@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "modal",
+  "type": "registry:ui",
+  "title": "Modal",
+  "description": "Accessible modal dialog with 4 sizes (sm, md, lg, xl), focus lock, and escape key handling.",
+  "dependencies": [
+    "react-focus-lock",
+    "lucide-react",
+    "motion"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/modal.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport type React from \"react\";\nimport { useEffect, useState } from \"react\";\nimport FocusLock from \"react-focus-lock\";\nimport { motion, AnimatePresence } from \"motion/react\";\nimport { useOverlay } from \"../contexts/overlay-context\";\nimport { useEscapeKey } from \"../hooks/use-escape-key\";\nimport { CloseButton } from \"./close-button\";\n\ninterface ModalProps {\n\tisOpen: boolean;\n\tonClose: () => void;\n\ttitle: string;\n\tchildren: React.ReactNode;\n\tclassName?: string;\n\tsize?: \"sm\" | \"md\" | \"lg\" | \"xl\";\n}\n\nexport function Modal({\n\tisOpen,\n\tonClose,\n\ttitle,\n\tchildren,\n\tclassName = \"\",\n\tsize = \"md\",\n}: ModalProps) {\n\tconst [overlayId, setOverlayId] = useState<string | null>(null);\n\tconst { registerOverlay, unregisterOverlay } = useOverlay();\n\n\t// Register/unregister overlay when modal opens/closes\n\tuseEffect(() => {\n\t\tif (isOpen && !overlayId) {\n\t\t\tconst id = registerOverlay(\"modal\", {\n\t\t\t\tblocksScroll: true,\n\t\t\t\tisFullscreen: false,\n\t\t\t});\n\t\t\tsetOverlayId(id);\n\t\t} else if (!isOpen && overlayId) {\n\t\t\tunregisterOverlay(overlayId);\n\t\t\tsetOverlayId(null);\n\t\t}\n\t}, [isOpen, overlayId, registerOverlay, unregisterOverlay]);\n\n\t// ESC key to close\n\tuseEscapeKey(onClose, isOpen);\n\n\tconst sizeClasses = {\n\t\tsm: \"max-w-md\",\n\t\tmd: \"max-w-md\",\n\t\tlg: \"max-w-4xl\",\n\t\txl: \"max-w-6xl\",\n\t};\n\n\treturn (\n\t\t<AnimatePresence>\n\t\t\t{isOpen && (\n\t\t\t\t<FocusLock returnFocus>\n\t\t\t\t\t<motion.div\n\t\t\t\t\t\tinitial={{ opacity: 0 }}\n\t\t\t\t\t\tanimate={{ opacity: 1 }}\n\t\t\t\t\t\texit={{ opacity: 0 }}\n\t\t\t\t\t\ttransition={{ duration: 0.2 }}\n\t\t\t\t\t\tclassName=\"fixed inset-0 bg-black/50 backdrop-blur-sm p-4 overflow-y-auto\"\n\t\t\t\t\t\tstyle={{ zIndex: \"var(--z-modal)\" }}\n\t\t\t\t\t\tonClick={(e) => {\n\t\t\t\t\t\t\tif (e.target === e.currentTarget) {\n\t\t\t\t\t\t\t\tonClose();\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t}}\n\t\t\t\t\t>\n\t\t\t\t\t\t<div className=\"min-h-full flex items-center justify-center py-0 pointer-events-none\">\n\t\t\t\t\t\t\t<motion.div\n\t\t\t\t\t\t\t\tinitial={{ opacity: 0, scale: 0.95, y: 10 }}\n\t\t\t\t\t\t\t\tanimate={{ opacity: 1, scale: 1, y: 0 }}\n\t\t\t\t\t\t\t\texit={{ opacity: 0, scale: 0.95, y: 10 }}\n\t\t\t\t\t\t\t\ttransition={{\n\t\t\t\t\t\t\t\t\tduration: 0.3,\n\t\t\t\t\t\t\t\t\tease: [0.16, 1, 0.3, 1],\n\t\t\t\t\t\t\t\t}}\n\t\t\t\t\t\t\t\tclassName={`bg-[rgba(30,30,31,0.8)] backdrop-blur-xl shadow-[0px_20px_30px_0px_rgba(0,0,0,0.25),0px_0px_15px_0px_rgba(0,0,0,0.1),inset_0px_0px_0px_1px_rgba(255,255,255,0.075),0px_0px_0px_1px_rgba(0,0,0,0.5)] rounded-md w-full ${sizeClasses[size]} flex flex-col max-h-[calc(100vh-2rem)] ${className} pointer-events-auto`}\n\t\t\t\t\t\t\t\trole=\"dialog\"\n\t\t\t\t\t\t\t\taria-modal=\"true\"\n\t\t\t\t\t\t\t\taria-labelledby=\"modal-title\"\n\t\t\t\t\t\t\t>\n\t\t\t\t\t\t\t\t<div className=\"flex items-center justify-start px-4 py-2 border-b border-white/10 relative shrink-0\">\n\t\t\t\t\t\t\t\t\t<CloseButton onClick={onClose} />\n\t\t\t\t\t\t\t\t\t<div\n\t\t\t\t\t\t\t\t\t\tid=\"modal-title\"\n\t\t\t\t\t\t\t\t\t\tclassName=\"text-white/90 text-sm font-medium ml-2\"\n\t\t\t\t\t\t\t\t\t>\n\t\t\t\t\t\t\t\t\t\t{title}\n\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t<div className=\"p-4 overflow-y-auto\">{children}</div>\n\t\t\t\t\t\t\t</motion.div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</motion.div>\n\t\t\t\t</FocusLock>\n\t\t\t)}\n\t\t</AnimatePresence>\n\t);\n}\n"
+    }
+  ]
+}

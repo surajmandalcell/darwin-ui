@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "multi-select",
+  "type": "registry:ui",
+  "title": "MultiSelect",
+  "description": "Multi-selection dropdown component for selecting multiple options.",
+  "dependencies": [
+    "@radix-ui/react-popover",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/multi-select.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { createPortal } from \"react-dom\";\n\ninterface Option {\n\tlabel: string;\n\tvalue: string;\n}\n\ninterface MultiSelectProps {\n\tvalue: string[];\n\tonChange: (next: string[]) => void;\n\toptions: Option[];\n\tplaceholder?: string;\n}\n\nexport function MultiSelect({\n\tvalue,\n\tonChange,\n\toptions,\n\tplaceholder,\n}: MultiSelectProps) {\n\tconst [open, setOpen] = React.useState(false);\n\tconst ref = React.useRef<HTMLDivElement | null>(null);\n\tconst buttonRef = React.useRef<HTMLButtonElement | null>(null);\n\tconst [dropdownPosition, setDropdownPosition] = React.useState({ top: 0, left: 0, width: 0 });\n\n\tReact.useEffect(() => {\n\t\tif (open && buttonRef.current) {\n\t\t\tconst rect = buttonRef.current.getBoundingClientRect();\n\t\t\tsetDropdownPosition({\n\t\t\t\ttop: rect.bottom + window.scrollY + 4,\n\t\t\t\tleft: rect.left + window.scrollX,\n\t\t\t\twidth: rect.width,\n\t\t\t});\n\t\t}\n\t}, [open]);\n\n\tReact.useEffect(() => {\n\t\tconst onDoc = (e: MouseEvent) => {\n\t\t\tif (!ref.current) return;\n\t\t\tif (!ref.current.contains(e.target as Node)) setOpen(false);\n\t\t};\n\t\tdocument.addEventListener(\"mousedown\", onDoc);\n\t\treturn () => document.removeEventListener(\"mousedown\", onDoc);\n\t}, []);\n\n\tfunction toggle(val: string) {\n\t\tconst has = value.includes(val);\n\t\tonChange(has ? value.filter((v) => v !== val) : [...value, val]);\n\t}\n\n\tconst dropdown = open && typeof window !== \"undefined\" ? (\n\t\tcreatePortal(\n\t\t\t<div\n\t\t\t\tstyle={{\n\t\t\t\t\tposition: 'fixed',\n\t\t\t\t\ttop: `${dropdownPosition.top}px`,\n\t\t\t\t\tleft: `${dropdownPosition.left}px`,\n\t\t\t\t\twidth: `${dropdownPosition.width}px`,\n\t\t\t\t}}\n\t\t\t\tclassName=\"z-9999 rounded-md border border-white/10 bg-[#121212] p-2 shadow-lg\"\n\t\t\t>\n\t\t\t\t{options.map((opt) => (\n\t\t\t\t\t<label\n\t\t\t\t\t\tkey={opt.value}\n\t\t\t\t\t\tclassName=\"flex items-center gap-2 px-2 py-1.5 rounded hover:bg-white/10 cursor-pointer text-sm text-white/90\"\n\t\t\t\t\t>\n\t\t\t\t\t\t<input\n\t\t\t\t\t\t\ttype=\"checkbox\"\n\t\t\t\t\t\t\tclassName=\"accent-blue-500\"\n\t\t\t\t\t\t\tchecked={value.includes(opt.value)}\n\t\t\t\t\t\t\tonChange={() => toggle(opt.value)}\n\t\t\t\t\t\t/>\n\t\t\t\t\t\t<span>{opt.label}</span>\n\t\t\t\t\t</label>\n\t\t\t\t))}\n\t\t\t</div>,\n\t\t\tdocument.body\n\t\t)\n\t) : null;\n\n\treturn (\n\t\t<div className=\"relative\" ref={ref}>\n\t\t\t<button\n\t\t\t\tref={buttonRef}\n\t\t\t\ttype=\"button\"\n\t\t\t\tonClick={() => setOpen((v) => !v)}\n\t\t\t\tclassName=\"w-full min-h-8 px-3 py-1.5 bg-white/5 border border-white/10 rounded-sm text-white/90 text-sm text-left flex items-center justify-between hover:bg-white/10\"\n\t\t\t>\n\t\t\t\t<span className=\"truncate\">\n\t\t\t\t\t{value.length ? value.join(\", \") : placeholder || \"Select...\"}\n\t\t\t\t</span>\n\t\t\t\t<span className=\"text-white/50 text-xs\">{open ? \"▲\" : \"▼\"}</span>\n\t\t\t</button>\n\t\t\t{dropdown}\n\t\t\t{value.length > 0 && (\n\t\t\t\t<div className=\"flex flex-wrap gap-2 mt-2\">\n\t\t\t\t\t{value.map((v) => (\n\t\t\t\t\t\t<span\n\t\t\t\t\t\t\tkey={v}\n\t\t\t\t\t\t\tclassName=\"inline-flex items-center gap-1 px-2 py-0.5 bg-white/10 border border-white/15 rounded text-white/80 text-xs\"\n\t\t\t\t\t\t>\n\t\t\t\t\t\t\t{options.find((o) => o.value === v)?.label || v}\n\t\t\t\t\t\t\t<button\n\t\t\t\t\t\t\t\ttype=\"button\"\n\t\t\t\t\t\t\t\tclassName=\"text-white/60 hover:text-red-400\"\n\t\t\t\t\t\t\t\tonClick={() => toggle(v)}\n\t\t\t\t\t\t\t>\n\t\t\t\t\t\t\t\t×\n\t\t\t\t\t\t\t</button>\n\t\t\t\t\t\t</span>\n\t\t\t\t\t))}\n\t\t\t\t</div>\n\t\t\t)}\n\t\t</div>\n\t);\n}\n"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "search-input",
+  "type": "registry:ui",
+  "title": "SearchInput",
+  "description": "Search input field component with search icon styling.",
+  "registryDependencies": [
+    "input"
+  ],
+  "files": [
+    {
+      "path": "components/search-input.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { Input } from \"./input\";\n\ntype SearchInputProps = React.InputHTMLAttributes<HTMLInputElement>;\n\nexport function SearchInput(props: SearchInputProps) {\n\treturn <Input variant=\"search\" {...props} />;\n}\n"
+    }
+  ]
+}

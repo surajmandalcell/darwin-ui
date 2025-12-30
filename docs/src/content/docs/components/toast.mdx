@@ -1,0 +1,103 @@
+---
+title: Toast
+description: Toast notification system with auto-dismiss.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+A toast notification system with provider and hook for showing messages.
+
+## Installation
+
+<Tabs>
+  <TabItem label="Package">
+    ```tsx
+    import { ToastProvider, useToast } from '@smc/darwin-ui';
+    ```
+  </TabItem>
+  <TabItem label="shadcn CLI">
+    ```bash
+    npx shadcn add https://darwin-ui.mandalsuraj.com/registry/toast.json
+    ```
+  </TabItem>
+</Tabs>
+
+## Setup
+
+Wrap your app with `ToastProvider`:
+
+```tsx
+import { ToastProvider } from '@smc/darwin-ui';
+
+function App() {
+  return (
+    <ToastProvider>
+      <YourApp />
+    </ToastProvider>
+  );
+}
+```
+
+## Usage
+
+```tsx
+import { useToast, Button } from '@smc/darwin-ui';
+
+export function Example() {
+  const { showToast } = useToast();
+
+  return (
+    <Button
+      onClick={() =>
+        showToast({
+          message: 'Action completed!',
+          type: 'success',
+        })
+      }
+    >
+      Show Toast
+    </Button>
+  );
+}
+```
+
+## Types
+
+```tsx
+showToast({ message: 'Info message', type: 'info' });
+showToast({ message: 'Success!', type: 'success' });
+showToast({ message: 'Warning!', type: 'warning' });
+showToast({ message: 'Error occurred', type: 'error' });
+```
+
+## Duration
+
+```tsx
+showToast({
+  message: 'Custom duration',
+  type: 'info',
+  duration: 5000, // 5 seconds
+});
+```
+
+## API Reference
+
+### useToast Hook
+
+```tsx
+const { showToast } = useToast();
+```
+
+### showToast Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `message` | `string` | - | Toast message |
+| `type` | `ToastType` | `"info"` | Toast variant |
+| `duration` | `number` | `3000` | Auto-dismiss time (ms) |
+
+### ToastType
+
+```tsx
+type ToastType = 'info' | 'success' | 'warning' | 'error';
+```

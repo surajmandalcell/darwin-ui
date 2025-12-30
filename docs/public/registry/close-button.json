@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "close-button",
+  "type": "registry:ui",
+  "title": "CloseButton",
+  "description": "Styled close button component for modals, windows, and dismissible content.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/close-button.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport { twMerge } from \"tailwind-merge\";\n\ninterface CloseButtonProps {\n\tonClick?: () => void;\n\thref?: string;\n\tclassName?: string;\n}\n\nexport function CloseButton({\n\tonClick,\n\thref,\n\tclassName = \"\",\n}: CloseButtonProps) {\n\tconst baseClasses =\n\t\t\"w-3.5 h-3.5 bg-red-500 rounded-full hover:bg-red-400 transition-all after:content-[''] after:absolute after:inset-0 after:m-auto after:w-1/3 after:h-1/3 after:rounded-full after:bg-red-700 after:opacity-0 hover:after:opacity-100 after:transition-opacity relative\";\n\n\tconst wrapperClasses =\n\t\t\"inline-flex items-center justify-center min-w-3.5 min-h-3.5\";\n\n\tif (href) {\n\t\treturn (\n\t\t\t<a href={href} className={twMerge(wrapperClasses, className)}>\n\t\t\t\t<span className={baseClasses} />\n\t\t\t</a>\n\t\t);\n\t}\n\n\treturn (\n\t\t<button\n\t\t\tonClick={onClick}\n\t\t\tclassName={twMerge(wrapperClasses, className)}\n\t\t\taria-label=\"Close\"\n\t\t>\n\t\t\t<span className={baseClasses} />\n\t\t</button>\n\t);\n}\n"
+    }
+  ]
+}

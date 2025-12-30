@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "styles",
+  "type": "registry:style",
+  "title": "Darwin UI Styles",
+  "description": "Base styles and CSS variables for Darwin UI dark theme.",
+  "files": [
+    {
+      "path": "styles/darwin-ui.css",
+      "type": "registry:style",
+      "content": "/* Darwin UI Styles */\n\n@import \"tailwindcss\";\n\n@layer base {\n  :root {\n    --background: 0 0% 4%;\n    --foreground: 0 0% 95%;\n  }\n}\n\n@layer utilities {\n  .animate-pulse {\n    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;\n  }\n\n  @keyframes pulse {\n    0%, 100% {\n      opacity: 1;\n    }\n    50% {\n      opacity: 0.5;\n    }\n  }\n}\n"
+    }
+  ],
+  "cssVars": {
+    "dark": {
+      "background": "0 0% 4%",
+      "foreground": "0 0% 95%",
+      "card": "0 0% 6%",
+      "card-foreground": "0 0% 95%",
+      "border": "0 0% 15%",
+      "ring": "217.2 91.2% 59.8%",
+      "muted": "0 0% 15%",
+      "muted-foreground": "0 0% 65%"
+    }
+  }
+}

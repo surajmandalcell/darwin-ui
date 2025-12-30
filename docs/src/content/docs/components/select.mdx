@@ -1,0 +1,69 @@
+---
+title: Select
+description: Custom select/dropdown component with portal rendering.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+A styled select dropdown with keyboard navigation.
+
+## Installation
+
+<Tabs>
+  <TabItem label="Package">
+    ```tsx
+    import { Select } from '@smc/darwin-ui';
+    ```
+  </TabItem>
+  <TabItem label="shadcn CLI">
+    ```bash
+    npx shadcn add https://darwin-ui.mandalsuraj.com/registry/select.json
+    ```
+  </TabItem>
+</Tabs>
+
+## Usage
+
+```tsx
+import { Select } from '@smc/darwin-ui';
+
+const options = [
+  { value: 'option1', label: 'Option 1' },
+  { value: 'option2', label: 'Option 2' },
+  { value: 'option3', label: 'Option 3' },
+];
+
+export function Example() {
+  const [value, setValue] = useState('');
+
+  return (
+    <Select
+      options={options}
+      value={value}
+      onChange={setValue}
+      placeholder="Select an option"
+    />
+  );
+}
+```
+
+## API Reference
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `options` | `Option[]` | - | Available options |
+| `value` | `string` | - | Selected value |
+| `onChange` | `(value: string) => void` | - | Change handler |
+| `placeholder` | `string` | - | Placeholder text |
+| `disabled` | `boolean` | `false` | Disable select |
+
+### Option Type
+
+```tsx
+interface Option {
+  value: string;
+  label: string;
+}
+```

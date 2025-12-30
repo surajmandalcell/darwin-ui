@@ -1,0 +1,139 @@
+---
+title: Button
+description: A versatile button component with 11 variants and multiple sizes.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+The Button component provides a flexible, accessible button with multiple styling variants and sizes.
+
+## Installation
+
+<Tabs>
+  <TabItem label="Package">
+    ```tsx
+    import { Button } from '@smc/darwin-ui';
+    ```
+  </TabItem>
+  <TabItem label="shadcn CLI">
+    ```bash
+    npx shadcn add https://darwin-ui.mandalsuraj.com/registry/button.json
+    ```
+  </TabItem>
+</Tabs>
+
+## Usage
+
+```tsx
+import { Button } from '@smc/darwin-ui';
+
+export function Example() {
+  return (
+    <Button variant="primary" size="default">
+      Click me
+    </Button>
+  );
+}
+```
+
+## Variants
+
+Button supports 11 variants:
+
+```tsx
+<Button variant="default">Default</Button>
+<Button variant="primary">Primary</Button>
+<Button variant="secondary">Secondary</Button>
+<Button variant="success">Success</Button>
+<Button variant="warning">Warning</Button>
+<Button variant="info">Info</Button>
+<Button variant="destructive">Destructive</Button>
+<Button variant="outline">Outline</Button>
+<Button variant="ghost">Ghost</Button>
+<Button variant="link">Link</Button>
+<Button variant="accent">Accent</Button>
+```
+
+| Variant | Description | Use Case |
+|---------|-------------|----------|
+| `default` | Glass-effect background | General actions |
+| `primary` | Blue solid background | Main CTAs |
+| `secondary` | Subtle glass effect | Secondary actions |
+| `success` | Green background | Confirmations |
+| `warning` | Amber background | Caution actions |
+| `info` | Light blue background | Informational |
+| `destructive` | Red background | Delete/remove |
+| `outline` | Transparent with border | Subtle actions |
+| `ghost` | Transparent | Minimal UI |
+| `link` | Text with underline | Inline links |
+| `accent` | Purple background | Highlighted |
+
+## Sizes
+
+```tsx
+<Button size="sm">Small</Button>
+<Button size="default">Default</Button>
+<Button size="lg">Large</Button>
+<Button size="icon">
+  <IconComponent />
+</Button>
+```
+
+| Size | Height | Padding |
+|------|--------|---------|
+| `sm` | 32px | `px-3` |
+| `default` | 36px | `px-4 py-2` |
+| `lg` | 40px | `px-8` |
+| `icon` | 36px | Square |
+
+## With Icons
+
+```tsx
+import { Plus, Download } from 'lucide-react';
+
+<Button>
+  <Plus className="w-4 h-4 mr-2" />
+  Add Item
+</Button>
+
+<Button size="icon">
+  <Download className="w-4 h-4" />
+</Button>
+```
+
+## Disabled State
+
+```tsx
+<Button disabled>Disabled Button</Button>
+```
+
+## API Reference
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `Variant` | `"default"` | Visual style variant |
+| `size` | `Size` | `"default"` | Button size |
+| `disabled` | `boolean` | `false` | Disable button |
+| `className` | `string` | - | Additional classes |
+| `children` | `ReactNode` | - | Button content |
+
+### Types
+
+```tsx
+type Variant =
+  | "default"
+  | "primary"
+  | "secondary"
+  | "success"
+  | "warning"
+  | "info"
+  | "destructive"
+  | "outline"
+  | "ghost"
+  | "link"
+  | "accent";
+
+type Size = "default" | "sm" | "lg" | "icon";
+```

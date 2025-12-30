@@ -1,0 +1,38 @@
+---
+title: useEscapeKey
+description: Hook for handling ESC key press events.
+---
+
+A hook for detecting escape key presses.
+
+## Installation
+
+```bash
+npx shadcn add https://darwin-ui.mandalsuraj.com/registry/use-escape-key.json
+```
+
+## Usage
+
+```tsx
+import { useEscapeKey } from '@smc/darwin-ui';
+
+export function Modal({ onClose }) {
+  useEscapeKey(onClose);
+
+  return (
+    <div className="modal">
+      Press ESC to close
+    </div>
+  );
+}
+```
+
+## API Reference
+
+```tsx
+function useEscapeKey(callback: () => void): void;
+```
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `callback` | `() => void` | Function called on ESC press |

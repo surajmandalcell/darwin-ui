@@ -1,0 +1,411 @@
+"use client";
+
+import {
+	Area,
+	Bar,
+	CartesianGrid,
+	Cell,
+	Legend,
+	Line,
+	Pie,
+	AreaChart as RechartsAreaChart,
+	BarChart as RechartsBarChart,
+	LineChart as RechartsLineChart,
+	PieChart as RechartsPieChart,
+	ResponsiveContainer,
+	Tooltip,
+	XAxis,
+	YAxis,
+} from "recharts";
+
+// Darwin UI color palette
+const COLORS = {
+	blue: "#60a5fa",
+	green: "#34d399",
+	yellow: "#fbbf24",
+	red: "#f87171",
+	purple: "#a78bfa",
+	pink: "#f472b6",
+	orange: "#fb923c",
+	teal: "#2dd4bf",
+};
+
+const DEFAULT_COLORS = [
+	COLORS.blue,
+	COLORS.green,
+	COLORS.yellow,
+	COLORS.red,
+	COLORS.purple,
+	COLORS.pink,
+	COLORS.orange,
+	COLORS.teal,
+];
+
+// Custom Tooltip Component
+interface TooltipPayload {
+	color: string;
+	name: string;
+	value: number;
+}
+
+interface CustomTooltipProps {
+	active?: boolean;
+	payload?: TooltipPayload[];
+	label?: string;
+}
+
+const CustomTooltip = ({ active, payload, label }: CustomTooltipProps) => {
+	if (active && payload && payload.length) {
+		return (
+			<div className="bg-[#2a2a2a] border border-white/10 rounded-md p-3 shadow-lg backdrop-blur-sm">
+				{label && <p className="text-white/90 font-medium mb-2">{label}</p>}
+				{payload.map((entry, index) => (
+					<div
+						key={`${entry.name}-${index}`}
+						className="flex items-center gap-2 text-sm"
+					>
+						<div
+							className="w-3 h-3 rounded-full"
+							style={{ backgroundColor: entry.color }}
+						/>
+						<span className="text-white/60">{entry.name}:</span>
+						<span className="text-white/90 font-medium">{entry.value}</span>
+					</div>
+				))}
+			</div>
+		);
+	}
+	return null;
+};
+
+// Bar Chart Component
+export interface BarChartProps {
+	data: Record<string, string | number>[];
+	xKey: string;
+	bars: Array<{ dataKey: string; fill?: string; name?: string }>;
+	height?: number;
+	showGrid?: boolean;
+	showLegend?: boolean;
+}
+
+export function BarChart({
+	data,
+	xKey,
+	bars,
+	height = 300,
+	showGrid = true,
+	showLegend = false,
+}: BarChartProps) {
+	return (
+		<ResponsiveContainer width="100%" height={height}>
+			<RechartsBarChart data={data}>
+				{showGrid && (
+					<CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
+				)}
+				<XAxis
+					dataKey={xKey}
+					stroke="rgba(255,255,255,0.6)"
+					tick={{ fill: "rgba(255,255,255,0.9)", fontSize: 12 }}
+				/>
+				<YAxis
+					stroke="rgba(255,255,255,0.6)"
+					tick={{ fill: "rgba(255,255,255,0.9)", fontSize: 12 }}
+				/>
+				<Tooltip content={<CustomTooltip />} />
+				{showLegend && (
+					<Legend
+						wrapperStyle={{ color: "rgba(255,255,255,0.9)" }}
+						iconType="circle"
+					/>
+				)}
+				{bars.map((bar, index) => (
+					<Bar
+						key={bar.dataKey}
+						dataKey={bar.dataKey}
+						fill={bar.fill || DEFAULT_COLORS[index % DEFAULT_COLORS.length]}
+						name={bar.name || bar.dataKey}
+						radius={[4, 4, 0, 0]}
+					/>
+				))}
+			</RechartsBarChart>
+		</ResponsiveContainer>
+	);
+}
+
+// Line Chart Component
+export interface LineChartProps {
+	data: Record<string, string | number>[];
+	xKey: string;
+	lines: Array<{
+		dataKey: string;
+		stroke?: string;
+		name?: string;
+		strokeWidth?: number;
+	}>;
+	height?: number;
+	showGrid?: boolean;
+	showLegend?: boolean;
+}
+
+export function LineChart({
+	data,
+	xKey,
+	lines,
+	height = 300,
+	showGrid = true,
+	showLegend = true,
+}: LineChartProps) {
+	return (
+		<ResponsiveContainer width="100%" height={height}>
+			<RechartsLineChart data={data}>
+				{showGrid && (
+					<CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
+				)}
+				<XAxis
+					dataKey={xKey}
+					stroke="rgba(255,255,255,0.6)"
+					tick={{ fill: "rgba(255,255,255,0.9)", fontSize: 12 }}
+				/>
+				<YAxis
+					stroke="rgba(255,255,255,0.6)"
+					tick={{ fill: "rgba(255,255,255,0.9)", fontSize: 12 }}
+				/>
+				<Tooltip content={<CustomTooltip />} />
+				{showLegend && (
+					<Legend
+						wrapperStyle={{ color: "rgba(255,255,255,0.9)" }}
+						iconType="circle"
+					/>
+				)}
+				{lines.map((line, index) => (
+					<Line
+						key={line.dataKey}
+						type="monotone"
+						dataKey={line.dataKey}
+						stroke={
+							line.stroke || DEFAULT_COLORS[index % DEFAULT_COLORS.length]
+						}
+						name={line.name || line.dataKey}
+						strokeWidth={line.strokeWidth || 2}
+						dot={{
+							fill:
+								line.stroke || DEFAULT_COLORS[index % DEFAULT_COLORS.length],
+							r: 4,
+						}}
+						activeDot={{ r: 6 }}
+					/>
+				))}
+			</RechartsLineChart>
+		</ResponsiveContainer>
+	);
+}
+
+// Area Chart Component
+export interface AreaChartProps {
+	data: Record<string, string | number>[];
+	xKey: string;
+	areas: Array<{
+		dataKey: string;
+		fill?: string;
+		stroke?: string;
+		name?: string;
+	}>;
+	height?: number;
+	showGrid?: boolean;
+	showLegend?: boolean;
+	stacked?: boolean;
+}
+
+export function AreaChart({
+	data,
+	xKey,
+	areas,
+	height = 300,
+	showGrid = true,
+	showLegend = true,
+	stacked = false,
+}: AreaChartProps) {
+	return (
+		<ResponsiveContainer width="100%" height={height}>
+			<RechartsAreaChart data={data}>
+				{showGrid && (
+					<CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
+				)}
+				<XAxis
+					dataKey={xKey}
+					stroke="rgba(255,255,255,0.6)"
+					tick={{ fill: "rgba(255,255,255,0.9)", fontSize: 12 }}
+				/>
+				<YAxis
+					stroke="rgba(255,255,255,0.6)"
+					tick={{ fill: "rgba(255,255,255,0.9)", fontSize: 12 }}
+				/>
+				<Tooltip content={<CustomTooltip />} />
+				{showLegend && (
+					<Legend
+						wrapperStyle={{ color: "rgba(255,255,255,0.9)" }}
+						iconType="circle"
+					/>
+				)}
+				{areas.map((area, index) => (
+					<Area
+						key={area.dataKey}
+						type="monotone"
+						dataKey={area.dataKey}
+						stackId={stacked ? "1" : undefined}
+						fill={area.fill || DEFAULT_COLORS[index % DEFAULT_COLORS.length]}
+						stroke={
+							area.stroke || DEFAULT_COLORS[index % DEFAULT_COLORS.length]
+						}
+						name={area.name || area.dataKey}
+						fillOpacity={0.6}
+					/>
+				))}
+			</RechartsAreaChart>
+		</ResponsiveContainer>
+	);
+}
+
+// Pie Chart Component
+interface PieDataItem {
+	[key: string]: string | number;
+}
+
+export interface PieChartProps {
+	data: PieDataItem[];
+	nameKey: string;
+	valueKey: string;
+	height?: number;
+	innerRadius?: number;
+	outerRadius?: number;
+	colors?: string[];
+	showLegend?: boolean;
+}
+
+export function PieChart({
+	data,
+	nameKey,
+	valueKey,
+	height = 300,
+	innerRadius = 0,
+	outerRadius = 80,
+	colors = DEFAULT_COLORS,
+	showLegend = true,
+}: PieChartProps) {
+	return (
+		<ResponsiveContainer width="100%" height={height}>
+			<RechartsPieChart>
+				<Pie
+					data={data}
+					cx="50%"
+					cy="50%"
+					innerRadius={innerRadius}
+					outerRadius={outerRadius}
+					dataKey={valueKey}
+					nameKey={nameKey}
+					label={(props) => {
+						const entry = data[props.index];
+						return `${entry[nameKey]}: ${entry[valueKey]}`;
+					}}
+					labelLine={{ stroke: "rgba(255,255,255,0.6)" }}
+				>
+					{data.map((item, index) => (
+						<Cell
+							key={`cell-${item[nameKey]}-${index}`}
+							fill={colors[index % colors.length]}
+						/>
+					))}
+				</Pie>
+				<Tooltip content={<CustomTooltip />} />
+				{showLegend && (
+					<Legend
+						wrapperStyle={{ color: "rgba(255,255,255,0.9)" }}
+						iconType="circle"
+					/>
+				)}
+			</RechartsPieChart>
+		</ResponsiveContainer>
+	);
+}
+
+// Donut Chart Component (Pie with inner radius)
+export interface DonutChartProps extends PieChartProps {}
+
+export function DonutChart({
+	data,
+	nameKey,
+	valueKey,
+	height = 300,
+	innerRadius = 60,
+	outerRadius = 80,
+	colors = DEFAULT_COLORS,
+	showLegend = true,
+}: DonutChartProps) {
+	return (
+		<PieChart
+			data={data}
+			nameKey={nameKey}
+			valueKey={valueKey}
+			height={height}
+			innerRadius={innerRadius}
+			outerRadius={outerRadius}
+			colors={colors}
+			showLegend={showLegend}
+		/>
+	);
+}
+
+// Stacked Bar Chart Component
+export interface StackedBarChartProps {
+	data: Record<string, string | number>[];
+	xKey: string;
+	stackKeys: Array<{ dataKey: string; fill?: string; name?: string }>;
+	height?: number;
+	showGrid?: boolean;
+	showLegend?: boolean;
+}
+
+export function StackedBarChart({
+	data,
+	xKey,
+	stackKeys,
+	height = 300,
+	showGrid = true,
+	showLegend = true,
+}: StackedBarChartProps) {
+	return (
+		<ResponsiveContainer width="100%" height={height}>
+			<RechartsBarChart data={data}>
+				{showGrid && (
+					<CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
+				)}
+				<XAxis
+					dataKey={xKey}
+					stroke="rgba(255,255,255,0.6)"
+					tick={{ fill: "rgba(255,255,255,0.9)", fontSize: 12 }}
+				/>
+				<YAxis
+					stroke="rgba(255,255,255,0.6)"
+					tick={{ fill: "rgba(255,255,255,0.9)", fontSize: 12 }}
+				/>
+				<Tooltip content={<CustomTooltip />} />
+				{showLegend && (
+					<Legend
+						wrapperStyle={{ color: "rgba(255,255,255,0.9)" }}
+						iconType="circle"
+					/>
+				)}
+				{stackKeys.map((stack, index) => (
+					<Bar
+						key={stack.dataKey}
+						dataKey={stack.dataKey}
+						stackId="a"
+						fill={stack.fill || DEFAULT_COLORS[index % DEFAULT_COLORS.length]}
+						name={stack.name || stack.dataKey}
+						radius={index === stackKeys.length - 1 ? [4, 4, 0, 0] : undefined}
+					/>
+				))}
+			</RechartsBarChart>
+		</ResponsiveContainer>
+	);
+}

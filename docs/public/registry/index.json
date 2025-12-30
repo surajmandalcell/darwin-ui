@@ -1,0 +1,335 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "darwin-ui",
+  "homepage": "https://darwin-ui.mandalsuraj.com",
+  "items": [
+    {
+      "name": "utils",
+      "type": "registry:lib",
+      "title": "Utils",
+      "description": "Utility functions for class name merging with Tailwind CSS.",
+      "dependencies": [
+        "tailwind-merge",
+        "clsx"
+      ]
+    },
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "A versatile button component with 11 variants including primary, secondary, destructive, ghost, and more.",
+      "dependencies": [
+        "tailwind-merge",
+        "clsx"
+      ]
+    },
+    {
+      "name": "badge",
+      "type": "registry:ui",
+      "title": "Badge",
+      "description": "Status indicator badges with 13 variants for different states like success, warning, published, draft, etc.",
+      "dependencies": [
+        "tailwind-merge",
+        "clsx",
+        "motion"
+      ]
+    },
+    {
+      "name": "card",
+      "type": "registry:ui",
+      "title": "Card",
+      "description": "Composable card components with glass-morphism styling. Includes CardHeader, CardTitle, CardDescription, CardContent, CardFooter, and CardAction.",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "title": "Input",
+      "description": "Glass-effect styled input component with default and search variants.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "checkbox",
+      "type": "registry:ui",
+      "title": "Checkbox",
+      "description": "Custom checkbox input with label support and checked state callback.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "switch",
+      "type": "registry:ui",
+      "title": "Switch",
+      "description": "Toggle switch component with label support for boolean inputs.",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "select",
+      "type": "registry:ui",
+      "title": "Select",
+      "description": "Custom select/dropdown component with portal rendering and keyboard navigation.",
+      "dependencies": [
+        "@radix-ui/react-popover",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "multi-select",
+      "type": "registry:ui",
+      "title": "MultiSelect",
+      "description": "Multi-selection dropdown component for selecting multiple options.",
+      "dependencies": [
+        "@radix-ui/react-popover",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "skeleton",
+      "type": "registry:ui",
+      "title": "Skeleton",
+      "description": "Loading skeleton placeholder with pulse animation for content loading states.",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "table",
+      "type": "registry:ui",
+      "title": "Table",
+      "description": "Comprehensive table system with TableHead, TableBody, TableCell, TableHeaderCell, TableRow, TableEmptyRow, and TableLoadingRows components.",
+      "registryDependencies": [
+        "utils",
+        "skeleton"
+      ]
+    },
+    {
+      "name": "modal",
+      "type": "registry:ui",
+      "title": "Modal",
+      "description": "Accessible modal dialog with 4 sizes (sm, md, lg, xl), focus lock, and escape key handling.",
+      "dependencies": [
+        "react-focus-lock",
+        "lucide-react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "toast",
+      "type": "registry:ui",
+      "title": "Toast",
+      "description": "Toast notification system with ToastProvider and useToast hook. Supports auto-dismiss with configurable duration.",
+      "dependencies": [
+        "lucide-react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "alert",
+      "type": "registry:ui",
+      "title": "Alert",
+      "description": "Alert dialog with AlertProvider and useAlert hook. Supports info, success, warning, and error types with icon indicators.",
+      "dependencies": [
+        "react-focus-lock",
+        "lucide-react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "utils",
+        "button"
+      ]
+    },
+    {
+      "name": "window",
+      "type": "registry:ui",
+      "title": "Window",
+      "description": "macOS-style window container with title bar and close button for desktop-like UI.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "utils",
+        "close-button"
+      ]
+    },
+    {
+      "name": "sidebar",
+      "type": "registry:ui",
+      "title": "Sidebar",
+      "description": "Responsive sidebar navigation with SidebarItem sub-component and mobile menu support.",
+      "dependencies": [
+        "lucide-react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "close-button",
+      "type": "registry:ui",
+      "title": "CloseButton",
+      "description": "Styled close button component for modals, windows, and dismissible content.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "search-input",
+      "type": "registry:ui",
+      "title": "SearchInput",
+      "description": "Search input field component with search icon styling.",
+      "registryDependencies": [
+        "input"
+      ]
+    },
+    {
+      "name": "context-menu",
+      "type": "registry:ui",
+      "title": "ContextMenu",
+      "description": "Right-click context menu component with typed menu items. Note: Requires Next.js for navigation features.",
+      "dependencies": [
+        "lucide-react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "upload",
+      "type": "registry:ui",
+      "title": "Upload",
+      "description": "File upload component with drag-and-drop support and file validation.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "reveal",
+      "type": "registry:ui",
+      "title": "Reveal",
+      "description": "Animation reveal component for scroll-triggered or mount animations using motion library.",
+      "dependencies": [
+        "motion"
+      ]
+    },
+    {
+      "name": "charts",
+      "type": "registry:ui",
+      "title": "Charts",
+      "description": "Recharts-based chart components including AreaChart, BarChart, LineChart, PieChart, DonutChart, and StackedBarChart with Darwin color palette.",
+      "dependencies": [
+        "recharts"
+      ]
+    },
+    {
+      "name": "date-select",
+      "type": "registry:ui",
+      "title": "DateSelect",
+      "description": "Date selector/picker component using react-day-picker with format utilities.",
+      "dependencies": [
+        "react-day-picker",
+        "date-fns",
+        "@radix-ui/react-popover",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "image",
+      "type": "registry:ui",
+      "title": "Image",
+      "description": "Optimized image component with custom utilities. Note: Requires Next.js for next/image optimization."
+    },
+    {
+      "name": "md-editor",
+      "type": "registry:ui",
+      "title": "MdEditor",
+      "description": "Markdown editor component using @uiw/react-md-editor. Note: Requires Next.js for dynamic imports.",
+      "dependencies": [
+        "@uiw/react-md-editor",
+        "remark-gfm"
+      ]
+    },
+    {
+      "name": "contact-form",
+      "type": "registry:block",
+      "title": "CompactContactForm",
+      "description": "Contact form component for user submissions.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "input",
+        "button"
+      ]
+    },
+    {
+      "name": "use-media-query",
+      "type": "registry:hook",
+      "title": "useMediaQuery",
+      "description": "Custom hook for responsive media query detection."
+    },
+    {
+      "name": "use-mobile",
+      "type": "registry:hook",
+      "title": "useIsMobile",
+      "description": "Hook to detect mobile device viewport.",
+      "registryDependencies": [
+        "use-media-query"
+      ]
+    },
+    {
+      "name": "use-escape-key",
+      "type": "registry:hook",
+      "title": "useEscapeKey",
+      "description": "Hook for handling ESC key press events."
+    },
+    {
+      "name": "use-contact-form",
+      "type": "registry:hook",
+      "title": "useContactForm",
+      "description": "Form handling hook for contact form submissions."
+    },
+    {
+      "name": "overlay-context",
+      "type": "registry:lib",
+      "title": "OverlayProvider",
+      "description": "Context provider for overlay state management across modals, alerts, and toasts."
+    }
+  ]
+}

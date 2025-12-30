@@ -1,0 +1,74 @@
+<svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background with gradient -->
+  <defs>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#0a0a0a"/>
+    </linearGradient>
+    <linearGradient id="glass-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:rgba(255,255,255,0.1)"/>
+      <stop offset="100%" style="stop-color:rgba(255,255,255,0.02)"/>
+    </linearGradient>
+    <filter id="blur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2"/>
+    </filter>
+  </defs>
+
+  <!-- Main background -->
+  <rect width="400" height="300" rx="16" fill="url(#bg-gradient)"/>
+
+  <!-- Decorative circles -->
+  <circle cx="50" cy="50" r="80" fill="#3b82f6" opacity="0.1" filter="url(#blur)"/>
+  <circle cx="350" cy="250" r="60" fill="#8b5cf6" opacity="0.1" filter="url(#blur)"/>
+
+  <!-- Window component -->
+  <g transform="translate(40, 40)">
+    <!-- Window background -->
+    <rect width="320" height="200" rx="12" fill="url(#glass-gradient)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+
+    <!-- Window title bar -->
+    <rect width="320" height="36" rx="12" fill="rgba(0,0,0,0.3)"/>
+    <rect y="24" width="320" height="12" fill="rgba(0,0,0,0.3)"/>
+
+    <!-- Traffic lights -->
+    <circle cx="20" cy="18" r="6" fill="#ff5f57"/>
+    <circle cx="40" cy="18" r="6" fill="#febc2e"/>
+    <circle cx="60" cy="18" r="6" fill="#28c840"/>
+
+    <!-- Window title -->
+    <text x="160" y="23" fill="rgba(255,255,255,0.7)" font-family="system-ui" font-size="12" text-anchor="middle">Darwin UI</text>
+
+    <!-- Content area -->
+    <g transform="translate(16, 48)">
+      <!-- Card 1 -->
+      <rect width="135" height="70" rx="8" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+      <text x="12" y="24" fill="rgba(255,255,255,0.5)" font-family="system-ui" font-size="10">Revenue</text>
+      <text x="12" y="48" fill="rgba(255,255,255,0.9)" font-family="system-ui" font-size="18" font-weight="600">$48.2K</text>
+
+      <!-- Card 2 -->
+      <g transform="translate(151, 0)">
+        <rect width="135" height="70" rx="8" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+        <text x="12" y="24" fill="rgba(255,255,255,0.5)" font-family="system-ui" font-size="10">Users</text>
+        <text x="12" y="48" fill="rgba(255,255,255,0.9)" font-family="system-ui" font-size="18" font-weight="600">2,420</text>
+      </g>
+
+      <!-- Chart area -->
+      <g transform="translate(0, 82)">
+        <rect width="288" height="56" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+        <!-- Simple chart line -->
+        <polyline points="16,40 50,30 84,35 118,20 152,25 186,15 220,22 254,10 272,18"
+                  fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <polyline points="16,40 50,30 84,35 118,20 152,25 186,15 220,22 254,10 272,18 272,48 16,48"
+                  fill="url(#chart-gradient)" opacity="0.3"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- Chart gradient -->
+  <defs>
+    <linearGradient id="chart-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6"/>
+      <stop offset="100%" style="stop-color:transparent"/>
+    </linearGradient>
+  </defs>
+</svg>

@@ -1,0 +1,36 @@
+---
+title: useIsMobile
+description: Hook to detect mobile device viewport.
+---
+
+A convenience hook for mobile detection.
+
+## Installation
+
+```bash
+npx shadcn add https://darwin-ui.mandalsuraj.com/registry/use-mobile.json
+```
+
+## Usage
+
+```tsx
+import { useIsMobile } from '@smc/darwin-ui';
+
+export function Example() {
+  const isMobile = useIsMobile();
+
+  return (
+    <div>
+      {isMobile ? <MobileNav /> : <DesktopNav />}
+    </div>
+  );
+}
+```
+
+## API Reference
+
+```tsx
+function useIsMobile(): boolean;
+```
+
+**Returns:** `boolean` - `true` if viewport width < 768px

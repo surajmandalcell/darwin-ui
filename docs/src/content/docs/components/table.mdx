@@ -1,0 +1,132 @@
+---
+title: Table
+description: Comprehensive table system with loading and empty states.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+A full-featured table component with sub-components for flexible layouts.
+
+## Installation
+
+<Tabs>
+  <TabItem label="Package">
+    ```tsx
+    import {
+      Table,
+      TableHead,
+      TableBody,
+      TableRow,
+      TableHeaderCell,
+      TableCell,
+      TableEmptyRow,
+      TableLoadingRows
+    } from '@smc/darwin-ui';
+    ```
+  </TabItem>
+  <TabItem label="shadcn CLI">
+    ```bash
+    npx shadcn add https://darwin-ui.mandalsuraj.com/registry/table.json
+    ```
+  </TabItem>
+</Tabs>
+
+## Usage
+
+```tsx
+import {
+  Table,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableHeaderCell,
+  TableCell
+} from '@smc/darwin-ui';
+
+export function Example() {
+  return (
+    <Table>
+      <TableHead>
+        <TableRow>
+          <TableHeaderCell>Name</TableHeaderCell>
+          <TableHeaderCell>Status</TableHeaderCell>
+          <TableHeaderCell>Actions</TableHeaderCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        <TableRow>
+          <TableCell>Item 1</TableCell>
+          <TableCell>
+            <Badge variant="success">Active</Badge>
+          </TableCell>
+          <TableCell>
+            <Button size="sm">View</Button>
+          </TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  );
+}
+```
+
+## Components
+
+| Component | Description |
+|-----------|-------------|
+| `Table` | Main wrapper |
+| `TableHead` | Header section |
+| `TableBody` | Body section |
+| `TableRow` | Table row |
+| `TableHeaderCell` | Header cell with bold text |
+| `TableCell` | Standard cell |
+| `TableEmptyRow` | Empty state row |
+| `TableLoadingRows` | Loading skeleton rows |
+
+## Loading State
+
+```tsx
+<Table>
+  <TableHead>
+    <TableRow>
+      <TableHeaderCell>Name</TableHeaderCell>
+      <TableHeaderCell>Status</TableHeaderCell>
+    </TableRow>
+  </TableHead>
+  <TableBody>
+    <TableLoadingRows columns={2} rows={5} />
+  </TableBody>
+</Table>
+```
+
+## Empty State
+
+```tsx
+<Table>
+  <TableHead>
+    <TableRow>
+      <TableHeaderCell>Name</TableHeaderCell>
+    </TableRow>
+  </TableHead>
+  <TableBody>
+    <TableEmptyRow colSpan={1}>
+      No items found
+    </TableEmptyRow>
+  </TableBody>
+</Table>
+```
+
+## API Reference
+
+### TableLoadingRows Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `columns` | `number` | - | Number of columns |
+| `rows` | `number` | `3` | Number of loading rows |
+
+### TableEmptyRow Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `colSpan` | `number` | - | Columns to span |
+| `children` | `ReactNode` | - | Empty message |

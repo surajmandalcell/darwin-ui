@@ -1,0 +1,77 @@
+---
+title: Modal
+description: Accessible modal dialog with focus lock and keyboard handling.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+An accessible modal dialog component with focus management and escape key handling.
+
+## Installation
+
+<Tabs>
+  <TabItem label="Package">
+    ```tsx
+    import { Modal } from '@smc/darwin-ui';
+    ```
+  </TabItem>
+  <TabItem label="shadcn CLI">
+    ```bash
+    npx shadcn add https://darwin-ui.mandalsuraj.com/registry/modal.json
+    ```
+  </TabItem>
+</Tabs>
+
+## Usage
+
+```tsx
+import { Modal, Button } from '@smc/darwin-ui';
+import { useState } from 'react';
+
+export function Example() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Open Modal</Button>
+
+      <Modal
+        isOpen={open}
+        onClose={() => setOpen(false)}
+        title="Modal Title"
+      >
+        <p>Modal content goes here.</p>
+      </Modal>
+    </>
+  );
+}
+```
+
+## Sizes
+
+```tsx
+<Modal size="sm" ... />  // 400px max-width
+<Modal size="md" ... />  // 500px max-width (default)
+<Modal size="lg" ... />  // 600px max-width
+<Modal size="xl" ... />  // 800px max-width
+```
+
+## Features
+
+- **Focus Lock**: Traps focus within the modal
+- **Escape Key**: Closes modal on ESC press
+- **Backdrop**: Click outside to close
+- **Animation**: Smooth open/close transitions
+- **Accessibility**: Proper ARIA attributes
+
+## API Reference
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `isOpen` | `boolean` | - | Open state |
+| `onClose` | `() => void` | - | Close handler |
+| `title` | `string` | - | Modal title |
+| `size` | `"sm" \| "md" \| "lg" \| "xl"` | `"md"` | Modal width |
+| `children` | `ReactNode` | - | Modal content |

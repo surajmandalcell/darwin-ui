@@ -1,0 +1,69 @@
+---
+title: Input
+description: Glass-effect styled input component with variants.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+A styled input component with glass-morphism effects.
+
+## Installation
+
+<Tabs>
+  <TabItem label="Package">
+    ```tsx
+    import { Input } from '@smc/darwin-ui';
+    ```
+  </TabItem>
+  <TabItem label="shadcn CLI">
+    ```bash
+    npx shadcn add https://darwin-ui.mandalsuraj.com/registry/input.json
+    ```
+  </TabItem>
+</Tabs>
+
+## Usage
+
+```tsx
+import { Input } from '@smc/darwin-ui';
+
+export function Example() {
+  return <Input type="text" placeholder="Enter text..." />;
+}
+```
+
+## Variants
+
+```tsx
+<Input variant="default" placeholder="Default input" />
+<Input variant="search" placeholder="Search..." />
+```
+
+## Examples
+
+### With Label
+
+```tsx
+<div className="space-y-2">
+  <label htmlFor="email">Email</label>
+  <Input id="email" type="email" placeholder="you@example.com" />
+</div>
+```
+
+### Disabled
+
+```tsx
+<Input disabled placeholder="Disabled input" />
+```
+
+## API Reference
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `"default" \| "search"` | `"default"` | Input style |
+| `type` | `string` | `"text"` | HTML input type |
+| `placeholder` | `string` | - | Placeholder text |
+| `disabled` | `boolean` | `false` | Disable input |
+| `className` | `string` | - | Additional classes |

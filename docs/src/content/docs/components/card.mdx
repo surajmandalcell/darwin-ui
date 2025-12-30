@@ -1,0 +1,168 @@
+---
+title: Card
+description: Composable card components with glass-morphism styling.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+The Card component provides a flexible container with glass-morphism styling. It includes multiple sub-components for composable layouts.
+
+## Installation
+
+<Tabs>
+  <TabItem label="Package">
+    ```tsx
+    import {
+      Card,
+      CardHeader,
+      CardTitle,
+      CardDescription,
+      CardContent,
+      CardFooter,
+      CardAction
+    } from '@smc/darwin-ui';
+    ```
+  </TabItem>
+  <TabItem label="shadcn CLI">
+    ```bash
+    npx shadcn add https://darwin-ui.mandalsuraj.com/registry/card.json
+    ```
+  </TabItem>
+</Tabs>
+
+## Usage
+
+```tsx
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent
+} from '@smc/darwin-ui';
+
+export function Example() {
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Card Title</CardTitle>
+        <CardDescription>Card description text</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <p>Card content goes here.</p>
+      </CardContent>
+    </Card>
+  );
+}
+```
+
+## Components
+
+### Card
+
+The main container with glass-morphism styling:
+- Semi-transparent background
+- Subtle border with hover effect
+- Rounded corners
+
+### CardHeader
+
+Container for title and description with vertical spacing.
+
+### CardTitle
+
+Heading element with proper typography.
+
+### CardDescription
+
+Muted text for supplementary information.
+
+### CardContent
+
+Main content area with padding.
+
+### CardFooter
+
+Bottom section with horizontal layout for actions.
+
+### CardAction
+
+Action buttons container with gap spacing.
+
+## Examples
+
+### With Footer
+
+```tsx
+<Card>
+  <CardHeader>
+    <CardTitle>Settings</CardTitle>
+    <CardDescription>Manage your preferences</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <p>Content here</p>
+  </CardContent>
+  <CardFooter>
+    <Button variant="outline">Cancel</Button>
+    <Button variant="primary">Save</Button>
+  </CardFooter>
+</Card>
+```
+
+### With Actions
+
+```tsx
+<Card>
+  <CardHeader>
+    <CardTitle>Project</CardTitle>
+    <CardAction>
+      <Button size="sm" variant="ghost">Edit</Button>
+      <Button size="sm" variant="destructive">Delete</Button>
+    </CardAction>
+  </CardHeader>
+  <CardContent>
+    <p>Project details</p>
+  </CardContent>
+</Card>
+```
+
+### Metric Card
+
+```tsx
+<Card>
+  <CardHeader>
+    <CardDescription>Total Revenue</CardDescription>
+    <CardTitle className="text-2xl">$45,231.89</CardTitle>
+  </CardHeader>
+  <CardContent>
+    <Badge variant="success">+20.1% from last month</Badge>
+  </CardContent>
+</Card>
+```
+
+## Styling
+
+The card uses these default styles:
+
+```css
+/* Base card */
+.card {
+  border-radius: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: hsl(0 0% 6%);
+  transition: border-color 0.2s;
+}
+
+.card:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+```
+
+## API Reference
+
+All card components accept standard HTML div attributes plus:
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `className` | `string` | Additional CSS classes |
+| `ref` | `React.Ref` | Forward ref support |

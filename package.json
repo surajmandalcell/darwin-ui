@@ -1,0 +1,90 @@
+{
+  "name": "@smc/darwin-ui",
+  "version": "1.1.0",
+  "description": "A beautiful macOS-inspired dark theme React component library with glass-morphism aesthetic",
+  "author": "Suraj Mandal <contact@surajmandal.in>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/surajmandalcell/darwin-ui.git"
+  },
+  "homepage": "https://darwin-ui.mandalsuraj.com",
+  "bugs": {
+    "url": "https://github.com/surajmandalcell/darwin-ui/issues"
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./styles": "./dist/darwin-ui.css",
+    "./styles.css": "./dist/darwin-ui.css"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": [
+    "*.css"
+  ],
+  "scripts": {
+    "build": "tsup && cp src/styles/darwin-ui.css dist/",
+    "build:registry": "tsx scripts/build-registry.ts",
+    "dev": "tsup --watch",
+    "clean": "rimraf dist",
+    "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "next": ">=14.0.0"
+  },
+  "peerDependenciesMeta": {
+    "next": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "@base-ui-components/react": "^1.0.0-beta.4",
+    "@radix-ui/react-dialog": "^1.1.15",
+    "@radix-ui/react-popover": "^1.1.15",
+    "@uiw/react-md-editor": "^4.0.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "date-fns": "^3.6.0",
+    "lucide-react": "^0.556.0",
+    "motion": "^12.23.25",
+    "react-day-picker": "^9.4.0",
+    "react-focus-lock": "^2.13.2",
+    "recharts": "^3.5.1",
+    "remark-gfm": "^4.0.0",
+    "tailwind-merge": "^3.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.6",
+    "@types/react-dom": "^19.0.2",
+    "next": "^15.0.0",
+    "rimraf": "^6.0.1",
+    "tailwindcss": "^4.1.17",
+    "tsup": "^8.3.5",
+    "tsx": "^4.19.0",
+    "typescript": "^5.8.0"
+  },
+  "keywords": [
+    "react",
+    "ui",
+    "components",
+    "dark-theme",
+    "macos",
+    "glass-morphism",
+    "tailwind",
+    "shadcn",
+    "design-system"
+  ]
+}

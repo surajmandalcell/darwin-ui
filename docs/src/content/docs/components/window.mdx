@@ -1,0 +1,55 @@
+---
+title: Window
+description: macOS-style window container with title bar.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+A container component styled like a macOS window.
+
+## Installation
+
+<Tabs>
+  <TabItem label="Package">
+    ```tsx
+    import { Window } from '@smc/darwin-ui';
+    ```
+  </TabItem>
+  <TabItem label="shadcn CLI">
+    ```bash
+    npx shadcn add https://darwin-ui.mandalsuraj.com/registry/window.json
+    ```
+  </TabItem>
+</Tabs>
+
+## Usage
+
+```tsx
+import { Window } from '@smc/darwin-ui';
+
+export function Example() {
+  return (
+    <Window title="My Application" showControls>
+      <p>Window content goes here.</p>
+    </Window>
+  );
+}
+```
+
+## Features
+
+- macOS-style title bar
+- Optional traffic light controls
+- Close button functionality
+- Glass-morphism styling
+
+## API Reference
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `title` | `string` | - | Window title |
+| `showControls` | `boolean` | `true` | Show close button |
+| `onClose` | `() => void` | - | Close handler |
+| `children` | `ReactNode` | - | Window content |

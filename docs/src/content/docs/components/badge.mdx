@@ -1,0 +1,119 @@
+---
+title: Badge
+description: Status indicator badges with 13 variants for different states.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+The Badge component displays status indicators with motion animations.
+
+## Installation
+
+<Tabs>
+  <TabItem label="Package">
+    ```tsx
+    import { Badge } from '@smc/darwin-ui';
+    ```
+  </TabItem>
+  <TabItem label="shadcn CLI">
+    ```bash
+    npx shadcn add https://darwin-ui.mandalsuraj.com/registry/badge.json
+    ```
+  </TabItem>
+</Tabs>
+
+## Usage
+
+```tsx
+import { Badge } from '@smc/darwin-ui';
+
+export function Example() {
+  return <Badge variant="success">Active</Badge>;
+}
+```
+
+## Variants
+
+Badge supports 13 variants:
+
+```tsx
+<Badge variant="default">Default</Badge>
+<Badge variant="secondary">Secondary</Badge>
+<Badge variant="outline">Outline</Badge>
+<Badge variant="destructive">Destructive</Badge>
+<Badge variant="success">Success</Badge>
+<Badge variant="warning">Warning</Badge>
+<Badge variant="info">Info</Badge>
+<Badge variant="published">Published</Badge>
+<Badge variant="draft">Draft</Badge>
+<Badge variant="archived">Archived</Badge>
+<Badge variant="new">New</Badge>
+<Badge variant="read">Read</Badge>
+<Badge variant="responded">Responded</Badge>
+```
+
+### Semantic Variants
+
+| Variant | Color | Use Case |
+|---------|-------|----------|
+| `success` | Green | Positive states, active |
+| `warning` | Amber | Caution, pending |
+| `destructive` | Red | Errors, critical |
+| `info` | Blue | Informational |
+
+### Status Variants
+
+| Variant | Color | Use Case |
+|---------|-------|----------|
+| `published` | Green | Content published |
+| `draft` | Gray | Work in progress |
+| `archived` | Muted | Inactive items |
+| `new` | Blue | Recent items |
+| `read` | Green | Viewed items |
+| `responded` | Purple | Replied items |
+
+### Style Variants
+
+| Variant | Style | Use Case |
+|---------|-------|----------|
+| `default` | Solid | General use |
+| `secondary` | Subtle | Secondary info |
+| `outline` | Border only | Minimal |
+
+## Animation
+
+Badges include subtle motion animations on mount:
+
+```tsx
+// Animation is built-in via motion library
+<Badge variant="success">Animated</Badge>
+```
+
+## API Reference
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `BadgeVariant` | `"default"` | Visual style |
+| `className` | `string` | - | Additional classes |
+| `children` | `ReactNode` | - | Badge content |
+
+### Types
+
+```tsx
+type BadgeVariant =
+  | "default"
+  | "secondary"
+  | "outline"
+  | "destructive"
+  | "success"
+  | "warning"
+  | "info"
+  | "published"
+  | "draft"
+  | "archived"
+  | "new"
+  | "read"
+  | "responded";
+```

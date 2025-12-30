@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "overlay-context",
+  "type": "registry:lib",
+  "title": "OverlayProvider",
+  "description": "Context provider for overlay state management across modals, alerts, and toasts.",
+  "files": [
+    {
+      "path": "contexts/overlay-context.tsx",
+      "type": "registry:lib",
+      "content": "\"use client\";\n\nimport { createContext, useContext, useState, ReactNode, useCallback } from \"react\";\n\ninterface OverlayConfig {\n\tblocksScroll: boolean;\n\tisFullscreen: boolean;\n}\n\ninterface OverlayContextType {\n\tregisterOverlay: (type: string, config: OverlayConfig) => string;\n\tunregisterOverlay: (id: string) => void;\n}\n\nconst OverlayContext = createContext<OverlayContextType | undefined>(undefined);\n\nexport function OverlayProvider({ children }: { children: ReactNode }) {\n\tconst [_overlays, setOverlays] = useState<Map<string, { type: string; config: OverlayConfig }>>(\n\t\tnew Map()\n\t);\n\n\tconst registerOverlay = useCallback((type: string, config: OverlayConfig): string => {\n\t\tconst id = `${type}-${Date.now()}-${Math.random()}`;\n\t\tsetOverlays((prev) => {\n\t\t\tconst next = new Map(prev);\n\t\t\tnext.set(id, { type, config });\n\t\t\treturn next;\n\t\t});\n\t\treturn id;\n\t}, []);\n\n\tconst unregisterOverlay = useCallback((id: string) => {\n\t\tsetOverlays((prev) => {\n\t\t\tconst next = new Map(prev);\n\t\t\tnext.delete(id);\n\t\t\treturn next;\n\t\t});\n\t}, []);\n\n\treturn (\n\t\t<OverlayContext.Provider value={{ registerOverlay, unregisterOverlay }}>\n\t\t\t{children}\n\t\t</OverlayContext.Provider>\n\t);\n}\n\nexport function useOverlay() {\n\tconst context = useContext(OverlayContext);\n\tif (context === undefined) {\n\t\tthrow new Error(\"useOverlay must be used within an OverlayProvider\");\n\t}\n\treturn context;\n}\n"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-mobile",
+  "type": "registry:hook",
+  "title": "useIsMobile",
+  "description": "Hook to detect mobile device viewport.",
+  "registryDependencies": [
+    "use-media-query"
+  ],
+  "files": [
+    {
+      "path": "hooks/use-mobile.ts",
+      "type": "registry:hook",
+      "content": "\"use client\";\n\nimport { useMediaQuery } from './use-media-query';\n\n/**\n * Hook to detect mobile devices\n */\nexport function useIsMobile(): boolean {\n  return useMediaQuery('(max-width: 768px)');\n}\n"
+    }
+  ]
+}

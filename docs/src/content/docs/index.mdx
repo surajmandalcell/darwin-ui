@@ -1,0 +1,82 @@
+---
+title: Darwin UI
+description: A beautiful macOS-inspired dark theme React component library with glass-morphism aesthetic.
+template: splash
+hero:
+  tagline: Build stunning dark-themed interfaces with glass-morphism styling. 25+ React components, shadcn-compatible, and ready for production.
+  image:
+    file: ../../assets/hero.svg
+  actions:
+    - text: Get Started
+      link: /getting-started/introduction/
+      icon: right-arrow
+      variant: primary
+    - text: View Components
+      link: /components/button/
+      variant: minimal
+---
+
+import { Card, CardContent, CardGrid } from '@astrojs/starlight/components';
+import DashboardShowcase from '../../components/DashboardShowcase';
+
+## Live Demo
+
+Experience Darwin UI components in action:
+
+<DashboardShowcase client:load />
+
+## Features
+
+<CardGrid stagger>
+  <Card title="25+ Components" icon="puzzle">
+    Buttons, cards, tables, modals, charts, and more - all with consistent dark theme styling.
+  </Card>
+  <Card title="Glass Morphism" icon="sun">
+    Beautiful backdrop-blur effects and semi-transparent elements for modern UI aesthetics.
+  </Card>
+  <Card title="shadcn Compatible" icon="rocket">
+    Install individual components via CLI: `npx shadcn add https://darwin-ui.mandalsuraj.com/registry/button.json`
+  </Card>
+  <Card title="React 19 Ready" icon="seti:react">
+    Built for React 19 with TypeScript, Tailwind CSS v4, and tree-shakeable exports.
+  </Card>
+</CardGrid>
+
+## Quick Start
+
+```bash
+# Install the package
+npm install @smc/darwin-ui
+
+# Or add individual components
+npx shadcn add https://darwin-ui.mandalsuraj.com/registry/button.json
+```
+
+```tsx
+import { Button, Card, CardHeader, CardTitle, CardContent } from '@smc/darwin-ui';
+import '@smc/darwin-ui/styles';
+
+function App() {
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Welcome to Darwin UI</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <Button variant="primary">Get Started</Button>
+      </CardContent>
+    </Card>
+  );
+}
+```
+
+## Components Overview
+
+| Category | Components |
+|----------|------------|
+| **Layout** | Card, Window, Sidebar |
+| **Forms** | Button, Input, Select, MultiSelect, Checkbox, Switch |
+| **Data Display** | Table, Badge, Skeleton |
+| **Feedback** | Modal, Toast, Alert |
+| **Charts** | AreaChart, BarChart, LineChart, PieChart, DonutChart |
+| **Utility** | ContextMenu, Image, Upload, Reveal |

@@ -1,0 +1,65 @@
+---
+title: Skeleton
+description: Loading skeleton placeholder with pulse animation.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+A loading placeholder with animated pulse effect.
+
+## Installation
+
+<Tabs>
+  <TabItem label="Package">
+    ```tsx
+    import { Skeleton } from '@smc/darwin-ui';
+    ```
+  </TabItem>
+  <TabItem label="shadcn CLI">
+    ```bash
+    npx shadcn add https://darwin-ui.mandalsuraj.com/registry/skeleton.json
+    ```
+  </TabItem>
+</Tabs>
+
+## Usage
+
+```tsx
+import { Skeleton } from '@smc/darwin-ui';
+
+export function Example() {
+  return (
+    <div className="space-y-2">
+      <Skeleton className="h-4 w-full" />
+      <Skeleton className="h-4 w-3/4" />
+      <Skeleton className="h-4 w-1/2" />
+    </div>
+  );
+}
+```
+
+## Examples
+
+### Card Skeleton
+
+```tsx
+<div className="space-y-4">
+  <Skeleton className="h-40 w-full rounded-lg" />
+  <Skeleton className="h-4 w-3/4" />
+  <Skeleton className="h-4 w-1/2" />
+</div>
+```
+
+### Avatar Skeleton
+
+```tsx
+<Skeleton className="h-12 w-12 rounded-full" />
+```
+
+## API Reference
+
+### Props
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `className` | `string` | Size and shape classes |

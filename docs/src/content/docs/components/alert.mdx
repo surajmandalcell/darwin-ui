@@ -1,0 +1,98 @@
+---
+title: Alert
+description: Alert dialog with provider and hook for confirmations.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Alert dialogs for confirmations and important messages.
+
+## Installation
+
+<Tabs>
+  <TabItem label="Package">
+    ```tsx
+    import { AlertProvider, useAlert } from '@smc/darwin-ui';
+    ```
+  </TabItem>
+  <TabItem label="shadcn CLI">
+    ```bash
+    npx shadcn add https://darwin-ui.mandalsuraj.com/registry/alert.json
+    ```
+  </TabItem>
+</Tabs>
+
+## Setup
+
+Wrap your app with `AlertProvider`:
+
+```tsx
+import { AlertProvider } from '@smc/darwin-ui';
+
+function App() {
+  return (
+    <AlertProvider>
+      <YourApp />
+    </AlertProvider>
+  );
+}
+```
+
+## Usage
+
+```tsx
+import { useAlert, Button } from '@smc/darwin-ui';
+
+export function Example() {
+  const { showAlert } = useAlert();
+
+  return (
+    <Button
+      variant="destructive"
+      onClick={() =>
+        showAlert({
+          title: 'Delete Item?',
+          message: 'This action cannot be undone.',
+          type: 'warning',
+          onConfirm: () => console.log('Deleted'),
+        })
+      }
+    >
+      Delete
+    </Button>
+  );
+}
+```
+
+## Types
+
+```tsx
+showAlert({ type: 'info', ... });
+showAlert({ type: 'success', ... });
+showAlert({ type: 'warning', ... });
+showAlert({ type: 'error', ... });
+```
+
+## API Reference
+
+### useAlert Hook
+
+```tsx
+const { showAlert } = useAlert();
+```
+
+### showAlert Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `title` | `string` | - | Alert title |
+| `message` | `string` | - | Alert message |
+| `type` | `AlertType` | `"info"` | Alert variant |
+| `onConfirm` | `() => void` | - | Confirm callback |
+| `onCancel` | `() => void` | - | Cancel callback |
+
+### AlertType
+
+```tsx
+type AlertType = 'info' | 'success' | 'warning' | 'error';
+```

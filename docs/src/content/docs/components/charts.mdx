@@ -1,0 +1,130 @@
+---
+title: Charts
+description: Recharts-based chart components with Darwin color palette.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+A collection of chart components built on Recharts with Darwin UI styling.
+
+## Installation
+
+<Tabs>
+  <TabItem label="Package">
+    ```tsx
+    import {
+      AreaChart,
+      BarChart,
+      LineChart,
+      PieChart,
+      DonutChart,
+      StackedBarChart
+    } from '@smc/darwin-ui';
+    ```
+  </TabItem>
+  <TabItem label="shadcn CLI">
+    ```bash
+    npx shadcn add https://darwin-ui.mandalsuraj.com/registry/charts.json
+    ```
+  </TabItem>
+</Tabs>
+
+## Charts
+
+### AreaChart
+
+```tsx
+const data = [
+  { month: 'Jan', revenue: 4500 },
+  { month: 'Feb', revenue: 5200 },
+  { month: 'Mar', revenue: 4800 },
+];
+
+<AreaChart
+  data={data}
+  xAxisKey="month"
+  dataKey="revenue"
+  height={300}
+/>
+```
+
+### BarChart
+
+```tsx
+<BarChart
+  data={data}
+  xAxisKey="month"
+  dataKey="revenue"
+  height={300}
+/>
+```
+
+### LineChart
+
+```tsx
+<LineChart
+  data={data}
+  xAxisKey="month"
+  dataKey="revenue"
+  height={300}
+/>
+```
+
+### PieChart
+
+```tsx
+const pieData = [
+  { name: 'Desktop', value: 45 },
+  { name: 'Mobile', value: 35 },
+  { name: 'Tablet', value: 20 },
+];
+
+<PieChart data={pieData} height={300} />
+```
+
+### DonutChart
+
+```tsx
+<DonutChart data={pieData} height={300} />
+```
+
+### StackedBarChart
+
+```tsx
+const stackedData = [
+  { month: 'Jan', desktop: 400, mobile: 200 },
+  { month: 'Feb', desktop: 500, mobile: 300 },
+];
+
+<StackedBarChart
+  data={stackedData}
+  xAxisKey="month"
+  dataKeys={['desktop', 'mobile']}
+  height={300}
+/>
+```
+
+## Color Palette
+
+Charts use Darwin UI's color palette:
+
+| Color | Hex | Use |
+|-------|-----|-----|
+| Blue | `#60a5fa` | Primary data |
+| Green | `#34d399` | Positive values |
+| Yellow | `#fbbf24` | Warnings |
+| Red | `#f87171` | Negative values |
+| Purple | `#a78bfa` | Accent data |
+| Teal | `#2dd4bf` | Secondary data |
+
+## API Reference
+
+### Common Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `data` | `any[]` | - | Chart data |
+| `height` | `number` | `300` | Chart height |
+| `xAxisKey` | `string` | - | X-axis data key |
+| `dataKey` | `string` | - | Y-axis data key |
+| `color` | `string` | - | Custom color |

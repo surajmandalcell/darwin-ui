@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "switch",
+  "type": "registry:ui",
+  "title": "Switch",
+  "description": "Toggle switch component with label support for boolean inputs.",
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/switch.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport { useId } from \"react\";\nimport type React from \"react\";\n\ninterface SwitchProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {\n\tlabel?: string;\n\tchecked?: boolean;\n\tonChange?: (checked: boolean) => void;\n}\n\nexport function Switch({\n\tclassName = \"\",\n\tlabel,\n\tchecked,\n\tonChange,\n\tdisabled,\n\t...props\n}: SwitchProps) {\n\tconst id = useId();\n\n\treturn (\n\t\t<label\n\t\t\thtmlFor={id}\n\t\t\tclassName={`inline-flex items-center gap-2 text-[13px] text-slate-100 ${\n\t\t\t\tdisabled ? \"opacity-50 cursor-default\" : \"cursor-pointer\"\n\t\t\t} ${className}`}\n\t\t>\n\t\t\t<span className=\"relative inline-flex items-center\">\n\t\t\t\t<input\n\t\t\t\t\tid={id}\n\t\t\t\t\ttype=\"checkbox\"\n\t\t\t\t\tchecked={checked}\n\t\t\t\t\tdisabled={disabled}\n\t\t\t\t\tonChange={(e) => onChange && onChange(e.target.checked)}\n\t\t\t\t\t{...props}\n\t\t\t\t\tclassName=\"peer absolute inset-0 h-full w-full cursor-pointer opacity-0\"\n\t\t\t\t/>\n\t\t\t\t<span\n\t\t\t\t\tclassName={`flex h-5 w-9 items-center rounded-full px-0.5 transition-colors ${\n\t\t\t\t\t\tchecked ? \"bg-emerald-500\" : \"bg-slate-600\"\n\t\t\t\t\t}`}\n\t\t\t\t>\n\t\t\t\t\t<span\n\t\t\t\t\t\tclassName={`h-4 w-4 rounded-full bg-white shadow-sm transition-transform ${\n\t\t\t\t\t\t\tchecked ? \"translate-x-4\" : \"translate-x-0\"\n\t\t\t\t\t\t}`}\n\t\t\t\t\t/>\n\t\t\t\t</span>\n\t\t\t</span>\n\t\t\t{label ? <span>{label}</span> : null}\n\t\t</label>\n\t);\n}\n"
+    }
+  ]
+}

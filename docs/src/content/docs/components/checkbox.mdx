@@ -1,0 +1,52 @@
+---
+title: Checkbox
+description: Custom checkbox input with label support.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+A styled checkbox component.
+
+## Installation
+
+<Tabs>
+  <TabItem label="Package">
+    ```tsx
+    import { Checkbox } from '@smc/darwin-ui';
+    ```
+  </TabItem>
+  <TabItem label="shadcn CLI">
+    ```bash
+    npx shadcn add https://darwin-ui.mandalsuraj.com/registry/checkbox.json
+    ```
+  </TabItem>
+</Tabs>
+
+## Usage
+
+```tsx
+import { Checkbox } from '@smc/darwin-ui';
+
+export function Example() {
+  const [checked, setChecked] = useState(false);
+
+  return (
+    <Checkbox
+      label="Accept terms"
+      checked={checked}
+      onCheckedChange={setChecked}
+    />
+  );
+}
+```
+
+## API Reference
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `label` | `string` | - | Checkbox label |
+| `checked` | `boolean` | `false` | Checked state |
+| `onCheckedChange` | `(checked: boolean) => void` | - | Change handler |
+| `disabled` | `boolean` | `false` | Disable checkbox |

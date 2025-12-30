@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "checkbox",
+  "type": "registry:ui",
+  "title": "Checkbox",
+  "description": "Custom checkbox input with label support and checked state callback.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/checkbox.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport { useId } from \"react\";\nimport type React from \"react\";\n\ninterface CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {\n\tboxClassName?: string;\n\tlabel?: string;\n\tchecked?: boolean;\n\tonChange?: (checked: boolean) => void;\n}\n\nexport function Checkbox({\n\tclassName = \"\",\n\tboxClassName = \"\",\n\tlabel,\n\tchecked,\n\tonChange,\n\tdisabled,\n\t...props\n}: CheckboxProps) {\n\tconst id = useId();\n\n\treturn (\n\t\t<label\n\t\t\thtmlFor={id}\n\t\t\tclassName={`inline-flex items-center gap-2 text-[13px] text-slate-100 ${\n\t\t\t\tdisabled ? \"opacity-50 cursor-default\" : \"cursor-pointer\"\n\t\t\t} ${className}`}\n\t\t>\n\t\t\t<span className=\"relative flex h-4 w-4 items-center justify-center\">\n\t\t\t\t<input\n\t\t\t\t\tid={id}\n\t\t\t\t\ttype=\"checkbox\"\n\t\t\t\t\tchecked={checked}\n\t\t\t\t\tdisabled={disabled}\n\t\t\t\t\tonChange={(e) => onChange && onChange(e.target.checked)}\n\t\t\t\t\t{...props}\n\t\t\t\t\tclassName=\"peer absolute inset-0 h-full w-full cursor-pointer opacity-0\"\n\t\t\t\t/>\n\t\t\t\t<span\n\t\t\t\t\tclassName={`flex h-4 w-4 items-center justify-center rounded-sm border text-white transition-colors ${\n\t\t\t\t\t\tchecked\n\t\t\t\t\t\t\t? \"border-sky-500 bg-sky-500\"\n\t\t\t\t\t\t\t: \"border-slate-500 bg-slate-900\"\n\t\t\t\t\t} ${boxClassName}`}\n\t\t\t\t>\n\t\t\t\t\t<svg\n\t\t\t\t\t\tviewBox=\"0 0 16 16\"\n\t\t\t\t\t\taria-hidden=\"true\"\n\t\t\t\t\t\tclassName={`h-[11px] w-[11px] transition-opacity ${\n\t\t\t\t\t\t\tchecked ? \"opacity-100\" : \"opacity-0\"\n\t\t\t\t\t\t}`}\n\t\t\t\t\t>\n\t\t\t\t\t\t<polyline\n\t\t\t\t\t\t\tpoints=\"3.5 8.5 6.5 11.5 12.5 4.5\"\n\t\t\t\t\t\t\tfill=\"none\"\n\t\t\t\t\t\t\tstroke=\"currentColor\"\n\t\t\t\t\t\t\tstrokeWidth=\"1.8\"\n\t\t\t\t\t\t\tstrokeLinecap=\"round\"\n\t\t\t\t\t\t\tstrokeLinejoin=\"round\"\n\t\t\t\t\t\t/>\n\t\t\t\t\t</svg>\n\t\t\t\t</span>\n\t\t\t</span>\n\t\t\t{label ? <span>{label}</span> : null}\n\t\t</label>\n\t);\n}\n"
+    }
+  ]
+}

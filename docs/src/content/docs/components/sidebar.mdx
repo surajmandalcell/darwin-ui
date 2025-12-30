@@ -1,0 +1,65 @@
+---
+title: Sidebar
+description: Responsive sidebar navigation component.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+A responsive sidebar with mobile menu support.
+
+## Installation
+
+<Tabs>
+  <TabItem label="Package">
+    ```tsx
+    import { Sidebar } from '@smc/darwin-ui';
+    ```
+  </TabItem>
+  <TabItem label="shadcn CLI">
+    ```bash
+    npx shadcn add https://darwin-ui.mandalsuraj.com/registry/sidebar.json
+    ```
+  </TabItem>
+</Tabs>
+
+## Usage
+
+```tsx
+import { Sidebar } from '@smc/darwin-ui';
+import { Home, Settings, Users } from 'lucide-react';
+
+export function Example() {
+  return (
+    <Sidebar>
+      <Sidebar.Item icon={Home} label="Home" href="/" />
+      <Sidebar.Item icon={Users} label="Users" href="/users" />
+      <Sidebar.Item icon={Settings} label="Settings" href="/settings" />
+    </Sidebar>
+  );
+}
+```
+
+## Features
+
+- Responsive collapse on mobile
+- Icon + label layout
+- Active state highlighting
+- Smooth animations
+
+## API Reference
+
+### Sidebar Props
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `children` | `ReactNode` | Sidebar items |
+| `className` | `string` | Additional classes |
+
+### SidebarItem Props
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `icon` | `LucideIcon` | Item icon |
+| `label` | `string` | Item label |
+| `href` | `string` | Navigation link |
+| `active` | `boolean` | Active state |
