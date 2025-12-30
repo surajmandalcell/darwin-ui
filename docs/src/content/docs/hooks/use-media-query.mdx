@@ -1,28 +1,27 @@
 ---
 title: useMediaQuery
-description: Custom hook for responsive media query detection.
+description: A hook to subscribe to a media query.
 ---
 
-A hook for detecting media query matches.
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Seamlessly switch between logic based on CSS media queries.
 
 ## Installation
 
-```bash
-npx shadcn add https://darwin-ui.mandalsuraj.com/registry/use-media-query.json
+```tsx
+import { useMediaQuery } from '@smc/darwin-ui';
 ```
 
 ## Usage
 
 ```tsx
-import { useMediaQuery } from '@smc/darwin-ui';
-
-export function Example() {
-  const isDesktop = useMediaQuery('(min-width: 1024px)');
-  const prefersDark = useMediaQuery('(prefers-color-scheme: dark)');
+export function ResponsiveComponent() {
+  const isDesktop = useMediaQuery('(min-width: 768px)');
 
   return (
     <div>
-      {isDesktop ? 'Desktop view' : 'Mobile view'}
+      {isDesktop ? 'Desktop View' : 'Mobile View'}
     </div>
   );
 }
@@ -31,11 +30,5 @@ export function Example() {
 ## API Reference
 
 ```tsx
-function useMediaQuery(query: string): boolean;
+function useMediaQuery(query: string): boolean
 ```
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `query` | `string` | CSS media query |
-
-**Returns:** `boolean` - Whether the query matches

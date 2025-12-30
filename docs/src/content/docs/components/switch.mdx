@@ -1,23 +1,30 @@
 ---
 title: Switch
-description: Toggle switch component with label support.
+description: A control that allows the user to toggle between checked and not checked.
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { SwitchPreview } from '../../../components/ComponentPreview';
 
-A toggle switch for boolean inputs.
+The Switch component is a beautiful toggle control with spring interactions.
+
+## Live Preview
+
+<div class="not-content">
+  <SwitchPreview client:load />
+</div>
 
 ## Installation
 
 <Tabs>
-  <TabItem label="Package">
-    ```tsx
-    import { Switch } from '@smc/darwin-ui';
-    ```
-  </TabItem>
-  <TabItem label="shadcn CLI">
+  <TabItem label="CLI">
     ```bash
     npx shadcn add https://darwin-ui.mandalsuraj.com/registry/switch.json
+    ```
+  </TabItem>
+  <TabItem label="Manual">
+    ```bash
+    npm install @smc/darwin-ui
     ```
   </TabItem>
 </Tabs>
@@ -28,25 +35,46 @@ A toggle switch for boolean inputs.
 import { Switch } from '@smc/darwin-ui';
 
 export function Example() {
-  const [enabled, setEnabled] = useState(false);
-
   return (
-    <Switch
-      label="Enable notifications"
-      checked={enabled}
-      onCheckedChange={setEnabled}
-    />
+    <div className="flex items-center space-x-2">
+      <Switch id="airplane-mode" />
+      <label htmlFor="airplane-mode">Airplane Mode</label>
+    </div>
   );
 }
 ```
 
 ## API Reference
 
-### Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `label` | `string` | - | Switch label |
-| `checked` | `boolean` | `false` | Toggle state |
-| `onCheckedChange` | `(checked: boolean) => void` | - | Change handler |
-| `disabled` | `boolean` | `false` | Disable switch |
+<div class="overflow-x-auto">
+  <table>
+    <thead>
+      <tr>
+        <th>Prop</th>
+        <th>Type</th>
+        <th>Default</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>`checked`</td>
+        <td>`boolean`</td>
+        <td>`false`</td>
+        <td>The controlled state.</td>
+      </tr>
+      <tr>
+        <td>`onCheckedChange`</td>
+        <td>`(checked: boolean) => void`</td>
+        <td>-</td>
+        <td>Event handler for state.</td>
+      </tr>
+      <tr>
+        <td>`disabled`</td>
+        <td>`boolean`</td>
+        <td>`false`</td>
+        <td>Disables the switch.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

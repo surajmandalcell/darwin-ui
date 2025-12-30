@@ -1,23 +1,30 @@
 ---
 title: Select
-description: Custom select/dropdown component with portal rendering.
+description: Displays a list of options for the user to pick from.
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { SelectPreview } from '../../../components/ComponentPreview';
 
-A styled select dropdown with keyboard navigation.
+The Select component offers a native-like experience with enhanced styling and keyboard accessibility.
+
+## Live Preview
+
+<div class="not-content">
+  <SelectPreview client:load />
+</div>
 
 ## Installation
 
 <Tabs>
-  <TabItem label="Package">
-    ```tsx
-    import { Select } from '@smc/darwin-ui';
-    ```
-  </TabItem>
-  <TabItem label="shadcn CLI">
+  <TabItem label="CLI">
     ```bash
     npx shadcn add https://darwin-ui.mandalsuraj.com/registry/select.json
+    ```
+  </TabItem>
+  <TabItem label="Manual">
+    ```bash
+    npm install @smc/darwin-ui
     ```
   </TabItem>
 </Tabs>
@@ -25,45 +32,61 @@ A styled select dropdown with keyboard navigation.
 ## Usage
 
 ```tsx
-import { Select } from '@smc/darwin-ui';
-
-const options = [
-  { value: 'option1', label: 'Option 1' },
-  { value: 'option2', label: 'Option 2' },
-  { value: 'option3', label: 'Option 3' },
-];
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@smc/darwin-ui';
 
 export function Example() {
-  const [value, setValue] = useState('');
-
   return (
-    <Select
-      options={options}
-      value={value}
-      onChange={setValue}
-      placeholder="Select an option"
-    />
+    <Select>
+      <SelectTrigger className="w-[180px]">
+        <SelectValue placeholder="Theme" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectItem value="light">Light</SelectItem>
+        <SelectItem value="dark">Dark</SelectItem>
+        <SelectItem value="system">System</SelectItem>
+      </SelectContent>
+    </Select>
   );
 }
 ```
 
 ## API Reference
 
-### Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `options` | `Option[]` | - | Available options |
-| `value` | `string` | - | Selected value |
-| `onChange` | `(value: string) => void` | - | Change handler |
-| `placeholder` | `string` | - | Placeholder text |
-| `disabled` | `boolean` | `false` | Disable select |
-
-### Option Type
-
-```tsx
-interface Option {
-  value: string;
-  label: string;
-}
-```
+<div class="overflow-x-auto">
+  <table>
+    <thead>
+      <tr>
+        <th>Prop</th>
+        <th>Type</th>
+        <th>Default</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>`value`</td>
+        <td>`string`</td>
+        <td>-</td>
+        <td>The controlled value of the select item.</td>
+      </tr>
+      <tr>
+        <td>`onValueChange`</td>
+        <td>`(value: string) => void`</td>
+        <td>-</td>
+        <td>Event handler for value changes.</td>
+      </tr>
+      <tr>
+        <td>`disabled`</td>
+        <td>`boolean`</td>
+        <td>`false`</td>
+        <td>Disables interaction.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

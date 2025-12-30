@@ -1,23 +1,30 @@
 ---
 title: Checkbox
-description: Custom checkbox input with label support.
+description: A control for selecting one or more options from a set.
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { CheckboxPreview } from '../../../components/ComponentPreview';
 
-A styled checkbox component.
+The Checkbox component features a custom check animation and glass-styled container.
+
+## Live Preview
+
+<div class="not-content">
+  <CheckboxPreview client:load />
+</div>
 
 ## Installation
 
 <Tabs>
-  <TabItem label="Package">
-    ```tsx
-    import { Checkbox } from '@smc/darwin-ui';
-    ```
-  </TabItem>
-  <TabItem label="shadcn CLI">
+  <TabItem label="CLI">
     ```bash
     npx shadcn add https://darwin-ui.mandalsuraj.com/registry/checkbox.json
+    ```
+  </TabItem>
+  <TabItem label="Manual">
+    ```bash
+    npm install @smc/darwin-ui
     ```
   </TabItem>
 </Tabs>
@@ -28,25 +35,51 @@ A styled checkbox component.
 import { Checkbox } from '@smc/darwin-ui';
 
 export function Example() {
-  const [checked, setChecked] = useState(false);
-
   return (
-    <Checkbox
-      label="Accept terms"
-      checked={checked}
-      onCheckedChange={setChecked}
-    />
+    <div className="flex items-center space-x-2">
+      <Checkbox id="terms" />
+      <label
+        htmlFor="terms"
+        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+      >
+        Accept terms and conditions
+      </label>
+    </div>
   );
 }
 ```
 
 ## API Reference
 
-### Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `label` | `string` | - | Checkbox label |
-| `checked` | `boolean` | `false` | Checked state |
-| `onCheckedChange` | `(checked: boolean) => void` | - | Change handler |
-| `disabled` | `boolean` | `false` | Disable checkbox |
+<div class="overflow-x-auto">
+  <table>
+    <thead>
+      <tr>
+        <th>Prop</th>
+        <th>Type</th>
+        <th>Default</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>`checked`</td>
+        <td>`boolean`</td>
+        <td>`false`</td>
+        <td>The controlled checked state.</td>
+      </tr>
+      <tr>
+        <td>`onCheckedChange`</td>
+        <td>`(checked: boolean) => void`</td>
+        <td>-</td>
+        <td>Event handler for state changes.</td>
+      </tr>
+      <tr>
+        <td>`disabled`</td>
+        <td>`boolean`</td>
+        <td>`false`</td>
+        <td>Disables interaction.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

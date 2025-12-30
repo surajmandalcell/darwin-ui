@@ -1,168 +1,138 @@
 ---
 title: Card
-description: Composable card components with glass-morphism styling.
+description: A versatile container component with glass-morphism styling, widely used for grouping content.
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { CardPreview } from '../../../components/ComponentPreview';
 
-The Card component provides a flexible container with glass-morphism styling. It includes multiple sub-components for composable layouts.
+The Card component serves as the fundamental building block for layout, providing a surface to group related content. It features a sophisticated glass material effect that adapts to the background.
+
+## Live Preview
+
+<div class="not-content">
+  <CardPreview client:load />
+</div>
 
 ## Installation
 
 <Tabs>
-  <TabItem label="Package">
-    ```tsx
-    import {
-      Card,
-      CardHeader,
-      CardTitle,
-      CardDescription,
-      CardContent,
-      CardFooter,
-      CardAction
-    } from '@smc/darwin-ui';
-    ```
-  </TabItem>
-  <TabItem label="shadcn CLI">
+  <TabItem label="CLI">
     ```bash
     npx shadcn add https://darwin-ui.mandalsuraj.com/registry/card.json
+    ```
+  </TabItem>
+  <TabItem label="Manual">
+    ```bash
+    npm install @smc/darwin-ui
     ```
   </TabItem>
 </Tabs>
 
 ## Usage
 
-```tsx
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent
-} from '@smc/darwin-ui';
+```tsx title="src/components/ProfileCard.tsx"
+import { Card, CardHeader, CardTitle, CardContent, CardFooter, Button } from '@smc/darwin-ui';
 
-export function Example() {
+export function ProfileCard() {
   return (
-    <Card>
+    <Card className="w-[350px]">
       <CardHeader>
-        <CardTitle>Card Title</CardTitle>
-        <CardDescription>Card description text</CardDescription>
+        <CardTitle>Create project</CardTitle>
+        <p className="text-sm text-white/50">Deploy your new project in one-click.</p>
       </CardHeader>
       <CardContent>
-        <p>Card content goes here.</p>
+        <form>
+          {/* Form fields */}
+        </form>
       </CardContent>
+      <CardFooter className="flex justify-between">
+        <Button variant="secondary">Cancel</Button>
+        <Button>Deploy</Button>
+      </CardFooter>
     </Card>
   );
 }
 ```
 
-## Components
+## Structure
 
-### Card
+The Card component typically consists of the following sub-components:
 
-The main container with glass-morphism styling:
-- Semi-transparent background
-- Subtle border with hover effect
-- Rounded corners
-
-### CardHeader
-
-Container for title and description with vertical spacing.
-
-### CardTitle
-
-Heading element with proper typography.
-
-### CardDescription
-
-Muted text for supplementary information.
-
-### CardContent
-
-Main content area with padding.
-
-### CardFooter
-
-Bottom section with horizontal layout for actions.
-
-### CardAction
-
-Action buttons container with gap spacing.
-
-## Examples
-
-### With Footer
-
-```tsx
-<Card>
-  <CardHeader>
-    <CardTitle>Settings</CardTitle>
-    <CardDescription>Manage your preferences</CardDescription>
-  </CardHeader>
-  <CardContent>
-    <p>Content here</p>
-  </CardContent>
-  <CardFooter>
-    <Button variant="outline">Cancel</Button>
-    <Button variant="primary">Save</Button>
-  </CardFooter>
-</Card>
-```
-
-### With Actions
-
-```tsx
-<Card>
-  <CardHeader>
-    <CardTitle>Project</CardTitle>
-    <CardAction>
-      <Button size="sm" variant="ghost">Edit</Button>
-      <Button size="sm" variant="destructive">Delete</Button>
-    </CardAction>
-  </CardHeader>
-  <CardContent>
-    <p>Project details</p>
-  </CardContent>
-</Card>
-```
-
-### Metric Card
-
-```tsx
-<Card>
-  <CardHeader>
-    <CardDescription>Total Revenue</CardDescription>
-    <CardTitle className="text-2xl">$45,231.89</CardTitle>
-  </CardHeader>
-  <CardContent>
-    <Badge variant="success">+20.1% from last month</Badge>
-  </CardContent>
-</Card>
-```
-
-## Styling
-
-The card uses these default styles:
-
-```css
-/* Base card */
-.card {
-  border-radius: 0.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: hsl(0 0% 6%);
-  transition: border-color 0.2s;
-}
-
-.card:hover {
-  border-color: rgba(255, 255, 255, 0.15);
-}
-```
+- `Card`: The main container with border and background.
+- `CardHeader`: Wrapper for title and description.
+- `CardTitle`: The primary heading.
+- `CardDescription`: Secondary text for context.
+- `CardContent`: The main body area.
+- `CardFooter`: Bottom area, usually for actions.
 
 ## API Reference
 
-All card components accept standard HTML div attributes plus:
+<div class="overflow-x-auto">
+  <table>
+    <thead>
+      <tr>
+        <th>Component</th>
+        <th>Prop</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>`Card`</td>
+        <td>`className`</td>
+        <td>`string`</td>
+        <td>Additional class names for the container.</td>
+      </tr>
+      <tr>
+        <td>`CardHeader`</td>
+        <td>`className`</td>
+        <td>`string`</td>
+        <td>Wrapper for the header section.</td>
+      </tr>
+      <tr>
+        <td>`CardTitle`</td>
+        <td>`as`</td>
+        <td>`ElementType`</td>
+        <td>The semantic HTML heading level (default: `h3`).</td>
+      </tr>
+      <tr>
+        <td>`CardContent`</td>
+        <td>`className`</td>
+        <td>`string`</td>
+        <td>Wrapper for the main content.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-| Prop | Type | Description |
-|------|------|-------------|
-| `className` | `string` | Additional CSS classes |
-| `ref` | `React.Ref` | Forward ref support |
+### Accessibility
+
+<div class="checklist">
+  <div class="check-item">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-500"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    <span>Appropriate heading hierarchy with `CardTitle`</span>
+  </div>
+  <div class="check-item">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-500"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    <span>Semantic sectioning</span>
+  </div>
+</div>
+
+<style>{`
+  .checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+  
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+  }
+`}</style>

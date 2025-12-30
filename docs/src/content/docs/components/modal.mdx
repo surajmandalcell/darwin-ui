@@ -1,28 +1,30 @@
 ---
 title: Modal
-description: Accessible modal dialog with focus lock and keyboard handling.
+description: A window overlay that sits on top of a page view.
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { ModalPreview } from '../../../components/ComponentPreview';
 
-An accessible modal dialog with backdrop blur, focus trapping, and smooth animations.
+The Modal component provides a focused environment for user tasks, featuring a backdrop blur and smooth entrance animations.
 
-## Preview
+## Live Preview
 
-<ModalPreview client:load />
+<div class="not-content">
+  <ModalPreview client:load />
+</div>
 
 ## Installation
 
 <Tabs>
-  <TabItem label="Package">
-    ```tsx
-    import { Modal } from '@smc/darwin-ui';
+  <TabItem label="CLI">
+    ```bash
+    npx shadcn add https://darwin-ui.mandalsuraj.com/registry/dialog.json
     ```
   </TabItem>
-  <TabItem label="shadcn CLI">
+  <TabItem label="Manual">
     ```bash
-    npx shadcn add https://darwin-ui.mandalsuraj.com/registry/modal.json
+    npm install @smc/darwin-ui
     ```
   </TabItem>
 </Tabs>
@@ -30,58 +32,64 @@ An accessible modal dialog with backdrop blur, focus trapping, and smooth animat
 ## Usage
 
 ```tsx
-import { Modal, Button } from '@smc/darwin-ui';
-import { useState } from 'react';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@smc/darwin-ui';
 
 export function Example() {
-  const [open, setOpen] = useState(false);
-
   return (
-    <>
-      <Button onClick={() => setOpen(true)}>Open Modal</Button>
-
-      <Modal
-        isOpen={open}
-        onClose={() => setOpen(false)}
-        title="Modal Title"
-      >
-        <p>Modal content goes here.</p>
-      </Modal>
-    </>
+    <Dialog>
+      <DialogTrigger>Open</DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Are you sure absolutely sure?</DialogTitle>
+          <DialogDescription>
+            This action cannot be undone. This will permanently delete your account
+            and remove your data from our servers.
+          </DialogDescription>
+        </DialogHeader>
+      </DialogContent>
+    </Dialog>
   );
 }
 ```
 
-## Features
-
-- **Backdrop blur**: Glass-morphism overlay effect
-- **Focus trapping**: Keyboard focus stays within modal
-- **Escape to close**: Press `ESC` to dismiss
-- **Click outside**: Close by clicking backdrop
-- **Smooth animations**: Scale and fade transitions
-
-## Sizes
-
-```tsx
-<Modal size="sm" />  // 400px max-width
-<Modal size="md" />  // 500px max-width (default)
-<Modal size="lg" />  // 600px max-width
-<Modal size="xl" />  // 800px max-width
-```
-
 ## API Reference
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `isOpen` | `boolean` | - | Control visibility |
-| `onClose` | `() => void` | - | Close handler |
-| `title` | `string` | - | Modal title |
-| `size` | `Size` | `"md"` | Modal width |
-| `children` | `ReactNode` | - | Modal content |
-
-## Accessibility
-
-- Focus is trapped inside modal when open
-- `Escape` key closes the modal
-- Proper `aria-modal` and `role="dialog"` attributes
-- Background content hidden from screen readers
+<div class="overflow-x-auto">
+  <table>
+    <thead>
+      <tr>
+        <th>Component</th>
+        <th>Prop</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>`Dialog`</td>
+        <td>`open`</td>
+        <td>`boolean`</td>
+        <td>The controlled open state.</td>
+      </tr>
+      <tr>
+        <td>`Dialog`</td>
+        <td>`onOpenChange`</td>
+        <td>`(open: boolean) => void`</td>
+        <td>Event handler for open state changes.</td>
+      </tr>
+      <tr>
+        <td>`DialogContent`</td>
+        <td>`className`</td>
+        <td>`string`</td>
+        <td>Additional styles for the modal content.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -37,3 +37,6 @@ coverage/
 # Package manager locks (optional - uncomment if desired)
 # package-lock.json
 # yarn.lock
+
+# LLM prompts
+rework.md

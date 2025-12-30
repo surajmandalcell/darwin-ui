@@ -1,38 +1,37 @@
 ---
 title: useEscapeKey
-description: Hook for handling ESC key press events.
+description: A hook to listen for the escape key press.
 ---
 
-A hook for detecting escape key presses.
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+This hook provides a simple way to bind a callback to the `Escape` key.
 
 ## Installation
 
-```bash
-npx shadcn add https://darwin-ui.mandalsuraj.com/registry/use-escape-key.json
-```
+<Tabs>
+  <TabItem label="Manual">
+    ```bash
+    npm install @smc/darwin-ui
+    ```
+  </TabItem>
+</Tabs>
 
 ## Usage
 
 ```tsx
 import { useEscapeKey } from '@smc/darwin-ui';
 
-export function Modal({ onClose }) {
-  useEscapeKey(onClose);
+export function Modal() {
+  const close = () => console.log('closed');
+  useEscapeKey(close);
 
-  return (
-    <div className="modal">
-      Press ESC to close
-    </div>
-  );
+  return <div>Modal Content</div>;
 }
 ```
 
 ## API Reference
 
 ```tsx
-function useEscapeKey(callback: () => void): void;
+function useEscapeKey(handler: (event: KeyboardEvent) => void): void
 ```
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `callback` | `() => void` | Function called on ESC press |

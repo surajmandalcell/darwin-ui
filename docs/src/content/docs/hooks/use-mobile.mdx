@@ -1,36 +1,24 @@
 ---
-title: useIsMobile
-description: Hook to detect mobile device viewport.
+title: useMobile
+description: Shorthand hook for mobile device detection.
 ---
 
-A convenience hook for mobile detection.
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+A convenience hook wrapping `useMediaQuery` for standard mobile breakpoints.
 
 ## Installation
 
-```bash
-npx shadcn add https://darwin-ui.mandalsuraj.com/registry/use-mobile.json
+```tsx
+import { useMobile } from '@smc/darwin-ui';
 ```
 
 ## Usage
 
 ```tsx
-import { useIsMobile } from '@smc/darwin-ui';
+export function Nav() {
+  const isMobile = useMobile();
 
-export function Example() {
-  const isMobile = useIsMobile();
-
-  return (
-    <div>
-      {isMobile ? <MobileNav /> : <DesktopNav />}
-    </div>
-  );
+  return isMobile ? <MobileNav /> : <DesktopNav />;
 }
 ```
-
-## API Reference
-
-```tsx
-function useIsMobile(): boolean;
-```
-
-**Returns:** `boolean` - `true` if viewport width < 768px

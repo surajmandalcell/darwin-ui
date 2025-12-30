@@ -1,130 +1,84 @@
 ---
 title: Charts
-description: Recharts-based chart components with Darwin color palette.
+description: Beautiful, responsive charts built with Recharts and customized for Darwin UI's dark theme.
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-A collection of chart components built on Recharts with Darwin UI styling.
+Charts in Darwin UI are built using Recharts but are heavily styled to match the glass-morphism aesthetic. We provide custom tooltips, axes, and color palettes.
 
 ## Installation
 
 <Tabs>
-  <TabItem label="Package">
-    ```tsx
-    import {
-      AreaChart,
-      BarChart,
-      LineChart,
-      PieChart,
-      DonutChart,
-      StackedBarChart
-    } from '@smc/darwin-ui';
-    ```
-  </TabItem>
-  <TabItem label="shadcn CLI">
+  <TabItem label="CLI">
     ```bash
-    npx shadcn add https://darwin-ui.mandalsuraj.com/registry/charts.json
+    npm install recharts
     ```
   </TabItem>
 </Tabs>
 
-## Charts
+## Area Chart
 
-### AreaChart
+Used for visualizing trends over time, like revenue or traffic.
 
 ```tsx
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+
 const data = [
-  { month: 'Jan', revenue: 4500 },
-  { month: 'Feb', revenue: 5200 },
-  { month: 'Mar', revenue: 4800 },
+  { name: 'Jan', value: 4000 },
+  { name: 'Feb', value: 3000 },
+  { name: 'Mar', value: 2000 },
+  { name: 'Apr', value: 2780 },
+  { name: 'May', value: 1890 },
+  { name: 'Jun', value: 2390 },
 ];
 
-<AreaChart
-  data={data}
-  xAxisKey="month"
-  dataKey="revenue"
-  height={300}
-/>
+export function RevenueChart() {
+  return (
+    <div className="h-[300px] w-full">
+      <ResponsiveContainer width="100%" height="100%">
+        <AreaChart data={data}>
+          <defs>
+            <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.3}/>
+              <stop offset="95%" stopColor="#3b82f6" stopOpacity={0}/>
+            </linearGradient>
+          </defs>
+          <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" vertical={false} />
+          <XAxis 
+            dataKey="name" 
+            stroke="rgba(255,255,255,0.1)"
+            tick={{ fill: "rgba(255,255,255,0.4)", fontSize: 12 }} 
+            tickLine={false}
+            axisLine={false}
+          />
+          <Tooltip 
+            contentStyle={{ 
+              backgroundColor: "rgba(10,10,10,0.9)", 
+              border: "1px solid rgba(255,255,255,0.1)",
+              borderRadius: "8px"
+            }}
+            itemStyle={{ color: "#fff" }}
+          />
+          <Area 
+            type="monotone" 
+            dataKey="value" 
+            stroke="#3b82f6" 
+            fillOpacity={1} 
+            fill="url(#colorValue)" 
+          />
+        </AreaChart>
+      </ResponsiveContainer>
+    </div>
+  );
+}
 ```
 
-### BarChart
+## Styling Guidelines
 
-```tsx
-<BarChart
-  data={data}
-  xAxisKey="month"
-  dataKey="revenue"
-  height={300}
-/>
-```
+To maintain the Darwin UI look:
 
-### LineChart
-
-```tsx
-<LineChart
-  data={data}
-  xAxisKey="month"
-  dataKey="revenue"
-  height={300}
-/>
-```
-
-### PieChart
-
-```tsx
-const pieData = [
-  { name: 'Desktop', value: 45 },
-  { name: 'Mobile', value: 35 },
-  { name: 'Tablet', value: 20 },
-];
-
-<PieChart data={pieData} height={300} />
-```
-
-### DonutChart
-
-```tsx
-<DonutChart data={pieData} height={300} />
-```
-
-### StackedBarChart
-
-```tsx
-const stackedData = [
-  { month: 'Jan', desktop: 400, mobile: 200 },
-  { month: 'Feb', desktop: 500, mobile: 300 },
-];
-
-<StackedBarChart
-  data={stackedData}
-  xAxisKey="month"
-  dataKeys={['desktop', 'mobile']}
-  height={300}
-/>
-```
-
-## Color Palette
-
-Charts use Darwin UI's color palette:
-
-| Color | Hex | Use |
-|-------|-----|-----|
-| Blue | `#60a5fa` | Primary data |
-| Green | `#34d399` | Positive values |
-| Yellow | `#fbbf24` | Warnings |
-| Red | `#f87171` | Negative values |
-| Purple | `#a78bfa` | Accent data |
-| Teal | `#2dd4bf` | Secondary data |
-
-## API Reference
-
-### Common Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `data` | `any[]` | - | Chart data |
-| `height` | `number` | `300` | Chart height |
-| `xAxisKey` | `string` | - | X-axis data key |
-| `dataKey` | `string` | - | Y-axis data key |
-| `color` | `string` | - | Custom color |
+1.  **Grid Lines**: Use `stroke="rgba(255,255,255,0.05)"` and `vertical={false}`.
+2.  **Axes**: Remove axis lines with `axisLine={false}` and `tickLine={false}`. Use muted colors for text.
+3.  **Tooltips**: Use a custom `contentStyle` with high opacity backing (e.g., `rgba(10,10,10,0.9)`) and a subtle border.
+4.  **Gradients**: Always use `defs` to create fade-out gradients for area fills.
