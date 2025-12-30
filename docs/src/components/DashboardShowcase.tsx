@@ -15,18 +15,14 @@ import {
   Search,
   Bell,
   ChevronDown,
-  MoreHorizontal,
   Eye,
   Trash2,
   X,
   Check,
-  AlertCircle,
 } from "lucide-react";
 import {
   AreaChart,
   Area,
-  BarChart,
-  Bar,
   XAxis,
   YAxis,
   CartesianGrid,
