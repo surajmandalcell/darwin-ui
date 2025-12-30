@@ -16,31 +16,101 @@ hero:
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
 import DashboardShowcase from '../../components/DashboardShowcase';
 
 ## Live Demo
 
-Experience Darwin UI components in action:
+Experience Darwin UI components in action. Click the buttons, open modals, and explore the interactive dashboard:
 
 <DashboardShowcase client:load />
 
 ## Features
 
-<CardGrid stagger>
-  <Card title="25+ Components" icon="puzzle">
-    Buttons, cards, tables, modals, charts, and more - all with consistent dark theme styling.
-  </Card>
-  <Card title="Glass Morphism" icon="sun">
-    Beautiful backdrop-blur effects and semi-transparent elements for modern UI aesthetics.
-  </Card>
-  <Card title="shadcn Compatible" icon="rocket">
-    Install individual components via CLI: `npx shadcn add https://darwin-ui.mandalsuraj.com/registry/button.json`
-  </Card>
-  <Card title="React 19 Ready" icon="seti:react">
-    Built for React 19 with TypeScript, Tailwind CSS v4, and tree-shakeable exports.
-  </Card>
-</CardGrid>
+<div class="features-grid">
+  <div class="feature-card">
+    <div class="feature-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+    </div>
+    <h3>25+ Components</h3>
+    <p>Buttons, cards, tables, modals, charts, and more — all with consistent dark theme styling and glass-morphism effects.</p>
+  </div>
+
+  <div class="feature-card">
+    <div class="feature-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+    </div>
+    <h3>Glass Morphism</h3>
+    <p>Beautiful backdrop-blur effects and semi-transparent elements create a modern, sophisticated UI aesthetic.</p>
+  </div>
+
+  <div class="feature-card">
+    <div class="feature-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 3 4 8 5-5 5 15H2L8 3z"/></svg>
+    </div>
+    <h3>shadcn Compatible</h3>
+    <p>Install individual components via CLI with full customization support and zero configuration needed.</p>
+  </div>
+
+  <div class="feature-card">
+    <div class="feature-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+    </div>
+    <h3>React 19 Ready</h3>
+    <p>Built for React 19 with TypeScript, Tailwind CSS v4, and tree-shakeable exports for optimal performance.</p>
+  </div>
+</div>
+
+<style>{`
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+    margin: 2rem 0;
+  }
+
+  .feature-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 1rem;
+    padding: 1.75rem;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .feature-card:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.4);
+  }
+
+  .feature-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 0.75rem;
+    color: #60a5fa;
+    margin-bottom: 1rem;
+  }
+
+  .feature-card h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0 0 0.5rem 0;
+    letter-spacing: -0.02em;
+  }
+
+  .feature-card p {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.55);
+    line-height: 1.6;
+    margin: 0;
+  }
+`}</style>
 
 ## Quick Start
 
@@ -70,13 +140,62 @@ function App() {
 }
 ```
 
-## Components Overview
+## Components
 
-| Category | Components |
-|----------|------------|
-| **Layout** | Card, Window, Sidebar |
-| **Forms** | Button, Input, Select, MultiSelect, Checkbox, Switch |
-| **Data Display** | Table, Badge, Skeleton |
-| **Feedback** | Modal, Toast, Alert |
-| **Charts** | AreaChart, BarChart, LineChart, PieChart, DonutChart |
-| **Utility** | ContextMenu, Image, Upload, Reveal |
+<div class="components-overview">
+  <div class="component-category">
+    <h4>Layout</h4>
+    <span>Card, Window, Sidebar</span>
+  </div>
+  <div class="component-category">
+    <h4>Forms</h4>
+    <span>Button, Input, Select, Checkbox, Switch</span>
+  </div>
+  <div class="component-category">
+    <h4>Data Display</h4>
+    <span>Table, Badge, Skeleton</span>
+  </div>
+  <div class="component-category">
+    <h4>Feedback</h4>
+    <span>Modal, Toast, Alert</span>
+  </div>
+  <div class="component-category">
+    <h4>Charts</h4>
+    <span>Area, Bar, Line, Pie, Donut</span>
+  </div>
+  <div class="component-category">
+    <h4>Utility</h4>
+    <span>ContextMenu, Image, Upload</span>
+  </div>
+</div>
+
+<style>{`
+  .components-overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .component-category {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 0.75rem;
+    padding: 1rem 1.25rem;
+  }
+
+  .component-category h4 {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #60a5fa;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .component-category span {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.5;
+  }
+`}</style>

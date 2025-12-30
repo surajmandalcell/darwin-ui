@@ -33,35 +33,31 @@ import {
   Cell,
 } from "recharts";
 
-// Utility function
 function cn(...inputs: (string | undefined | null | false)[]) {
   return twMerge(clsx(inputs));
 }
 
-// Sample data
 const revenueData = [
-  { month: "Jan", revenue: 4500, users: 120 },
-  { month: "Feb", revenue: 5200, users: 145 },
-  { month: "Mar", revenue: 4800, users: 132 },
-  { month: "Apr", revenue: 6100, users: 178 },
-  { month: "May", revenue: 5900, users: 165 },
-  { month: "Jun", revenue: 7200, users: 210 },
+  { month: "Jan", revenue: 4500 },
+  { month: "Feb", revenue: 5200 },
+  { month: "Mar", revenue: 4800 },
+  { month: "Apr", revenue: 6100 },
+  { month: "May", revenue: 5900 },
+  { month: "Jun", revenue: 7200 },
 ];
 
 const pieData = [
-  { name: "Desktop", value: 45, color: "#60a5fa" },
-  { name: "Mobile", value: 35, color: "#34d399" },
-  { name: "Tablet", value: 20, color: "#a78bfa" },
+  { name: "Desktop", value: 45, color: "#3b82f6" },
+  { name: "Mobile", value: 35, color: "#10b981" },
+  { name: "Tablet", value: 20, color: "#8b5cf6" },
 ];
 
 const tableData = [
   { id: 1, name: "Premium Plan", status: "active", revenue: "$2,400", growth: "+12%" },
   { id: 2, name: "Basic Plan", status: "active", revenue: "$1,200", growth: "+8%" },
   { id: 3, name: "Enterprise", status: "pending", revenue: "$4,800", growth: "+24%" },
-  { id: 4, name: "Starter", status: "inactive", revenue: "$480", growth: "-2%" },
 ];
 
-// Mini components for the showcase
 function Button({
   children,
   variant = "default",
@@ -76,20 +72,20 @@ function Button({
   [key: string]: any;
 }) {
   const variants = {
-    default: "bg-white/10 text-white/90 hover:bg-white/20 border border-white/5",
-    primary: "bg-blue-600 text-white hover:bg-blue-700",
-    ghost: "hover:bg-white/10",
+    default: "bg-white/[0.08] text-white/90 hover:bg-white/[0.12] border border-white/[0.06]",
+    primary: "bg-blue-500 text-white hover:bg-blue-600 shadow-lg shadow-blue-500/20",
+    ghost: "text-white/60 hover:text-white hover:bg-white/[0.06]",
     destructive: "bg-red-500/80 text-white hover:bg-red-600",
   };
   const sizes = {
     default: "h-9 px-4 py-2",
     sm: "h-8 px-3 text-xs",
-    icon: "h-8 w-8",
+    icon: "h-8 w-8 p-0",
   };
   return (
     <button
       className={cn(
-        "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors",
+        "inline-flex items-center justify-center rounded-lg text-sm font-medium transition-all duration-200",
         variants[variant],
         sizes[size],
         className
@@ -109,13 +105,13 @@ function Badge({
   variant?: "default" | "success" | "warning" | "destructive";
 }) {
   const variants = {
-    default: "bg-white/10 text-white/70",
-    success: "bg-green-500/20 text-green-400",
-    warning: "bg-amber-500/20 text-amber-400",
-    destructive: "bg-red-500/20 text-red-400",
+    default: "bg-white/[0.08] text-white/70",
+    success: "bg-emerald-500/15 text-emerald-400 border border-emerald-500/20",
+    warning: "bg-amber-500/15 text-amber-400 border border-amber-500/20",
+    destructive: "bg-red-500/15 text-red-400 border border-red-500/20",
   };
   return (
-    <span className={cn("px-2 py-1 text-xs rounded-full font-medium", variants[variant])}>
+    <span className={cn("inline-flex items-center px-2.5 py-0.5 text-xs font-medium rounded-full", variants[variant])}>
       {children}
     </span>
   );
@@ -125,7 +121,7 @@ function Card({ children, className }: { children: React.ReactNode; className?: 
   return (
     <div
       className={cn(
-        "rounded-lg border border-white/10 bg-white/5 backdrop-blur-sm",
+        "rounded-xl border border-white/[0.08] bg-white/[0.02] backdrop-blur-xl",
         className
       )}
     >
@@ -149,19 +145,20 @@ function MetricCard({
 }) {
   return (
     <Card className="p-4">
-      <div className="flex items-center justify-between">
-        <div className="p-2 rounded-lg bg-white/5">
-          <Icon className="w-4 h-4 text-white/60" />
+      <div className="flex items-center justify-between mb-3">
+        <div className="p-2 rounded-lg bg-white/[0.04] border border-white/[0.06]">
+          <Icon className="w-4 h-4 text-white/50" />
         </div>
-        <div className={cn("flex items-center gap-1 text-xs", changeType === "up" ? "text-green-400" : "text-red-400")}>
+        <div className={cn(
+          "flex items-center gap-1 text-xs font-medium",
+          changeType === "up" ? "text-emerald-400" : "text-red-400"
+        )}>
           {changeType === "up" ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
           {change}
         </div>
       </div>
-      <div className="mt-3">
-        <p className="text-xs text-white/50">{title}</p>
-        <p className="text-xl font-semibold text-white mt-1">{value}</p>
-      </div>
+      <p className="text-xs text-white/40 mb-1">{title}</p>
+      <p className="text-xl font-semibold text-white tracking-tight">{value}</p>
     </Card>
   );
 }
@@ -177,77 +174,85 @@ export default function DashboardShowcase() {
   };
 
   return (
-    <div className="relative w-full rounded-xl overflow-hidden bg-[#0a0a0a] border border-white/10">
+    <div
+      className="relative w-full rounded-2xl overflow-hidden border border-white/[0.08] shadow-2xl"
+      style={{
+        background: 'linear-gradient(180deg, rgba(10,10,10,1) 0%, rgba(5,5,5,1) 100%)',
+        boxShadow: '0 0 0 1px rgba(255,255,255,0.05), 0 25px 50px -12px rgba(0,0,0,0.8)'
+      }}
+    >
       {/* Window Title Bar */}
-      <div className="flex items-center justify-between px-4 py-3 bg-black/40 border-b border-white/10">
+      <div className="flex items-center justify-between h-12 px-4 bg-black/40 border-b border-white/[0.06]">
         <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-red-500" />
-          <div className="w-3 h-3 rounded-full bg-yellow-500" />
-          <div className="w-3 h-3 rounded-full bg-green-500" />
+          <div className="w-3 h-3 rounded-full bg-[#ff5f57] shadow-sm" />
+          <div className="w-3 h-3 rounded-full bg-[#febc2e] shadow-sm" />
+          <div className="w-3 h-3 rounded-full bg-[#28c840] shadow-sm" />
         </div>
-        <span className="text-xs text-white/50">Darwin UI Dashboard</span>
+        <span className="text-xs font-medium text-white/40 tracking-wide">Darwin UI Dashboard</span>
         <div className="w-16" />
       </div>
 
-      <div className="flex min-h-[500px]">
+      <div className="flex" style={{ minHeight: '480px' }}>
         {/* Sidebar */}
-        <div className="w-48 border-r border-white/10 bg-black/20 p-4 hidden sm:block">
-          <div className="flex items-center gap-2 mb-6">
-            <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center">
-              <span className="text-white font-bold text-sm">D</span>
+        <div className="w-52 shrink-0 border-r border-white/[0.06] bg-black/20 hidden md:block">
+          <div className="p-4">
+            <div className="flex items-center gap-3 mb-8">
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg shadow-blue-500/20">
+                <span className="text-white font-bold text-sm">D</span>
+              </div>
+              <span className="text-sm font-semibold text-white">Darwin UI</span>
             </div>
-            <span className="text-sm font-semibold text-white">Darwin UI</span>
-          </div>
 
-          <nav className="space-y-1">
-            {[
-              { id: "dashboard", icon: LayoutDashboard, label: "Dashboard" },
-              { id: "users", icon: Users, label: "Users" },
-              { id: "analytics", icon: BarChart3, label: "Analytics" },
-              { id: "settings", icon: Settings, label: "Settings" },
-            ].map((item) => (
-              <button
-                key={item.id}
-                onClick={() => setActiveNav(item.id)}
-                className={cn(
-                  "w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors",
-                  activeNav === item.id
-                    ? "bg-white/10 text-white"
-                    : "text-white/50 hover:text-white hover:bg-white/5"
-                )}
-              >
-                <item.icon className="w-4 h-4" />
-                {item.label}
-              </button>
-            ))}
-          </nav>
+            <nav className="space-y-1">
+              {[
+                { id: "dashboard", icon: LayoutDashboard, label: "Dashboard" },
+                { id: "users", icon: Users, label: "Users" },
+                { id: "analytics", icon: BarChart3, label: "Analytics" },
+                { id: "settings", icon: Settings, label: "Settings" },
+              ].map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => setActiveNav(item.id)}
+                  className={cn(
+                    "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200",
+                    activeNav === item.id
+                      ? "bg-white/[0.08] text-white shadow-sm"
+                      : "text-white/50 hover:text-white hover:bg-white/[0.04]"
+                  )}
+                >
+                  <item.icon className="w-4 h-4" />
+                  {item.label}
+                </button>
+              ))}
+            </nav>
+          </div>
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 p-4 sm:p-6 overflow-auto">
+        <div className="flex-1 p-6 overflow-auto">
           {/* Top Bar */}
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h1 className="text-lg font-semibold text-white">Dashboard</h1>
-              <p className="text-xs text-white/50">Welcome back, here's your overview</p>
+              <h1 className="text-xl font-semibold text-white tracking-tight">Dashboard</h1>
+              <p className="text-sm text-white/40 mt-0.5">Welcome back, here's your overview</p>
             </div>
-            <div className="flex items-center gap-2">
-              <div className="relative hidden sm:block">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
+            <div className="flex items-center gap-3">
+              <div className="relative hidden lg:block">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
                 <input
                   type="text"
                   placeholder="Search..."
-                  className="w-48 h-9 pl-9 pr-4 rounded-lg bg-white/5 border border-white/10 text-sm text-white placeholder:text-white/40 focus:outline-none focus:border-white/20"
+                  className="w-44 h-9 pl-9 pr-4 rounded-lg bg-white/[0.04] border border-white/[0.08] text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-white/20 focus:bg-white/[0.06] transition-all"
                 />
               </div>
               <Button size="icon" variant="ghost">
-                <Bell className="w-4 h-4 text-white/60" />
+                <Bell className="w-4 h-4" />
               </Button>
             </div>
           </div>
 
           {/* Metric Cards */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+          <div className="grid grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
             <MetricCard title="Total Revenue" value="$48,234" change="+12.5%" changeType="up" icon={DollarSign} />
             <MetricCard title="Active Users" value="2,420" change="+8.2%" changeType="up" icon={Users} />
             <MetricCard title="Conversion" value="3.24%" change="-0.4%" changeType="down" icon={Activity} />
@@ -255,51 +260,74 @@ export default function DashboardShowcase() {
           </div>
 
           {/* Charts Row */}
-          <div className="grid lg:grid-cols-3 gap-4 mb-6">
+          <div className="grid xl:grid-cols-3 gap-4 mb-6">
             {/* Area Chart */}
-            <Card className="lg:col-span-2 p-4">
+            <Card className="xl:col-span-2 p-5">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-sm font-medium text-white">Revenue Overview</h3>
                 <Button size="sm" variant="ghost">
                   <ChevronDown className="w-4 h-4" />
                 </Button>
               </div>
-              <div className="h-48">
+              <div className="h-44">
                 <ResponsiveContainer width="100%" height="100%">
-                  <AreaChart data={revenueData}>
+                  <AreaChart data={revenueData} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>
                     <defs>
                       <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.3} />
-                        <stop offset="95%" stopColor="#3b82f6" stopOpacity={0} />
+                        <stop offset="0%" stopColor="#3b82f6" stopOpacity={0.25} />
+                        <stop offset="100%" stopColor="#3b82f6" stopOpacity={0} />
                       </linearGradient>
                     </defs>
-                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
-                    <XAxis dataKey="month" tick={{ fill: "rgba(255,255,255,0.5)", fontSize: 10 }} axisLine={false} />
-                    <YAxis tick={{ fill: "rgba(255,255,255,0.5)", fontSize: 10 }} axisLine={false} />
-                    <Tooltip
-                      contentStyle={{ background: "#1a1a1a", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 8 }}
-                      labelStyle={{ color: "#fff" }}
+                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.04)" vertical={false} />
+                    <XAxis
+                      dataKey="month"
+                      tick={{ fill: "rgba(255,255,255,0.4)", fontSize: 11 }}
+                      axisLine={false}
+                      tickLine={false}
                     />
-                    <Area type="monotone" dataKey="revenue" stroke="#3b82f6" fillOpacity={1} fill="url(#colorRevenue)" />
+                    <YAxis
+                      tick={{ fill: "rgba(255,255,255,0.4)", fontSize: 11 }}
+                      axisLine={false}
+                      tickLine={false}
+                    />
+                    <Tooltip
+                      contentStyle={{
+                        background: "rgba(0,0,0,0.9)",
+                        border: "1px solid rgba(255,255,255,0.1)",
+                        borderRadius: 8,
+                        boxShadow: "0 10px 30px rgba(0,0,0,0.5)"
+                      }}
+                      labelStyle={{ color: "#fff", fontWeight: 500 }}
+                      itemStyle={{ color: "rgba(255,255,255,0.7)" }}
+                    />
+                    <Area
+                      type="monotone"
+                      dataKey="revenue"
+                      stroke="#3b82f6"
+                      strokeWidth={2}
+                      fillOpacity={1}
+                      fill="url(#colorRevenue)"
+                    />
                   </AreaChart>
                 </ResponsiveContainer>
               </div>
             </Card>
 
             {/* Pie Chart */}
-            <Card className="p-4">
+            <Card className="p-5">
               <h3 className="text-sm font-medium text-white mb-4">Traffic Source</h3>
-              <div className="h-32">
+              <div className="h-28">
                 <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
                     <Pie
                       data={pieData}
                       cx="50%"
                       cy="50%"
-                      innerRadius={30}
-                      outerRadius={50}
-                      paddingAngle={2}
+                      innerRadius={32}
+                      outerRadius={52}
+                      paddingAngle={3}
                       dataKey="value"
+                      stroke="none"
                     >
                       {pieData.map((entry, index) => (
                         <Cell key={`cell-${index}`} fill={entry.color} />
@@ -308,9 +336,9 @@ export default function DashboardShowcase() {
                   </PieChart>
                 </ResponsiveContainer>
               </div>
-              <div className="flex justify-center gap-4 mt-2">
+              <div className="flex justify-center gap-4 mt-3">
                 {pieData.map((item) => (
-                  <div key={item.name} className="flex items-center gap-1">
+                  <div key={item.name} className="flex items-center gap-1.5">
                     <div className="w-2 h-2 rounded-full" style={{ background: item.color }} />
                     <span className="text-xs text-white/50">{item.name}</span>
                   </div>
@@ -321,7 +349,7 @@ export default function DashboardShowcase() {
 
           {/* Table */}
           <Card className="overflow-hidden">
-            <div className="flex items-center justify-between p-4 border-b border-white/10">
+            <div className="flex items-center justify-between px-5 py-4 border-b border-white/[0.06]">
               <h3 className="text-sm font-medium text-white">Recent Plans</h3>
               <Button size="sm" variant="primary" onClick={handleShowToast}>
                 Add New
@@ -330,19 +358,19 @@ export default function DashboardShowcase() {
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
-                  <tr className="border-b border-white/10">
-                    <th className="px-4 py-3 text-left text-xs font-medium text-white/50">Name</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-white/50">Status</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-white/50">Revenue</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-white/50">Growth</th>
-                    <th className="px-4 py-3 text-right text-xs font-medium text-white/50">Actions</th>
+                  <tr className="border-b border-white/[0.06]">
+                    <th className="px-5 py-3 text-left text-xs font-medium text-white/40 uppercase tracking-wider">Name</th>
+                    <th className="px-5 py-3 text-left text-xs font-medium text-white/40 uppercase tracking-wider">Status</th>
+                    <th className="px-5 py-3 text-left text-xs font-medium text-white/40 uppercase tracking-wider">Revenue</th>
+                    <th className="px-5 py-3 text-left text-xs font-medium text-white/40 uppercase tracking-wider">Growth</th>
+                    <th className="px-5 py-3 text-right text-xs font-medium text-white/40 uppercase tracking-wider">Actions</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className="divide-y divide-white/[0.04]">
                   {tableData.map((row) => (
-                    <tr key={row.id} className="border-b border-white/5 hover:bg-white/5">
-                      <td className="px-4 py-3 text-sm text-white">{row.name}</td>
-                      <td className="px-4 py-3">
+                    <tr key={row.id} className="hover:bg-white/[0.02] transition-colors">
+                      <td className="px-5 py-3.5 text-sm text-white font-medium">{row.name}</td>
+                      <td className="px-5 py-3.5">
                         <Badge
                           variant={
                             row.status === "active" ? "success" : row.status === "pending" ? "warning" : "destructive"
@@ -351,12 +379,12 @@ export default function DashboardShowcase() {
                           {row.status}
                         </Badge>
                       </td>
-                      <td className="px-4 py-3 text-sm text-white">{row.revenue}</td>
-                      <td className="px-4 py-3 text-sm text-white">{row.growth}</td>
-                      <td className="px-4 py-3 text-right">
+                      <td className="px-5 py-3.5 text-sm text-white/70">{row.revenue}</td>
+                      <td className="px-5 py-3.5 text-sm text-emerald-400 font-medium">{row.growth}</td>
+                      <td className="px-5 py-3.5">
                         <div className="flex items-center justify-end gap-1">
                           <Button size="icon" variant="ghost" onClick={() => setShowModal(true)}>
-                            <Eye className="w-4 h-4 text-white/60" />
+                            <Eye className="w-4 h-4" />
                           </Button>
                           <Button size="icon" variant="ghost">
                             <Trash2 className="w-4 h-4 text-red-400" />
@@ -374,16 +402,30 @@ export default function DashboardShowcase() {
 
       {/* Modal */}
       {showModal && (
-        <div className="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50">
-          <div className="w-80 bg-[#151515] rounded-xl border border-white/10 p-6">
+        <div
+          className="absolute inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50"
+          style={{ animation: 'fadeIn 0.15s ease-out' }}
+        >
+          <div
+            className="w-80 bg-[#0f0f0f] rounded-2xl border border-white/[0.08] p-6 shadow-2xl"
+            style={{
+              animation: 'scaleIn 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
+              boxShadow: '0 25px 50px -12px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.05)'
+            }}
+          >
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-sm font-medium text-white">Plan Details</h3>
-              <button onClick={() => setShowModal(false)} className="text-white/40 hover:text-white">
+              <h3 className="text-base font-semibold text-white">Plan Details</h3>
+              <button
+                onClick={() => setShowModal(false)}
+                className="p-1.5 rounded-lg text-white/40 hover:text-white hover:bg-white/[0.06] transition-all"
+              >
                 <X className="w-4 h-4" />
               </button>
             </div>
-            <p className="text-sm text-white/60 mb-4">This modal demonstrates Darwin UI's Modal component with focus lock and backdrop blur.</p>
-            <div className="flex gap-2">
+            <p className="text-sm text-white/50 mb-6 leading-relaxed">
+              This modal demonstrates Darwin UI's Modal component with backdrop blur and smooth animations.
+            </p>
+            <div className="flex gap-3">
               <Button variant="ghost" className="flex-1" onClick={() => setShowModal(false)}>
                 Cancel
               </Button>
@@ -397,11 +439,34 @@ export default function DashboardShowcase() {
 
       {/* Toast */}
       {showToast && (
-        <div className="absolute bottom-4 right-4 flex items-center gap-2 px-4 py-3 bg-green-500/20 border border-green-500/30 rounded-lg z-50">
-          <Check className="w-4 h-4 text-green-400" />
-          <span className="text-sm text-green-400">Action completed successfully!</span>
+        <div
+          className="absolute bottom-5 right-5 flex items-center gap-2.5 px-4 py-3 bg-emerald-500/10 border border-emerald-500/20 rounded-xl backdrop-blur-xl z-50"
+          style={{
+            animation: 'slideInFromBottom 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+            boxShadow: '0 10px 40px -10px rgba(16, 185, 129, 0.3)'
+          }}
+        >
+          <div className="p-1 rounded-full bg-emerald-500/20">
+            <Check className="w-3.5 h-3.5 text-emerald-400" />
+          </div>
+          <span className="text-sm font-medium text-emerald-400">Action completed successfully!</span>
         </div>
       )}
+
+      <style>{`
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes scaleIn {
+          from { opacity: 0; transform: scale(0.95); }
+          to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes slideInFromBottom {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
     </div>
   );
 }

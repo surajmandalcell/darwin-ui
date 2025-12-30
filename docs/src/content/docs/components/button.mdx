@@ -1,11 +1,16 @@
 ---
 title: Button
-description: A versatile button component with 11 variants and multiple sizes.
+description: A versatile button component with multiple variants and sizes.
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { ButtonPreview, ButtonSizePreview, ButtonWithIconPreview } from '../../../components/ComponentPreview';
 
-The Button component provides a flexible, accessible button with multiple styling variants and sizes.
+The Button component provides a flexible, accessible button with glass-morphism styling and multiple variants.
+
+## Preview
+
+<ButtonPreview client:load />
 
 ## Installation
 
@@ -38,37 +43,22 @@ export function Example() {
 
 ## Variants
 
-Button supports 11 variants:
-
-```tsx
-<Button variant="default">Default</Button>
-<Button variant="primary">Primary</Button>
-<Button variant="secondary">Secondary</Button>
-<Button variant="success">Success</Button>
-<Button variant="warning">Warning</Button>
-<Button variant="info">Info</Button>
-<Button variant="destructive">Destructive</Button>
-<Button variant="outline">Outline</Button>
-<Button variant="ghost">Ghost</Button>
-<Button variant="link">Link</Button>
-<Button variant="accent">Accent</Button>
-```
+Button supports 8 core variants:
 
 | Variant | Description | Use Case |
 |---------|-------------|----------|
 | `default` | Glass-effect background | General actions |
-| `primary` | Blue solid background | Main CTAs |
+| `primary` | Blue solid with glow | Main CTAs |
 | `secondary` | Subtle glass effect | Secondary actions |
-| `success` | Green background | Confirmations |
-| `warning` | Amber background | Caution actions |
-| `info` | Light blue background | Informational |
-| `destructive` | Red background | Delete/remove |
+| `success` | Green with glow | Confirmations |
+| `warning` | Amber with glow | Caution actions |
+| `destructive` | Red with glow | Delete/remove |
 | `outline` | Transparent with border | Subtle actions |
 | `ghost` | Transparent | Minimal UI |
-| `link` | Text with underline | Inline links |
-| `accent` | Purple background | Highlighted |
 
 ## Sizes
+
+<ButtonSizePreview client:load />
 
 ```tsx
 <Button size="sm">Small</Button>
@@ -79,25 +69,32 @@ Button supports 11 variants:
 </Button>
 ```
 
-| Size | Height | Padding |
-|------|--------|---------|
-| `sm` | 32px | `px-3` |
-| `default` | 36px | `px-4 py-2` |
-| `lg` | 40px | `px-8` |
-| `icon` | 36px | Square |
+| Size | Height | Use Case |
+|------|--------|----------|
+| `sm` | 32px | Compact UI, tables |
+| `default` | 36px | Standard buttons |
+| `lg` | 44px | Hero sections, emphasis |
+| `icon` | 36px | Icon-only buttons |
 
 ## With Icons
 
-```tsx
-import { Plus, Download } from 'lucide-react';
+<ButtonWithIconPreview client:load />
 
-<Button>
-  <Plus className="w-4 h-4 mr-2" />
+```tsx
+import { Plus, Download, Settings } from 'lucide-react';
+
+<Button variant="primary">
+  <Plus className="w-4 h-4" />
   Add Item
 </Button>
 
-<Button size="icon">
+<Button variant="secondary">
   <Download className="w-4 h-4" />
+  Download
+</Button>
+
+<Button size="icon" variant="ghost">
+  <Settings className="w-4 h-4" />
 </Button>
 ```
 
@@ -106,6 +103,8 @@ import { Plus, Download } from 'lucide-react';
 ```tsx
 <Button disabled>Disabled Button</Button>
 ```
+
+Disabled buttons have reduced opacity and don't respond to interactions.
 
 ## API Reference
 
@@ -128,12 +127,16 @@ type Variant =
   | "secondary"
   | "success"
   | "warning"
-  | "info"
   | "destructive"
   | "outline"
-  | "ghost"
-  | "link"
-  | "accent";
+  | "ghost";
 
 type Size = "default" | "sm" | "lg" | "icon";
 ```
+
+## Accessibility
+
+- Uses native `<button>` element for full keyboard support
+- Supports `disabled` state with proper `aria-disabled`
+- Focus ring visible for keyboard navigation
+- Color contrast meets WCAG 2.1 AA standards

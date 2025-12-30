@@ -4,8 +4,13 @@ description: Accessible modal dialog with focus lock and keyboard handling.
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { ModalPreview } from '../../../components/ComponentPreview';
 
-An accessible modal dialog component with focus management and escape key handling.
+An accessible modal dialog with backdrop blur, focus trapping, and smooth animations.
+
+## Preview
+
+<ModalPreview client:load />
 
 ## Installation
 
@@ -47,31 +52,36 @@ export function Example() {
 }
 ```
 
+## Features
+
+- **Backdrop blur**: Glass-morphism overlay effect
+- **Focus trapping**: Keyboard focus stays within modal
+- **Escape to close**: Press `ESC` to dismiss
+- **Click outside**: Close by clicking backdrop
+- **Smooth animations**: Scale and fade transitions
+
 ## Sizes
 
 ```tsx
-<Modal size="sm" ... />  // 400px max-width
-<Modal size="md" ... />  // 500px max-width (default)
-<Modal size="lg" ... />  // 600px max-width
-<Modal size="xl" ... />  // 800px max-width
+<Modal size="sm" />  // 400px max-width
+<Modal size="md" />  // 500px max-width (default)
+<Modal size="lg" />  // 600px max-width
+<Modal size="xl" />  // 800px max-width
 ```
-
-## Features
-
-- **Focus Lock**: Traps focus within the modal
-- **Escape Key**: Closes modal on ESC press
-- **Backdrop**: Click outside to close
-- **Animation**: Smooth open/close transitions
-- **Accessibility**: Proper ARIA attributes
 
 ## API Reference
 
-### Props
-
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `isOpen` | `boolean` | - | Open state |
+| `isOpen` | `boolean` | - | Control visibility |
 | `onClose` | `() => void` | - | Close handler |
 | `title` | `string` | - | Modal title |
-| `size` | `"sm" \| "md" \| "lg" \| "xl"` | `"md"` | Modal width |
+| `size` | `Size` | `"md"` | Modal width |
 | `children` | `ReactNode` | - | Modal content |
+
+## Accessibility
+
+- Focus is trapped inside modal when open
+- `Escape` key closes the modal
+- Proper `aria-modal` and `role="dialog"` attributes
+- Background content hidden from screen readers
