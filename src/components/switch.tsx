@@ -2,6 +2,7 @@
 
 import { useId } from "react";
 import type React from "react";
+import { motion } from "framer-motion";
 
 interface SwitchProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
 	label?: string;
@@ -36,17 +37,25 @@ export function Switch({
 					{...props}
 					className="peer absolute inset-0 h-full w-full cursor-pointer opacity-0"
 				/>
-				<span
-					className={`flex h-5 w-9 items-center rounded-full px-0.5 transition-colors ${
-						checked ? "bg-emerald-500" : "bg-slate-600"
-					}`}
+				<motion.span
+					animate={{
+						backgroundColor: checked ? "rgb(16 185 129)" : "rgb(71 85 105)",
+					}}
+					transition={{ duration: 0.2 }}
+					className="flex h-5 w-9 items-center rounded-full px-0.5"
 				>
-					<span
-						className={`h-4 w-4 rounded-full bg-white shadow-sm transition-transform ${
-							checked ? "translate-x-4" : "translate-x-0"
-						}`}
+					<motion.span
+						animate={{
+							x: checked ? 16 : 0,
+						}}
+						transition={{
+							type: "spring",
+							stiffness: 300,
+							damping: 15,
+						}}
+						className="h-4 w-4 rounded-full bg-white shadow-sm"
 					/>
-				</span>
+				</motion.span>
 			</span>
 			{label ? <span>{label}</span> : null}
 		</label>

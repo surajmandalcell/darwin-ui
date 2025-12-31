@@ -1,6 +1,8 @@
 import type React from "react";
 import { twMerge } from "tailwind-merge";
 import { clsx, type ClassValue } from "clsx";
+import { motion } from "framer-motion";
+import { Loader2 } from "lucide-react";
 
 function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
@@ -28,6 +30,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	size?: Size;
 	className?: string;
 	children: React.ReactNode;
+	loading?: boolean;
 }
 
 export function Button({
@@ -35,6 +38,8 @@ export function Button({
 	variant = "default",
 	size = "default",
 	className,
+	loading = false,
+	disabled,
 	...props
 }: ButtonProps) {
 	const variants: Record<Variant, string> = {
@@ -63,9 +68,15 @@ export function Button({
 		icon: "h-9 w-9",
 	};
 
+	const isDisabled = disabled || loading;
+
 	return (
-		<button
+		<motion.button
 			{...(props as any)}
+			disabled={isDisabled}
+			whileHover={!isDisabled ? { scale: 1.02 } : {}}
+			whileTap={!isDisabled ? { scale: 0.98 } : {}}
+			transition={{ duration: 0.15, ease: "easeOut" }}
 			className={cn(
 				"inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
 				variants[variant],
@@ -73,7 +84,8 @@ export function Button({
 				className,
 			)}
 		>
+			{loading && <Loader2 className="w-4 h-4 animate-spin" />}
 			{children}
-		</button>
+		</motion.button>
 	);
 }
