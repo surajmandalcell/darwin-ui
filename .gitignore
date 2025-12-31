@@ -40,3 +40,4 @@ coverage/
 
 # LLM prompts
 rework.md
+.playwright-mcp/
