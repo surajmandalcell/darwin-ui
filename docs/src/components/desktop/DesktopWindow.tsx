@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useCallback, useState, useEffect } from 'react';
-import { motion, useDragControls, useMotionValue, AnimatePresence } from 'framer-motion';
+import { motion, useDragControls, useMotionValue } from 'framer-motion';
 import { useDesktop, type WindowState, type AppDefinition } from '../../contexts/desktop-context';
 
 // Import app components
@@ -9,6 +9,7 @@ import { DeveloperApp } from './apps/DeveloperApp';
 import { TerminalApp } from './apps/TerminalApp';
 import { NotesApp } from './apps/NotesApp';
 import { SettingsApp } from './apps/SettingsApp';
+import { AboutApp } from './apps/AboutApp';
 
 interface DesktopWindowProps {
   windowState: WindowState;
@@ -22,6 +23,7 @@ const appComponents: Record<string, React.ComponentType<{ windowState: WindowSta
   terminal: TerminalApp,
   notes: NotesApp,
   settings: SettingsApp,
+  about: AboutApp,
 };
 
 // macOS Traffic Light Colors (from official Apple design)

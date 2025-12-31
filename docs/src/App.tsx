@@ -3,8 +3,7 @@ import { ThemeProvider } from "./contexts/theme-context";
 import { DesktopProvider } from "./contexts/desktop-context";
 import { OverlayProvider, AlertProvider, ToastProvider } from "@smc/darwin-ui";
 import { Desktop } from "./components/desktop/Desktop";
-import DocsLayout from "./layouts/DocsLayout";
-import DocPageResolver from "./pages/DocPageResolver";
+import DocsPage from "./pages/DocsPage";
 
 function App() {
   return (
@@ -13,11 +12,8 @@ function App() {
         <AlertProvider>
           <ToastProvider>
             <Routes>
-              {/* Fullscreen Documentation Routes */}
-              <Route path="/docs" element={<DocsLayout />}>
-                <Route index element={<DocPageResolver />} />
-                <Route path="*" element={<DocPageResolver />} />
-              </Route>
+              {/* Standalone Documentation - same as DeveloperApp */}
+              <Route path="/docs" element={<DocsPage />} />
 
               {/* Desktop Environment (root) */}
               <Route

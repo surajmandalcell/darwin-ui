@@ -25,7 +25,7 @@ interface TooltipProviderProps {
 	delayDuration?: number;
 }
 
-function TooltipProvider({ children, delayDuration = 300 }: TooltipProviderProps) {
+function TooltipProvider({ children }: TooltipProviderProps) {
 	return <>{children}</>;
 }
 
@@ -64,7 +64,7 @@ interface TooltipTriggerProps {
 
 function TooltipTrigger({ children, className, asChild }: TooltipTriggerProps) {
 	const { onOpenChange, delayDuration } = useTooltipContext();
-	const timeoutRef = React.useRef<NodeJS.Timeout>(undefined);
+	const timeoutRef = React.useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
 	const handleMouseEnter = () => {
 		timeoutRef.current = setTimeout(() => {

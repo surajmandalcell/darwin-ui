@@ -14,13 +14,8 @@ import {
   Copy,
   Check,
   ExternalLink,
-  AlertCircle,
-  CheckCircle,
-  AlertTriangle,
-  Info
 } from 'lucide-react';
 import {
-  Alert,
   Button,
   Input,
   Checkbox,
@@ -193,16 +188,22 @@ const docSections = {
     title: 'Components',
     icon: <Layout className="w-4 h-4" />,
     pages: [
+      { id: 'badge', title: 'Badge' },
       { id: 'button', title: 'Button' },
-      { id: 'input', title: 'Input' },
+      { id: 'card', title: 'Card' },
+      { id: 'charts', title: 'Charts' },
       { id: 'checkbox', title: 'Checkbox' },
-      { id: 'toggle', title: 'Toggle' },
+      { id: 'close-button', title: 'CloseButton' },
+      { id: 'context-menu', title: 'ContextMenu' },
+      { id: 'input', title: 'Input' },
+      { id: 'modal', title: 'Modal' },
+      { id: 'multi-select', title: 'MultiSelect' },
+      { id: 'search-input', title: 'SearchInput' },
       { id: 'select', title: 'Select' },
-      { id: 'slider', title: 'Slider' },
+      { id: 'skeleton', title: 'Skeleton' },
+      { id: 'switch', title: 'Switch' },
+      { id: 'table', title: 'Table' },
       { id: 'window', title: 'Window' },
-      { id: 'tooltip', title: 'Tooltip' },
-      { id: 'alert', title: 'Alert' },
-      { id: 'toast', title: 'Toast' },
     ],
   },
   'theming': {
@@ -702,42 +703,6 @@ function CheckboxPreview() {
   );
 }
 
-function TogglePreview() {
-  const [enabled1, setEnabled1] = useState(false);
-  const [enabled2, setEnabled2] = useState(true);
-
-  return (
-    <motion.div
-      className="flex flex-col gap-3"
-      variants={containerVariants}
-      initial="hidden"
-      animate="show"
-    >
-      <motion.div variants={itemVariants} whileHover={{ x: 4 }}>
-        <Switch
-          label="Enable notifications"
-          checked={enabled1}
-          onChange={setEnabled1}
-        />
-      </motion.div>
-      <motion.div variants={itemVariants} whileHover={{ x: 4 }}>
-        <Switch
-          label="Dark mode"
-          checked={enabled2}
-          onChange={setEnabled2}
-        />
-      </motion.div>
-      <motion.div variants={itemVariants} whileHover={{ x: 4 }}>
-        <Switch
-          label="Disabled"
-          checked={false}
-          disabled
-        />
-      </motion.div>
-    </motion.div>
-  );
-}
-
 function SelectPreview() {
   const [value, setValue] = useState('option1');
 
@@ -761,80 +726,6 @@ function SelectPreview() {
     </motion.div>
   );
 }
-
-function AlertPreview() {
-  const alerts = [
-    { variant: 'info' as const, title: 'Information', desc: 'This is an informational alert message.' },
-    { variant: 'success' as const, title: 'Success', desc: 'Your changes have been saved successfully.' },
-    { variant: 'warning' as const, title: 'Warning', desc: 'Please review your settings before proceeding.' },
-    { variant: 'error' as const, title: 'Error', desc: 'Something went wrong. Please try again.' },
-  ];
-
-  return (
-    <motion.div
-      className="flex flex-col gap-3 w-full"
-      variants={containerVariants}
-      initial="hidden"
-      animate="show"
-    >
-      {alerts.map((alert, i) => (
-        <motion.div
-          key={alert.title}
-          variants={itemVariants}
-          custom={i}
-        >
-          <Alert
-            variant={alert.variant}
-            title={alert.title}
-            description={alert.desc}
-          />
-        </motion.div>
-      ))}
-    </motion.div>
-  );
-}
-
-function ToastPreview() {
-  return (
-    <motion.div
-      className="flex flex-col gap-3 w-full max-w-sm"
-      variants={containerVariants}
-      initial="hidden"
-      animate="show"
-    >
-      {[
-        { icon: CheckCircle, color: 'green', title: 'Success', desc: 'Your file has been uploaded.' },
-        { icon: AlertCircle, color: 'red', title: 'Error', desc: 'Failed to save changes.' },
-      ].map((toast, i) => {
-        const Icon = toast.icon;
-        return (
-          <motion.div
-            key={toast.title}
-            className="bg-neutral-900/95 backdrop-blur-md shadow-md rounded-md border border-white/10"
-            variants={itemVariants}
-            custom={i}
-            whileTap={{ scale: 0.98 }}
-          >
-            <div className="p-3 flex items-start gap-3">
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ delay: 0.2 + i * 0.1, type: "spring", stiffness: 500, damping: 15 }}
-              >
-                <Icon className={`w-4 h-4 text-${toast.color}-400 shrink-0 mt-0.5`} />
-              </motion.div>
-              <div className="flex-1 min-w-0">
-                <div className="text-white/90 text-sm font-semibold mb-0.5">{toast.title}</div>
-                <div className="text-white/70 text-sm">{toast.desc}</div>
-              </div>
-            </div>
-          </motion.div>
-        );
-      })}
-    </motion.div>
-  );
-}
-
 
 function WindowPreview() {
   return (
@@ -886,100 +777,522 @@ function WindowPreview() {
   );
 }
 
-function TooltipPreview() {
+// Badge Preview
+function BadgePreview() {
   return (
     <motion.div
-      className="flex gap-4 items-center"
+      className="flex flex-wrap gap-2"
       variants={containerVariants}
       initial="hidden"
       animate="show"
     >
       {[
-        { label: 'Hover me', tooltip: 'Tooltip content', variant: 'outline' as const },
-        { label: 'Another one', tooltip: 'More info here', variant: 'secondary' as const },
-      ].map((item, i) => (
+        { variant: undefined, label: 'Default' },
+        { variant: 'secondary' as const, label: 'Secondary' },
+        { variant: 'outline' as const, label: 'Outline' },
+        { variant: 'success' as const, label: 'Success' },
+        { variant: 'warning' as const, label: 'Warning' },
+        { variant: 'destructive' as const, label: 'Destructive' },
+        { variant: 'info' as const, label: 'Info' },
+        { variant: 'new' as const, label: 'New' },
+      ].map((badge, i) => (
         <motion.div
-          key={item.label}
-          className="relative group"
+          key={badge.label}
           variants={itemVariants}
           custom={i}
+          whileHover={{ scale: 1.1, y: -2 }}
+          whileTap={{ scale: 0.95 }}
         >
-          <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.95 }}>
-            <Button variant={item.variant} size="sm">{item.label}</Button>
-          </motion.div>
-          <motion.div
-            className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 text-xs text-white/90 bg-neutral-900 rounded border border-white/10 opacity-0 group-hover:opacity-100 whitespace-nowrap pointer-events-none"
-            initial={{ opacity: 0, y: 4, scale: 0.95 }}
-            whileHover={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ type: "spring", stiffness: 400, damping: 25 }}
-          >
-            {item.tooltip}
-            <motion.div
-              className="absolute top-full left-1/2 -translate-x-1/2 w-2 h-2 bg-neutral-900 border-r border-b border-white/10 rotate-45 -mt-1"
-            />
-          </motion.div>
+          <Badge variant={badge.variant}>{badge.label}</Badge>
         </motion.div>
       ))}
     </motion.div>
   );
 }
 
-function SliderPreview() {
-  const [value, setValue] = useState(50);
-
+// Card Preview
+function CardPreview() {
   return (
     <motion.div
-      className="w-full max-w-xs space-y-4"
-      initial={{ opacity: 0, y: 10 }}
+      className="w-full max-w-sm"
+      initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ type: "spring", stiffness: 300, damping: 25 }}
     >
-      <div className="space-y-2">
-        <div className="flex justify-between text-sm">
-          <span className="text-white/70">Volume</span>
-          <motion.span
-            className="text-white/50"
-            key={value}
-            initial={{ scale: 1.2, color: "rgb(96 165 250)" }}
-            animate={{ scale: 1, color: "rgba(255, 255, 255, 0.5)" }}
-            transition={{ type: "spring", stiffness: 400, damping: 20 }}
-          >
-            {value}%
-          </motion.span>
-        </div>
-        <motion.div whileHover={{ scale: 1.02 }}>
-          <input
-            type="range"
-            min="0"
-            max="100"
-            value={value}
-            onChange={(e) => setValue(Number(e.target.value))}
-            className="w-full h-1.5 bg-white/10 rounded-full appearance-none cursor-pointer accent-blue-500 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow-md"
+      <Card>
+        <CardHeader>
+          <CardTitle>Card Title</CardTitle>
+          <CardDescription>This is a description of the card content.</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <p className="text-white/70 text-sm">
+            Cards can contain any content including text, images, and other components.
+          </p>
+        </CardContent>
+        <CardFooter className="flex gap-2">
+          <Button variant="primary" size="sm">Action</Button>
+          <Button variant="ghost" size="sm">Cancel</Button>
+        </CardFooter>
+      </Card>
+    </motion.div>
+  );
+}
+
+// Charts Preview
+function ChartsPreview() {
+  const chartData = [
+    { name: 'Jan', value: 400, value2: 240 },
+    { name: 'Feb', value: 300, value2: 139 },
+    { name: 'Mar', value: 200, value2: 980 },
+    { name: 'Apr', value: 278, value2: 390 },
+    { name: 'May', value: 189, value2: 480 },
+  ];
+
+  return (
+    <motion.div
+      className="w-full space-y-6"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
+    >
+      <div>
+        <h4 className="text-sm font-medium text-white/70 mb-3">Bar Chart</h4>
+        <div className="w-full h-[200px]">
+          <BarChart
+            data={chartData}
+            xKey="name"
+            bars={[{ dataKey: 'value', name: 'Sales', fill: '#60a5fa' }]}
+            height={200}
           />
-        </motion.div>
+        </div>
       </div>
+      <div>
+        <h4 className="text-sm font-medium text-white/70 mb-3">Line Chart</h4>
+        <div className="w-full h-[200px]">
+          <LineChart
+            data={chartData}
+            xKey="name"
+            lines={[
+              { dataKey: 'value', name: 'Revenue', stroke: '#60a5fa' },
+              { dataKey: 'value2', name: 'Cost', stroke: '#34d399' },
+            ]}
+            height={200}
+          />
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+// CloseButton Preview
+function CloseButtonPreview() {
+  return (
+    <motion.div
+      className="flex items-center gap-4"
+      variants={containerVariants}
+      initial="hidden"
+      animate="show"
+    >
+      <motion.div variants={itemVariants} className="flex flex-col items-center gap-2">
+        <CloseButton onClick={() => {}} />
+        <span className="text-xs text-white/50">Default</span>
+      </motion.div>
+      <motion.div variants={itemVariants} className="flex flex-col items-center gap-2">
+        <div className="p-3 bg-white/5 rounded-lg border border-white/10">
+          <div className="flex items-center gap-3">
+            <span className="text-sm text-white/70">Dismissible item</span>
+            <CloseButton onClick={() => {}} />
+          </div>
+        </div>
+        <span className="text-xs text-white/50">In context</span>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+// ContextMenu Preview
+function ContextMenuPreview() {
+  const menuItems = [
+    { label: 'Cut', onClick: () => {} },
+    { label: 'Copy', onClick: () => {} },
+    { label: 'Paste', onClick: () => {} },
+    { label: '', onClick: () => {}, separator: true },
+    { label: 'Delete', onClick: () => {} },
+  ];
+
+  return (
+    <motion.div
+      className="w-full"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+    >
+      <ContextMenu items={menuItems}>
+        <div className="p-8 border border-dashed border-white/20 rounded-lg text-center">
+          <p className="text-white/60 text-sm">Right-click here to open context menu</p>
+        </div>
+      </ContextMenu>
+    </motion.div>
+  );
+}
+
+// Modal Preview
+function ModalPreview() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+    >
+      <Button variant="primary" onClick={() => setIsOpen(true)}>
+        Open Modal
+      </Button>
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} title="Example Modal">
+        <div className="space-y-4">
+          <p className="text-white/70">
+            This is a modal dialog. You can put any content here.
+          </p>
+          <div className="flex gap-2 justify-end">
+            <Button variant="ghost" onClick={() => setIsOpen(false)}>Cancel</Button>
+            <Button variant="primary" onClick={() => setIsOpen(false)}>Confirm</Button>
+          </div>
+        </div>
+      </Modal>
+    </motion.div>
+  );
+}
+
+// MultiSelect Preview
+function MultiSelectPreview() {
+  const [selected, setSelected] = useState<string[]>(['react']);
+
+  const options = [
+    { label: 'React', value: 'react' },
+    { label: 'Vue', value: 'vue' },
+    { label: 'Angular', value: 'angular' },
+    { label: 'Svelte', value: 'svelte' },
+    { label: 'Solid', value: 'solid' },
+  ];
+
+  return (
+    <motion.div
+      className="w-full max-w-xs"
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+    >
+      <MultiSelect
+        value={selected}
+        onChange={setSelected}
+        options={options}
+        placeholder="Select frameworks..."
+      />
+    </motion.div>
+  );
+}
+
+// SearchInput Preview
+function SearchInputPreview() {
+  const [query, setQuery] = useState('');
+
+  return (
+    <motion.div
+      className="w-full max-w-sm"
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+    >
+      <SearchInput
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Search components..."
+      />
+    </motion.div>
+  );
+}
+
+// Skeleton Preview
+function SkeletonPreview() {
+  return (
+    <motion.div
+      className="flex flex-col gap-3 w-full max-w-sm"
+      variants={containerVariants}
+      initial="hidden"
+      animate="show"
+    >
+      <motion.div
+        className="flex items-center gap-3"
+        variants={itemVariants}
+      >
+        <motion.div
+          animate={{ opacity: [0.5, 1, 0.5] }}
+          transition={{ duration: 2, repeat: Infinity }}
+        >
+          <Skeleton className="h-12 w-12 rounded-full" />
+        </motion.div>
+        <div className="flex-1 space-y-2">
+          <Skeleton className="h-4 w-3/4" />
+          <Skeleton className="h-3 w-1/2" />
+        </div>
+      </motion.div>
+      <motion.div variants={itemVariants}>
+        <Skeleton className="h-24 w-full rounded-lg" />
+      </motion.div>
+      <motion.div className="flex gap-2" variants={itemVariants}>
+        <Skeleton className="h-8 w-20 rounded-md" />
+        <Skeleton className="h-8 w-20 rounded-md" />
+      </motion.div>
+    </motion.div>
+  );
+}
+
+// Switch Preview
+function SwitchPreview() {
+  const [enabled1, setEnabled1] = useState(false);
+  const [enabled2, setEnabled2] = useState(true);
+
+  return (
+    <motion.div
+      className="flex flex-col gap-3"
+      variants={containerVariants}
+      initial="hidden"
+      animate="show"
+    >
+      <motion.div variants={itemVariants} whileHover={{ x: 4 }}>
+        <Switch
+          label="Enable notifications"
+          checked={enabled1}
+          onChange={setEnabled1}
+        />
+      </motion.div>
+      <motion.div variants={itemVariants} whileHover={{ x: 4 }}>
+        <Switch
+          label="Dark mode"
+          checked={enabled2}
+          onChange={setEnabled2}
+        />
+      </motion.div>
+      <motion.div variants={itemVariants} whileHover={{ x: 4 }}>
+        <Switch
+          label="Disabled"
+          checked={false}
+          disabled
+        />
+      </motion.div>
+    </motion.div>
+  );
+}
+
+// Table Preview
+function TablePreview() {
+  const data = [
+    { id: 1, name: 'John Doe', email: 'john@example.com', status: 'Active' },
+    { id: 2, name: 'Jane Smith', email: 'jane@example.com', status: 'Pending' },
+    { id: 3, name: 'Bob Johnson', email: 'bob@example.com', status: 'Inactive' },
+  ];
+
+  return (
+    <motion.div
+      className="w-full overflow-auto"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+    >
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableHeaderCell>Name</TableHeaderCell>
+            <TableHeaderCell>Email</TableHeaderCell>
+            <TableHeaderCell>Status</TableHeaderCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {data.map((row) => (
+            <TableRow key={row.id}>
+              <TableCell>{row.name}</TableCell>
+              <TableCell>{row.email}</TableCell>
+              <TableCell>
+                <Badge variant={row.status === 'Active' ? 'success' : row.status === 'Pending' ? 'warning' : 'secondary'}>
+                  {row.status}
+                </Badge>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
     </motion.div>
   );
 }
 
 // Component previews map
 const componentPreviews: Record<string, React.ComponentType> = {
-  button: ButtonPreview,
-  input: InputPreview,
-  checkbox: CheckboxPreview,
-  toggle: TogglePreview,
-  select: SelectPreview,
-  slider: SliderPreview,
-  window: WindowPreview,
-  tooltip: TooltipPreview,
-  alert: AlertPreview,
-  toast: ToastPreview,
+  'badge': BadgePreview,
+  'button': ButtonPreview,
+  'card': CardPreview,
+  'charts': ChartsPreview,
+  'checkbox': CheckboxPreview,
+  'close-button': CloseButtonPreview,
+  'context-menu': ContextMenuPreview,
+  'input': InputPreview,
+  'modal': ModalPreview,
+  'multi-select': MultiSelectPreview,
+  'search-input': SearchInputPreview,
+  'select': SelectPreview,
+  'skeleton': SkeletonPreview,
+  'switch': SwitchPreview,
+  'table': TablePreview,
+  'window': WindowPreview,
+};
+
+// Component code examples
+const componentCodeExamples: Record<string, { importCode: string; usageCode: string }> = {
+  'badge': {
+    importCode: `import { Badge } from '@smc/darwin-ui';`,
+    usageCode: `<Badge variant="success">Active</Badge>
+<Badge variant="warning">Pending</Badge>
+<Badge variant="destructive">Error</Badge>`,
+  },
+  'button': {
+    importCode: `import { Button } from '@smc/darwin-ui';`,
+    usageCode: `<Button variant="primary">Primary</Button>
+<Button variant="secondary">Secondary</Button>
+<Button variant="outline">Outline</Button>
+<Button loading>Loading...</Button>`,
+  },
+  'card': {
+    importCode: `import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@smc/darwin-ui';`,
+    usageCode: `<Card>
+  <CardHeader>
+    <CardTitle>Card Title</CardTitle>
+    <CardDescription>Description</CardDescription>
+  </CardHeader>
+  <CardContent>Content here</CardContent>
+  <CardFooter>
+    <Button>Action</Button>
+  </CardFooter>
+</Card>`,
+  },
+  'charts': {
+    importCode: `import { BarChart, LineChart, AreaChart, PieChart } from '@smc/darwin-ui';`,
+    usageCode: `<BarChart
+  data={data}
+  xKey="name"
+  bars={[{ dataKey: 'value', name: 'Sales' }]}
+/>
+
+<LineChart
+  data={data}
+  xKey="name"
+  lines={[{ dataKey: 'value', name: 'Revenue' }]}
+/>`,
+  },
+  'checkbox': {
+    importCode: `import { Checkbox } from '@smc/darwin-ui';`,
+    usageCode: `<Checkbox
+  label="Accept terms"
+  checked={checked}
+  onChange={setChecked}
+/>`,
+  },
+  'close-button': {
+    importCode: `import { CloseButton } from '@smc/darwin-ui';`,
+    usageCode: `<CloseButton onClick={handleClose} />`,
+  },
+  'context-menu': {
+    importCode: `import { ContextMenu } from '@smc/darwin-ui';`,
+    usageCode: `<ContextMenu items={[
+  { label: 'Cut', onClick: handleCut },
+  { label: 'Copy', onClick: handleCopy },
+  { label: '', onClick: () => {}, separator: true },
+  { label: 'Delete', onClick: handleDelete },
+]}>
+  <div>Right-click me</div>
+</ContextMenu>`,
+  },
+  'input': {
+    importCode: `import { Input } from '@smc/darwin-ui';`,
+    usageCode: `<Input placeholder="Enter text..." />
+<Input error placeholder="Error state" />
+<Input success placeholder="Success state" />`,
+  },
+  'modal': {
+    importCode: `import { Modal } from '@smc/darwin-ui';`,
+    usageCode: `<Modal isOpen={isOpen} onClose={() => setIsOpen(false)} title="Modal Title">
+  <p>Modal content here</p>
+</Modal>`,
+  },
+  'multi-select': {
+    importCode: `import { MultiSelect } from '@smc/darwin-ui';`,
+    usageCode: `<MultiSelect
+  value={selected}
+  onChange={setSelected}
+  options={[
+    { label: 'React', value: 'react' },
+    { label: 'Vue', value: 'vue' },
+  ]}
+  placeholder="Select..."
+/>`,
+  },
+  'search-input': {
+    importCode: `import { SearchInput } from '@smc/darwin-ui';`,
+    usageCode: `<SearchInput
+  value={query}
+  onChange={setQuery}
+  placeholder="Search..."
+/>`,
+  },
+  'select': {
+    importCode: `import { Select } from '@smc/darwin-ui';`,
+    usageCode: `<Select value={value} onChange={(e) => setValue(e.target.value)}>
+  <option value="option1">Option 1</option>
+  <option value="option2">Option 2</option>
+</Select>`,
+  },
+  'skeleton': {
+    importCode: `import { Skeleton } from '@smc/darwin-ui';`,
+    usageCode: `<Skeleton className="h-4 w-full" />
+<Skeleton className="h-12 w-12 rounded-full" />`,
+  },
+  'switch': {
+    importCode: `import { Switch } from '@smc/darwin-ui';`,
+    usageCode: `<Switch
+  label="Enable feature"
+  checked={enabled}
+  onChange={setEnabled}
+/>`,
+  },
+  'table': {
+    importCode: `import { Table, TableHead, TableBody, TableRow, TableHeaderCell, TableCell } from '@smc/darwin-ui';`,
+    usageCode: `<Table>
+  <TableHead>
+    <TableRow>
+      <TableHeaderCell>Name</TableHeaderCell>
+      <TableHeaderCell>Status</TableHeaderCell>
+    </TableRow>
+  </TableHead>
+  <TableBody>
+    <TableRow>
+      <TableCell>John Doe</TableCell>
+      <TableCell>Active</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>`,
+  },
+  'window': {
+    importCode: `import { Window } from '@smc/darwin-ui';`,
+    usageCode: `<Window title="My Window" isOpen={true} onClose={handleClose}>
+  <div className="p-4">Window content</div>
+</Window>`,
+  },
 };
 
 // Generic component page with enhanced animations
 function ComponentPage({ name }: { name: string }) {
-  const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1);
+  // Convert kebab-case to PascalCase for display
+  const displayName = name
+    .split('-')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join('');
+
   const PreviewComponent = componentPreviews[name];
+  const codeExample = componentCodeExamples[name];
 
   return (
     <motion.div
@@ -1005,19 +1318,19 @@ function ComponentPage({ name }: { name: string }) {
           >
             <ChevronRight className="w-3 h-3" />
           </motion.div>
-          <span className="text-white/70">{capitalizedName}</span>
+          <span className="text-white/70">{displayName}</span>
         </motion.div>
         <motion.h1
           className="text-4xl font-bold text-white mb-4"
           variants={itemVariants}
         >
-          {capitalizedName}
+          {displayName}
         </motion.h1>
         <motion.p
           className="text-lg text-white/70"
           variants={itemVariants}
         >
-          A beautiful, accessible {name} component with native macOS styling.
+          A beautiful, accessible {name.replace(/-/g, ' ')} component with native macOS styling.
         </motion.p>
       </motion.div>
 
@@ -1060,7 +1373,7 @@ function ComponentPage({ name }: { name: string }) {
         </motion.h2>
         <motion.div variants={itemVariants}>
           <CodeBlock
-            code={`import { ${capitalizedName} } from '@smc/darwin-ui';`}
+            code={codeExample?.importCode || `import { ${displayName} } from '@smc/darwin-ui';`}
             language="tsx"
           />
         </motion.div>
@@ -1079,7 +1392,7 @@ function ComponentPage({ name }: { name: string }) {
         </motion.h2>
         <motion.div variants={itemVariants}>
           <CodeBlock
-            code={`<${capitalizedName} />`}
+            code={codeExample?.usageCode || `<${displayName} />`}
             language="tsx"
           />
         </motion.div>

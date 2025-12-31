@@ -19,19 +19,43 @@ export const docsTree = [
     {
         title: "Components",
         items: [
+            // Form Controls
             { title: "Button", href: "/docs/components/button" },
-            { title: "Badge", href: "/docs/components/badge" },
-            { title: "Card", href: "/docs/components/card" },
             { title: "Input", href: "/docs/components/input" },
+            { title: "Textarea", href: "/docs/components/textarea" },
             { title: "Select", href: "/docs/components/select" },
             { title: "Checkbox", href: "/docs/components/checkbox" },
             { title: "Switch", href: "/docs/components/switch" },
-            { title: "Table", href: "/docs/components/table" },
-            { title: "Modal", href: "/docs/components/modal" },
-            { title: "Toast", href: "/docs/components/toast" },
-            { title: "Alert", href: "/docs/components/alert" },
-            { title: "Charts", href: "/docs/components/charts" },
+            { title: "Slider", href: "/docs/components/slider" },
+            { title: "SearchInput", href: "/docs/components/search-input" },
+            { title: "MultiSelect", href: "/docs/components/multi-select" },
+            { title: "DateSelect", href: "/docs/components/date-select" },
+            { title: "Upload", href: "/docs/components/upload" },
+            // Display
+            { title: "Badge", href: "/docs/components/badge" },
+            { title: "Card", href: "/docs/components/card" },
+            { title: "Avatar", href: "/docs/components/avatar" },
+            { title: "Image", href: "/docs/components/image" },
             { title: "Skeleton", href: "/docs/components/skeleton" },
+            { title: "Progress", href: "/docs/components/progress" },
+            { title: "Table", href: "/docs/components/table" },
+            { title: "Charts", href: "/docs/components/charts" },
+            // Layout
+            { title: "Tabs", href: "/docs/components/tabs" },
+            { title: "Accordion", href: "/docs/components/accordion" },
+            { title: "Window", href: "/docs/components/window" },
+            // Overlays
+            { title: "Modal", href: "/docs/components/modal" },
+            { title: "Dialog", href: "/docs/components/dialog" },
+            { title: "Alert", href: "/docs/components/alert" },
+            { title: "Toast", href: "/docs/components/toast" },
+            { title: "Tooltip", href: "/docs/components/tooltip" },
+            { title: "Popover", href: "/docs/components/popover" },
+            { title: "DropdownMenu", href: "/docs/components/dropdown-menu" },
+            { title: "ContextMenu", href: "/docs/components/context-menu" },
+            // Utility
+            { title: "CloseButton", href: "/docs/components/close-button" },
+            { title: "Reveal", href: "/docs/components/reveal" },
         ]
     },
     {

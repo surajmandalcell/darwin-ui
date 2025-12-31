@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, ChevronRight } from "lucide-react";
+import { Check } from "lucide-react";
 import { cn } from "../lib/utils";
 
 interface DropdownMenuContextValue {
@@ -115,7 +115,7 @@ function DropdownMenuContent({
 	side = "bottom",
 	sideOffset = 4,
 }: DropdownMenuContentProps) {
-	const { open, onOpenChange } = useDropdownMenuContext();
+	const { open } = useDropdownMenuContext();
 
 	const alignClasses = {
 		start: "left-0",

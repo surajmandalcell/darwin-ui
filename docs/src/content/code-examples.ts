@@ -591,3 +591,222 @@ function Analytics() {
     </div>
   );
 }`;
+
+// ============================================================================
+// New Components Examples
+// ============================================================================
+
+export const TABS_EXAMPLE = `import { Tabs, TabsList, TabsTrigger, TabsContent } from '@smc/darwin-ui';
+
+function SettingsTabs() {
+  return (
+    <Tabs defaultValue="general">
+      <TabsList>
+        <TabsTrigger value="general">General</TabsTrigger>
+        <TabsTrigger value="security">Security</TabsTrigger>
+        <TabsTrigger value="notifications">Notifications</TabsTrigger>
+      </TabsList>
+      <TabsContent value="general">
+        <p>General settings content</p>
+      </TabsContent>
+      <TabsContent value="security">
+        <p>Security settings content</p>
+      </TabsContent>
+      <TabsContent value="notifications">
+        <p>Notification preferences</p>
+      </TabsContent>
+    </Tabs>
+  );
+}`;
+
+export const ACCORDION_EXAMPLE = `import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@smc/darwin-ui';
+
+function FAQ() {
+  return (
+    <Accordion type="single" collapsible>
+      <AccordionItem value="item-1">
+        <AccordionTrigger>What is Darwin UI?</AccordionTrigger>
+        <AccordionContent>
+          Darwin UI is a macOS-inspired React component library with glass-morphism aesthetic.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-2">
+        <AccordionTrigger>Is it accessible?</AccordionTrigger>
+        <AccordionContent>
+          Yes! All components follow WAI-ARIA guidelines for accessibility.
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  );
+}`;
+
+export const AVATAR_EXAMPLE = `import { Avatar, AvatarImage, AvatarFallback } from '@smc/darwin-ui';
+
+function UserAvatar() {
+  return (
+    <div className="flex gap-4">
+      <Avatar>
+        <AvatarImage src="https://github.com/shadcn.png" alt="User" />
+        <AvatarFallback>JD</AvatarFallback>
+      </Avatar>
+
+      <Avatar size="lg">
+        <AvatarImage src="https://github.com/vercel.png" alt="Vercel" />
+        <AvatarFallback>V</AvatarFallback>
+      </Avatar>
+
+      {/* Fallback when image fails */}
+      <Avatar>
+        <AvatarFallback>AB</AvatarFallback>
+      </Avatar>
+    </div>
+  );
+}`;
+
+export const PROGRESS_EXAMPLE = `import { Progress, CircularProgress } from '@smc/darwin-ui';
+
+function UploadProgress() {
+  const [progress, setProgress] = useState(45);
+
+  return (
+    <div className="space-y-6">
+      {/* Linear progress bar */}
+      <Progress value={progress} max={100} />
+
+      {/* With label */}
+      <Progress value={75} max={100} showLabel />
+
+      {/* Circular progress */}
+      <CircularProgress value={60} size={80} strokeWidth={8} />
+    </div>
+  );
+}`;
+
+export const SLIDER_EXAMPLE = `import { Slider } from '@smc/darwin-ui';
+import { useState } from 'react';
+
+function VolumeControl() {
+  const [volume, setVolume] = useState(50);
+
+  return (
+    <div className="space-y-4">
+      <Slider
+        value={volume}
+        onChange={setVolume}
+        min={0}
+        max={100}
+        step={1}
+      />
+      <p className="text-sm text-white/60">Volume: {volume}%</p>
+    </div>
+  );
+}`;
+
+export const TEXTAREA_EXAMPLE = `import { Textarea } from '@smc/darwin-ui';
+import { useState } from 'react';
+
+function FeedbackForm() {
+  const [feedback, setFeedback] = useState('');
+
+  return (
+    <Textarea
+      placeholder="Enter your feedback..."
+      value={feedback}
+      onChange={(e) => setFeedback(e.target.value)}
+      rows={4}
+      maxLength={500}
+      showCount
+    />
+  );
+}`;
+
+export const DIALOG_EXAMPLE = `import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, Button } from '@smc/darwin-ui';
+
+function EditProfile() {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button>Edit Profile</Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Edit Profile</DialogTitle>
+          <DialogDescription>
+            Make changes to your profile here.
+          </DialogDescription>
+        </DialogHeader>
+        <div className="py-4">
+          <Input placeholder="Name" />
+          <Input placeholder="Email" className="mt-4" />
+        </div>
+        <DialogFooter>
+          <Button variant="secondary">Cancel</Button>
+          <Button>Save changes</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+}`;
+
+export const DROPDOWN_MENU_EXAMPLE = `import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, Button } from '@smc/darwin-ui';
+import { Settings, User, LogOut } from 'lucide-react';
+
+function UserMenu() {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="ghost">Menu</Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuItem>
+          <User className="mr-2 h-4 w-4" />
+          Profile
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <Settings className="mr-2 h-4 w-4" />
+          Settings
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem variant="destructive">
+          <LogOut className="mr-2 h-4 w-4" />
+          Logout
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}`;
+
+export const POPOVER_EXAMPLE = `import { Popover, PopoverTrigger, PopoverContent, Button } from '@smc/darwin-ui';
+
+function NotificationsPopover() {
+  return (
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button variant="ghost">Notifications</Button>
+      </PopoverTrigger>
+      <PopoverContent>
+        <div className="space-y-2">
+          <h4 className="font-medium">Notifications</h4>
+          <p className="text-sm text-white/60">You have 3 unread messages.</p>
+        </div>
+      </PopoverContent>
+    </Popover>
+  );
+}`;
+
+export const TOOLTIP_EXAMPLE = `import { Tooltip, TooltipTrigger, TooltipContent, Button } from '@smc/darwin-ui';
+
+function IconButton() {
+  return (
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button variant="ghost" size="icon">
+          <Settings className="h-4 w-4" />
+        </Button>
+      </TooltipTrigger>
+      <TooltipContent>
+        <p>Settings</p>
+      </TooltipContent>
+    </Tooltip>
+  );
+}`;

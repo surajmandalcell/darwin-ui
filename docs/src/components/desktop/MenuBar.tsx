@@ -111,7 +111,7 @@ function AboutModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
                   transition={{ delay: 0.35 }}
                 >
                   <p>Created by Suraj Mandal</p>
-                  <p>Built with React, Next.js & Tailwind CSS</p>
+                  <p>Built with React, Vite & Tailwind CSS</p>
                 </motion.div>
 
                 {/* GitHub Link */}

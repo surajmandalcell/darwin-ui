@@ -6,6 +6,7 @@ import {
   Terminal,
   StickyNote,
   Settings,
+  Info,
 } from 'lucide-react';
 
 // Types
@@ -143,6 +144,13 @@ export const apps: Record<string, AppDefinition> = {
     icon: <Settings className="w-full h-full" />,
     defaultSize: { width: 700, height: 550 },   // Compact settings panel
     minSize: { width: 500, height: 400 },
+  },
+  about: {
+    id: 'about',
+    name: 'About',
+    icon: <Info className="w-full h-full" />,
+    defaultSize: { width: 400, height: 500 },   // Small about window
+    minSize: { width: 320, height: 400 },
   },
 };
 
