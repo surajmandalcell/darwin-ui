@@ -17,6 +17,12 @@ import {
   ExternalLink,
 } from 'lucide-react';
 import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+  Avatar,
+  AvatarGroup,
   Button,
   Input,
   Checkbox,
@@ -30,8 +36,30 @@ import {
   CardDescription,
   CardContent,
   CardFooter,
+  DateSelect,
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+  DialogClose,
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  Image,
   Modal,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  Progress,
+  CircularProgress,
+  Reveal,
   SearchInput,
+  Slider,
   MultiSelect,
   Table,
   TableHead,
@@ -39,6 +67,15 @@ import {
   TableRow,
   TableHeaderCell,
   TableCell,
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+  Textarea,
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+  Upload,
   ContextMenu,
   LineChart,
   BarChart,
@@ -189,21 +226,38 @@ const docSections = {
     title: 'Components',
     icon: <Layout className="w-4 h-4" />,
     pages: [
+      { id: 'accordion', title: 'Accordion' },
+      { id: 'avatar', title: 'Avatar' },
       { id: 'badge', title: 'Badge' },
       { id: 'button', title: 'Button' },
       { id: 'card', title: 'Card' },
       { id: 'charts', title: 'Charts' },
       { id: 'checkbox', title: 'Checkbox' },
       { id: 'close-button', title: 'CloseButton' },
+      { id: 'contact-form', title: 'ContactForm' },
       { id: 'context-menu', title: 'ContextMenu' },
+      { id: 'date-select', title: 'DateSelect' },
+      { id: 'dialog', title: 'Dialog' },
+      { id: 'dropdown-menu', title: 'DropdownMenu' },
+      { id: 'image', title: 'Image' },
       { id: 'input', title: 'Input' },
+      { id: 'md-editor', title: 'MdEditor' },
       { id: 'modal', title: 'Modal' },
       { id: 'multi-select', title: 'MultiSelect' },
+      { id: 'popover', title: 'Popover' },
+      { id: 'progress', title: 'Progress' },
+      { id: 'reveal', title: 'Reveal' },
       { id: 'search-input', title: 'SearchInput' },
       { id: 'select', title: 'Select' },
+      { id: 'sidebar', title: 'Sidebar' },
       { id: 'skeleton', title: 'Skeleton' },
+      { id: 'slider', title: 'Slider' },
       { id: 'switch', title: 'Switch' },
       { id: 'table', title: 'Table' },
+      { id: 'tabs', title: 'Tabs' },
+      { id: 'textarea', title: 'Textarea' },
+      { id: 'tooltip', title: 'Tooltip' },
+      { id: 'upload', title: 'Upload' },
       { id: 'window', title: 'Window' },
     ],
   },
@@ -1131,28 +1185,694 @@ function TablePreview() {
   );
 }
 
+// Accordion Preview
+function AccordionPreview() {
+  return (
+    <motion.div
+      className="w-full max-w-md"
+      variants={containerVariants}
+      initial="hidden"
+      animate="show"
+    >
+      <Accordion type="single" defaultValue="item-1">
+        <motion.div variants={itemVariants}>
+          <AccordionItem value="item-1">
+            <AccordionTrigger>What is Darwin UI?</AccordionTrigger>
+            <AccordionContent>
+              Darwin UI is a beautiful, macOS-inspired React component library with native-feeling interactions and smooth animations.
+            </AccordionContent>
+          </AccordionItem>
+        </motion.div>
+        <motion.div variants={itemVariants}>
+          <AccordionItem value="item-2">
+            <AccordionTrigger>Is it accessible?</AccordionTrigger>
+            <AccordionContent>
+              Yes! All components are ARIA-compliant with full keyboard navigation support.
+            </AccordionContent>
+          </AccordionItem>
+        </motion.div>
+        <motion.div variants={itemVariants}>
+          <AccordionItem value="item-3">
+            <AccordionTrigger>Can I customize it?</AccordionTrigger>
+            <AccordionContent>
+              Absolutely. Darwin UI supports extensive theming and customization through CSS variables and Tailwind.
+            </AccordionContent>
+          </AccordionItem>
+        </motion.div>
+      </Accordion>
+    </motion.div>
+  );
+}
+
+// Avatar Preview
+function AvatarPreview() {
+  return (
+    <motion.div
+      className="flex flex-col gap-6"
+      variants={containerVariants}
+      initial="hidden"
+      animate="show"
+    >
+      <motion.div variants={itemVariants} className="flex flex-col gap-2">
+        <span className="text-xs text-white/50">Single Avatar</span>
+        <div className="flex items-center gap-3">
+          <Avatar src="https://i.pravatar.cc/150?img=1" alt="User" size="sm" />
+          <Avatar src="https://i.pravatar.cc/150?img=2" alt="User" size="md" />
+          <Avatar src="https://i.pravatar.cc/150?img=3" alt="User" size="lg" />
+          <Avatar fallback="John Doe" size="md" />
+        </div>
+      </motion.div>
+      <motion.div variants={itemVariants} className="flex flex-col gap-2">
+        <span className="text-xs text-white/50">Avatar Group</span>
+        <AvatarGroup max={4}>
+          <Avatar src="https://i.pravatar.cc/150?img=4" alt="User 1" />
+          <Avatar src="https://i.pravatar.cc/150?img=5" alt="User 2" />
+          <Avatar src="https://i.pravatar.cc/150?img=6" alt="User 3" />
+          <Avatar src="https://i.pravatar.cc/150?img=7" alt="User 4" />
+          <Avatar src="https://i.pravatar.cc/150?img=8" alt="User 5" />
+          <Avatar src="https://i.pravatar.cc/150?img=9" alt="User 6" />
+        </AvatarGroup>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+// DateSelect Preview
+function DateSelectPreview() {
+  const [dateConfig, setDateConfig] = useState<{ startDate?: Date } | null>(null);
+
+  return (
+    <motion.div
+      className="w-full max-w-sm"
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ type: "spring", stiffness: 300, damping: 25 }}
+    >
+      <DateSelect
+        label="Select a date"
+        onChange={(config) => setDateConfig(config)}
+      />
+      {dateConfig?.startDate && (
+        <motion.p
+          className="mt-2 text-xs text-white/50"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+        >
+          Selected: {dateConfig.startDate.toLocaleDateString()}
+        </motion.p>
+      )}
+    </motion.div>
+  );
+}
+
+// Dialog Preview
+function DialogPreview() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+    >
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogTrigger asChild>
+          <Button variant="primary">Open Dialog</Button>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogClose />
+          <DialogHeader>
+            <DialogTitle>Confirm Action</DialogTitle>
+            <DialogDescription>
+              Are you sure you want to proceed? This action cannot be undone.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <DialogClose asChild>
+              <Button variant="ghost">Cancel</Button>
+            </DialogClose>
+            <Button variant="primary" onClick={() => setOpen(false)}>Confirm</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </motion.div>
+  );
+}
+
+// DropdownMenu Preview
+function DropdownMenuPreview() {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+    >
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="outline">Open Menu</Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuItem onSelect={() => {}}>Profile</DropdownMenuItem>
+          <DropdownMenuItem onSelect={() => {}}>Settings</DropdownMenuItem>
+          <DropdownMenuItem onSelect={() => {}}>Preferences</DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem onSelect={() => {}} destructive>Log out</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </motion.div>
+  );
+}
+
+// Image Preview
+function ImagePreview() {
+  return (
+    <motion.div
+      className="flex flex-col gap-4"
+      variants={containerVariants}
+      initial="hidden"
+      animate="show"
+    >
+      <motion.div variants={itemVariants} className="flex flex-col gap-2">
+        <span className="text-xs text-white/50">Click to Enlarge</span>
+        <Image
+          src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=200&fit=crop"
+          alt="Mountain landscape"
+          className="w-48 h-32 object-cover"
+          rounded="lg"
+          clickToEnlarge
+        />
+      </motion.div>
+      <motion.div variants={itemVariants} className="flex flex-col gap-2">
+        <span className="text-xs text-white/50">Different Rounded Options</span>
+        <div className="flex gap-2">
+          <Image
+            src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=100&h=100&fit=crop"
+            alt="Ocean"
+            className="w-16 h-16 object-cover"
+            rounded="sm"
+          />
+          <Image
+            src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=100&h=100&fit=crop"
+            alt="Nature"
+            className="w-16 h-16 object-cover"
+            rounded="full"
+          />
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+// Popover Preview
+function PopoverPreview() {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+    >
+      <Popover>
+        <PopoverTrigger asChild>
+          <Button variant="outline">Show Info</Button>
+        </PopoverTrigger>
+        <PopoverContent>
+          <div className="space-y-2">
+            <h4 className="font-medium text-white">Popover Content</h4>
+            <p className="text-sm text-white/70">
+              This is a popover with some helpful information. It can contain any content.
+            </p>
+            <div className="flex gap-2 pt-2">
+              <Button variant="primary" size="sm">Learn More</Button>
+            </div>
+          </div>
+        </PopoverContent>
+      </Popover>
+    </motion.div>
+  );
+}
+
+// Progress Preview
+function ProgressPreview() {
+  const [value, setValue] = useState(65);
+
+  // Animate progress value
+  useState(() => {
+    const interval = setInterval(() => {
+      setValue((prev) => (prev >= 100 ? 0 : prev + 5));
+    }, 1000);
+    return () => clearInterval(interval);
+  });
+
+  return (
+    <motion.div
+      className="flex flex-col gap-6 w-full max-w-sm"
+      variants={containerVariants}
+      initial="hidden"
+      animate="show"
+    >
+      <motion.div variants={itemVariants} className="space-y-3">
+        <span className="text-xs text-white/50">Linear Progress</span>
+        <Progress value={value} showValue />
+        <Progress value={45} variant="success" />
+        <Progress value={75} variant="warning" />
+        <Progress indeterminate variant="gradient" />
+      </motion.div>
+      <motion.div variants={itemVariants} className="space-y-3">
+        <span className="text-xs text-white/50">Circular Progress</span>
+        <div className="flex items-center gap-4">
+          <CircularProgress value={value} showValue />
+          <CircularProgress value={80} variant="success" showValue />
+          <CircularProgress indeterminate variant="default" />
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+// Reveal Preview
+function RevealPreview() {
+  const [key, setKey] = useState(0);
+
+  return (
+    <motion.div
+      className="flex flex-col gap-4 w-full"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+    >
+      <Button variant="outline" size="sm" onClick={() => setKey(k => k + 1)}>
+        Replay Animations
+      </Button>
+      <div key={key} className="grid grid-cols-2 gap-4">
+        <Reveal type="slide" direction="up" delay={0}>
+          <div className="p-4 bg-white/5 rounded-lg border border-white/10 text-center">
+            <span className="text-sm text-white/70">Slide Up</span>
+          </div>
+        </Reveal>
+        <Reveal type="fade" delay={0.1}>
+          <div className="p-4 bg-white/5 rounded-lg border border-white/10 text-center">
+            <span className="text-sm text-white/70">Fade In</span>
+          </div>
+        </Reveal>
+        <Reveal type="scale" delay={0.2}>
+          <div className="p-4 bg-white/5 rounded-lg border border-white/10 text-center">
+            <span className="text-sm text-white/70">Scale</span>
+          </div>
+        </Reveal>
+        <Reveal type="blur" delay={0.3}>
+          <div className="p-4 bg-white/5 rounded-lg border border-white/10 text-center">
+            <span className="text-sm text-white/70">Blur</span>
+          </div>
+        </Reveal>
+      </div>
+    </motion.div>
+  );
+}
+
+// Slider Preview
+function SliderPreview() {
+  const [value, setValue] = useState(50);
+
+  return (
+    <motion.div
+      className="w-full max-w-sm space-y-4"
+      variants={containerVariants}
+      initial="hidden"
+      animate="show"
+    >
+      <motion.div variants={itemVariants}>
+        <div className="flex justify-between items-center mb-2">
+          <span className="text-sm text-white/70">Volume</span>
+          <span className="text-sm font-mono text-blue-400">{value}%</span>
+        </div>
+        <Slider
+          value={value}
+          onChange={setValue}
+          min={0}
+          max={100}
+          step={1}
+        />
+      </motion.div>
+      <motion.div variants={itemVariants}>
+        <div className="flex justify-between items-center mb-2">
+          <span className="text-sm text-white/70">With value display</span>
+        </div>
+        <Slider
+          value={value}
+          onChange={setValue}
+          min={0}
+          max={100}
+          showValue
+        />
+      </motion.div>
+    </motion.div>
+  );
+}
+
+// Tabs Preview
+function TabsPreview() {
+  const [activeTab, setActiveTab] = useState('overview');
+
+  return (
+    <motion.div
+      className="w-full max-w-md"
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ type: "spring", stiffness: 300, damping: 25 }}
+    >
+      <Tabs value={activeTab} onValueChange={setActiveTab}>
+        <TabsList>
+          <TabsTrigger value="overview">Overview</TabsTrigger>
+          <TabsTrigger value="features">Features</TabsTrigger>
+          <TabsTrigger value="settings">Settings</TabsTrigger>
+        </TabsList>
+        <TabsContent value="overview">
+          <div className="p-4 rounded-lg bg-white/5 border border-white/10">
+            <p className="text-white/70 text-sm">
+              This is the overview tab content. It provides a general summary of the item.
+            </p>
+          </div>
+        </TabsContent>
+        <TabsContent value="features">
+          <div className="p-4 rounded-lg bg-white/5 border border-white/10">
+            <p className="text-white/70 text-sm">
+              Features tab showing available capabilities and options.
+            </p>
+          </div>
+        </TabsContent>
+        <TabsContent value="settings">
+          <div className="p-4 rounded-lg bg-white/5 border border-white/10">
+            <p className="text-white/70 text-sm">
+              Settings tab for configuration options and preferences.
+            </p>
+          </div>
+        </TabsContent>
+      </Tabs>
+    </motion.div>
+  );
+}
+
+// Textarea Preview
+function TextareaPreview() {
+  const [value, setValue] = useState('');
+  const maxChars = 200;
+
+  return (
+    <motion.div
+      className="w-full max-w-sm space-y-3"
+      variants={containerVariants}
+      initial="hidden"
+      animate="show"
+    >
+      <motion.div variants={itemVariants}>
+        <Textarea
+          placeholder="Write your message here..."
+          value={value}
+          onChange={(e) => setValue(e.target.value.slice(0, maxChars))}
+          rows={4}
+        />
+        <div className="flex justify-end mt-1">
+          <span className={`text-xs ${value.length >= maxChars ? 'text-red-400' : 'text-white/50'}`}>
+            {value.length}/{maxChars}
+          </span>
+        </div>
+      </motion.div>
+      <motion.div variants={itemVariants}>
+        <Textarea
+          placeholder="Error state textarea"
+          error
+          rows={2}
+        />
+      </motion.div>
+    </motion.div>
+  );
+}
+
+// Tooltip Preview
+function TooltipPreview() {
+  return (
+    <motion.div
+      className="flex flex-wrap gap-4 items-center"
+      variants={containerVariants}
+      initial="hidden"
+      animate="show"
+    >
+      <motion.div variants={itemVariants}>
+        <Tooltip>
+          <TooltipTrigger>
+            <Button variant="outline">Hover me</Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            This is a tooltip!
+          </TooltipContent>
+        </Tooltip>
+      </motion.div>
+      <motion.div variants={itemVariants}>
+        <Tooltip>
+          <TooltipTrigger>
+            <Button variant="ghost">Left tooltip</Button>
+          </TooltipTrigger>
+          <TooltipContent side="left">
+            Appears on the left
+          </TooltipContent>
+        </Tooltip>
+      </motion.div>
+      <motion.div variants={itemVariants}>
+        <Tooltip>
+          <TooltipTrigger>
+            <Button variant="secondary">Bottom</Button>
+          </TooltipTrigger>
+          <TooltipContent side="bottom">
+            Tooltip on bottom
+          </TooltipContent>
+        </Tooltip>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+// Upload Preview
+function UploadPreview() {
+  const [files, setFiles] = useState<string[]>([]);
+
+  const handleUpload = async (uploadedFiles: File[]): Promise<string[]> => {
+    // Simulate upload - in real usage this would upload to a server
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    return uploadedFiles.map(f => URL.createObjectURL(f));
+  };
+
+  return (
+    <motion.div
+      className="w-full max-w-md"
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ type: "spring", stiffness: 300, damping: 25 }}
+    >
+      <Upload
+        value={files}
+        onChange={setFiles}
+        onUpload={handleUpload}
+        maxFiles={4}
+        label="Upload product images"
+      />
+    </motion.div>
+  );
+}
+
+// Sidebar Preview
+function SidebarPreview() {
+  const [activeItem, setActiveItem] = useState('Dashboard');
+
+  const sidebarItems = [
+    { label: 'Dashboard', onClick: () => setActiveItem('Dashboard') },
+    { label: 'Projects', onClick: () => setActiveItem('Projects') },
+    { label: 'Analytics', onClick: () => setActiveItem('Analytics') },
+    { label: 'Settings', onClick: () => setActiveItem('Settings') },
+  ];
+
+  return (
+    <motion.div
+      className="w-full max-w-xs"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+    >
+      <div className="rounded-lg border border-white/10 bg-neutral-950/80 overflow-hidden">
+        <div className="p-3 border-b border-white/10">
+          <span className="text-sm font-medium text-white/70">Navigation</span>
+        </div>
+        <div className="p-2 space-y-1">
+          {sidebarItems.map((item) => (
+            <button
+              key={item.label}
+              onClick={item.onClick}
+              className={`w-full text-left px-3 py-2 text-sm rounded-md transition-colors ${
+                activeItem === item.label
+                  ? 'bg-blue-600 text-white'
+                  : 'text-white/60 hover:bg-white/5 hover:text-white'
+              }`}
+            >
+              {item.label}
+            </button>
+          ))}
+        </div>
+        <div className="p-3 border-t border-white/10">
+          <button className="w-full text-left px-3 py-2 text-sm text-white/50 hover:text-white/70 rounded-md hover:bg-white/5 transition-colors">
+            Logout
+          </button>
+        </div>
+      </div>
+      <p className="text-xs text-white/40 mt-2 text-center">Active: {activeItem}</p>
+    </motion.div>
+  );
+}
+
+// ContactForm Preview
+function ContactFormPreview() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setName('');
+      setEmail('');
+    }, 1500);
+  };
+
+  return (
+    <motion.div
+      className="w-full max-w-sm"
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+    >
+      <div className="p-4 rounded-lg bg-white/5 border border-white/10">
+        <h3 className="text-sm font-medium text-white mb-3">Quick Connect</h3>
+        <form onSubmit={handleSubmit} className="space-y-3">
+          <Input
+            placeholder="Your name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <Input
+            type="email"
+            placeholder="your@email.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <Button
+            type="submit"
+            variant="primary"
+            className="w-full"
+            loading={isSubmitting}
+          >
+            {isSubmitting ? 'Submitting...' : 'Submit'}
+          </Button>
+        </form>
+      </div>
+    </motion.div>
+  );
+}
+
+// MdEditor Preview
+function MdEditorPreview() {
+  const [markdown] = useState(`# Hello World
+
+This is a **markdown** preview.
+
+- Item 1
+- Item 2
+- Item 3
+
+\`\`\`js
+const greeting = "Hello!";
+console.log(greeting);
+\`\`\`
+`);
+
+  return (
+    <motion.div
+      className="w-full max-w-md"
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+    >
+      <div className="rounded-lg border border-white/10 bg-neutral-950/80 overflow-hidden">
+        <div className="flex items-center gap-2 px-3 py-2 border-b border-white/10 bg-white/5">
+          <div className="flex gap-1">
+            <span className="px-2 py-0.5 text-xs bg-blue-500/20 text-blue-400 rounded">B</span>
+            <span className="px-2 py-0.5 text-xs bg-white/10 text-white/60 rounded italic">I</span>
+            <span className="px-2 py-0.5 text-xs bg-white/10 text-white/60 rounded">H1</span>
+          </div>
+          <span className="text-xs text-white/40 ml-auto">Markdown Editor</span>
+        </div>
+        <div className="p-3 font-mono text-xs text-white/70 whitespace-pre-wrap max-h-40 overflow-y-auto">
+          {markdown}
+        </div>
+      </div>
+      <p className="text-xs text-white/40 mt-2 text-center">Simplified preview (full editor has rich toolbar)</p>
+    </motion.div>
+  );
+}
+
 // Component previews map
 const componentPreviews: Record<string, React.ComponentType> = {
+  'accordion': AccordionPreview,
+  'avatar': AvatarPreview,
   'badge': BadgePreview,
   'button': ButtonPreview,
   'card': CardPreview,
   'charts': ChartsPreview,
   'checkbox': CheckboxPreview,
   'close-button': CloseButtonPreview,
+  'contact-form': ContactFormPreview,
   'context-menu': ContextMenuPreview,
+  'date-select': DateSelectPreview,
+  'dialog': DialogPreview,
+  'dropdown-menu': DropdownMenuPreview,
+  'image': ImagePreview,
   'input': InputPreview,
+  'md-editor': MdEditorPreview,
   'modal': ModalPreview,
   'multi-select': MultiSelectPreview,
+  'popover': PopoverPreview,
+  'progress': ProgressPreview,
+  'reveal': RevealPreview,
   'search-input': SearchInputPreview,
   'select': SelectPreview,
+  'sidebar': SidebarPreview,
   'skeleton': SkeletonPreview,
+  'slider': SliderPreview,
   'switch': SwitchPreview,
   'table': TablePreview,
+  'tabs': TabsPreview,
+  'textarea': TextareaPreview,
+  'tooltip': TooltipPreview,
+  'upload': UploadPreview,
   'window': WindowPreview,
 };
 
 // Component code examples
 const componentCodeExamples: Record<string, { importCode: string; usageCode: string }> = {
+  'accordion': {
+    importCode: `import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@smc/darwin-ui';`,
+    usageCode: `<Accordion type="single" defaultValue="item-1">
+  <AccordionItem value="item-1">
+    <AccordionTrigger>Section Title</AccordionTrigger>
+    <AccordionContent>
+      Content goes here...
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>`,
+  },
+  'avatar': {
+    importCode: `import { Avatar, AvatarGroup } from '@smc/darwin-ui';`,
+    usageCode: `<Avatar src="/user.jpg" alt="User" size="md" />
+<Avatar fallback="John Doe" />
+
+<AvatarGroup max={3}>
+  <Avatar src="/user1.jpg" />
+  <Avatar src="/user2.jpg" />
+  <Avatar src="/user3.jpg" />
+</AvatarGroup>`,
+  },
   'badge': {
     importCode: `import { Badge } from '@smc/darwin-ui';`,
     usageCode: `<Badge variant="success">Active</Badge>
@@ -1216,6 +1936,54 @@ const componentCodeExamples: Record<string, { importCode: string; usageCode: str
   <div>Right-click me</div>
 </ContextMenu>`,
   },
+  'date-select': {
+    importCode: `import { DateSelect } from '@smc/darwin-ui';`,
+    usageCode: `<DateSelect
+  label="Event Date"
+  onChange={(config) => console.log(config)}
+/>`,
+  },
+  'dialog': {
+    importCode: `import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogClose } from '@smc/darwin-ui';`,
+    usageCode: `<Dialog open={open} onOpenChange={setOpen}>
+  <DialogTrigger asChild>
+    <Button>Open Dialog</Button>
+  </DialogTrigger>
+  <DialogContent>
+    <DialogClose />
+    <DialogHeader>
+      <DialogTitle>Dialog Title</DialogTitle>
+      <DialogDescription>Description here</DialogDescription>
+    </DialogHeader>
+    <DialogFooter>
+      <Button onClick={() => setOpen(false)}>Confirm</Button>
+    </DialogFooter>
+  </DialogContent>
+</Dialog>`,
+  },
+  'dropdown-menu': {
+    importCode: `import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator } from '@smc/darwin-ui';`,
+    usageCode: `<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button>Open Menu</Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuItem onSelect={() => {}}>Profile</DropdownMenuItem>
+    <DropdownMenuItem onSelect={() => {}}>Settings</DropdownMenuItem>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem destructive>Log out</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>`,
+  },
+  'image': {
+    importCode: `import { Image } from '@smc/darwin-ui';`,
+    usageCode: `<Image
+  src="/photo.jpg"
+  alt="Photo"
+  rounded="lg"
+  clickToEnlarge
+/>`,
+  },
   'input': {
     importCode: `import { Input } from '@smc/darwin-ui';`,
     usageCode: `<Input placeholder="Enter text..." />
@@ -1239,6 +2007,41 @@ const componentCodeExamples: Record<string, { importCode: string; usageCode: str
   ]}
   placeholder="Select..."
 />`,
+  },
+  'popover': {
+    importCode: `import { Popover, PopoverTrigger, PopoverContent, PopoverClose } from '@smc/darwin-ui';`,
+    usageCode: `<Popover>
+  <PopoverTrigger asChild>
+    <Button>Show Info</Button>
+  </PopoverTrigger>
+  <PopoverContent>
+    <h4>Popover Title</h4>
+    <p>Content goes here...</p>
+  </PopoverContent>
+</Popover>`,
+  },
+  'progress': {
+    importCode: `import { Progress, CircularProgress } from '@smc/darwin-ui';`,
+    usageCode: `<Progress value={65} showValue />
+<Progress variant="success" value={100} />
+<Progress indeterminate variant="gradient" />
+
+<CircularProgress value={75} showValue />
+<CircularProgress indeterminate />`,
+  },
+  'reveal': {
+    importCode: `import { Reveal } from '@smc/darwin-ui';`,
+    usageCode: `<Reveal type="slide" direction="up">
+  <div>Slides up on scroll</div>
+</Reveal>
+
+<Reveal type="fade" delay={0.2}>
+  <div>Fades in with delay</div>
+</Reveal>
+
+<Reveal type="scale">
+  <div>Scales up</div>
+</Reveal>`,
   },
   'search-input': {
     importCode: `import { SearchInput } from '@smc/darwin-ui';`,
@@ -1284,6 +2087,105 @@ const componentCodeExamples: Record<string, { importCode: string; usageCode: str
     </TableRow>
   </TableBody>
 </Table>`,
+  },
+  'contact-form': {
+    importCode: `import { CompactContactForm } from '@smc/darwin-ui';`,
+    usageCode: `<CompactContactForm
+  title="Quick Connect Form"
+  className="max-w-lg"
+/>`,
+  },
+  'md-editor': {
+    importCode: `import { MdEditor } from '@smc/darwin-ui';`,
+    usageCode: `const [content, setContent] = useState('');
+
+<MdEditor
+  value={content}
+  onChange={setContent}
+  placeholder="Write your content in Markdown..."
+/>`,
+  },
+  'sidebar': {
+    importCode: `import { Sidebar } from '@smc/darwin-ui';`,
+    usageCode: `const items = [
+  { label: 'Dashboard', onClick: () => navigate('/dashboard'), icon: HomeIcon },
+  { label: 'Projects', onClick: () => navigate('/projects'), icon: FolderIcon },
+  { label: 'Settings', onClick: () => navigate('/settings'), icon: SettingsIcon },
+];
+
+<Sidebar
+  items={items}
+  activeItem="Dashboard"
+  onLogout={() => logout()}
+/>`,
+  },
+  'slider': {
+    importCode: `import { Slider } from '@smc/darwin-ui';`,
+    usageCode: `const [value, setValue] = useState(50);
+
+<Slider
+  value={value}
+  onChange={setValue}
+  min={0}
+  max={100}
+  step={1}
+  showValue
+/>`,
+  },
+  'tabs': {
+    importCode: `import { Tabs, TabsList, TabsTrigger, TabsContent } from '@smc/darwin-ui';`,
+    usageCode: `<Tabs value={activeTab} onValueChange={setActiveTab}>
+  <TabsList>
+    <TabsTrigger value="overview">Overview</TabsTrigger>
+    <TabsTrigger value="settings">Settings</TabsTrigger>
+  </TabsList>
+  <TabsContent value="overview">
+    Overview content...
+  </TabsContent>
+  <TabsContent value="settings">
+    Settings content...
+  </TabsContent>
+</Tabs>`,
+  },
+  'textarea': {
+    importCode: `import { Textarea } from '@smc/darwin-ui';`,
+    usageCode: `<Textarea
+  placeholder="Write your message..."
+  value={text}
+  onChange={(e) => setText(e.target.value)}
+  rows={4}
+/>
+<Textarea error placeholder="Error state" />
+<Textarea success placeholder="Success state" />`,
+  },
+  'tooltip': {
+    importCode: `import { Tooltip, TooltipTrigger, TooltipContent } from '@smc/darwin-ui';`,
+    usageCode: `<Tooltip>
+  <TooltipTrigger>
+    <Button>Hover me</Button>
+  </TooltipTrigger>
+  <TooltipContent side="top">
+    Helpful tooltip text
+  </TooltipContent>
+</Tooltip>`,
+  },
+  'upload': {
+    importCode: `import { Upload } from '@smc/darwin-ui';`,
+    usageCode: `const [files, setFiles] = useState<string[]>([]);
+
+const handleUpload = async (files: File[]) => {
+  // Upload files to your server
+  const urls = await uploadToServer(files);
+  return urls;
+};
+
+<Upload
+  value={files}
+  onChange={setFiles}
+  onUpload={handleUpload}
+  maxFiles={6}
+  label="Drop your images here"
+/>`,
   },
   'window': {
     importCode: `import { Window } from '@smc/darwin-ui';`,

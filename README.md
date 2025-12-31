@@ -5,14 +5,14 @@ A beautiful macOS-inspired dark theme React component library with glass-morphis
 [![npm version](https://img.shields.io/npm/v/@smc/darwin-ui.svg)](https://www.npmjs.com/package/@smc/darwin-ui)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-[Documentation](https://darwin-ui.mandalsuraj.com) | [Components](https://darwin-ui.mandalsuraj.com/components/button/) | [GitHub](https://github.com/surajmandalcell/darwin-ui)
+[Documentation](https://darwin-ui.mandalsuraj.com) | [GitHub](https://github.com/surajmandalcell/darwin-ui)
 
 ## Features
 
-- 25+ beautifully crafted React components
+- 35+ beautifully crafted React components
 - Dark theme with glass-morphism styling
 - Built for React 19 with TypeScript
-- Tailwind CSS v4 powered
+- Tailwind CSS v4 + Framer Motion powered
 - shadcn-compatible registry
 - Accessible and keyboard-friendly
 - Lightweight and tree-shakeable
@@ -63,14 +63,18 @@ function App() {
 - **Card** - Composable card with header, content, footer
 - **Window** - macOS-style window container
 - **Sidebar** - Responsive navigation sidebar
+- **Tabs** - Tabbed content navigation
+- **Accordion** - Collapsible content sections
 
 ### Forms
 - **Button** - 11 variants (primary, secondary, destructive, ghost, etc.)
 - **Input** - Glass-effect styled input
+- **Textarea** - Multi-line text input
 - **Select** - Custom dropdown with portal rendering
 - **MultiSelect** - Multi-selection dropdown
 - **Checkbox** - Custom checkbox with label
 - **Switch** - Toggle switch component
+- **Slider** - Range slider input
 - **SearchInput** - Search input field
 - **DateSelect** - Date picker component
 - **Upload** - File upload component
@@ -78,10 +82,20 @@ function App() {
 ### Data Display
 - **Table** - Full table system with loading/empty states
 - **Badge** - Status badges with 13 variants
+- **Avatar** - User avatar with fallback
+- **Progress** - Linear and circular progress indicators
 - **Skeleton** - Loading placeholder
+- **Image** - Optimized image component
+
+### Overlays
+- **Modal** - Accessible modal dialog
+- **Dialog** - Composable dialog component
+- **Popover** - Floating popover content
+- **Tooltip** - Hover tooltips
+- **DropdownMenu** - Dropdown menu with items
+- **ContextMenu** - Right-click context menu
 
 ### Feedback
-- **Modal** - Accessible modal dialog
 - **Toast** - Toast notifications with auto-dismiss
 - **Alert** - Alert dialogs with type indicators
 
@@ -94,10 +108,10 @@ function App() {
 - **StackedBarChart** - Stacked bar chart
 
 ### Utility
-- **ContextMenu** - Right-click context menu
-- **Image** - Optimized image component
+- **CloseButton** - Consistent close button
 - **MdEditor** - Markdown editor
 - **Reveal** - Animation reveal component
+- **CompactContactForm** - Pre-built contact form
 
 ## Hooks
 
