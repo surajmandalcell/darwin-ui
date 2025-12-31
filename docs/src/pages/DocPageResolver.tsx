@@ -17,6 +17,8 @@ import {
 } from "../components/ComponentPreview";
 import DashboardShowcase from "../components/DashboardShowcase";
 import { CodeBlock } from "../components/CodeBlock";
+import { Breadcrumbs } from "../components/Breadcrumbs";
+import { DocNavigation } from "../components/DocNavigation";
 import * as examples from "../content/code-examples";
 
 export default function DocPageResolver() {
@@ -788,7 +790,9 @@ export default function DocPageResolver() {
 
     return (
         <div className="docs-content animate-in fade-in duration-500">
+            <Breadcrumbs />
             {content}
+            <DocNavigation />
         </div>
     );
 }
