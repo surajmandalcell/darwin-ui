@@ -1,0 +1,159 @@
+---
+title: Input
+description: A fundamental form element for text capture, enhanced with glass-morphism and validation states.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { InputPreview } from '../../../components/ComponentPreview';
+
+The Input component is a polished form field that supports various types, states, and icon adornments, all with a consistent glass-morphism aesthetic.
+
+## Live Preview
+
+<div class="not-content">
+  <InputPreview client:load />
+</div>
+
+## Installation
+
+<Tabs>
+  <TabItem label="CLI">
+    ```bash
+    npx shadcn add https://darwin-ui.mandalsuraj.com/registry/input.json
+    ```
+  </TabItem>
+  <TabItem label="Manual">
+    ```bash
+    npm install @smc/darwin-ui
+    ```
+  </TabItem>
+</Tabs>
+
+## Usage
+
+```tsx
+import { Input, Label } from '@smc/darwin-ui';
+
+export function LoginInput() {
+  return (
+    <div className="grid w-full max-w-sm items-center gap-1.5">
+      <Label htmlFor="email">Email</Label>
+      <Input type="email" id="email" placeholder="Email" />
+    </div>
+  );
+}
+```
+
+## Examples
+
+### With Icons
+
+Inputs can be adorned with icons on the left or right to provide context.
+
+```tsx
+import { Search } from 'lucide-react';
+
+<div className="relative">
+  <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-white/50" />
+  <Input className="pl-9" placeholder="Search..." />
+</div>
+```
+
+### Disabled State
+
+```tsx
+<Input disabled type="email" placeholder="Email" />
+```
+
+### File Input
+
+```tsx
+<Input id="picture" type="file" />
+```
+
+## API Reference
+
+<div class="overflow-x-auto">
+  <table>
+    <thead>
+      <tr>
+        <th>Prop</th>
+        <th>Type</th>
+        <th>Default</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>`type`</td>
+        <td>`string`</td>
+        <td>`"text"`</td>
+        <td>HTML input type (text, password, email, etc.)</td>
+      </tr>
+      <tr>
+        <td>`placeholder`</td>
+        <td>`string`</td>
+        <td>-</td>
+        <td>Placeholder text</td>
+      </tr>
+      <tr>
+        <td>`disabled`</td>
+        <td>`boolean`</td>
+        <td>`false`</td>
+        <td>Disables the input</td>
+      </tr>
+      <tr>
+        <td>`required`</td>
+        <td>`boolean`</td>
+        <td>`false`</td>
+        <td>Marks the field as required</td>
+      </tr>
+      <tr>
+        <td>`value`</td>
+        <td>`string | number`</td>
+        <td>-</td>
+        <td>Controlled value</td>
+      </tr>
+      <tr>
+        <td>`onChange`</td>
+        <td>`function`</td>
+        <td>-</td>
+        <td>Change handler</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+### Accessibility
+
+<div class="checklist">
+  <div class="check-item">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-500"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    <span>Native `<input>` element support</span>
+  </div>
+  <div class="check-item">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-500"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    <span>Focus visible states</span>
+  </div>
+  <div class="check-item">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-500"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    <span>Support for `aria-invalid` and `aria-describedby`</span>
+  </div>
+</div>
+
+<style>{`
+  .checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+  
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+  }
+`}</style>

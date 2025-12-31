@@ -1,0 +1,146 @@
+---
+title: Alert
+description: Displays a callout for user attention, used for important messages and feedback.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { AlertPreview } from '../../../components/ComponentPreview';
+
+The Alert component highlights critical information with distinct visual cues. It supports semantic variants for success, warning, error, and informational messages.
+
+## Live Preview
+
+<div class="not-content">
+  <AlertPreview client:load />
+</div>
+
+## Installation
+
+<Tabs>
+  <TabItem label="CLI">
+    ```bash
+    npx shadcn add https://darwin-ui.mandalsuraj.com/registry/alert.json
+    ```
+  </TabItem>
+  <TabItem label="Manual">
+    ```bash
+    npm install @smc/darwin-ui
+    ```
+  </TabItem>
+</Tabs>
+
+## Usage
+
+```tsx
+import { Alert, AlertTitle, AlertDescription } from '@smc/darwin-ui';
+import { Terminal } from 'lucide-react';
+
+export function Example() {
+  return (
+    <Alert>
+      <Terminal className="h-4 w-4" />
+      <AlertTitle>Heads up!</AlertTitle>
+      <AlertDescription>
+        You can add components to your app using the cli.
+      </AlertDescription>
+    </Alert>
+  );
+}
+```
+
+## Variants
+
+<div class="overflow-x-auto">
+  <table>
+    <thead>
+      <tr>
+        <th>Variant</th>
+        <th>Visual Style</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>`default`</td>
+        <td>Gray glass background</td>
+        <td>Standard announcements.</td>
+      </tr>
+      <tr>
+        <td>`destructive`</td>
+        <td>Red outline & text</td>
+        <td>Critical errors or warnings.</td>
+      </tr>
+      <tr>
+        <td>`success`</td>
+        <td>Green outline & text</td>
+        <td>Confirmation of success.</td>
+      </tr>
+      <tr>
+        <td>`warning`</td>
+        <td>Amber outline & text</td>
+        <td>Non-blocking warnings.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+## API Reference
+
+<div class="overflow-x-auto">
+  <table>
+    <thead>
+      <tr>
+        <th>Component</th>
+        <th>Prop</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>`Alert`</td>
+        <td>`variant`</td>
+        <td>`"default" | "destructive"`</td>
+        <td>Visual style variant.</td>
+      </tr>
+      <tr>
+        <td>`AlertTitle`</td>
+        <td>`className`</td>
+        <td>`string`</td>
+        <td>Title styling.</td>
+      </tr>
+      <tr>
+        <td>`AlertDescription`</td>
+        <td>`className`</td>
+        <td>`string`</td>
+        <td>Description styling.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+### Accessibility
+
+<div class="checklist">
+  <div class="check-item">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-500"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    <span>Semantic `role="alert"` for assertive announcements</span>
+  </div>
+</div>
+
+<style>{`
+  .checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+  
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+  }
+`}</style>

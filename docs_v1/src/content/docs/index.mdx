@@ -1,0 +1,442 @@
+---
+title: Darwin UI
+description: A pixel-perfect macOS-inspired dark theme React component library.
+template: splash
+hero:
+  tagline: Build stunning, production-ready dark themed interfaces with pixel-perfect glass-morphism. React 19 + Tailwind v4.
+  image:
+    file: ../../assets/hero.svg
+  actions:
+    - text: Get Started
+      link: /getting-started/introduction/
+      icon: right-arrow
+      variant: primary
+    - text: View Components
+      link: /components/button/
+      variant: minimal
+      icon: external
+---
+
+import DashboardShowcase from '../../components/DashboardShowcase';
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<div class="hero-bg"></div>
+
+<section class="demo-section">
+  <div class="demo-container">
+    <DashboardShowcase client:load />
+    <div class="demo-glow"></div>
+  </div>
+</section>
+
+<section class="features-section">
+  <h2 class="section-title">Design Engineering at its Core</h2>
+  <p class="section-desc">Meticulously crafted with a focus on aesthetics, accessibility, and developer experience.</p>
+  
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon icon-blue">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+      </div>
+      <h3>25+ Polished Components</h3>
+      <p>A comprehensive suite of buttons, cards, tables, modals, and charts. Each component is handcrafted for dark mode perfection.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon icon-purple">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+      </div>
+      <h3>Refined Glass Morphism</h3>
+      <p>Not just blur. We use multi-layered backdrops, subtle gradients, and noise textures to create a truly premium glass aesthetic.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon icon-emerald">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 3 4 8 5-5 5 15H2L8 3z"/></svg>
+      </div>
+      <h3>shadcn Compatible</h3>
+      <p>Built on top of the same philosophy. Copy-paste components into your project or install them via CLI with zero lock-in.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon icon-amber">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      </div>
+      <h3>React 19 Ready</h3>
+      <p>Future-proof your application. Built with React 19, TypeScript 5, and Tailwind CSS v4 for ultimate performance.</p>
+    </div>
+  </div>
+</section>
+
+<section class="quick-start-section">
+  <div class="code-window">
+    <div class="window-header">
+      <div class="window-controls">
+         <span class="control red"></span>
+         <span class="control yellow"></span>
+         <span class="control green"></span>
+      </div>
+      <span class="window-title">bash</span>
+    </div>
+    <div class="window-content">
+      <div class="code-line">
+        <span class="prompt">$</span> npm install @smc/darwin-ui
+      </div>
+       <div class="code-line comment">
+        # Or add individual components
+      </div>
+      <div class="code-line">
+        <span class="prompt">$</span> npx shadcn add https://darwin-ui.mandalsuraj.com/registry/button.json
+      </div>
+    </div>
+  </div>
+   <div class="content-side">
+      <h2>Ready in Seconds</h2>
+      <p>Get started with a single command. Darwin UI is designed to be dropped into any existing React project with minimal configuration.</p>
+      <a href="/getting-started/introduction/" class="cta-link">Read the Guide <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+   </div>
+</section>
+
+<section class="components-section">
+  <h2 class="section-title">Component Categories</h2>
+  <div class="components-overview">
+    <a href="/components/card/" class="component-category">
+      <h4>Layout</h4>
+      <span>Card, Window, Sidebar, Container</span>
+    </a>
+    <a href="/components/button/" class="component-category">
+      <h4>Forms</h4>
+      <span>Button, Input, Select, Checkbox, Switch</span>
+    </a>
+    <a href="/components/table/" class="component-category">
+      <h4>Data Display</h4>
+      <span>Table, Badge, Skeleton, Tag</span>
+    </a>
+    <a href="/components/modal/" class="component-category">
+      <h4>Feedback</h4>
+      <span>Modal, Toast, Alert, Spinner</span>
+    </a>
+    <a href="/components/charts/" class="component-category">
+      <h4>Charts</h4>
+      <span>Area, Bar, Line, Pie, Donut</span>
+    </a>
+    <a href="/components/image/" class="component-category">
+      <h4>Utility</h4>
+      <span>ContextMenu, Image, Upload</span>
+    </a>
+  </div>
+</section>
+
+<style>{`
+  /* Custom Global Styles for Homepage */
+  
+  .hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      radial-gradient(circle at 50% 10%, rgba(59, 130, 246, 0.15) 0%, transparent 40%),
+      radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 30%);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    top: 20%;
+    right: 10%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(16,185,129,0.15) 0%, transparent 60%);
+    filter: blur(60px);
+    z-index: -1;
+    animation: float 10s ease-in-out infinite reverse;
+  }
+
+  /* Demo Section */
+  .demo-section {
+    margin: 4rem 0 6rem;
+    position: relative;
+    padding: 0 1rem;
+  }
+  
+  .demo-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+  }
+  
+  .demo-glow {
+    position: absolute;
+    inset: -20px;
+    background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.15), transparent 70%);
+    z-index: -1;
+    filter: blur(40px);
+    opacity: 0.6;
+  }
+
+  /* Features Section */
+  .features-section {
+    margin: 6rem 0;
+    text-align: center;
+  }
+  
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    letter-spacing: -0.03em;
+    background: linear-gradient(to right, #fff 20%, rgba(255,255,255,0.7));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px rgba(255,255,255,0.1);
+  }
+  
+  .section-desc {
+    font-size: 1.125rem;
+    color: var(--color-text-muted);
+    max-width: 600px;
+    margin: 0 auto 4rem;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    text-align: left;
+  }
+
+  .feature-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 1rem;
+    padding: 2rem;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .feature-card:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+  }
+  
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.06), transparent 40%);
+    opacity: 0;
+    transition: opacity 0.5s;
+    pointer-events: none;
+  }
+
+  .feature-card:hover::before {
+    opacity: 1;
+  }
+  
+  .feature-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+  }
+  
+  .icon-blue { background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.2); color: #60a5fa; }
+  .icon-purple { background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.2); color: #a78bfa; }
+  .icon-emerald { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2); color: #34d399; }
+  .icon-amber { background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.2); color: #fbbf24; }
+
+  .feature-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0 0 0.75rem 0;
+    letter-spacing: -0.02em;
+  }
+
+  .feature-card p {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Quick Start Section */
+  .quick-start-section {
+    margin: 6rem 0;
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    flex-wrap: wrap;
+  }
+  
+  .code-window {
+    flex: 1;
+    min-width: 340px;
+    background: #050505;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+  }
+  
+  .window-header {
+    background: rgba(255,255,255,0.03);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .window-controls {
+    position: absolute;
+    left: 1rem;
+    display: flex;
+    gap: 6px;
+  }
+  
+  .control { width: 10px; height: 10px; rounded-full; display: block; border-radius: 50%; }
+  .red { background: #ff5f57; }
+  .yellow { background: #febc2e; }
+  .green { background: #28c840; }
+  
+  .window-title {
+    font-family: inherit;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.3);
+  }
+  
+  .window-content {
+    padding: 1.5rem;
+    font-family: monospace;
+    font-size: 0.9rem;
+    line-height: 1.8;
+  }
+  
+  .code-line { display: block; color: #fff; }
+  .code-line.comment { color: rgba(255,255,255,0.4); }
+  .prompt { color: #3b82f6; margin-right: 0.5rem; user-select: none; }
+  
+  .content-side {
+    flex: 1;
+    min-width: 300px;
+  }
+  
+  .content-side h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    letter-spacing: -0.03em;
+  }
+  
+  .content-side p {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+  
+  .cta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #3b82f6;
+    font-weight: 600;
+    text-decoration: none;
+    transition: gap 0.2s ease;
+  }
+  
+  .cta-link:hover {
+    gap: 0.75rem;
+  }
+
+  /* Components Grid */
+  .components-section {
+    margin: 6rem 0;
+    text-align: center;
+  }
+
+  .components-overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.25rem;
+    margin-top: 3rem;
+  }
+
+  .component-category {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: left;
+    text-decoration: none !important;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-col: column;
+  }
+  
+  .component-category:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .component-category h4 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #60a5fa;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .component-category span {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.5;
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .section-title { font-size: 2rem; }
+    .hero-bg { opacity: 0.5; }
+    .quick-start-section { gap: 3rem; }
+  }
+
+  /* Animation Keyframes */
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.1); }
+  }
+
+  .hero-bg::before {
+    content: '';
+    position: absolute;
+    top: -10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(59,130,246,0.3) 0%, rgba(99,102,241,0.1) 40%, transparent 70%);
+    filter: blur(80px);
+    z-index: -1;
+    animation: pulse-glow 8s ease-in-out infinite;
+  }
+`}</style>

@@ -1,0 +1,34 @@
+---
+title: useMediaQuery
+description: A hook to subscribe to a media query.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Seamlessly switch between logic based on CSS media queries.
+
+## Installation
+
+```tsx
+import { useMediaQuery } from '@smc/darwin-ui';
+```
+
+## Usage
+
+```tsx
+export function ResponsiveComponent() {
+  const isDesktop = useMediaQuery('(min-width: 768px)');
+
+  return (
+    <div>
+      {isDesktop ? 'Desktop View' : 'Mobile View'}
+    </div>
+  );
+}
+```
+
+## API Reference
+
+```tsx
+function useMediaQuery(query: string): boolean
+```

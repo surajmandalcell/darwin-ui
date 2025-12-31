@@ -1,0 +1,92 @@
+---
+title: Toast
+description: A succinct message that is displayed temporarily.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { ToastPreview } from '../../../components/ComponentPreview';
+
+Toasts provide brief feedback about an operation through a message that appears temporarily.
+
+## Live Preview
+
+<div class="not-content">
+  <ToastPreview client:load />
+</div>
+
+## Installation
+
+<Tabs>
+  <TabItem label="CLI">
+    ```bash
+    npx shadcn add https://darwin-ui.mandalsuraj.com/registry/toast.json
+    ```
+  </TabItem>
+  <TabItem label="Manual">
+    ```bash
+    npm install @smc/darwin-ui
+    ```
+  </TabItem>
+</Tabs>
+
+## Usage
+
+```tsx
+import { useToast } from '@smc/darwin-ui';
+import { Button } from '@/components/ui/button';
+
+export function ToastDemo() {
+  const { toast } = useToast();
+
+  return (
+    <Button
+      onClick={() => {
+        toast({
+          title: "Scheduled: Catch up",
+          description: "Friday, February 10, 2023 at 5:57 PM",
+        });
+      }}
+    >
+      Show Toast
+    </Button>
+  );
+}
+```
+
+## API Reference
+
+The `toast` function accepts the following options:
+
+<div class="overflow-x-auto">
+  <table>
+    <thead>
+      <tr>
+        <th>Prop</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>`title`</td>
+        <td>`string`</td>
+        <td>The heading of the toast.</td>
+      </tr>
+      <tr>
+        <td>`description`</td>
+        <td>`string`</td>
+        <td>The main content message.</td>
+      </tr>
+      <tr>
+        <td>`duration`</td>
+        <td>`number`</td>
+        <td>Time in ms before dismissal (default: 5000).</td>
+      </tr>
+      <tr>
+        <td>`variant`</td>
+        <td>`"default" | "destructive"`</td>
+        <td>Visual style for errors.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

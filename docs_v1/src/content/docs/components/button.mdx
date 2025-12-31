@@ -1,0 +1,216 @@
+---
+title: Button
+description: Interactive button component with glass-morphism styling, glass-morphism effects, and accessible interactions.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { ButtonPreview, ButtonSizePreview, ButtonWithIconPreview } from '../../../components/ComponentPreview';
+
+The Button component acts as a primary interactive element, featuring a refined glass-morphism aesthetic, smooth microinteractions, and comprehensive accessibility support.
+
+## Live Preview
+
+<div class="not-content">
+  <ButtonPreview client:load />
+</div>
+
+## Installation
+
+<Tabs>
+  <TabItem label="CLI">
+    ```bash
+    npx shadcn add https://darwin-ui.mandalsuraj.com/registry/button.json
+    ```
+  </TabItem>
+  <TabItem label="Manual">
+    ```bash
+    npm install @smc/darwin-ui
+    ```
+  </TabItem>
+</Tabs>
+
+## Usage
+
+```tsx title="src/components/MyComponent.tsx"
+import { Button } from '@smc/darwin-ui';
+
+export function Example() {
+  return (
+    <div className="flex gap-4">
+      <Button variant="primary">Save Changes</Button>
+      <Button variant="secondary">Cancel</Button>
+    </div>
+  );
+}
+```
+
+## Variants
+
+The button component includes 8 distinct variants designed for clear visual hierarchy.
+
+<div class="overflow-x-auto">
+  <table>
+    <thead>
+      <tr>
+        <th>Variant</th>
+        <th>Description</th>
+        <th>Visual Style</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>`default`</td>
+        <td>Standard action, neutral priority.</td>
+        <td>Glass background, subtle border.</td>
+      </tr>
+      <tr>
+        <td>`primary`</td>
+        <td>Main call-to-action on the page.</td>
+        <td>Solid blue with ambient glow.</td>
+      </tr>
+      <tr>
+        <td>`secondary`</td>
+        <td>Alternative actions.</td>
+        <td>Lighter glass effect.</td>
+      </tr>
+      <tr>
+        <td>`destructive`</td>
+        <td>Dangerous or irreversible actions.</td>
+        <td>Solid red with warning glow.</td>
+      </tr>
+      <tr>
+        <td>`outline`</td>
+        <td>Low emphasis actions.</td>
+        <td>Transparent with visible border.</td>
+      </tr>
+      <tr>
+        <td>`ghost`</td>
+        <td>Minimal buttons, often used in toolbars.</td>
+        <td>Transparent, background on hover.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+## Sizes
+
+Available in 4 sizes to fit any layout context.
+
+<div class="not-content">
+  <ButtonSizePreview client:load />
+</div>
+
+```tsx
+<Button size="sm">Small</Button>
+<Button size="default">Default</Button>
+<Button size="lg">Large</Button>
+<Button size="icon">
+  <Plus />
+</Button>
+```
+
+## Advanced Examples
+
+### With Icons
+
+Buttons support arbitrary React nodes, making them perfect for icon-labels.
+
+<div class="not-content">
+  <ButtonWithIconPreview client:load />
+</div>
+
+```tsx
+<Button variant="primary">
+  <Plus className="w-4 h-4 mr-2" />
+  Create New
+</Button>
+```
+
+### Loading State
+
+Set the `loading` prop to `true` to show a spinner and disable interaction.
+
+```tsx
+<Button loading>Saving...</Button>
+```
+
+## API Reference
+
+<div class="overflow-x-auto">
+  <table>
+    <thead>
+      <tr>
+        <th>Prop</th>
+        <th>Type</th>
+        <th>Default</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>`variant`</td>
+        <td>`Variant`</td>
+        <td>`"default"`</td>
+        <td>Visual style variant of the button.</td>
+      </tr>
+      <tr>
+        <td>`size`</td>
+        <td>`Size`</td>
+        <td>`"default"`</td>
+        <td>Size preset of the button.</td>
+      </tr>
+      <tr>
+        <td>`loading`</td>
+        <td>`boolean`</td>
+        <td>`false`</td>
+        <td>Shows a loading spinner.</td>
+      </tr>
+      <tr>
+        <td>`disabled`</td>
+        <td>`boolean`</td>
+        <td>`false`</td>
+        <td>Disables interaction and dims opacity.</td>
+      </tr>
+      <tr>
+        <td>`asChild`</td>
+        <td>`boolean`</td>
+        <td>`false`</td>
+        <td>Merges props onto the immediate child.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+### Accessibility
+
+<div class="checklist">
+  <div class="check-item">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-500"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    <span>Semantic `<button>` element</span>
+  </div>
+  <div class="check-item">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-500"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    <span>Focus visible states for keyboard navigation</span>
+  </div>
+  <div class="check-item">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-500"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    <span>`aria-disabled` when disabled or loading</span>
+  </div>
+</div>
+
+<style>{`
+  .checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+  
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+  }
+`}</style>

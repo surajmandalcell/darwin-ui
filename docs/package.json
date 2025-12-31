@@ -1,34 +1,39 @@
 {
-  "name": "darwin-ui-docs",
-  "version": "1.0.0",
+  "name": "docs",
+  "version": "0.1.0",
   "private": true,
-  "type": "module",
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
   },
   "dependencies": {
-    "@astrojs/react": "^4.0.0",
-    "@astrojs/starlight": "^0.31.0",
-    "astro": "^5.0.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "recharts": "^3.5.1",
-    "motion": "^12.23.25",
-    "lucide-react": "^0.556.0",
-    "tailwind-merge": "^3.4.0",
-    "clsx": "^2.1.1",
+    "@base-ui/react": "^1.0.0",
+    "@radix-ui/react-slot": "^1.2.4",
     "class-variance-authority": "^0.7.1",
-    "react-focus-lock": "^2.13.2",
-    "@radix-ui/react-dialog": "^1.1.15",
-    "@radix-ui/react-popover": "^1.1.15",
-    "@base-ui-components/react": "^1.0.0-beta.4"
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.23.26",
+    "gray-matter": "^4.0.3",
+    "lucide-react": "^0.562.0",
+    "next": "16.1.1",
+    "next-mdx-remote": "^5.0.0",
+    "next-themes": "^0.4.6",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "recharts": "^3.6.0",
+    "shiki": "^3.20.0",
+    "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {
-    "@types/react": "^19.0.6",
-    "@types/react-dom": "^19.0.2",
-    "tailwindcss": "^4.1.17",
-    "@tailwindcss/vite": "^4.1.17"
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "babel-plugin-react-compiler": "1.0.0",
+    "eslint": "^9",
+    "eslint-config-next": "16.1.1",
+    "tailwindcss": "^4",
+    "typescript": "^5"
   }
 }

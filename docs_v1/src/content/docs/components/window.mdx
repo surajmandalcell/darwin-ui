@@ -1,0 +1,61 @@
+---
+title: Window
+description: A container that simulates a native OS window with traffic lights.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+The Window component is perfect for code snippets, terminal simulations, or showcasing app interfaces.
+
+## Installation
+
+```tsx
+import { Window, WindowHeader, WindowContent } from '@smc/darwin-ui';
+```
+
+## Usage
+
+```tsx
+export function Example() {
+  return (
+    <Window className="max-w-[500px]">
+      <WindowHeader title="terminal" />
+      <WindowContent>
+        <div className="font-mono text-sm text-white/80">
+          <p>$ npm install</p>
+          <p className="text-emerald-400">Success!</p>
+        </div>
+      </WindowContent>
+    </Window>
+  );
+}
+```
+
+## API Reference
+
+<div class="overflow-x-auto">
+  <table>
+    <thead>
+      <tr>
+        <th>Component</th>
+        <th>Prop</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>`Window`</td>
+        <td>`className`</td>
+        <td>`string`</td>
+        <td>Container styling.</td>
+      </tr>
+      <tr>
+        <td>`WindowHeader`</td>
+        <td>`title`</td>
+        <td>`string`</td>
+        <td>Optional title text for the header.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
