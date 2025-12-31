@@ -91,7 +91,7 @@ export function Select({
 						}}
 						className="z-50 min-w-[8rem] overflow-hidden rounded-md border border-white/10 bg-neutral-900/95 backdrop-blur-md shadow-md"
 					>
-						<ul role="listbox" className="p-1">
+						<ul role="listbox" className="py-1 px-1 flex flex-col gap-0.5">
 							{options.map((opt) => (
 								<li
 									key={opt.value}
@@ -99,8 +99,10 @@ export function Select({
 									aria-selected={opt.value === selected.value}
 									onClick={() => handleSelect(opt.value)}
 									className={cn(
-										"relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-2 text-sm outline-none transition-colors hover:bg-white/10 data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
-										opt.value === selected.value ? "bg-white/10 text-white" : "text-white/80"
+										"relative flex w-full cursor-pointer select-none items-center rounded-md px-2 py-1.5 text-sm outline-none transition-colors data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+										opt.value === selected.value
+											? "bg-white/10 text-white"
+											: "text-white/80 hover:bg-white/8"
 									)}
 								>
 									{opt.label}

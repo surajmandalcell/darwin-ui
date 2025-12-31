@@ -15,45 +15,103 @@ export function Desktop() {
 
   return (
     <div className="fixed inset-0 h-screen w-screen overflow-hidden select-none">
-      {/* Animated Gradient Blob Background */}
+      {/* Artistic Gradient Mesh Background - Inspired by Vercel/Linear */}
       <div className="absolute inset-0 overflow-hidden">
-        {/* Base dark background */}
-        <div className="absolute inset-0 bg-[#0a0a0a]" />
+        {/* Deep space base */}
+        <div className="absolute inset-0 bg-[#050508]" />
 
-        {/* Animated gradient blobs */}
-        <motion.div
-          className="absolute w-[600px] h-[600px] rounded-full bg-purple-600/30 blur-[120px]"
-          animate={{
-            x: [0, 100, 50, 0],
-            y: [0, 50, 100, 0],
-          }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          style={{ top: '10%', left: '20%' }}
-        />
-        <motion.div
-          className="absolute w-[500px] h-[500px] rounded-full bg-blue-600/30 blur-[100px]"
-          animate={{
-            x: [0, -80, -40, 0],
-            y: [0, 80, 40, 0],
-          }}
-          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          style={{ top: '40%', right: '10%' }}
-        />
-        <motion.div
-          className="absolute w-[400px] h-[400px] rounded-full bg-indigo-500/20 blur-[80px]"
-          animate={{
-            x: [0, 60, -30, 0],
-            y: [0, -40, 60, 0],
-          }}
-          transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-          style={{ bottom: '20%', left: '30%' }}
-        />
-
-        {/* Noise texture overlay */}
+        {/* Mesh gradient layer */}
         <div
-          className="absolute inset-0 opacity-[0.03]"
+          className="absolute inset-0 opacity-80"
           style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+            background: `
+              radial-gradient(ellipse 80% 50% at 20% 40%, rgba(120, 80, 200, 0.15), transparent 50%),
+              radial-gradient(ellipse 60% 80% at 80% 20%, rgba(60, 100, 180, 0.12), transparent 50%),
+              radial-gradient(ellipse 50% 60% at 60% 80%, rgba(100, 60, 160, 0.1), transparent 50%)
+            `
+          }}
+        />
+
+        {/* Primary aurora blob - slow drift */}
+        <motion.div
+          className="absolute w-[800px] h-[600px] rounded-full"
+          style={{
+            background: 'radial-gradient(ellipse at center, rgba(139, 92, 246, 0.15) 0%, rgba(139, 92, 246, 0.05) 40%, transparent 70%)',
+            filter: 'blur(60px)',
+            top: '-10%',
+            left: '10%',
+          }}
+          animate={{
+            x: [0, 80, 40, 0],
+            y: [0, 40, 80, 0],
+            scale: [1, 1.1, 0.95, 1],
+          }}
+          transition={{ duration: 30, repeat: Infinity, ease: "easeInOut" }}
+        />
+
+        {/* Secondary glow - blue accent */}
+        <motion.div
+          className="absolute w-[600px] h-[500px] rounded-full"
+          style={{
+            background: 'radial-gradient(ellipse at center, rgba(59, 130, 246, 0.12) 0%, rgba(59, 130, 246, 0.04) 50%, transparent 70%)',
+            filter: 'blur(80px)',
+            top: '30%',
+            right: '-5%',
+          }}
+          animate={{
+            x: [0, -60, -30, 0],
+            y: [0, 60, -20, 0],
+            scale: [1, 0.9, 1.05, 1],
+          }}
+          transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+        />
+
+        {/* Tertiary warm accent - subtle pink */}
+        <motion.div
+          className="absolute w-[500px] h-[400px] rounded-full"
+          style={{
+            background: 'radial-gradient(ellipse at center, rgba(236, 72, 153, 0.08) 0%, transparent 60%)',
+            filter: 'blur(100px)',
+            bottom: '10%',
+            left: '40%',
+          }}
+          animate={{
+            x: [0, 40, -20, 0],
+            y: [0, -30, 40, 0],
+            rotate: [0, 10, -5, 0],
+          }}
+          transition={{ duration: 35, repeat: Infinity, ease: "easeInOut" }}
+        />
+
+        {/* Subtle cyan accent - bottom right */}
+        <motion.div
+          className="absolute w-[400px] h-[300px] rounded-full"
+          style={{
+            background: 'radial-gradient(ellipse at center, rgba(34, 211, 238, 0.06) 0%, transparent 60%)',
+            filter: 'blur(70px)',
+            bottom: '-5%',
+            right: '20%',
+          }}
+          animate={{
+            x: [0, -30, 20, 0],
+            y: [0, 20, -10, 0],
+          }}
+          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+        />
+
+        {/* Vignette overlay */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: 'radial-gradient(ellipse 80% 60% at 50% 50%, transparent 20%, rgba(0, 0, 0, 0.4) 100%)'
+          }}
+        />
+
+        {/* Subtle grain texture */}
+        <div
+          className="absolute inset-0 opacity-[0.015] mix-blend-overlay pointer-events-none"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
           }}
         />
       </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { WindowState } from '../../../contexts/desktop-context';
 import {
@@ -452,7 +453,7 @@ function InstallationPage() {
 }
 
 // Quick Start page content with enhanced animations
-function QuickStartPage() {
+function QuickStartPage({ onNavigate }: { onNavigate?: (section: string, page: string) => void }) {
   const exampleCode = `import { Button, Window, Input } from '@smc/darwin-ui';
 
 function App() {
@@ -469,9 +470,9 @@ function App() {
 }`;
 
   const nextSteps = [
-    { title: 'Explore Components', desc: 'Browse all available components' },
-    { title: 'Theming Guide', desc: 'Customize colors and styles' },
-    { title: 'Examples', desc: 'See Darwin UI in action' },
+    { title: 'Explore Components', desc: 'Browse all available components', section: 'components', page: 'button' },
+    { title: 'Theming Guide', desc: 'Customize colors and styles', section: 'theming', page: 'colors' },
+    { title: 'Installation', desc: 'Set up Darwin UI in your project', section: 'getting-started', page: 'installation' },
   ];
 
   return (
@@ -537,6 +538,7 @@ function App() {
                 backgroundColor: "rgba(255, 255, 255, 0.05)"
               }}
               whileTap={{ scale: 0.98 }}
+              onClick={() => onNavigate?.(item.section, item.page)}
             >
               <motion.div
                 whileHover={{ x: 4 }}
@@ -850,14 +852,15 @@ function ChartsPreview() {
 
   return (
     <motion.div
-      className="w-full space-y-6"
+      className="w-full min-w-0 space-y-6"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}
+      style={{ width: '100%' }}
     >
-      <div>
+      <div className="w-full min-w-0">
         <h4 className="text-sm font-medium text-white/70 mb-3">Bar Chart</h4>
-        <div className="w-full h-[200px]">
+        <div style={{ width: '100%', height: 200 }}>
           <BarChart
             data={chartData}
             xKey="name"
@@ -866,9 +869,9 @@ function ChartsPreview() {
           />
         </div>
       </div>
-      <div>
+      <div className="w-full min-w-0">
         <h4 className="text-sm font-medium text-white/70 mb-3">Line Chart</h4>
-        <div className="w-full h-[200px]">
+        <div style={{ width: '100%', height: 200 }}>
           <LineChart
             data={chartData}
             xKey="name"
@@ -939,6 +942,9 @@ function ContextMenuPreview() {
 function ModalPreview() {
   const [isOpen, setIsOpen] = useState(false);
 
+  // Check if we're in the browser (for SSR compatibility with portal)
+  const isBrowser = typeof window !== 'undefined';
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -947,17 +953,21 @@ function ModalPreview() {
       <Button variant="primary" onClick={() => setIsOpen(true)}>
         Open Modal
       </Button>
-      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} title="Example Modal">
-        <div className="space-y-4">
-          <p className="text-white/70">
-            This is a modal dialog. You can put any content here.
-          </p>
-          <div className="flex gap-2 justify-end">
-            <Button variant="ghost" onClick={() => setIsOpen(false)}>Cancel</Button>
-            <Button variant="primary" onClick={() => setIsOpen(false)}>Confirm</Button>
+      {/* Use portal to render modal at document body level to escape stacking context */}
+      {isBrowser && createPortal(
+        <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} title="Example Modal">
+          <div className="space-y-4">
+            <p className="text-white/70">
+              This is a modal dialog. You can put any content here.
+            </p>
+            <div className="flex gap-2 justify-end">
+              <Button variant="ghost" onClick={() => setIsOpen(false)}>Cancel</Button>
+              <Button variant="primary" onClick={() => setIsOpen(false)}>Confirm</Button>
+            </div>
           </div>
-        </div>
-      </Modal>
+        </Modal>,
+        document.body
+      )}
     </motion.div>
   );
 }
@@ -1536,7 +1546,7 @@ function ThemingPage({ name }: { name: string }) {
 }
 
 // Page content router
-function PageContent({ section, page }: { section: string; page: string }) {
+function PageContent({ section, page, onNavigate }: { section: string; page: string; onNavigate?: (section: string, page: string) => void }) {
   if (section === 'getting-started') {
     switch (page) {
       case 'introduction':
@@ -1544,7 +1554,7 @@ function PageContent({ section, page }: { section: string; page: string }) {
       case 'installation':
         return <InstallationPage />;
       case 'quick-start':
-        return <QuickStartPage />;
+        return <QuickStartPage onNavigate={onNavigate} />;
     }
   }
 
@@ -1614,7 +1624,7 @@ function SidebarNavItem({
 export function DeveloperApp({ windowState: _windowState }: DeveloperAppProps) {
   const [activeSection, setActiveSection] = useState('getting-started');
   const [activePage, setActivePage] = useState('introduction');
-  const [expandedSections, setExpandedSections] = useState<string[]>(['getting-started', 'components']);
+  const [expandedSections, setExpandedSections] = useState<string[]>(['getting-started', 'components', 'theming']);
   const contentRef = useRef<HTMLDivElement>(null);
 
   const toggleSection = (sectionId: string) => {
@@ -1796,6 +1806,7 @@ export function DeveloperApp({ windowState: _windowState }: DeveloperAppProps) {
               key={`${activeSection}-${activePage}`}
               section={activeSection}
               page={activePage}
+              onNavigate={navigateTo}
             />
           </AnimatePresence>
         </div>

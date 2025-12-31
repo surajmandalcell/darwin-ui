@@ -3,14 +3,22 @@
 import { useDesktop, apps } from '../../contexts/desktop-context';
 import { DockItem } from './DockItem';
 import { motion } from 'framer-motion';
-import { Trash2 } from 'lucide-react';
+import { Trash2, Github, Info } from 'lucide-react';
 
 // Order of apps in dock
 const dockAppOrder = ['developer', 'terminal', 'notes', 'settings'];
 
 export function Dock() {
-  const { state, openApp, getRunningApps, focusWindow, restoreWindow } = useDesktop();
+  const { state, openApp, getRunningApps, focusWindow, restoreWindow, setAboutModal } = useDesktop();
   const runningApps = getRunningApps();
+
+  const handleGitHubClick = () => {
+    window.open('https://github.com/surajmandalcell/darwin-ui', '_blank');
+  };
+
+  const handleAboutClick = () => {
+    setAboutModal(true);
+  };
 
   const handleAppClick = (appId: string) => {
     // Check if app has windows
@@ -64,8 +72,52 @@ export function Dock() {
         );
       })}
 
-      {/* Trash */}
+      {/* Separator */}
       <div className="w-px h-10 bg-white/20 mx-1 self-center" />
+
+      {/* GitHub Icon */}
+      <motion.button
+        className="relative flex flex-col items-center group"
+        whileHover={{ scale: 1.15 }}
+        whileTap={{ scale: 0.95 }}
+        transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+        onClick={handleGitHubClick}
+      >
+        <div className="w-12 h-12 rounded-xl bg-neutral-800 flex items-center justify-center shadow-lg">
+          <Github className="w-6 h-6 text-white/80" />
+        </div>
+        {/* Tooltip */}
+        <motion.div
+          className="absolute -top-8 px-2 py-1 bg-black/80 rounded text-xs text-white whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none"
+          initial={false}
+          transition={{ duration: 0.15 }}
+        >
+          GitHub
+        </motion.div>
+      </motion.button>
+
+      {/* About Icon */}
+      <motion.button
+        className="relative flex flex-col items-center group"
+        whileHover={{ scale: 1.15 }}
+        whileTap={{ scale: 0.95 }}
+        transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+        onClick={handleAboutClick}
+      >
+        <div className="w-12 h-12 rounded-xl bg-blue-600 flex items-center justify-center shadow-lg">
+          <Info className="w-6 h-6 text-white/80" />
+        </div>
+        {/* Tooltip */}
+        <motion.div
+          className="absolute -top-8 px-2 py-1 bg-black/80 rounded text-xs text-white whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none"
+          initial={false}
+          transition={{ duration: 0.15 }}
+        >
+          About Darwin UI
+        </motion.div>
+      </motion.button>
+
+      {/* Trash */}
       <motion.button
         className="relative flex flex-col items-center group"
         whileHover={{ scale: 1.15 }}

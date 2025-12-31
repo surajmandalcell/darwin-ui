@@ -37,6 +37,7 @@ export interface DesktopState {
   activeWindowId: string | null;
   highestZIndex: number;
   isBooting: boolean;
+  showAboutModal: boolean;
   settings: {
     accentColor: 'blue' | 'purple' | 'pink' | 'red' | 'orange' | 'yellow' | 'green';
     reduceMotion: boolean;
@@ -166,7 +167,8 @@ type DesktopAction =
   | { type: 'UPDATE_WINDOW_SIZE'; windowId: string; size: { width: number; height: number } }
   | { type: 'UPDATE_WINDOW_ROUTE'; windowId: string; route: string }
   | { type: 'SET_BOOTING'; isBooting: boolean }
-  | { type: 'UPDATE_SETTINGS'; settings: Partial<DesktopState['settings']> };
+  | { type: 'UPDATE_SETTINGS'; settings: Partial<DesktopState['settings']> }
+  | { type: 'SET_ABOUT_MODAL'; show: boolean };
 
 // Initial state
 const initialState: DesktopState = {
@@ -174,6 +176,7 @@ const initialState: DesktopState = {
   activeWindowId: null,
   highestZIndex: 100,
   isBooting: true,
+  showAboutModal: false,
   settings: {
     accentColor: 'blue',
     reduceMotion: false,
@@ -396,6 +399,10 @@ function desktopReducer(state: DesktopState, action: DesktopAction): DesktopStat
       };
     }
 
+    case 'SET_ABOUT_MODAL': {
+      return { ...state, showAboutModal: action.show };
+    }
+
     default:
       return state;
   }
@@ -415,6 +422,7 @@ interface DesktopContextValue {
   updateWindowRoute: (windowId: string, route: string) => void;
   setBooting: (isBooting: boolean) => void;
   updateSettings: (settings: Partial<DesktopState['settings']>) => void;
+  setAboutModal: (show: boolean) => void;
   getRunningApps: () => string[];
   getWindowsByApp: (appId: string) => WindowState[];
   getActiveWindow: () => WindowState | undefined;
@@ -470,6 +478,10 @@ export function DesktopProvider({ children }: { children: ReactNode }) {
     dispatch({ type: 'UPDATE_SETTINGS', settings });
   }, []);
 
+  const setAboutModal = useCallback((show: boolean) => {
+    dispatch({ type: 'SET_ABOUT_MODAL', show });
+  }, []);
+
   const getRunningApps = useCallback(() => {
     return [...new Set(state.windows.filter(w => w.isOpen).map(w => w.appId))];
   }, [state.windows]);
@@ -511,6 +523,7 @@ export function DesktopProvider({ children }: { children: ReactNode }) {
     updateWindowRoute,
     setBooting,
     updateSettings,
+    setAboutModal,
     getRunningApps,
     getWindowsByApp,
     getActiveWindow,

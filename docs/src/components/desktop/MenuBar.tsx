@@ -275,10 +275,10 @@ export function MenuBar() {
     maximizeWindow,
     restoreWindow,
     focusWindow,
+    setAboutModal,
     state
   } = useDesktop();
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
-  const [showAboutModal, setShowAboutModal] = useState(false);
 
   const activeWindow = getActiveWindow();
   const activeApp = activeWindow ? apps[activeWindow.appId] : null;
@@ -415,8 +415,8 @@ export function MenuBar() {
 
   // Handler for About modal
   const handleOpenAbout = useCallback(() => {
-    setShowAboutModal(true);
-  }, []);
+    setAboutModal(true);
+  }, [setAboutModal]);
 
   // Darwin menu items for stagger animation
   const darwinMenuItems = [
@@ -622,7 +622,7 @@ export function MenuBar() {
       </AnimatePresence>
 
       {/* About Modal */}
-      <AboutModal isOpen={showAboutModal} onClose={() => setShowAboutModal(false)} />
+      <AboutModal isOpen={state.showAboutModal} onClose={() => setAboutModal(false)} />
     </div>
   );
 }

@@ -2,6 +2,8 @@
 
 import React from "react";
 import { createPortal } from "react-dom";
+import { cn } from "../lib/utils";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface Option {
 	label: string;
@@ -13,16 +15,78 @@ interface MultiSelectProps {
 	onChange: (next: string[]) => void;
 	options: Option[];
 	placeholder?: string;
+	disabled?: boolean;
+	className?: string;
+}
+
+function CheckIcon({ className }: { className?: string }) {
+	return (
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			width="12"
+			height="12"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			strokeWidth="2.5"
+			strokeLinecap="round"
+			strokeLinejoin="round"
+			className={className}
+		>
+			<path d="M20 6 9 17l-5-5" />
+		</svg>
+	);
+}
+
+function ChevronIcon({ className }: { className?: string }) {
+	return (
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			width="24"
+			height="24"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			strokeWidth="2"
+			strokeLinecap="round"
+			strokeLinejoin="round"
+			className={className}
+		>
+			<path d="m6 9 6 6 6-6" />
+		</svg>
+	);
+}
+
+function XIcon({ className }: { className?: string }) {
+	return (
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			width="12"
+			height="12"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			strokeWidth="2"
+			strokeLinecap="round"
+			strokeLinejoin="round"
+			className={className}
+		>
+			<path d="M18 6 6 18" />
+			<path d="m6 6 12 12" />
+		</svg>
+	);
 }
 
 export function MultiSelect({
 	value,
 	onChange,
 	options,
-	placeholder,
+	placeholder = "Select...",
+	disabled = false,
+	className,
 }: MultiSelectProps) {
 	const [open, setOpen] = React.useState(false);
-	const ref = React.useRef<HTMLDivElement | null>(null);
+	const containerRef = React.useRef<HTMLDivElement | null>(null);
 	const buttonRef = React.useRef<HTMLButtonElement | null>(null);
 	const [dropdownPosition, setDropdownPosition] = React.useState({ top: 0, left: 0, width: 0 });
 
@@ -38,79 +102,137 @@ export function MultiSelect({
 	}, [open]);
 
 	React.useEffect(() => {
-		const onDoc = (e: MouseEvent) => {
-			if (!ref.current) return;
-			if (!ref.current.contains(e.target as Node)) setOpen(false);
-		};
-		document.addEventListener("mousedown", onDoc);
-		return () => document.removeEventListener("mousedown", onDoc);
-	}, []);
+		function onDocClick(e: MouseEvent) {
+			if (!containerRef.current) return;
+			if (!containerRef.current.contains(e.target as Node)) setOpen(false);
+		}
+		if (open) document.addEventListener("mousedown", onDocClick);
+		return () => document.removeEventListener("mousedown", onDocClick);
+	}, [open]);
 
 	function toggle(val: string) {
 		const has = value.includes(val);
 		onChange(has ? value.filter((v) => v !== val) : [...value, val]);
 	}
 
-	const dropdown = open && typeof window !== "undefined" ? (
+	function removeTag(e: React.MouseEvent, val: string) {
+		e.stopPropagation();
+		onChange(value.filter((v) => v !== val));
+	}
+
+	const displayValue = React.useMemo(() => {
+		if (value.length === 0) return null;
+		if (value.length <= 2) {
+			return value.map((v) => options.find((o) => o.value === v)?.label || v).join(", ");
+		}
+		return `${value.length} selected`;
+	}, [value, options]);
+
+	const dropdown = typeof window !== "undefined" ? (
 		createPortal(
-			<div
-				style={{
-					position: 'fixed',
-					top: `${dropdownPosition.top}px`,
-					left: `${dropdownPosition.left}px`,
-					width: `${dropdownPosition.width}px`,
-				}}
-				className="z-9999 rounded-md border border-white/10 bg-neutral-950 p-2 shadow-md"
-			>
-				{options.map((opt) => (
-					<label
-						key={opt.value}
-						className="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-white/10 cursor-pointer text-sm text-white/90"
+			<AnimatePresence>
+				{open && (
+					<motion.div
+						initial={{ opacity: 0, scale: 0.95, y: -10 }}
+						animate={{ opacity: 1, scale: 1, y: 0 }}
+						exit={{ opacity: 0, scale: 0.95, y: -10 }}
+						transition={{ duration: 0.15, ease: "easeOut" }}
+						style={{
+							position: 'fixed',
+							top: `${dropdownPosition.top}px`,
+							left: `${dropdownPosition.left}px`,
+							minWidth: `${dropdownPosition.width}px`,
+						}}
+						className="z-50 min-w-[8rem] overflow-hidden rounded-md border border-white/10 bg-neutral-900/95 backdrop-blur-md shadow-md"
 					>
-						<input
-							type="checkbox"
-							className="accent-blue-500"
-							checked={value.includes(opt.value)}
-							onChange={() => toggle(opt.value)}
-						/>
-						<span>{opt.label}</span>
-					</label>
-				))}
-			</div>,
+						<ul role="listbox" className="p-1">
+							{options.map((opt) => {
+								const isSelected = value.includes(opt.value);
+								return (
+									<li
+										key={opt.value}
+										role="option"
+										aria-selected={isSelected}
+										onClick={() => toggle(opt.value)}
+										className={cn(
+											"relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none transition-colors hover:bg-white/10",
+											isSelected ? "text-white" : "text-white/80"
+										)}
+									>
+										<span className="absolute left-2 flex h-4 w-4 items-center justify-center">
+											{isSelected && (
+												<motion.span
+													initial={{ scale: 0, opacity: 0 }}
+													animate={{ scale: 1, opacity: 1 }}
+													exit={{ scale: 0, opacity: 0 }}
+													transition={{ duration: 0.1 }}
+												>
+													<CheckIcon className="h-3 w-3 text-blue-400" />
+												</motion.span>
+											)}
+										</span>
+										{opt.label}
+									</li>
+								);
+							})}
+						</ul>
+					</motion.div>
+				)}
+			</AnimatePresence>,
 			document.body
 		)
 	) : null;
 
 	return (
-		<div className="relative" ref={ref}>
+		<div
+			ref={containerRef}
+			className={cn("relative inline-block w-full", className)}
+		>
 			<button
 				ref={buttonRef}
 				type="button"
+				disabled={disabled}
+				aria-haspopup="listbox"
+				aria-expanded={open}
 				onClick={() => setOpen((v) => !v)}
-				className="w-full min-h-8 px-3 py-1.5 bg-white/5 border border-white/10 rounded-sm text-white/90 text-sm text-left flex items-center justify-between hover:bg-white/10"
+				className={cn(
+					"flex h-9 w-full items-center justify-between rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm text-white/90 shadow-sm ring-offset-background placeholder:text-white/50 focus:outline-none focus:ring-1 focus:ring-blue-500/50 disabled:cursor-not-allowed disabled:opacity-50 hover:bg-white/10 transition-colors backdrop-blur-sm",
+				)}
 			>
-				<span className="truncate">
-					{value.length ? value.join(", ") : placeholder || "Select..."}
+				<span className={cn("truncate", !displayValue && "text-white/50")}>
+					{displayValue || placeholder}
 				</span>
-				<span className="text-white/50 text-xs">{open ? "▲" : "▼"}</span>
+				<span className="ml-2 h-4 w-4 opacity-50">
+					<motion.span
+						animate={{ rotate: open ? 180 : 0 }}
+						transition={{ duration: 0.2, ease: "easeOut" }}
+						className="block"
+					>
+						<ChevronIcon className="h-4 w-4" />
+					</motion.span>
+				</span>
 			</button>
 			{dropdown}
 			{value.length > 0 && (
-				<div className="flex flex-wrap gap-2 mt-2">
+				<div className="flex flex-wrap gap-1.5 mt-2">
 					{value.map((v) => (
-						<span
+						<motion.span
 							key={v}
-							className="inline-flex items-center gap-1 px-2 py-0.5 bg-white/10 border border-white/10 rounded text-white/80 text-xs"
+							initial={{ scale: 0.8, opacity: 0 }}
+							animate={{ scale: 1, opacity: 1 }}
+							exit={{ scale: 0.8, opacity: 0 }}
+							transition={{ duration: 0.15 }}
+							className="inline-flex items-center gap-1.5 px-2 py-1 bg-white/5 border border-white/10 rounded-md text-white/80 text-xs backdrop-blur-sm"
 						>
 							{options.find((o) => o.value === v)?.label || v}
 							<button
 								type="button"
-								className="text-white/60 hover:text-red-400"
-								onClick={() => toggle(v)}
+								className="text-white/40 hover:text-white/80 transition-colors rounded-sm hover:bg-white/10 p-0.5"
+								onClick={(e) => removeTag(e, v)}
 							>
-								×
+								<XIcon className="h-3 w-3" />
 							</button>
-						</span>
+						</motion.span>
 					))}
 				</div>
 			)}
