@@ -1,0 +1,57 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Gradient background: Blue to Purple -->
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#6366f1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+    </linearGradient>
+
+    <!-- Shine overlay gradient -->
+    <linearGradient id="shine" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.4" />
+      <stop offset="40%" style="stop-color:#ffffff;stop-opacity:0.1" />
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0" />
+    </linearGradient>
+
+    <!-- Shadow for depth -->
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background rounded rect (iOS superellipse approximation) -->
+  <rect
+    x="10"
+    y="10"
+    width="492"
+    height="492"
+    rx="102"
+    ry="102"
+    fill="url(#bg-gradient)"
+    filter="url(#shadow)"
+  />
+
+  <!-- Shine overlay (top half only) -->
+  <rect
+    x="10"
+    y="10"
+    width="492"
+    height="246"
+    rx="102"
+    ry="102"
+    fill="url(#shine)"
+  />
+
+  <!-- Letter "D" -->
+  <text
+    x="256"
+    y="350"
+    font-family="SF Pro Display, -apple-system, BlinkMacSystemFont, system-ui, sans-serif"
+    font-size="320"
+    font-weight="700"
+    text-anchor="middle"
+    fill="#ffffff"
+    style="user-select: none;"
+  >D</text>
+</svg>
