@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { Github, ArrowRight, ArrowDown } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { ShowcaseCard } from '../components/ShowcaseCard';
-import { CodeBlock } from '../components/CodeBlock';
 import {
   Button,
   Badge,
@@ -24,12 +23,6 @@ import {
   TableRow,
   TableCell,
   TableHeaderCell,
-  Modal,
-  ToastProvider,
-  useToast,
-  useAlert,
-  AlertProvider,
-  OverlayProvider,
   Skeleton,
   Image,
   DateSelect,
@@ -56,22 +49,16 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Hero Section */}
-      <OverlayProvider>
-        <AlertProvider>
-          <ToastProvider>
-            <HeroSection scrollToShowcase={scrollToShowcase} />
+      <HeroSection scrollToShowcase={scrollToShowcase} />
 
-            {/* Component Showcase Grid */}
-            <ComponentShowcaseSection />
+      {/* Dashboard Product UI - Moved to top for impact */}
+      <DashboardSection />
 
-            {/* Dashboard Demo Section */}
-            <DashboardSection />
+      {/* Component Showcase Grid */}
+      <ComponentShowcaseSection />
 
-            {/* CTA Section */}
-            <CTASection />
-          </ToastProvider>
-        </AlertProvider>
-      </OverlayProvider>
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }
@@ -80,34 +67,78 @@ export default function LandingPage() {
 function HeroSection({ scrollToShowcase }: { scrollToShowcase: () => void }) {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Animated Grid Background */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
-
-      {/* Gradient Orbs */}
-      <motion.div
-        className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-[120px]"
-        animate={{
-          y: [0, 50, 0],
-          x: [0, 30, 0],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
-      <motion.div
-        className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-[120px]"
-        animate={{
-          y: [0, -50, 0],
-          x: [0, -30, 0],
-        }}
-        transition={{
-          duration: 10,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
+      {/* Modern Mesh Gradient Background - ChatGPT Style */}
+      <div className="absolute inset-0 bg-[#0a0a0a]">
+        {/* Multiple radial gradients creating mesh effect */}
+        <motion.div
+          className="absolute top-0 left-[10%] w-[500px] h-[500px] rounded-full opacity-40"
+          style={{
+            background: 'radial-gradient(circle, #8656e5 0%, transparent 70%)',
+            filter: 'blur(80px)',
+          }}
+          animate={{
+            y: [0, 30, 0],
+            x: [0, 20, 0],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.div
+          className="absolute top-[20%] right-[15%] w-[600px] h-[600px] rounded-full opacity-30"
+          style={{
+            background: 'radial-gradient(circle, #255ec2 0%, transparent 70%)',
+            filter: 'blur(90px)',
+          }}
+          animate={{
+            y: [0, -40, 0],
+            x: [0, -25, 0],
+            scale: [1, 1.15, 1],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.div
+          className="absolute bottom-[10%] left-[30%] w-[550px] h-[550px] rounded-full opacity-35"
+          style={{
+            background: 'radial-gradient(circle, #e61eea 0%, transparent 70%)',
+            filter: 'blur(85px)',
+          }}
+          animate={{
+            y: [0, 35, 0],
+            x: [0, -30, 0],
+            scale: [1, 1.12, 1],
+          }}
+          transition={{
+            duration: 14,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.div
+          className="absolute bottom-[25%] right-[25%] w-[450px] h-[450px] rounded-full opacity-25"
+          style={{
+            background: 'radial-gradient(circle, #12a4ff 0%, transparent 70%)',
+            filter: 'blur(75px)',
+          }}
+          animate={{
+            y: [0, -25, 0],
+            x: [0, 35, 0],
+            scale: [1, 1.08, 1],
+          }}
+          transition={{
+            duration: 13,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+      </div>
 
       {/* Content */}
       <div className="relative z-10 max-w-5xl mx-auto px-4 text-center">
@@ -163,15 +194,16 @@ function HeroSection({ scrollToShowcase }: { scrollToShowcase: () => void }) {
           transition={{ delay: 0.5, duration: 0.6 }}
           className="flex flex-col sm:flex-row gap-4 justify-center items-center"
         >
-          <button
+          <Button
             onClick={scrollToShowcase}
-            className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black rounded-full font-semibold hover:bg-white/90 transition-all hover:scale-105"
+            size="lg"
+            className="rounded-full px-8 py-6 bg-white text-black hover:bg-white/90 hover:scale-105"
           >
             Explore Components
-            <ArrowDown className="w-5 h-5" />
-          </button>
+            <ArrowDown className="ml-2 w-5 h-5" />
+          </Button>
           <Link to="/docs/getting-started/introduction">
-            <Button size="lg" variant="secondary" className="rounded-full px-8">
+            <Button size="lg" variant="secondary" className="rounded-full px-8 py-6">
               View Docs
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
@@ -181,7 +213,7 @@ function HeroSection({ scrollToShowcase }: { scrollToShowcase: () => void }) {
             target="_blank"
             rel="noreferrer"
           >
-            <Button size="lg" variant="ghost" className="rounded-full px-8">
+            <Button size="lg" variant="ghost" className="rounded-full px-8 py-6">
               <Github className="mr-2 w-5 h-5" />
               GitHub
             </Button>
@@ -194,9 +226,6 @@ function HeroSection({ scrollToShowcase }: { scrollToShowcase: () => void }) {
 
 // Component Showcase Grid Section
 function ComponentShowcaseSection() {
-  const { showToast } = useToast();
-  const { showAlert } = useAlert();
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
   const [multiSelectValues, setMultiSelectValues] = useState<string[]>([]);
   const [uploadedFiles, setUploadedFiles] = useState<string[]>([]);
@@ -323,18 +352,15 @@ function ComponentShowcaseSection() {
       slug: 'modal',
       description: 'Dialog with backdrop and animations',
       preview: (
-        <>
-          <Button onClick={() => setIsModalOpen(true)}>
-            Open Modal
-          </Button>
-          <Modal
-            isOpen={isModalOpen}
-            onClose={() => setIsModalOpen(false)}
-            title="Example Modal"
-          >
-            <p>This is a modal dialog with smooth animations.</p>
-          </Modal>
-        </>
+        <div className="flex flex-col gap-3 items-center">
+          <div className="w-64 rounded-lg border border-white/20 bg-gradient-to-br from-white/10 to-white/5 p-4 backdrop-blur-sm shadow-lg">
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="font-semibold text-white text-sm">Example Modal</h3>
+              <button className="text-white/60 hover:text-white text-xs">✕</button>
+            </div>
+            <p className="text-white/70 text-xs">Dialog with smooth animations and backdrop blur</p>
+          </div>
+        </div>
       ),
     },
     {
@@ -342,16 +368,15 @@ function ComponentShowcaseSection() {
       slug: 'toast',
       description: 'Notification system with auto-dismiss',
       preview: (
-        <Button
-          onClick={() =>
-            showToast('This is a toast notification', {
-              title: 'Success!',
-              type: 'success',
-            })
-          }
-        >
-          Show Toast
-        </Button>
+        <div className="w-72 rounded-lg border border-green-500/30 bg-gradient-to-br from-green-500/20 to-green-500/5 p-3 backdrop-blur-sm shadow-lg">
+          <div className="flex items-start gap-2">
+            <div className="flex-shrink-0 w-5 h-5 rounded-full bg-green-500 flex items-center justify-center text-white text-xs">✓</div>
+            <div className="flex-1">
+              <p className="font-medium text-white text-sm">Success!</p>
+              <p className="text-white/70 text-xs mt-0.5">Toast notification with auto-dismiss</p>
+            </div>
+          </div>
+        </div>
       ),
     },
     {
@@ -359,17 +384,15 @@ function ComponentShowcaseSection() {
       slug: 'alert',
       description: 'Alert dialogs with variants',
       preview: (
-        <Button
-          onClick={() =>
-            showAlert({
-              title: 'Alert',
-              message: 'This is an alert message',
-              type: 'info',
-            })
-          }
-        >
-          Show Alert
-        </Button>
+        <div className="w-64 rounded-lg border border-blue-500/30 bg-gradient-to-br from-blue-500/20 to-blue-500/5 p-4 backdrop-blur-sm shadow-lg">
+          <div className="flex items-start gap-3">
+            <div className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center text-white text-xs">i</div>
+            <div className="flex-1">
+              <h4 className="font-semibold text-white text-sm mb-1">Alert</h4>
+              <p className="text-white/70 text-xs">Informational alert message</p>
+            </div>
+          </div>
+        </div>
       ),
     },
     {
@@ -550,16 +573,40 @@ function ComponentShowcaseSection() {
 // Dashboard Demo Section
 function DashboardSection() {
   return (
-    <section className="py-24 px-4 bg-white/[0.02]">
-      <div className="max-w-7xl mx-auto">
-        {/* Section Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-5xl font-bold mb-4 bg-gradient-to-b from-white to-white/60 bg-clip-text text-transparent">
-            Real-World Example
-          </h2>
-          <p className="text-xl text-white/60">
-            See how components work together in a complete dashboard
-          </p>
+    <section className="py-24 px-4 relative overflow-hidden">
+      {/* Subtle gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] via-white/[0.01] to-transparent" />
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        {/* Section Header with cooler styling */}
+        <div className="text-center mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="inline-flex items-center rounded-full border border-purple-500/20 bg-purple-500/5 px-4 py-1.5 text-sm backdrop-blur-sm mb-4"
+          >
+            <span className="text-purple-400">✨ Product Showcase</span>
+          </motion.div>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-b from-white via-white to-white/60 bg-clip-text text-transparent"
+          >
+            Beautiful Dashboard UI
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-xl text-white/60 max-w-2xl mx-auto"
+          >
+            Experience the power of Darwin UI with a fully interactive dashboard
+          </motion.p>
         </div>
 
         {/* Dashboard Container */}
@@ -582,56 +629,37 @@ function DashboardSection() {
   );
 }
 
-// CTA Section
-function CTASection() {
-  const installCommand = 'npm install @smc/darwin-ui';
-
+// Compact Footer
+function Footer() {
   return (
-    <section className="py-32 px-4">
-      <div className="max-w-3xl mx-auto text-center">
-        <h2 className="text-6xl font-bold mb-6 bg-gradient-to-b from-white to-white/60 bg-clip-text text-transparent">
-          Ready to build?
-        </h2>
-        <p className="text-xl text-white/60 mb-12">
-          Get started with Darwin UI in seconds
-        </p>
+    <footer className="border-t border-white/5 bg-white/[0.02] backdrop-blur-sm">
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+          {/* Left side - Made by */}
+          <div className="text-white/60 text-sm">
+            Made by{' '}
+            <span className="text-white font-medium">Suraj Mandal</span>
+          </div>
 
-        {/* Install Command */}
-        <CodeBlock
-          code={installCommand}
-          language="bash"
-          showLineNumbers={false}
-        />
-
-        {/* Links */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12">
-          <Link to="/docs/getting-started/installation">
-            <Button size="lg" className="rounded-full px-8">
-              Installation Guide
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Button>
-          </Link>
-          <a
-            href="https://github.com/surajmandalcell/darwin-ui"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <Button size="lg" variant="secondary" className="rounded-full px-8">
-              <Github className="mr-2 w-5 h-5" />
-              View on GitHub
-            </Button>
-          </a>
-          <a
-            href="https://www.npmjs.com/package/@smc/darwin-ui"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <Button size="lg" variant="ghost" className="rounded-full px-8">
-              NPM Package
-            </Button>
-          </a>
+          {/* Right side - Links */}
+          <div className="flex items-center gap-6">
+            <a
+              href="mailto:surajmandalcell@gmail.com"
+              className="text-white/60 hover:text-white text-sm transition-colors"
+            >
+              surajmandalcell@gmail.com
+            </a>
+            <a
+              href="https://github.com/surajmandalcell"
+              target="_blank"
+              rel="noreferrer"
+              className="text-white/60 hover:text-white transition-colors"
+            >
+              <Github className="w-5 h-5" />
+            </a>
+          </div>
         </div>
       </div>
-    </section>
+    </footer>
   );
 }

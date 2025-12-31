@@ -2,6 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
+import { ThemeToggle } from './ThemeToggle';
 
 // Hardcoded sidebar tree for now since we don't have fs access in client-side Vite (easily)
 // In a real app we might fetch this JSON or codegen it.
@@ -47,10 +48,13 @@ export function SidebarContent({ className, onClose }: { className?: string, onC
 
     return (
         <div className={cn("h-full py-6 pr-6 pl-4 overflow-y-auto", className)}>
-            <Link to="/" className="mb-8 px-2 flex items-center gap-2 font-bold text-xl text-white no-underline">
-                <div className="h-6 w-6 rounded-full bg-gradient-to-tr from-indigo-500 to-purple-500" />
-                Darwin UI
-            </Link>
+            <div className="mb-8 px-2 flex items-center justify-between">
+                <Link to="/" className="flex items-center gap-2 font-bold text-xl text-white no-underline">
+                    <div className="h-6 w-6 rounded-full bg-gradient-to-tr from-indigo-500 to-purple-500" />
+                    Darwin UI
+                </Link>
+                <ThemeToggle />
+            </div>
             <div className="space-y-6">
                 {docsTree.map((section, i) => (
                     <div key={i}>
