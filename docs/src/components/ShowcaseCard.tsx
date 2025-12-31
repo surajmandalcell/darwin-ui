@@ -11,8 +11,6 @@ interface ShowcaseCardProps {
   slug: string;
   preview: ReactNode;
   badge?: string;
-  cols?: number;
-  rows?: number;
 }
 
 export function ShowcaseCard({
@@ -21,8 +19,6 @@ export function ShowcaseCard({
   slug,
   preview,
   badge,
-  cols = 1,
-  rows = 1,
 }: ShowcaseCardProps) {
 
   return (
