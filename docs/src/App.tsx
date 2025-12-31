@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { ThemeProvider } from "./contexts/theme-context";
+import { OverlayProvider } from "@smc/darwin-ui";
 import LandingPage from "./pages/LandingPage";
 import DocsLayout from "./layouts/DocsLayout";
 import DocPageResolver from "./pages/DocPageResolver";
@@ -18,16 +19,18 @@ function ScrollToTop() {
 function App() {
   return (
     <ThemeProvider>
-      <Router>
-        <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
+      <OverlayProvider>
+        <Router>
+          <ScrollToTop />
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
 
-          <Route path="/docs" element={<DocsLayout />}>
-            <Route path="*" element={<DocPageResolver />} />
-          </Route>
-        </Routes>
-      </Router>
+            <Route path="/docs" element={<DocsLayout />}>
+              <Route path="*" element={<DocPageResolver />} />
+            </Route>
+          </Routes>
+        </Router>
+      </OverlayProvider>
     </ThemeProvider>
   );
 }
