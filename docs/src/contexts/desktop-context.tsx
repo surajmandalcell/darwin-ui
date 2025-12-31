@@ -45,13 +45,38 @@ export interface DesktopState {
   };
 }
 
+// Helper to calculate responsive default size based on screen dimensions
+// All windows open at 80% of viewport width and height
+const getResponsiveSize = (
+  _idealWidth: number,
+  _idealHeight: number,
+  minWidth: number,
+  minHeight: number
+): { width: number; height: number } => {
+  if (typeof window === 'undefined') {
+    // SSR fallback: use reasonable defaults
+    return { width: 1200, height: 700 };
+  }
+
+  // Calculate 80% of viewport dimensions
+  // Height accounts for menu bar (28px) and dock (80px)
+  const width = Math.floor(window.innerWidth * 0.8);
+  const height = Math.floor((window.innerHeight - 28 - 80) * 0.8);
+
+  // Respect minimum sizes
+  return {
+    width: Math.max(minWidth, width),
+    height: Math.max(minHeight, height),
+  };
+};
+
 // App definitions
 export const apps: Record<string, AppDefinition> = {
   developer: {
     id: 'developer',
     name: 'Developer',
     icon: <BookOpen className="w-full h-full" />,
-    defaultSize: { width: 1100, height: 750 },
+    defaultSize: { width: 1100, height: 800 },
     minSize: { width: 600, height: 400 },
     defaultRoute: '/docs/getting-started/introduction',
   },
@@ -59,35 +84,35 @@ export const apps: Record<string, AppDefinition> = {
     id: 'components',
     name: 'Components',
     icon: <LayoutGrid className="w-full h-full" />,
-    defaultSize: { width: 900, height: 600 },
+    defaultSize: { width: 950, height: 700 },
     minSize: { width: 500, height: 350 },
   },
   terminal: {
     id: 'terminal',
     name: 'Terminal',
     icon: <Terminal className="w-full h-full" />,
-    defaultSize: { width: 700, height: 450 },
+    defaultSize: { width: 750, height: 500 },
     minSize: { width: 400, height: 250 },
   },
   notes: {
     id: 'notes',
     name: 'Notes',
     icon: <StickyNote className="w-full h-full" />,
-    defaultSize: { width: 600, height: 500 },
+    defaultSize: { width: 650, height: 550 },
     minSize: { width: 350, height: 300 },
   },
   preview: {
     id: 'preview',
     name: 'Preview',
     icon: <Image className="w-full h-full" />,
-    defaultSize: { width: 800, height: 600 },
+    defaultSize: { width: 850, height: 650 },
     minSize: { width: 500, height: 400 },
   },
   settings: {
     id: 'settings',
     name: 'Settings',
     icon: <Settings className="w-full h-full" />,
-    defaultSize: { width: 750, height: 550 },
+    defaultSize: { width: 800, height: 600 },
     minSize: { width: 550, height: 400 },
   },
 };
@@ -123,20 +148,35 @@ const initialState: DesktopState = {
 const generateWindowId = () => `window-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
 const calculateCascadePosition = (existingWindows: WindowState[], appDef: AppDefinition): { x: number; y: number } => {
-  const baseX = 100;
-  const baseY = 50;
+  const menuBarHeight = 28;
+  const dockHeight = 80;
   const offset = 30;
 
   // Find windows of same app
   const sameAppWindows = existingWindows.filter(w => w.appId === appDef.id && w.isOpen && !w.isMinimized);
 
   if (sameAppWindows.length === 0) {
-    // Center the window
     const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 1920;
     const screenHeight = typeof window !== 'undefined' ? window.innerHeight : 1080;
+
+    // Get the responsive size that will actually be used (80% of viewport)
+    const responsiveSize = getResponsiveSize(
+      appDef.defaultSize.width,
+      appDef.defaultSize.height,
+      appDef.minSize.width,
+      appDef.minSize.height
+    );
+
+    // Center the window horizontally (remaining 20% split equally on both sides = 10% on each side)
+    const centeredX = Math.floor((screenWidth - responsiveSize.width) / 2);
+
+    // Center vertically in available space (below menu bar 28px, above dock 80px)
+    const availableHeight = screenHeight - menuBarHeight - dockHeight;
+    const centeredY = Math.floor(menuBarHeight + (availableHeight - responsiveSize.height) / 2);
+
     return {
-      x: Math.max(baseX, (screenWidth - appDef.defaultSize.width) / 2),
-      y: Math.max(baseY, (screenHeight - appDef.defaultSize.height - 80) / 2), // 80 for dock
+      x: Math.max(0, centeredX),
+      y: Math.max(menuBarHeight, centeredY),
     };
   }
 
@@ -192,7 +232,14 @@ function desktopReducer(state: DesktopState, action: DesktopAction): DesktopStat
         };
       }
 
-      // Create new window
+      // Create new window with responsive sizing
+      const responsiveSize = getResponsiveSize(
+        appDef.defaultSize.width,
+        appDef.defaultSize.height,
+        appDef.minSize.width,
+        appDef.minSize.height
+      );
+
       const newWindow: WindowState = {
         id: generateWindowId(),
         appId: action.appId,
@@ -201,7 +248,7 @@ function desktopReducer(state: DesktopState, action: DesktopAction): DesktopStat
         isMinimized: false,
         isMaximized: false,
         position: calculateCascadePosition(state.windows, appDef),
-        size: { ...appDef.defaultSize },
+        size: responsiveSize,
         zIndex: state.highestZIndex + 1,
         route: action.route || appDef.defaultRoute,
       };

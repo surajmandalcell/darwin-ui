@@ -150,7 +150,7 @@ function IntroductionPage() {
             transition={{ delay: 0.25 + i * 0.05 }}
             whileHover={{ scale: 1.02 }}
           >
-            <div className="w-10 h-10 rounded-lg bg-blue-500 flex items-center justify-center text-white mb-3">
+            <div className="w-10 h-10 rounded-lg bg-white/[0.06] border border-white/[0.08] flex items-center justify-center text-blue-400 mb-3">
               {feature.icon}
             </div>
             <h3 className="font-semibold text-white mb-1">{feature.title}</h3>
@@ -532,24 +532,24 @@ function SliderPreview() {
   );
 }
 
-// Component previews map
-const componentPreviews: Record<string, React.ReactNode> = {
-  button: <ButtonPreview />,
-  input: <InputPreview />,
-  checkbox: <CheckboxPreview />,
-  toggle: <TogglePreview />,
-  select: <SelectPreview />,
-  slider: <SliderPreview />,
-  window: <WindowPreview />,
-  tooltip: <TooltipPreview />,
-  alert: <AlertPreview />,
-  toast: <ToastPreview />,
+// Component previews map - using functions to ensure fresh instances on each render
+const componentPreviews: Record<string, React.ComponentType> = {
+  button: ButtonPreview,
+  input: InputPreview,
+  checkbox: CheckboxPreview,
+  toggle: TogglePreview,
+  select: SelectPreview,
+  slider: SliderPreview,
+  window: WindowPreview,
+  tooltip: TooltipPreview,
+  alert: AlertPreview,
+  toast: ToastPreview,
 };
 
 // Generic component page
 function ComponentPage({ name }: { name: string }) {
   const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1);
-  const preview = componentPreviews[name];
+  const PreviewComponent = componentPreviews[name];
 
   return (
     <motion.div
@@ -573,7 +573,9 @@ function ComponentPage({ name }: { name: string }) {
       <div className="p-6 rounded-xl bg-white/5 border border-white/10">
         <h3 className="text-sm font-medium text-white/50 mb-4">Preview</h3>
         <div className="flex items-center justify-center min-h-[100px] p-4">
-          {preview || (
+          {PreviewComponent ? (
+            <PreviewComponent key={name} />
+          ) : (
             <p className="text-white/40 text-sm">No preview available</p>
           )}
         </div>
@@ -734,8 +736,8 @@ export function DeveloperApp({ windowState: _windowState }: DeveloperAppProps) {
         {/* Sidebar Header */}
         <div className="p-4 border-b border-white/10">
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded bg-blue-500 flex items-center justify-center">
-              <BookOpen className="w-3.5 h-3.5 text-white" />
+            <div className="w-6 h-6 rounded bg-white/[0.08] border border-white/[0.08] flex items-center justify-center">
+              <BookOpen className="w-3.5 h-3.5 text-blue-400" />
             </div>
             <span className="font-semibold text-white text-sm">Documentation</span>
           </div>

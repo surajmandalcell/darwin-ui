@@ -33,7 +33,7 @@ export function Dock() {
 
   return (
     <motion.div
-      className="relative flex items-end gap-1 px-2 py-1.5 rounded-2xl"
+      className="relative flex items-end gap-2 px-4 py-2 rounded-2xl"
       style={{
         background: 'rgba(30, 30, 30, 0.4)',
         backdropFilter: 'blur(30px)',

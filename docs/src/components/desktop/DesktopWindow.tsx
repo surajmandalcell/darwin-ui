@@ -179,6 +179,12 @@ export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowP
         damping: 30,
         mass: 0.8,
       }}
+      drag={!windowState.isMaximized}
+      dragControls={dragControls}
+      dragMomentum={false}
+      dragElastic={0}
+      dragListener={false}
+      onDragEnd={handleDragEnd}
       onClick={() => focusWindow(windowState.id)}
     >
       {/* Window Frame */}
@@ -196,48 +202,35 @@ export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowP
         }}
       >
         {/* Title Bar */}
-        <motion.div
+        <div
           className="flex items-center h-9 px-3 bg-black/20 border-b border-white/10 cursor-default select-none shrink-0"
-          drag={!windowState.isMaximized}
-          dragControls={dragControls}
-          dragMomentum={false}
-          dragElastic={0}
-          onDragEnd={handleDragEnd}
+          onPointerDown={(e) => {
+            if (!windowState.isMaximized) {
+              dragControls.start(e);
+            }
+          }}
           onDoubleClick={handleMaximize}
         >
           {/* Traffic Lights */}
-          <div className="flex items-center gap-2 group">
+          <div className="flex items-center gap-2">
             {/* Close */}
             <button
-              className="w-3 h-3 rounded-full bg-[#ff5f57] hover:brightness-110 transition-all flex items-center justify-center"
+              className="w-3 h-3 rounded-full"
+              style={{ backgroundColor: '#ff5f57' }}
               onClick={handleClose}
-            >
-              <svg className="w-2 h-2 text-black/50 opacity-0 group-hover:opacity-100 transition-opacity" viewBox="0 0 10 10">
-                <path d="M1 1l8 8M9 1l-8 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-              </svg>
-            </button>
+            />
             {/* Minimize */}
             <button
-              className="w-3 h-3 rounded-full bg-[#febc2e] hover:brightness-110 transition-all flex items-center justify-center"
+              className="w-3 h-3 rounded-full"
+              style={{ backgroundColor: '#febc2e' }}
               onClick={handleMinimize}
-            >
-              <svg className="w-2 h-2 text-black/50 opacity-0 group-hover:opacity-100 transition-opacity" viewBox="0 0 10 10">
-                <path d="M1 5h8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-              </svg>
-            </button>
+            />
             {/* Maximize */}
             <button
-              className="w-3 h-3 rounded-full bg-[#28c840] hover:brightness-110 transition-all flex items-center justify-center"
+              className="w-3 h-3 rounded-full"
+              style={{ backgroundColor: '#28c840' }}
               onClick={handleMaximize}
-            >
-              <svg className="w-2 h-2 text-black/50 opacity-0 group-hover:opacity-100 transition-opacity" viewBox="0 0 10 10">
-                {windowState.isMaximized ? (
-                  <path d="M3 7V3h4M7 3v4H3" stroke="currentColor" strokeWidth="1.2" fill="none"/>
-                ) : (
-                  <path d="M1 3.5L5 0l4 3.5M5 0v10" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" fill="none" transform="rotate(45 5 5)"/>
-                )}
-              </svg>
-            </button>
+            />
           </div>
 
           {/* Title */}
@@ -249,7 +242,7 @@ export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowP
 
           {/* Spacer for symmetry */}
           <div className="w-14" />
-        </motion.div>
+        </div>
 
         {/* Content */}
         <div className="flex-1 overflow-hidden">

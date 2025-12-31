@@ -129,7 +129,7 @@ export function Desktop() {
               className="text-center"
             >
               {/* Darwin UI Logo */}
-              <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-blue-500 flex items-center justify-center">
+              <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-blue-500/20 to-indigo-500/20 border border-white/[0.08] flex items-center justify-center backdrop-blur-sm">
                 <span className="text-3xl font-bold text-white">D</span>
               </div>
               <motion.div
