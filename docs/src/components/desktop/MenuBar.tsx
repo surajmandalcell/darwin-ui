@@ -82,7 +82,7 @@ function AboutModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
                 >
-                  Version 1.1.0
+                  Version 1.2.0
                 </motion.p>
 
                 {/* Description */}

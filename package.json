@@ -1,6 +1,6 @@
 {
   "name": "@smc/darwin-ui",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A beautiful macOS-inspired dark theme React component library with glass-morphism aesthetic",
   "author": "Suraj Mandal <contact@mandalsuraj.com>",
   "license": "MIT",
