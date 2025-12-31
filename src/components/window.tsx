@@ -1,6 +1,6 @@
 import type React from "react";
 import { CloseButton } from "./close-button";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 
 interface WindowProps {
 	children: React.ReactNode;

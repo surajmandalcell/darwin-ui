@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import { ReactNode, useRef } from "react";
+import { type ReactNode, useRef } from "react";
 import { twMerge } from "tailwind-merge";
 
 type AnimationType = "clip" | "fade" | "slide" | "scale" | "blur";

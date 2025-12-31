@@ -1,20 +1,14 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import NextImage, { ImageProps as NextImageProps } from "next/image";
 import { twMerge } from "tailwind-merge";
 import { Expand, X } from "lucide-react";
 import FocusLock from "react-focus-lock";
 import { useOverlay } from "../contexts/overlay-context";
 import { useEscapeKey } from "../hooks/use-escape-key";
 
-// Support both Next.js Image and regular img elements
-export type MacOSImageProps = (
-	| (Omit<NextImageProps, "className" | "onClick"> & { useNext?: true })
-	| (Omit<React.ImgHTMLAttributes<HTMLImageElement>, "className"> & {
-			useNext: false;
-	  })
-) & {
+// Image props using standard HTML img attributes
+export type MacOSImageProps = React.ImgHTMLAttributes<HTMLImageElement> & {
 	className?: string;
 	rounded?: "none" | "sm" | "md" | "lg" | "xl" | "full";
 	clickToEnlarge?: boolean;
@@ -118,11 +112,9 @@ export function Image({
 						}`}
 						onClick={(e) => e.stopPropagation()}
 					>
-						<NextImage
+						<img
 							src={getImageSrc()}
 							alt={getImageAlt()}
-							width={1920}
-							height={1080}
 							className="object-contain rounded-lg max-w-full max-h-[90vh] w-auto h-auto"
 						/>
 					</div>
@@ -131,18 +123,9 @@ export function Image({
 		);
 	};
 
-	// Check if image has fill prop (for Next.js Image)
-	const hasFill = "fill" in props && props.fill === true;
-
 	// Wrapper for click-to-enlarge functionality
 	const wrapWithClickToEnlarge = (element: React.ReactNode) => {
 		if (!clickToEnlarge) return element;
-
-		// For fill images, wrapper should be block and fill parent
-		// For non-fill images, wrapper should be inline-block
-		const wrapperClass = hasFill
-			? "cursor-pointer group relative block w-full h-full"
-			: "cursor-pointer group relative inline-block";
 
 		return (
 			<>
@@ -155,7 +138,7 @@ export function Image({
 					}}
 					role="button"
 					tabIndex={0}
-					className={wrapperClass}
+					className="cursor-pointer group relative inline-block"
 				>
 					{element}
 					<div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center pointer-events-none rounded-lg">
@@ -167,31 +150,12 @@ export function Image({
 		);
 	};
 
-	// Use Next.js Image by default, or regular img if useNext is false
-	if ("useNext" in props && props.useNext === false) {
-		const { useNext: _useNext, ...imgProps } = props;
-		const imgElement = (
-			<img
-				{...(imgProps as React.ImgHTMLAttributes<HTMLImageElement>)}
-				className={baseClass}
-			/>
-		);
-		return wrapWithClickToEnlarge(imgElement);
-	}
-
-	// Default to Next.js Image
-	const { useNext: _useNext, ...nextImageProps } = props as NextImageProps & {
-		useNext?: boolean;
-	};
-
-	// Add default sizes for fill images if not provided
-	const imagePropsWithSizes =
-		hasFill && !nextImageProps.sizes
-			? { ...nextImageProps, sizes: "100vw" }
-			: nextImageProps;
-
-	const imageElement = (
-		<NextImage {...imagePropsWithSizes} className={baseClass} />
+	// Use regular img element
+	const imgElement = (
+		<img
+			{...props}
+			className={baseClass}
+		/>
 	);
-	return wrapWithClickToEnlarge(imageElement);
+	return wrapWithClickToEnlarge(imgElement);
 }

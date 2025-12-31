@@ -1,8 +1,45 @@
 "use client";
 
-import { usePathname } from "next/navigation";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
+
+// Framework-agnostic pathname hook
+const usePathname = () => {
+	const [pathname, setPathname] = useState(
+		typeof window !== "undefined" ? window.location.pathname : "/"
+	);
+
+	useEffect(() => {
+		const handleLocationChange = () => {
+			setPathname(window.location.pathname);
+		};
+
+		// Listen to popstate for browser back/forward
+		window.addEventListener("popstate", handleLocationChange);
+
+		// For SPAs using pushState/replaceState
+		const originalPushState = window.history.pushState;
+		const originalReplaceState = window.history.replaceState;
+
+		window.history.pushState = function(...args) {
+			originalPushState.apply(this, args);
+			handleLocationChange();
+		};
+
+		window.history.replaceState = function(...args) {
+			originalReplaceState.apply(this, args);
+			handleLocationChange();
+		};
+
+		return () => {
+			window.removeEventListener("popstate", handleLocationChange);
+			window.history.pushState = originalPushState;
+			window.history.replaceState = originalReplaceState;
+		};
+	}, []);
+
+	return pathname;
+};
 
 export interface ContextMenuItem {
 	label: string;

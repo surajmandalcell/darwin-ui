@@ -323,7 +323,7 @@ export default function DashboardShowcase() {
                                                         tickFormatter={(value) => `$${value}`}
                                                     />
                                                     <Tooltip
-                                                        content={({ active, payload, label }) => {
+                                                        content={({ active, payload, label: _label }) => {
                                                             if (active && payload && payload.length) {
                                                                 return (
                                                                     <div className="bg-[#0a0a0a]/90 backdrop-blur-md border border-white/[0.08] rounded-xl shadow-xl p-3">

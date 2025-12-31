@@ -12,9 +12,7 @@ import {
     Settings,
     ChevronDown,
     Loader2,
-    Mail,
     User,
-    Lock,
     ArrowRight
 } from "lucide-react";
 

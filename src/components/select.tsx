@@ -3,7 +3,7 @@
 import React from "react";
 import { createPortal } from "react-dom";
 import { cn } from "../lib/utils";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence } from "framer-motion";
 
 type OptionLike = { value: string; label: React.ReactNode };
 

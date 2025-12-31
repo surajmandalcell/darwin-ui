@@ -3,7 +3,7 @@
 import type React from "react";
 import { useEffect, useState } from "react";
 import FocusLock from "react-focus-lock";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useOverlay } from "../contexts/overlay-context";
 import { useEscapeKey } from "../hooks/use-escape-key";
 import { CloseButton } from "./close-button";

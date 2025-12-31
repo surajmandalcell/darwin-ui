@@ -1,7 +1,6 @@
-import { Manrope } from 'next/font/google';
+// Simplified font export for framework agnosticism
+export const manrope = {
+  className: "font-sans",
+  style: { fontFamily: "'Manrope', sans-serif" },
+};
 
-export const manrope = Manrope({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-manrope',
-});

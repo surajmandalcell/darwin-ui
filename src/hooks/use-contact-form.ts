@@ -7,7 +7,7 @@ interface UseContactFormOptions {
   defaultMessage?: string;
 }
 
-export function useContactForm({ initialValues, defaultMessage }: UseContactFormOptions) {
+export function useContactForm({ initialValues, defaultMessage: _defaultMessage }: UseContactFormOptions) {
   const [formData, setFormData] = useState(initialValues);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');

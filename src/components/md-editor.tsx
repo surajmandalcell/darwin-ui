@@ -1,7 +1,6 @@
 "use client";
 
-import dynamic from "next/dynamic";
-import { useRef } from "react";
+import { lazy, Suspense, useRef } from "react";
 import remarkGfm from "remark-gfm";
 import { Skeleton } from "./skeleton";
 import {
@@ -40,10 +39,7 @@ function EditorSkeleton() {
 	);
 }
 
-const MDEditor = dynamic(() => import("@uiw/react-md-editor"), {
-	ssr: false,
-	loading: () => <EditorSkeleton />,
-});
+const MDEditorLazy = lazy(() => import("@uiw/react-md-editor"));
 
 interface MdEditorProps {
 	value: string;
@@ -137,19 +133,21 @@ export function MdEditor({ value, onChange, placeholder }: MdEditorProps) {
 				data-color-mode="dark"
 				className="rounded-[6px] overflow-hidden border border-white/10 bg-white/5"
 			>
-				<MDEditor
-					id="md-editor"
-					value={value}
-					onChange={(v) => onChange(v || "")}
-					previewOptions={{ remarkPlugins: [remarkGfm] }}
-					textareaProps={{
-						placeholder:
-							placeholder || "Write your post content in Markdown...",
-					}}
-					height={466}
-					className="rounded-2xl! overflow-hidden"
-					extraCommands={[imageUploadCommand]}
-				/>
+				<Suspense fallback={<EditorSkeleton />}>
+					<MDEditorLazy
+						id="md-editor"
+						value={value}
+						onChange={(v) => onChange(v || "")}
+						previewOptions={{ remarkPlugins: [remarkGfm] }}
+						textareaProps={{
+							placeholder:
+								placeholder || "Write your post content in Markdown...",
+						}}
+						height={466}
+						className="rounded-2xl! overflow-hidden"
+						extraCommands={[imageUploadCommand]}
+					/>
+				</Suspense>
 			</div>
 		</>
 	);
