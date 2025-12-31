@@ -3,7 +3,6 @@
 import { HeroSection } from './sections/HeroSection';
 import { StatsSection } from './sections/StatsSection';
 import { TechStackSection } from './sections/TechStackSection';
-import { FeaturesSection } from './sections/FeaturesSection';
 import { CategorySection } from './sections/CategorySection';
 import { AllComponentsGrid } from './sections/AllComponentsGrid';
 import { FooterSection } from './sections/FooterSection';
@@ -32,6 +31,10 @@ export default function LandingPage() {
   // State for form demo
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
   const [multiSelectValues, setMultiSelectValues] = useState<string[]>(['react']);
+  const [country, setCountry] = useState('');
+  const [rememberMe, setRememberMe] = useState(true);
+  const [newsletter, setNewsletter] = useState(false);
+  const [notifications, setNotifications] = useState(false);
 
   return (
     <div className="min-h-screen bg-[#0a0a0a]">
@@ -44,9 +47,6 @@ export default function LandingPage() {
       {/* Technology Stack */}
       <TechStackSection />
 
-      {/* Features */}
-      <FeaturesSection />
-
       {/* Form Components Category - ENHANCED */}
       <CategorySection
         {...categoryMetadata.form}
@@ -57,8 +57,8 @@ export default function LandingPage() {
             <Input placeholder="Full Name" />
             <Input type="email" placeholder="Email Address" />
             <Input type="password" placeholder="Password" />
-            <Select>
-              <option>Select your country</option>
+            <Select value={country} onChange={(e) => setCountry(e.target.value)}>
+              <option value="">Select your country</option>
               <option value="us">United States</option>
               <option value="uk">United Kingdom</option>
               <option value="ca">Canada</option>
@@ -79,9 +79,9 @@ export default function LandingPage() {
               onChange={(config) => setSelectedDate(config.startDate)}
             />
             <div className="space-y-3">
-              <Checkbox label="Remember me" defaultChecked />
-              <Checkbox label="Subscribe to newsletter" />
-              <Switch label="Enable notifications" />
+              <Checkbox label="Remember me" checked={rememberMe} onChange={setRememberMe} />
+              <Checkbox label="Subscribe to newsletter" checked={newsletter} onChange={setNewsletter} />
+              <Switch label="Enable notifications" checked={notifications} onChange={setNotifications} />
             </div>
             <Button variant="primary" className="w-full">
               Submit Form

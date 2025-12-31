@@ -2,6 +2,20 @@ import { allComponents } from '../data/components';
 import { ShowcaseCard } from '../../../components/ShowcaseCard';
 import { componentPreviews } from '../components/ComponentPreviews';
 
+// Bento grid sizing configuration
+const bentoSizes: Record<string, { cols: number; rows: number }> = {
+  Button: { cols: 2, rows: 2 },
+  Upload: { cols: 2, rows: 2 },
+  Table: { cols: 2, rows: 2 },
+  Charts: { cols: 2, rows: 2 },
+  Window: { cols: 2, rows: 1 },
+  Reveal: { cols: 2, rows: 2 },
+  DateSelect: { cols: 1, rows: 2 },
+  Modal: { cols: 1, rows: 2 },
+};
+
+const getSize = (title: string) => bentoSizes[title] || { cols: 1, rows: 1 };
+
 export function AllComponentsGrid() {
   return (
     <section id="components" className="py-24 relative">
@@ -20,23 +34,27 @@ export function AllComponentsGrid() {
           </p>
         </div>
 
-        {/* Components Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {allComponents.map((component, index) => (
-            <ShowcaseCard
-              key={component.slug}
-              title={component.title}
-              description={component.description}
-              slug={component.slug}
-              badge={component.badge}
-              preview={
-                componentPreviews[component.slug] || (
-                  <div className="text-white/60">Component preview</div>
-                )
-              }
-              delay={index * 0.03}
-            />
-          ))}
+        {/* Components Bento Grid - 4 columns with variable sizing */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          {allComponents.map((component) => {
+            const size = getSize(component.title);
+            return (
+              <ShowcaseCard
+                key={component.slug}
+                title={component.title}
+                description={component.description}
+                slug={component.slug}
+                badge={component.badge}
+                preview={
+                  componentPreviews[component.title] || (
+                    <div className="text-white/60">Component preview</div>
+                  )
+                }
+                cols={size.cols}
+                rows={size.rows}
+              />
+            );
+          })}
         </div>
       </div>
     </section>
