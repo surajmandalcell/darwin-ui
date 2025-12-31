@@ -45,72 +45,28 @@ function AnimatedWifi({ connected = true }: { connected?: boolean }) {
   );
 }
 
-// Animated Battery indicator component
-function AnimatedBattery({ level = 100, charging = false }: { level?: number; charging?: boolean }) {
-  const getBatteryColor = () => {
-    if (charging) return '#34d399'; // green when charging
-    if (level <= 20) return '#ef4444'; // red when low
-    if (level <= 50) return '#fbbf24'; // yellow when medium
-    return 'currentColor'; // white when good
-  };
-
-  return (
-    <div className="flex items-center gap-1.5">
-      <div className="relative">
-        <Battery className="w-5 h-4" style={{ color: getBatteryColor() }} />
-        {/* Battery fill indicator */}
-        <motion.div
-          className="absolute top-[3px] left-[3px] h-[6px] rounded-[1px]"
-          style={{ backgroundColor: getBatteryColor() }}
-          initial={{ width: 0 }}
-          animate={{ width: `${Math.min(level, 100) * 0.11}px` }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-        />
-        {/* Charging animation */}
-        {charging && (
-          <motion.div
-            className="absolute inset-0 flex items-center justify-center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: [0, 1, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-          >
-            <span className="text-[8px] font-bold text-white">
-              ⚡
-            </span>
-          </motion.div>
-        )}
-      </div>
-      <motion.span
-        className="text-xs tabular-nums"
-        key={level}
-        initial={{ opacity: 0, y: -5 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.2 }}
-      >
-        {level}%
-      </motion.span>
-    </div>
-  );
+// Simple Battery icon
+function BatteryIcon() {
+  return <Battery className="w-4 h-4" />;
 }
 
-// Animated clock component with seconds
-function AnimatedClock() {
+// Simple clock component without seconds
+function Clock() {
   const [time, setTime] = useState(new Date());
 
   useEffect(() => {
     const timer = setInterval(() => {
       setTime(new Date());
-    }, 1000);
+    }, 60000); // Update every minute
     return () => clearInterval(timer);
   }, []);
 
   const formatTime = (date: Date) => {
     const hours = date.getHours();
     const minutes = date.getMinutes().toString().padStart(2, '0');
-    const seconds = date.getSeconds().toString().padStart(2, '0');
     const ampm = hours >= 12 ? 'PM' : 'AM';
     const displayHours = hours % 12 || 12;
-    return { hours: displayHours, minutes, seconds, ampm };
+    return `${displayHours}:${minutes} ${ampm}`;
   };
 
   const formatDate = (date: Date) => {
@@ -121,25 +77,10 @@ function AnimatedClock() {
     });
   };
 
-  const { hours, minutes, seconds, ampm } = formatTime(time);
-
   return (
-    <div className="flex items-center gap-2 pl-2">
-      <span>{formatDate(time)}</span>
-      <div className="flex items-baseline tabular-nums">
-        <span>{hours}:{minutes}</span>
-        <motion.span
-          className="text-[10px] text-white/60 ml-0.5"
-          key={seconds}
-          initial={{ opacity: 0.5, y: 2 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.15 }}
-        >
-          :{seconds}
-        </motion.span>
-        <span className="text-[10px] text-white/70 ml-1">{ampm}</span>
-      </div>
-    </div>
+    <span className="tabular-nums">
+      {formatDate(time)} {formatTime(time)}
+    </span>
   );
 }
 
@@ -191,8 +132,6 @@ export function MenuBar() {
     state
   } = useDesktop();
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
-  const [batteryLevel] = useState(87); // Simulated battery level
-  const [isCharging] = useState(false);
 
   const activeWindow = getActiveWindow();
   const activeApp = activeWindow ? apps[activeWindow.appId] : null;
@@ -509,11 +448,11 @@ export function MenuBar() {
             <AnimatedWifi connected={true} />
           </motion.button>
 
-          {/* Battery with animated indicator */}
-          <AnimatedBattery level={batteryLevel} charging={isCharging} />
+          {/* Battery */}
+          <BatteryIcon />
 
-          {/* Date & Time with seconds */}
-          <AnimatedClock />
+          {/* Date & Time */}
+          <Clock />
         </div>
       </div>
 

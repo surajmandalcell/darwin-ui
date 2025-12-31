@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useCallback, useState, useEffect } from 'react';
-import { motion, useDragControls, AnimatePresence, useMotionValue } from 'framer-motion';
+import { motion, useDragControls, useMotionValue } from 'framer-motion';
 import { useDesktop, type WindowState, type AppDefinition } from '../../contexts/desktop-context';
 
 // Import app components
@@ -42,9 +42,7 @@ export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowP
   const [initialSize, setInitialSize] = useState(windowState.size);
   const [initialMousePos, setInitialMousePos] = useState({ x: 0, y: 0 });
   const [initialWindowPos, setInitialWindowPos] = useState(windowState.position);
-  const [trafficLightsHovered, setTrafficLightsHovered] = useState(false);
-  const [wasFocused, setWasFocused] = useState(isFocused);
-  const [showFocusPulse, setShowFocusPulse] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
 
   // Use motion values for drag transform - these reset to 0 after we update position
   const dragX = useMotionValue(0);
@@ -56,22 +54,19 @@ export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowP
   const MIN_VISIBLE_PIXELS = 100;
   const SNAP_THRESHOLD = 20; // Pixels from edge to trigger snap
 
-  // Detect focus gain for pulse animation
-  useEffect(() => {
-    if (isFocused && !wasFocused) {
-      setShowFocusPulse(true);
-      const timer = setTimeout(() => setShowFocusPulse(false), 300);
-      return () => clearTimeout(timer);
-    }
-    setWasFocused(isFocused);
-  }, [isFocused, wasFocused]);
-
   // Get the app component
   const AppComponent = appComponents[windowState.appId];
+
+  // Handle drag start
+  const handleDragStart = useCallback(() => {
+    setIsDragging(true);
+  }, []);
 
   // Handle drag end - update position and reset transform with snap-to-edge behavior
   const handleDragEnd = useCallback(
     () => {
+      setIsDragging(false);
+
       // Get the current transform offset from motion values
       const offsetX = dragX.get();
       const offsetY = dragY.get();
@@ -294,25 +289,17 @@ export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowP
     <motion.div
       ref={windowRef}
       className="absolute pointer-events-auto"
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{
-        opacity: 1,
-        scale: showFocusPulse ? 1.01 : 1,
-      }}
-      exit={{ opacity: 0, scale: 0.95 }}
-      transition={{
-        type: 'spring',
-        stiffness: 400,
-        damping: 30,
-        mass: 0.8,
-        scale: { duration: 0.15 },
-      }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.15 }}
       drag={!windowState.isMaximized}
       dragControls={dragControls}
       dragConstraints={dragConstraints}
       dragMomentum={false}
       dragElastic={0}
       dragListener={false}
+      onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
       style={{
         left: position.x,
@@ -322,6 +309,7 @@ export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowP
         zIndex: windowState.zIndex,
         x: dragX,
         y: dragY,
+        willChange: isDragging ? 'transform' : 'auto',
       }}
       onClick={() => focusWindow(windowState.id)}
     >
@@ -359,81 +347,26 @@ export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowP
           }}
           onDoubleClick={handleMaximize}
         >
-          {/* Traffic Lights */}
-          <div
-            className="flex items-center gap-2"
-            onMouseEnter={() => setTrafficLightsHovered(true)}
-            onMouseLeave={() => setTrafficLightsHovered(false)}
-          >
-            {/* Close */}
-            <motion.button
-              className="w-3 h-3 rounded-full flex items-center justify-center relative overflow-hidden group"
+          {/* Traffic Lights - Plain colored dots only */}
+          <div className="flex items-center gap-2">
+            {/* Close - Red dot */}
+            <button
+              className="w-3 h-3 rounded-full"
               style={{ backgroundColor: isFocused ? '#ff5f57' : 'rgba(255,255,255,0.2)' }}
               onClick={handleClose}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              transition={{ duration: 0.1 }}
-            >
-              <AnimatePresence>
-                {trafficLightsHovered && isFocused && (
-                  <motion.span
-                    initial={{ opacity: 0, scale: 0.5 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.5 }}
-                    transition={{ duration: 0.1 }}
-                    className="text-[8px] font-bold text-black/60"
-                  >
-                    x
-                  </motion.span>
-                )}
-              </AnimatePresence>
-            </motion.button>
-            {/* Minimize */}
-            <motion.button
-              className="w-3 h-3 rounded-full flex items-center justify-center relative overflow-hidden"
+            />
+            {/* Minimize - Yellow dot */}
+            <button
+              className="w-3 h-3 rounded-full"
               style={{ backgroundColor: isFocused ? '#febc2e' : 'rgba(255,255,255,0.2)' }}
               onClick={handleMinimize}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              transition={{ duration: 0.1 }}
-            >
-              <AnimatePresence>
-                {trafficLightsHovered && isFocused && (
-                  <motion.span
-                    initial={{ opacity: 0, scale: 0.5 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.5 }}
-                    transition={{ duration: 0.1 }}
-                    className="text-[8px] font-bold text-black/60"
-                  >
-                    -
-                  </motion.span>
-                )}
-              </AnimatePresence>
-            </motion.button>
-            {/* Maximize */}
-            <motion.button
-              className="w-3 h-3 rounded-full flex items-center justify-center relative overflow-hidden"
+            />
+            {/* Maximize - Green dot */}
+            <button
+              className="w-3 h-3 rounded-full"
               style={{ backgroundColor: isFocused ? '#28c840' : 'rgba(255,255,255,0.2)' }}
               onClick={handleMaximize}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              transition={{ duration: 0.1 }}
-            >
-              <AnimatePresence>
-                {trafficLightsHovered && isFocused && (
-                  <motion.span
-                    initial={{ opacity: 0, scale: 0.5 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.5 }}
-                    transition={{ duration: 0.1 }}
-                    className="text-[8px] font-bold text-black/60"
-                  >
-                    +
-                  </motion.span>
-                )}
-              </AnimatePresence>
-            </motion.button>
+            />
           </div>
 
           {/* Title with truncation */}
