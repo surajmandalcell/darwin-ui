@@ -42,23 +42,69 @@ export interface DesktopState {
   };
 }
 
+// localStorage key for persisting window sizes
+const WINDOW_SIZES_KEY = 'darwin-ui-window-sizes';
+
+// Load saved sizes from localStorage (SSR-safe)
+const loadSavedSizes = (): Record<string, { width: number; height: number }> => {
+  if (typeof window === 'undefined') {
+    return {};
+  }
+  try {
+    const saved = localStorage.getItem(WINDOW_SIZES_KEY);
+    return saved ? JSON.parse(saved) : {};
+  } catch {
+    return {};
+  }
+};
+
+// Save size when window is resized (SSR-safe)
+const saveWindowSize = (appId: string, size: { width: number; height: number }) => {
+  if (typeof window === 'undefined') {
+    return;
+  }
+  try {
+    const sizes = loadSavedSizes();
+    sizes[appId] = size;
+    localStorage.setItem(WINDOW_SIZES_KEY, JSON.stringify(sizes));
+  } catch {
+    // Silently fail if localStorage is not available
+  }
+};
+
+// App-specific viewport proportions for responsive sizing
+const appSizeProportions: Record<string, { widthPercent: number; heightPercent: number }> = {
+  developer: { widthPercent: 0.8, heightPercent: 0.8 },   // Large - documentation viewer
+  terminal: { widthPercent: 0.7, heightPercent: 0.5 },    // Wide but shorter - like a real terminal
+  notes: { widthPercent: 0.5, heightPercent: 0.4 },       // Wider, shorter - note-taking size
+  settings: { widthPercent: 0.5, heightPercent: 0.55 },   // Medium - settings panel
+};
+
 // Helper to calculate responsive default size based on screen dimensions
-// All windows open at 80% of viewport width and height
+// Each app has its own proportions for optimal layout
 const getResponsiveSize = (
-  _idealWidth: number,
-  _idealHeight: number,
+  appId: string,
   minWidth: number,
   minHeight: number
 ): { width: number; height: number } => {
+  // Get app-specific proportions or fallback to 80%
+  const proportions = appSizeProportions[appId] || { widthPercent: 0.8, heightPercent: 0.8 };
+
   if (typeof window === 'undefined') {
-    // SSR fallback: use reasonable defaults
-    return { width: 1200, height: 700 };
+    // SSR fallback: use reasonable defaults based on proportions
+    const ssrWidth = Math.floor(1920 * proportions.widthPercent);
+    const ssrHeight = Math.floor((1080 - 28 - 80) * proportions.heightPercent);
+    return {
+      width: Math.max(minWidth, ssrWidth),
+      height: Math.max(minHeight, ssrHeight)
+    };
   }
 
-  // Calculate 80% of viewport dimensions
+  // Calculate size based on app-specific viewport proportions
   // Height accounts for menu bar (28px) and dock (80px)
-  const width = Math.floor(window.innerWidth * 0.8);
-  const height = Math.floor((window.innerHeight - 28 - 80) * 0.8);
+  const availableHeight = window.innerHeight - 28 - 80;
+  const width = Math.floor(window.innerWidth * proportions.widthPercent);
+  const height = Math.floor(availableHeight * proportions.heightPercent);
 
   // Respect minimum sizes
   return {
@@ -73,7 +119,7 @@ export const apps: Record<string, AppDefinition> = {
     id: 'developer',
     name: 'Developer',
     icon: <BookOpen className="w-full h-full" />,
-    defaultSize: { width: 1100, height: 800 },
+    defaultSize: { width: 1100, height: 800 },  // Large documentation viewer
     minSize: { width: 600, height: 400 },
     defaultRoute: '/docs/getting-started/introduction',
   },
@@ -81,22 +127,22 @@ export const apps: Record<string, AppDefinition> = {
     id: 'terminal',
     name: 'Terminal',
     icon: <Terminal className="w-full h-full" />,
-    defaultSize: { width: 750, height: 500 },
-    minSize: { width: 400, height: 250 },
+    defaultSize: { width: 900, height: 500 },   // Wide like a real terminal
+    minSize: { width: 600, height: 300 },
   },
   notes: {
     id: 'notes',
     name: 'Notes',
     icon: <StickyNote className="w-full h-full" />,
-    defaultSize: { width: 650, height: 550 },
-    minSize: { width: 350, height: 300 },
+    defaultSize: { width: 700, height: 400 },   // Wider, shorter note-taking size
+    minSize: { width: 400, height: 300 },
   },
   settings: {
     id: 'settings',
     name: 'Settings',
     icon: <Settings className="w-full h-full" />,
-    defaultSize: { width: 800, height: 600 },
-    minSize: { width: 550, height: 400 },
+    defaultSize: { width: 700, height: 550 },   // Compact settings panel
+    minSize: { width: 500, height: 400 },
   },
 };
 
@@ -141,10 +187,9 @@ const calculateCascadePosition = (existingWindows: WindowState[], appDef: AppDef
     const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 1920;
     const screenHeight = typeof window !== 'undefined' ? window.innerHeight : 1080;
 
-    // Get the responsive size that will actually be used (80% of viewport)
+    // Get the responsive size that will actually be used (app-specific proportions)
     const responsiveSize = getResponsiveSize(
-      appDef.defaultSize.width,
-      appDef.defaultSize.height,
+      appDef.id,
       appDef.minSize.width,
       appDef.minSize.height
     );
@@ -214,10 +259,12 @@ function desktopReducer(state: DesktopState, action: DesktopAction): DesktopStat
         };
       }
 
-      // Create new window with responsive sizing
-      const responsiveSize = getResponsiveSize(
-        appDef.defaultSize.width,
-        appDef.defaultSize.height,
+      // Check for saved size from localStorage, otherwise use responsive sizing
+      const savedSizes = loadSavedSizes();
+      const savedSize = savedSizes[action.appId];
+
+      const windowSize = savedSize || getResponsiveSize(
+        appDef.id,
         appDef.minSize.width,
         appDef.minSize.height
       );
@@ -230,7 +277,7 @@ function desktopReducer(state: DesktopState, action: DesktopAction): DesktopStat
         isMinimized: false,
         isMaximized: false,
         position: calculateCascadePosition(state.windows, appDef),
-        size: responsiveSize,
+        size: windowSize,
         zIndex: state.highestZIndex + 1,
         route: action.route || appDef.defaultRoute,
       };
@@ -306,6 +353,13 @@ function desktopReducer(state: DesktopState, action: DesktopAction): DesktopStat
     }
 
     case 'UPDATE_WINDOW_SIZE': {
+      // Find the window to get its appId for saving to localStorage
+      const windowToResize = state.windows.find(w => w.id === action.windowId);
+      if (windowToResize) {
+        // Save the new size to localStorage for this app
+        saveWindowSize(windowToResize.appId, action.size);
+      }
+
       return {
         ...state,
         windows: state.windows.map(w =>

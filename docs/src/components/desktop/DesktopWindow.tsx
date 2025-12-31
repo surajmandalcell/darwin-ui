@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useCallback, useState, useEffect } from 'react';
-import { motion, useDragControls, type PanInfo, AnimatePresence } from 'framer-motion';
+import { motion, useDragControls, AnimatePresence, useMotionValue } from 'framer-motion';
 import { useDesktop, type WindowState, type AppDefinition } from '../../contexts/desktop-context';
 
 // Import app components
@@ -40,11 +40,21 @@ export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowP
   const [isResizing, setIsResizing] = useState(false);
   const [resizeDirection, setResizeDirection] = useState<string | null>(null);
   const [initialSize, setInitialSize] = useState(windowState.size);
-  const [initialPos, setInitialPos] = useState({ x: 0, y: 0 });
-  const dragStartOffset = useRef({ x: 0, y: 0 });
+  const [initialMousePos, setInitialMousePos] = useState({ x: 0, y: 0 });
+  const [initialWindowPos, setInitialWindowPos] = useState(windowState.position);
   const [trafficLightsHovered, setTrafficLightsHovered] = useState(false);
   const [wasFocused, setWasFocused] = useState(isFocused);
   const [showFocusPulse, setShowFocusPulse] = useState(false);
+
+  // Use motion values for drag transform - these reset to 0 after we update position
+  const dragX = useMotionValue(0);
+  const dragY = useMotionValue(0);
+
+  // Constants for window constraints
+  const MENU_BAR_HEIGHT = 28;
+  const DOCK_HEIGHT = 70;
+  const MIN_VISIBLE_PIXELS = 100;
+  const SNAP_THRESHOLD = 20; // Pixels from edge to trigger snap
 
   // Detect focus gain for pulse animation
   useEffect(() => {
@@ -59,39 +69,63 @@ export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowP
   // Get the app component
   const AppComponent = appComponents[windowState.appId];
 
-  // Handle drag start - capture offset between cursor and window origin
-  const handleDragStart = useCallback(
-    (event: MouseEvent | TouchEvent | PointerEvent) => {
-      const clientX = 'touches' in event ? event.touches[0].clientX : (event as MouseEvent).clientX;
-      const clientY = 'touches' in event ? event.touches[0].clientY : (event as MouseEvent).clientY;
-
-      // Store the offset between cursor position and window position
-      dragStartOffset.current = {
-        x: clientX - windowState.position.x,
-        y: clientY - windowState.position.y,
-      };
-    },
-    [windowState.position]
-  );
-
-  // Handle drag end
+  // Handle drag end - update position and reset transform with snap-to-edge behavior
   const handleDragEnd = useCallback(
-    (_: any, info: PanInfo) => {
-      // Calculate new position: cursor position minus the initial offset
-      const newX = info.point.x - dragStartOffset.current.x;
-      const newY = info.point.y - dragStartOffset.current.y;
+    () => {
+      // Get the current transform offset from motion values
+      const offsetX = dragX.get();
+      const offsetY = dragY.get();
 
-      // Constrain to viewport
-      const maxX = window.innerWidth - 100;
-      const maxY = window.innerHeight - 100;
-      const minY = 28; // Below menu bar
+      // Calculate new position
+      let newX = windowState.position.x + offsetX;
+      let newY = windowState.position.y + offsetY;
 
+      // Get viewport dimensions
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+
+      // Calculate bounds - keep MIN_VISIBLE_PIXELS visible on each side
+      const minX = -windowState.size.width + MIN_VISIBLE_PIXELS;
+      const maxX = viewportWidth - MIN_VISIBLE_PIXELS;
+      const minY = MENU_BAR_HEIGHT;
+      const maxY = viewportHeight - DOCK_HEIGHT - MIN_VISIBLE_PIXELS;
+
+      // Snap to edges if close enough
+      // Snap to left edge
+      if (newX >= 0 && newX <= SNAP_THRESHOLD) {
+        newX = 0;
+      }
+      // Snap to right edge
+      if (newX + windowState.size.width >= viewportWidth - SNAP_THRESHOLD &&
+          newX + windowState.size.width <= viewportWidth) {
+        newX = viewportWidth - windowState.size.width;
+      }
+      // Snap to top (below menu bar)
+      if (newY >= MENU_BAR_HEIGHT && newY <= MENU_BAR_HEIGHT + SNAP_THRESHOLD) {
+        newY = MENU_BAR_HEIGHT;
+      }
+      // Snap to bottom (above dock)
+      const bottomEdge = viewportHeight - DOCK_HEIGHT;
+      if (newY + windowState.size.height >= bottomEdge - SNAP_THRESHOLD &&
+          newY + windowState.size.height <= bottomEdge) {
+        newY = bottomEdge - windowState.size.height;
+      }
+
+      // Enforce strict bounds - window can never fully disappear
+      newX = Math.max(minX, Math.min(newX, maxX));
+      newY = Math.max(minY, Math.min(newY, maxY));
+
+      // Update position in state
       updateWindowPosition(windowState.id, {
-        x: Math.max(0, Math.min(newX, maxX)),
-        y: Math.max(minY, Math.min(newY, maxY)),
+        x: newX,
+        y: newY,
       });
+
+      // Reset motion values to 0 (the transform)
+      dragX.set(0);
+      dragY.set(0);
     },
-    [windowState.id, updateWindowPosition]
+    [windowState.id, windowState.position, windowState.size, updateWindowPosition, dragX, dragY, MIN_VISIBLE_PIXELS, MENU_BAR_HEIGHT, DOCK_HEIGHT, SNAP_THRESHOLD]
   );
 
   // Handle resize
@@ -102,43 +136,100 @@ export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowP
       setIsResizing(true);
       setResizeDirection(direction);
       setInitialSize(windowState.size);
-      setInitialPos({ x: e.clientX, y: e.clientY });
+      setInitialMousePos({ x: e.clientX, y: e.clientY });
+      setInitialWindowPos(windowState.position);
     },
-    [windowState.size]
+    [windowState.size, windowState.position]
   );
 
   useEffect(() => {
     if (!isResizing) return;
 
     const handleMouseMove = (e: MouseEvent) => {
-      const deltaX = e.clientX - initialPos.x;
-      const deltaY = e.clientY - initialPos.y;
+      const deltaX = e.clientX - initialMousePos.x;
+      const deltaY = e.clientY - initialMousePos.y;
 
+      // Get minimum sizes - use strict enforcement
+      const minWidth = appDef.minSize.width;
+      const minHeight = appDef.minSize.height;
+
+      // Get viewport bounds for clamping
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+
+      // Start from the CAPTURED initial values, not the live state
       let newWidth = initialSize.width;
       let newHeight = initialSize.height;
-      let newX = windowState.position.x;
-      let newY = windowState.position.y;
+      let newX = initialWindowPos.x;
+      let newY = initialWindowPos.y;
 
+      // Handle east (right) edge resize
       if (resizeDirection?.includes('e')) {
-        newWidth = Math.max(appDef.minSize.width, initialSize.width + deltaX);
-      }
-      if (resizeDirection?.includes('w')) {
-        const widthDelta = Math.min(deltaX, initialSize.width - appDef.minSize.width);
-        newWidth = initialSize.width - widthDelta;
-        newX = windowState.position.x + widthDelta;
-      }
-      if (resizeDirection?.includes('s')) {
-        newHeight = Math.max(appDef.minSize.height, initialSize.height + deltaY);
-      }
-      if (resizeDirection?.includes('n')) {
-        const heightDelta = Math.min(deltaY, initialSize.height - appDef.minSize.height);
-        newHeight = initialSize.height - heightDelta;
-        newY = windowState.position.y + heightDelta;
+        newWidth = initialSize.width + deltaX;
       }
 
-      updateWindowSize(windowState.id, { width: newWidth, height: newHeight });
+      // Handle west (left) edge resize - moves the left edge
+      if (resizeDirection?.includes('w')) {
+        // New width = initial width minus how much we moved right
+        newWidth = initialSize.width - deltaX;
+        // New X = initial X plus how much we moved right
+        newX = initialWindowPos.x + deltaX;
+
+        // Clamp: don't let width go below minimum
+        if (newWidth < minWidth) {
+          newWidth = minWidth;
+          // Adjust X so the right edge stays in place
+          newX = initialWindowPos.x + (initialSize.width - minWidth);
+        }
+
+        // Clamp: don't let X go negative
+        if (newX < 0) {
+          newX = 0;
+          newWidth = initialWindowPos.x + initialSize.width;
+        }
+      }
+
+      // Handle south (bottom) edge resize
+      if (resizeDirection?.includes('s')) {
+        newHeight = initialSize.height + deltaY;
+      }
+
+      // Handle north (top) edge resize - moves the top edge
+      if (resizeDirection?.includes('n')) {
+        // New height = initial height minus how much we moved down
+        newHeight = initialSize.height - deltaY;
+        // New Y = initial Y plus how much we moved down
+        newY = initialWindowPos.y + deltaY;
+
+        // Clamp: don't let height go below minimum
+        if (newHeight < minHeight) {
+          newHeight = minHeight;
+          // Adjust Y so the bottom edge stays in place
+          newY = initialWindowPos.y + (initialSize.height - minHeight);
+        }
+
+        // Clamp: don't let Y go above menu bar
+        if (newY < MENU_BAR_HEIGHT) {
+          newY = MENU_BAR_HEIGHT;
+          newHeight = initialWindowPos.y + initialSize.height - MENU_BAR_HEIGHT;
+        }
+      }
+
+      // Final safety clamps
+      newWidth = Math.max(minWidth, Math.min(newWidth, viewportWidth - newX));
+      newHeight = Math.max(minHeight, Math.min(newHeight, viewportHeight - DOCK_HEIGHT - newY));
+      newX = Math.max(0, newX);
+      newY = Math.max(MENU_BAR_HEIGHT, newY);
+
+      // Only update if values are valid (finite and positive)
+      if (isFinite(newWidth) && isFinite(newHeight) && newWidth > 0 && newHeight > 0) {
+        updateWindowSize(windowState.id, { width: newWidth, height: newHeight });
+      }
+
       if (resizeDirection?.includes('w') || resizeDirection?.includes('n')) {
-        updateWindowPosition(windowState.id, { x: newX, y: newY });
+        if (isFinite(newX) && isFinite(newY)) {
+          updateWindowPosition(windowState.id, { x: newX, y: newY });
+        }
       }
     };
 
@@ -154,7 +245,7 @@ export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowP
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseUp);
     };
-  }, [isResizing, resizeDirection, initialSize, initialPos, windowState, appDef.minSize, updateWindowSize, updateWindowPosition]);
+  }, [isResizing, resizeDirection, initialSize, initialMousePos, initialWindowPos, windowState.id, appDef.minSize, updateWindowSize, updateWindowPosition, MENU_BAR_HEIGHT, DOCK_HEIGHT]);
 
   // Handle traffic light buttons
   const handleClose = (e: React.MouseEvent) => {
@@ -178,12 +269,21 @@ export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowP
 
   // Calculate position and size
   const position = windowState.isMaximized
-    ? { x: 0, y: 28 }
+    ? { x: 0, y: MENU_BAR_HEIGHT }
     : windowState.position;
 
   const size = windowState.isMaximized
-    ? { width: window.innerWidth, height: window.innerHeight - 28 - 70 }
+    ? { width: window.innerWidth, height: window.innerHeight - MENU_BAR_HEIGHT - DOCK_HEIGHT }
     : windowState.size;
+
+  // Calculate drag constraints to prevent windows from disappearing
+  // These are relative to the current position, not absolute viewport coordinates
+  const dragConstraints = {
+    left: -windowState.size.width + MIN_VISIBLE_PIXELS - windowState.position.x,
+    right: window.innerWidth - MIN_VISIBLE_PIXELS - windowState.position.x,
+    top: MENU_BAR_HEIGHT - windowState.position.y,
+    bottom: window.innerHeight - DOCK_HEIGHT - MIN_VISIBLE_PIXELS - windowState.position.y,
+  };
 
   // Dynamic shadow based on focus state
   const shadowStyle = isFocused
@@ -194,20 +294,12 @@ export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowP
     <motion.div
       ref={windowRef}
       className="absolute pointer-events-auto"
-      style={{
-        left: position.x,
-        top: position.y,
-        width: size.width,
-        height: size.height,
-        zIndex: windowState.zIndex,
-      }}
-      initial={{ opacity: 0, scale: 0.95, y: 10 }}
+      initial={{ opacity: 0, scale: 0.95 }}
       animate={{
         opacity: 1,
         scale: showFocusPulse ? 1.01 : 1,
-        y: 0,
       }}
-      exit={{ opacity: 0, scale: 0.95, y: 10 }}
+      exit={{ opacity: 0, scale: 0.95 }}
       transition={{
         type: 'spring',
         stiffness: 400,
@@ -217,11 +309,20 @@ export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowP
       }}
       drag={!windowState.isMaximized}
       dragControls={dragControls}
+      dragConstraints={dragConstraints}
       dragMomentum={false}
       dragElastic={0}
       dragListener={false}
-      onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
+      style={{
+        left: position.x,
+        top: position.y,
+        width: size.width,
+        height: size.height,
+        zIndex: windowState.zIndex,
+        x: dragX,
+        y: dragY,
+      }}
       onClick={() => focusWindow(windowState.id)}
     >
       {/* Window Frame */}
