@@ -34,7 +34,7 @@ export function FinalCTASection() {
         <div className="flex flex-wrap items-center justify-center gap-4 mb-8">
           <Link
             to="/docs/getting-started"
-            className="px-8 py-4 bg-white text-black hover:bg-white/90 rounded-lg transition-colors duration-200 font-semibold"
+            className="px-6 py-2.5 bg-white text-black hover:bg-white/90 rounded-lg transition-colors duration-200 font-semibold"
           >
             Get Started
           </Link>
@@ -42,7 +42,7 @@ export function FinalCTASection() {
             href="https://github.com/surajmandalcell/darwin-ui"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-8 py-4 border border-white/20 hover:bg-white/5 rounded-lg transition-colors duration-200 text-white font-semibold inline-flex items-center gap-2"
+            className="px-6 py-2.5 bg-white/[0.05] hover:bg-white/10 rounded-lg transition-colors duration-200 text-white font-semibold inline-flex items-center gap-2"
           >
             <Github className="w-5 h-5" />
             View on GitHub

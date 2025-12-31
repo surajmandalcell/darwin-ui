@@ -1,26 +1,6 @@
 import { allComponents } from '../data/components';
 import { ShowcaseCard } from '../../../components/ShowcaseCard';
-
-// Simple placeholder for component previews
-// These will be replaced with actual component demos when integrated
-const componentPreviews: Record<string, React.ReactNode> = {
-  button: (
-    <button className="px-6 py-2 bg-white text-black rounded-lg font-medium">
-      Button
-    </button>
-  ),
-  badge: (
-    <div className="inline-flex px-3 py-1 bg-blue-500/20 border border-blue-500/30 text-blue-400 rounded-full text-sm">
-      Badge
-    </div>
-  ),
-  card: (
-    <div className="w-full max-w-xs p-4 border border-white/10 rounded-lg bg-white/[0.02]">
-      <div className="text-white font-semibold mb-2">Card</div>
-      <div className="text-white/60 text-sm">Card content</div>
-    </div>
-  ),
-};
+import { componentPreviews } from '../components/ComponentPreviews';
 
 export function AllComponentsGrid() {
   return (

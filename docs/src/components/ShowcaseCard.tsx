@@ -25,7 +25,7 @@ export function ShowcaseCard({
 }: ShowcaseCardProps) {
   return (
     <Reveal type="fade" delay={delay} duration={0.6} threshold={0.1}>
-      <div className="group relative overflow-visible rounded-2xl border border-white/10 hover:border-white/20 bg-gradient-to-br from-white/[0.02] to-transparent transition-all duration-300 flex flex-col h-full">
+      <div className="group relative overflow-hidden rounded-2xl border border-white/10 hover:border-white/20 bg-gradient-to-br from-white/[0.02] to-transparent transition-all duration-300 flex flex-col h-full">
         {/* Badge (if provided) */}
         {badge && (
           <Badge
@@ -37,7 +37,7 @@ export function ShowcaseCard({
         )}
 
         {/* Preview container - 320px height (h-80) */}
-        <div className="relative p-10 h-80 flex items-center justify-center overflow-visible">
+        <div className="relative p-10 h-80 flex items-center justify-center">
           <div className="w-full flex items-center justify-center relative">
             {preview}
           </div>
