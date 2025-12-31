@@ -97,7 +97,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
 				{toasts.map((toast) => (
 					<div
 						key={toast.id}
-						className="bg-[rgba(30,30,31,0.95)] backdrop-blur-xl shadow-[0px_20px_30px_0px_rgba(0,0,0,0.25),0px_0px_15px_0px_rgba(0,0,0,0.1),inset_0px_0px_0px_1px_rgba(255,255,255,0.075),0px_0px_0px_1px_rgba(0,0,0,0.5)] rounded-md min-w-80 max-w-md pointer-events-auto animate-in slide-in-from-right duration-300"
+						className="bg-neutral-900/95 backdrop-blur-md shadow-md border border-white/10 rounded-md min-w-80 max-w-md pointer-events-auto animate-in slide-in-from-right duration-300"
 					>
 						<div className="p-4 flex items-start gap-3">
 							{getIcon(toast.type)}

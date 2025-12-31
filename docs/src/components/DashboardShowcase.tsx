@@ -75,8 +75,8 @@ function MetricCard({
     icon: React.ElementType;
 }) {
     return (
-        <div className="group relative p-5 rounded-xl border border-white/[0.06] bg-gradient-to-br from-white/[0.03] to-transparent hover-card-lift overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+        <div className="group relative p-5 rounded-xl border border-white/[0.06] bg-white/[0.03] hover-card-lift overflow-hidden">
+            <div className="absolute inset-0 bg-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
             <div className="relative flex items-center justify-between mb-4">
                 <div className="p-2.5 rounded-lg bg-white/[0.04] border border-white/[0.06] text-white/70 group-hover:text-blue-400 group-hover:border-blue-500/30 transition-colors shadow-sm">
@@ -119,14 +119,10 @@ export default function DashboardShowcase() {
 
     return (
         <div
-            className="relative w-full rounded-[20px] overflow-hidden border border-white/[0.08] shadow-2xl font-sans"
-            style={{
-                background: '#050505',
-                boxShadow: '0 0 0 1px rgba(255,255,255,0.05), 0 40px 80px -20px rgba(0,0,0,0.6)'
-            }}
+            className="relative w-full rounded-[20px] overflow-hidden border border-white/10 shadow-lg font-sans bg-neutral-950"
         >
             {/* Window Title Bar */}
-            <div className="bg-[#0a0a0a] border-b border-white/[0.06] h-11 flex items-center px-4 justify-between select-none">
+            <div className="bg-neutral-950 border-b border-white/10 h-11 flex items-center px-4 justify-between select-none">
                 <div className="flex gap-2 group">
                     <div className="w-3 h-3 rounded-full bg-[#ff5f57] group-hover:bg-[#ff5f57]/80 transition-colors shadow-sm" />
                     <div className="w-3 h-3 rounded-full bg-[#febc2e] group-hover:bg-[#febc2e]/80 transition-colors shadow-sm" />
@@ -141,7 +137,7 @@ export default function DashboardShowcase() {
 
             <div className="flex h-[700px] xl:h-[600px]">
                 {/* Sidebar */}
-                <div className="w-[240px] flex-shrink-0 border-r border-white/[0.06] bg-[#080808] hidden md:flex flex-col">
+                <div className="w-[240px] flex-shrink-0 border-r border-white/10 bg-neutral-950 hidden md:flex flex-col">
                     <div className="p-5">
 
                         <div className="space-y-6">
@@ -212,7 +208,7 @@ export default function DashboardShowcase() {
 
                     <div className="mt-auto p-4 border-t border-white/[0.06]">
                         <div className="flex items-center gap-3 px-2 py-2 rounded-lg hover:bg-white/[0.04] transition-colors cursor-pointer">
-                            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-purple-500 to-pink-500 border border-white/10" />
+                            <div className="w-8 h-8 rounded-full bg-purple-500 border border-white/10" />
                             <div className="flex-1 min-w-0">
                                 <p className="text-sm font-medium text-white truncate">Olivia Martin</p>
                                 <p className="text-xs text-white/40 truncate">olivia@untitledui.com</p>
@@ -223,7 +219,7 @@ export default function DashboardShowcase() {
                 </div>
 
                 {/* Main Content */}
-                <div className="flex-1 min-w-0 bg-[#050505] overflow-auto">
+                <div className="flex-1 min-w-0 bg-neutral-950 overflow-auto">
                     <div className="p-8">
                         {/* Header */}
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
@@ -320,7 +316,7 @@ export default function DashboardShowcase() {
                                                         content={({ active, payload, label: _label }) => {
                                                             if (active && payload && payload.length) {
                                                                 return (
-                                                                    <div className="bg-[#0a0a0a]/90 backdrop-blur-md border border-white/[0.08] rounded-xl shadow-xl p-3">
+                                                                    <div className="bg-neutral-950/90 backdrop-blur-md border border-white/10 rounded-xl shadow-sm p-3">
                                                                         <p className="text-[11px] font-medium text-white/50 mb-1 uppercase tracking-wider">{payload[0].payload.month}</p>
                                                                         <div className="flex items-baseline gap-1">
                                                                             <p className="text-lg font-bold text-white tabular-nums">${payload[0].value}</p>
@@ -391,7 +387,7 @@ export default function DashboardShowcase() {
                                                     content={({ active, payload }) => {
                                                         if (active && payload && payload.length) {
                                                             return (
-                                                                <div className="bg-[#0a0a0a]/90 backdrop-blur-md border border-white/[0.08] rounded-lg shadow-xl px-3 py-2">
+                                                                <div className="bg-neutral-950/90 backdrop-blur-md border border-white/10 rounded-lg shadow-sm px-3 py-2">
                                                                     <div className="flex items-center gap-2">
                                                                         <div className="w-2 h-2 rounded-full" style={{ background: payload[0].payload.color }} />
                                                                         <span className="text-xs font-medium text-white">{payload[0].name}: {payload[0].value}%</span>
@@ -526,14 +522,14 @@ export default function DashboardShowcase() {
                     style={{ animation: 'fadeIn 0.2s ease-out' }}
                 >
                     <div
-                        className="w-full max-w-sm bg-[#0a0a0a] border border-white/[0.08] rounded-2xl shadow-2xl p-6 relative overflow-hidden animate-modal-enter"
+                        className="w-full max-w-sm bg-neutral-950 border border-white/10 rounded-2xl shadow-md p-6 relative overflow-hidden animate-modal-enter"
                         onClick={(e) => e.stopPropagation()}
                         style={{
                             boxShadow: '0 0 0 1px rgba(255,255,255,0.05), 0 20px 50px -10px rgba(0,0,0,0.8)'
                         }}
                     >
                         {/* Glossy header effect */}
-                        <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-white/[0.04] to-transparent pointer-events-none" />
+                        <div className="absolute top-0 left-0 right-0 h-24 bg-white/[0.02] pointer-events-none" />
 
                         <div className="relative">
                             <div className="mb-6 flex justify-between items-start">
@@ -562,7 +558,7 @@ export default function DashboardShowcase() {
             {/* Toast Notification */}
             {showToast && (
                 <div
-                    className="absolute bottom-6 right-6 z-50 flex items-center gap-3 px-5 py-4 bg-[#0f172a] border border-emerald-500/30 rounded-xl shadow-2xl animate-toast-enter overflow-hidden"
+                    className="absolute bottom-6 right-6 z-50 flex items-center gap-3 px-5 py-4 bg-slate-900 border border-emerald-500/20 rounded-xl shadow-md animate-toast-enter overflow-hidden"
                     style={{
                         boxShadow: '0 10px 30px -5px rgba(0,0,0,0.5)'
                     }}

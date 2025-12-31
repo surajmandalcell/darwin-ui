@@ -7,7 +7,6 @@ import { useDesktop, type WindowState, type AppDefinition } from '../../contexts
 // Import app components
 import { DeveloperApp } from './apps/DeveloperApp';
 import { ComponentsApp } from './apps/ComponentsApp';
-import { PlaygroundApp } from './apps/PlaygroundApp';
 import { TerminalApp } from './apps/TerminalApp';
 import { NotesApp } from './apps/NotesApp';
 import { PreviewApp } from './apps/PreviewApp';
@@ -23,7 +22,6 @@ interface DesktopWindowProps {
 const appComponents: Record<string, React.ComponentType<{ windowState: WindowState }>> = {
   developer: DeveloperApp,
   components: ComponentsApp,
-  playground: PlaygroundApp,
   terminal: TerminalApp,
   notes: NotesApp,
   preview: PreviewApp,
@@ -172,13 +170,14 @@ export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowP
         height: size.height,
         zIndex: windowState.zIndex,
       }}
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.95 }}
+      initial={{ opacity: 0, scale: 0.95, y: 10 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.95, y: 10 }}
       transition={{
         type: 'spring',
-        stiffness: 300,
-        damping: 25,
+        stiffness: 400,
+        damping: 30,
+        mass: 0.8,
       }}
       onClick={() => focusWindow(windowState.id)}
     >
@@ -186,19 +185,19 @@ export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowP
       <div
         className={`w-full h-full rounded-xl overflow-hidden flex flex-col transition-shadow duration-200 ${
           isFocused
-            ? 'shadow-2xl shadow-black/50'
-            : 'shadow-lg shadow-black/30'
+            ? 'shadow-lg shadow-black/50'
+            : 'shadow-md shadow-black/30'
         }`}
         style={{
-          background: 'rgba(30, 30, 32, 0.95)',
-          backdropFilter: 'blur(40px)',
-          WebkitBackdropFilter: 'blur(40px)',
-          border: `1px solid ${isFocused ? 'rgba(255,255,255,0.15)' : 'rgba(255,255,255,0.08)'}`,
+          background: 'rgb(23 23 23 / 0.95)',
+          backdropFilter: 'blur(12px)',
+          WebkitBackdropFilter: 'blur(12px)',
+          border: `1px solid ${isFocused ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.1)'}`,
         }}
       >
         {/* Title Bar */}
         <motion.div
-          className="flex items-center h-9 px-3 bg-black/20 border-b border-white/5 cursor-default select-none shrink-0"
+          className="flex items-center h-9 px-3 bg-black/20 border-b border-white/10 cursor-default select-none shrink-0"
           drag={!windowState.isMaximized}
           dragControls={dragControls}
           dragMomentum={false}

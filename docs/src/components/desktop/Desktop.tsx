@@ -6,22 +6,22 @@ import { Dock } from './Dock';
 import { DesktopWindow } from './DesktopWindow';
 import { motion, AnimatePresence } from 'framer-motion';
 
-// Wallpaper gradients inspired by macOS
+// Solid dark wallpapers inspired by macOS
 const wallpapers = {
   sonoma: {
-    background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 25%, #0f3460 50%, #1a1a2e 75%, #16213e 100%)',
-    overlay: 'radial-gradient(ellipse at 30% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 50%), radial-gradient(ellipse at 70% 80%, rgba(168, 85, 247, 0.1) 0%, transparent 50%)',
+    background: '#1a1a2e',
+    overlay: 'none',
   },
   ventura: {
-    background: 'linear-gradient(135deg, #0c1821 0%, #162447 50%, #1f4068 100%)',
-    overlay: 'radial-gradient(ellipse at 50% 0%, rgba(59, 130, 246, 0.2) 0%, transparent 60%)',
+    background: '#0c1821',
+    overlay: 'none',
   },
   monterey: {
-    background: 'linear-gradient(180deg, #2d1b4e 0%, #1e3a5f 50%, #1a1a2e 100%)',
-    overlay: 'radial-gradient(ellipse at 50% 30%, rgba(147, 51, 234, 0.15) 0%, transparent 50%)',
+    background: '#1e1e2e',
+    overlay: 'none',
   },
   gradient: {
-    background: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%)',
+    background: '#0a0a0a',
     overlay: 'none',
   },
 };
@@ -34,7 +34,7 @@ export function Desktop() {
   const visibleWindows = state.windows.filter(w => w.isOpen && !w.isMinimized);
 
   return (
-    <div className="fixed inset-0 overflow-hidden select-none">
+    <div className="fixed inset-0 h-screen w-screen overflow-hidden select-none">
       {/* Animated Wallpaper */}
       <motion.div
         className="absolute inset-0"
@@ -125,11 +125,11 @@ export function Desktop() {
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 1.1, opacity: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               className="text-center"
             >
               {/* Darwin UI Logo */}
-              <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+              <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-blue-500 flex items-center justify-center">
                 <span className="text-3xl font-bold text-white">D</span>
               </div>
               <motion.div
@@ -142,7 +142,7 @@ export function Desktop() {
                   className="h-full bg-white/80 rounded-full"
                   initial={{ width: '0%' }}
                   animate={{ width: '100%' }}
-                  transition={{ duration: 0.6, ease: 'easeInOut' }}
+                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                 />
               </motion.div>
             </motion.div>

@@ -26,8 +26,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 			<div className="relative w-full">
 				<motion.input
 					type={type}
-					animate={shouldShake ? { x: [-10, 10, -10, 10, 0] } : {}}
-					transition={{ duration: 0.4 }}
+					animate={shouldShake ? { x: [-6, 6, -6, 6, 0] } : {}}
+					transition={{
+						duration: 0.3,
+						ease: "easeInOut"
+					}}
 					className={cn(
 						// Glass effect for input
 						"flex h-9 w-full rounded-md border bg-white/5 px-3 py-1 text-sm text-white/90 shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-white/40 focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50 backdrop-blur-sm hover:bg-white/10",

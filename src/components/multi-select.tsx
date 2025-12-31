@@ -60,7 +60,7 @@ export function MultiSelect({
 					left: `${dropdownPosition.left}px`,
 					width: `${dropdownPosition.width}px`,
 				}}
-				className="z-9999 rounded-md border border-white/10 bg-[#121212] p-2 shadow-lg"
+				className="z-9999 rounded-md border border-white/10 bg-neutral-950 p-2 shadow-md"
 			>
 				{options.map((opt) => (
 					<label
@@ -100,7 +100,7 @@ export function MultiSelect({
 					{value.map((v) => (
 						<span
 							key={v}
-							className="inline-flex items-center gap-1 px-2 py-0.5 bg-white/10 border border-white/15 rounded text-white/80 text-xs"
+							className="inline-flex items-center gap-1 px-2 py-0.5 bg-white/10 border border-white/10 rounded text-white/80 text-xs"
 						>
 							{options.find((o) => o.value === v)?.label || v}
 							<button

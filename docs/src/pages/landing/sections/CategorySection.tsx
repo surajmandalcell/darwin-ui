@@ -66,7 +66,7 @@ export function CategorySection({
   const demoContent = (
     <div className="flex items-center justify-center">
       <div
-        className="relative rounded-2xl overflow-hidden border border-white/10 p-12 w-full demo-shadow bg-gradient-to-br from-white/[0.02] to-transparent"
+        className="relative rounded-2xl overflow-hidden border border-white/10 p-12 w-full demo-shadow bg-white/[0.02]"
       >
         {demo}
       </div>

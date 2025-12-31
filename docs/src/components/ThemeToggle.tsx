@@ -52,7 +52,7 @@ export function ThemeToggle() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: -10 }}
             transition={{ duration: 0.15 }}
-            className="absolute right-0 mt-2 w-36 rounded-lg border border-white/10 bg-[#1a1a1a] backdrop-blur-xl shadow-2xl overflow-hidden z-50"
+            className="absolute right-0 mt-2 w-36 rounded-lg border border-white/10 bg-neutral-900 backdrop-blur-md shadow-md overflow-hidden z-50"
           >
             {themeOptions.map((option) => {
               const OptionIcon = option.icon;

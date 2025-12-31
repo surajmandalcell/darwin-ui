@@ -24,12 +24,10 @@ export function HeroSection() {
   return (
     <section className="relative py-32 overflow-hidden">
       {/* Subtle gradient background */}
-      <div className="absolute inset-0 bg-[#0a0a0a]">
+      <div className="absolute inset-0 bg-neutral-950">
         <div
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full opacity-20"
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full opacity-20 bg-blue-500/15"
           style={{
-            background:
-              'radial-gradient(circle, rgba(59, 130, 246, 0.15), transparent 70%)',
             filter: 'blur(120px)',
           }}
         />

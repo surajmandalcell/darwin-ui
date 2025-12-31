@@ -83,7 +83,7 @@ function InlineSelect({
 			</Popover.Trigger>
 			<Popover.Portal>
 				<Popover.Content
-					className="bg-[#2a2a2a] border border-white/10 rounded-lg shadow-xl p-1 z-10000 min-w-[140px]"
+					className="bg-neutral-800 border border-white/10 rounded-lg shadow-md p-1 z-10000 min-w-[140px]"
 					sideOffset={5}
 				>
 					{options.map((option) => (
@@ -151,7 +151,7 @@ function DatePickerButton({
 			</Popover.Trigger>
 			<Popover.Portal>
 				<Popover.Content
-					className="bg-[#2a2a2a] border border-white/10 rounded-lg shadow-xl p-4 z-10000"
+					className="bg-neutral-800 border border-white/10 rounded-lg shadow-md p-4 z-10000"
 					sideOffset={5}
 				>
 					<div className="rdp-custom">
@@ -240,7 +240,7 @@ function TimePickerButton({
 			</Popover.Trigger>
 			<Popover.Portal>
 				<Popover.Content
-					className="bg-[#2a2a2a] border border-white/10 rounded-lg shadow-xl p-3 z-10000"
+					className="bg-neutral-800 border border-white/10 rounded-lg shadow-md p-3 z-10000"
 					sideOffset={5}
 				>
 					<input
@@ -907,8 +907,8 @@ export function DateSelect({
 				</Dialog.Trigger>
 
 				<Dialog.Portal>
-					<Dialog.Overlay className="fixed inset-0 bg-black/50 backdrop-blur-sm z-9998" />
-					<Dialog.Content className="fixed w-fit max-w-2xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#2a2a2a] border border-white/10 rounded-lg shadow-2xl p-6 z-9999">
+					<Dialog.Overlay className="fixed inset-0 bg-black/50 backdrop-blur-[6px] z-9998" />
+					<Dialog.Content className="fixed w-fit max-w-2xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-neutral-800 border border-white/10 rounded-lg shadow-md p-6 z-9999">
 						<Dialog.Title className="text-lg font-semibold text-white/90 mb-4">
 							Select Date & Time
 						</Dialog.Title>

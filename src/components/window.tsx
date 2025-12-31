@@ -13,7 +13,7 @@ export function Window({ children, title }: WindowProps) {
 			initial={{ opacity: 0, scale: 0.98 }}
 			animate={{ opacity: 1, scale: 1 }}
 			transition={{ duration: 0.4, ease: "easeOut" }}
-			className="flex h-full w-full flex-col rounded-lg border border-white/10 bg-[#121212]/80 shadow-2xl backdrop-blur-xl"
+			className="flex h-full w-full flex-col rounded-lg border border-white/10 bg-neutral-950/80 shadow-lg backdrop-blur-md"
 		>
 			<div className="relative flex items-center justify-center border-b border-white/10 px-4 py-1.5 bg-white/5 rounded-t-lg">
 				<CloseButton

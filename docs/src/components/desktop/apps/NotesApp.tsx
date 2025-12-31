@@ -156,10 +156,10 @@ export function NotesApp({ windowState: _windowState }: NotesAppProps) {
   };
 
   return (
-    <div className="flex h-full bg-[#1e1e20]">
+    <div className="flex h-full bg-neutral-900">
       {/* Folders Sidebar */}
       <motion.div
-        className="w-44 bg-[#161618] border-r border-white/10 flex flex-col"
+        className="w-44 bg-neutral-950 border-r border-white/10 flex flex-col"
         initial={{ x: -20, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
       >
@@ -190,7 +190,7 @@ export function NotesApp({ windowState: _windowState }: NotesAppProps) {
 
       {/* Notes List */}
       <motion.div
-        className="w-64 bg-[#1a1a1c] border-r border-white/10 flex flex-col"
+        className="w-64 bg-neutral-900 border-r border-white/10 flex flex-col"
         initial={{ x: -10, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ delay: 0.1 }}
@@ -232,7 +232,7 @@ export function NotesApp({ windowState: _windowState }: NotesAppProps) {
                 {formatDate(note.updatedAt)}
               </p>
               <p className="text-xs text-white/50 mt-1 line-clamp-2">
-                {note.content.slice(0, 100)}...
+                {note.content}
               </p>
             </motion.button>
           ))}
@@ -244,7 +244,7 @@ export function NotesApp({ windowState: _windowState }: NotesAppProps) {
         {selectedNote ? (
           <>
             {/* Toolbar */}
-            <div className="flex items-center gap-2 px-4 py-2 bg-[#161618] border-b border-white/10">
+            <div className="flex items-center gap-2 px-4 py-2 bg-neutral-950 border-b border-white/10">
               <button className="p-1.5 text-white/50 hover:text-white hover:bg-white/10 rounded transition-colors">
                 <Bold className="w-4 h-4" />
               </button>

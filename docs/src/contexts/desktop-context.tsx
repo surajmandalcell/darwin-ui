@@ -4,7 +4,6 @@ import { createContext, useContext, useReducer, useCallback, useEffect, type Rea
 import {
   BookOpen,
   LayoutGrid,
-  Play,
   Terminal,
   StickyNote,
   Image,
@@ -62,13 +61,6 @@ export const apps: Record<string, AppDefinition> = {
     icon: <LayoutGrid className="w-full h-full" />,
     defaultSize: { width: 900, height: 600 },
     minSize: { width: 500, height: 350 },
-  },
-  playground: {
-    id: 'playground',
-    name: 'Playground',
-    icon: <Play className="w-full h-full" />,
-    defaultSize: { width: 1000, height: 650 },
-    minSize: { width: 700, height: 450 },
   },
   terminal: {
     id: 'terminal',

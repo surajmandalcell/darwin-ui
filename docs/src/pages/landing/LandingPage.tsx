@@ -37,7 +37,7 @@ export default function LandingPage() {
   const [notifications, setNotifications] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a]">
+    <div className="min-h-screen bg-neutral-950">
       {/* Hero with centered layout */}
       <HeroSection />
 

@@ -90,7 +90,7 @@ export function SearchDialog({ open, onClose }: SearchDialogProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50"
+            className="fixed inset-0 bg-black/60 backdrop-blur-[6px] z-50"
           />
 
           {/* Dialog */}
@@ -102,7 +102,7 @@ export function SearchDialog({ open, onClose }: SearchDialogProps) {
             className="fixed top-[20%] left-1/2 -translate-x-1/2 w-full max-w-2xl z-50"
           >
             <Command
-              className="rounded-xl border border-white/10 bg-[#0a0a0a] shadow-2xl overflow-hidden"
+              className="rounded-xl border border-white/10 bg-neutral-950 shadow-md overflow-hidden"
               label="Search documentation"
               shouldFilter={false} // We handle filtering with Fuse
             >

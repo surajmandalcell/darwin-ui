@@ -98,7 +98,7 @@ export function Sidebar({ items, activeItem, onLogout }: SidebarProps) {
 				initial={{ x: "-100%" }}
 				animate={{ x: mobileMenuOpen ? 0 : "-100%" }}
 				transition={{ type: "spring", damping: 25, stiffness: 200 }}
-				className="fixed left-0 top-0 z-40 h-full w-64 border-r border-white/10 bg-[#121212]/95 p-4 pt-20 shadow-2xl backdrop-blur-xl md:hidden"
+				className="fixed left-0 top-0 z-40 h-full w-64 border-r border-white/10 bg-neutral-950/95 p-4 pt-20 shadow-lg backdrop-blur-md md:hidden"
 			>
 				<div className="flex h-full flex-col">
 					<div className="space-y-1">

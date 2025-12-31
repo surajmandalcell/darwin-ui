@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { WindowState } from '../../../contexts/desktop-context';
 import {
@@ -31,7 +31,7 @@ const slides: Slide[] = [
     id: 'button',
     title: 'Button',
     description: 'Beautiful buttons with multiple variants and states',
-    color: 'from-blue-600 to-blue-800',
+    color: 'bg-blue-600',
     component: (
       <div className="flex flex-wrap gap-3 justify-center">
         <Button variant="primary">Primary</Button>
@@ -45,7 +45,7 @@ const slides: Slide[] = [
     id: 'input',
     title: 'Input',
     description: 'Text inputs with validation and placeholder states',
-    color: 'from-green-600 to-green-800',
+    color: 'bg-green-600',
     component: (
       <div className="space-y-3 w-64">
         <Input placeholder="Enter your name..." />
@@ -58,7 +58,7 @@ const slides: Slide[] = [
     id: 'checkbox',
     title: 'Checkbox',
     description: 'macOS-style checkboxes with smooth animations',
-    color: 'from-purple-600 to-purple-800',
+    color: 'bg-purple-600',
     component: (
       <div className="space-y-3">
         <Checkbox label="Enable notifications" defaultChecked />
@@ -71,7 +71,7 @@ const slides: Slide[] = [
     id: 'switch',
     title: 'Switch',
     description: 'Smooth toggle switches for boolean options',
-    color: 'from-orange-600 to-orange-800',
+    color: 'bg-orange-600',
     component: (
       <div className="space-y-4">
         <div className="flex items-center justify-between w-48">
@@ -98,25 +98,25 @@ export function PreviewApp({ windowState: _windowState }: PreviewAppProps) {
 
   const currentSlide = slides[currentIndex];
 
-  const goToNext = () => {
+  const goToNext = useCallback(() => {
     setCurrentIndex((prev) => (prev + 1) % slides.length);
-  };
+  }, []);
 
-  const goToPrev = () => {
+  const goToPrev = useCallback(() => {
     setCurrentIndex((prev) => (prev - 1 + slides.length) % slides.length);
-  };
+  }, []);
 
   // Auto-play effect
-  useState(() => {
+  useEffect(() => {
     if (!isPlaying) return;
     const interval = setInterval(goToNext, 3000);
     return () => clearInterval(interval);
-  });
+  }, [isPlaying, goToNext]);
 
   return (
-    <div className="flex flex-col h-full bg-[#0a0a0b]">
+    <div className="flex flex-col h-full bg-neutral-950">
       {/* Toolbar */}
-      <div className="flex items-center justify-between px-4 py-2 bg-[#1a1a1c] border-b border-white/10">
+      <div className="flex items-center justify-between px-4 py-2 bg-neutral-900 border-b border-white/10">
         <div className="flex items-center gap-2">
           <button
             onClick={() => setShowGrid(!showGrid)}
@@ -167,7 +167,7 @@ export function PreviewApp({ windowState: _windowState }: PreviewAppProps) {
                       setCurrentIndex(idx);
                       setShowGrid(false);
                     }}
-                    className={`aspect-video rounded-xl bg-gradient-to-br ${slide.color} p-4 flex flex-col items-center justify-center text-center transition-all hover:scale-105 ${
+                    className={`aspect-video rounded-xl ${slide.color} p-4 flex flex-col items-center justify-center text-center transition-all hover:scale-105 ${
                       currentIndex === idx ? 'ring-2 ring-white' : ''
                     }`}
                     initial={{ opacity: 0, y: 20 }}
@@ -189,7 +189,7 @@ export function PreviewApp({ windowState: _windowState }: PreviewAppProps) {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -100 }}
               transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-              className={`absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br ${currentSlide.color}`}
+              className={`absolute inset-0 flex flex-col items-center justify-center ${currentSlide.color}`}
             >
               {/* Title */}
               <motion.div
@@ -206,7 +206,7 @@ export function PreviewApp({ windowState: _windowState }: PreviewAppProps) {
 
               {/* Component Preview */}
               <motion.div
-                className="p-8 rounded-2xl bg-[#1e1e20]/90 backdrop-blur-xl border border-white/10 shadow-2xl"
+                className="p-8 rounded-2xl bg-neutral-900/90 backdrop-blur-md border border-white/10 shadow-md"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.2, type: 'spring' }}
@@ -233,12 +233,12 @@ export function PreviewApp({ windowState: _windowState }: PreviewAppProps) {
       </div>
 
       {/* Thumbnail Strip */}
-      <div className="flex items-center justify-center gap-2 p-3 bg-[#1a1a1c] border-t border-white/10">
+      <div className="flex items-center justify-center gap-2 p-3 bg-neutral-900 border-t border-white/10">
         {slides.map((slide, idx) => (
           <button
             key={slide.id}
             onClick={() => setCurrentIndex(idx)}
-            className={`w-16 h-10 rounded-md bg-gradient-to-br ${slide.color} transition-all ${
+            className={`w-16 h-10 rounded-md ${slide.color} transition-all ${
               currentIndex === idx
                 ? 'ring-2 ring-white scale-110'
                 : 'opacity-60 hover:opacity-100'

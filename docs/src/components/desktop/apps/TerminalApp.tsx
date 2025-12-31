@@ -133,9 +133,9 @@ export function TerminalApp({ windowState: _windowState }: TerminalAppProps) {
   };
 
   return (
-    <div className="flex flex-col h-full bg-[#0a0a0b] font-mono text-sm">
+    <div className="flex flex-col h-full bg-neutral-950 font-mono text-sm">
       {/* Tabs */}
-      <div className="flex items-center bg-[#1a1a1c] border-b border-white/10">
+      <div className="flex items-center bg-neutral-900 border-b border-white/10">
         <div className="flex-1 flex items-center overflow-x-auto">
           {tabs.map((tab) => (
             <div
@@ -143,8 +143,8 @@ export function TerminalApp({ windowState: _windowState }: TerminalAppProps) {
               onClick={() => setActiveTab(tab.id)}
               className={`flex items-center gap-2 px-4 py-2 cursor-pointer border-r border-white/10 transition-colors ${
                 activeTab === tab.id
-                  ? 'bg-[#0a0a0b] text-white'
-                  : 'bg-[#161618] text-white/50 hover:text-white/80'
+                  ? 'bg-neutral-950 text-white'
+                  : 'bg-neutral-950 text-white/50 hover:text-white/80'
               }`}
             >
               <span className="text-xs">{tab.name}</span>
@@ -217,7 +217,7 @@ export function TerminalApp({ windowState: _windowState }: TerminalAppProps) {
       </div>
 
       {/* Quick Commands */}
-      <div className="flex items-center gap-2 px-4 py-2 bg-[#1a1a1c] border-t border-white/10">
+      <div className="flex items-center gap-2 px-4 py-2 bg-neutral-900 border-t border-white/10">
         <span className="text-xs text-white/40">Quick:</span>
         {['install', 'create', 'help'].map((cmd) => (
           <button

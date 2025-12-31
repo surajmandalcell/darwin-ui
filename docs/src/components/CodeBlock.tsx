@@ -33,7 +33,7 @@ export function CodeBlock({
   };
 
   return (
-    <div className="relative group rounded-xl overflow-hidden border border-white/10 bg-[#0a0a0a] my-4">
+    <div className="relative group rounded-xl overflow-hidden border border-white/10 bg-neutral-950 my-4">
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-2 border-b border-white/10 bg-white/[0.02]">
         <div className="flex items-center gap-2">

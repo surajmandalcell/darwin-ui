@@ -44,21 +44,21 @@ export function Button({
 }: ButtonProps) {
 	const variants: Record<Variant, string> = {
 		default:
-			"bg-white/10 text-white/90 hover:bg-white/20 border border-white/5 backdrop-blur-sm shadow-sm",
+			"bg-white/10 text-white/90 hover:bg-white/15 border border-white/10",
 		primary:
-			"bg-blue-600 text-white hover:bg-blue-700 shadow-sm border border-blue-500/50",
+			"bg-blue-500 text-white hover:bg-blue-500/90",
 		secondary:
-			"bg-white/5 text-white/70 hover:bg-white/10 border border-white/5 backdrop-blur-sm",
-		success: "bg-green-600 text-white hover:bg-green-700 shadow-sm",
-		warning: "bg-amber-500 text-black hover:bg-amber-600 shadow-sm",
-		info: "bg-blue-500 text-white hover:bg-blue-600 shadow-sm",
+			"bg-white/5 text-white/70 hover:bg-white/10 border border-white/10",
+		success: "bg-green-500 text-white hover:bg-green-500/90",
+		warning: "bg-amber-500 text-black hover:bg-amber-500/90",
+		info: "bg-blue-400 text-white hover:bg-blue-400/90",
 		destructive:
-			"bg-red-500/80 text-white hover:bg-red-600 shadow-sm border border-red-500/20",
+			"bg-red-500 text-white hover:bg-red-500/90",
 		outline:
-			"border border-white/20 bg-transparent hover:bg-white/10 hover:text-white shadow-sm",
-		ghost: "hover:bg-white/10 hover:text-white",
+			"border border-white/20 bg-transparent hover:bg-white/5 text-white/80",
+		ghost: "hover:bg-white/10 text-white/80",
 		link: "text-blue-400 underline-offset-4 hover:underline",
-		accent: "bg-purple-600 text-white hover:bg-purple-700 shadow-sm",
+		accent: "bg-purple-500 text-white hover:bg-purple-500/90",
 	};
 
 	const sizes: Record<Size, string> = {
@@ -74,11 +74,11 @@ export function Button({
 		<motion.button
 			{...(props as any)}
 			disabled={isDisabled}
-			whileHover={!isDisabled ? { scale: 1.02 } : {}}
-			whileTap={!isDisabled ? { scale: 0.98 } : {}}
-			transition={{ duration: 0.15, ease: "easeOut" }}
+			whileHover={!isDisabled ? { opacity: 0.9 } : {}}
+			whileTap={!isDisabled ? { scale: 0.99 } : {}}
+			transition={{ duration: 0.1 }}
 			className={cn(
-				"inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
+				"inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-500/50 disabled:pointer-events-none disabled:opacity-50",
 				variants[variant],
 				sizes[size],
 				className,

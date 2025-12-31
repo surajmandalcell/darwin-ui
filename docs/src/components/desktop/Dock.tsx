@@ -6,22 +6,27 @@ import { motion } from 'framer-motion';
 import { Trash2 } from 'lucide-react';
 
 // Order of apps in dock
-const dockAppOrder = ['developer', 'components', 'playground', 'terminal', 'notes', 'preview', 'settings'];
+const dockAppOrder = ['developer', 'components', 'terminal', 'notes', 'preview', 'settings'];
 
 export function Dock() {
-  const { state, openApp, getRunningApps, focusWindow } = useDesktop();
+  const { state, openApp, getRunningApps, focusWindow, restoreWindow } = useDesktop();
   const runningApps = getRunningApps();
 
   const handleAppClick = (appId: string) => {
     // Check if app has windows
     const appWindows = state.windows.filter(w => w.appId === appId);
     const openWindow = appWindows.find(w => w.isOpen && !w.isMinimized);
+    const minimizedWindow = appWindows.find(w => w.isMinimized);
 
     if (openWindow) {
       // Focus existing window
       focusWindow(openWindow.id);
+    } else if (minimizedWindow) {
+      // Restore minimized window
+      restoreWindow(minimizedWindow.id);
+      focusWindow(minimizedWindow.id);
     } else {
-      // Open new window or restore minimized
+      // Open new window
       openApp(appId);
     }
   };
@@ -59,30 +64,6 @@ export function Dock() {
         );
       })}
 
-      {/* Divider */}
-      <div className="w-px h-10 bg-white/20 mx-1 self-center" />
-
-      {/* Minimized Windows Section */}
-      {state.windows.filter(w => w.isMinimized).map((window) => {
-        const app = apps[window.appId];
-        if (!app) return null;
-
-        return (
-          <DockItem
-            key={window.id}
-            app={app}
-            isRunning={true}
-            isMinimized={true}
-            onClick={() => {
-              // Restore the specific window
-              // For now, just open the app which will restore it
-              openApp(window.appId);
-            }}
-            index={dockAppOrder.length}
-          />
-        );
-      })}
-
       {/* Trash */}
       <div className="w-px h-10 bg-white/20 mx-1 self-center" />
       <motion.button
@@ -91,7 +72,7 @@ export function Dock() {
         whileTap={{ scale: 0.95 }}
         transition={{ type: 'spring', stiffness: 400, damping: 17 }}
       >
-        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-gray-600 to-gray-800 flex items-center justify-center shadow-lg">
+        <div className="w-12 h-12 rounded-xl bg-gray-700 flex items-center justify-center shadow-lg">
           <Trash2 className="w-6 h-6 text-white/80" />
         </div>
         {/* Tooltip */}

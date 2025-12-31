@@ -1,14 +1,13 @@
 "use client";
 
 import { useState } from 'react';
-import { motion, useSpring } from 'framer-motion';
+import { motion, useSpring, useAnimationControls } from 'framer-motion';
 import type { AppDefinition } from '../../contexts/desktop-context';
 
 interface DockItemProps {
   app: AppDefinition;
   isRunning: boolean;
   hasMinimizedWindow?: boolean;
-  isMinimized?: boolean;
   onClick: () => void;
   index: number;
 }
@@ -17,16 +16,15 @@ export function DockItem({
   app,
   isRunning,
   hasMinimizedWindow,
-  isMinimized,
   onClick,
   index,
 }: DockItemProps) {
   const [isHovered, setIsHovered] = useState(false);
-  const [, setIsBouncing] = useState(false);
+  const controls = useAnimationControls();
 
-  // Animation values
-  const scale = useSpring(1, { stiffness: 400, damping: 20 });
-  const y = useSpring(0, { stiffness: 400, damping: 20 });
+  // Animation values with smoother damping
+  const scale = useSpring(1, { stiffness: 400, damping: 25 });
+  const y = useSpring(0, { stiffness: 400, damping: 25 });
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -40,45 +38,45 @@ export function DockItem({
     y.set(0);
   };
 
+  // Smooth bounce animation using framer-motion keyframes
+  const bounce = () => {
+    controls.start({
+      y: [0, -20, 0, -10, 0, -5, 0],
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+        times: [0, 0.2, 0.4, 0.55, 0.7, 0.85, 1]
+      }
+    });
+  };
+
   const handleClick = () => {
     if (!isRunning) {
-      // Bounce animation when opening
-      setIsBouncing(true);
-      // Bounce effect
-      const bounceAnimation = async () => {
-        for (let i = 0; i < 3; i++) {
-          y.set(-20);
-          await new Promise(r => setTimeout(r, 150));
-          y.set(0);
-          await new Promise(r => setTimeout(r, 150));
-        }
-        setIsBouncing(false);
-      };
-      bounceAnimation();
+      // Smooth bounce animation when opening
+      bounce();
     }
     onClick();
   };
 
-  // App icon backgrounds - different gradient for each app
-  const iconGradients: Record<string, string> = {
-    developer: 'from-blue-500 to-blue-700',
-    components: 'from-indigo-500 to-purple-600',
-    playground: 'from-green-500 to-emerald-600',
-    terminal: 'from-gray-700 to-gray-900',
-    notes: 'from-yellow-400 to-orange-500',
-    preview: 'from-purple-500 to-pink-600',
-    settings: 'from-gray-500 to-gray-700',
+  // App icon backgrounds - solid colors for each app
+  const iconColors: Record<string, string> = {
+    developer: 'bg-blue-500',
+    components: 'bg-indigo-500',
+    terminal: 'bg-gray-700',
+    notes: 'bg-yellow-500',
+    preview: 'bg-purple-500',
+    settings: 'bg-gray-600',
   };
 
   return (
     <motion.button
       className="relative flex flex-col items-center group"
-      style={{ scale, y }}
+      style={{ scale }}
+      animate={controls}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={handleClick}
       initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
       transition={{
         delay: index * 0.05,
         duration: 0.4,
@@ -87,8 +85,8 @@ export function DockItem({
     >
       {/* Icon */}
       <div
-        className={`w-12 h-12 rounded-xl bg-gradient-to-br ${
-          iconGradients[app.id] || 'from-gray-500 to-gray-700'
+        className={`w-12 h-12 rounded-xl ${
+          iconColors[app.id] || 'bg-gray-600'
         } flex items-center justify-center shadow-lg transition-shadow ${
           isHovered ? 'shadow-xl shadow-black/30' : ''
         }`}
@@ -98,20 +96,14 @@ export function DockItem({
         </div>
       </div>
 
-      {/* Running Indicator */}
-      {isRunning && !isMinimized && (
+      {/* Running Indicator - shows different states:
+          - White dot = running and visible
+          - Amber/yellow dot = minimized */}
+      {isRunning && (
         <motion.div
-          className="absolute -bottom-1 w-1 h-1 rounded-full bg-white/80"
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.2 }}
-        />
-      )}
-
-      {/* Minimized Indicator (slightly different) */}
-      {hasMinimizedWindow && (
-        <motion.div
-          className="absolute -bottom-1 w-1 h-1 rounded-full bg-white/40"
+          className={`absolute -bottom-1 w-1 h-1 rounded-full ${
+            hasMinimizedWindow ? 'bg-amber-400' : 'bg-white/80'
+          }`}
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.2 }}

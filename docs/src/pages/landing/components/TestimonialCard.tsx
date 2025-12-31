@@ -15,7 +15,7 @@ export function TestimonialCard({
     <div className="card-border card-background rounded-2xl p-8">
       {/* Avatar */}
       <div className="mb-6">
-        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 border border-white/10 flex items-center justify-center">
+        <div className="w-12 h-12 rounded-full bg-blue-500/20 border border-white/10 flex items-center justify-center">
           <span className="text-white font-semibold text-sm">{avatar}</span>
         </div>
       </div>

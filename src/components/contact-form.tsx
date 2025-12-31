@@ -30,8 +30,8 @@ export function CompactContactForm({
 	return (
 		<section className={`relative py-14 sm:py-16 ${className}`}>
 			<div className="relative z-10 mx-auto max-w-6xl px-4">
-				<div className="relative overflow-hidden bg-linear-to-br from-black/80 via-neutral-900/30 to-black/80 backdrop-blur-xl border border-white/10 rounded-xl">
-					<div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(255,255,255,0.04),transparent_50%)]" />
+				<div className="relative overflow-hidden bg-neutral-900/80 backdrop-blur-md border border-white/10 rounded-xl">
+					<div className="absolute inset-0 bg-white/[0.02]" />
 					<div className="relative z-10 p-5 sm:p-6">
 						{/* Row 1: Heading */}
 						<div className="text-left mb-4">

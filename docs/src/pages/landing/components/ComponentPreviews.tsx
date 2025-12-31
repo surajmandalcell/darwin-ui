@@ -384,7 +384,7 @@ const ToastPreview = () => {
 				{toasts.map((toast) => (
 					<div
 						key={toast.id}
-						className="bg-[rgba(30,30,31,0.95)] backdrop-blur-xl shadow-lg rounded-md min-w-80 max-w-md pointer-events-auto animate-in slide-in-from-right duration-300"
+						className="bg-neutral-900/95 backdrop-blur-md shadow-md border border-white/10 rounded-md min-w-80 max-w-md pointer-events-auto animate-in slide-in-from-right duration-300"
 					>
 						<div className="p-4 flex items-start gap-3">
 							<div className="flex-1 min-w-0">

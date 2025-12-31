@@ -23,7 +23,7 @@ export function ShowcaseCard({
 
   return (
     <div className="min-h-[280px]">
-      <div className="group relative overflow-hidden rounded-2xl border border-white/10 hover:border-white/20 bg-gradient-to-br from-white/[0.02] to-transparent transition-all duration-300 flex flex-col h-full min-h-[280px]">
+      <div className="group relative overflow-hidden rounded-2xl border border-white/10 hover:border-white/20 bg-white/[0.02] transition-all duration-300 flex flex-col h-full min-h-[280px]">
         {/* Badge (if provided) */}
         {badge && (
           <Badge

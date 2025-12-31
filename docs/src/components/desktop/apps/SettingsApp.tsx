@@ -2,8 +2,10 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import type { WindowState } from '../../../contexts/desktop-context';
+import type { WindowState, DesktopState } from '../../../contexts/desktop-context';
 import { useDesktop } from '../../../contexts/desktop-context';
+
+type WallpaperId = DesktopState['settings']['wallpaper'];
 import {
   Palette,
   Sun,
@@ -40,11 +42,11 @@ const accentColors = [
   { id: 'cyan', name: 'Cyan', color: '#06b6d4' },
 ];
 
-const wallpapers = [
-  { id: 'sonoma', name: 'Sonoma', gradient: 'from-indigo-900 via-purple-900 to-blue-900' },
-  { id: 'ventura', name: 'Ventura', gradient: 'from-blue-900 via-cyan-900 to-teal-900' },
-  { id: 'monterey', name: 'Monterey', gradient: 'from-purple-900 via-violet-900 to-indigo-900' },
-  { id: 'gradient', name: 'Minimal', gradient: 'from-gray-900 to-black' },
+const wallpapers: { id: WallpaperId; name: string; gradient: string }[] = [
+  { id: 'sonoma', name: 'Sonoma', gradient: 'bg-indigo-900' },
+  { id: 'ventura', name: 'Ventura', gradient: 'bg-blue-900' },
+  { id: 'monterey', name: 'Monterey', gradient: 'bg-purple-900' },
+  { id: 'gradient', name: 'Minimal', gradient: 'bg-gray-900' },
 ];
 
 export function SettingsApp({ windowState: _windowState }: SettingsAppProps) {
@@ -128,8 +130,8 @@ export function SettingsApp({ windowState: _windowState }: SettingsAppProps) {
               {wallpapers.map((wp) => (
                 <button
                   key={wp.id}
-                  onClick={() => updateSettings({ wallpaper: wp.id as any })}
-                  className={`aspect-video rounded-xl bg-gradient-to-br ${wp.gradient} transition-all ${
+                  onClick={() => updateSettings({ wallpaper: wp.id })}
+                  className={`aspect-video rounded-xl ${wp.gradient} transition-all ${
                     state.settings.wallpaper === wp.id
                       ? 'ring-2 ring-blue-500 scale-105'
                       : 'hover:scale-102 opacity-80 hover:opacity-100'
@@ -271,7 +273,7 @@ export function SettingsApp({ windowState: _windowState }: SettingsAppProps) {
             animate={{ opacity: 1, y: 0 }}
             className="text-center py-8"
           >
-            <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+            <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-blue-500 flex items-center justify-center">
               <span className="text-3xl font-bold text-white">D</span>
             </div>
             <h2 className="text-2xl font-bold text-white mb-1">Darwin UI</h2>
@@ -296,10 +298,10 @@ export function SettingsApp({ windowState: _windowState }: SettingsAppProps) {
   };
 
   return (
-    <div className="flex h-full bg-[#1e1e20]">
+    <div className="flex h-full bg-neutral-900">
       {/* Sidebar */}
       <motion.div
-        className="w-52 bg-[#161618] border-r border-white/10 flex flex-col p-3"
+        className="w-52 bg-neutral-950 border-r border-white/10 flex flex-col p-3"
         initial={{ x: -20, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
       >

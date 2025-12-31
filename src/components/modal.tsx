@@ -61,7 +61,7 @@ export function Modal({
 						animate={{ opacity: 1 }}
 						exit={{ opacity: 0 }}
 						transition={{ duration: 0.2 }}
-						className="fixed inset-0 bg-black/50 backdrop-blur-sm p-4 overflow-y-auto"
+						className="fixed inset-0 bg-black/50 backdrop-blur-[6px] p-4 overflow-y-auto"
 						style={{ zIndex: "var(--z-modal)" }}
 						onClick={(e) => {
 							if (e.target === e.currentTarget) {
@@ -78,7 +78,7 @@ export function Modal({
 									duration: 0.3,
 									ease: [0.16, 1, 0.3, 1],
 								}}
-								className={`bg-[rgba(30,30,31,0.8)] backdrop-blur-xl shadow-[0px_20px_30px_0px_rgba(0,0,0,0.25),0px_0px_15px_0px_rgba(0,0,0,0.1),inset_0px_0px_0px_1px_rgba(255,255,255,0.075),0px_0px_0px_1px_rgba(0,0,0,0.5)] rounded-md w-full ${sizeClasses[size]} flex flex-col max-h-[calc(100vh-2rem)] ${className} pointer-events-auto`}
+								className={`bg-neutral-900/80 backdrop-blur-md shadow-md border border-white/10 rounded-md w-full ${sizeClasses[size]} flex flex-col max-h-[calc(100vh-2rem)] ${className} pointer-events-auto`}
 								role="dialog"
 								aria-modal="true"
 								aria-labelledby="modal-title"

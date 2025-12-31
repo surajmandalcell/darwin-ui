@@ -64,7 +64,7 @@ const MENU_CONFIG = {
 };
 
 const MENU_STYLES = {
-	base: "text-white bg-[rgba(30,30,31,0.5)] backdrop-blur-xl shadow-[0px_20px_30px_0px_rgba(0,0,0,0.25),0px_0px_15px_0px_rgba(0,0,0,0.1),inset_0px_0px_0px_1px_rgba(255,255,255,0.075),0px_0px_0px_1px_rgba(0,0,0,0.5)]",
+	base: "text-white bg-neutral-900/50 backdrop-blur-md shadow-md border border-white/10",
 	contextMenu: "fixed z-50 min-w-32 text-sm p-1 w-fit rounded-[6px]",
 	clickMenu:
 		"absolute left-0 top-full z-50 min-w-32 w-56 text-sm p-1 rounded-[6px] transition-all duration-150 ease-out",

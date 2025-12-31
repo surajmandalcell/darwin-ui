@@ -89,7 +89,7 @@ export function Select({
 							left: `${dropdownPosition.left}px`,
 							minWidth: `${dropdownPosition.width}px`,
 						}}
-						className="z-50 min-w-[8rem] overflow-hidden rounded-md border border-white/10 bg-[#1a1a1a]/95 backdrop-blur-xl shadow-xl"
+						className="z-50 min-w-[8rem] overflow-hidden rounded-md border border-white/10 bg-neutral-900/95 backdrop-blur-md shadow-md"
 					>
 						<ul role="listbox" className="p-1">
 							{options.map((opt) => (
@@ -135,6 +135,7 @@ export function Select({
 				<span className="ml-2 h-4 w-4 opacity-50">
 					<motion.svg
 						animate={{ rotate: open ? 180 : 0 }}
+						transition={{ duration: 0.2, ease: "easeOut" }}
 						xmlns="http://www.w3.org/2000/svg"
 						width="24"
 						height="24"

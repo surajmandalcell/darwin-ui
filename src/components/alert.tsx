@@ -102,12 +102,12 @@ export function AlertProvider({ children }: { children: React.ReactNode }) {
 					>
 						<button
 							type="button"
-							className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+							className="absolute inset-0 bg-black/50 backdrop-blur-[6px]"
 							aria-label={alert.cancelText || "Dismiss alert"}
 							onClick={() => handleClose(alert.onCancel)}
 						/>
 						<div
-							className={`relative bg-[rgba(30,30,31,0.95)] backdrop-blur-xl shadow-[0px_20px_30px_0px_rgba(0,0,0,0.25),0px_0px_15px_0px_rgba(0,0,0,0.1),inset_0px_0px_0px_1px_rgba(255,255,255,0.075),0px_0px_0px_1px_rgba(0,0,0,0.5)] rounded-md w-full max-w-md ${
+							className={`relative bg-neutral-900/95 backdrop-blur-md shadow-md border border-white/10 rounded-md w-full max-w-md ${
 								isClosing
 									? "animate-out zoom-out-95 duration-200"
 									: "animate-in zoom-in-95 duration-200"

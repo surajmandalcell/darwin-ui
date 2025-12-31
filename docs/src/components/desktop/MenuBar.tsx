@@ -49,7 +49,7 @@ export function MenuBar() {
   return (
     <div className="fixed top-0 left-0 right-0 h-7 z-[9000]">
       {/* Glass background */}
-      <div className="absolute inset-0 bg-black/40 backdrop-blur-2xl border-b border-white/10" />
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-md border-b border-white/10" />
 
       {/* Content */}
       <div className="relative h-full flex items-center justify-between px-4 text-white/90 text-[13px] font-medium">
@@ -60,7 +60,7 @@ export function MenuBar() {
             className="flex items-center justify-center w-5 h-5 hover:bg-white/10 rounded transition-colors"
             onClick={() => setActiveMenu(activeMenu === 'darwin' ? null : 'darwin')}
           >
-            <div className="w-4 h-4 rounded bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center">
+            <div className="w-4 h-4 rounded bg-blue-500 flex items-center justify-center">
               <span className="text-[10px] font-bold text-white">D</span>
             </div>
           </button>
@@ -92,7 +92,7 @@ export function MenuBar() {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: -5, scale: 0.95 }}
                       transition={{ duration: 0.15 }}
-                      className="absolute top-full left-0 mt-1 min-w-[180px] py-1 bg-[#2a2a2a]/95 backdrop-blur-xl rounded-lg border border-white/10 shadow-2xl"
+                      className="absolute top-full left-0 mt-1 min-w-[180px] py-1 bg-neutral-800/95 backdrop-blur-md rounded-lg border border-white/10 shadow-md"
                     >
                       {menuItems[menu].map((item, idx) => (
                         <button

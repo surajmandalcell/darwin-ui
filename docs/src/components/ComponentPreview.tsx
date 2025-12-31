@@ -212,14 +212,14 @@ export function ModalPreview() {
 
             {isOpen && (
                 <div
-                    className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[100]"
+                    className="fixed inset-0 bg-black/60 backdrop-blur-[6px] flex items-center justify-center z-[100]"
                     onClick={() => setIsOpen(false)}
                 >
                     <Card
-                        className="w-[90%] max-w-md bg-[#0a0a0a] border-white/[0.08] p-6 shadow-2xl relative overflow-hidden"
+                        className="w-[90%] max-w-md bg-neutral-950 border-white/10 p-6 shadow-md relative overflow-hidden"
                         onClick={(e: React.MouseEvent) => e.stopPropagation()}
                     >
-                        <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-white/[0.04] to-transparent pointer-events-none" />
+                        <div className="absolute top-0 left-0 right-0 h-24 bg-white/[0.02] pointer-events-none" />
 
                         <div className="relative">
                             <div className="flex items-center justify-between mb-5">
@@ -267,7 +267,7 @@ export function ToastPreview() {
 
             {showToast && (
                 <div
-                    className="absolute bottom-4 z-20 flex items-center gap-3 px-4 py-3 bg-[#0f172a] border border-emerald-500/20 rounded-xl shadow-xl animate-in slide-in-from-bottom-5 fade-in duration-300"
+                    className="absolute bottom-4 z-20 flex items-center gap-3 px-4 py-3 bg-slate-900 border border-emerald-500/20 rounded-xl shadow-md animate-in slide-in-from-bottom-5 fade-in duration-300"
                 >
                     <div className="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-500/10 flex items-center justify-center">
                         <Check className="w-4 h-4 text-emerald-500" />
@@ -310,7 +310,7 @@ export function SelectPreview() {
 
                 {isOpen && (
                     <div
-                        className="absolute top-full left-0 right-0 mt-2 py-1.5 bg-[#0a0a0a] border border-white/[0.08] rounded-xl shadow-2xl z-10 overflow-hidden animate-in fade-in zoom-in-95 duration-200"
+                        className="absolute top-full left-0 right-0 mt-2 py-1.5 bg-neutral-950 border border-white/10 rounded-xl shadow-md z-10 overflow-hidden animate-in fade-in zoom-in-95 duration-200"
                     >
                         {options.map((option) => (
                             <button

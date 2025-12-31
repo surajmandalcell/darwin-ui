@@ -35,21 +35,21 @@ const categories = [
 ];
 
 const components = [
-  { id: 'button', name: 'Button', category: 'form', icon: <MousePointer className="w-5 h-5" />, description: 'Interactive button with multiple variants', color: 'from-blue-500 to-blue-600' },
-  { id: 'input', name: 'Input', category: 'form', icon: <FormInput className="w-5 h-5" />, description: 'Text input with validation states', color: 'from-green-500 to-green-600' },
-  { id: 'checkbox', name: 'Checkbox', category: 'form', icon: <Square className="w-5 h-5" />, description: 'Checkable input for boolean values', color: 'from-purple-500 to-purple-600' },
-  { id: 'toggle', name: 'Toggle', category: 'form', icon: <ToggleLeft className="w-5 h-5" />, description: 'Switch between on and off states', color: 'from-orange-500 to-orange-600' },
-  { id: 'select', name: 'Select', category: 'form', icon: <ChevronRight className="w-5 h-5" />, description: 'Dropdown selection component', color: 'from-cyan-500 to-cyan-600' },
-  { id: 'slider', name: 'Slider', category: 'form', icon: <Sliders className="w-5 h-5" />, description: 'Range input for numeric values', color: 'from-pink-500 to-pink-600' },
-  { id: 'alert', name: 'Alert', category: 'feedback', icon: <Bell className="w-5 h-5" />, description: 'Display important messages', color: 'from-red-500 to-red-600' },
-  { id: 'toast', name: 'Toast', category: 'feedback', icon: <MessageSquare className="w-5 h-5" />, description: 'Brief notification popups', color: 'from-yellow-500 to-yellow-600' },
-  { id: 'tooltip', name: 'Tooltip', category: 'feedback', icon: <MessageSquare className="w-5 h-5" />, description: 'Contextual information on hover', color: 'from-indigo-500 to-indigo-600' },
-  { id: 'progress', name: 'Progress', category: 'feedback', icon: <Sliders className="w-5 h-5" />, description: 'Visual progress indicators', color: 'from-teal-500 to-teal-600' },
-  { id: 'window', name: 'Window', category: 'layout', icon: <PanelTop className="w-5 h-5" />, description: 'macOS-style window container', color: 'from-gray-500 to-gray-600' },
-  { id: 'card', name: 'Card', category: 'layout', icon: <Square className="w-5 h-5" />, description: 'Content container with styling', color: 'from-slate-500 to-slate-600' },
-  { id: 'tabs', name: 'Tabs', category: 'layout', icon: <Layers className="w-5 h-5" />, description: 'Tabbed content navigation', color: 'from-violet-500 to-violet-600' },
-  { id: 'modal', name: 'Modal', category: 'overlay', icon: <Layers className="w-5 h-5" />, description: 'Dialog overlay component', color: 'from-fuchsia-500 to-fuchsia-600' },
-  { id: 'popover', name: 'Popover', category: 'overlay', icon: <MessageSquare className="w-5 h-5" />, description: 'Floating content container', color: 'from-rose-500 to-rose-600' },
+  { id: 'button', name: 'Button', category: 'form', icon: <MousePointer className="w-5 h-5" />, description: 'Interactive button with multiple variants', color: 'bg-blue-500' },
+  { id: 'input', name: 'Input', category: 'form', icon: <FormInput className="w-5 h-5" />, description: 'Text input with validation states', color: 'bg-green-500' },
+  { id: 'checkbox', name: 'Checkbox', category: 'form', icon: <Square className="w-5 h-5" />, description: 'Checkable input for boolean values', color: 'bg-purple-500' },
+  { id: 'toggle', name: 'Toggle', category: 'form', icon: <ToggleLeft className="w-5 h-5" />, description: 'Switch between on and off states', color: 'bg-orange-500' },
+  { id: 'select', name: 'Select', category: 'form', icon: <ChevronRight className="w-5 h-5" />, description: 'Dropdown selection component', color: 'bg-cyan-500' },
+  { id: 'slider', name: 'Slider', category: 'form', icon: <Sliders className="w-5 h-5" />, description: 'Range input for numeric values', color: 'bg-pink-500' },
+  { id: 'alert', name: 'Alert', category: 'feedback', icon: <Bell className="w-5 h-5" />, description: 'Display important messages', color: 'bg-red-500' },
+  { id: 'toast', name: 'Toast', category: 'feedback', icon: <MessageSquare className="w-5 h-5" />, description: 'Brief notification popups', color: 'bg-yellow-500' },
+  { id: 'tooltip', name: 'Tooltip', category: 'feedback', icon: <MessageSquare className="w-5 h-5" />, description: 'Contextual information on hover', color: 'bg-indigo-500' },
+  { id: 'progress', name: 'Progress', category: 'feedback', icon: <Sliders className="w-5 h-5" />, description: 'Visual progress indicators', color: 'bg-teal-500' },
+  { id: 'window', name: 'Window', category: 'layout', icon: <PanelTop className="w-5 h-5" />, description: 'macOS-style window container', color: 'bg-gray-500' },
+  { id: 'card', name: 'Card', category: 'layout', icon: <Square className="w-5 h-5" />, description: 'Content container with styling', color: 'bg-slate-500' },
+  { id: 'tabs', name: 'Tabs', category: 'layout', icon: <Layers className="w-5 h-5" />, description: 'Tabbed content navigation', color: 'bg-violet-500' },
+  { id: 'modal', name: 'Modal', category: 'overlay', icon: <Layers className="w-5 h-5" />, description: 'Dialog overlay component', color: 'bg-fuchsia-500' },
+  { id: 'popover', name: 'Popover', category: 'overlay', icon: <MessageSquare className="w-5 h-5" />, description: 'Floating content container', color: 'bg-rose-500' },
 ];
 
 export function ComponentsApp({ windowState: _windowState }: ComponentsAppProps) {
@@ -66,10 +66,10 @@ export function ComponentsApp({ windowState: _windowState }: ComponentsAppProps)
   });
 
   return (
-    <div className="flex h-full bg-[#1e1e20]">
+    <div className="flex h-full bg-neutral-900">
       {/* Finder-style Sidebar */}
       <motion.div
-        className="w-48 bg-[#252528] border-r border-white/10 flex flex-col"
+        className="w-48 bg-neutral-800 border-r border-white/10 flex flex-col"
         initial={{ x: -20, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
       >
@@ -100,7 +100,7 @@ export function ComponentsApp({ windowState: _windowState }: ComponentsAppProps)
       {/* Main Content */}
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Toolbar */}
-        <div className="flex items-center gap-3 px-4 py-2 bg-[#1a1a1c] border-b border-white/10">
+        <div className="flex items-center gap-3 px-4 py-2 bg-neutral-900 border-b border-white/10">
           {/* Search */}
           <div className="relative flex-1 max-w-xs">
             <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
@@ -171,7 +171,7 @@ export function ComponentsApp({ windowState: _windowState }: ComponentsAppProps)
                   <div
                     className={`${
                       viewMode === 'columns' ? 'w-10 h-10' : 'w-12 h-12'
-                    } rounded-xl bg-gradient-to-br ${comp.color} flex items-center justify-center text-white ${
+                    } rounded-xl ${comp.color} flex items-center justify-center text-white ${
                       viewMode === 'list' ? '' : 'mb-3'
                     }`}
                   >
