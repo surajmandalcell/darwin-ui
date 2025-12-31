@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, lazy, useState } from 'react';
+import { Suspense, lazy, useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Github } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -62,76 +62,47 @@ export default function LandingPage() {
 
 // Hero Section Component
 function HeroSection({ scrollToShowcase }: { scrollToShowcase: () => void }) {
+  const [isDashboardExpanded, setIsDashboardExpanded] = useState(false);
+  const hoverTimeoutRef = useRef<number | null>(null);
+
+  // Handle mouse enter with 300ms delay
+  const handleMouseEnter = () => {
+    hoverTimeoutRef.current = setTimeout(() => {
+      setIsDashboardExpanded(true);
+    }, 300);
+  };
+
+  // Handle mouse leave - collapse immediately
+  const handleMouseLeave = () => {
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+    }
+    setIsDashboardExpanded(false);
+  };
+
+  // Handle ESC key to collapse
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsDashboardExpanded(false);
+      }
+    };
+
+    if (isDashboardExpanded) {
+      window.addEventListener('keydown', handleEscape);
+      return () => window.removeEventListener('keydown', handleEscape);
+    }
+  }, [isDashboardExpanded]);
+
   return (
     <section className="relative h-screen flex items-center overflow-hidden">
-      {/* Modern Mesh Gradient Background */}
-      <div className="absolute inset-0 bg-[#0a0a0a]">
-        <motion.div
-          className="absolute top-0 left-[10%] w-[500px] h-[500px] rounded-full opacity-40"
+      {/* Radial Gradient Background from Top */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#1a1a2e] via-[#0a0a0a] to-[#0a0a0a]">
+        <div
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[800px] opacity-40"
           style={{
-            background: 'radial-gradient(circle, #8656e5 0%, transparent 70%)',
+            background: 'radial-gradient(ellipse at top, rgba(99, 102, 241, 0.4), rgba(139, 92, 246, 0.3) 40%, transparent 70%)',
             filter: 'blur(80px)',
-          }}
-          animate={{
-            y: [0, 30, 0],
-            x: [0, 20, 0],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            duration: 12,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-        <motion.div
-          className="absolute top-[20%] right-[15%] w-[600px] h-[600px] rounded-full opacity-30"
-          style={{
-            background: 'radial-gradient(circle, #255ec2 0%, transparent 70%)',
-            filter: 'blur(90px)',
-          }}
-          animate={{
-            y: [0, -40, 0],
-            x: [0, -25, 0],
-            scale: [1, 1.15, 1],
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-        <motion.div
-          className="absolute bottom-[10%] left-[30%] w-[550px] h-[550px] rounded-full opacity-35"
-          style={{
-            background: 'radial-gradient(circle, #e61eea 0%, transparent 70%)',
-            filter: 'blur(85px)',
-          }}
-          animate={{
-            y: [0, 35, 0],
-            x: [0, -30, 0],
-            scale: [1, 1.12, 1],
-          }}
-          transition={{
-            duration: 14,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-        <motion.div
-          className="absolute bottom-[25%] right-[25%] w-[450px] h-[450px] rounded-full opacity-25"
-          style={{
-            background: 'radial-gradient(circle, #12a4ff 0%, transparent 70%)',
-            filter: 'blur(75px)',
-          }}
-          animate={{
-            y: [0, -25, 0],
-            x: [0, 35, 0],
-            scale: [1, 1.08, 1],
-          }}
-          transition={{
-            duration: 13,
-            repeat: Infinity,
-            ease: "easeInOut"
           }}
         />
       </div>
@@ -212,26 +183,39 @@ function HeroSection({ scrollToShowcase }: { scrollToShowcase: () => void }) {
         </div>
       </div>
 
-      {/* Dashboard Screenshot - Extends beyond viewport on the right */}
-      <motion.div
-        initial={{ opacity: 0, x: 100 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 0.3, duration: 0.8 }}
-        className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 w-[60%] z-20 pointer-events-none"
+      {/* Dashboard Screenshot - Interactive on hover */}
+      <div
+        className="hidden lg:block absolute -right-[15%] top-1/2 -translate-y-1/2 w-[60%] z-20"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       >
-        <Suspense
-          fallback={
-            <div className="h-[600px] flex items-center justify-center">
-              <div className="text-center">
-                <Skeleton className="h-12 w-64 mx-auto mb-4" />
-                <Skeleton className="h-6 w-48 mx-auto" />
-              </div>
-            </div>
-          }
+        <motion.div
+          initial={{ opacity: 0, x: 100 }}
+          animate={{
+            opacity: 1,
+            x: isDashboardExpanded ? -100 : 0,
+          }}
+          transition={{
+            opacity: { delay: 0.3, duration: 0.8 },
+            x: isDashboardExpanded
+              ? { duration: 0.4, ease: "easeOut" }
+              : { delay: 0.3, duration: 0.8 }
+          }}
         >
-          <DashboardShowcase />
-        </Suspense>
-      </motion.div>
+          <Suspense
+            fallback={
+              <div className="h-[600px] flex items-center justify-center">
+                <div className="text-center">
+                  <Skeleton className="h-12 w-64 mx-auto mb-4" />
+                  <Skeleton className="h-6 w-48 mx-auto" />
+                </div>
+              </div>
+            }
+          >
+            <DashboardShowcase />
+          </Suspense>
+        </motion.div>
+      </div>
     </section>
   );
 }

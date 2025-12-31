@@ -1,7 +1,7 @@
 "use client";
 
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { Check, Copy } from 'lucide-react';
 import { useState } from 'react';
 
@@ -66,7 +66,7 @@ export function CodeBlock({
       {/* Code Content */}
       <SyntaxHighlighter
         language={language}
-        style={atomDark}
+        style={vscDarkPlus}
         showLineNumbers={showLineNumbers}
         wrapLines={highlightLines.length > 0}
         lineProps={(lineNumber) => ({
