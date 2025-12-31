@@ -7,8 +7,8 @@ export {
 	fileToBase64,
 	validateImageFile,
 } from "../lib/image-utils";
-export type { AlertType } from "./alert";
-export { AlertProvider, useAlert } from "./alert";
+export type { AlertType, AlertVariant } from "./alert";
+export { Alert, AlertProvider, useAlert } from "./alert";
 export { Badge } from "./badge";
 export { Button } from "./button";
 export {
@@ -67,3 +67,53 @@ export type { ToastType } from "./toast";
 export { ToastProvider, useToast } from "./toast";
 export { Upload } from "./upload";
 export { Window } from "./window";
+
+// Tabs
+export { Tabs, TabsList, TabsTrigger, TabsContent } from "./tabs";
+
+// Accordion
+export { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "./accordion";
+
+// Avatar
+export { Avatar, AvatarGroup } from "./avatar";
+
+// Progress
+export { Progress, CircularProgress } from "./progress";
+
+// Slider
+export { Slider } from "./slider";
+
+// Textarea
+export type { TextareaProps } from "./textarea";
+export { Textarea } from "./textarea";
+
+// Dialog
+export {
+	Dialog,
+	DialogTrigger,
+	DialogContent,
+	DialogHeader,
+	DialogTitle,
+	DialogDescription,
+	DialogBody,
+	DialogFooter,
+	DialogClose,
+} from "./dialog";
+
+// Dropdown Menu
+export {
+	DropdownMenu,
+	DropdownMenuTrigger,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuCheckboxItem,
+	DropdownMenuLabel,
+	DropdownMenuSeparator,
+	DropdownMenuShortcut,
+} from "./dropdown-menu";
+
+// Popover
+export { Popover, PopoverTrigger, PopoverContent, PopoverClose } from "./popover";
+
+// Tooltip
+export { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "./tooltip";

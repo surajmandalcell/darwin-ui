@@ -19,7 +19,35 @@ import {
   AlertTriangle,
   Info
 } from 'lucide-react';
-import { Button, Input, Checkbox, Switch, Select, Badge, Skeleton } from '@smc/darwin-ui';
+import {
+  Alert,
+  Button,
+  Input,
+  Checkbox,
+  Switch,
+  Select,
+  Badge,
+  Skeleton,
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+  Modal,
+  SearchInput,
+  MultiSelect,
+  Table,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableHeaderCell,
+  TableCell,
+  ContextMenu,
+  LineChart,
+  BarChart,
+  CloseButton,
+} from '@smc/darwin-ui';
 
 interface DeveloperAppProps {
   windowState: WindowState;
@@ -77,7 +105,7 @@ const pageTransitionVariants = {
   }
 } as const;
 
-// Feature card variants
+// Feature card variants (no hover border glow)
 const featureCardVariants = {
   hidden: { opacity: 0, y: 20, scale: 0.95 },
   show: {
@@ -93,7 +121,6 @@ const featureCardVariants = {
   hover: {
     y: -4,
     scale: 1.02,
-    boxShadow: "0 12px 40px -12px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1)",
     transition: {
       type: "spring",
       stiffness: 400,
@@ -138,14 +165,13 @@ const sidebarItemVariants = {
   })
 };
 
-// Code block glow variants
+// Code block variants (no hover glow)
 const codeBlockVariants = {
   initial: {
     borderColor: "rgba(255, 255, 255, 0.1)"
   },
   hover: {
-    borderColor: "rgba(59, 130, 246, 0.4)",
-    boxShadow: "0 0 20px -5px rgba(59, 130, 246, 0.3)",
+    borderColor: "rgba(255, 255, 255, 0.1)",
     transition: {
       duration: 0.3
     }
@@ -502,13 +528,12 @@ function App() {
           {nextSteps.map((item, i) => (
             <motion.div
               key={item.title}
-              className="flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/10 hover:border-blue-500/50 cursor-pointer transition-colors"
+              className="flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/10 cursor-pointer transition-colors"
               variants={itemVariants}
               custom={i}
               whileHover={{
                 x: 8,
-                borderColor: "rgba(59, 130, 246, 0.5)",
-                backgroundColor: "rgba(59, 130, 246, 0.05)"
+                backgroundColor: "rgba(255, 255, 255, 0.05)"
               }}
               whileTap={{ scale: 0.98 }}
             >
@@ -739,10 +764,10 @@ function SelectPreview() {
 
 function AlertPreview() {
   const alerts = [
-    { icon: Info, color: 'blue', title: 'Information', desc: 'This is an informational alert message.' },
-    { icon: CheckCircle, color: 'green', title: 'Success', desc: 'Your changes have been saved successfully.' },
-    { icon: AlertTriangle, color: 'amber', title: 'Warning', desc: 'Please review your settings before proceeding.' },
-    { icon: AlertCircle, color: 'red', title: 'Error', desc: 'Something went wrong. Please try again.' },
+    { variant: 'info' as const, title: 'Information', desc: 'This is an informational alert message.' },
+    { variant: 'success' as const, title: 'Success', desc: 'Your changes have been saved successfully.' },
+    { variant: 'warning' as const, title: 'Warning', desc: 'Please review your settings before proceeding.' },
+    { variant: 'error' as const, title: 'Error', desc: 'Something went wrong. Please try again.' },
   ];
 
   return (
@@ -752,35 +777,19 @@ function AlertPreview() {
       initial="hidden"
       animate="show"
     >
-      {alerts.map((alert, i) => {
-        const Icon = alert.icon;
-        return (
-          <motion.div
-            key={alert.title}
-            className={`flex items-start gap-3 p-3 rounded-lg bg-${alert.color}-500/10 border border-${alert.color}-500/20`}
-            variants={itemVariants}
-            custom={i}
-            whileHover={{ scale: 1.02, x: 4 }}
-            whileTap={{ scale: 0.98 }}
-            style={{
-              backgroundColor: `rgba(var(--${alert.color}-500), 0.1)`,
-              borderColor: `rgba(var(--${alert.color}-500), 0.2)`
-            }}
-          >
-            <motion.div
-              initial={{ scale: 0, rotate: -180 }}
-              animate={{ scale: 1, rotate: 0 }}
-              transition={{ delay: i * 0.1, type: "spring", stiffness: 400, damping: 15 }}
-            >
-              <Icon className={`w-5 h-5 text-${alert.color}-400 shrink-0 mt-0.5`} />
-            </motion.div>
-            <div>
-              <div className="text-sm font-medium text-white/90">{alert.title}</div>
-              <div className="text-sm text-white/60">{alert.desc}</div>
-            </div>
-          </motion.div>
-        );
-      })}
+      {alerts.map((alert, i) => (
+        <motion.div
+          key={alert.title}
+          variants={itemVariants}
+          custom={i}
+        >
+          <Alert
+            variant={alert.variant}
+            title={alert.title}
+            description={alert.desc}
+          />
+        </motion.div>
+      ))}
     </motion.div>
   );
 }
@@ -804,10 +813,6 @@ function ToastPreview() {
             className="bg-neutral-900/95 backdrop-blur-md shadow-md rounded-md border border-white/10"
             variants={itemVariants}
             custom={i}
-            whileHover={{
-              y: -4,
-              boxShadow: "0 12px 40px -12px rgba(0, 0, 0, 0.4)"
-            }}
             whileTap={{ scale: 0.98 }}
           >
             <div className="p-3 flex items-start gap-3">
@@ -838,10 +843,6 @@ function WindowPreview() {
       initial={{ opacity: 0, y: 20, scale: 0.9 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ type: "spring", stiffness: 300, damping: 25 }}
-      whileHover={{
-        y: -4,
-        boxShadow: "0 20px 60px -20px rgba(0, 0, 0, 0.5)"
-      }}
     >
       <div className="rounded-lg border border-white/10 bg-neutral-950/80 shadow-sm overflow-hidden">
         <div className="flex items-center justify-between border-b border-white/10 px-3 py-2 bg-white/5">
@@ -1026,10 +1027,6 @@ function ComponentPage({ name }: { name: string }) {
         initial="hidden"
         animate="show"
         transition={{ delay: 0.2 }}
-        whileHover={{
-          borderColor: "rgba(255, 255, 255, 0.15)",
-          backgroundColor: "rgba(255, 255, 255, 0.06)"
-        }}
       >
         <motion.h3
           className="text-sm font-medium text-white/50 mb-4"
@@ -1202,9 +1199,6 @@ function ThemingPage({ name }: { name: string }) {
           initial="hidden"
           animate="show"
           transition={{ delay: 0.2 }}
-          whileHover={{
-            borderColor: "rgba(255, 255, 255, 0.15)"
-          }}
         >
           <h3 className="text-sm font-medium text-white/50 mb-4">Preview</h3>
           <div className="flex items-center justify-center min-h-[100px] p-4">

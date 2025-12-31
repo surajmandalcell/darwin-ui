@@ -22,7 +22,7 @@ export function DocNavigation() {
         {previous ? (
           <Link
             to={previous.href}
-            className="group flex flex-col gap-2 p-4 rounded-lg border border-white/10 bg-white/[0.02] hover:bg-white/5 hover:border-white/20 transition-all"
+            className="group flex flex-col gap-2 p-4 rounded-lg border border-white/10 bg-white/[0.02] hover:bg-white/5 transition-all"
           >
             <div className="flex items-center gap-2 text-xs text-white/40 uppercase tracking-wide font-medium">
               <ArrowLeft className="w-3 h-3" />
@@ -40,7 +40,7 @@ export function DocNavigation() {
         {next && (
           <Link
             to={next.href}
-            className="group flex flex-col gap-2 p-4 rounded-lg border border-white/10 bg-white/[0.02] hover:bg-white/5 hover:border-white/20 transition-all sm:items-end sm:text-right"
+            className="group flex flex-col gap-2 p-4 rounded-lg border border-white/10 bg-white/[0.02] hover:bg-white/5 transition-all sm:items-end sm:text-right"
           >
             <div className="flex items-center gap-2 text-xs text-white/40 uppercase tracking-wide font-medium">
               Next

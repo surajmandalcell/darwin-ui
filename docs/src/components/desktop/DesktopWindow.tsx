@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useCallback, useState, useEffect } from 'react';
-import { motion, useDragControls, useMotionValue } from 'framer-motion';
+import { motion, useDragControls, useMotionValue, AnimatePresence } from 'framer-motion';
 import { useDesktop, type WindowState, type AppDefinition } from '../../contexts/desktop-context';
 
 // Import app components
@@ -23,6 +23,146 @@ const appComponents: Record<string, React.ComponentType<{ windowState: WindowSta
   notes: NotesApp,
   settings: SettingsApp,
 };
+
+// macOS Traffic Light Colors (from official Apple design)
+const trafficLightColors = {
+  close: {
+    bg: '#ff5f57',
+    bgHover: '#ff5f57',
+    bgActive: '#bf4942',
+    symbol: '#4d0000',
+    symbolActive: '#190000',
+  },
+  minimize: {
+    bg: '#febc2e',
+    bgHover: '#febc2e',
+    bgActive: '#bf8e22',
+    symbol: '#995700',
+    symbolActive: '#592800',
+  },
+  maximize: {
+    bg: '#28c840',
+    bgHover: '#28c840',
+    bgActive: '#1d9730',
+    symbol: '#006500',
+    symbolActive: '#003200',
+  },
+  unfocused: '#ddd',
+};
+
+// Traffic Light Button Component
+interface TrafficLightButtonProps {
+  type: 'close' | 'minimize' | 'maximize';
+  onClick: (e: React.MouseEvent) => void;
+  isFocused: boolean;
+  isGroupHovered: boolean;
+  isMaximized?: boolean;
+}
+
+function TrafficLightButton({ type, onClick, isFocused, isGroupHovered, isMaximized }: TrafficLightButtonProps) {
+  const [isPressed, setIsPressed] = useState(false);
+  const colors = trafficLightColors[type];
+
+  const bgColor = !isFocused
+    ? trafficLightColors.unfocused
+    : isPressed
+      ? colors.bgActive
+      : colors.bg;
+
+  const symbolColor = isPressed ? colors.symbolActive : colors.symbol;
+
+  return (
+    <button
+      className="w-3 h-3 rounded-full relative flex items-center justify-center transition-colors duration-75"
+      style={{ backgroundColor: bgColor }}
+      onClick={onClick}
+      onMouseDown={() => setIsPressed(true)}
+      onMouseUp={() => setIsPressed(false)}
+      onMouseLeave={() => setIsPressed(false)}
+    >
+      {/* Symbol - only visible on group hover when window is focused */}
+      <motion.div
+        className="absolute inset-0 flex items-center justify-center"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isGroupHovered && isFocused ? 1 : 0 }}
+        transition={{ duration: 0.1 }}
+      >
+        {type === 'close' && (
+          // X symbol - two rotated lines
+          <svg width="6" height="6" viewBox="0 0 6 6" className="overflow-visible">
+            <line x1="0" y1="0" x2="6" y2="6" stroke={symbolColor} strokeWidth="1.2" strokeLinecap="round" />
+            <line x1="6" y1="0" x2="0" y2="6" stroke={symbolColor} strokeWidth="1.2" strokeLinecap="round" />
+          </svg>
+        )}
+        {type === 'minimize' && (
+          // Minus symbol - horizontal line
+          <svg width="8" height="2" viewBox="0 0 8 2">
+            <line x1="0" y1="1" x2="8" y2="1" stroke={symbolColor} strokeWidth="1.2" strokeLinecap="round" />
+          </svg>
+        )}
+        {type === 'maximize' && (
+          // Expand/Plus symbol - two diagonal arrows pointing outward (macOS Sonoma style)
+          <svg width="6" height="6" viewBox="0 0 6 6" className="overflow-visible">
+            {isMaximized ? (
+              // When maximized, show inward arrows (restore)
+              <>
+                <polyline points="0,2 2,2 2,0" fill="none" stroke={symbolColor} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                <polyline points="6,4 4,4 4,6" fill="none" stroke={symbolColor} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+              </>
+            ) : (
+              // When normal, show outward arrows (expand)
+              <>
+                <polyline points="2,0 0,0 0,2" fill="none" stroke={symbolColor} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                <polyline points="4,6 6,6 6,4" fill="none" stroke={symbolColor} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+              </>
+            )}
+          </svg>
+        )}
+      </motion.div>
+    </button>
+  );
+}
+
+// Traffic Lights Container Component
+interface TrafficLightsProps {
+  onClose: (e: React.MouseEvent) => void;
+  onMinimize: (e: React.MouseEvent) => void;
+  onMaximize: (e: React.MouseEvent) => void;
+  isFocused: boolean;
+  isMaximized: boolean;
+}
+
+function TrafficLights({ onClose, onMinimize, onMaximize, isFocused, isMaximized }: TrafficLightsProps) {
+  const [isGroupHovered, setIsGroupHovered] = useState(false);
+
+  return (
+    <div
+      className="flex items-center gap-2"
+      onMouseEnter={() => setIsGroupHovered(true)}
+      onMouseLeave={() => setIsGroupHovered(false)}
+    >
+      <TrafficLightButton
+        type="close"
+        onClick={onClose}
+        isFocused={isFocused}
+        isGroupHovered={isGroupHovered}
+      />
+      <TrafficLightButton
+        type="minimize"
+        onClick={onMinimize}
+        isFocused={isFocused}
+        isGroupHovered={isGroupHovered}
+      />
+      <TrafficLightButton
+        type="maximize"
+        onClick={onMaximize}
+        isFocused={isFocused}
+        isGroupHovered={isGroupHovered}
+        isMaximized={isMaximized}
+      />
+    </div>
+  );
+}
 
 export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowProps) {
   const {
@@ -347,27 +487,14 @@ export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowP
           }}
           onDoubleClick={handleMaximize}
         >
-          {/* Traffic Lights - Plain colored dots only */}
-          <div className="flex items-center gap-2">
-            {/* Close - Red dot */}
-            <button
-              className="w-3 h-3 rounded-full"
-              style={{ backgroundColor: isFocused ? '#ff5f57' : 'rgba(255,255,255,0.2)' }}
-              onClick={handleClose}
-            />
-            {/* Minimize - Yellow dot */}
-            <button
-              className="w-3 h-3 rounded-full"
-              style={{ backgroundColor: isFocused ? '#febc2e' : 'rgba(255,255,255,0.2)' }}
-              onClick={handleMinimize}
-            />
-            {/* Maximize - Green dot */}
-            <button
-              className="w-3 h-3 rounded-full"
-              style={{ backgroundColor: isFocused ? '#28c840' : 'rgba(255,255,255,0.2)' }}
-              onClick={handleMaximize}
-            />
-          </div>
+          {/* Traffic Lights - macOS style with group hover behavior */}
+          <TrafficLights
+            onClose={handleClose}
+            onMinimize={handleMinimize}
+            onMaximize={handleMaximize}
+            isFocused={isFocused}
+            isMaximized={windowState.isMaximized}
+          />
 
           {/* Title with truncation */}
           <div className="flex-1 text-center overflow-hidden px-4">

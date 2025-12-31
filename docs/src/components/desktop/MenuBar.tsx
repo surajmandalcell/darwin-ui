@@ -3,7 +3,153 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useDesktop, apps } from '../../contexts/desktop-context';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Wifi, Battery, Apple, WifiOff } from 'lucide-react';
+import { Search, Wifi, Battery, Apple, WifiOff, X, ExternalLink } from 'lucide-react';
+
+// About Modal Component - Apple-style About window
+function AboutModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+  // Handle escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleEscape);
+    return () => window.removeEventListener('keydown', handleEscape);
+  }, [isOpen, onClose]);
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          {/* Backdrop */}
+          <motion.div
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[9500]"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+          />
+
+          {/* Modal */}
+          <motion.div
+            className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-[9501]"
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+          >
+            <div className="w-[320px] bg-neutral-900/95 backdrop-blur-xl rounded-xl border border-white/10 shadow-2xl shadow-black/50 overflow-hidden">
+              {/* Header with close button */}
+              <div className="relative flex items-center justify-center h-8 bg-neutral-800/50 border-b border-white/5">
+                <motion.button
+                  className="absolute left-2 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-red-500 flex items-center justify-center group"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={onClose}
+                >
+                  <X className="w-2 h-2 text-red-900 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </motion.button>
+                <span className="text-xs text-white/50 font-medium">About Darwin UI</span>
+              </div>
+
+              {/* Content */}
+              <div className="p-6 flex flex-col items-center text-center">
+                {/* Logo */}
+                <motion.div
+                  className="w-20 h-20 mb-4 rounded-2xl bg-gradient-to-br from-blue-500/30 via-indigo-500/20 to-purple-500/30 border border-white/10 flex items-center justify-center shadow-lg"
+                  initial={{ scale: 0.8, rotate: -10 }}
+                  animate={{ scale: 1, rotate: 0 }}
+                  transition={{ delay: 0.1, type: 'spring', damping: 15 }}
+                >
+                  <Apple className="w-10 h-10 text-white" />
+                </motion.div>
+
+                {/* App Name */}
+                <motion.h1
+                  className="text-xl font-semibold text-white mb-1"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.15 }}
+                >
+                  Darwin UI
+                </motion.h1>
+
+                {/* Version */}
+                <motion.p
+                  className="text-sm text-white/60 mb-4"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                >
+                  Version 1.1.0
+                </motion.p>
+
+                {/* Description */}
+                <motion.p
+                  className="text-sm text-white/70 mb-4 leading-relaxed"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.25 }}
+                >
+                  A macOS-inspired React component library for building beautiful, modern interfaces.
+                </motion.p>
+
+                {/* Divider */}
+                <motion.div
+                  className="w-full h-px bg-white/10 mb-4"
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ delay: 0.3 }}
+                />
+
+                {/* Credits */}
+                <motion.div
+                  className="text-xs text-white/50 space-y-1"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.35 }}
+                >
+                  <p>Created by Suraj Mandal</p>
+                  <p>Built with React, Next.js & Tailwind CSS</p>
+                </motion.div>
+
+                {/* GitHub Link */}
+                <motion.a
+                  href="https://github.com/surajmandalcell/darwin-ui"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-4 flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 rounded-lg text-sm text-white/80 hover:text-white transition-colors border border-white/10"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                >
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
+                  </svg>
+                  <span>View on GitHub</span>
+                  <ExternalLink className="w-3 h-3 text-white/40" />
+                </motion.a>
+
+                {/* Copyright */}
+                <motion.p
+                  className="mt-4 text-[10px] text-white/30"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.45 }}
+                >
+                  Copyright 2024-2025 Darwin UI. All rights reserved.
+                </motion.p>
+              </div>
+            </div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+  );
+}
 
 interface MenuItem {
   label: string;
@@ -132,6 +278,7 @@ export function MenuBar() {
     state
   } = useDesktop();
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
+  const [showAboutModal, setShowAboutModal] = useState(false);
 
   const activeWindow = getActiveWindow();
   const activeApp = activeWindow ? apps[activeWindow.appId] : null;
@@ -266,9 +413,14 @@ export function MenuBar() {
 
   const menuItems = getMenuItems();
 
+  // Handler for About modal
+  const handleOpenAbout = useCallback(() => {
+    setShowAboutModal(true);
+  }, []);
+
   // Darwin menu items for stagger animation
   const darwinMenuItems = [
-    { label: 'About Darwin UI', action: () => openApp('developer', '/docs/getting-started/introduction') },
+    { label: 'About Darwin UI', action: handleOpenAbout },
     { separator: true },
     { label: 'System Settings...', action: () => openApp('settings') },
     { separator: true },
@@ -468,6 +620,9 @@ export function MenuBar() {
           />
         )}
       </AnimatePresence>
+
+      {/* About Modal */}
+      <AboutModal isOpen={showAboutModal} onClose={() => setShowAboutModal(false)} />
     </div>
   );
 }

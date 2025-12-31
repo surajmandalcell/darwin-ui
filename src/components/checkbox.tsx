@@ -46,12 +46,12 @@ export function Checkbox({
 					animate={{
 						backgroundColor: isActive ? "rgb(14 165 233)" : "rgb(15 23 42)",
 						borderColor: isActive ? "rgb(14 165 233)" : "rgb(100 116 139)",
-						scale: checked && !disabled ? [1, 1.1, 1] : 1,
+						scale: checked && !disabled ? 1.05 : 1,
 					}}
 					transition={{
-						type: "spring",
-						stiffness: 500,
-						damping: 30,
+						backgroundColor: { type: "spring", stiffness: 500, damping: 30 },
+						borderColor: { type: "spring", stiffness: 500, damping: 30 },
+						scale: { type: "spring", stiffness: 400, damping: 15 },
 					}}
 					className={`flex h-4 w-4 items-center justify-center rounded-sm border text-white ${boxClassName}`}
 				>

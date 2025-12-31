@@ -79,7 +79,7 @@ function MetricCard({
             <div className="absolute inset-0 bg-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
             <div className="relative flex items-center justify-between mb-4">
-                <div className="p-2.5 rounded-lg bg-white/[0.04] border border-white/[0.06] text-white/70 group-hover:text-blue-400 group-hover:border-blue-500/30 transition-colors shadow-sm">
+                <div className="p-2.5 rounded-lg bg-white/[0.04] border border-white/[0.06] text-white/70 group-hover:text-blue-400 transition-colors shadow-sm">
                     <Icon className="w-5 h-5" />
                 </div>
                 <div className={cn(

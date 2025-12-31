@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, Navigate } from "react-router-dom";
 import {
     ButtonPreview,
     ButtonSizePreview,
@@ -24,6 +24,11 @@ import * as examples from "../content/code-examples";
 export default function DocPageResolver() {
     const location = useLocation();
     const pathname = location.pathname;
+
+    // Redirect /docs to /docs/getting-started/introduction
+    if (pathname === '/docs' || pathname === '/docs/') {
+        return <Navigate to="/docs/getting-started/introduction" replace />;
+    }
 
     // Parse the slug
     const slug = pathname.replace('/docs/', '');
