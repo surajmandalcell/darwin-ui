@@ -28,6 +28,34 @@
 
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Tailscale-Inspired Design Tokens */
+  /* Backgrounds */
+  --bg-base: #0a0a0a;
+  --bg-elevated: #0f0f0f;
+  --bg-subtle: rgba(255, 255, 255, 0.02);
+
+  /* Borders */
+  --border-subtle: rgba(255, 255, 255, 0.05);
+  --border-default: rgba(255, 255, 255, 0.10);
+  --border-strong: rgba(255, 255, 255, 0.20);
+
+  /* Text */
+  --text-primary: rgba(255, 255, 255, 1.0);
+  --text-secondary: rgba(255, 255, 255, 0.90);
+  --text-tertiary: rgba(255, 255, 255, 0.60);
+  --text-quaternary: rgba(255, 255, 255, 0.40);
+
+  /* Accents */
+  --accent-blue: #3b82f6;
+  --accent-purple: #8b5cf6;
+  --accent-green: #10b981;
+  --accent-orange: #f97316;
+
+  /* Shadows */
+  --shadow-screenshot: 0 0 0 1px rgba(255, 255, 255, 0.05), 0 50px 100px -20px rgba(0, 0, 0, 0.5);
+  --shadow-demo: 0 0 0 1px rgba(255, 255, 255, 0.05), 0 20px 40px -10px rgba(0, 0, 0, 0.3);
+  --shadow-card: 0 0 0 1px rgba(255, 255, 255, 0.05), 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 [data-theme='light'] {
@@ -119,26 +147,46 @@ body {
 
   /* Showcase-specific animations */
   .animate-fade-in-up {
-    animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   }
 
+  /* Tailscale-style hover (NO SCALE - only lift and border) */
   .hover-card-lift {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .hover-card-lift:hover {
     transform: translateY(-4px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-  }
-
-  .shimmer-effect {
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-    background-size: 200% 100%;
-    animation: shimmer 2s infinite;
   }
 
   .component-preview {
     @apply flex items-center justify-center p-8 rounded-xl border border-white/10 bg-white/[0.02] backdrop-blur-sm;
+  }
+
+  /* Design System Utilities */
+  .card-border {
+    @apply border border-white/10 hover:border-white/20 transition-all duration-300;
+  }
+
+  .card-background {
+    @apply bg-gradient-to-b from-white/[0.02] to-transparent;
+  }
+
+  .card-background-elevated {
+    @apply bg-gradient-to-br from-white/[0.03] to-transparent;
+  }
+
+  .screenshot-shadow {
+    box-shadow: var(--shadow-screenshot);
+  }
+
+  .demo-shadow {
+    box-shadow: var(--shadow-demo);
+  }
+
+  .card-shadow {
+    box-shadow: var(--shadow-card);
   }
 }
 
@@ -201,21 +249,11 @@ body {
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(20px) scale(0.95);
+    transform: translateY(20px);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-
-  100% {
-    background-position: 200% 0;
+    transform: translateY(0);
   }
 }

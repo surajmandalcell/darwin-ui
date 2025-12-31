@@ -24,11 +24,8 @@ export function ShowcaseCard({
   delay = 0
 }: ShowcaseCardProps) {
   return (
-    <Reveal type="slide" direction="up" delay={delay} duration={0.5} threshold={0.1}>
-      <div className="group relative overflow-visible rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.05] to-transparent hover-card-lift flex flex-col h-full hover:z-50">
-        {/* Subtle gradient glow on hover - replaces shimmer */}
-        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none bg-gradient-to-br from-blue-500/10 via-transparent to-purple-500/10 rounded-2xl" />
-
+    <Reveal type="fade" delay={delay} duration={0.6} threshold={0.1}>
+      <div className="group relative overflow-visible rounded-2xl border border-white/10 hover:border-white/20 bg-gradient-to-br from-white/[0.02] to-transparent transition-all duration-300 flex flex-col h-full">
         {/* Badge (if provided) */}
         {badge && (
           <Badge
@@ -39,17 +36,17 @@ export function ShowcaseCard({
           </Badge>
         )}
 
-        {/* Preview container with fixed aspect ratio for consistency */}
-        <div className="relative p-6 h-64 flex items-center justify-center overflow-visible">
-          <div className="w-full flex items-center justify-center relative z-10">
+        {/* Preview container - 320px height (h-80) */}
+        <div className="relative p-10 h-80 flex items-center justify-center overflow-visible">
+          <div className="w-full flex items-center justify-center relative">
             {preview}
           </div>
         </div>
 
         {/* Info footer */}
-        <div className="border-t border-white/10 bg-black/20 backdrop-blur-md p-4">
-          <h3 className="font-bold text-white text-lg mb-1">{title}</h3>
-          <p className="text-sm text-white/60 mb-3 line-clamp-2">{description}</p>
+        <div className="border-t border-white/10 bg-black/20 backdrop-blur-md p-6">
+          <h3 className="font-semibold text-white text-xl mb-2">{title}</h3>
+          <p className="text-sm text-white/60 mb-4 line-clamp-2">{description}</p>
           <Link
             to={`/docs/components/${slug}`}
             className="inline-flex items-center gap-2 text-sm text-blue-400 hover:text-blue-300 transition-colors group/link"
