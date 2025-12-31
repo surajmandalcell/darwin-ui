@@ -1,0 +1,44 @@
+/* cmdk custom styles */
+[cmdk-root] {
+  --cmdk-list-height: 400px;
+}
+
+[cmdk-group-heading] {
+  user-select: none;
+}
+
+[cmdk-item] {
+  cursor: pointer;
+  user-select: none;
+}
+
+[cmdk-item][data-disabled='true'] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+[cmdk-input]::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+[cmdk-list] {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+}
+
+[cmdk-list]::-webkit-scrollbar {
+  width: 8px;
+}
+
+[cmdk-list]::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+[cmdk-list]::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+[cmdk-list]::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
