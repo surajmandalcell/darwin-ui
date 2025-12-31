@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { ThemeProvider } from "./contexts/theme-context";
-import { OverlayProvider } from "@smc/darwin-ui";
+import { OverlayProvider, AlertProvider, ToastProvider } from "@smc/darwin-ui";
 import LandingPage from "./pages/LandingPage";
 import DocsLayout from "./layouts/DocsLayout";
 import DocPageResolver from "./pages/DocPageResolver";
@@ -20,16 +20,20 @@ function App() {
   return (
     <ThemeProvider>
       <OverlayProvider>
-        <Router>
-          <ScrollToTop />
-          <Routes>
-            <Route path="/" element={<LandingPage />} />
+        <AlertProvider>
+          <ToastProvider>
+            <Router>
+              <ScrollToTop />
+              <Routes>
+                <Route path="/" element={<LandingPage />} />
 
-            <Route path="/docs" element={<DocsLayout />}>
-              <Route path="*" element={<DocPageResolver />} />
-            </Route>
-          </Routes>
-        </Router>
+                <Route path="/docs" element={<DocsLayout />}>
+                  <Route path="*" element={<DocPageResolver />} />
+                </Route>
+              </Routes>
+            </Router>
+          </ToastProvider>
+        </AlertProvider>
       </OverlayProvider>
     </ThemeProvider>
   );

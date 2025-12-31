@@ -2,7 +2,7 @@
 
 import { Suspense, lazy, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Github, ArrowRight, ArrowDown } from 'lucide-react';
+import { Github } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { ShowcaseCard } from '../components/ShowcaseCard';
 import {
@@ -51,9 +51,6 @@ export default function LandingPage() {
       {/* Hero Section */}
       <HeroSection scrollToShowcase={scrollToShowcase} />
 
-      {/* Dashboard Product UI - Moved to top for impact */}
-      <DashboardSection />
-
       {/* Component Showcase Grid */}
       <ComponentShowcaseSection />
 
@@ -66,10 +63,9 @@ export default function LandingPage() {
 // Hero Section Component
 function HeroSection({ scrollToShowcase }: { scrollToShowcase: () => void }) {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Modern Mesh Gradient Background - ChatGPT Style */}
+    <section className="relative h-screen flex items-center overflow-hidden">
+      {/* Modern Mesh Gradient Background */}
       <div className="absolute inset-0 bg-[#0a0a0a]">
-        {/* Multiple radial gradients creating mesh effect */}
         <motion.div
           className="absolute top-0 left-[10%] w-[500px] h-[500px] rounded-full opacity-40"
           style={{
@@ -140,86 +136,102 @@ function HeroSection({ scrollToShowcase }: { scrollToShowcase: () => void }) {
         />
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 max-w-5xl mx-auto px-4 text-center">
-        {/* Logo */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-8"
-        >
-          <img
-            src="/darwin-logo.svg"
-            alt="Darwin UI"
-            className="w-32 h-32 mx-auto drop-shadow-2xl"
-          />
-        </motion.div>
-
-        {/* Version Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
-          className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm backdrop-blur-md mb-6"
-        >
-          <span className="flex h-2 w-2 rounded-full bg-emerald-400 mr-2 animate-pulse" />
-          <span className="text-white/70">v1.1.0 Available Now</span>
-        </motion.div>
-
-        {/* Title */}
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.6 }}
-          className="text-7xl sm:text-8xl md:text-9xl font-bold tracking-tight bg-gradient-to-b from-white via-white to-white/40 bg-clip-text text-transparent mb-6"
-        >
-          Darwin UI
-        </motion.h1>
-
-        {/* Tagline */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.6 }}
-          className="text-xl sm:text-2xl text-white/60 max-w-2xl mx-auto mb-10 leading-relaxed"
-        >
-          26 Premium Components. One Beautiful System.
-        </motion.p>
-
-        {/* CTA Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.6 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-        >
-          <Button
-            onClick={scrollToShowcase}
-            size="lg"
-            className="rounded-full px-8 py-6 bg-white text-black hover:bg-white/90 hover:scale-105"
+      {/* Content Container */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-8">
+        {/* Left Side - Content */}
+        <div className="max-w-2xl space-y-8">
+          {/* Title */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="space-y-4"
           >
-            Explore Components
-            <ArrowDown className="ml-2 w-5 h-5" />
-          </Button>
-          <Link to="/docs/getting-started/introduction">
-            <Button size="lg" variant="secondary" className="rounded-full px-8 py-6">
-              View Docs
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Button>
-          </Link>
-          <a
-            href="https://github.com/surajmandalcell/darwin-ui"
-            target="_blank"
-            rel="noreferrer"
+            <h1 className="text-6xl md:text-7xl lg:text-8xl font-light tracking-tight text-white">
+              Darwin UI
+            </h1>
+            <p className="text-xl md:text-2xl font-light text-white/50 max-w-lg">
+              26 premium components for modern web applications
+            </p>
+          </motion.div>
+
+          {/* Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+            className="flex flex-wrap gap-3"
           >
-            <Button size="lg" variant="ghost" className="rounded-full px-8 py-6">
-              <Github className="mr-2 w-5 h-5" />
-              GitHub
+            <Button
+              onClick={scrollToShowcase}
+              className="px-6 py-3 bg-white text-black hover:bg-white/90"
+            >
+              Explore Components
             </Button>
-          </a>
-        </motion.div>
+            <Link to="/docs/getting-started/introduction">
+              <Button variant="outline" className="px-6 py-3">
+                View Docs
+              </Button>
+            </Link>
+            <a
+              href="https://github.com/surajmandalcell/darwin-ui"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Button variant="outline" className="px-6 py-3">
+                <Github className="mr-2 w-4 h-4" />
+                GitHub
+              </Button>
+            </a>
+          </motion.div>
+
+          {/* Install Command */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.6 }}
+            className="relative group"
+          >
+            <div className="flex items-center gap-3 px-4 py-3 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors max-w-md">
+              <code className="flex-1 text-sm font-mono text-white/80">
+                npm install @smc/darwin-ui
+              </code>
+              <button
+                onClick={() => {
+                  navigator.clipboard.writeText('npm install @smc/darwin-ui');
+                }}
+                className="p-2 hover:bg-white/10 rounded transition-colors"
+                title="Copy to clipboard"
+              >
+                <svg className="w-4 h-4 text-white/60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </button>
+            </div>
+          </motion.div>
+        </div>
       </div>
+
+      {/* Dashboard Screenshot - Extends beyond viewport on the right */}
+      <motion.div
+        initial={{ opacity: 0, x: 100 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 0.3, duration: 0.8 }}
+        className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 w-[60%] z-20 pointer-events-none"
+      >
+        <Suspense
+          fallback={
+            <div className="h-[600px] flex items-center justify-center">
+              <div className="text-center">
+                <Skeleton className="h-12 w-64 mx-auto mb-4" />
+                <Skeleton className="h-6 w-48 mx-auto" />
+              </div>
+            </div>
+          }
+        >
+          <DashboardShowcase />
+        </Suspense>
+      </motion.div>
     </section>
   );
 }
@@ -570,70 +582,11 @@ function ComponentShowcaseSection() {
   );
 }
 
-// Dashboard Demo Section
-function DashboardSection() {
-  return (
-    <section className="py-24 px-4 relative overflow-hidden">
-      {/* Subtle gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] via-white/[0.01] to-transparent" />
-
-      <div className="max-w-7xl mx-auto relative z-10">
-        {/* Section Header with cooler styling */}
-        <div className="text-center mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center rounded-full border border-purple-500/20 bg-purple-500/5 px-4 py-1.5 text-sm backdrop-blur-sm mb-4"
-          >
-            <span className="text-purple-400">✨ Product Showcase</span>
-          </motion.div>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-b from-white via-white to-white/60 bg-clip-text text-transparent"
-          >
-            Beautiful Dashboard UI
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-xl text-white/60 max-w-2xl mx-auto"
-          >
-            Experience the power of Darwin UI with a fully interactive dashboard
-          </motion.p>
-        </div>
-
-        {/* Dashboard Container */}
-        <div className="rounded-2xl border border-white/10 overflow-hidden shadow-2xl">
-          <Suspense
-            fallback={
-              <div className="h-[600px] flex items-center justify-center">
-                <div className="text-center">
-                  <Skeleton className="h-12 w-64 mx-auto mb-4" />
-                  <Skeleton className="h-6 w-48 mx-auto" />
-                </div>
-              </div>
-            }
-          >
-            <DashboardShowcase />
-          </Suspense>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 // Compact Footer
 function Footer() {
   return (
     <footer className="border-t border-white/5 bg-white/[0.02] backdrop-blur-sm">
-      <div className="max-w-7xl mx-auto px-4 py-8">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-8">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           {/* Left side - Made by */}
           <div className="text-white/60 text-sm">
