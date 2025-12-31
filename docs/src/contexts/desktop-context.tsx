@@ -3,10 +3,8 @@
 import { createContext, useContext, useReducer, useCallback, useEffect, type ReactNode } from 'react';
 import {
   BookOpen,
-  LayoutGrid,
   Terminal,
   StickyNote,
-  Image,
   Settings,
 } from 'lucide-react';
 
@@ -39,7 +37,6 @@ export interface DesktopState {
   highestZIndex: number;
   isBooting: boolean;
   settings: {
-    wallpaper: 'sonoma' | 'ventura' | 'monterey' | 'gradient';
     accentColor: 'blue' | 'purple' | 'pink' | 'red' | 'orange' | 'yellow' | 'green';
     reduceMotion: boolean;
   };
@@ -80,13 +77,6 @@ export const apps: Record<string, AppDefinition> = {
     minSize: { width: 600, height: 400 },
     defaultRoute: '/docs/getting-started/introduction',
   },
-  components: {
-    id: 'components',
-    name: 'Components',
-    icon: <LayoutGrid className="w-full h-full" />,
-    defaultSize: { width: 950, height: 700 },
-    minSize: { width: 500, height: 350 },
-  },
   terminal: {
     id: 'terminal',
     name: 'Terminal',
@@ -100,13 +90,6 @@ export const apps: Record<string, AppDefinition> = {
     icon: <StickyNote className="w-full h-full" />,
     defaultSize: { width: 650, height: 550 },
     minSize: { width: 350, height: 300 },
-  },
-  preview: {
-    id: 'preview',
-    name: 'Preview',
-    icon: <Image className="w-full h-full" />,
-    defaultSize: { width: 850, height: 650 },
-    minSize: { width: 500, height: 400 },
   },
   settings: {
     id: 'settings',
@@ -138,7 +121,6 @@ const initialState: DesktopState = {
   highestZIndex: 100,
   isBooting: true,
   settings: {
-    wallpaper: 'sonoma',
     accentColor: 'blue',
     reduceMotion: false,
   },

@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import type { AppDefinition } from '../../contexts/desktop-context';
-import { Hammer, LayoutGrid, Terminal, StickyNote, Image, Settings } from 'lucide-react';
+import { Hammer, Terminal, StickyNote, Settings } from 'lucide-react';
 
 interface DockItemProps {
   app: AppDefinition;
@@ -16,10 +16,8 @@ interface DockItemProps {
 // Map app IDs to their Lucide icons
 const appIcons: Record<string, React.ReactNode> = {
   developer: <Hammer className="w-6 h-6 text-white" />,
-  components: <LayoutGrid className="w-6 h-6 text-white" />,
   terminal: <Terminal className="w-6 h-6 text-white" />,
   notes: <StickyNote className="w-6 h-6 text-white" />,
-  preview: <Image className="w-6 h-6 text-white" />,
   settings: <Settings className="w-6 h-6 text-white" />,
 };
 

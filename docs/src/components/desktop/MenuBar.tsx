@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useDesktop, apps } from '../../contexts/desktop-context';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Wifi, Battery } from 'lucide-react';
+import { Search, Wifi, Battery, Apple, WifiOff } from 'lucide-react';
 
 interface MenuItem {
   label: string;
@@ -12,6 +12,172 @@ interface MenuItem {
   disabled?: boolean;
   separator?: boolean;
 }
+
+// Animated WiFi indicator component
+function AnimatedWifi({ connected = true }: { connected?: boolean }) {
+  return (
+    <div className="relative">
+      {connected ? (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="relative"
+        >
+          <Wifi className="w-4 h-4" />
+          {/* Subtle pulse animation for active connection */}
+          <motion.div
+            className="absolute inset-0 flex items-center justify-center"
+            initial={{ opacity: 0.5, scale: 1 }}
+            animate={{ opacity: 0, scale: 1.5 }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeOut"
+            }}
+          >
+            <div className="w-2 h-2 rounded-full bg-green-400" />
+          </motion.div>
+        </motion.div>
+      ) : (
+        <WifiOff className="w-4 h-4 text-white/50" />
+      )}
+    </div>
+  );
+}
+
+// Animated Battery indicator component
+function AnimatedBattery({ level = 100, charging = false }: { level?: number; charging?: boolean }) {
+  const getBatteryColor = () => {
+    if (charging) return '#34d399'; // green when charging
+    if (level <= 20) return '#ef4444'; // red when low
+    if (level <= 50) return '#fbbf24'; // yellow when medium
+    return 'currentColor'; // white when good
+  };
+
+  return (
+    <div className="flex items-center gap-1.5">
+      <div className="relative">
+        <Battery className="w-5 h-4" style={{ color: getBatteryColor() }} />
+        {/* Battery fill indicator */}
+        <motion.div
+          className="absolute top-[3px] left-[3px] h-[6px] rounded-[1px]"
+          style={{ backgroundColor: getBatteryColor() }}
+          initial={{ width: 0 }}
+          animate={{ width: `${Math.min(level, 100) * 0.11}px` }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        />
+        {/* Charging animation */}
+        {charging && (
+          <motion.div
+            className="absolute inset-0 flex items-center justify-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0, 1, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+          >
+            <span className="text-[8px] font-bold text-white">
+              ⚡
+            </span>
+          </motion.div>
+        )}
+      </div>
+      <motion.span
+        className="text-xs tabular-nums"
+        key={level}
+        initial={{ opacity: 0, y: -5 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.2 }}
+      >
+        {level}%
+      </motion.span>
+    </div>
+  );
+}
+
+// Animated clock component with seconds
+function AnimatedClock() {
+  const [time, setTime] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTime(new Date());
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const formatTime = (date: Date) => {
+    const hours = date.getHours();
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    const seconds = date.getSeconds().toString().padStart(2, '0');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    const displayHours = hours % 12 || 12;
+    return { hours: displayHours, minutes, seconds, ampm };
+  };
+
+  const formatDate = (date: Date) => {
+    return date.toLocaleDateString('en-US', {
+      weekday: 'short',
+      month: 'short',
+      day: 'numeric',
+    });
+  };
+
+  const { hours, minutes, seconds, ampm } = formatTime(time);
+
+  return (
+    <div className="flex items-center gap-2 pl-2">
+      <span>{formatDate(time)}</span>
+      <div className="flex items-baseline tabular-nums">
+        <span>{hours}:{minutes}</span>
+        <motion.span
+          className="text-[10px] text-white/60 ml-0.5"
+          key={seconds}
+          initial={{ opacity: 0.5, y: 2 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.15 }}
+        >
+          :{seconds}
+        </motion.span>
+        <span className="text-[10px] text-white/70 ml-1">{ampm}</span>
+      </div>
+    </div>
+  );
+}
+
+// Dropdown menu animation variants
+const dropdownVariants = {
+  hidden: {
+    opacity: 0,
+    scale: 0.95,
+    y: -8,
+    transition: { duration: 0.12, ease: "easeIn" as const }
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: {
+      duration: 0.15,
+      ease: [0.23, 1, 0.32, 1] as const,
+      staggerChildren: 0.02,
+      delayChildren: 0.02
+    }
+  },
+  exit: {
+    opacity: 0,
+    scale: 0.95,
+    y: -5,
+    transition: { duration: 0.1, ease: "easeIn" as const }
+  }
+};
+
+const menuItemVariants = {
+  hidden: { opacity: 0, x: -8 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.15, ease: "easeOut" as const }
+  }
+};
 
 export function MenuBar() {
   const {
@@ -24,35 +190,12 @@ export function MenuBar() {
     focusWindow,
     state
   } = useDesktop();
-  const [currentTime, setCurrentTime] = useState(new Date());
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
-
-  // Update clock every minute
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentTime(new Date());
-    }, 60000);
-    return () => clearInterval(timer);
-  }, []);
+  const [batteryLevel] = useState(87); // Simulated battery level
+  const [isCharging] = useState(false);
 
   const activeWindow = getActiveWindow();
   const activeApp = activeWindow ? apps[activeWindow.appId] : null;
-
-  const formatTime = (date: Date) => {
-    return date.toLocaleTimeString('en-US', {
-      hour: 'numeric',
-      minute: '2-digit',
-      hour12: true,
-    });
-  };
-
-  const formatDate = (date: Date) => {
-    return date.toLocaleDateString('en-US', {
-      weekday: 'short',
-      month: 'short',
-      day: 'numeric',
-    });
-  };
 
   // Handle menu item actions
   const handleNewWindow = useCallback(() => {
@@ -184,6 +327,17 @@ export function MenuBar() {
 
   const menuItems = getMenuItems();
 
+  // Darwin menu items for stagger animation
+  const darwinMenuItems = [
+    { label: 'About Darwin UI', action: () => openApp('developer', '/docs/getting-started/introduction') },
+    { separator: true },
+    { label: 'System Settings...', action: () => openApp('settings') },
+    { separator: true },
+    { label: 'Open Developer', action: () => openApp('developer') },
+    { label: 'Open Terminal', action: () => openApp('terminal') },
+    { label: 'Open Notes', action: () => openApp('notes') },
+  ];
+
   return (
     <div className="fixed top-0 left-0 right-0 h-7 z-[9000]">
       {/* Glass background */}
@@ -195,128 +349,117 @@ export function MenuBar() {
         <div className="flex items-center gap-4">
           {/* Darwin Logo (Apple position) */}
           <div className="relative">
-            <button
-              className={`flex items-center justify-center w-5 h-5 rounded transition-colors ${
-                activeMenu === 'darwin' ? 'bg-white/20' : 'hover:bg-white/10'
-              }`}
+            <motion.button
+              className="flex items-center justify-center w-5 h-5 rounded"
+              animate={{
+                backgroundColor: activeMenu === 'darwin' ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0)'
+              }}
+              whileHover={{ backgroundColor: 'rgba(255,255,255,0.1)' }}
+              transition={{ duration: 0.15 }}
               onClick={() => setActiveMenu(activeMenu === 'darwin' ? null : 'darwin')}
             >
-              <div className="w-4 h-4 rounded bg-white/[0.08] flex items-center justify-center">
-                <span className="text-[10px] font-bold text-white">D</span>
-              </div>
-            </button>
+              <Apple className="w-4 h-4" />
+            </motion.button>
 
             {/* Darwin Menu Dropdown */}
             <AnimatePresence>
               {activeMenu === 'darwin' && (
                 <motion.div
-                  initial={{ opacity: 0, y: -5, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -5, scale: 0.95 }}
-                  transition={{ duration: 0.15 }}
-                  className="absolute top-full left-0 mt-1 min-w-[200px] py-1 bg-neutral-800/95 backdrop-blur-md rounded-lg border border-white/10 shadow-xl"
+                  variants={dropdownVariants}
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                  className="absolute top-full left-0 mt-1 min-w-[200px] py-1 bg-neutral-800/95 backdrop-blur-md rounded-lg border border-white/10 shadow-2xl shadow-black/50"
                 >
-                  <button
-                    className="w-full px-3 py-1.5 text-left text-[13px] text-white/90 hover:bg-blue-500 hover:text-white transition-colors flex items-center justify-between"
-                    onClick={() => {
-                      openApp('developer', '/docs/getting-started/introduction');
-                      setActiveMenu(null);
-                    }}
-                  >
-                    <span>About Darwin UI</span>
-                  </button>
-                  <div className="my-1 h-px bg-white/10" />
-                  <button
-                    className="w-full px-3 py-1.5 text-left text-[13px] text-white/90 hover:bg-blue-500 hover:text-white transition-colors flex items-center justify-between"
-                    onClick={() => {
-                      openApp('settings');
-                      setActiveMenu(null);
-                    }}
-                  >
-                    <span>System Settings...</span>
-                  </button>
-                  <div className="my-1 h-px bg-white/10" />
-                  <button
-                    className="w-full px-3 py-1.5 text-left text-[13px] text-white/90 hover:bg-blue-500 hover:text-white transition-colors flex items-center justify-between"
-                    onClick={() => {
-                      openApp('developer');
-                      setActiveMenu(null);
-                    }}
-                  >
-                    <span>Open Developer</span>
-                  </button>
-                  <button
-                    className="w-full px-3 py-1.5 text-left text-[13px] text-white/90 hover:bg-blue-500 hover:text-white transition-colors flex items-center justify-between"
-                    onClick={() => {
-                      openApp('components');
-                      setActiveMenu(null);
-                    }}
-                  >
-                    <span>Open Components</span>
-                  </button>
-                  <button
-                    className="w-full px-3 py-1.5 text-left text-[13px] text-white/90 hover:bg-blue-500 hover:text-white transition-colors flex items-center justify-between"
-                    onClick={() => {
-                      openApp('terminal');
-                      setActiveMenu(null);
-                    }}
-                  >
-                    <span>Open Terminal</span>
-                  </button>
-                  <button
-                    className="w-full px-3 py-1.5 text-left text-[13px] text-white/90 hover:bg-blue-500 hover:text-white transition-colors flex items-center justify-between"
-                    onClick={() => {
-                      openApp('notes');
-                      setActiveMenu(null);
-                    }}
-                  >
-                    <span>Open Notes</span>
-                  </button>
+                  {darwinMenuItems.map((item, idx) => (
+                    item.separator ? (
+                      <motion.div
+                        key={idx}
+                        variants={menuItemVariants}
+                        className="my-1 h-px bg-white/10"
+                      />
+                    ) : (
+                      <motion.button
+                        key={idx}
+                        variants={menuItemVariants}
+                        className="w-full px-3 py-1.5 text-left text-[13px] text-white/90 flex items-center justify-between transition-colors duration-100 hover:bg-blue-500 hover:text-white rounded-sm mx-0.5"
+                        style={{ width: 'calc(100% - 4px)' }}
+                        onClick={() => {
+                          item.action?.();
+                          setActiveMenu(null);
+                        }}
+                        whileHover={{ x: 2 }}
+                        transition={{ duration: 0.1 }}
+                      >
+                        <span>{item.label}</span>
+                      </motion.button>
+                    )
+                  ))}
                 </motion.div>
               )}
             </AnimatePresence>
           </div>
 
           {/* Active App Name */}
-          {activeApp && (
-            <span className="font-semibold">{activeApp.name}</span>
-          )}
+          <AnimatePresence mode="wait">
+            {activeApp && (
+              <motion.span
+                key={activeApp.name}
+                className="font-semibold"
+                initial={{ opacity: 0, y: -5 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 5 }}
+                transition={{ duration: 0.15 }}
+              >
+                {activeApp.name}
+              </motion.span>
+            )}
+          </AnimatePresence>
 
           {/* App Menus */}
           <div className="flex items-center gap-3">
             {Object.keys(menuItems).map((menu) => (
               <div key={menu} className="relative">
-                <button
-                  className={`px-2 py-0.5 rounded transition-colors ${
-                    activeMenu === menu ? 'bg-white/20' : 'hover:bg-white/10'
-                  }`}
+                <motion.button
+                  className="px-2 py-0.5 rounded"
+                  animate={{
+                    backgroundColor: activeMenu === menu ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0)'
+                  }}
+                  whileHover={{ backgroundColor: activeMenu === menu ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.1)' }}
+                  transition={{ duration: 0.15 }}
                   onClick={() => setActiveMenu(activeMenu === menu ? null : menu)}
                   onMouseEnter={() => activeMenu && setActiveMenu(menu)}
                 >
                   {menu}
-                </button>
+                </motion.button>
 
                 {/* Dropdown */}
                 <AnimatePresence>
                   {activeMenu === menu && (
                     <motion.div
-                      initial={{ opacity: 0, y: -5, scale: 0.95 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: -5, scale: 0.95 }}
-                      transition={{ duration: 0.15 }}
-                      className="absolute top-full left-0 mt-1 min-w-[200px] py-1 bg-neutral-800/95 backdrop-blur-md rounded-lg border border-white/10 shadow-xl"
+                      variants={dropdownVariants}
+                      initial="hidden"
+                      animate="visible"
+                      exit="exit"
+                      className="absolute top-full left-0 mt-1 min-w-[200px] py-1 bg-neutral-800/95 backdrop-blur-md rounded-lg border border-white/10 shadow-2xl shadow-black/50"
                     >
                       {menuItems[menu].map((item, idx) => (
                         item.separator ? (
-                          <div key={idx} className="my-1 h-px bg-white/10" />
-                        ) : (
-                          <button
+                          <motion.div
                             key={idx}
-                            className={`w-full px-3 py-1.5 text-left text-[13px] flex items-center justify-between transition-colors ${
+                            variants={menuItemVariants}
+                            className="my-1 h-px bg-white/10"
+                          />
+                        ) : (
+                          <motion.button
+                            key={idx}
+                            variants={menuItemVariants}
+                            className={`w-full px-3 py-1.5 text-left text-[13px] flex items-center justify-between rounded-sm mx-0.5 ${
                               item.disabled
                                 ? 'text-white/30 cursor-default'
                                 : 'text-white/90 hover:bg-blue-500 hover:text-white'
                             }`}
+                            style={{ width: 'calc(100% - 4px)' }}
                             onClick={() => {
                               if (!item.disabled && item.action) {
                                 item.action();
@@ -324,6 +467,8 @@ export function MenuBar() {
                               setActiveMenu(null);
                             }}
                             disabled={item.disabled}
+                            whileHover={!item.disabled ? { x: 2 } : {}}
+                            transition={{ duration: 0.1 }}
                           >
                             <span>{item.label}</span>
                             {item.shortcut && (
@@ -331,7 +476,7 @@ export function MenuBar() {
                                 {item.shortcut}
                               </span>
                             )}
-                          </button>
+                          </motion.button>
                         )
                       ))}
                     </motion.div>
@@ -345,36 +490,45 @@ export function MenuBar() {
         {/* Right side - System Tray */}
         <div className="flex items-center gap-3">
           {/* Search/Spotlight */}
-          <button className="p-1 hover:bg-white/10 rounded transition-colors">
+          <motion.button
+            className="p-1 rounded"
+            whileHover={{ backgroundColor: 'rgba(255,255,255,0.1)' }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ duration: 0.1 }}
+          >
             <Search className="w-4 h-4" />
-          </button>
+          </motion.button>
 
-          {/* Wifi */}
-          <button className="p-1 hover:bg-white/10 rounded transition-colors">
-            <Wifi className="w-4 h-4" />
-          </button>
+          {/* Wifi with animated indicator */}
+          <motion.button
+            className="p-1 rounded"
+            whileHover={{ backgroundColor: 'rgba(255,255,255,0.1)' }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ duration: 0.1 }}
+          >
+            <AnimatedWifi connected={true} />
+          </motion.button>
 
-          {/* Battery */}
-          <div className="flex items-center gap-1">
-            <Battery className="w-5 h-4" />
-            <span className="text-xs">100%</span>
-          </div>
+          {/* Battery with animated indicator */}
+          <AnimatedBattery level={batteryLevel} charging={isCharging} />
 
-          {/* Date & Time */}
-          <div className="flex items-center gap-2 pl-2">
-            <span>{formatDate(currentTime)}</span>
-            <span>{formatTime(currentTime)}</span>
-          </div>
+          {/* Date & Time with seconds */}
+          <AnimatedClock />
         </div>
       </div>
 
       {/* Click outside to close menu */}
-      {activeMenu && (
-        <div
-          className="fixed inset-0 z-[-1]"
-          onClick={() => setActiveMenu(null)}
-        />
-      )}
+      <AnimatePresence>
+        {activeMenu && (
+          <motion.div
+            className="fixed inset-0 z-[-1]"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setActiveMenu(null)}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }

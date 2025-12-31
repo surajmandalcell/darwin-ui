@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { Trash2 } from 'lucide-react';
 
 // Order of apps in dock
-const dockAppOrder = ['developer', 'components', 'terminal', 'notes', 'preview', 'settings'];
+const dockAppOrder = ['developer', 'terminal', 'notes', 'settings'];
 
 export function Dock() {
   const { state, openApp, getRunningApps, focusWindow, restoreWindow } = useDesktop();

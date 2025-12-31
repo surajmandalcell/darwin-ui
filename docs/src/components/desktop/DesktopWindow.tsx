@@ -1,15 +1,13 @@
 "use client";
 
 import { useRef, useCallback, useState, useEffect } from 'react';
-import { motion, useDragControls, type PanInfo } from 'framer-motion';
+import { motion, useDragControls, type PanInfo, AnimatePresence } from 'framer-motion';
 import { useDesktop, type WindowState, type AppDefinition } from '../../contexts/desktop-context';
 
 // Import app components
 import { DeveloperApp } from './apps/DeveloperApp';
-import { ComponentsApp } from './apps/ComponentsApp';
 import { TerminalApp } from './apps/TerminalApp';
 import { NotesApp } from './apps/NotesApp';
-import { PreviewApp } from './apps/PreviewApp';
 import { SettingsApp } from './apps/SettingsApp';
 
 interface DesktopWindowProps {
@@ -21,10 +19,8 @@ interface DesktopWindowProps {
 // Map app IDs to components
 const appComponents: Record<string, React.ComponentType<{ windowState: WindowState }>> = {
   developer: DeveloperApp,
-  components: ComponentsApp,
   terminal: TerminalApp,
   notes: NotesApp,
-  preview: PreviewApp,
   settings: SettingsApp,
 };
 
@@ -45,15 +41,45 @@ export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowP
   const [resizeDirection, setResizeDirection] = useState<string | null>(null);
   const [initialSize, setInitialSize] = useState(windowState.size);
   const [initialPos, setInitialPos] = useState({ x: 0, y: 0 });
+  const dragStartOffset = useRef({ x: 0, y: 0 });
+  const [trafficLightsHovered, setTrafficLightsHovered] = useState(false);
+  const [wasFocused, setWasFocused] = useState(isFocused);
+  const [showFocusPulse, setShowFocusPulse] = useState(false);
+
+  // Detect focus gain for pulse animation
+  useEffect(() => {
+    if (isFocused && !wasFocused) {
+      setShowFocusPulse(true);
+      const timer = setTimeout(() => setShowFocusPulse(false), 300);
+      return () => clearTimeout(timer);
+    }
+    setWasFocused(isFocused);
+  }, [isFocused, wasFocused]);
 
   // Get the app component
   const AppComponent = appComponents[windowState.appId];
 
+  // Handle drag start - capture offset between cursor and window origin
+  const handleDragStart = useCallback(
+    (event: MouseEvent | TouchEvent | PointerEvent) => {
+      const clientX = 'touches' in event ? event.touches[0].clientX : (event as MouseEvent).clientX;
+      const clientY = 'touches' in event ? event.touches[0].clientY : (event as MouseEvent).clientY;
+
+      // Store the offset between cursor position and window position
+      dragStartOffset.current = {
+        x: clientX - windowState.position.x,
+        y: clientY - windowState.position.y,
+      };
+    },
+    [windowState.position]
+  );
+
   // Handle drag end
   const handleDragEnd = useCallback(
     (_: any, info: PanInfo) => {
-      const newX = windowState.position.x + info.offset.x;
-      const newY = windowState.position.y + info.offset.y;
+      // Calculate new position: cursor position minus the initial offset
+      const newX = info.point.x - dragStartOffset.current.x;
+      const newY = info.point.y - dragStartOffset.current.y;
 
       // Constrain to viewport
       const maxX = window.innerWidth - 100;
@@ -65,7 +91,7 @@ export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowP
         y: Math.max(minY, Math.min(newY, maxY)),
       });
     },
-    [windowState.id, windowState.position, updateWindowPosition]
+    [windowState.id, updateWindowPosition]
   );
 
   // Handle resize
@@ -159,6 +185,11 @@ export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowP
     ? { width: window.innerWidth, height: window.innerHeight - 28 - 70 }
     : windowState.size;
 
+  // Dynamic shadow based on focus state
+  const shadowStyle = isFocused
+    ? '0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 12px 24px -8px rgba(0, 0, 0, 0.4)'
+    : '0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 4px 10px -4px rgba(0, 0, 0, 0.2)';
+
   return (
     <motion.div
       ref={windowRef}
@@ -171,36 +202,52 @@ export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowP
         zIndex: windowState.zIndex,
       }}
       initial={{ opacity: 0, scale: 0.95, y: 10 }}
-      animate={{ opacity: 1, scale: 1, y: 0 }}
+      animate={{
+        opacity: 1,
+        scale: showFocusPulse ? 1.01 : 1,
+        y: 0,
+      }}
       exit={{ opacity: 0, scale: 0.95, y: 10 }}
       transition={{
         type: 'spring',
         stiffness: 400,
         damping: 30,
         mass: 0.8,
+        scale: { duration: 0.15 },
       }}
       drag={!windowState.isMaximized}
       dragControls={dragControls}
       dragMomentum={false}
       dragElastic={0}
       dragListener={false}
+      onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
       onClick={() => focusWindow(windowState.id)}
     >
       {/* Window Frame */}
-      <div
-        className={`w-full h-full rounded-xl overflow-hidden flex flex-col transition-shadow duration-200 ${
-          isFocused
-            ? 'shadow-lg shadow-black/50'
-            : 'shadow-md shadow-black/30'
-        }`}
+      <motion.div
+        className="w-full h-full rounded-xl overflow-hidden flex flex-col"
+        animate={{
+          boxShadow: shadowStyle,
+        }}
+        transition={{ duration: 0.2, ease: 'easeOut' }}
         style={{
           background: 'rgb(23 23 23 / 0.95)',
           backdropFilter: 'blur(12px)',
           WebkitBackdropFilter: 'blur(12px)',
-          border: `1px solid ${isFocused ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.1)'}`,
         }}
       >
+        {/* Border overlay for focus state */}
+        <motion.div
+          className="absolute inset-0 rounded-xl pointer-events-none"
+          animate={{
+            boxShadow: isFocused
+              ? 'inset 0 0 0 1px rgba(255,255,255,0.2)'
+              : 'inset 0 0 0 1px rgba(255,255,255,0.1)',
+          }}
+          transition={{ duration: 0.2 }}
+        />
+
         {/* Title Bar */}
         <div
           className="flex items-center h-9 px-3 bg-black/20 border-b border-white/10 cursor-default select-none shrink-0"
@@ -212,32 +259,92 @@ export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowP
           onDoubleClick={handleMaximize}
         >
           {/* Traffic Lights */}
-          <div className="flex items-center gap-2">
+          <div
+            className="flex items-center gap-2"
+            onMouseEnter={() => setTrafficLightsHovered(true)}
+            onMouseLeave={() => setTrafficLightsHovered(false)}
+          >
             {/* Close */}
-            <button
-              className="w-3 h-3 rounded-full"
-              style={{ backgroundColor: '#ff5f57' }}
+            <motion.button
+              className="w-3 h-3 rounded-full flex items-center justify-center relative overflow-hidden group"
+              style={{ backgroundColor: isFocused ? '#ff5f57' : 'rgba(255,255,255,0.2)' }}
               onClick={handleClose}
-            />
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              transition={{ duration: 0.1 }}
+            >
+              <AnimatePresence>
+                {trafficLightsHovered && isFocused && (
+                  <motion.span
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.5 }}
+                    transition={{ duration: 0.1 }}
+                    className="text-[8px] font-bold text-black/60"
+                  >
+                    x
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </motion.button>
             {/* Minimize */}
-            <button
-              className="w-3 h-3 rounded-full"
-              style={{ backgroundColor: '#febc2e' }}
+            <motion.button
+              className="w-3 h-3 rounded-full flex items-center justify-center relative overflow-hidden"
+              style={{ backgroundColor: isFocused ? '#febc2e' : 'rgba(255,255,255,0.2)' }}
               onClick={handleMinimize}
-            />
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              transition={{ duration: 0.1 }}
+            >
+              <AnimatePresence>
+                {trafficLightsHovered && isFocused && (
+                  <motion.span
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.5 }}
+                    transition={{ duration: 0.1 }}
+                    className="text-[8px] font-bold text-black/60"
+                  >
+                    -
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </motion.button>
             {/* Maximize */}
-            <button
-              className="w-3 h-3 rounded-full"
-              style={{ backgroundColor: '#28c840' }}
+            <motion.button
+              className="w-3 h-3 rounded-full flex items-center justify-center relative overflow-hidden"
+              style={{ backgroundColor: isFocused ? '#28c840' : 'rgba(255,255,255,0.2)' }}
               onClick={handleMaximize}
-            />
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              transition={{ duration: 0.1 }}
+            >
+              <AnimatePresence>
+                {trafficLightsHovered && isFocused && (
+                  <motion.span
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.5 }}
+                    transition={{ duration: 0.1 }}
+                    className="text-[8px] font-bold text-black/60"
+                  >
+                    +
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </motion.button>
           </div>
 
-          {/* Title */}
-          <div className="flex-1 text-center">
-            <span className="text-[13px] font-medium text-white/70">
+          {/* Title with truncation */}
+          <div className="flex-1 text-center overflow-hidden px-4">
+            <motion.span
+              className="text-[13px] font-medium block truncate"
+              animate={{ color: isFocused ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.5)' }}
+              transition={{ duration: 0.2 }}
+              title={windowState.title}
+            >
               {windowState.title}
-            </span>
+            </motion.span>
           </div>
 
           {/* Spacer for symmetry */}
@@ -248,45 +355,65 @@ export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowP
         <div className="flex-1 overflow-hidden">
           {AppComponent && <AppComponent windowState={windowState} />}
         </div>
-      </div>
+      </motion.div>
 
       {/* Resize Handles (only when not maximized) */}
       {!windowState.isMaximized && (
         <>
-          {/* Corners */}
-          <div
-            className="absolute -bottom-1 -right-1 w-4 h-4 cursor-se-resize"
+          {/* Corners - larger hit areas with subtle visual indicators on hover */}
+          <motion.div
+            className="absolute -bottom-1 -right-1 w-5 h-5 cursor-se-resize group"
             onMouseDown={(e) => handleResizeStart(e, 'se')}
-          />
-          <div
-            className="absolute -bottom-1 -left-1 w-4 h-4 cursor-sw-resize"
+            whileHover={{ scale: 1.1 }}
+          >
+            <div className="absolute bottom-1 right-1 w-2 h-2 opacity-0 group-hover:opacity-30 transition-opacity bg-white rounded-sm" />
+          </motion.div>
+          <motion.div
+            className="absolute -bottom-1 -left-1 w-5 h-5 cursor-sw-resize group"
             onMouseDown={(e) => handleResizeStart(e, 'sw')}
-          />
-          <div
-            className="absolute -top-1 -right-1 w-4 h-4 cursor-ne-resize"
+            whileHover={{ scale: 1.1 }}
+          >
+            <div className="absolute bottom-1 left-1 w-2 h-2 opacity-0 group-hover:opacity-30 transition-opacity bg-white rounded-sm" />
+          </motion.div>
+          <motion.div
+            className="absolute -top-1 -right-1 w-5 h-5 cursor-ne-resize group"
             onMouseDown={(e) => handleResizeStart(e, 'ne')}
-          />
-          <div
-            className="absolute -top-1 -left-1 w-4 h-4 cursor-nw-resize"
+            whileHover={{ scale: 1.1 }}
+          >
+            <div className="absolute top-1 right-1 w-2 h-2 opacity-0 group-hover:opacity-30 transition-opacity bg-white rounded-sm" />
+          </motion.div>
+          <motion.div
+            className="absolute -top-1 -left-1 w-5 h-5 cursor-nw-resize group"
             onMouseDown={(e) => handleResizeStart(e, 'nw')}
-          />
-          {/* Edges */}
+            whileHover={{ scale: 1.1 }}
+          >
+            <div className="absolute top-1 left-1 w-2 h-2 opacity-0 group-hover:opacity-30 transition-opacity bg-white rounded-sm" />
+          </motion.div>
+          {/* Edges with hover indicators */}
           <div
-            className="absolute top-2 bottom-2 -right-1 w-2 cursor-e-resize"
+            className="absolute top-3 bottom-3 -right-1 w-3 cursor-e-resize group"
             onMouseDown={(e) => handleResizeStart(e, 'e')}
-          />
+          >
+            <div className="absolute inset-y-0 right-1 w-0.5 opacity-0 group-hover:opacity-20 transition-opacity bg-white rounded-full" />
+          </div>
           <div
-            className="absolute top-2 bottom-2 -left-1 w-2 cursor-w-resize"
+            className="absolute top-3 bottom-3 -left-1 w-3 cursor-w-resize group"
             onMouseDown={(e) => handleResizeStart(e, 'w')}
-          />
+          >
+            <div className="absolute inset-y-0 left-1 w-0.5 opacity-0 group-hover:opacity-20 transition-opacity bg-white rounded-full" />
+          </div>
           <div
-            className="absolute -bottom-1 left-2 right-2 h-2 cursor-s-resize"
+            className="absolute -bottom-1 left-3 right-3 h-3 cursor-s-resize group"
             onMouseDown={(e) => handleResizeStart(e, 's')}
-          />
+          >
+            <div className="absolute inset-x-0 bottom-1 h-0.5 opacity-0 group-hover:opacity-20 transition-opacity bg-white rounded-full" />
+          </div>
           <div
-            className="absolute -top-1 left-2 right-2 h-2 cursor-n-resize"
+            className="absolute -top-1 left-3 right-3 h-3 cursor-n-resize group"
             onMouseDown={(e) => handleResizeStart(e, 'n')}
-          />
+          >
+            <div className="absolute inset-x-0 top-1 h-0.5 opacity-0 group-hover:opacity-20 transition-opacity bg-white rounded-full" />
+          </div>
         </>
       )}
     </motion.div>

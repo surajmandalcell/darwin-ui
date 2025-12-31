@@ -5,66 +5,58 @@ import { MenuBar } from './MenuBar';
 import { Dock } from './Dock';
 import { DesktopWindow } from './DesktopWindow';
 import { motion, AnimatePresence } from 'framer-motion';
-
-// Solid dark wallpapers inspired by macOS
-const wallpapers = {
-  sonoma: {
-    background: '#1a1a2e',
-    overlay: 'none',
-  },
-  ventura: {
-    background: '#0c1821',
-    overlay: 'none',
-  },
-  monterey: {
-    background: '#1e1e2e',
-    overlay: 'none',
-  },
-  gradient: {
-    background: '#0a0a0a',
-    overlay: 'none',
-  },
-};
+import { Apple } from 'lucide-react';
 
 export function Desktop() {
   const { state } = useDesktop();
-  const currentWallpaper = wallpapers[state.settings.wallpaper];
 
   // Filter visible windows (open and not minimized)
   const visibleWindows = state.windows.filter(w => w.isOpen && !w.isMinimized);
 
   return (
     <div className="fixed inset-0 h-screen w-screen overflow-hidden select-none">
-      {/* Animated Wallpaper */}
-      <motion.div
-        className="absolute inset-0"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.5 }}
-        style={{ background: currentWallpaper.background }}
-      >
-        {/* Animated gradient overlay */}
+      {/* Animated Gradient Blob Background */}
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Base dark background */}
+        <div className="absolute inset-0 bg-[#0a0a0a]" />
+
+        {/* Animated gradient blobs */}
         <motion.div
-          className="absolute inset-0"
-          style={{ background: currentWallpaper.overlay }}
+          className="absolute w-[600px] h-[600px] rounded-full bg-purple-600/30 blur-[120px]"
           animate={{
-            backgroundPosition: ['0% 0%', '100% 100%', '0% 0%'],
+            x: [0, 100, 50, 0],
+            y: [0, 50, 100, 0],
           }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: 'linear',
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          style={{ top: '10%', left: '20%' }}
+        />
+        <motion.div
+          className="absolute w-[500px] h-[500px] rounded-full bg-blue-600/30 blur-[100px]"
+          animate={{
+            x: [0, -80, -40, 0],
+            y: [0, 80, 40, 0],
           }}
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+          style={{ top: '40%', right: '10%' }}
+        />
+        <motion.div
+          className="absolute w-[400px] h-[400px] rounded-full bg-indigo-500/20 blur-[80px]"
+          animate={{
+            x: [0, 60, -30, 0],
+            y: [0, -40, 60, 0],
+          }}
+          transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
+          style={{ bottom: '20%', left: '30%' }}
         />
 
-        {/* Subtle noise texture */}
+        {/* Noise texture overlay */}
         <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
           }}
         />
-      </motion.div>
+      </div>
 
       {/* Menu Bar */}
       <motion.div
@@ -130,7 +122,7 @@ export function Desktop() {
             >
               {/* Darwin UI Logo */}
               <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-blue-500/20 to-indigo-500/20 border border-white/[0.08] flex items-center justify-center backdrop-blur-sm">
-                <span className="text-3xl font-bold text-white">D</span>
+                <Apple className="w-10 h-10 text-white" />
               </div>
               <motion.div
                 className="w-32 h-1 bg-white/20 rounded-full overflow-hidden mx-auto"
