@@ -134,7 +134,7 @@ export default function DashboardShowcase() {
                 </div>
                 <div className="text-[13px] font-medium text-white/30 flex items-center gap-2">
                     <LayoutDashboard className="w-3.5 h-3.5" />
-                    <span>Darwin UI Dashboard</span>
+                    <span>Dashboard</span>
                 </div>
                 <div className="w-16" />
             </div>
@@ -143,12 +143,6 @@ export default function DashboardShowcase() {
                 {/* Sidebar */}
                 <div className="w-[240px] flex-shrink-0 border-r border-white/[0.06] bg-[#080808] hidden md:flex flex-col">
                     <div className="p-5">
-                        <div className="flex items-center gap-3 mb-8 px-2">
-                            <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center shadow-[0_0_15px_rgba(37,99,235,0.4)]">
-                                <span className="text-white font-bold text-lg leading-none">D</span>
-                            </div>
-                            <span className="text-base font-bold text-white tracking-tight">Darwin UI</span>
-                        </div>
 
                         <div className="space-y-6">
                             <div>

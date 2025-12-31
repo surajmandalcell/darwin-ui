@@ -41,7 +41,7 @@ export function ShowcaseCard({
 
         {/* Preview container with fixed aspect ratio for consistency */}
         <div className="relative p-6 h-64 flex items-center justify-center overflow-visible">
-          <div className="w-full flex items-center justify-center scale-90 transition-transform group-hover:scale-95 relative z-10">
+          <div className="w-full flex items-center justify-center relative z-10">
             {preview}
           </div>
         </div>

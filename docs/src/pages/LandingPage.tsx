@@ -96,13 +96,20 @@ function HeroSection({ scrollToShowcase }: { scrollToShowcase: () => void }) {
 
   return (
     <section className="relative h-screen flex items-center overflow-hidden">
-      {/* Radial Gradient Background from Top */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#1a1a2e] via-[#0a0a0a] to-[#0a0a0a]">
+      {/* Modern Gradient Background */}
+      <div className="absolute inset-0 bg-black">
         <div
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[800px] opacity-40"
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-[1400px] h-[900px] opacity-30"
           style={{
-            background: 'radial-gradient(ellipse at top, rgba(99, 102, 241, 0.4), rgba(139, 92, 246, 0.3) 40%, transparent 70%)',
-            filter: 'blur(80px)',
+            background: 'radial-gradient(ellipse at top, rgba(59, 130, 246, 0.5), rgba(147, 51, 234, 0.4) 50%, transparent 80%)',
+            filter: 'blur(100px)',
+          }}
+        />
+        <div
+          className="absolute bottom-0 right-0 w-[800px] h-[600px] opacity-20"
+          style={{
+            background: 'radial-gradient(ellipse at bottom right, rgba(236, 72, 153, 0.4), transparent 70%)',
+            filter: 'blur(90px)',
           }}
         />
       </div>
@@ -163,7 +170,7 @@ function HeroSection({ scrollToShowcase }: { scrollToShowcase: () => void }) {
             transition={{ delay: 0.4, duration: 0.6 }}
             className="relative group"
           >
-            <div className="flex items-center gap-3 px-4 py-3 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors max-w-md">
+            <div className="flex items-center gap-3 px-4 py-3 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors w-fit">
               <code className="flex-1 text-sm font-mono text-white/80">
                 npm install @smc/darwin-ui
               </code>
@@ -193,12 +200,12 @@ function HeroSection({ scrollToShowcase }: { scrollToShowcase: () => void }) {
           initial={{ opacity: 0, x: 100 }}
           animate={{
             opacity: 1,
-            x: isDashboardExpanded ? -100 : 0,
+            x: isDashboardExpanded ? -250 : 0,
           }}
           transition={{
             opacity: { delay: 0.3, duration: 0.8 },
             x: isDashboardExpanded
-              ? { duration: 0.4, ease: "easeOut" }
+              ? { duration: 0.25, ease: [0.16, 1, 0.3, 1] }
               : { delay: 0.3, duration: 0.8 }
           }}
         >
