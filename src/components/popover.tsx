@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "../lib/utils";
 
@@ -118,19 +119,63 @@ function PopoverContent({
 	side = "bottom",
 	sideOffset = 8,
 }: PopoverContentProps) {
-	const { open } = usePopoverContext();
+	const { open, triggerRef } = usePopoverContext();
+	const [mounted, setMounted] = React.useState(false);
+	const [position, setPosition] = React.useState({ top: 0, left: 0 });
 
-	const alignClasses = {
-		start: "left-0",
-		center: "left-1/2 -translate-x-1/2",
-		end: "right-0",
+	// Ensure we only render portal on client
+	React.useEffect(() => {
+		setMounted(true);
+	}, []);
+
+	// Calculate position based on trigger element
+	React.useEffect(() => {
+		if (open && triggerRef.current) {
+			const rect = triggerRef.current.getBoundingClientRect();
+			let top = 0;
+			let left = 0;
+
+			switch (side) {
+				case "top":
+					top = rect.top - sideOffset;
+					left = align === "start" ? rect.left : align === "end" ? rect.right : rect.left + rect.width / 2;
+					break;
+				case "bottom":
+					top = rect.bottom + sideOffset;
+					left = align === "start" ? rect.left : align === "end" ? rect.right : rect.left + rect.width / 2;
+					break;
+				case "left":
+					top = rect.top + rect.height / 2;
+					left = rect.left - sideOffset;
+					break;
+				case "right":
+					top = rect.top + rect.height / 2;
+					left = rect.right + sideOffset;
+					break;
+			}
+
+			setPosition({ top, left });
+		}
+	}, [open, side, align, sideOffset, triggerRef]);
+
+	const getTransformOrigin = () => {
+		switch (side) {
+			case "top": return align === "start" ? "bottom left" : align === "end" ? "bottom right" : "bottom center";
+			case "bottom": return align === "start" ? "top left" : align === "end" ? "top right" : "top center";
+			case "left": return "right center";
+			case "right": return "left center";
+			default: return "top center";
+		}
 	};
 
-	const sideStyles: Record<string, React.CSSProperties> = {
-		top: { bottom: "100%", marginBottom: sideOffset },
-		bottom: { top: "100%", marginTop: sideOffset },
-		left: { right: "100%", marginRight: sideOffset, top: "50%", transform: "translateY(-50%)" },
-		right: { left: "100%", marginLeft: sideOffset, top: "50%", transform: "translateY(-50%)" },
+	const getTransform = () => {
+		const transforms = [];
+		if (side === "top") transforms.push("translateY(-100%)");
+		if (side === "left") transforms.push("translateX(-100%)", "translateY(-50%)");
+		if (side === "right") transforms.push("translateY(-50%)");
+		if ((side === "top" || side === "bottom") && align === "center") transforms.push("translateX(-50%)");
+		if ((side === "top" || side === "bottom") && align === "end") transforms.push("translateX(-100%)");
+		return transforms.join(" ");
 	};
 
 	const getAnimationProps = () => {
@@ -150,7 +195,7 @@ function PopoverContent({
 
 	const animationProps = getAnimationProps();
 
-	return (
+	const content = (
 		<AnimatePresence>
 			{open && (
 				<motion.div
@@ -158,17 +203,26 @@ function PopoverContent({
 					{...animationProps}
 					transition={{ duration: 0.15, ease: "easeOut" }}
 					className={cn(
-						"absolute z-50 w-72 rounded-lg border border-white/10 bg-neutral-900/95 backdrop-blur-md p-4 shadow-xl",
-						side === "top" || side === "bottom" ? alignClasses[align] : "",
+						"fixed w-72 rounded-lg border border-white/10 bg-neutral-900/95 backdrop-blur-md p-4 shadow-xl",
 						className
 					)}
-					style={sideStyles[side]}
+					style={{
+						zIndex: 9999,
+						top: position.top,
+						left: position.left,
+						transform: getTransform(),
+						transformOrigin: getTransformOrigin(),
+					}}
 				>
 					{children}
 				</motion.div>
 			)}
 		</AnimatePresence>
 	);
+
+	// Use portal to escape stacking context
+	if (!mounted) return null;
+	return createPortal(content, document.body);
 }
 
 interface PopoverCloseProps {

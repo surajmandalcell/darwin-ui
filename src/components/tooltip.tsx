@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "../lib/utils";
 
@@ -8,6 +9,7 @@ interface TooltipContextValue {
 	open: boolean;
 	onOpenChange: (open: boolean) => void;
 	delayDuration: number;
+	triggerRef: React.RefObject<HTMLElement | null>;
 }
 
 const TooltipContext = React.createContext<TooltipContextValue | undefined>(undefined);
@@ -45,12 +47,13 @@ function Tooltip({
 	delayDuration = 300,
 }: TooltipProps) {
 	const [internalOpen, setInternalOpen] = React.useState(defaultOpen);
+	const triggerRef = React.useRef<HTMLElement>(null);
 
 	const open = controlledOpen !== undefined ? controlledOpen : internalOpen;
 	const handleOpenChange = onOpenChange || setInternalOpen;
 
 	return (
-		<TooltipContext.Provider value={{ open, onOpenChange: handleOpenChange, delayDuration }}>
+		<TooltipContext.Provider value={{ open, onOpenChange: handleOpenChange, delayDuration, triggerRef }}>
 			<div className="relative inline-flex">{children}</div>
 		</TooltipContext.Provider>
 	);
@@ -63,7 +66,7 @@ interface TooltipTriggerProps {
 }
 
 function TooltipTrigger({ children, className, asChild }: TooltipTriggerProps) {
-	const { onOpenChange, delayDuration } = useTooltipContext();
+	const { onOpenChange, delayDuration, triggerRef } = useTooltipContext();
 	const timeoutRef = React.useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
 	const handleMouseEnter = () => {
@@ -89,11 +92,13 @@ function TooltipTrigger({ children, className, asChild }: TooltipTriggerProps) {
 
 	if (asChild && React.isValidElement(children)) {
 		return React.cloneElement(children as React.ReactElement<{
+			ref?: React.Ref<HTMLElement>;
 			onMouseEnter?: () => void;
 			onMouseLeave?: () => void;
 			onFocus?: () => void;
 			onBlur?: () => void;
 		}>, {
+			ref: triggerRef,
 			onMouseEnter: handleMouseEnter,
 			onMouseLeave: handleMouseLeave,
 			onFocus: () => onOpenChange(true),
@@ -103,6 +108,7 @@ function TooltipTrigger({ children, className, asChild }: TooltipTriggerProps) {
 
 	return (
 		<span
+			ref={triggerRef as React.RefObject<HTMLSpanElement>}
 			onMouseEnter={handleMouseEnter}
 			onMouseLeave={handleMouseLeave}
 			onFocus={() => onOpenChange(true)}
@@ -129,19 +135,53 @@ function TooltipContent({
 	sideOffset = 6,
 	align = "center",
 }: TooltipContentProps) {
-	const { open } = useTooltipContext();
+	const { open, triggerRef } = useTooltipContext();
+	const [mounted, setMounted] = React.useState(false);
+	const [position, setPosition] = React.useState({ top: 0, left: 0 });
 
-	const alignClasses = {
-		start: "left-0",
-		center: "left-1/2 -translate-x-1/2",
-		end: "right-0",
-	};
+	// Ensure we only render portal on client
+	React.useEffect(() => {
+		setMounted(true);
+	}, []);
 
-	const sideStyles: Record<string, React.CSSProperties> = {
-		top: { bottom: "100%", marginBottom: sideOffset },
-		bottom: { top: "100%", marginTop: sideOffset },
-		left: { right: "100%", marginRight: sideOffset, top: "50%", transform: "translateY(-50%)" },
-		right: { left: "100%", marginLeft: sideOffset, top: "50%", transform: "translateY(-50%)" },
+	// Calculate position based on trigger element
+	React.useEffect(() => {
+		if (open && triggerRef.current) {
+			const rect = triggerRef.current.getBoundingClientRect();
+			let top = 0;
+			let left = 0;
+
+			switch (side) {
+				case "top":
+					top = rect.top - sideOffset;
+					left = align === "start" ? rect.left : align === "end" ? rect.right : rect.left + rect.width / 2;
+					break;
+				case "bottom":
+					top = rect.bottom + sideOffset;
+					left = align === "start" ? rect.left : align === "end" ? rect.right : rect.left + rect.width / 2;
+					break;
+				case "left":
+					top = rect.top + rect.height / 2;
+					left = rect.left - sideOffset;
+					break;
+				case "right":
+					top = rect.top + rect.height / 2;
+					left = rect.right + sideOffset;
+					break;
+			}
+
+			setPosition({ top, left });
+		}
+	}, [open, side, align, sideOffset, triggerRef]);
+
+	const getTransform = () => {
+		const transforms = [];
+		if (side === "top") transforms.push("translateY(-100%)");
+		if (side === "left") transforms.push("translateX(-100%)", "translateY(-50%)");
+		if (side === "right") transforms.push("translateY(-50%)");
+		if ((side === "top" || side === "bottom") && align === "center") transforms.push("translateX(-50%)");
+		if ((side === "top" || side === "bottom") && align === "end") transforms.push("translateX(-100%)");
+		return transforms.join(" ");
 	};
 
 	const getAnimationProps = () => {
@@ -161,7 +201,7 @@ function TooltipContent({
 
 	const animationProps = getAnimationProps();
 
-	return (
+	const content = (
 		<AnimatePresence>
 			{open && (
 				<motion.div
@@ -169,17 +209,25 @@ function TooltipContent({
 					{...animationProps}
 					transition={{ duration: 0.15, ease: "easeOut" }}
 					className={cn(
-						"absolute z-50 overflow-hidden rounded-md bg-neutral-800 px-3 py-1.5 text-xs text-white/90 shadow-lg border border-white/10",
-						side === "top" || side === "bottom" ? alignClasses[align] : "",
+						"fixed overflow-hidden rounded-md bg-neutral-800 px-3 py-1.5 text-xs text-white/90 shadow-lg border border-white/10",
 						className
 					)}
-					style={sideStyles[side]}
+					style={{
+						zIndex: 9999,
+						top: position.top,
+						left: position.left,
+						transform: getTransform(),
+					}}
 				>
 					{children}
 				</motion.div>
 			)}
 		</AnimatePresence>
 	);
+
+	// Use portal to escape stacking context
+	if (!mounted) return null;
+	return createPortal(content, document.body);
 }
 
 export { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent };

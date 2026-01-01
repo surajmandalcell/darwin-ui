@@ -3,7 +3,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useDesktop, apps } from '../../contexts/desktop-context';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Wifi, Battery, Apple, WifiOff, X, ExternalLink } from 'lucide-react';
+import { Search, Wifi, Battery, WifiOff, X, ExternalLink } from 'lucide-react';
+import { DarwinLogo } from '../icons/DarwinLogo';
 
 // About Modal Component - Apple-style About window
 function AboutModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
@@ -57,12 +58,11 @@ function AboutModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
               <div className="p-6 flex flex-col items-center text-center">
                 {/* Logo */}
                 <motion.div
-                  className="w-20 h-20 mb-4 rounded-2xl bg-gradient-to-br from-blue-500/30 via-indigo-500/20 to-purple-500/30 border border-white/10 flex items-center justify-center shadow-lg"
                   initial={{ scale: 0.8, rotate: -10 }}
                   animate={{ scale: 1, rotate: 0 }}
                   transition={{ delay: 0.1, type: 'spring', damping: 15 }}
                 >
-                  <Apple className="w-10 h-10 text-white" />
+                  <DarwinLogo className="w-16 h-16 text-white" />
                 </motion.div>
 
                 {/* App Name */}
@@ -449,7 +449,7 @@ export function MenuBar() {
               transition={{ duration: 0.15 }}
               onClick={() => setActiveMenu(activeMenu === 'darwin' ? null : 'darwin')}
             >
-              <Apple className="w-4 h-4" />
+              <DarwinLogo className="w-4 h-4" />
             </motion.button>
 
             {/* Darwin Menu Dropdown */}

@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check } from "lucide-react";
 import { cn } from "../lib/utils";
@@ -115,20 +116,49 @@ function DropdownMenuContent({
 	side = "bottom",
 	sideOffset = 4,
 }: DropdownMenuContentProps) {
-	const { open } = useDropdownMenuContext();
+	const { open, triggerRef } = useDropdownMenuContext();
+	const [mounted, setMounted] = React.useState(false);
+	const [position, setPosition] = React.useState({ top: 0, left: 0 });
 
-	const alignClasses = {
-		start: "left-0",
-		center: "left-1/2 -translate-x-1/2",
-		end: "right-0",
+	// Ensure we only render portal on client
+	React.useEffect(() => {
+		setMounted(true);
+	}, []);
+
+	// Calculate position based on trigger element
+	React.useEffect(() => {
+		if (open && triggerRef.current) {
+			const rect = triggerRef.current.getBoundingClientRect();
+			let top = 0;
+			let left = 0;
+
+			if (side === "bottom") {
+				top = rect.bottom + sideOffset;
+			} else {
+				top = rect.top - sideOffset;
+			}
+
+			if (align === "start") {
+				left = rect.left;
+			} else if (align === "center") {
+				left = rect.left + rect.width / 2;
+			} else {
+				left = rect.right;
+			}
+
+			setPosition({ top, left });
+		}
+	}, [open, side, align, sideOffset, triggerRef]);
+
+	const getTransform = () => {
+		const transforms = [];
+		if (side === "top") transforms.push("translateY(-100%)");
+		if (align === "center") transforms.push("translateX(-50%)");
+		if (align === "end") transforms.push("translateX(-100%)");
+		return transforms.join(" ") || undefined;
 	};
 
-	const sideClasses = {
-		top: "bottom-full mb-1",
-		bottom: "top-full mt-1",
-	};
-
-	return (
+	const content = (
 		<AnimatePresence>
 			{open && (
 				<motion.div
@@ -139,18 +169,26 @@ function DropdownMenuContent({
 					role="menu"
 					aria-orientation="vertical"
 					className={cn(
-						"absolute z-50 min-w-[180px] overflow-hidden rounded-lg border border-white/10 bg-neutral-900/95 backdrop-blur-md p-1 shadow-xl",
-						alignClasses[align],
-						sideClasses[side],
+						"fixed min-w-[180px] overflow-hidden rounded-lg border border-white/10 bg-neutral-900/95 backdrop-blur-md p-1 shadow-xl",
 						className
 					)}
-					style={{ marginTop: side === "bottom" ? sideOffset : undefined, marginBottom: side === "top" ? sideOffset : undefined }}
+					style={{
+						zIndex: 9999,
+						top: position.top,
+						left: position.left,
+						transform: getTransform(),
+						transformOrigin: side === "top" ? "bottom" : "top",
+					}}
 				>
 					{children}
 				</motion.div>
 			)}
 		</AnimatePresence>
 	);
+
+	// Use portal to escape stacking context
+	if (!mounted) return null;
+	return createPortal(content, document.body);
 }
 
 interface DropdownMenuItemProps {

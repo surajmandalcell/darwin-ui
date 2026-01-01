@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import FocusLock from "react-focus-lock";
 import { X } from "lucide-react";
@@ -84,6 +85,12 @@ interface DialogContentProps {
 
 function DialogContent({ children, className, size = "md" }: DialogContentProps) {
 	const { open, onOpenChange } = useDialogContext();
+	const [mounted, setMounted] = React.useState(false);
+
+	// Ensure we only render portal on client
+	React.useEffect(() => {
+		setMounted(true);
+	}, []);
 
 	const sizeClasses = {
 		sm: "max-w-sm",
@@ -93,7 +100,7 @@ function DialogContent({ children, className, size = "md" }: DialogContentProps)
 		full: "max-w-[90vw]",
 	};
 
-	return (
+	const content = (
 		<AnimatePresence>
 			{open && (
 				<FocusLock returnFocus>
@@ -103,7 +110,7 @@ function DialogContent({ children, className, size = "md" }: DialogContentProps)
 						exit={{ opacity: 0 }}
 						transition={{ duration: 0.2 }}
 						className="fixed inset-0 bg-black/50 backdrop-blur-sm p-4 overflow-y-auto flex items-center justify-center"
-						style={{ zIndex: "var(--z-modal, 50)" }}
+						style={{ zIndex: 9999 }}
 						onClick={(e) => {
 							if (e.target === e.currentTarget) {
 								onOpenChange(false);
@@ -133,6 +140,10 @@ function DialogContent({ children, className, size = "md" }: DialogContentProps)
 			)}
 		</AnimatePresence>
 	);
+
+	// Use portal to escape stacking context
+	if (!mounted) return null;
+	return createPortal(content, document.body);
 }
 
 interface DialogHeaderProps {

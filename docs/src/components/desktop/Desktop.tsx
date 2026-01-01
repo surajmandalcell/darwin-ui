@@ -5,7 +5,7 @@ import { MenuBar } from './MenuBar';
 import { Dock } from './Dock';
 import { DesktopWindow } from './DesktopWindow';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Apple } from 'lucide-react';
+import { DarwinLogo } from '../icons/DarwinLogo';
 
 export function Desktop() {
   const { state } = useDesktop();
@@ -178,10 +178,8 @@ export function Desktop() {
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               className="text-center"
             >
-              {/* Darwin UI Logo */}
-              <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-blue-500/20 to-indigo-500/20 border border-white/[0.08] flex items-center justify-center backdrop-blur-sm">
-                <Apple className="w-10 h-10 text-white" />
-              </div>
+              {/* Darwin UI Logo - Clean without squircle */}
+              <DarwinLogo className="w-16 h-16 mx-auto mb-4 text-white" />
               <motion.div
                 className="w-32 h-1 bg-white/20 rounded-full overflow-hidden mx-auto"
                 initial={{ opacity: 0 }}

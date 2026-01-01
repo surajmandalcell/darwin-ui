@@ -2,6 +2,7 @@
 
 import { useRef, useCallback, useState, useEffect } from 'react';
 import { motion, useDragControls, useMotionValue } from 'framer-motion';
+import { ExternalLink } from 'lucide-react';
 import { useDesktop, type WindowState, type AppDefinition } from '../../contexts/desktop-context';
 
 // Import app components
@@ -512,8 +513,23 @@ export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowP
             </motion.span>
           </div>
 
-          {/* Spacer for symmetry */}
-          <div className="w-14" />
+          {/* Right side actions - External link for Developer app */}
+          <div className="w-14 flex items-center justify-end">
+            {windowState.appId === 'developer' && (
+              <motion.button
+                className="p-1.5 rounded-md hover:bg-white/10 transition-colors"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('/docs', '_blank');
+                }}
+                title="Open in new tab"
+              >
+                <ExternalLink className="w-3.5 h-3.5 text-white/60 hover:text-white/90" />
+              </motion.button>
+            )}
+          </div>
         </div>
 
         {/* Content */}
