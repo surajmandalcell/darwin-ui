@@ -2,7 +2,7 @@
 
 A beautiful macOS-inspired dark theme React component library with glass-morphism aesthetic.
 
-[![npm version](https://img.shields.io/npm/v/@smc/darwin-ui.svg)](https://www.npmjs.com/package/@smc/darwin-ui)
+[![npm version](https://img.shields.io/npm/v/@pikoloo/darwin-ui.svg)](https://www.npmjs.com/package/@pikoloo/darwin-ui)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 [Documentation](https://darwin-ui.mandalsuraj.com) | [GitHub](https://github.com/surajmandalcell/darwin-ui)
@@ -22,11 +22,11 @@ A beautiful macOS-inspired dark theme React component library with glass-morphis
 ### Using npm/yarn/pnpm
 
 ```bash
-npm install @smc/darwin-ui
+npm install @pikoloo/darwin-ui
 # or
-yarn add @smc/darwin-ui
+yarn add @pikoloo/darwin-ui
 # or
-pnpm add @smc/darwin-ui
+pnpm add @pikoloo/darwin-ui
 ```
 
 ### Using shadcn CLI
@@ -40,8 +40,8 @@ npx shadcn add https://darwin-ui.mandalsuraj.com/registry/card.json
 ## Quick Start
 
 ```tsx
-import { Button, Card, CardHeader, CardTitle, CardContent } from '@smc/darwin-ui';
-import '@smc/darwin-ui/styles';
+import { Button, Card, CardHeader, CardTitle, CardContent } from '@pikoloo/darwin-ui';
+import '@pikoloo/darwin-ui/styles';
 
 function App() {
   return (
@@ -116,7 +116,7 @@ function App() {
 ## Hooks
 
 ```tsx
-import { useIsMobile, useMediaQuery, useEscapeKey } from '@smc/darwin-ui';
+import { useIsMobile, useMediaQuery, useEscapeKey } from '@pikoloo/darwin-ui';
 
 // Detect mobile devices
 const isMobile = useIsMobile();
@@ -148,7 +148,7 @@ Add Darwin UI's CSS to your Tailwind config:
 ```css
 /* In your global CSS */
 @import "tailwindcss";
-@import "@smc/darwin-ui/styles";
+@import "@pikoloo/darwin-ui/styles";
 ```
 
 ## Browser Support
