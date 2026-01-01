@@ -67,7 +67,7 @@ export function DockItem({
       whileTap={{ scale: 0.95 }}
     >
       {/* Icon Container */}
-      <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center">
+      <div className="w-8 h-8 md:w-12 md:h-12 rounded-xl bg-white/10 flex items-center justify-center">
         {icon}
       </div>
 

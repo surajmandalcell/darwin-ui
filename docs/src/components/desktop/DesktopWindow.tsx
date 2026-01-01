@@ -190,6 +190,15 @@ export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowP
   const [initialMousePos, setInitialMousePos] = useState({ x: 0, y: 0 });
   const [initialWindowPos, setInitialWindowPos] = useState(windowState.position);
   const [isDragging, setIsDragging] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check for mobile viewport
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Use motion values for drag transform - these reset to 0 after we update position
   const dragX = useMotionValue(0);
@@ -203,6 +212,9 @@ export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowP
 
   // Get the app component
   const AppComponent = appComponents[windowState.appId];
+
+  // Force maximized behavior on mobile
+  const effectiveIsMaximized = windowState.isMaximized || isMobile;
 
   // Handle drag start
   const handleDragStart = useCallback(() => {
@@ -410,11 +422,11 @@ export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowP
   };
 
   // Calculate position and size
-  const position = windowState.isMaximized
+  const position = effectiveIsMaximized
     ? { x: 0, y: MENU_BAR_HEIGHT }
     : windowState.position;
 
-  const size = windowState.isMaximized
+  const size = effectiveIsMaximized
     ? { width: window.innerWidth, height: window.innerHeight - MENU_BAR_HEIGHT - DOCK_HEIGHT }
     : windowState.size;
 
@@ -440,7 +452,7 @@ export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowP
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.15 }}
-      drag={!windowState.isMaximized}
+      drag={!effectiveIsMaximized}
       dragControls={dragControls}
       dragConstraints={dragConstraints}
       dragMomentum={false}
@@ -488,7 +500,7 @@ export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowP
         <div
           className="flex items-center h-9 px-3 bg-black/20 border-b border-white/10 cursor-default select-none shrink-0"
           onPointerDown={(e) => {
-            if (!windowState.isMaximized) {
+            if (!effectiveIsMaximized) {
               dragControls.start(e);
             }
           }}
@@ -500,7 +512,7 @@ export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowP
             onMinimize={handleMinimize}
             onMaximize={handleMaximize}
             isFocused={isFocused}
-            isMaximized={windowState.isMaximized}
+            isMaximized={effectiveIsMaximized}
           />
 
           {/* Title with truncation */}
@@ -541,7 +553,7 @@ export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowP
       </motion.div>
 
       {/* Resize Handles (only when not maximized) */}
-      {!windowState.isMaximized && (
+      {!effectiveIsMaximized && (
         <>
           {/* Corners - larger hit areas with subtle visual indicators on hover */}
           <motion.div

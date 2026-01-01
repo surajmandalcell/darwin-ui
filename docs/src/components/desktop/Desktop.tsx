@@ -150,7 +150,7 @@ export function Desktop() {
 
       {/* Dock */}
       <motion.div
-        className="absolute bottom-2 left-1/2 -translate-x-1/2"
+        className="absolute bottom-2 left-1/2 -translate-x-1/2 z-[9990]"
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{

@@ -568,11 +568,10 @@ export function MenuBar() {
 						)}
 					</AnimatePresence>
 
-					{/* App Menus */}
-					<div className="flex items-center gap-3">
-						{Object.keys(menuItems).map((menu) => (
-							<div key={menu} className="relative">
-								<motion.button
+					          {/* App Menus */}
+					          <div className="hidden md:flex items-center gap-3">
+					            {Object.keys(menuItems).map((menu) => (
+					              <div key={menu} className="relative">								<motion.button
 									className="px-2 py-0.5 rounded"
 									animate={{
 										backgroundColor:

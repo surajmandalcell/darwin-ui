@@ -3,10 +3,10 @@
 import { useDesktop, apps } from '../../contexts/desktop-context';
 import { DockItem } from './DockItem';
 import { motion } from 'framer-motion';
-import { Trash2, Github, Info } from 'lucide-react';
+import { Github, Info } from 'lucide-react';
 
 // Order of apps in dock
-const dockAppOrder = ['developer', 'example', 'terminal', 'notes', 'settings', 'changelog'];
+const dockAppOrder = ['developer', 'example', 'changelog', 'terminal', 'notes', 'settings'];
 
 export function Dock() {
   const { state, openApp, getRunningApps, focusWindow, restoreWindow, setAboutModal } = useDesktop();
@@ -41,7 +41,7 @@ export function Dock() {
 
   return (
     <motion.div
-      className="relative flex items-end gap-2 px-4 py-2 rounded-2xl"
+      className="relative flex items-end gap-1 px-[10px] py-1.5 md:px-4 md:gap-2 rounded-2xl max-w-[calc(100vw-20px)] overflow-x-auto z-[9990] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
       style={{
         background: 'rgba(30, 30, 30, 0.4)',
         backdropFilter: 'blur(30px)',
@@ -73,7 +73,7 @@ export function Dock() {
       })}
 
       {/* Separator */}
-      <div className="w-px h-10 bg-white/20 mx-1 self-center" />
+      <div className="w-px h-6 md:h-10 bg-white/20 mx-1 self-center" />
 
       {/* GitHub Icon */}
       <motion.button
@@ -83,7 +83,7 @@ export function Dock() {
         transition={{ type: 'spring', stiffness: 400, damping: 17 }}
         onClick={handleGitHubClick}
       >
-        <div className="w-12 h-12 rounded-xl bg-neutral-800 flex items-center justify-center shadow-lg">
+        <div className="w-8 h-8 md:w-12 md:h-12 rounded-xl bg-neutral-800 flex items-center justify-center shadow-lg">
           <Github className="w-6 h-6 text-white/80" />
         </div>
         {/* Tooltip */}
@@ -104,7 +104,7 @@ export function Dock() {
         transition={{ type: 'spring', stiffness: 400, damping: 17 }}
         onClick={handleAboutClick}
       >
-        <div className="w-12 h-12 rounded-xl bg-blue-600 flex items-center justify-center shadow-lg">
+        <div className="w-8 h-8 md:w-12 md:h-12 rounded-xl bg-blue-600 flex items-center justify-center shadow-lg">
           <Info className="w-6 h-6 text-white/80" />
         </div>
         {/* Tooltip */}
@@ -114,26 +114,6 @@ export function Dock() {
           transition={{ duration: 0.15 }}
         >
           About Darwin UI
-        </motion.div>
-      </motion.button>
-
-      {/* Trash */}
-      <motion.button
-        className="relative flex flex-col items-center group"
-        whileHover={{ scale: 1.15 }}
-        whileTap={{ scale: 0.95 }}
-        transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-      >
-        <div className="w-12 h-12 rounded-xl bg-gray-700 flex items-center justify-center shadow-lg">
-          <Trash2 className="w-6 h-6 text-white/80" />
-        </div>
-        {/* Tooltip */}
-        <motion.div
-          className="absolute -top-8 px-2 py-1 bg-black/80 rounded text-xs text-white whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none"
-          initial={false}
-          transition={{ duration: 0.15 }}
-        >
-          Trash
         </motion.div>
       </motion.button>
     </motion.div>
