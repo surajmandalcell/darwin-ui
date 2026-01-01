@@ -7,6 +7,7 @@ import {
   StickyNote,
   Settings,
   Info,
+  LayoutDashboard,
 } from 'lucide-react';
 
 // Types
@@ -77,6 +78,7 @@ const saveWindowSize = (appId: string, size: { width: number; height: number }) 
 // App-specific viewport proportions for responsive sizing
 const appSizeProportions: Record<string, { widthPercent: number; heightPercent: number }> = {
   developer: { widthPercent: 0.8, heightPercent: 0.8 },   // Large - documentation viewer
+  example: { widthPercent: 0.85, heightPercent: 0.85 },   // Large - dashboard showcase
   terminal: { widthPercent: 0.7, heightPercent: 0.5 },    // Wide but shorter - like a real terminal
   notes: { widthPercent: 0.5, heightPercent: 0.4 },       // Wider, shorter - note-taking size
   settings: { widthPercent: 0.5, heightPercent: 0.55 },   // Medium - settings panel
@@ -124,6 +126,13 @@ export const apps: Record<string, AppDefinition> = {
     defaultSize: { width: 1100, height: 800 },  // Large documentation viewer
     minSize: { width: 600, height: 400 },
     defaultRoute: '/docs/getting-started/introduction',
+  },
+  example: {
+    id: 'example',
+    name: 'Example',
+    icon: <LayoutDashboard className="w-full h-full" />,
+    defaultSize: { width: 1200, height: 850 },  // Large dashboard showcase
+    minSize: { width: 800, height: 500 },
   },
   terminal: {
     id: 'terminal',

@@ -59,6 +59,7 @@ import {
   CircularProgress,
   Reveal,
   SearchInput,
+  Sidebar,
   Slider,
   MultiSelect,
   Table,
@@ -1675,7 +1676,7 @@ function UploadPreview() {
   );
 }
 
-// Sidebar Preview
+// Sidebar Preview - Shows the actual Sidebar component in a contained preview
 function SidebarPreview() {
   const [activeItem, setActiveItem] = useState('Dashboard');
 
@@ -1688,36 +1689,33 @@ function SidebarPreview() {
 
   return (
     <motion.div
-      className="w-full max-w-xs"
+      className="w-full"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
     >
+      {/* Container to show sidebar in a realistic layout */}
       <div className="rounded-lg border border-white/10 bg-neutral-950/80 overflow-hidden">
-        <div className="p-3 border-b border-white/10">
-          <span className="text-sm font-medium text-white/70">Navigation</span>
-        </div>
-        <div className="p-2 space-y-1">
-          {sidebarItems.map((item) => (
-            <button
-              key={item.label}
-              onClick={item.onClick}
-              className={`w-full text-left px-3 py-2 text-sm rounded-md transition-colors ${
-                activeItem === item.label
-                  ? 'bg-blue-600 text-white'
-                  : 'text-white/60 hover:bg-white/5 hover:text-white'
-              }`}
-            >
-              {item.label}
-            </button>
-          ))}
-        </div>
-        <div className="p-3 border-t border-white/10">
-          <button className="w-full text-left px-3 py-2 text-sm text-white/50 hover:text-white/70 rounded-md hover:bg-white/5 transition-colors">
-            Logout
-          </button>
+        <div className="flex h-64">
+          {/* Sidebar area - using the actual Sidebar component */}
+          <div className="border-r border-white/10 bg-neutral-900/50">
+            <Sidebar
+              items={sidebarItems}
+              activeItem={activeItem}
+              onLogout={() => setActiveItem('Logged out')}
+            />
+          </div>
+          {/* Content area */}
+          <div className="flex-1 p-4 flex items-center justify-center">
+            <div className="text-center">
+              <p className="text-white/70 text-sm">Current page:</p>
+              <p className="text-white font-medium mt-1">{activeItem}</p>
+            </div>
+          </div>
         </div>
       </div>
-      <p className="text-xs text-white/40 mt-2 text-center">Active: {activeItem}</p>
+      <p className="text-xs text-white/40 mt-2 text-center">
+        The sidebar is responsive - on mobile it shows as a slide-out menu
+      </p>
     </motion.div>
   );
 }
@@ -2261,14 +2259,16 @@ function ComponentPage({ name }: { name: string }) {
         >
           Preview
         </motion.h3>
-        <div className="flex items-center justify-center min-h-[100px] p-4">
-          <AnimatedPreviewWrapper componentKey={name}>
-            {PreviewComponent ? (
-              <PreviewComponent key={name} />
-            ) : (
-              <p className="text-white/40 text-sm">No preview available</p>
-            )}
-          </AnimatedPreviewWrapper>
+        <div className="flex items-center justify-center min-h-[100px] p-4 w-full">
+          <div className="w-full">
+            <AnimatedPreviewWrapper componentKey={name}>
+              {PreviewComponent ? (
+                <PreviewComponent key={name} />
+              ) : (
+                <p className="text-white/40 text-sm text-center">No preview available</p>
+              )}
+            </AnimatedPreviewWrapper>
+          </div>
         </div>
       </motion.div>
 
@@ -2426,8 +2426,10 @@ function ThemingPage({ name }: { name: string }) {
           transition={{ delay: 0.2 }}
         >
           <h3 className="text-sm font-medium text-white/50 mb-4">Preview</h3>
-          <div className="flex items-center justify-center min-h-[100px] p-4">
-            {preview}
+          <div className="flex items-center justify-center min-h-[100px] p-4 w-full">
+            <div className="w-full">
+              {preview}
+            </div>
           </div>
         </motion.div>
       )}

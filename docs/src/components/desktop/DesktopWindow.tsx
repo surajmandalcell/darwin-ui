@@ -6,6 +6,7 @@ import { useDesktop, type WindowState, type AppDefinition } from '../../contexts
 
 // Import app components
 import { DeveloperApp } from './apps/DeveloperApp';
+import { ExampleApp } from './apps/ExampleApp';
 import { TerminalApp } from './apps/TerminalApp';
 import { NotesApp } from './apps/NotesApp';
 import { SettingsApp } from './apps/SettingsApp';
@@ -20,6 +21,7 @@ interface DesktopWindowProps {
 // Map app IDs to components
 const appComponents: Record<string, React.ComponentType<{ windowState: WindowState }>> = {
   developer: DeveloperApp,
+  example: ExampleApp,
   terminal: TerminalApp,
   notes: NotesApp,
   settings: SettingsApp,
