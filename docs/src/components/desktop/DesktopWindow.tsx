@@ -485,17 +485,6 @@ export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowP
           WebkitBackdropFilter: 'blur(12px)',
         }}
       >
-        {/* Border overlay for focus state */}
-        <motion.div
-          className="absolute inset-0 rounded-xl pointer-events-none"
-          animate={{
-            boxShadow: isFocused
-              ? 'inset 0 0 0 1px rgba(255,255,255,0.2)'
-              : 'inset 0 0 0 1px rgba(255,255,255,0.1)',
-          }}
-          transition={{ duration: 0.2 }}
-        />
-
         {/* Title Bar */}
         <div
           className="flex items-center h-9 px-3 bg-black/20 border-b border-white/10 cursor-default select-none shrink-0"
@@ -550,6 +539,17 @@ export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowP
         <div className="flex-1 overflow-hidden">
           {AppComponent && <AppComponent windowState={windowState} />}
         </div>
+
+        {/* Border overlay for focus state */}
+        <motion.div
+          className="absolute inset-0 rounded-xl pointer-events-none"
+          animate={{
+            boxShadow: isFocused
+              ? 'inset 0 0 0 1px rgba(255,255,255,0.2)'
+              : 'inset 0 0 0 1px rgba(255,255,255,0.1)',
+          }}
+          transition={{ duration: 0.2 }}
+        />
       </motion.div>
 
       {/* Resize Handles (only when not maximized) */}
@@ -561,53 +561,53 @@ export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowP
             onMouseDown={(e) => handleResizeStart(e, 'se')}
             whileHover={{ scale: 1.1 }}
           >
-            <div className="absolute bottom-1 right-1 w-2 h-2 opacity-0 group-hover:opacity-30 transition-opacity bg-white rounded-sm" />
+            <div className="absolute bottom-1 right-1 w-2 h-2 opacity-0 transition-opacity bg-white rounded-sm" />
           </motion.div>
           <motion.div
             className="absolute -bottom-1 -left-1 w-5 h-5 cursor-sw-resize group"
             onMouseDown={(e) => handleResizeStart(e, 'sw')}
             whileHover={{ scale: 1.1 }}
           >
-            <div className="absolute bottom-1 left-1 w-2 h-2 opacity-0 group-hover:opacity-30 transition-opacity bg-white rounded-sm" />
+            <div className="absolute bottom-1 left-1 w-2 h-2 opacity-0 transition-opacity bg-white rounded-sm" />
           </motion.div>
           <motion.div
             className="absolute -top-1 -right-1 w-5 h-5 cursor-ne-resize group"
             onMouseDown={(e) => handleResizeStart(e, 'ne')}
             whileHover={{ scale: 1.1 }}
           >
-            <div className="absolute top-1 right-1 w-2 h-2 opacity-0 group-hover:opacity-30 transition-opacity bg-white rounded-sm" />
+            <div className="absolute top-1 right-1 w-2 h-2 opacity-0 transition-opacity bg-white rounded-sm" />
           </motion.div>
           <motion.div
             className="absolute -top-1 -left-1 w-5 h-5 cursor-nw-resize group"
             onMouseDown={(e) => handleResizeStart(e, 'nw')}
             whileHover={{ scale: 1.1 }}
           >
-            <div className="absolute top-1 left-1 w-2 h-2 opacity-0 group-hover:opacity-30 transition-opacity bg-white rounded-sm" />
+            <div className="absolute top-1 left-1 w-2 h-2 opacity-0 transition-opacity bg-white rounded-sm" />
           </motion.div>
           {/* Edges with hover indicators */}
           <div
             className="absolute top-3 bottom-3 -right-1 w-3 cursor-e-resize group"
             onMouseDown={(e) => handleResizeStart(e, 'e')}
           >
-            <div className="absolute inset-y-0 right-1 w-0.5 opacity-0 group-hover:opacity-20 transition-opacity bg-white rounded-full" />
+            <div className="absolute inset-y-0 right-1 w-0.5 opacity-0 transition-opacity bg-white rounded-full" />
           </div>
           <div
             className="absolute top-3 bottom-3 -left-1 w-3 cursor-w-resize group"
             onMouseDown={(e) => handleResizeStart(e, 'w')}
           >
-            <div className="absolute inset-y-0 left-1 w-0.5 opacity-0 group-hover:opacity-20 transition-opacity bg-white rounded-full" />
+            <div className="absolute inset-y-0 left-1 w-0.5 opacity-0 transition-opacity bg-white rounded-full" />
           </div>
           <div
             className="absolute -bottom-1 left-3 right-3 h-3 cursor-s-resize group"
             onMouseDown={(e) => handleResizeStart(e, 's')}
           >
-            <div className="absolute inset-x-0 bottom-1 h-0.5 opacity-0 group-hover:opacity-20 transition-opacity bg-white rounded-full" />
+            <div className="absolute inset-x-0 bottom-1 h-0.5 opacity-0 transition-opacity bg-white rounded-full" />
           </div>
           <div
             className="absolute -top-1 left-3 right-3 h-3 cursor-n-resize group"
             onMouseDown={(e) => handleResizeStart(e, 'n')}
           >
-            <div className="absolute inset-x-0 top-1 h-0.5 opacity-0 group-hover:opacity-20 transition-opacity bg-white rounded-full" />
+            <div className="absolute inset-x-0 top-1 h-0.5 opacity-0 transition-opacity bg-white rounded-full" />
           </div>
         </>
       )}
