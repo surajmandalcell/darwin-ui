@@ -135,7 +135,7 @@ function DashboardContent() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search..."
-            className="w-48"
+            wrapperClassName="w-48"
           />
           <Tooltip>
             <TooltipTrigger asChild>

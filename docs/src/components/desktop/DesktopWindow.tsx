@@ -12,6 +12,7 @@ import { TerminalApp } from './apps/TerminalApp';
 import { NotesApp } from './apps/NotesApp';
 import { SettingsApp } from './apps/SettingsApp';
 import { AboutApp } from './apps/AboutApp';
+import { ChangelogApp } from './apps/ChangelogApp';
 
 interface DesktopWindowProps {
   windowState: WindowState;
@@ -27,6 +28,7 @@ const appComponents: Record<string, React.ComponentType<{ windowState: WindowSta
   notes: NotesApp,
   settings: SettingsApp,
   about: AboutApp,
+  changelog: ChangelogApp,
 };
 
 // macOS Traffic Light Colors (from official Apple design)

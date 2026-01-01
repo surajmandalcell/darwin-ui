@@ -4,12 +4,14 @@ import React from "react";
 import { Search } from "lucide-react";
 import { cn } from "../lib/utils";
 
-type SearchInputProps = React.InputHTMLAttributes<HTMLInputElement>;
+interface SearchInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+	wrapperClassName?: string;
+}
 
-export function SearchInput({ className, ...props }: SearchInputProps) {
+export function SearchInput({ className, wrapperClassName, ...props }: SearchInputProps) {
 	return (
-		<div className="relative w-full">
-			<Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40 pointer-events-none" />
+		<div className={cn("relative", wrapperClassName)}>
+			<Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40 pointer-events-none z-10" />
 			<input
 				type="search"
 				className={cn(

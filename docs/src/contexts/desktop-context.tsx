@@ -8,6 +8,7 @@ import {
   Settings,
   Info,
   LayoutDashboard,
+  FileText,
 } from 'lucide-react';
 
 // Types
@@ -82,6 +83,7 @@ const appSizeProportions: Record<string, { widthPercent: number; heightPercent: 
   terminal: { widthPercent: 0.7, heightPercent: 0.5 },    // Wide but shorter - like a real terminal
   notes: { widthPercent: 0.5, heightPercent: 0.4 },       // Wider, shorter - note-taking size
   settings: { widthPercent: 0.5, heightPercent: 0.55 },   // Medium - settings panel
+  changelog: { widthPercent: 0.6, heightPercent: 0.75 },  // Medium-tall - version history
 };
 
 // Helper to calculate responsive default size based on screen dimensions
@@ -161,6 +163,13 @@ export const apps: Record<string, AppDefinition> = {
     icon: <Info className="w-full h-full" />,
     defaultSize: { width: 400, height: 500 },   // Small about window
     minSize: { width: 320, height: 400 },
+  },
+  changelog: {
+    id: 'changelog',
+    name: 'Changelog',
+    icon: <FileText className="w-full h-full" />,
+    defaultSize: { width: 700, height: 600 },   // Medium changelog viewer
+    minSize: { width: 500, height: 400 },
   },
 };
 

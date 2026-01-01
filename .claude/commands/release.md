@@ -36,18 +36,50 @@ Update version to `$1` in these files:
 - `/docs/src/components/desktop/MenuBar.tsx` - version display in menu bar
 - `/docs/src/components/desktop/apps/AboutApp.tsx` - version display in About app
 
-### 4. Commit Version Bump
+### 4. Update Changelog
+Add a new entry at the TOP of the changelog array in `/docs/src/data/changelog.ts`:
+
+```typescript
+{
+  version: '$1',
+  date: 'YYYY-MM-DD',  // Use today's date
+  title: 'Short descriptive title',
+  description: 'Brief summary of this release (optional)',
+  changes: [
+    { type: 'added', description: 'New feature description' },
+    { type: 'added', component: 'ComponentName', description: 'Component-specific change' },
+    { type: 'changed', description: 'What was modified' },
+    { type: 'fixed', description: 'Bug that was fixed' },
+    { type: 'removed', description: 'What was removed' },
+    { type: 'deprecated', description: 'What is now deprecated' },
+    { type: 'security', description: 'Security-related change' },
+  ],
+}
+```
+
+**Change types:**
+- `added` - New features or components
+- `changed` - Changes to existing functionality
+- `fixed` - Bug fixes
+- `removed` - Removed features
+- `deprecated` - Features marked for future removal
+- `security` - Security-related changes
+
+Use `component` field when change is specific to a component.
+Use `breaking: true` for breaking changes.
+
+### 5. Commit Version Bump
 ```bash
 git add .
 git commit -m "release: v$1"
 ```
 
-### 5. Create Git Tag
+### 6. Create Git Tag
 ```bash
 git tag -a v$1 -m "Release v$1"
 ```
 
-### 6. Push to Remote
+### 7. Push to Remote
 Ask user for confirmation, then:
 ```bash
 git push origin main

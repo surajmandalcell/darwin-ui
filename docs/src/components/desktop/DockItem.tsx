@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import type { AppDefinition } from '../../contexts/desktop-context';
-import { Hammer, Terminal, StickyNote, Settings, LayoutDashboard } from 'lucide-react';
+import { Hammer, Terminal, StickyNote, Settings, LayoutDashboard, FileText } from 'lucide-react';
 
 interface DockItemProps {
   app: AppDefinition;
@@ -20,6 +20,7 @@ const appIcons: Record<string, React.ReactNode> = {
   terminal: <Terminal className="w-6 h-6 text-white" />,
   notes: <StickyNote className="w-6 h-6 text-white" />,
   settings: <Settings className="w-6 h-6 text-white" />,
+  changelog: <FileText className="w-6 h-6 text-white" />,
 };
 
 export function DockItem({
