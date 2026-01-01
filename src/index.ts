@@ -1,11 +1,11 @@
 // Components
-export * from './components';
+export * from "./components";
 
 // Hooks
-export * from './hooks';
+export * from "./hooks";
 
 // Utils
-export * from './lib';
+export * from "./lib";
 
 // Styles (import in your app)
-// import '@smc/darwin-ui/styles';
+// import '@pikoloo/darwin-ui/styles';
