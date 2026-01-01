@@ -32,6 +32,23 @@ export interface ChangelogEntry {
 
 export const changelog: ChangelogEntry[] = [
   {
+    version: '1.3.0',
+    date: '2025-12-31',
+    title: 'Changelog Feature & Branding Update',
+    description: 'New changelog system with dedicated page, custom Darwin logo branding, Example app, and comprehensive component demos.',
+    changes: [
+      { type: 'added', description: 'Changelog feature with dedicated /changelog page and structured data format' },
+      { type: 'added', description: 'Example App - Dashboard showcasing all components in real-world UI scenarios' },
+      { type: 'added', description: 'Custom Darwin logo replacing Apple icon throughout the UI for unique branding' },
+      { type: 'added', description: 'Component demos for all 35 library components in documentation' },
+      { type: 'added', description: 'Release command for streamlined version publishing' },
+      { type: 'changed', description: 'MenuBar now uses custom Darwin logo in the system menu' },
+      { type: 'changed', description: 'About modal redesigned with new Darwin branding' },
+      { type: 'fixed', description: 'Preview issues in component documentation' },
+      { type: 'removed', description: 'Orphaned docs components that were no longer in use' },
+    ],
+  },
+  {
     version: '1.2.0',
     date: '2025-12-31',
     title: 'Desktop Environment & Component Expansion',
