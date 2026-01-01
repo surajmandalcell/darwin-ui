@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useCallback, useState, useEffect } from 'react';
+import { useRef, useCallback, useState, useEffect, useLayoutEffect } from 'react';
 import { motion, useDragControls, useMotionValue } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
 import { useDesktop, type WindowState, type AppDefinition } from '../../contexts/desktop-context';
@@ -274,13 +274,15 @@ export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowP
         x: newX,
         y: newY,
       });
-
-      // Reset motion values to 0 (the transform)
-      dragX.set(0);
-      dragY.set(0);
     },
     [windowState.id, windowState.position, windowState.size, updateWindowPosition, dragX, dragY, MIN_VISIBLE_PIXELS, MENU_BAR_HEIGHT, DOCK_HEIGHT, SNAP_THRESHOLD]
   );
+
+  // Reset drag transform when position updates to prevent visual jump
+  useLayoutEffect(() => {
+    dragX.set(0);
+    dragY.set(0);
+  }, [windowState.position.x, windowState.position.y, dragX, dragY]);
 
   // Handle resize
   const handleResizeStart = useCallback(
