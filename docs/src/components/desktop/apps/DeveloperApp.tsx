@@ -15,6 +15,8 @@ import {
   Copy,
   Check,
   ExternalLink,
+  Menu,
+  X,
 } from 'lucide-react';
 import {
   Accordion,
@@ -2525,10 +2527,120 @@ function SidebarNavItem({
   );
 }
 
+// Extracted Navigation Component
+function DocsNavigation({
+  activeSection,
+  activePage,
+  expandedSections,
+  toggleSection,
+  navigateTo,
+  onNavigate
+}: {
+  activeSection: string;
+  activePage: string;
+  expandedSections: string[];
+  toggleSection: (id: string) => void;
+  navigateTo: (section: string, page: string) => void;
+  onNavigate?: () => void;
+}) {
+  return (
+    <nav className="flex-1 overflow-y-auto p-3 space-y-1">
+      {Object.entries(docSections).map(([sectionId, section], sectionIndex) => (
+        <motion.div
+          key={sectionId}
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: sectionIndex * 0.1 }}
+        >
+          <motion.button
+            onClick={() => toggleSection(sectionId)}
+            className="w-full flex items-center gap-2 px-2 py-1.5 text-sm text-white/70 hover:text-white hover:bg-white/5 rounded-md transition-colors"
+            whileHover={{ x: 4 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <motion.div
+              animate={{ rotate: expandedSections.includes(sectionId) ? 90 : 0 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            >
+              <ChevronRight className="w-3 h-3" />
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.1 }}
+              transition={{ type: "spring", stiffness: 400, damping: 20 }}
+            >
+              {section.icon}
+            </motion.div>
+            <span className="font-medium">{section.title}</span>
+          </motion.button>
+
+          <AnimatePresence>
+            {expandedSections.includes(sectionId) && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{
+                  height: 'auto',
+                  opacity: 1,
+                  transition: {
+                    height: {
+                      type: "spring",
+                      stiffness: 300,
+                      damping: 30
+                    },
+                    opacity: {
+                      duration: 0.2,
+                      delay: 0.1
+                    }
+                  }
+                }}
+                exit={{
+                  height: 0,
+                  opacity: 0,
+                  transition: {
+                    height: {
+                      type: "spring",
+                      stiffness: 300,
+                      damping: 30
+                    },
+                    opacity: {
+                      duration: 0.1
+                    }
+                  }
+                }}
+                className="overflow-hidden"
+              >
+                <motion.div
+                  className="pl-7 py-1 space-y-0.5"
+                  variants={containerVariants}
+                  initial="hidden"
+                  animate="show"
+                >
+                  {section.pages.map((page, pageIndex) => (
+                    <SidebarNavItem
+                      key={page.id}
+                      page={page}
+                      isActive={activeSection === sectionId && activePage === page.id}
+                      onClick={() => {
+                        navigateTo(sectionId, page.id);
+                        onNavigate?.();
+                      }}
+                      index={pageIndex}
+                    />
+                  ))}
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
+      ))}
+    </nav>
+  );
+}
+
 export function DeveloperApp({ windowState: _windowState }: DeveloperAppProps) {
   const [activeSection, setActiveSection] = useState('getting-started');
   const [activePage, setActivePage] = useState('introduction');
   const [expandedSections, setExpandedSections] = useState<string[]>(['getting-started', 'components', 'theming']);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
 
   const toggleSection = (sectionId: string) => {
@@ -2555,10 +2667,66 @@ export function DeveloperApp({ windowState: _windowState }: DeveloperAppProps) {
   };
 
   return (
-    <div className="flex h-full bg-neutral-900">
-      {/* Sidebar */}
+    <div className="flex flex-col md:flex-row h-full bg-neutral-900 relative">
+      {/* Mobile Header */}
+      <div className="md:hidden flex items-center justify-between p-4 border-b border-white/10 bg-neutral-950 flex-shrink-0">
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded bg-white/[0.08] border border-white/[0.08] flex items-center justify-center">
+            <BookOpen className="w-4 h-4 text-blue-400" />
+          </div>
+          <span className="font-semibold text-white">Documentation</span>
+        </div>
+        <button
+          onClick={() => setShowMobileMenu(true)}
+          className="p-2 -mr-2 text-white/70 hover:text-white transition-colors"
+        >
+          <Menu className="w-6 h-6" />
+        </button>
+      </div>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {showMobileMenu && (
+          <>
+            <motion.div
+              className="fixed inset-0 bg-black/50 z-50 backdrop-blur-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowMobileMenu(false)}
+            />
+            <motion.div
+              className="fixed inset-y-0 right-0 w-64 bg-neutral-950 z-50 border-l border-white/10 flex flex-col shadow-2xl"
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            >
+              <div className="p-4 border-b border-white/10 flex items-center justify-between">
+                <span className="font-semibold text-white">Menu</span>
+                <button
+                  onClick={() => setShowMobileMenu(false)}
+                  className="p-1 text-white/50 hover:text-white transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+              <DocsNavigation
+                activeSection={activeSection}
+                activePage={activePage}
+                expandedSections={expandedSections}
+                toggleSection={toggleSection}
+                navigateTo={navigateTo}
+                onNavigate={() => setShowMobileMenu(false)}
+              />
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
+      {/* Desktop Sidebar */}
       <motion.div
-        className="w-56 bg-neutral-950 border-r border-white/10 flex flex-col overflow-hidden"
+        className="hidden md:flex w-56 bg-neutral-950 border-r border-white/10 flex-col overflow-hidden flex-shrink-0"
         initial={{ x: -56, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
@@ -2583,92 +2751,13 @@ export function DeveloperApp({ windowState: _windowState }: DeveloperAppProps) {
         </motion.div>
 
         {/* Navigation */}
-        <nav className="flex-1 overflow-y-auto p-3 space-y-1">
-          {Object.entries(docSections).map(([sectionId, section], sectionIndex) => (
-            <motion.div
-              key={sectionId}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: sectionIndex * 0.1 }}
-            >
-              <motion.button
-                onClick={() => toggleSection(sectionId)}
-                className="w-full flex items-center gap-2 px-2 py-1.5 text-sm text-white/70 hover:text-white hover:bg-white/5 rounded-md transition-colors"
-                whileHover={{ x: 4 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <motion.div
-                  animate={{ rotate: expandedSections.includes(sectionId) ? 90 : 0 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                >
-                  <ChevronRight className="w-3 h-3" />
-                </motion.div>
-                <motion.div
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                >
-                  {section.icon}
-                </motion.div>
-                <span className="font-medium">{section.title}</span>
-              </motion.button>
-
-              <AnimatePresence>
-                {expandedSections.includes(sectionId) && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{
-                      height: 'auto',
-                      opacity: 1,
-                      transition: {
-                        height: {
-                          type: "spring",
-                          stiffness: 300,
-                          damping: 30
-                        },
-                        opacity: {
-                          duration: 0.2,
-                          delay: 0.1
-                        }
-                      }
-                    }}
-                    exit={{
-                      height: 0,
-                      opacity: 0,
-                      transition: {
-                        height: {
-                          type: "spring",
-                          stiffness: 300,
-                          damping: 30
-                        },
-                        opacity: {
-                          duration: 0.1
-                        }
-                      }
-                    }}
-                    className="overflow-hidden"
-                  >
-                    <motion.div
-                      className="pl-7 py-1 space-y-0.5"
-                      variants={containerVariants}
-                      initial="hidden"
-                      animate="show"
-                    >
-                      {section.pages.map((page, pageIndex) => (
-                        <SidebarNavItem
-                          key={page.id}
-                          page={page}
-                          isActive={activeSection === sectionId && activePage === page.id}
-                          onClick={() => navigateTo(sectionId, page.id)}
-                          index={pageIndex}
-                        />
-                      ))}
-                    </motion.div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          ))}
-        </nav>
+        <DocsNavigation
+          activeSection={activeSection}
+          activePage={activePage}
+          expandedSections={expandedSections}
+          toggleSection={toggleSection}
+          navigateTo={navigateTo}
+        />
 
         {/* Sidebar Footer */}
         <motion.div
@@ -2704,7 +2793,7 @@ export function DeveloperApp({ windowState: _windowState }: DeveloperAppProps) {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
       >
-        <div className="max-w-3xl mx-auto p-8">
+        <div className="max-w-3xl mx-auto p-4 md:p-8">
           <AnimatePresence mode="wait">
             <PageContent
               key={`${activeSection}-${activePage}`}

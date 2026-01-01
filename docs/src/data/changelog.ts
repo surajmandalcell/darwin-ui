@@ -51,7 +51,7 @@ export const changelog: ChangelogEntry[] = [
   {
     version: '1.2.0',
     date: '2025-12-31',
-    title: 'Desktop Environment & Component Expansion',
+    title: 'DE & Component Improvements',
     description: 'Major release featuring a complete macOS-inspired desktop environment with multiple apps, 15 new components, and significant UI/UX improvements.',
     changes: [
       // Added
