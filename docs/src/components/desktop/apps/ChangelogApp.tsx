@@ -16,7 +16,7 @@ import {
   Tag,
   Package,
   ExternalLink,
-  Sparkles,
+  Plus,
   Wrench,
   Bug,
   Trash2,
@@ -57,7 +57,7 @@ const itemVariants = {
 // Get icon for change type
 function getChangeTypeIcon(type: ChangelogChange['type']) {
   const icons = {
-    added: Sparkles,
+    added: Plus,
     changed: Wrench,
     fixed: Bug,
     removed: Trash2,
