@@ -23,7 +23,7 @@ import {
   AlertTriangle,
   Shield,
 } from 'lucide-react';
-import { Badge } from '@smc/darwin-ui';
+import { Badge } from '@pikoloo/darwin-ui';
 
 interface ChangelogAppProps {
   windowState: WindowState;

@@ -25,7 +25,7 @@ import {
     Switch,
     Card,
     Skeleton,
-} from "@smc/darwin-ui";
+} from "@pikoloo/darwin-ui";
 
 // ============================================
 // Local Components (if library counterpart is different or missing inline version)

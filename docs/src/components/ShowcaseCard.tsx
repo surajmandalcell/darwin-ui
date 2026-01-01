@@ -2,7 +2,7 @@
 
 import { type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { Badge } from '@smc/darwin-ui';
+import { Badge } from '@pikoloo/darwin-ui';
 import { ArrowRight } from 'lucide-react';
 
 interface ShowcaseCardProps {

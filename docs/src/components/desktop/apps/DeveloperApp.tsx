@@ -81,7 +81,7 @@ import {
   LineChart,
   BarChart,
   CloseButton,
-} from '@smc/darwin-ui';
+} from '@pikoloo/darwin-ui';
 
 interface DeveloperAppProps {
   windowState: WindowState;
@@ -432,7 +432,7 @@ function IntroductionPage() {
         transition={{ delay: 0.4 }}
       >
         <h2 className="text-2xl font-semibold text-white mb-4">Quick Install</h2>
-        <CodeBlock code="npm install @smc/darwin-ui" language="bash" />
+        <CodeBlock code="npm install @pikoloo/darwin-ui" language="bash" />
       </motion.div>
     </motion.div>
   );
@@ -441,10 +441,10 @@ function IntroductionPage() {
 // Installation page content with staggered animations
 function InstallationPage() {
   const installMethods = [
-    { title: 'Using npm', code: 'npm install @smc/darwin-ui' },
-    { title: 'Using yarn', code: 'yarn add @smc/darwin-ui' },
-    { title: 'Using pnpm', code: 'pnpm add @smc/darwin-ui' },
-    { title: 'Using bun', code: 'bun add @smc/darwin-ui' },
+    { title: 'Using npm', code: 'npm install @pikoloo/darwin-ui' },
+    { title: 'Using yarn', code: 'yarn add @pikoloo/darwin-ui' },
+    { title: 'Using pnpm', code: 'pnpm add @pikoloo/darwin-ui' },
+    { title: 'Using bun', code: 'bun add @pikoloo/darwin-ui' },
   ];
 
   return (
@@ -509,7 +509,7 @@ function InstallationPage() {
 
 // Quick Start page content with enhanced animations
 function QuickStartPage({ onNavigate }: { onNavigate?: (section: string, page: string) => void }) {
-  const exampleCode = `import { Button, Window, Input } from '@smc/darwin-ui';
+  const exampleCode = `import { Button, Window, Input } from '@pikoloo/darwin-ui';
 
 function App() {
   return (
@@ -1850,7 +1850,7 @@ const componentPreviews: Record<string, React.ComponentType> = {
 // Component code examples
 const componentCodeExamples: Record<string, { importCode: string; usageCode: string }> = {
   'accordion': {
-    importCode: `import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@smc/darwin-ui';`,
+    importCode: `import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@pikoloo/darwin-ui';`,
     usageCode: `<Accordion type="single" defaultValue="item-1">
   <AccordionItem value="item-1">
     <AccordionTrigger>Section Title</AccordionTrigger>
@@ -1861,7 +1861,7 @@ const componentCodeExamples: Record<string, { importCode: string; usageCode: str
 </Accordion>`,
   },
   'avatar': {
-    importCode: `import { Avatar, AvatarGroup } from '@smc/darwin-ui';`,
+    importCode: `import { Avatar, AvatarGroup } from '@pikoloo/darwin-ui';`,
     usageCode: `<Avatar src="/user.jpg" alt="User" size="md" />
 <Avatar fallback="John Doe" />
 
@@ -1872,20 +1872,20 @@ const componentCodeExamples: Record<string, { importCode: string; usageCode: str
 </AvatarGroup>`,
   },
   'badge': {
-    importCode: `import { Badge } from '@smc/darwin-ui';`,
+    importCode: `import { Badge } from '@pikoloo/darwin-ui';`,
     usageCode: `<Badge variant="success">Active</Badge>
 <Badge variant="warning">Pending</Badge>
 <Badge variant="destructive">Error</Badge>`,
   },
   'button': {
-    importCode: `import { Button } from '@smc/darwin-ui';`,
+    importCode: `import { Button } from '@pikoloo/darwin-ui';`,
     usageCode: `<Button variant="primary">Primary</Button>
 <Button variant="secondary">Secondary</Button>
 <Button variant="outline">Outline</Button>
 <Button loading>Loading...</Button>`,
   },
   'card': {
-    importCode: `import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@smc/darwin-ui';`,
+    importCode: `import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@pikoloo/darwin-ui';`,
     usageCode: `<Card>
   <CardHeader>
     <CardTitle>Card Title</CardTitle>
@@ -1898,7 +1898,7 @@ const componentCodeExamples: Record<string, { importCode: string; usageCode: str
 </Card>`,
   },
   'charts': {
-    importCode: `import { BarChart, LineChart, AreaChart, PieChart } from '@smc/darwin-ui';`,
+    importCode: `import { BarChart, LineChart, AreaChart, PieChart } from '@pikoloo/darwin-ui';`,
     usageCode: `<BarChart
   data={data}
   xKey="name"
@@ -1912,7 +1912,7 @@ const componentCodeExamples: Record<string, { importCode: string; usageCode: str
 />`,
   },
   'checkbox': {
-    importCode: `import { Checkbox } from '@smc/darwin-ui';`,
+    importCode: `import { Checkbox } from '@pikoloo/darwin-ui';`,
     usageCode: `<Checkbox
   label="Accept terms"
   checked={checked}
@@ -1920,11 +1920,11 @@ const componentCodeExamples: Record<string, { importCode: string; usageCode: str
 />`,
   },
   'close-button': {
-    importCode: `import { CloseButton } from '@smc/darwin-ui';`,
+    importCode: `import { CloseButton } from '@pikoloo/darwin-ui';`,
     usageCode: `<CloseButton onClick={handleClose} />`,
   },
   'context-menu': {
-    importCode: `import { ContextMenu } from '@smc/darwin-ui';`,
+    importCode: `import { ContextMenu } from '@pikoloo/darwin-ui';`,
     usageCode: `<ContextMenu items={[
   { label: 'Cut', onClick: handleCut },
   { label: 'Copy', onClick: handleCopy },
@@ -1935,14 +1935,14 @@ const componentCodeExamples: Record<string, { importCode: string; usageCode: str
 </ContextMenu>`,
   },
   'date-select': {
-    importCode: `import { DateSelect } from '@smc/darwin-ui';`,
+    importCode: `import { DateSelect } from '@pikoloo/darwin-ui';`,
     usageCode: `<DateSelect
   label="Event Date"
   onChange={(config) => console.log(config)}
 />`,
   },
   'dialog': {
-    importCode: `import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogClose } from '@smc/darwin-ui';`,
+    importCode: `import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogClose } from '@pikoloo/darwin-ui';`,
     usageCode: `<Dialog open={open} onOpenChange={setOpen}>
   <DialogTrigger asChild>
     <Button>Open Dialog</Button>
@@ -1960,7 +1960,7 @@ const componentCodeExamples: Record<string, { importCode: string; usageCode: str
 </Dialog>`,
   },
   'dropdown-menu': {
-    importCode: `import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator } from '@smc/darwin-ui';`,
+    importCode: `import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator } from '@pikoloo/darwin-ui';`,
     usageCode: `<DropdownMenu>
   <DropdownMenuTrigger asChild>
     <Button>Open Menu</Button>
@@ -1974,7 +1974,7 @@ const componentCodeExamples: Record<string, { importCode: string; usageCode: str
 </DropdownMenu>`,
   },
   'image': {
-    importCode: `import { Image } from '@smc/darwin-ui';`,
+    importCode: `import { Image } from '@pikoloo/darwin-ui';`,
     usageCode: `<Image
   src="/photo.jpg"
   alt="Photo"
@@ -1983,19 +1983,19 @@ const componentCodeExamples: Record<string, { importCode: string; usageCode: str
 />`,
   },
   'input': {
-    importCode: `import { Input } from '@smc/darwin-ui';`,
+    importCode: `import { Input } from '@pikoloo/darwin-ui';`,
     usageCode: `<Input placeholder="Enter text..." />
 <Input error placeholder="Error state" />
 <Input success placeholder="Success state" />`,
   },
   'modal': {
-    importCode: `import { Modal } from '@smc/darwin-ui';`,
+    importCode: `import { Modal } from '@pikoloo/darwin-ui';`,
     usageCode: `<Modal isOpen={isOpen} onClose={() => setIsOpen(false)} title="Modal Title">
   <p>Modal content here</p>
 </Modal>`,
   },
   'multi-select': {
-    importCode: `import { MultiSelect } from '@smc/darwin-ui';`,
+    importCode: `import { MultiSelect } from '@pikoloo/darwin-ui';`,
     usageCode: `<MultiSelect
   value={selected}
   onChange={setSelected}
@@ -2007,7 +2007,7 @@ const componentCodeExamples: Record<string, { importCode: string; usageCode: str
 />`,
   },
   'popover': {
-    importCode: `import { Popover, PopoverTrigger, PopoverContent, PopoverClose } from '@smc/darwin-ui';`,
+    importCode: `import { Popover, PopoverTrigger, PopoverContent, PopoverClose } from '@pikoloo/darwin-ui';`,
     usageCode: `<Popover>
   <PopoverTrigger asChild>
     <Button>Show Info</Button>
@@ -2019,7 +2019,7 @@ const componentCodeExamples: Record<string, { importCode: string; usageCode: str
 </Popover>`,
   },
   'progress': {
-    importCode: `import { Progress, CircularProgress } from '@smc/darwin-ui';`,
+    importCode: `import { Progress, CircularProgress } from '@pikoloo/darwin-ui';`,
     usageCode: `<Progress value={65} showValue />
 <Progress variant="success" value={100} />
 <Progress indeterminate variant="gradient" />
@@ -2028,7 +2028,7 @@ const componentCodeExamples: Record<string, { importCode: string; usageCode: str
 <CircularProgress indeterminate />`,
   },
   'reveal': {
-    importCode: `import { Reveal } from '@smc/darwin-ui';`,
+    importCode: `import { Reveal } from '@pikoloo/darwin-ui';`,
     usageCode: `<Reveal type="slide" direction="up">
   <div>Slides up on scroll</div>
 </Reveal>
@@ -2042,7 +2042,7 @@ const componentCodeExamples: Record<string, { importCode: string; usageCode: str
 </Reveal>`,
   },
   'search-input': {
-    importCode: `import { SearchInput } from '@smc/darwin-ui';`,
+    importCode: `import { SearchInput } from '@pikoloo/darwin-ui';`,
     usageCode: `<SearchInput
   value={query}
   onChange={setQuery}
@@ -2050,19 +2050,19 @@ const componentCodeExamples: Record<string, { importCode: string; usageCode: str
 />`,
   },
   'select': {
-    importCode: `import { Select } from '@smc/darwin-ui';`,
+    importCode: `import { Select } from '@pikoloo/darwin-ui';`,
     usageCode: `<Select value={value} onChange={(e) => setValue(e.target.value)}>
   <option value="option1">Option 1</option>
   <option value="option2">Option 2</option>
 </Select>`,
   },
   'skeleton': {
-    importCode: `import { Skeleton } from '@smc/darwin-ui';`,
+    importCode: `import { Skeleton } from '@pikoloo/darwin-ui';`,
     usageCode: `<Skeleton className="h-4 w-full" />
 <Skeleton className="h-12 w-12 rounded-full" />`,
   },
   'switch': {
-    importCode: `import { Switch } from '@smc/darwin-ui';`,
+    importCode: `import { Switch } from '@pikoloo/darwin-ui';`,
     usageCode: `<Switch
   label="Enable feature"
   checked={enabled}
@@ -2070,7 +2070,7 @@ const componentCodeExamples: Record<string, { importCode: string; usageCode: str
 />`,
   },
   'table': {
-    importCode: `import { Table, TableHead, TableBody, TableRow, TableHeaderCell, TableCell } from '@smc/darwin-ui';`,
+    importCode: `import { Table, TableHead, TableBody, TableRow, TableHeaderCell, TableCell } from '@pikoloo/darwin-ui';`,
     usageCode: `<Table>
   <TableHead>
     <TableRow>
@@ -2087,14 +2087,14 @@ const componentCodeExamples: Record<string, { importCode: string; usageCode: str
 </Table>`,
   },
   'contact-form': {
-    importCode: `import { CompactContactForm } from '@smc/darwin-ui';`,
+    importCode: `import { CompactContactForm } from '@pikoloo/darwin-ui';`,
     usageCode: `<CompactContactForm
   title="Quick Connect Form"
   className="max-w-lg"
 />`,
   },
   'md-editor': {
-    importCode: `import { MdEditor } from '@smc/darwin-ui';`,
+    importCode: `import { MdEditor } from '@pikoloo/darwin-ui';`,
     usageCode: `const [content, setContent] = useState('');
 
 <MdEditor
@@ -2104,7 +2104,7 @@ const componentCodeExamples: Record<string, { importCode: string; usageCode: str
 />`,
   },
   'sidebar': {
-    importCode: `import { Sidebar } from '@smc/darwin-ui';`,
+    importCode: `import { Sidebar } from '@pikoloo/darwin-ui';`,
     usageCode: `const items = [
   { label: 'Dashboard', onClick: () => navigate('/dashboard'), icon: HomeIcon },
   { label: 'Projects', onClick: () => navigate('/projects'), icon: FolderIcon },
@@ -2118,7 +2118,7 @@ const componentCodeExamples: Record<string, { importCode: string; usageCode: str
 />`,
   },
   'slider': {
-    importCode: `import { Slider } from '@smc/darwin-ui';`,
+    importCode: `import { Slider } from '@pikoloo/darwin-ui';`,
     usageCode: `const [value, setValue] = useState(50);
 
 <Slider
@@ -2131,7 +2131,7 @@ const componentCodeExamples: Record<string, { importCode: string; usageCode: str
 />`,
   },
   'tabs': {
-    importCode: `import { Tabs, TabsList, TabsTrigger, TabsContent } from '@smc/darwin-ui';`,
+    importCode: `import { Tabs, TabsList, TabsTrigger, TabsContent } from '@pikoloo/darwin-ui';`,
     usageCode: `<Tabs value={activeTab} onValueChange={setActiveTab}>
   <TabsList>
     <TabsTrigger value="overview">Overview</TabsTrigger>
@@ -2146,7 +2146,7 @@ const componentCodeExamples: Record<string, { importCode: string; usageCode: str
 </Tabs>`,
   },
   'textarea': {
-    importCode: `import { Textarea } from '@smc/darwin-ui';`,
+    importCode: `import { Textarea } from '@pikoloo/darwin-ui';`,
     usageCode: `<Textarea
   placeholder="Write your message..."
   value={text}
@@ -2157,7 +2157,7 @@ const componentCodeExamples: Record<string, { importCode: string; usageCode: str
 <Textarea success placeholder="Success state" />`,
   },
   'tooltip': {
-    importCode: `import { Tooltip, TooltipTrigger, TooltipContent } from '@smc/darwin-ui';`,
+    importCode: `import { Tooltip, TooltipTrigger, TooltipContent } from '@pikoloo/darwin-ui';`,
     usageCode: `<Tooltip>
   <TooltipTrigger>
     <Button>Hover me</Button>
@@ -2168,7 +2168,7 @@ const componentCodeExamples: Record<string, { importCode: string; usageCode: str
 </Tooltip>`,
   },
   'upload': {
-    importCode: `import { Upload } from '@smc/darwin-ui';`,
+    importCode: `import { Upload } from '@pikoloo/darwin-ui';`,
     usageCode: `const [files, setFiles] = useState<string[]>([]);
 
 const handleUpload = async (files: File[]) => {
@@ -2186,7 +2186,7 @@ const handleUpload = async (files: File[]) => {
 />`,
   },
   'window': {
-    importCode: `import { Window } from '@smc/darwin-ui';`,
+    importCode: `import { Window } from '@pikoloo/darwin-ui';`,
     usageCode: `<Window title="My Window" isOpen={true} onClose={handleClose}>
   <div className="p-4">Window content</div>
 </Window>`,
@@ -2285,7 +2285,7 @@ function ComponentPage({ name }: { name: string }) {
         </motion.h2>
         <motion.div variants={itemVariants}>
           <CodeBlock
-            code={codeExample?.importCode || `import { ${displayName} } from '@smc/darwin-ui';`}
+            code={codeExample?.importCode || `import { ${displayName} } from '@pikoloo/darwin-ui';`}
             language="tsx"
           />
         </motion.div>

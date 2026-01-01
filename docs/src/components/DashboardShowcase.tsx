@@ -34,7 +34,7 @@ import {
     Cell,
 } from "recharts";
 
-import { Button, Badge, Card } from "@smc/darwin-ui";
+import { Button, Badge, Card } from "@pikoloo/darwin-ui";
 
 import { cn } from "@/lib/utils";
 

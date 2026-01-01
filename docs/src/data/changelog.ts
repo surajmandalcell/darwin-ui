@@ -145,7 +145,7 @@ export const changelog: ChangelogEntry[] = [
       { type: 'added', description: 'useContactForm hook for form handling' },
       { type: 'added', description: 'OverlayProvider for managing overlay stacking' },
       { type: 'added', description: 'Comprehensive documentation with API references' },
-      { type: 'added', description: 'NPM package published as @smc/darwin-ui' },
+      { type: 'added', description: 'NPM package published as @pikoloo/darwin-ui' },
     ],
   },
 ];

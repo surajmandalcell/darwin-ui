@@ -18,10 +18,10 @@
       "@/*": [
         "./src/*"
       ],
-      "@smc/darwin-ui": [
+      "@pikoloo/darwin-ui": [
         "../src/index.ts"
       ],
-      "@smc/darwin-ui/*": [
+      "@pikoloo/darwin-ui/*": [
         "../src/*"
       ]
     },

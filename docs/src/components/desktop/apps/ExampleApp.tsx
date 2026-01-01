@@ -48,7 +48,7 @@ import {
   Skeleton,
   LineChart,
   BarChart,
-} from '@smc/darwin-ui';
+} from '@pikoloo/darwin-ui';
 
 interface ExampleAppProps {
   windowState: WindowState;

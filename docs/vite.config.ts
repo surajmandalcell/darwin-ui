@@ -12,7 +12,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
-      '@smc/darwin-ui': path.resolve(__dirname, '../src'),
+      '@pikoloo/darwin-ui': path.resolve(__dirname, '../src'),
       // Force React and framer-motion to use docs' node_modules
       'react': path.resolve(__dirname, './node_modules/react'),
       'react-dom': path.resolve(__dirname, './node_modules/react-dom'),

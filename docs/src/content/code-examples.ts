@@ -7,15 +7,15 @@
 // Installation Examples
 // ============================================================================
 
-export const INSTALL_NPM = `npm install @smc/darwin-ui`;
+export const INSTALL_NPM = `npm install @pikoloo/darwin-ui`;
 
-export const INSTALL_YARN = `yarn add @smc/darwin-ui`;
+export const INSTALL_YARN = `yarn add @pikoloo/darwin-ui`;
 
-export const INSTALL_PNPM = `pnpm add @smc/darwin-ui`;
+export const INSTALL_PNPM = `pnpm add @pikoloo/darwin-ui`;
 
-export const IMPORT_STYLES = `import '@smc/darwin-ui/styles.css';`;
+export const IMPORT_STYLES = `import '@pikoloo/darwin-ui/styles.css';`;
 
-export const PROVIDER_SETUP = `import { ToastProvider, AlertProvider, OverlayProvider } from '@smc/darwin-ui';
+export const PROVIDER_SETUP = `import { ToastProvider, AlertProvider, OverlayProvider } from '@pikoloo/darwin-ui';
 
 function App() {
   return (
@@ -29,7 +29,7 @@ function App() {
   );
 }`;
 
-export const FIRST_COMPONENT = `import { Button } from '@smc/darwin-ui';
+export const FIRST_COMPONENT = `import { Button } from '@pikoloo/darwin-ui';
 
 function MyComponent() {
   return (
@@ -63,7 +63,7 @@ export const CUSTOM_THEME = `/* Override CSS variables in your own CSS */
   --radius: 0.5rem;              /* Sharper corners */
 }`;
 
-export const COMPONENT_OVERRIDE = `import { Button } from '@smc/darwin-ui';
+export const COMPONENT_OVERRIDE = `import { Button } from '@pikoloo/darwin-ui';
 
 function MyButton() {
   return (
@@ -79,7 +79,7 @@ function MyButton() {
 // Hook Examples
 // ============================================================================
 
-export const USE_MEDIA_QUERY_EXAMPLE = `import { useMediaQuery } from '@smc/darwin-ui';
+export const USE_MEDIA_QUERY_EXAMPLE = `import { useMediaQuery } from '@pikoloo/darwin-ui';
 
 function ResponsiveComponent() {
   const isDesktop = useMediaQuery('(min-width: 1024px)');
@@ -95,7 +95,7 @@ function ResponsiveComponent() {
   );
 }`;
 
-export const USE_IS_MOBILE_EXAMPLE = `import { useIsMobile } from '@smc/darwin-ui';
+export const USE_IS_MOBILE_EXAMPLE = `import { useIsMobile } from '@pikoloo/darwin-ui';
 
 function Navigation() {
   const isMobile = useIsMobile(); // true if viewport width < 768px
@@ -107,7 +107,7 @@ function Navigation() {
   );
 }`;
 
-export const USE_ESCAPE_KEY_EXAMPLE = `import { useEscapeKey } from '@smc/darwin-ui';
+export const USE_ESCAPE_KEY_EXAMPLE = `import { useEscapeKey } from '@pikoloo/darwin-ui';
 import { useState } from 'react';
 
 function Modal() {
@@ -130,7 +130,7 @@ function Modal() {
 // Component Examples
 // ============================================================================
 
-export const BUTTON_EXAMPLE = `import { Button } from '@smc/darwin-ui';
+export const BUTTON_EXAMPLE = `import { Button } from '@pikoloo/darwin-ui';
 import { Download } from 'lucide-react';
 
 function ButtonDemo() {
@@ -148,7 +148,7 @@ function ButtonDemo() {
   );
 }`;
 
-export const BADGE_EXAMPLE = `import { Badge } from '@smc/darwin-ui';
+export const BADGE_EXAMPLE = `import { Badge } from '@pikoloo/darwin-ui';
 
 function StatusBadges() {
   return (
@@ -161,8 +161,8 @@ function StatusBadges() {
   );
 }`;
 
-export const CARD_EXAMPLE = `import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter, CardAction } from '@smc/darwin-ui';
-import { Button } from '@smc/darwin-ui';
+export const CARD_EXAMPLE = `import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter, CardAction } from '@pikoloo/darwin-ui';
+import { Button } from '@pikoloo/darwin-ui';
 
 function ProductCard() {
   return (
@@ -186,7 +186,7 @@ function ProductCard() {
   );
 }`;
 
-export const INPUT_EXAMPLE = `import { Input } from '@smc/darwin-ui';
+export const INPUT_EXAMPLE = `import { Input } from '@pikoloo/darwin-ui';
 import { useState } from 'react';
 
 function LoginForm() {
@@ -205,7 +205,7 @@ function LoginForm() {
   );
 }`;
 
-export const SELECT_EXAMPLE = `import { Select } from '@smc/darwin-ui';
+export const SELECT_EXAMPLE = `import { Select } from '@pikoloo/darwin-ui';
 import { useState } from 'react';
 
 function CountrySelector() {
@@ -224,7 +224,7 @@ function CountrySelector() {
   );
 }`;
 
-export const CHECKBOX_EXAMPLE = `import { Checkbox } from '@smc/darwin-ui';
+export const CHECKBOX_EXAMPLE = `import { Checkbox } from '@pikoloo/darwin-ui';
 import { useState } from 'react';
 
 function TermsAcceptance() {
@@ -239,7 +239,7 @@ function TermsAcceptance() {
   );
 }`;
 
-export const SWITCH_EXAMPLE = `import { Switch } from '@smc/darwin-ui';
+export const SWITCH_EXAMPLE = `import { Switch } from '@pikoloo/darwin-ui';
 import { useState } from 'react';
 
 function NotificationSettings() {
@@ -262,7 +262,7 @@ function NotificationSettings() {
   );
 }`;
 
-export const TABLE_EXAMPLE = `import { Table, TableHead, TableBody, TableRow, TableHeaderCell, TableCell } from '@smc/darwin-ui';
+export const TABLE_EXAMPLE = `import { Table, TableHead, TableBody, TableRow, TableHeaderCell, TableCell } from '@pikoloo/darwin-ui';
 
 function UsersTable() {
   const users = [
@@ -293,7 +293,7 @@ function UsersTable() {
   );
 }`;
 
-export const MODAL_EXAMPLE = `import { Modal, Button } from '@smc/darwin-ui';
+export const MODAL_EXAMPLE = `import { Modal, Button } from '@pikoloo/darwin-ui';
 import { useState } from 'react';
 
 function DeleteConfirmation() {
@@ -330,7 +330,7 @@ function DeleteConfirmation() {
   );
 }`;
 
-export const TOAST_EXAMPLE = `import { ToastProvider, useToast, Button } from '@smc/darwin-ui';
+export const TOAST_EXAMPLE = `import { ToastProvider, useToast, Button } from '@pikoloo/darwin-ui';
 
 function NotificationButton() {
   const { showToast } = useToast();
@@ -350,7 +350,7 @@ function NotificationButton() {
   );
 }`;
 
-export const ALERT_EXAMPLE = `import { AlertProvider, useAlert, Button } from '@smc/darwin-ui';
+export const ALERT_EXAMPLE = `import { AlertProvider, useAlert, Button } from '@pikoloo/darwin-ui';
 
 function DeleteButton() {
   const { showAlert } = useAlert();
@@ -375,7 +375,7 @@ function DeleteButton() {
   return <Button variant="destructive" onClick={handleClick}>Delete File</Button>;
 }`;
 
-export const SKELETON_EXAMPLE = `import { Skeleton } from '@smc/darwin-ui';
+export const SKELETON_EXAMPLE = `import { Skeleton } from '@pikoloo/darwin-ui';
 
 function LoadingCard() {
   return (
@@ -389,7 +389,7 @@ function LoadingCard() {
   );
 }`;
 
-export const IMAGE_EXAMPLE = `import { Image } from '@smc/darwin-ui';
+export const IMAGE_EXAMPLE = `import { Image } from '@pikoloo/darwin-ui';
 
 function Gallery() {
   return (
@@ -402,7 +402,7 @@ function Gallery() {
   );
 }`;
 
-export const DATE_SELECT_EXAMPLE = `import { DateSelect } from '@smc/darwin-ui';
+export const DATE_SELECT_EXAMPLE = `import { DateSelect } from '@pikoloo/darwin-ui';
 import { useState } from 'react';
 
 function EventScheduler() {
@@ -420,7 +420,7 @@ function EventScheduler() {
   );
 }`;
 
-export const MULTI_SELECT_EXAMPLE = `import { MultiSelect } from '@smc/darwin-ui';
+export const MULTI_SELECT_EXAMPLE = `import { MultiSelect } from '@pikoloo/darwin-ui';
 import { useState } from 'react';
 
 function TechStackSelector() {
@@ -443,7 +443,7 @@ function TechStackSelector() {
   );
 }`;
 
-export const SEARCH_INPUT_EXAMPLE = `import { SearchInput } from '@smc/darwin-ui';
+export const SEARCH_INPUT_EXAMPLE = `import { SearchInput } from '@pikoloo/darwin-ui';
 import { useState } from 'react';
 
 function UserSearch() {
@@ -458,7 +458,7 @@ function UserSearch() {
   );
 }`;
 
-export const CONTEXT_MENU_EXAMPLE = `import { ContextMenu, Button } from '@smc/darwin-ui';
+export const CONTEXT_MENU_EXAMPLE = `import { ContextMenu, Button } from '@pikoloo/darwin-ui';
 
 function FileItem() {
   const menuItems = [
@@ -475,7 +475,7 @@ function FileItem() {
   );
 }`;
 
-export const UPLOAD_EXAMPLE = `import { Upload } from '@smc/darwin-ui';
+export const UPLOAD_EXAMPLE = `import { Upload } from '@pikoloo/darwin-ui';
 import { useState } from 'react';
 
 function ImageUploader() {
@@ -506,7 +506,7 @@ function ImageUploader() {
   );
 }`;
 
-export const REVEAL_EXAMPLE = `import Reveal from '@smc/darwin-ui/components/reveal';
+export const REVEAL_EXAMPLE = `import Reveal from '@pikoloo/darwin-ui/components/reveal';
 
 function AnimatedSection() {
   return (
@@ -526,7 +526,7 @@ function AnimatedSection() {
   );
 }`;
 
-export const WINDOW_EXAMPLE = `import { Window } from '@smc/darwin-ui';
+export const WINDOW_EXAMPLE = `import { Window } from '@pikoloo/darwin-ui';
 
 function AppWindow() {
   return (
@@ -539,7 +539,7 @@ function AppWindow() {
   );
 }`;
 
-export const CLOSE_BUTTON_EXAMPLE = `import { CloseButton } from '@smc/darwin-ui';
+export const CLOSE_BUTTON_EXAMPLE = `import { CloseButton } from '@pikoloo/darwin-ui';
 
 function Notification() {
   return (
@@ -553,7 +553,7 @@ function Notification() {
   );
 }`;
 
-export const CHARTS_EXAMPLE = `import { AreaChart, BarChart, LineChart, PieChart, DonutChart, StackedBarChart } from '@smc/darwin-ui';
+export const CHARTS_EXAMPLE = `import { AreaChart, BarChart, LineChart, PieChart, DonutChart, StackedBarChart } from '@pikoloo/darwin-ui';
 
 const data = [
   { month: 'Jan', revenue: 4000, expenses: 2400 },
@@ -596,7 +596,7 @@ function Analytics() {
 // New Components Examples
 // ============================================================================
 
-export const TABS_EXAMPLE = `import { Tabs, TabsList, TabsTrigger, TabsContent } from '@smc/darwin-ui';
+export const TABS_EXAMPLE = `import { Tabs, TabsList, TabsTrigger, TabsContent } from '@pikoloo/darwin-ui';
 
 function SettingsTabs() {
   return (
@@ -619,7 +619,7 @@ function SettingsTabs() {
   );
 }`;
 
-export const ACCORDION_EXAMPLE = `import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@smc/darwin-ui';
+export const ACCORDION_EXAMPLE = `import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@pikoloo/darwin-ui';
 
 function FAQ() {
   return (
@@ -640,7 +640,7 @@ function FAQ() {
   );
 }`;
 
-export const AVATAR_EXAMPLE = `import { Avatar, AvatarImage, AvatarFallback } from '@smc/darwin-ui';
+export const AVATAR_EXAMPLE = `import { Avatar, AvatarImage, AvatarFallback } from '@pikoloo/darwin-ui';
 
 function UserAvatar() {
   return (
@@ -663,7 +663,7 @@ function UserAvatar() {
   );
 }`;
 
-export const PROGRESS_EXAMPLE = `import { Progress, CircularProgress } from '@smc/darwin-ui';
+export const PROGRESS_EXAMPLE = `import { Progress, CircularProgress } from '@pikoloo/darwin-ui';
 
 function UploadProgress() {
   const [progress, setProgress] = useState(45);
@@ -682,7 +682,7 @@ function UploadProgress() {
   );
 }`;
 
-export const SLIDER_EXAMPLE = `import { Slider } from '@smc/darwin-ui';
+export const SLIDER_EXAMPLE = `import { Slider } from '@pikoloo/darwin-ui';
 import { useState } from 'react';
 
 function VolumeControl() {
@@ -702,7 +702,7 @@ function VolumeControl() {
   );
 }`;
 
-export const TEXTAREA_EXAMPLE = `import { Textarea } from '@smc/darwin-ui';
+export const TEXTAREA_EXAMPLE = `import { Textarea } from '@pikoloo/darwin-ui';
 import { useState } from 'react';
 
 function FeedbackForm() {
@@ -720,7 +720,7 @@ function FeedbackForm() {
   );
 }`;
 
-export const DIALOG_EXAMPLE = `import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, Button } from '@smc/darwin-ui';
+export const DIALOG_EXAMPLE = `import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, Button } from '@pikoloo/darwin-ui';
 
 function EditProfile() {
   return (
@@ -748,7 +748,7 @@ function EditProfile() {
   );
 }`;
 
-export const DROPDOWN_MENU_EXAMPLE = `import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, Button } from '@smc/darwin-ui';
+export const DROPDOWN_MENU_EXAMPLE = `import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, Button } from '@pikoloo/darwin-ui';
 import { Settings, User, LogOut } from 'lucide-react';
 
 function UserMenu() {
@@ -776,7 +776,7 @@ function UserMenu() {
   );
 }`;
 
-export const POPOVER_EXAMPLE = `import { Popover, PopoverTrigger, PopoverContent, Button } from '@smc/darwin-ui';
+export const POPOVER_EXAMPLE = `import { Popover, PopoverTrigger, PopoverContent, Button } from '@pikoloo/darwin-ui';
 
 function NotificationsPopover() {
   return (
@@ -794,7 +794,7 @@ function NotificationsPopover() {
   );
 }`;
 
-export const TOOLTIP_EXAMPLE = `import { Tooltip, TooltipTrigger, TooltipContent, Button } from '@smc/darwin-ui';
+export const TOOLTIP_EXAMPLE = `import { Tooltip, TooltipTrigger, TooltipContent, Button } from '@pikoloo/darwin-ui';
 
 function IconButton() {
   return (
