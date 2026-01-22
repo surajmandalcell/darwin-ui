@@ -49,7 +49,7 @@ export function ComponentGridSection() {
   const isInView = useInView(sectionRef, { once: true, margin: "-200px" });
 
   return (
-    <section ref={sectionRef} className="min-h-screen py-24 px-4 relative">
+    <section ref={sectionRef} className="min-h-screen py-16 md:py-20 lg:py-24 xl:py-28 px-4 relative">
       <motion.div
         className="text-center mb-16 max-w-3xl mx-auto"
         initial={{ opacity: 0, y: 30 }}

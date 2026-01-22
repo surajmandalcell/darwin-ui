@@ -261,7 +261,7 @@ export default function ShowcasePage() {
       </section>
 
       {/* Feature highlights */}
-      <section className="py-32 px-6 md:px-12 lg:px-20 relative">
+      <section className="py-16 md:py-20 lg:py-24 xl:py-28 px-6 md:px-12 lg:px-20 relative">
         <div className="max-w-[1400px] mx-auto">
           <motion.div
             className="grid md:grid-cols-3 gap-6"
