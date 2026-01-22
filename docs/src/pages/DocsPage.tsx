@@ -20,7 +20,7 @@ export default function DocsPage() {
   };
 
   return (
-    <div className="h-screen w-screen bg-neutral-900 overflow-hidden flex flex-col">
+    <div className="h-screen w-screen bg-background overflow-hidden flex flex-col">
       <UnifiedNavbar />
       <div className="flex-1 overflow-hidden">
         <DeveloperApp windowState={mockWindowState} />

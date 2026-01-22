@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { WindowState } from '../../../contexts/desktop-context';
+import { useTheme } from '../../../contexts/theme-context';
 import {
   Palette,
   Sun,
@@ -215,7 +216,7 @@ function AnimatedCard({ children, className = '', onClick }: AnimatedCardProps) 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function SettingsApp({ windowState: _windowState }: SettingsAppProps) {
   const [activeSection, setActiveSection] = useState('appearance');
-  const [theme, setTheme] = useState<'light' | 'dark' | 'system'>('dark');
+  const { theme, setTheme } = useTheme();
   const [accentColor, setAccentColor] = useState('blue');
   const [animationSpeed, setAnimationSpeed] = useState<'slow' | 'normal' | 'fast'>('normal');
   const [reduceMotion, setReduceMotion] = useState(false);
