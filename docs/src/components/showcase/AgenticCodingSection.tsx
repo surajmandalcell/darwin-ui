@@ -2,7 +2,7 @@
 
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
-import { Zap, Terminal, Code2, Wand2 } from 'lucide-react';
+import { Terminal, Code2, Wand2 } from 'lucide-react';
 
 const codeLines = [
   '// Claude, add a date picker to the form',
@@ -182,19 +182,6 @@ export function AgenticCodingSection() {
 
           {/* Right side - Content */}
           <div className="order-1 lg:order-2 space-y-8">
-            {/* Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
-              <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
-                <Zap className="w-3.5 h-3.5" />
-                Agentic Ready
-              </span>
-            </motion.div>
-
             {/* Title */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
