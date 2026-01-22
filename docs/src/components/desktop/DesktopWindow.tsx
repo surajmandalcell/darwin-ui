@@ -4,6 +4,7 @@ import { useRef, useCallback, useState, useEffect, useLayoutEffect } from 'react
 import { motion, useDragControls, useMotionValue } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
 import { useDesktop, type WindowState, type AppDefinition } from '../../contexts/desktop-context';
+import { useTheme } from '../../contexts/theme-context';
 
 // Import app components
 import { DeveloperApp } from './apps/DeveloperApp';
@@ -181,6 +182,9 @@ export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowP
     updateWindowPosition,
     updateWindowSize,
   } = useDesktop();
+
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === 'dark';
 
   const windowRef = useRef<HTMLDivElement>(null);
   const dragControls = useDragControls();
@@ -441,10 +445,14 @@ export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowP
     bottom: window.innerHeight - DOCK_HEIGHT - MIN_VISIBLE_PIXELS - windowState.position.y,
   };
 
-  // Dynamic shadow based on focus state
-  const shadowStyle = isFocused
-    ? '0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 12px 24px -8px rgba(0, 0, 0, 0.4)'
-    : '0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 4px 10px -4px rgba(0, 0, 0, 0.2)';
+  // Dynamic shadow based on focus state and theme
+  const shadowStyle = isDark
+    ? (isFocused
+        ? '0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 12px 24px -8px rgba(0, 0, 0, 0.4)'
+        : '0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 4px 10px -4px rgba(0, 0, 0, 0.2)')
+    : (isFocused
+        ? '0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 12px 24px -8px rgba(0, 0, 0, 0.15)'
+        : '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 10px -4px rgba(0, 0, 0, 0.08)');
 
   return (
     <motion.div
@@ -482,14 +490,16 @@ export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowP
         }}
         transition={{ duration: 0.2, ease: 'easeOut' }}
         style={{
-          background: 'rgb(23 23 23 / 0.95)',
+          background: isDark ? 'rgb(23 23 23 / 0.95)' : 'rgb(255 255 255 / 0.95)',
           backdropFilter: 'blur(12px)',
           WebkitBackdropFilter: 'blur(12px)',
         }}
       >
         {/* Title Bar */}
         <div
-          className="flex items-center h-9 px-3 bg-black/20 border-b border-white/10 cursor-default select-none shrink-0"
+          className={`flex items-center h-9 px-3 border-b cursor-default select-none shrink-0 ${
+            isDark ? 'bg-black/20 border-white/10' : 'bg-black/5 border-black/10'
+          }`}
           onPointerDown={(e) => {
             if (!effectiveIsMaximized) {
               dragControls.start(e);
@@ -510,7 +520,11 @@ export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowP
           <div className="flex-1 text-center overflow-hidden px-4">
             <motion.span
               className="text-[13px] font-medium block truncate"
-              animate={{ color: isFocused ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.5)' }}
+              animate={{
+                color: isDark
+                  ? (isFocused ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.5)')
+                  : (isFocused ? 'rgba(0,0,0,0.9)' : 'rgba(0,0,0,0.5)')
+              }}
               transition={{ duration: 0.2 }}
               title={windowState.title}
             >
@@ -522,7 +536,9 @@ export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowP
           <div className="w-14 flex items-center justify-end">
             {windowState.appId === 'developer' && (
               <motion.button
-                className="p-1.5 rounded-md hover:bg-white/10 transition-colors"
+                className={`p-1.5 rounded-md transition-colors ${
+                  isDark ? 'hover:bg-white/10' : 'hover:bg-black/10'
+                }`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={(e) => {
@@ -531,7 +547,9 @@ export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowP
                 }}
                 title="Open in new tab"
               >
-                <ExternalLink className="w-3.5 h-3.5 text-white/60 hover:text-white/90" />
+                <ExternalLink className={`w-3.5 h-3.5 ${
+                  isDark ? 'text-white/60 hover:text-white/90' : 'text-black/60 hover:text-black/90'
+                }`} />
               </motion.button>
             )}
           </div>
@@ -546,9 +564,13 @@ export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowP
         <motion.div
           className="absolute inset-0 rounded-xl pointer-events-none"
           animate={{
-            boxShadow: isFocused
-              ? 'inset 0 0 0 1px rgba(255,255,255,0.2)'
-              : 'inset 0 0 0 1px rgba(255,255,255,0.1)',
+            boxShadow: isDark
+              ? (isFocused
+                  ? 'inset 0 0 0 1px rgba(255,255,255,0.2)'
+                  : 'inset 0 0 0 1px rgba(255,255,255,0.1)')
+              : (isFocused
+                  ? 'inset 0 0 0 1px rgba(0,0,0,0.15)'
+                  : 'inset 0 0 0 1px rgba(0,0,0,0.1)'),
           }}
           transition={{ duration: 0.2 }}
         />
@@ -563,53 +585,53 @@ export function DesktopWindow({ windowState, appDef, isFocused }: DesktopWindowP
             onMouseDown={(e) => handleResizeStart(e, 'se')}
             whileHover={{ scale: 1.1 }}
           >
-            <div className="absolute bottom-1 right-1 w-2 h-2 opacity-0 transition-opacity bg-white rounded-sm" />
+            <div className={`absolute bottom-1 right-1 w-2 h-2 opacity-0 transition-opacity rounded-sm ${isDark ? 'bg-white' : 'bg-black'}`} />
           </motion.div>
           <motion.div
             className="absolute -bottom-1 -left-1 w-5 h-5 cursor-sw-resize group"
             onMouseDown={(e) => handleResizeStart(e, 'sw')}
             whileHover={{ scale: 1.1 }}
           >
-            <div className="absolute bottom-1 left-1 w-2 h-2 opacity-0 transition-opacity bg-white rounded-sm" />
+            <div className={`absolute bottom-1 left-1 w-2 h-2 opacity-0 transition-opacity rounded-sm ${isDark ? 'bg-white' : 'bg-black'}`} />
           </motion.div>
           <motion.div
             className="absolute -top-1 -right-1 w-5 h-5 cursor-ne-resize group"
             onMouseDown={(e) => handleResizeStart(e, 'ne')}
             whileHover={{ scale: 1.1 }}
           >
-            <div className="absolute top-1 right-1 w-2 h-2 opacity-0 transition-opacity bg-white rounded-sm" />
+            <div className={`absolute top-1 right-1 w-2 h-2 opacity-0 transition-opacity rounded-sm ${isDark ? 'bg-white' : 'bg-black'}`} />
           </motion.div>
           <motion.div
             className="absolute -top-1 -left-1 w-5 h-5 cursor-nw-resize group"
             onMouseDown={(e) => handleResizeStart(e, 'nw')}
             whileHover={{ scale: 1.1 }}
           >
-            <div className="absolute top-1 left-1 w-2 h-2 opacity-0 transition-opacity bg-white rounded-sm" />
+            <div className={`absolute top-1 left-1 w-2 h-2 opacity-0 transition-opacity rounded-sm ${isDark ? 'bg-white' : 'bg-black'}`} />
           </motion.div>
           {/* Edges with hover indicators */}
           <div
             className="absolute top-3 bottom-3 -right-1 w-3 cursor-e-resize group"
             onMouseDown={(e) => handleResizeStart(e, 'e')}
           >
-            <div className="absolute inset-y-0 right-1 w-0.5 opacity-0 transition-opacity bg-white rounded-full" />
+            <div className={`absolute inset-y-0 right-1 w-0.5 opacity-0 transition-opacity rounded-full ${isDark ? 'bg-white' : 'bg-black'}`} />
           </div>
           <div
             className="absolute top-3 bottom-3 -left-1 w-3 cursor-w-resize group"
             onMouseDown={(e) => handleResizeStart(e, 'w')}
           >
-            <div className="absolute inset-y-0 left-1 w-0.5 opacity-0 transition-opacity bg-white rounded-full" />
+            <div className={`absolute inset-y-0 left-1 w-0.5 opacity-0 transition-opacity rounded-full ${isDark ? 'bg-white' : 'bg-black'}`} />
           </div>
           <div
             className="absolute -bottom-1 left-3 right-3 h-3 cursor-s-resize group"
             onMouseDown={(e) => handleResizeStart(e, 's')}
           >
-            <div className="absolute inset-x-0 bottom-1 h-0.5 opacity-0 transition-opacity bg-white rounded-full" />
+            <div className={`absolute inset-x-0 bottom-1 h-0.5 opacity-0 transition-opacity rounded-full ${isDark ? 'bg-white' : 'bg-black'}`} />
           </div>
           <div
             className="absolute -top-1 left-3 right-3 h-3 cursor-n-resize group"
             onMouseDown={(e) => handleResizeStart(e, 'n')}
           >
-            <div className="absolute inset-x-0 top-1 h-0.5 opacity-0 transition-opacity bg-white rounded-full" />
+            <div className={`absolute inset-x-0 top-1 h-0.5 opacity-0 transition-opacity rounded-full ${isDark ? 'bg-white' : 'bg-black'}`} />
           </div>
         </>
       )}
