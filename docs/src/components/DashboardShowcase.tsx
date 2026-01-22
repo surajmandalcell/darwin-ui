@@ -75,27 +75,27 @@ function MetricCard({
     icon: React.ElementType;
 }) {
     return (
-        <div className="group relative p-5 rounded-xl border border-white/[0.06] bg-white/[0.03] hover-card-lift overflow-hidden">
+        <div className="group relative p-3 rounded-lg border border-white/[0.06] bg-white/[0.03] hover-card-lift overflow-hidden">
             <div className="absolute inset-0 bg-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
-            <div className="relative flex items-center justify-between mb-4">
-                <div className="p-2.5 rounded-lg bg-white/[0.04] border border-white/[0.06] text-white/70 group-hover:text-blue-400 transition-colors shadow-sm">
-                    <Icon className="w-5 h-5" />
+            <div className="relative flex items-center justify-between mb-2">
+                <div className="p-2 rounded-md bg-white/[0.04] border border-white/[0.06] text-white/70 group-hover:text-blue-400 transition-colors">
+                    <Icon className="w-4 h-4" />
                 </div>
                 <div className={cn(
-                    "flex items-center gap-1.5 text-xs font-semibold px-2 py-1 rounded-full border shadow-sm backdrop-blur-md",
+                    "flex items-center gap-1 text-[10px] font-semibold px-1.5 py-0.5 rounded-full border",
                     changeType === "up"
                         ? "text-emerald-400 bg-emerald-500/10 border-emerald-500/10"
                         : "text-red-400 bg-red-500/10 border-red-500/10"
                 )}>
-                    {changeType === "up" ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
+                    {changeType === "up" ? <TrendingUp className="w-2.5 h-2.5" /> : <TrendingDown className="w-2.5 h-2.5" />}
                     {change}
                 </div>
             </div>
 
             <div className="relative">
-                <p className="text-[11px] font-medium text-white/50 uppercase tracking-widest mb-1">{title}</p>
-                <p className="text-2xl font-bold text-white tracking-tight tabular-nums drop-shadow-sm">{value}</p>
+                <p className="text-[10px] font-medium text-white/50 uppercase tracking-wider mb-0.5">{title}</p>
+                <p className="text-xl font-bold text-white tracking-tight tabular-nums">{value}</p>
             </div>
         </div>
     );
@@ -122,26 +122,26 @@ export default function DashboardShowcase() {
         <div
             className="relative w-full rounded-[20px] overflow-hidden border border-white/10 shadow-lg font-sans bg-neutral-950"
         >
-            {/* Window Title Bar */}
-            <div className="bg-neutral-950 border-b border-white/10 h-11 flex items-center px-4 justify-between select-none">
-                <div className="flex gap-2 group">
-                    <div className="w-3 h-3 rounded-full bg-[#ff5f57] group-hover:bg-[#ff5f57]/80 transition-colors shadow-sm" />
-                    <div className="w-3 h-3 rounded-full bg-[#febc2e] group-hover:bg-[#febc2e]/80 transition-colors shadow-sm" />
-                    <div className="w-3 h-3 rounded-full bg-[#28c840] group-hover:bg-[#28c840]/80 transition-colors shadow-sm" />
+            {/* Window Title Bar - Compact */}
+            <div className="bg-neutral-950 border-b border-white/10 h-8 flex items-center px-3 justify-between select-none">
+                <div className="flex gap-1.5 group">
+                    <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f57] group-hover:bg-[#ff5f57]/80 transition-colors" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-[#febc2e] group-hover:bg-[#febc2e]/80 transition-colors" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-[#28c840] group-hover:bg-[#28c840]/80 transition-colors" />
                 </div>
-                <div className="text-[13px] font-medium text-white/30 flex items-center gap-2">
-                    <LayoutDashboard className="w-3.5 h-3.5" />
+                <div className="text-[11px] font-medium text-white/30 flex items-center gap-1.5">
+                    <LayoutDashboard className="w-3 h-3" />
                     <span>Dashboard</span>
                 </div>
-                <div className="w-16" />
+                <div className="w-12" />
             </div>
 
-            <div className="flex flex-col md:flex-row min-h-[500px] md:h-[600px] xl:h-[600px]">
-                {/* Sidebar */}
-                <div className="w-[240px] flex-shrink-0 border-r border-white/10 bg-neutral-950 hidden md:flex flex-col">
-                    <div className="p-5">
+            <div className="flex flex-col md:flex-row min-h-[600px] md:h-[700px] xl:h-[750px]">
+                {/* Sidebar - Compact */}
+                <div className="w-[200px] flex-shrink-0 border-r border-white/10 bg-neutral-950 hidden md:flex flex-col">
+                    <div className="p-3">
 
-                        <div className="space-y-6">
+                        <div className="space-y-4">
                             <div>
                                 <div className="flex items-center justify-between px-3 mb-2 text-[11px] font-semibold text-white/40 uppercase tracking-wider">
                                     <span>Platform</span>
@@ -221,9 +221,9 @@ export default function DashboardShowcase() {
 
                 {/* Main Content */}
                 <div className="flex-1 min-w-0 bg-neutral-950 overflow-auto">
-                    <div className="p-8">
+                    <div className="p-5">
                         {/* Header */}
-                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
                             <div>
                                 <h1 className="text-2xl font-bold text-white tracking-tight">Dashboard Overview</h1>
                                 <p className="text-sm text-white/50 mt-1">Monitor your key metrics and performance</p>
@@ -259,18 +259,18 @@ export default function DashboardShowcase() {
                         </div>
 
                         {/* Metrics Grid */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-8">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3 mb-5">
                             <MetricCard title="Total Revenue" value="$48,234.00" change="+12.5%" changeType="up" icon={DollarSign} />
                             <MetricCard title="Active Users" value="12,420" change="+8.2%" changeType="up" icon={Users} />
                             <MetricCard title="Conversion" value="3.24%" change="-0.4%" changeType="down" icon={Activity} />
                             <MetricCard title="Growth Rate" value="+24.5%" change="+4.1%" changeType="up" icon={TrendingUp} />
                         </div>
 
-                        <div className="grid xl:grid-cols-3 gap-6 mb-8">
+                        <div className="grid xl:grid-cols-3 gap-4 mb-5">
                             {/* Main Chart */}
-                            <div className="xl:col-span-2 space-y-6">
-                                <Card className="p-6">
-                                    <div className="flex items-center justify-between mb-6">
+                            <div className="xl:col-span-2 space-y-4">
+                                <Card className="p-4">
+                                    <div className="flex items-center justify-between mb-4">
                                         <div>
                                             <h3 className="text-base font-semibold text-white">Revenue Trend</h3>
                                             <div className="flex items-center gap-2 mt-1">
@@ -287,7 +287,7 @@ export default function DashboardShowcase() {
                                             </Button>
                                         </div>
                                     </div>
-                                    <div className="h-[300px] w-full min-w-0">
+                                    <div className="h-[220px] w-full min-w-0">
                                         {mounted ? (
                                             <ResponsiveContainer width="100%" height="100%">
                                                 <AreaChart data={revenueData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
@@ -358,14 +358,14 @@ export default function DashboardShowcase() {
                             </div>
 
                             {/* Pie Chart Card */}
-                            <Card className="p-6 flex flex-col">
+                            <Card className="p-4 flex flex-col">
                                 <div className="flex items-center justify-between mb-2">
-                                    <h3 className="text-base font-semibold text-white">Traffic Source</h3>
-                                    <Button size="icon" variant="ghost" className="h-7 w-7">
-                                        <MoreVertical className="w-4 h-4" />
+                                    <h3 className="text-sm font-semibold text-white">Traffic Source</h3>
+                                    <Button size="icon" variant="ghost" className="h-6 w-6">
+                                        <MoreVertical className="w-3.5 h-3.5" />
                                     </Button>
                                 </div>
-                                <div className="flex-1 min-h-[250px] relative w-full">
+                                <div className="flex-1 min-h-[180px] relative w-full">
                                     {mounted ? (
                                         <ResponsiveContainer width="100%" height="100%">
                                             <PieChart>
@@ -426,9 +426,9 @@ export default function DashboardShowcase() {
 
                         {/* Table Section */}
                         <Card className="overflow-hidden">
-                            <div className="flex items-center justify-between px-6 py-4 border-b border-white/[0.06]">
-                                <div className="flex items-center gap-4">
-                                    <h3 className="text-base font-semibold text-white">Recent Transactions</h3>
+                            <div className="flex items-center justify-between px-4 py-3 border-b border-white/[0.06]">
+                                <div className="flex items-center gap-3">
+                                    <h3 className="text-sm font-semibold text-white">Recent Transactions</h3>
                                     <div className="h-4 w-[1px] bg-white/[0.1]" />
                                     <div className="flex items-center gap-2">
                                         <Badge variant="secondary">All Status</Badge>
@@ -450,26 +450,26 @@ export default function DashboardShowcase() {
                                 <table className="w-full">
                                     <thead>
                                         <tr className="bg-white/[0.02] border-b border-white/[0.06]">
-                                            <th className="px-6 py-3 text-left text-[11px] font-semibold text-white/50 uppercase tracking-wider">Plan Name</th>
-                                            <th className="px-6 py-3 text-left text-[11px] font-semibold text-white/50 uppercase tracking-wider">Status</th>
-                                            <th className="px-6 py-3 text-left text-[11px] font-semibold text-white/50 uppercase tracking-wider">Date</th>
-                                            <th className="px-6 py-3 text-left text-[11px] font-semibold text-white/50 uppercase tracking-wider">Revenue</th>
-                                            <th className="px-6 py-3 text-left text-[11px] font-semibold text-white/50 uppercase tracking-wider">Growth</th>
-                                            <th className="px-6 py-3 text-right text-[11px] font-semibold text-white/50 uppercase tracking-wider">Actions</th>
+                                            <th className="px-4 py-2 text-left text-[10px] font-semibold text-white/50 uppercase tracking-wider">Plan Name</th>
+                                            <th className="px-4 py-2 text-left text-[10px] font-semibold text-white/50 uppercase tracking-wider">Status</th>
+                                            <th className="px-4 py-2 text-left text-[10px] font-semibold text-white/50 uppercase tracking-wider">Date</th>
+                                            <th className="px-4 py-2 text-left text-[10px] font-semibold text-white/50 uppercase tracking-wider">Revenue</th>
+                                            <th className="px-4 py-2 text-left text-[10px] font-semibold text-white/50 uppercase tracking-wider">Growth</th>
+                                            <th className="px-4 py-2 text-right text-[10px] font-semibold text-white/50 uppercase tracking-wider">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody className="divide-y divide-white/[0.04]">
                                         {tableData.map((row) => (
                                             <tr key={row.id} className="group hover:bg-white/[0.02] transition-colors">
-                                                <td className="px-6 py-4">
-                                                    <div className="flex items-center gap-3">
-                                                        <div className="w-8 h-8 rounded-full bg-white/[0.06] flex items-center justify-center text-xs font-bold text-white border border-white/[0.04]">
+                                                <td className="px-4 py-2.5">
+                                                    <div className="flex items-center gap-2">
+                                                        <div className="w-6 h-6 rounded-full bg-white/[0.06] flex items-center justify-center text-[10px] font-bold text-white border border-white/[0.04]">
                                                             {row.name.charAt(0)}
                                                         </div>
-                                                        <span className="text-sm font-medium text-white">{row.name}</span>
+                                                        <span className="text-xs font-medium text-white">{row.name}</span>
                                                     </div>
                                                 </td>
-                                                <td className="px-6 py-4">
+                                                <td className="px-4 py-2.5">
                                                     <Badge
                                                         variant={
                                                             row.status === "active" ? "success"
@@ -477,22 +477,23 @@ export default function DashboardShowcase() {
                                                                     : row.status === "inactive" ? "secondary"
                                                                         : "destructive"
                                                         }
+                                                        className="text-[10px]"
                                                     >
                                                         {row.status.charAt(0).toUpperCase() + row.status.slice(1)}
                                                     </Badge>
                                                 </td>
-                                                <td className="px-6 py-4 text-sm text-white/50">{row.date}</td>
-                                                <td className="px-6 py-4 text-sm font-medium text-white tabular-nums">{row.revenue}</td>
-                                                <td className="px-6 py-4 text-sm font-medium tabular-nums" style={row.growth.startsWith("+") ? { color: '#34d399' } : { color: '#f87171' }}>
+                                                <td className="px-4 py-2.5 text-xs text-white/50">{row.date}</td>
+                                                <td className="px-4 py-2.5 text-xs font-medium text-white tabular-nums">{row.revenue}</td>
+                                                <td className="px-4 py-2.5 text-xs font-medium tabular-nums" style={row.growth.startsWith("+") ? { color: '#34d399' } : { color: '#f87171' }}>
                                                     {row.growth}
                                                 </td>
-                                                <td className="px-6 py-4 text-right">
+                                                <td className="px-4 py-2.5 text-right">
                                                     <div className="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                                                        <Button size="icon" variant="ghost" className="h-7 w-7" onClick={() => setShowModal(true)}>
-                                                            <Eye className="w-3.5 h-3.5" />
+                                                        <Button size="icon" variant="ghost" className="h-6 w-6" onClick={() => setShowModal(true)}>
+                                                            <Eye className="w-3 h-3" />
                                                         </Button>
-                                                        <Button size="icon" variant="ghost" className="h-7 w-7 hover:text-red-400 hover:bg-red-500/10">
-                                                            <Trash2 className="w-3.5 h-3.5" />
+                                                        <Button size="icon" variant="ghost" className="h-6 w-6 hover:text-red-400 hover:bg-red-500/10">
+                                                            <Trash2 className="w-3 h-3" />
                                                         </Button>
                                                     </div>
                                                 </td>
@@ -503,11 +504,11 @@ export default function DashboardShowcase() {
                             </div>
 
                             {/* Pagination */}
-                            <div className="border-t border-white/[0.06] px-6 py-3 flex items-center justify-between">
-                                <p className="text-xs text-white/40">Showing 1-4 of 24 items</p>
-                                <div className="flex gap-2">
-                                    <Button size="sm" variant="ghost" disabled>Previous</Button>
-                                    <Button size="sm" variant="ghost">Next</Button>
+                            <div className="border-t border-white/[0.06] px-4 py-2 flex items-center justify-between">
+                                <p className="text-[10px] text-white/40">Showing 1-4 of 24 items</p>
+                                <div className="flex gap-1">
+                                    <Button size="sm" variant="ghost" disabled className="h-6 text-[10px] px-2">Prev</Button>
+                                    <Button size="sm" variant="ghost" className="h-6 text-[10px] px-2">Next</Button>
                                 </div>
                             </div>
                         </Card>
