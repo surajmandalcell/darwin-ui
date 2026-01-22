@@ -177,6 +177,6 @@ Contributions are welcome! Please read our [Contributing Guide](CONTRIBUTING.md)
 
 MIT License - see [LICENSE](LICENSE) for details.
 
----
+<br>
 
 Made with care by [Suraj Mandal](https://github.com/surajmandalcell)
