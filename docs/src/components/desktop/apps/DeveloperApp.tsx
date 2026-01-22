@@ -10,6 +10,8 @@ import {
   Zap,
   Palette,
   Layout,
+  Layers,
+  Monitor,
   MousePointer,
   Code2,
   Copy,
@@ -364,10 +366,12 @@ function CodeBlock({ code, language = 'bash' }: { code: string; language?: strin
 // Introduction page content with enhanced animations
 function IntroductionPage() {
   const features = [
-    { icon: <Zap className="w-5 h-5" />, title: 'Fast & Lightweight', desc: 'Tree-shakeable with zero runtime overhead' },
-    { icon: <Palette className="w-5 h-5" />, title: 'Beautiful Design', desc: 'macOS-inspired aesthetics out of the box' },
+    { icon: <Layers className="w-5 h-5" />, title: 'Glass Morphism', desc: 'Translucent, frosted-glass effects with depth and elegance' },
+    { icon: <Zap className="w-5 h-5" />, title: 'Framer Motion', desc: 'Buttery smooth animations with spring physics built-in' },
+    { icon: <Palette className="w-5 h-5" />, title: 'Tailwind CSS', desc: 'Utility-first styling with full customization support' },
     { icon: <Code2 className="w-5 h-5" />, title: 'TypeScript First', desc: 'Full type safety and IntelliSense support' },
     { icon: <MousePointer className="w-5 h-5" />, title: 'Accessible', desc: 'ARIA-compliant with keyboard navigation' },
+    { icon: <Monitor className="w-5 h-5" />, title: 'macOS Native Feel', desc: 'Authentic desktop experience in the browser' },
   ];
 
   return (
@@ -398,8 +402,26 @@ function IntroductionPage() {
         </motion.p>
       </motion.div>
 
+      {/* Design Philosophy */}
       <motion.div
-        className="grid grid-cols-1 md:grid-cols-2 gap-4"
+        className="p-6 rounded-xl bg-gradient-to-br from-blue-500/10 to-purple-500/10 border border-white/10"
+        variants={itemVariants}
+        initial="hidden"
+        animate="show"
+        transition={{ delay: 0.15 }}
+      >
+        <h2 className="text-xl font-semibold text-white mb-3">Design Philosophy</h2>
+        <p className="text-white/70 leading-relaxed">
+          Darwin UI brings the polish and refinement of macOS to React applications.
+          Every component is crafted with attention to detail—from subtle backdrop blurs
+          and glass-morphism effects to spring-based animations that feel natural.
+          We believe great UI should be both beautiful and functional, providing
+          delightful interactions without sacrificing accessibility or performance.
+        </p>
+      </motion.div>
+
+      <motion.div
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
         variants={containerVariants}
         initial="hidden"
         animate="show"
@@ -449,6 +471,39 @@ function InstallationPage() {
     { title: 'Using bun', code: 'bun add @pikoloo/darwin-ui' },
   ];
 
+  const stylesImportCode = `// Import Darwin UI styles in your app entry point
+import '@pikoloo/darwin-ui/styles.css';`;
+
+  const providerSetupCode = `import {
+  OverlayProvider,
+  AlertProvider,
+  ToastProvider
+} from '@pikoloo/darwin-ui';
+
+function App({ children }) {
+  return (
+    <OverlayProvider>
+      <AlertProvider>
+        <ToastProvider>
+          {children}
+        </ToastProvider>
+      </AlertProvider>
+    </OverlayProvider>
+  );
+}`;
+
+  const firstComponentCode = `import { Button } from '@pikoloo/darwin-ui';
+
+function MyComponent() {
+  return (
+    <div className="p-4 space-x-2">
+      <Button>Default</Button>
+      <Button variant="primary">Primary</Button>
+      <Button variant="secondary">Secondary</Button>
+    </div>
+  );
+}`;
+
   return (
     <motion.div
       variants={pageTransitionVariants}
@@ -476,27 +531,82 @@ function InstallationPage() {
         </motion.p>
       </motion.div>
 
+      {/* Step 1: Install Package */}
       <motion.div
-        className="space-y-6"
+        className="space-y-4"
         variants={containerVariants}
         initial="hidden"
         animate="show"
       >
-        {installMethods.map((method) => (
-          <motion.div key={method.title} variants={itemVariants}>
-            <h2 className="text-xl font-semibold text-white mb-3">{method.title}</h2>
-            <CodeBlock code={method.code} language="bash" />
-          </motion.div>
-        ))}
+        <h2 className="text-2xl font-semibold text-white">1. Install the Package</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {installMethods.map((method) => (
+            <motion.div key={method.title} variants={itemVariants}>
+              <h3 className="text-sm font-medium text-white/70 mb-2">{method.title}</h3>
+              <CodeBlock code={method.code} language="bash" />
+            </motion.div>
+          ))}
+        </div>
       </motion.div>
 
+      {/* Step 2: Import Styles */}
+      <motion.div
+        variants={itemVariants}
+        initial="hidden"
+        animate="show"
+        transition={{ delay: 0.2 }}
+      >
+        <h2 className="text-2xl font-semibold text-white mb-3">2. Import Styles</h2>
+        <p className="text-white/70 mb-4">
+          Add the Darwin UI stylesheet to your application entry point (e.g., <code className="text-blue-400 bg-white/5 px-1.5 py-0.5 rounded">_app.tsx</code>, <code className="text-blue-400 bg-white/5 px-1.5 py-0.5 rounded">main.tsx</code>, or <code className="text-blue-400 bg-white/5 px-1.5 py-0.5 rounded">layout.tsx</code>):
+        </p>
+        <CodeBlock code={stylesImportCode} language="typescript" />
+      </motion.div>
+
+      {/* Step 3: Setup Providers */}
+      <motion.div
+        variants={itemVariants}
+        initial="hidden"
+        animate="show"
+        transition={{ delay: 0.3 }}
+      >
+        <h2 className="text-2xl font-semibold text-white mb-3">3. Setup Providers</h2>
+        <p className="text-white/70 mb-4">
+          Wrap your application with Darwin UI providers to enable overlays, alerts, and toasts:
+        </p>
+        <CodeBlock code={providerSetupCode} language="typescript" />
+      </motion.div>
+
+      {/* Step 4: Use Components */}
+      <motion.div
+        variants={itemVariants}
+        initial="hidden"
+        animate="show"
+        transition={{ delay: 0.4 }}
+      >
+        <h2 className="text-2xl font-semibold text-white mb-3">4. Start Using Components</h2>
+        <p className="text-white/70 mb-4">
+          Import and use any Darwin UI component in your application:
+        </p>
+        <CodeBlock code={firstComponentCode} language="typescript" />
+        <div className="mt-4 p-4 rounded-xl bg-white/5 border border-white/10">
+          <p className="text-sm text-white/50 mb-3">Preview:</p>
+          <div className="flex items-center gap-2">
+            <Button>Default</Button>
+            <Button variant="primary">Primary</Button>
+            <Button variant="secondary">Secondary</Button>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Peer Dependencies */}
       <motion.div
         variants={itemVariants}
         initial="hidden"
         animate="show"
         transition={{ delay: 0.5 }}
       >
-        <h2 className="text-xl font-semibold text-white mb-3">Peer Dependencies</h2>
+        <h2 className="text-2xl font-semibold text-white mb-3">Peer Dependencies</h2>
         <p className="text-white/70 mb-4">
           Darwin UI requires React 18+ and Framer Motion for animations:
         </p>
@@ -2315,74 +2425,50 @@ function ComponentPage({ name }: { name: string }) {
   );
 }
 
-// Theming page with enhanced animations
-function ThemingPage({ name }: { name: string }) {
-  const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1).replace('-', ' ');
+// Colors theming page
+function ColorsPage() {
+  const cssVariablesCode = `/* Darwin UI CSS Variables */
+:root {
+  /* Primary accent colors */
+  --darwin-accent-blue: 59 130 246;
+  --darwin-accent-purple: 168 85 247;
+  --darwin-accent-green: 34 197 94;
+  --darwin-accent-orange: 249 115 22;
 
-  const themingPreviews: Record<string, React.ReactNode> = {
-    colors: (
-      <motion.div
-        className="flex flex-wrap gap-2"
-        variants={containerVariants}
-        initial="hidden"
-        animate="show"
-      >
-        {[
-          { variant: undefined, label: 'Default' },
-          { variant: 'secondary' as const, label: 'Secondary' },
-          { variant: 'outline' as const, label: 'Outline' },
-          { variant: 'success' as const, label: 'Success' },
-          { variant: 'warning' as const, label: 'Warning' },
-          { variant: 'destructive' as const, label: 'Destructive' },
-          { variant: 'info' as const, label: 'Info' },
-          { variant: 'new' as const, label: 'New' },
-        ].map((badge, i) => (
-          <motion.div
-            key={badge.label}
-            variants={itemVariants}
-            custom={i}
-            whileHover={{ scale: 1.1, y: -2 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Badge variant={badge.variant}>{badge.label}</Badge>
-          </motion.div>
-        ))}
-      </motion.div>
-    ),
-    'dark-mode': (
-      <motion.div
-        className="flex flex-col gap-3 w-full max-w-sm"
-        variants={containerVariants}
-        initial="hidden"
-        animate="show"
-      >
-        <motion.div
-          className="flex items-center gap-3"
-          variants={itemVariants}
-        >
-          <motion.div
-            animate={{ opacity: [0.5, 1, 0.5] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            <Skeleton className="h-12 w-12 rounded-full" />
-          </motion.div>
-          <div className="flex-1 space-y-2">
-            <Skeleton className="h-4 w-3/4" />
-            <Skeleton className="h-3 w-1/2" />
-          </div>
-        </motion.div>
-        <motion.div variants={itemVariants}>
-          <Skeleton className="h-24 w-full rounded-lg" />
-        </motion.div>
-        <motion.div className="flex gap-2" variants={itemVariants}>
-          <Skeleton className="h-8 w-20 rounded-md" />
-          <Skeleton className="h-8 w-20 rounded-md" />
-        </motion.div>
-      </motion.div>
-    ),
-  };
+  /* Semantic colors */
+  --darwin-success: 34 197 94;
+  --darwin-warning: 234 179 8;
+  --darwin-destructive: 239 68 68;
+  --darwin-info: 59 130 246;
 
-  const preview = themingPreviews[name];
+  /* Surface colors */
+  --darwin-surface: 255 255 255;
+  --darwin-surface-elevated: 255 255 255;
+  --darwin-border: 0 0 0 / 0.1;
+}`;
+
+  const accentUsageCode = `import { Button, Badge } from '@pikoloo/darwin-ui';
+
+// Use accent colors via component variants
+<Button variant="primary">Blue Accent</Button>
+
+// Or apply custom accent via className
+<Button className="bg-purple-500 hover:bg-purple-600">
+  Purple Button
+</Button>
+
+// Badge variants map to accent colors
+<Badge variant="success">Success</Badge>
+<Badge variant="warning">Warning</Badge>
+<Badge variant="destructive">Error</Badge>
+<Badge variant="info">Info</Badge>`;
+
+  const accentColors = [
+    { name: 'Blue', color: 'bg-blue-500', hex: '#3B82F6' },
+    { name: 'Purple', color: 'bg-purple-500', hex: '#A855F7' },
+    { name: 'Green', color: 'bg-green-500', hex: '#22C55E' },
+    { name: 'Orange', color: 'bg-orange-500', hex: '#F97316' },
+  ];
 
   return (
     <motion.div
@@ -2403,52 +2489,429 @@ function ThemingPage({ name }: { name: string }) {
         >
           <span>Theming</span>
           <ChevronRight className="w-3 h-3" />
-          <span className="text-white/70">{capitalizedName}</span>
+          <span className="text-white/70">Colors</span>
         </motion.div>
         <motion.h1
           className="text-4xl font-bold text-white mb-4"
           variants={itemVariants}
         >
-          {capitalizedName}
+          Colors
         </motion.h1>
         <motion.p
           className="text-lg text-white/70"
           variants={itemVariants}
         >
-          Customize the look and feel of Darwin UI components.
+          Darwin UI uses CSS variables for consistent, customizable colors across all components.
         </motion.p>
       </motion.div>
 
-      {preview && (
-        <motion.div
-          className="p-6 rounded-xl bg-white/5 border border-white/10"
-          variants={itemVariants}
-          initial="hidden"
-          animate="show"
-          transition={{ delay: 0.2 }}
-        >
-          <h3 className="text-sm font-medium text-white/50 mb-4">Preview</h3>
-          <div className="flex items-center justify-center min-h-[100px] p-4 w-full">
-            <div className="w-full">
-              {preview}
-            </div>
-          </div>
-        </motion.div>
-      )}
-
+      {/* Accent Colors Preview */}
       <motion.div
         className="p-6 rounded-xl bg-white/5 border border-white/10"
         variants={itemVariants}
         initial="hidden"
         animate="show"
+        transition={{ delay: 0.2 }}
+      >
+        <h3 className="text-xl font-semibold text-white mb-4">Accent Colors</h3>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {accentColors.map((accent, i) => (
+            <motion.div
+              key={accent.name}
+              className="text-center"
+              variants={itemVariants}
+              custom={i}
+              whileHover={{ scale: 1.05 }}
+            >
+              <div className={`w-full h-16 rounded-lg ${accent.color} mb-2`} />
+              <p className="text-white font-medium">{accent.name}</p>
+              <p className="text-white/50 text-sm font-mono">{accent.hex}</p>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* Badge Variants */}
+      <motion.div
+        className="p-6 rounded-xl bg-white/5 border border-white/10"
+        variants={itemVariants}
+        initial="hidden"
+        animate="show"
+        transition={{ delay: 0.25 }}
+      >
+        <h3 className="text-xl font-semibold text-white mb-4">Semantic Colors</h3>
+        <div className="flex flex-wrap gap-2">
+          {[
+            { variant: undefined, label: 'Default' },
+            { variant: 'secondary' as const, label: 'Secondary' },
+            { variant: 'success' as const, label: 'Success' },
+            { variant: 'warning' as const, label: 'Warning' },
+            { variant: 'destructive' as const, label: 'Destructive' },
+            { variant: 'info' as const, label: 'Info' },
+          ].map((badge) => (
+            <Badge key={badge.label} variant={badge.variant}>{badge.label}</Badge>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* CSS Variables Reference */}
+      <motion.div
+        variants={itemVariants}
+        initial="hidden"
+        animate="show"
         transition={{ delay: 0.3 }}
       >
-        <p className="text-white/60 text-sm">
-          Detailed theming documentation coming soon...
+        <h2 className="text-2xl font-semibold text-white mb-3">CSS Variables Reference</h2>
+        <p className="text-white/70 mb-4">
+          All colors are defined as CSS custom properties using RGB values for easy opacity manipulation:
         </p>
+        <CodeBlock code={cssVariablesCode} language="css" />
+      </motion.div>
+
+      {/* Usage Examples */}
+      <motion.div
+        variants={itemVariants}
+        initial="hidden"
+        animate="show"
+        transition={{ delay: 0.4 }}
+      >
+        <h2 className="text-2xl font-semibold text-white mb-3">Usage Examples</h2>
+        <CodeBlock code={accentUsageCode} language="typescript" />
       </motion.div>
     </motion.div>
   );
+}
+
+// Dark Mode theming page
+function DarkModePage() {
+  const themeProviderCode = `import { ThemeProvider } from '@pikoloo/darwin-ui';
+
+function App({ children }) {
+  return (
+    <ThemeProvider defaultTheme="system" storageKey="darwin-theme">
+      {children}
+    </ThemeProvider>
+  );
+}`;
+
+  const useThemeCode = `import { useTheme } from '@pikoloo/darwin-ui';
+
+function ThemeToggle() {
+  const { theme, setTheme } = useTheme();
+
+  return (
+    <Button
+      variant="secondary"
+      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+    >
+      {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
+    </Button>
+  );
+}`;
+
+  const localStorageNote = `// Theme preference is automatically persisted to localStorage
+// using the key specified in ThemeProvider
+
+// Default behavior:
+// - 'system': Follows OS preference
+// - 'light': Always light mode
+// - 'dark': Always dark mode
+
+// The storageKey prop determines the localStorage key:
+localStorage.getItem('darwin-theme'); // Returns: 'light' | 'dark' | 'system'`;
+
+  return (
+    <motion.div
+      variants={pageTransitionVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      className="space-y-8"
+    >
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="show"
+      >
+        <motion.div
+          className="flex items-center gap-2 text-sm text-white/50 mb-2"
+          variants={itemVariants}
+        >
+          <span>Theming</span>
+          <ChevronRight className="w-3 h-3" />
+          <span className="text-white/70">Dark Mode</span>
+        </motion.div>
+        <motion.h1
+          className="text-4xl font-bold text-white mb-4"
+          variants={itemVariants}
+        >
+          Dark Mode
+        </motion.h1>
+        <motion.p
+          className="text-lg text-white/70"
+          variants={itemVariants}
+        >
+          Darwin UI supports automatic dark mode with system preference detection and localStorage persistence.
+        </motion.p>
+      </motion.div>
+
+      {/* Preview */}
+      <motion.div
+        className="p-6 rounded-xl bg-white/5 border border-white/10"
+        variants={itemVariants}
+        initial="hidden"
+        animate="show"
+        transition={{ delay: 0.2 }}
+      >
+        <h3 className="text-xl font-semibold text-white mb-4">Preview</h3>
+        <div className="flex flex-col gap-3 max-w-sm">
+          <div className="flex items-center gap-3">
+            <Skeleton className="h-12 w-12 rounded-full" />
+            <div className="flex-1 space-y-2">
+              <Skeleton className="h-4 w-3/4" />
+              <Skeleton className="h-3 w-1/2" />
+            </div>
+          </div>
+          <Skeleton className="h-24 w-full rounded-lg" />
+          <div className="flex gap-2">
+            <Button variant="secondary" size="sm">Light</Button>
+            <Button variant="primary" size="sm">Dark</Button>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* ThemeProvider Setup */}
+      <motion.div
+        variants={itemVariants}
+        initial="hidden"
+        animate="show"
+        transition={{ delay: 0.3 }}
+      >
+        <h2 className="text-2xl font-semibold text-white mb-3">ThemeProvider Setup</h2>
+        <p className="text-white/70 mb-4">
+          Wrap your application with ThemeProvider to enable dark mode support:
+        </p>
+        <CodeBlock code={themeProviderCode} language="typescript" />
+      </motion.div>
+
+      {/* localStorage Persistence */}
+      <motion.div
+        variants={itemVariants}
+        initial="hidden"
+        animate="show"
+        transition={{ delay: 0.35 }}
+      >
+        <h2 className="text-2xl font-semibold text-white mb-3">localStorage Persistence</h2>
+        <p className="text-white/70 mb-4">
+          Theme preference is automatically saved and restored from localStorage:
+        </p>
+        <CodeBlock code={localStorageNote} language="typescript" />
+      </motion.div>
+
+      {/* Toggle Implementation */}
+      <motion.div
+        variants={itemVariants}
+        initial="hidden"
+        animate="show"
+        transition={{ delay: 0.4 }}
+      >
+        <h2 className="text-2xl font-semibold text-white mb-3">Toggle Implementation</h2>
+        <p className="text-white/70 mb-4">
+          Use the <code className="text-blue-400 bg-white/5 px-1.5 py-0.5 rounded">useTheme</code> hook to access and change the current theme:
+        </p>
+        <CodeBlock code={useThemeCode} language="typescript" />
+      </motion.div>
+    </motion.div>
+  );
+}
+
+// Customization theming page
+function CustomizationPage() {
+  const cssOverridesCode = `/* Override Darwin UI CSS variables in your stylesheet */
+:root {
+  /* Change the primary accent to your brand color */
+  --darwin-accent-blue: 99 102 241; /* Indigo */
+
+  /* Customize surface colors */
+  --darwin-surface: 15 23 42;
+  --darwin-surface-elevated: 30 41 59;
+
+  /* Adjust border opacity */
+  --darwin-border: 255 255 255 / 0.1;
+}
+
+/* Target specific components */
+.darwin-button-primary {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+}
+
+.darwin-card {
+  backdrop-filter: blur(20px);
+}`;
+
+  const classNameCode = `import { Button, Card } from '@pikoloo/darwin-ui';
+
+// All components accept className for custom styling
+<Button
+  className="bg-gradient-to-r from-pink-500 to-violet-500
+             hover:from-pink-600 hover:to-violet-600"
+>
+  Gradient Button
+</Button>
+
+<Card className="border-2 border-dashed border-blue-500/50">
+  <CardContent>Custom bordered card</CardContent>
+</Card>
+
+// Combine with Tailwind utilities
+<Input
+  className="focus:ring-2 focus:ring-purple-500
+             focus:border-transparent"
+  placeholder="Purple focus ring"
+/>`;
+
+  const tailwindConfigCode = `// tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        darwin: {
+          surface: 'rgb(var(--darwin-surface) / <alpha-value>)',
+          accent: 'rgb(var(--darwin-accent-blue) / <alpha-value>)',
+          success: 'rgb(var(--darwin-success) / <alpha-value>)',
+          warning: 'rgb(var(--darwin-warning) / <alpha-value>)',
+          destructive: 'rgb(var(--darwin-destructive) / <alpha-value>)',
+        },
+      },
+    },
+  },
+};
+
+// Usage with extended colors:
+// <div className="bg-darwin-surface text-darwin-accent">`;
+
+  return (
+    <motion.div
+      variants={pageTransitionVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      className="space-y-8"
+    >
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="show"
+      >
+        <motion.div
+          className="flex items-center gap-2 text-sm text-white/50 mb-2"
+          variants={itemVariants}
+        >
+          <span>Theming</span>
+          <ChevronRight className="w-3 h-3" />
+          <span className="text-white/70">Customization</span>
+        </motion.div>
+        <motion.h1
+          className="text-4xl font-bold text-white mb-4"
+          variants={itemVariants}
+        >
+          Customization
+        </motion.h1>
+        <motion.p
+          className="text-lg text-white/70"
+          variants={itemVariants}
+        >
+          Customize Darwin UI components to match your brand with CSS variables, className props, and Tailwind integration.
+        </motion.p>
+      </motion.div>
+
+      {/* Preview */}
+      <motion.div
+        className="p-6 rounded-xl bg-white/5 border border-white/10"
+        variants={itemVariants}
+        initial="hidden"
+        animate="show"
+        transition={{ delay: 0.2 }}
+      >
+        <h3 className="text-xl font-semibold text-white mb-4">Customization Examples</h3>
+        <div className="flex flex-wrap gap-3">
+          <Button className="bg-gradient-to-r from-pink-500 to-violet-500 hover:from-pink-600 hover:to-violet-600">
+            Gradient
+          </Button>
+          <Button className="bg-emerald-500 hover:bg-emerald-600">
+            Custom Green
+          </Button>
+          <Button variant="secondary" className="border-2 border-dashed">
+            Dashed Border
+          </Button>
+        </div>
+      </motion.div>
+
+      {/* CSS Variable Overrides */}
+      <motion.div
+        variants={itemVariants}
+        initial="hidden"
+        animate="show"
+        transition={{ delay: 0.3 }}
+      >
+        <h2 className="text-2xl font-semibold text-white mb-3">CSS Variable Overrides</h2>
+        <p className="text-white/70 mb-4">
+          Override CSS custom properties to change colors globally across all components:
+        </p>
+        <CodeBlock code={cssOverridesCode} language="css" />
+      </motion.div>
+
+      {/* className Prop */}
+      <motion.div
+        variants={itemVariants}
+        initial="hidden"
+        animate="show"
+        transition={{ delay: 0.35 }}
+      >
+        <h2 className="text-2xl font-semibold text-white mb-3">Component className Prop</h2>
+        <p className="text-white/70 mb-4">
+          Every Darwin UI component accepts a <code className="text-blue-400 bg-white/5 px-1.5 py-0.5 rounded">className</code> prop for inline customization:
+        </p>
+        <CodeBlock code={classNameCode} language="typescript" />
+      </motion.div>
+
+      {/* Tailwind Integration */}
+      <motion.div
+        variants={itemVariants}
+        initial="hidden"
+        animate="show"
+        transition={{ delay: 0.4 }}
+      >
+        <h2 className="text-2xl font-semibold text-white mb-3">Tailwind CSS Integration</h2>
+        <p className="text-white/70 mb-4">
+          Extend your Tailwind config to use Darwin UI&apos;s CSS variables as custom colors:
+        </p>
+        <CodeBlock code={tailwindConfigCode} language="javascript" />
+      </motion.div>
+    </motion.div>
+  );
+}
+
+// Theming page router
+function ThemingPage({ name }: { name: string }) {
+  switch (name) {
+    case 'colors':
+      return <ColorsPage />;
+    case 'dark-mode':
+      return <DarkModePage />;
+    case 'customization':
+      return <CustomizationPage />;
+    default:
+      return (
+        <motion.div
+          className="text-white/50"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+        >
+          Theming content for {name} coming soon...
+        </motion.div>
+      );
+  }
 }
 
 // Page content router
