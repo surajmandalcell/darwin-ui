@@ -361,11 +361,11 @@ const COMPONENTS: ComponentDef[] = [
     category: 'data-display',
     size: 'sm',
     preview: (
-      <AvatarGroup max={3}>
-        <Avatar fallback="JD" size="sm" />
-        <Avatar fallback="SM" size="sm" />
-        <Avatar fallback="AK" size="sm" />
-        <Avatar fallback="+5" size="sm" />
+      <AvatarGroup max={3} className="[&>*]:border-0 [&>*]:ring-0">
+        <Avatar fallback="JD" size="sm" className="border-0 ring-0 bg-gradient-to-br from-indigo-500 to-purple-600" />
+        <Avatar fallback="SM" size="sm" className="border-0 ring-0 bg-gradient-to-br from-emerald-500 to-teal-600" />
+        <Avatar fallback="AK" size="sm" className="border-0 ring-0 bg-gradient-to-br from-amber-500 to-orange-600" />
+        <Avatar fallback="+5" size="sm" className="border-0 ring-0 bg-gradient-to-br from-pink-500 to-rose-600" />
       </AvatarGroup>
     ),
   },
@@ -923,11 +923,11 @@ function ComponentCard({ component, delay = 0 }: ComponentCardProps) {
       transition={{ delay, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
       layout
     >
-      {/* Shimmer effect on hover */}
+      {/* Subtle shimmer effect on hover */}
       <div
         className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
         style={{
-          background: 'linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.03) 45%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.03) 55%, transparent 60%)',
+          background: 'linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.015) 45%, rgba(255,255,255,0.025) 50%, rgba(255,255,255,0.015) 55%, transparent 60%)',
           backgroundSize: '200% 100%',
           animation: 'shimmer 2s infinite'
         }}
@@ -938,10 +938,10 @@ function ComponentCard({ component, delay = 0 }: ComponentCardProps) {
 
       {/* Preview - adjust height based on size */}
       <div className={`relative z-10 flex items-center justify-center ${
-        isLarge ? 'min-h-[160px] h-[calc(100%-2rem)]' :
-        isTall ? 'min-h-[140px] h-[calc(100%-2rem)]' :
-        isWide ? 'min-h-[60px]' :
-        'min-h-[60px]'
+        isLarge ? 'min-h-[200px] h-[calc(100%-2rem)]' :
+        isTall ? 'min-h-[200px] h-[calc(100%-2rem)]' :
+        isWide ? 'min-h-[80px]' :
+        'min-h-[80px]'
       }`}>
         {component.preview}
       </div>
@@ -1003,7 +1003,7 @@ export function ComponentShowcaseSection() {
       {/* Component Grid */}
       <div className="max-w-[1600px] mx-auto px-4 md:px-8 lg:px-12">
         <motion.div
-          className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-4 auto-rows-[120px]"
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 auto-rows-[160px] [grid-auto-flow:dense]"
           layout
         >
           <AnimatePresence mode="popLayout">
