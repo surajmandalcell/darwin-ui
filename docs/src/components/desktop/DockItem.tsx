@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from 'react';
 import { motion } from 'framer-motion';
 import type { AppDefinition } from '../../contexts/desktop-context';
 import { Hammer, Terminal, StickyNote, Settings, LayoutDashboard, FileText } from 'lucide-react';
@@ -11,6 +10,10 @@ interface DockItemProps {
   hasMinimizedWindow?: boolean;
   onClick: () => void;
   index: number;
+  scale: number;
+  isHovered: boolean;
+  onHover: () => void;
+  onLeave: () => void;
 }
 
 // Map app IDs to their Lucide icons
@@ -29,42 +32,32 @@ export function DockItem({
   hasMinimizedWindow,
   onClick,
   index,
+  scale,
+  isHovered,
+  onHover,
+  onLeave,
 }: DockItemProps) {
-  const [isHovered, setIsHovered] = useState(false);
-
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
-
-  const handleClick = () => {
-    onClick();
-  };
-
   // Get icon for this app or use the app's default icon
   const icon = appIcons[app.id] || app.icon;
 
   return (
     <motion.button
-      className="relative flex flex-col items-center group"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      onClick={handleClick}
+      className="relative flex flex-col items-center origin-bottom"
+      onClick={onClick}
+      onMouseEnter={onHover}
+      onMouseLeave={onLeave}
       initial={{ opacity: 0, y: 20 }}
       animate={{
         opacity: 1,
         y: 0,
-        scale: isHovered ? 1.15 : 1,
+        scale: scale,
       }}
       transition={{
         opacity: { delay: index * 0.03, duration: 0.3 },
         y: { delay: index * 0.03, duration: 0.3 },
-        scale: { type: 'spring', stiffness: 300, damping: 20 },
+        scale: { type: 'spring', stiffness: 400, damping: 25 },
       }}
-      whileTap={{ scale: 0.95 }}
+      whileTap={{ scale: scale * 0.9 }}
     >
       {/* Icon Container */}
       <div className="w-8 h-8 md:w-12 md:h-12 rounded-xl bg-foreground/10 flex items-center justify-center">

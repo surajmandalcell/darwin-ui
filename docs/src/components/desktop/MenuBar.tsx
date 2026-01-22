@@ -17,6 +17,8 @@ import {
 	Monitor,
 	BookOpen,
 	History,
+	Sun,
+	Moon,
 } from "lucide-react";
 import { DarwinLogo } from "../icons/DarwinLogo";
 
@@ -309,8 +311,12 @@ export function MenuBar() {
 		setAboutModal,
 		state,
 	} = useDesktop();
-	const { resolvedTheme } = useTheme();
+	const { resolvedTheme, setTheme } = useTheme();
 	const isDark = resolvedTheme === "dark";
+
+	const toggleTheme = useCallback(() => {
+		setTheme(isDark ? "light" : "dark");
+	}, [isDark, setTheme]);
 	const [activeMenu, setActiveMenu] = useState<string | null>(null);
 
 	const activeWindow = getActiveWindow();
@@ -772,6 +778,40 @@ export function MenuBar() {
 						transition={{ duration: 0.1 }}
 					>
 						<AnimatedWifi connected={true} />
+					</motion.button>
+
+					{/* Theme Toggle */}
+					<motion.button
+						className="p-1 rounded"
+						whileHover={{ backgroundColor: isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)" }}
+						whileTap={{ scale: 0.95 }}
+						transition={{ duration: 0.1 }}
+						onClick={toggleTheme}
+						title={isDark ? "Switch to light mode" : "Switch to dark mode"}
+					>
+						<AnimatePresence mode="wait">
+							{isDark ? (
+								<motion.div
+									key="moon"
+									initial={{ rotate: -90, opacity: 0 }}
+									animate={{ rotate: 0, opacity: 1 }}
+									exit={{ rotate: 90, opacity: 0 }}
+									transition={{ duration: 0.15 }}
+								>
+									<Moon className="w-4 h-4" />
+								</motion.div>
+							) : (
+								<motion.div
+									key="sun"
+									initial={{ rotate: 90, opacity: 0 }}
+									animate={{ rotate: 0, opacity: 1 }}
+									exit={{ rotate: -90, opacity: 0 }}
+									transition={{ duration: 0.15 }}
+								>
+									<Sun className="w-4 h-4" />
+								</motion.div>
+							)}
+						</AnimatePresence>
 					</motion.button>
 
 					{/* Battery */}
