@@ -48,7 +48,7 @@ export function Dock() {
 
   return (
     <motion.div
-      className="relative flex items-end gap-1 px-[10px] py-1.5 md:px-4 md:gap-2 rounded-2xl max-w-[calc(100vw-20px)] overflow-x-auto z-[9990] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+      className="relative flex items-end gap-1 px-[10px] py-1.5 md:px-4 md:gap-2 rounded-2xl max-w-[calc(100vw-20px)] overflow-visible z-[9990]"
       style={{
         backgroundColor: isDark ? 'rgba(30, 30, 30, 0.4)' : 'rgba(255, 255, 255, 0.6)',
         backdropFilter: 'blur(30px)',
@@ -87,62 +87,66 @@ export function Dock() {
       {/* GitHub Icon */}
       <motion.button
         className="relative flex flex-col items-center"
-        animate={{
-          scale: githubHovered ? 1.2 : 1,
-          translateY: githubHovered ? -4 : 0,
-        }}
-        transition={{ type: 'spring', stiffness: 500, damping: 25 }}
-        whileTap={{ scale: 0.95 }}
+        whileTap={{ opacity: 0.7 }}
         onClick={handleGitHubClick}
         onMouseEnter={() => setGithubHovered(true)}
         onMouseLeave={() => setGithubHovered(false)}
       >
-        <div className="w-8 h-8 md:w-12 md:h-12 rounded-xl bg-muted flex items-center justify-center">
+        <motion.div
+          className="w-8 h-8 md:w-12 md:h-12 rounded-xl bg-muted flex items-center justify-center shadow-sm"
+          animate={{
+            boxShadow: githubHovered ? '0 4px 12px rgba(0,0,0,0.15)' : '0 1px 3px rgba(0,0,0,0.1)',
+          }}
+          transition={{ duration: 0.15 }}
+        >
           <Github className="w-6 h-6 text-foreground/80" />
-        </div>
+        </motion.div>
         {/* Tooltip */}
         <motion.div
-          className="absolute -top-10 px-3 py-1.5 bg-popover backdrop-blur-sm rounded-md text-xs text-popover-foreground whitespace-nowrap pointer-events-none border border-border"
-          initial={{ opacity: 0, y: 5 }}
+          className="absolute -top-9 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-popover/95 backdrop-blur-md rounded-lg text-xs font-medium text-popover-foreground whitespace-nowrap pointer-events-none border border-border shadow-sm z-[9999]"
+          initial={{ opacity: 0, y: 8, scale: 0.9 }}
           animate={{
             opacity: githubHovered ? 1 : 0,
-            y: githubHovered ? 0 : 5,
+            y: githubHovered ? 0 : 8,
+            scale: githubHovered ? 1 : 0.9,
           }}
-          transition={{ duration: 0.1 }}
+          transition={{ duration: 0.15, ease: [0.4, 0, 0.2, 1] }}
         >
           GitHub
-          <div className="absolute left-1/2 -translate-x-1/2 -bottom-1 w-2 h-2 bg-popover rotate-45 border-r border-b border-border" />
+          <div className="absolute left-1/2 -translate-x-1/2 -bottom-1.5 w-2.5 h-2.5 bg-popover/95 rotate-45 border-r border-b border-border" />
         </motion.div>
       </motion.button>
 
       {/* About Icon */}
       <motion.button
         className="relative flex flex-col items-center"
-        animate={{
-          scale: aboutHovered ? 1.2 : 1,
-          translateY: aboutHovered ? -4 : 0,
-        }}
-        transition={{ type: 'spring', stiffness: 500, damping: 25 }}
-        whileTap={{ scale: 0.95 }}
+        whileTap={{ opacity: 0.7 }}
         onClick={handleAboutClick}
         onMouseEnter={() => setAboutHovered(true)}
         onMouseLeave={() => setAboutHovered(false)}
       >
-        <div className="w-8 h-8 md:w-12 md:h-12 rounded-xl bg-muted flex items-center justify-center">
+        <motion.div
+          className="w-8 h-8 md:w-12 md:h-12 rounded-xl bg-muted flex items-center justify-center shadow-sm"
+          animate={{
+            boxShadow: aboutHovered ? '0 4px 12px rgba(0,0,0,0.15)' : '0 1px 3px rgba(0,0,0,0.1)',
+          }}
+          transition={{ duration: 0.15 }}
+        >
           <Info className="w-6 h-6 text-foreground/80" />
-        </div>
+        </motion.div>
         {/* Tooltip */}
         <motion.div
-          className="absolute -top-10 px-3 py-1.5 bg-popover backdrop-blur-sm rounded-md text-xs text-popover-foreground whitespace-nowrap pointer-events-none border border-border"
-          initial={{ opacity: 0, y: 5 }}
+          className="absolute -top-9 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-popover/95 backdrop-blur-md rounded-lg text-xs font-medium text-popover-foreground whitespace-nowrap pointer-events-none border border-border shadow-sm z-[9999]"
+          initial={{ opacity: 0, y: 8, scale: 0.9 }}
           animate={{
             opacity: aboutHovered ? 1 : 0,
-            y: aboutHovered ? 0 : 5,
+            y: aboutHovered ? 0 : 8,
+            scale: aboutHovered ? 1 : 0.9,
           }}
-          transition={{ duration: 0.1 }}
+          transition={{ duration: 0.15, ease: [0.4, 0, 0.2, 1] }}
         >
           About Darwin UI
-          <div className="absolute left-1/2 -translate-x-1/2 -bottom-1 w-2 h-2 bg-popover rotate-45 border-r border-b border-border" />
+          <div className="absolute left-1/2 -translate-x-1/2 -bottom-1.5 w-2.5 h-2.5 bg-popover/95 rotate-45 border-r border-b border-border" />
         </motion.div>
       </motion.button>
     </motion.div>

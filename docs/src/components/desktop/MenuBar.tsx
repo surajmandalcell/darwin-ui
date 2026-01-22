@@ -511,7 +511,7 @@ export function MenuBar() {
 	const handleLogoMouseLeave = () => {
 		logoHoverTimeoutRef.current = setTimeout(() => {
 			setLogoHovered(false);
-		}, 1500);
+		}, 300);
 	};
 
 	return (
@@ -522,13 +522,13 @@ export function MenuBar() {
 			{/* Content */}
 			<div className="relative h-full flex items-center justify-between px-4 text-foreground/90 text-[13px] font-medium">
 				{/* Left side - Logo and App Menu / Nav Items */}
-				<div
-					className="flex items-center gap-4"
-					onMouseEnter={handleLogoMouseEnter}
-					onMouseLeave={handleLogoMouseLeave}
-				>
+				<div className="flex items-center gap-4">
 					{/* Darwin Logo (Apple position) */}
-					<div className="relative">
+					<div
+						className="relative"
+						onMouseEnter={handleLogoMouseEnter}
+						onMouseLeave={handleLogoMouseLeave}
+					>
 						<motion.button
 							className="flex items-center justify-center w-5 h-5 rounded"
 							animate={{
@@ -595,6 +595,8 @@ export function MenuBar() {
 								animate={{ opacity: 1, x: 0 }}
 								exit={{ opacity: 0, x: -10 }}
 								transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+								onMouseEnter={handleLogoMouseEnter}
+								onMouseLeave={handleLogoMouseLeave}
 							>
 								{navItems.map((item, index) => (
 									<motion.div

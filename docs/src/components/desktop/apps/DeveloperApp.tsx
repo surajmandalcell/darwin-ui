@@ -296,14 +296,14 @@ function CodeBlock({ code, language = 'bash' }: { code: string; language?: strin
 
   return (
     <motion.div
-      className="relative group rounded-lg overflow-hidden bg-card border border-border"
+      className="relative group rounded-lg overflow-hidden bg-card border border-foreground/10 shadow-sm"
       variants={codeBlockVariants}
       initial="initial"
       whileHover="hover"
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
     >
-      <div className="flex items-center justify-between px-4 py-2 bg-muted/50 border-b border-border">
+      <div className="flex items-center justify-between px-4 py-2 bg-muted/50 border-b border-foreground/10">
         <motion.span
           className="text-xs text-muted-foreground font-mono"
           animate={{ opacity: isHovered ? 0.8 : 0.5 }}

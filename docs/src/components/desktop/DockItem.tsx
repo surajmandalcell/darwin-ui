@@ -41,25 +41,25 @@ export function DockItem({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={onClick}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{
-        opacity: 1,
-        y: 0,
-        scale: isHovered ? 1.2 : 1,
-        translateY: isHovered ? -4 : 0,
-      }}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
       transition={{
-        opacity: { delay: index * 0.02, duration: 0.2 },
-        y: { delay: index * 0.02, duration: 0.2 },
-        scale: { type: 'spring', stiffness: 500, damping: 25 },
-        translateY: { type: 'spring', stiffness: 500, damping: 25 },
+        opacity: { delay: index * 0.02, duration: 0.15 },
+        y: { delay: index * 0.02, duration: 0.15 },
       }}
-      whileTap={{ scale: 0.95 }}
+      whileTap={{ opacity: 0.7 }}
     >
       {/* Icon Container */}
-      <div className="w-8 h-8 md:w-12 md:h-12 rounded-xl bg-foreground/10 flex items-center justify-center">
+      <motion.div
+        className="w-8 h-8 md:w-12 md:h-12 rounded-xl bg-muted flex items-center justify-center shadow-sm"
+        animate={{
+          backgroundColor: isHovered ? 'hsl(var(--muted) / 1.2)' : 'hsl(var(--muted))',
+          boxShadow: isHovered ? '0 4px 12px rgba(0,0,0,0.15)' : '0 1px 3px rgba(0,0,0,0.1)',
+        }}
+        transition={{ duration: 0.15 }}
+      >
         {icon}
-      </div>
+      </motion.div>
 
       {/* Running Indicator */}
       {isRunning && (
@@ -75,17 +75,18 @@ export function DockItem({
 
       {/* Tooltip */}
       <motion.div
-        className="absolute -top-10 px-3 py-1.5 bg-popover backdrop-blur-sm rounded-md text-xs text-popover-foreground whitespace-nowrap pointer-events-none border border-border"
-        initial={{ opacity: 0, y: 5 }}
+        className="absolute -top-9 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-popover/95 backdrop-blur-md rounded-lg text-xs font-medium text-popover-foreground whitespace-nowrap pointer-events-none border border-border shadow-sm z-[9999]"
+        initial={{ opacity: 0, y: 8, scale: 0.9 }}
         animate={{
           opacity: isHovered ? 1 : 0,
-          y: isHovered ? 0 : 5,
+          y: isHovered ? 0 : 8,
+          scale: isHovered ? 1 : 0.9,
         }}
-        transition={{ duration: 0.1 }}
+        transition={{ duration: 0.15, ease: [0.4, 0, 0.2, 1] }}
       >
         {app.name}
         {/* Tooltip arrow */}
-        <div className="absolute left-1/2 -translate-x-1/2 -bottom-1 w-2 h-2 bg-popover rotate-45 border-r border-b border-border" />
+        <div className="absolute left-1/2 -translate-x-1/2 -bottom-1.5 w-2.5 h-2.5 bg-popover/95 rotate-45 border-r border-b border-border" />
       </motion.div>
     </motion.button>
   );

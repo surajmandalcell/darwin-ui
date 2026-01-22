@@ -191,7 +191,9 @@ export function Desktop() {
       <AnimatePresence>
         {state.isBooting && (
           <motion.div
-            className="absolute inset-0 bg-black flex items-center justify-center z-[9999]"
+            className={`absolute inset-0 flex items-center justify-center z-[9999] ${
+              isDark ? 'bg-black' : 'bg-white'
+            }`}
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8, ease: 'easeInOut' }}
@@ -204,15 +206,17 @@ export function Desktop() {
               className="text-center"
             >
               {/* Darwin UI Logo - Clean without squircle */}
-              <DarwinLogo className="w-16 h-16 mx-auto mb-4 text-white" />
+              <DarwinLogo className={`w-16 h-16 mx-auto mb-4 ${isDark ? 'text-white' : 'text-black'}`} />
               <motion.div
-                className="w-32 h-1 bg-white/20 rounded-full overflow-hidden mx-auto"
+                className={`w-32 h-1 rounded-full overflow-hidden mx-auto ${
+                  isDark ? 'bg-white/20' : 'bg-black/20'
+                }`}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2 }}
               >
                 <motion.div
-                  className="h-full bg-white/80 rounded-full"
+                  className={`h-full rounded-full ${isDark ? 'bg-white/80' : 'bg-black/80'}`}
                   initial={{ width: '0%' }}
                   animate={{ width: '100%' }}
                   transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
