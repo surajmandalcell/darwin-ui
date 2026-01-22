@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useCallback } from 'react';
+import { useState } from 'react';
 import { useDesktop, apps } from '../../contexts/desktop-context';
 import { useTheme } from '../../contexts/theme-context';
 import { DockItem } from './DockItem';
@@ -10,49 +10,14 @@ import { Github, Info } from 'lucide-react';
 // Order of apps in dock
 const dockAppOrder = ['developer', 'example', 'changelog', 'terminal', 'notes', 'settings'];
 
-// Total items including separator and utility icons
-const TOTAL_ITEMS = dockAppOrder.length + 3; // apps + github + about + separator placeholder
-
 export function Dock() {
   const { state, openApp, getRunningApps, focusWindow, restoreWindow, setAboutModal } = useDesktop();
   const { resolvedTheme } = useTheme();
   const isDark = resolvedTheme === 'dark';
   const runningApps = getRunningApps();
 
-  const dockRef = useRef<HTMLDivElement>(null);
-  const [mouseX, setMouseX] = useState<number | null>(null);
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-
-  // Calculate scale for each item based on distance from mouse
-  const getScale = useCallback((index: number) => {
-    if (mouseX === null || !dockRef.current) return 1;
-
-    const dockRect = dockRef.current.getBoundingClientRect();
-    const itemWidth = dockRect.width / TOTAL_ITEMS;
-    const itemCenter = itemWidth * (index + 0.5);
-    const distance = Math.abs(mouseX - itemCenter);
-
-    // Magnification parameters
-    const maxScale = 1.5;
-    const effectRadius = itemWidth * 2.5;
-
-    if (distance > effectRadius) return 1;
-
-    // Smooth falloff using cosine
-    const scale = 1 + (maxScale - 1) * Math.cos((distance / effectRadius) * (Math.PI / 2));
-    return scale;
-  }, [mouseX]);
-
-  const handleMouseMove = useCallback((e: React.MouseEvent) => {
-    if (!dockRef.current) return;
-    const rect = dockRef.current.getBoundingClientRect();
-    setMouseX(e.clientX - rect.left);
-  }, []);
-
-  const handleMouseLeave = useCallback(() => {
-    setMouseX(null);
-    setHoveredIndex(null);
-  }, []);
+  const [githubHovered, setGithubHovered] = useState(false);
+  const [aboutHovered, setAboutHovered] = useState(false);
 
   const handleGitHubClick = () => {
     window.open('https://github.com/surajmandalcell/darwin-ui', '_blank');
@@ -83,7 +48,6 @@ export function Dock() {
 
   return (
     <motion.div
-      ref={dockRef}
       className="relative flex items-end gap-1 px-[10px] py-1.5 md:px-4 md:gap-2 rounded-2xl max-w-[calc(100vw-20px)] overflow-x-auto z-[9990] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
       style={{
         backgroundColor: isDark ? 'rgba(30, 30, 30, 0.4)' : 'rgba(255, 255, 255, 0.6)',
@@ -94,8 +58,6 @@ export function Dock() {
           ? '0 10px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05)'
           : '0 10px 40px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.5)',
       }}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
     >
       {/* App Icons */}
       {dockAppOrder.map((appId, index) => {
@@ -115,10 +77,6 @@ export function Dock() {
             hasMinimizedWindow={hasMinimizedWindow}
             onClick={() => handleAppClick(appId)}
             index={index}
-            scale={getScale(index)}
-            isHovered={hoveredIndex === index}
-            onHover={() => setHoveredIndex(index)}
-            onLeave={() => setHoveredIndex(null)}
           />
         );
       })}
@@ -128,13 +86,16 @@ export function Dock() {
 
       {/* GitHub Icon */}
       <motion.button
-        className="relative flex flex-col items-center origin-bottom"
-        animate={{ scale: getScale(dockAppOrder.length + 1) }}
-        transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-        whileTap={{ scale: getScale(dockAppOrder.length + 1) * 0.9 }}
+        className="relative flex flex-col items-center"
+        animate={{
+          scale: githubHovered ? 1.2 : 1,
+          translateY: githubHovered ? -4 : 0,
+        }}
+        transition={{ type: 'spring', stiffness: 500, damping: 25 }}
+        whileTap={{ scale: 0.95 }}
         onClick={handleGitHubClick}
-        onMouseEnter={() => setHoveredIndex(dockAppOrder.length + 1)}
-        onMouseLeave={() => setHoveredIndex(null)}
+        onMouseEnter={() => setGithubHovered(true)}
+        onMouseLeave={() => setGithubHovered(false)}
       >
         <div className="w-8 h-8 md:w-12 md:h-12 rounded-xl bg-muted flex items-center justify-center">
           <Github className="w-6 h-6 text-foreground/80" />
@@ -144,10 +105,10 @@ export function Dock() {
           className="absolute -top-10 px-3 py-1.5 bg-popover backdrop-blur-sm rounded-md text-xs text-popover-foreground whitespace-nowrap pointer-events-none border border-border"
           initial={{ opacity: 0, y: 5 }}
           animate={{
-            opacity: hoveredIndex === dockAppOrder.length + 1 ? 1 : 0,
-            y: hoveredIndex === dockAppOrder.length + 1 ? 0 : 5,
+            opacity: githubHovered ? 1 : 0,
+            y: githubHovered ? 0 : 5,
           }}
-          transition={{ duration: 0.15 }}
+          transition={{ duration: 0.1 }}
         >
           GitHub
           <div className="absolute left-1/2 -translate-x-1/2 -bottom-1 w-2 h-2 bg-popover rotate-45 border-r border-b border-border" />
@@ -156,13 +117,16 @@ export function Dock() {
 
       {/* About Icon */}
       <motion.button
-        className="relative flex flex-col items-center origin-bottom"
-        animate={{ scale: getScale(dockAppOrder.length + 2) }}
-        transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-        whileTap={{ scale: getScale(dockAppOrder.length + 2) * 0.9 }}
+        className="relative flex flex-col items-center"
+        animate={{
+          scale: aboutHovered ? 1.2 : 1,
+          translateY: aboutHovered ? -4 : 0,
+        }}
+        transition={{ type: 'spring', stiffness: 500, damping: 25 }}
+        whileTap={{ scale: 0.95 }}
         onClick={handleAboutClick}
-        onMouseEnter={() => setHoveredIndex(dockAppOrder.length + 2)}
-        onMouseLeave={() => setHoveredIndex(null)}
+        onMouseEnter={() => setAboutHovered(true)}
+        onMouseLeave={() => setAboutHovered(false)}
       >
         <div className="w-8 h-8 md:w-12 md:h-12 rounded-xl bg-muted flex items-center justify-center">
           <Info className="w-6 h-6 text-foreground/80" />
@@ -172,10 +136,10 @@ export function Dock() {
           className="absolute -top-10 px-3 py-1.5 bg-popover backdrop-blur-sm rounded-md text-xs text-popover-foreground whitespace-nowrap pointer-events-none border border-border"
           initial={{ opacity: 0, y: 5 }}
           animate={{
-            opacity: hoveredIndex === dockAppOrder.length + 2 ? 1 : 0,
-            y: hoveredIndex === dockAppOrder.length + 2 ? 0 : 5,
+            opacity: aboutHovered ? 1 : 0,
+            y: aboutHovered ? 0 : 5,
           }}
-          transition={{ duration: 0.15 }}
+          transition={{ duration: 0.1 }}
         >
           About Darwin UI
           <div className="absolute left-1/2 -translate-x-1/2 -bottom-1 w-2 h-2 bg-popover rotate-45 border-r border-b border-border" />

@@ -120,7 +120,7 @@ export default function DashboardShowcase() {
 
     return (
         <div
-            className="relative w-full rounded-[20px] overflow-hidden border border-border shadow-lg font-sans bg-card"
+            className="relative w-full overflow-hidden font-sans bg-card"
         >
             {/* Window Title Bar - Compact */}
             <div className="bg-card border-b border-border h-8 flex items-center px-3 justify-between select-none">

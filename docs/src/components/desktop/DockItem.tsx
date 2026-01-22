@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import type { AppDefinition } from '../../contexts/desktop-context';
 import { Hammer, Terminal, StickyNote, Settings, LayoutDashboard, FileText } from 'lucide-react';
@@ -10,10 +11,6 @@ interface DockItemProps {
   hasMinimizedWindow?: boolean;
   onClick: () => void;
   index: number;
-  scale: number;
-  isHovered: boolean;
-  onHover: () => void;
-  onLeave: () => void;
 }
 
 // Map app IDs to their Lucide icons
@@ -32,32 +29,32 @@ export function DockItem({
   hasMinimizedWindow,
   onClick,
   index,
-  scale,
-  isHovered,
-  onHover,
-  onLeave,
 }: DockItemProps) {
+  const [isHovered, setIsHovered] = useState(false);
+
   // Get icon for this app or use the app's default icon
   const icon = appIcons[app.id] || app.icon;
 
   return (
     <motion.button
-      className="relative flex flex-col items-center origin-bottom"
+      className="relative flex flex-col items-center group"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       onClick={onClick}
-      onMouseEnter={onHover}
-      onMouseLeave={onLeave}
       initial={{ opacity: 0, y: 20 }}
       animate={{
         opacity: 1,
         y: 0,
-        scale: scale,
+        scale: isHovered ? 1.2 : 1,
+        translateY: isHovered ? -4 : 0,
       }}
       transition={{
-        opacity: { delay: index * 0.03, duration: 0.3 },
-        y: { delay: index * 0.03, duration: 0.3 },
-        scale: { type: 'spring', stiffness: 400, damping: 25 },
+        opacity: { delay: index * 0.02, duration: 0.2 },
+        y: { delay: index * 0.02, duration: 0.2 },
+        scale: { type: 'spring', stiffness: 500, damping: 25 },
+        translateY: { type: 'spring', stiffness: 500, damping: 25 },
       }}
-      whileTap={{ scale: scale * 0.9 }}
+      whileTap={{ scale: 0.95 }}
     >
       {/* Icon Container */}
       <div className="w-8 h-8 md:w-12 md:h-12 rounded-xl bg-foreground/10 flex items-center justify-center">
@@ -72,7 +69,7 @@ export function DockItem({
           }`}
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.2 }}
+          transition={{ duration: 0.15 }}
         />
       )}
 
@@ -84,7 +81,7 @@ export function DockItem({
           opacity: isHovered ? 1 : 0,
           y: isHovered ? 0 : 5,
         }}
-        transition={{ duration: 0.15 }}
+        transition={{ duration: 0.1 }}
       >
         {app.name}
         {/* Tooltip arrow */}
