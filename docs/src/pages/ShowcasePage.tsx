@@ -5,7 +5,7 @@ import { DarwinLogo } from '../components/icons/DarwinLogo';
 import { Button } from '@pikoloo/darwin-ui';
 import { ArrowRight, Github, ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { ComponentGridSection } from '../components/showcase/ComponentGridSection';
+import { ComponentShowcaseSection } from '../components/showcase/ComponentShowcaseSection';
 import { DashboardDemoSection } from '../components/showcase/DashboardDemoSection';
 import { UnifiedNavbar } from '../components/UnifiedNavbar';
 import { HeroComponentPreview } from '../components/showcase/HeroComponentPreview';
@@ -251,7 +251,7 @@ export default function ShowcasePage() {
       </section>
 
       {/* Component Grid Section */}
-      <ComponentGridSection />
+      <ComponentShowcaseSection />
 
       {/* Dashboard Demo Section */}
       <DashboardDemoSection />
