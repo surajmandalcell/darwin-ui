@@ -5,6 +5,7 @@ import { OverlayProvider, AlertProvider, ToastProvider } from "@pikoloo/darwin-u
 import { Desktop } from "./components/desktop/Desktop";
 import DocsPage from "./pages/DocsPage";
 import ChangelogPage from "./pages/ChangelogPage";
+import ShowcasePage from "./pages/ShowcasePage";
 
 function App() {
   return (
@@ -13,15 +14,18 @@ function App() {
         <AlertProvider>
           <ToastProvider>
             <Routes>
-              {/* Standalone Documentation - same as DeveloperApp */}
+              {/* Showcase Landing Page */}
+              <Route path="/" element={<ShowcasePage />} />
+
+              {/* Standalone Documentation */}
               <Route path="/docs" element={<DocsPage />} />
 
-              {/* Standalone Changelog - same as ChangelogApp */}
+              {/* Standalone Changelog */}
               <Route path="/changelog" element={<ChangelogPage />} />
 
-              {/* Desktop Environment (root) */}
+              {/* Desktop Environment */}
               <Route
-                path="/*"
+                path="/desktop"
                 element={
                   <DesktopProvider>
                     <Desktop />
