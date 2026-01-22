@@ -135,7 +135,7 @@ export default function DashboardShowcase() {
                 <div className="w-16" />
             </div>
 
-            <div className="flex h-[700px] xl:h-[600px]">
+            <div className="flex flex-col md:flex-row min-h-[500px] md:h-[600px] xl:h-[600px]">
                 {/* Sidebar */}
                 <div className="w-[240px] flex-shrink-0 border-r border-white/10 bg-neutral-950 hidden md:flex flex-col">
                     <div className="p-5">

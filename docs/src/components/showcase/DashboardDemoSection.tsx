@@ -26,8 +26,11 @@ export function DashboardDemoSection() {
         animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
         transition={{ delay: 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       >
-        <div className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-black/50">
-          <DashboardShowcase />
+        {/* Wrapper with horizontal scroll for small screens */}
+        <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
+          <div className="min-w-[320px] sm:min-w-0 rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-black/50">
+            <DashboardShowcase />
+          </div>
         </div>
       </motion.div>
     </section>
