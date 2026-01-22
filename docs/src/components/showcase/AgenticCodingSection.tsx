@@ -25,7 +25,7 @@ interface FeatureCardProps {
 function FeatureCard({ icon, title, description, delay }: FeatureCardProps) {
 	return (
 		<motion.div
-			className="flex items-start gap-4 p-4 rounded-xl bg-white/[0.02] border border-white/[0.06] hover:bg-white/[0.04] hover:border-white/[0.1] transition-all duration-300"
+			className="flex items-start gap-4 p-4 rounded-xl bg-muted/20 border border-border/60 hover:bg-muted/40 hover:border-border transition-all duration-300"
 			initial={{ opacity: 0, x: 20 }}
 			whileInView={{ opacity: 1, x: 0 }}
 			viewport={{ once: true }}
@@ -35,8 +35,8 @@ function FeatureCard({ icon, title, description, delay }: FeatureCardProps) {
 				{icon}
 			</div>
 			<div>
-				<h4 className="text-sm font-semibold text-white mb-1">{title}</h4>
-				<p className="text-xs text-white/40 leading-relaxed">{description}</p>
+				<h4 className="text-sm font-semibold text-foreground mb-1">{title}</h4>
+				<p className="text-xs text-muted-foreground leading-relaxed">{description}</p>
 			</div>
 		</motion.div>
 	);
@@ -125,15 +125,15 @@ export function AgenticCodingSection() {
 						viewport={{ once: true }}
 						transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
 					>
-						<div className="rounded-xl border border-white/10 overflow-hidden bg-[#0d0d0f] shadow-2xl shadow-black/50">
+						<div className="rounded-xl border border-border overflow-hidden bg-card shadow-2xl shadow-foreground/20">
 							{/* Window chrome */}
-							<div className="flex items-center gap-2 px-4 py-3 bg-white/[0.02] border-b border-white/[0.06]">
+							<div className="flex items-center gap-2 px-4 py-3 bg-muted/20 border-b border-border/60">
 								<div className="flex items-center gap-1.5">
 									<div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
 									<div className="w-3 h-3 rounded-full bg-[#febc2e]" />
 									<div className="w-3 h-3 rounded-full bg-[#28c840]" />
 								</div>
-								<span className="ml-4 text-xs text-white/40 font-medium">
+								<span className="ml-4 text-xs text-muted-foreground font-medium">
 									FormComponent.tsx
 								</span>
 							</div>
@@ -143,14 +143,14 @@ export function AgenticCodingSection() {
 								{displayedLines.map((line, index) => (
 									<div key={index} className="flex">
 										{/* Line number */}
-										<span className="w-8 text-right pr-4 text-white/20 select-none text-xs leading-6">
+										<span className="w-8 text-right pr-4 text-muted-foreground/50 select-none text-xs leading-6">
 											{index + 1}
 										</span>
 										{/* Code line */}
 										<span
 											className={`leading-6 ${
 												isComment(codeLines[index])
-													? "text-white/30 italic"
+													? "text-muted-foreground/70 italic"
 													: "text-emerald-400/90"
 											}`}
 										>
@@ -169,7 +169,7 @@ export function AgenticCodingSection() {
 									currentLineIndex >= codeLines.length &&
 									cursorVisible && (
 										<div className="flex">
-											<span className="w-8 text-right pr-4 text-white/20 select-none text-xs leading-6">
+											<span className="w-8 text-right pr-4 text-muted-foreground/50 select-none text-xs leading-6">
 												{displayedLines.length + 1}
 											</span>
 											<span className="inline-block w-[2px] h-4 bg-emerald-400 align-middle" />
@@ -179,7 +179,7 @@ export function AgenticCodingSection() {
 								{displayedLines.length < 8 &&
 									[...Array(8 - displayedLines.length)].map((_, i) => (
 										<div key={`placeholder-${i}`} className="flex">
-											<span className="w-8 text-right pr-4 text-white/10 select-none text-xs leading-6">
+											<span className="w-8 text-right pr-4 text-muted-foreground/30 select-none text-xs leading-6">
 												{displayedLines.length + i + 1}
 											</span>
 										</div>
@@ -198,9 +198,9 @@ export function AgenticCodingSection() {
 							transition={{ duration: 0.5, delay: 0.1 }}
 						>
 							<h2 className="text-4xl md:text-5xl font-bold leading-tight font-heading">
-								<span className="text-white">Agentic Coding</span>
+								<span className="text-foreground">Agentic Coding</span>
 								<br />
-								<span className="text-white/40">Supported by Default</span>
+								<span className="text-muted-foreground">Supported by Default</span>
 							</h2>
 						</motion.div>
 
