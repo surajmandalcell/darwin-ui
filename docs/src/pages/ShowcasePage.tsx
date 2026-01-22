@@ -7,6 +7,7 @@ import { ArrowRight, Github, ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ComponentShowcaseSection } from '../components/showcase/ComponentShowcaseSection';
 import { DashboardDemoSection } from '../components/showcase/DashboardDemoSection';
+import { AgenticCodingSection } from '../components/showcase/AgenticCodingSection';
 import { UnifiedNavbar } from '../components/UnifiedNavbar';
 import { HeroComponentPreview } from '../components/showcase/HeroComponentPreview';
 import { useRef } from 'react';
@@ -255,6 +256,9 @@ export default function ShowcasePage() {
 
       {/* Dashboard Demo Section */}
       <DashboardDemoSection />
+
+      {/* Agentic Coding Section */}
+      <AgenticCodingSection />
 
       {/* Footer */}
       <footer className="py-16 px-6 md:px-12 lg:px-20 border-t border-white/[0.06]">
