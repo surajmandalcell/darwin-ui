@@ -261,22 +261,54 @@ export default function ShowcasePage() {
       <AgenticCodingSection />
 
       {/* Footer */}
-      <footer className="py-16 px-6 md:px-12 lg:px-20 border-t border-white/[0.06]">
-        <div className="max-w-[1400px] mx-auto">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+      <footer>
+        {/* Top CTA Section */}
+        <div className="py-20 px-6 md:px-12 lg:px-20">
+          <div className="max-w-[1400px] mx-auto text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                Ready to build something beautiful?
+              </h2>
+              <p className="text-lg text-white/40 mb-8 max-w-xl mx-auto">
+                Start using Darwin UI in your projects today. Free, open source, and designed for developers.
+              </p>
+              <div className="flex flex-wrap justify-center gap-4">
+                <Link to="/docs">
+                  <Button size="lg" className="group h-12 px-8 text-sm font-medium">
+                    Get Started
+                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </Link>
+                <a href="https://github.com/surajmandalcell/darwin-ui" target="_blank" rel="noopener noreferrer">
+                  <button className="h-12 px-8 text-sm font-medium text-white/60 hover:text-white border border-white/10 hover:border-white/20 rounded-lg transition-all flex items-center gap-2 hover:bg-white/[0.02]">
+                    <Github className="w-4 h-4" />
+                    Star on GitHub
+                  </button>
+                </a>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="border-t border-white/[0.04] py-8 px-6 md:px-12 lg:px-20">
+          <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-3">
               <DarwinLogo className="w-6 h-6" />
-              <span className="text-white/40 text-sm font-medium">Darwin UI</span>
+              <span className="text-white/40 text-sm">Darwin UI</span>
+              <span className="text-white/20 text-sm">·</span>
+              <span className="text-white/20 text-xs">Open source under MIT</span>
             </div>
-            <div className="flex flex-wrap gap-8 text-sm text-white/30">
-              <Link to="/docs" className="hover:text-white transition-colors">Documentation</Link>
-              <Link to="/changelog" className="hover:text-white transition-colors">Changelog</Link>
-              <Link to="/desktop" className="hover:text-white transition-colors">Desktop Demo</Link>
-              <a href="https://github.com/surajmandalcell/darwin-ui" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">GitHub</a>
+            <div className="flex items-center gap-6">
+              <Link to="/docs" className="text-sm text-white/30 hover:text-white transition-colors">Docs</Link>
+              <Link to="/changelog" className="text-sm text-white/30 hover:text-white transition-colors">Changelog</Link>
+              <a href="https://github.com/surajmandalcell/darwin-ui" target="_blank" rel="noopener noreferrer" className="text-sm text-white/30 hover:text-white transition-colors">GitHub</a>
+              <a href="https://twitter.com/surajmandalcell" target="_blank" rel="noopener noreferrer" className="text-sm text-white/30 hover:text-white transition-colors">Twitter</a>
             </div>
-          </div>
-          <div className="mt-12 pt-8 border-t border-white/[0.04] text-xs text-white/20">
-            © 2024 Darwin UI. Open source under MIT license.
           </div>
         </div>
       </footer>
