@@ -60,17 +60,17 @@ export function Upload({
 	return (
 		<div className="flex flex-col gap-2">
 			{/* Drop area */}
-			<div className="relative flex min-h-52 flex-col overflow-hidden rounded-xl border border-dashed border-white/15 p-4">
+			<div className="relative flex min-h-52 flex-col overflow-hidden rounded-xl border border-dashed border-[hsl(var(--border-strong))] p-4">
 				{(value?.length || 0) + (pending.length || 0) > 0 ? (
 					<div className="flex w-full flex-col gap-3">
 						<div className="flex items-center justify-between gap-2">
-							<h3 className="truncate text-sm font-medium text-white/80">
+							<h3 className="truncate text-sm font-medium text-[hsl(var(--text-secondary))]">
 								Images ({value.length + pending.length})
 							</h3>
 							<div className="flex gap-2">
 								<button
 									onClick={() => fileInputRef.current?.click()}
-									className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-md text-xs text-white/70 hover:text-white/90 transition-all duration-200"
+									className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[hsl(var(--glass-bg))] hover:bg-[hsl(var(--glass-bg-hover))] border border-[hsl(var(--border-default))] hover:border-[hsl(var(--border-strong))] rounded-md text-xs text-[hsl(var(--text-secondary))] hover:text-[hsl(var(--text-primary))] transition-all duration-200"
 								>
 									<UploadIcon className="size-3.5" />
 									Add
@@ -89,7 +89,7 @@ export function Upload({
 							{value.map((url, index) => (
 								<div
 									key={url + index}
-									className="relative flex flex-col rounded-md border border-white/10 bg-white/5 overflow-hidden group"
+									className="relative flex flex-col rounded-md border border-[hsl(var(--border-default))] bg-[hsl(var(--glass-bg))] overflow-hidden group"
 								>
 									<Image
 										height={80}
@@ -105,15 +105,15 @@ export function Upload({
 									>
 										<XIcon className="size-3.5 text-white" />
 									</Button>
-									<div className="flex min-w-0 items-center justify-between gap-2 border-t border-white/10 p-2">
-										<span className="truncate text-[12px] text-white/80">
+									<div className="flex min-w-0 items-center justify-between gap-2 border-t border-[hsl(var(--border-default))] p-2">
+										<span className="truncate text-[12px] text-[hsl(var(--text-secondary))]">
 											{index === 0 ? "Cover" : `Image ${index + 1}`}
 										</span>
 										<div className="flex gap-1">
 											<button
 												title={index === 0 ? "Already cover" : "Make cover"}
 												onClick={() => setCover(index)}
-												className="p-1 rounded bg-white/10 hover:bg-white/20 text-white"
+												className="p-1 rounded bg-[hsl(var(--glass-bg-hover))] hover:bg-[hsl(var(--glass-bg-active))] text-[hsl(var(--text-primary))]"
 											>
 												{index === 0 ? (
 													<StarIcon className="w-3.5 h-3.5 text-yellow-300" />
@@ -126,7 +126,7 @@ export function Upload({
 												onClick={() =>
 													swap(index, Math.min(index + 1, value.length - 1))
 												}
-												className="p-1 rounded bg-white/10 hover:bg-white/20 text-white"
+												className="p-1 rounded bg-[hsl(var(--glass-bg-hover))] hover:bg-[hsl(var(--glass-bg-active))] text-[hsl(var(--text-primary))]"
 											>
 												<ArrowLeftRightIcon className="w-3.5 h-3.5" />
 											</button>
@@ -137,7 +137,7 @@ export function Upload({
 							{pending.map((p, i) => (
 								<div
 									key={"pending-" + p.id}
-									className="relative flex flex-col rounded-md border border-white/10 bg-white/5 overflow-hidden"
+									className="relative flex flex-col rounded-md border border-[hsl(var(--border-default))] bg-[hsl(var(--glass-bg))] overflow-hidden"
 								>
 									<div className="aspect-square w-full bg-black/30">
 										{/* eslint-disable-next-line @next/next/no-img-element */}
@@ -154,7 +154,7 @@ export function Upload({
 												style={{ width: `${p.progress}%` }}
 											/>
 										</div>
-										<div className="text-[11px] text-white/70 mt-1">
+										<div className="text-[11px] text-[hsl(var(--text-secondary))] mt-1">
 											Uploading… {p.progress}%
 										</div>
 									</div>
@@ -165,16 +165,16 @@ export function Upload({
 				) : (
 					<div className="flex flex-col items-center justify-center px-4 py-3 text-center">
 						<div
-							className="mb-2 flex size-11 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/5"
+							className="mb-2 flex size-11 shrink-0 items-center justify-center rounded-full border border-[hsl(var(--border-strong))] bg-[hsl(var(--glass-bg))]"
 							aria-hidden="true"
 						>
-							<ImageIcon className="size-4 text-white/70" />
+							<ImageIcon className="size-4 text-[hsl(var(--text-secondary))]" />
 						</div>
-						<p className="mb-1.5 text-sm font-medium text-white/90">
+						<p className="mb-1.5 text-sm font-medium text-[hsl(var(--text-primary))]">
 							Drop your images here
 						</p>
-						{label && <p className="text-xs text-white/70 mb-1">{label}</p>}
-						<p className="text-xs text-white/60">Max {maxFiles} files</p>
+						{label && <p className="text-xs text-[hsl(var(--text-secondary))] mb-1">{label}</p>}
+						<p className="text-xs text-[hsl(var(--text-tertiary))]">Max {maxFiles} files</p>
 						<div className="mt-3" />
 					</div>
 				)}
@@ -226,7 +226,7 @@ export function Upload({
 						}}
 					/>
 					<div
-						className="border border-dashed border-white/50 rounded-lg min-h-[50px] flex items-center justify-center text-white/60 text-sm cursor-pointer hover:bg-white/5"
+						className="border border-dashed border-[hsl(var(--border-strong))] rounded-lg min-h-[50px] flex items-center justify-center text-[hsl(var(--text-tertiary))] text-sm cursor-pointer hover:bg-[hsl(var(--glass-bg))]"
 						onClick={() => fileInputRef.current?.click()}
 					>
 						Click to select images

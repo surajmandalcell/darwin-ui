@@ -87,10 +87,10 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
 					}}
 					onChange={handleChange}
 					className={cn(
-						"flex min-h-[80px] w-full rounded-md border bg-white/5 px-3 py-2 text-sm text-white/90 shadow-sm transition-colors placeholder:text-white/40 focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50 backdrop-blur-sm hover:bg-white/10",
+						"flex min-h-[80px] w-full rounded-md border bg-[hsl(var(--glass-bg))] px-3 py-2 text-sm text-[hsl(var(--text-primary))] shadow-sm transition-colors placeholder:text-[hsl(var(--text-muted))] focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50 backdrop-blur-sm hover:bg-[hsl(var(--glass-bg-hover))]",
 						error && "border-red-500/50 focus-visible:ring-red-500/50",
 						success && "border-green-500/50 focus-visible:ring-green-500/50",
-						!error && !success && "border-white/10 focus-visible:ring-blue-500/50",
+						!error && !success && "border-[hsl(var(--border-default))] focus-visible:ring-blue-500/50",
 						autoResize ? "resize-none overflow-hidden" : resizeClasses[resize],
 						className
 					)}

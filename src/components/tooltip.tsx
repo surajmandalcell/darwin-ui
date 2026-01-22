@@ -201,7 +201,7 @@ function TooltipContent({
 					{...animationProps}
 					transition={{ duration: getDuration("normal"), ease: "easeOut" }}
 					className={cn(
-						"fixed overflow-hidden rounded-md bg-neutral-800 px-3 py-1.5 text-xs text-white/90 shadow-lg border border-white/10",
+						"fixed overflow-hidden rounded-md bg-[hsl(var(--overlay-bg))] px-3 py-1.5 text-xs text-[hsl(var(--text-primary))] shadow-lg border border-[hsl(var(--border-default))]",
 						className
 					)}
 					style={{

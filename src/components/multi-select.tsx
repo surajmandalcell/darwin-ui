@@ -143,7 +143,7 @@ export function MultiSelect({
 							left: `${dropdownPosition.left}px`,
 							minWidth: `${dropdownPosition.width}px`,
 						}}
-						className="z-50 min-w-[8rem] overflow-hidden rounded-md border border-white/10 bg-neutral-900/95 backdrop-blur-md shadow-md"
+						className="z-50 min-w-[8rem] overflow-hidden rounded-md border border-[hsl(var(--border-default))] bg-[hsl(var(--overlay-bg))] backdrop-blur-md shadow-md"
 					>
 						<ul role="listbox" className="p-1">
 							{options.map((opt) => {
@@ -155,8 +155,8 @@ export function MultiSelect({
 										aria-selected={isSelected}
 										onClick={() => toggle(opt.value)}
 										className={cn(
-											"relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none transition-colors hover:bg-white/10",
-											isSelected ? "text-white" : "text-white/80"
+											"relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none transition-colors hover:bg-[hsl(var(--glass-bg-hover))]",
+											isSelected ? "text-[hsl(var(--text-primary))]" : "text-[hsl(var(--text-secondary))]"
 										)}
 									>
 										<span className="absolute left-2 flex h-4 w-4 items-center justify-center">
@@ -196,10 +196,10 @@ export function MultiSelect({
 				aria-expanded={open}
 				onClick={() => setOpen((v) => !v)}
 				className={cn(
-					"flex h-9 w-full items-center justify-between rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm text-white/90 shadow-sm ring-offset-background placeholder:text-white/50 focus:outline-none focus:ring-1 focus:ring-blue-500/50 disabled:cursor-not-allowed disabled:opacity-50 hover:bg-white/10 transition-colors backdrop-blur-sm",
+					"flex h-9 w-full items-center justify-between rounded-md border border-[hsl(var(--border-default))] bg-[hsl(var(--glass-bg))] px-3 py-2 text-sm text-[hsl(var(--text-primary))] shadow-sm ring-offset-background placeholder:text-[hsl(var(--text-tertiary))] focus:outline-none focus:ring-1 focus:ring-blue-500/50 disabled:cursor-not-allowed disabled:opacity-50 hover:bg-[hsl(var(--glass-bg-hover))] transition-colors backdrop-blur-sm",
 				)}
 			>
-				<span className={cn("truncate", !displayValue && "text-white/50")}>
+				<span className={cn("truncate", !displayValue && "text-[hsl(var(--text-tertiary))]")}>
 					{displayValue || placeholder}
 				</span>
 				<span className="ml-2 h-4 w-4 opacity-50">
@@ -222,12 +222,12 @@ export function MultiSelect({
 							animate={{ scale: 1, opacity: 1 }}
 							exit={{ scale: 0.8, opacity: 0 }}
 							transition={{ duration: 0.15 }}
-							className="inline-flex items-center gap-1.5 px-2 py-1 bg-white/5 border border-white/10 rounded-md text-white/80 text-xs backdrop-blur-sm"
+							className="inline-flex items-center gap-1.5 px-2 py-1 bg-[hsl(var(--glass-bg))] border border-[hsl(var(--border-default))] rounded-md text-[hsl(var(--text-secondary))] text-xs backdrop-blur-sm"
 						>
 							{options.find((o) => o.value === v)?.label || v}
 							<button
 								type="button"
-								className="text-white/40 hover:text-white/80 transition-colors rounded-sm hover:bg-white/10 p-0.5"
+								className="text-[hsl(var(--text-muted))] hover:text-[hsl(var(--text-secondary))] transition-colors rounded-sm hover:bg-[hsl(var(--glass-bg-hover))] p-0.5"
 								onClick={(e) => removeTag(e, v)}
 							>
 								<XIcon className="h-3 w-3" />

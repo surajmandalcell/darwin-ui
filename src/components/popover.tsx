@@ -203,7 +203,7 @@ function PopoverContent({
 					{...animationProps}
 					transition={{ duration: 0.15, ease: "easeOut" }}
 					className={cn(
-						"fixed w-72 rounded-lg border border-white/10 bg-neutral-900/95 backdrop-blur-md p-4 shadow-xl",
+						"fixed w-72 rounded-lg border border-[hsl(var(--border-default))] bg-[hsl(var(--overlay-bg))] backdrop-blur-md p-4 shadow-xl",
 						className
 					)}
 					style={{

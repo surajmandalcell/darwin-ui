@@ -13,14 +13,14 @@ export function Window({ children, title }: WindowProps) {
 			initial={{ opacity: 0, scale: 0.98 }}
 			animate={{ opacity: 1, scale: 1 }}
 			transition={{ duration: 0.4, ease: "easeOut" }}
-			className="flex h-full w-full flex-col rounded-lg border border-white/10 bg-neutral-950/80 shadow-lg backdrop-blur-md"
+			className="flex h-full w-full flex-col rounded-lg border border-[hsl(var(--border-default))] bg-[hsl(var(--overlay-bg))] shadow-lg backdrop-blur-md"
 		>
-			<div className="relative flex items-center justify-center border-b border-white/10 px-4 py-1.5 bg-white/5 rounded-t-lg">
+			<div className="relative flex items-center justify-center border-b border-[hsl(var(--border-default))] px-4 py-1.5 bg-[hsl(var(--glass-bg))] rounded-t-lg">
 				<CloseButton
 					href="/"
 					className="absolute left-4 top-1/2 -translate-y-1/2"
 				/>
-				<div className="text-xs font-medium text-white/70 tracking-wide">
+				<div className="text-xs font-medium text-[hsl(var(--text-secondary))] tracking-wide">
 					{title}
 				</div>
 			</div>

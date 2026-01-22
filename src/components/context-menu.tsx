@@ -64,13 +64,13 @@ const MENU_CONFIG = {
 };
 
 const MENU_STYLES = {
-	base: "text-white bg-neutral-900/50 backdrop-blur-md shadow-md border border-white/10",
+	base: "text-[hsl(var(--text-primary))] bg-[hsl(var(--overlay-bg))] backdrop-blur-md shadow-md border border-[hsl(var(--border-default))]",
 	contextMenu: "fixed z-50 min-w-32 text-sm p-1 w-fit rounded-[6px]",
 	clickMenu:
 		"absolute left-0 top-full z-50 min-w-32 w-56 text-sm p-1 rounded-[6px] transition-all duration-150 ease-out",
 	menuItem:
-		"w-full text-left px-1.5 py-1 transition-all duration-150 ease-out flex items-center justify-between rounded-[4px] truncate cursor-pointer whitespace-nowrap text-white/90",
-	menuItemDisabled: "text-white/40 cursor-not-allowed",
+		"w-full text-left px-1.5 py-1 transition-all duration-150 ease-out flex items-center justify-between rounded-[4px] truncate cursor-pointer whitespace-nowrap text-[hsl(var(--text-primary))]",
+	menuItemDisabled: "text-[hsl(var(--text-muted))] cursor-not-allowed",
 	menuItemEnabled: "hover:bg-blue-600 focus:outline-hidden focus:ring-0",
 };
 
@@ -129,7 +129,7 @@ const MenuItems: React.FC<{
 	<div className="py-1">
 		{items.map((item, index) => (
 			<React.Fragment key={index}>
-				{item.separator && <div className="my-1 h-px bg-white/20" />}
+				{item.separator && <div className="my-1 h-px bg-[hsl(var(--border-default))]" />}
 				<button
 					onClick={() => onItemClick(item)}
 					disabled={item.disabled}
@@ -142,7 +142,7 @@ const MenuItems: React.FC<{
 				>
 					<span>{item.label}</span>
 					{item.shortcut && (
-						<span className="ml-auto text-xs tracking-widest text-white/60">
+						<span className="ml-auto text-xs tracking-widest text-[hsl(var(--text-secondary))]">
 							{item.shortcut}
 						</span>
 					)}

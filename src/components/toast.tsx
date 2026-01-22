@@ -97,22 +97,22 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
 				{toasts.map((toast) => (
 					<div
 						key={toast.id}
-						className="bg-neutral-900/95 backdrop-blur-md shadow-md border border-white/10 rounded-md min-w-80 max-w-md pointer-events-auto animate-in slide-in-from-right duration-300"
+						className="bg-[hsl(var(--overlay-bg))] backdrop-blur-md shadow-md border border-[hsl(var(--border-default))] rounded-md min-w-80 max-w-md pointer-events-auto animate-in slide-in-from-right duration-300"
 					>
 						<div className="p-4 flex items-start gap-3">
 							{getIcon(toast.type)}
 							<div className="flex-1 min-w-0">
 								{toast.title && (
-									<div className="text-white/90 text-sm font-semibold mb-0.5">
+									<div className="text-[hsl(var(--text-primary))] text-sm font-semibold mb-0.5">
 										{toast.title}
 									</div>
 								)}
-								<div className="text-white/70 text-sm">{toast.message}</div>
+								<div className="text-[hsl(var(--text-secondary))] text-sm">{toast.message}</div>
 							</div>
 							<button
 								type="button"
 								onClick={() => removeToast(toast.id)}
-								className="text-white/40 hover:text-white/70 transition-colors shrink-0"
+								className="text-[hsl(var(--text-muted))] hover:text-[hsl(var(--text-secondary))] transition-colors shrink-0"
 								aria-label="Close"
 							>
 								<X className="w-4 h-4" />

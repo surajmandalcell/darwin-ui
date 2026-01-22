@@ -30,18 +30,18 @@ export function CompactContactForm({
 	return (
 		<section className={`relative py-14 sm:py-16 ${className}`}>
 			<div className="relative z-10 mx-auto max-w-6xl px-4">
-				<div className="relative overflow-hidden bg-neutral-900/80 backdrop-blur-md border border-white/10 rounded-xl">
-					<div className="absolute inset-0 bg-white/[0.02]" />
+				<div className="relative overflow-hidden bg-[hsl(var(--overlay-bg))] backdrop-blur-md border border-[hsl(var(--border-default))] rounded-xl">
+					<div className="absolute inset-0 bg-[hsl(var(--glass-bg))]" />
 					<div className="relative z-10 p-5 sm:p-6">
 						{/* Row 1: Heading */}
 						<div className="text-left mb-4">
 							<Reveal className="sm:flex gap-2">
 								<h3
-									className={`${manrope.className} text-xl sm:text-2xl text-white font-light `}
+									className={`${manrope.className} text-xl sm:text-2xl text-[hsl(var(--text-primary))] font-light `}
 								>
 									{title}
 								</h3>
-								<p className="text-xs text-gray-400 mt-auto">
+								<p className="text-xs text-[hsl(var(--text-muted))] mt-auto">
 									Will reach out asap, thats a promise!
 								</p>
 							</Reveal>
@@ -74,7 +74,7 @@ export function CompactContactForm({
 								<button
 									type="submit"
 									disabled={isSubmitting}
-									className={`${manrope.className} w-full sm:w-auto px-6 py-3 min-h-11 ${isSubmitting ? "bg-white/5 text-white/50 cursor-not-allowed" : "bg-white/10 hover:bg-white/20 text-white"} border border-white/20 rounded-md transition-colors font-medium text-sm`}
+									className={`${manrope.className} w-full sm:w-auto px-6 py-3 min-h-11 ${isSubmitting ? "bg-[hsl(var(--glass-bg))] text-[hsl(var(--text-tertiary))] cursor-not-allowed" : "bg-[hsl(var(--glass-bg-hover))] hover:bg-[hsl(var(--glass-bg-active))] text-[hsl(var(--text-primary))]"} border border-[hsl(var(--border-strong))] rounded-md transition-colors font-medium text-sm`}
 								>
 									{isSubmitting ? "Submitting..." : "Submit"}
 								</button>

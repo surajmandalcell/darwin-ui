@@ -90,7 +90,7 @@ export function Select({
 							left: `${dropdownPosition.left}px`,
 							minWidth: `${dropdownPosition.width}px`,
 						}}
-						className="z-50 min-w-[8rem] overflow-hidden rounded-md border border-white/10 bg-neutral-900/95 backdrop-blur-md shadow-md"
+						className="z-50 min-w-[8rem] overflow-hidden rounded-md border border-[hsl(var(--border-default))] bg-[hsl(var(--overlay-bg))] backdrop-blur-md shadow-md"
 					>
 						<ul role="listbox" className="py-1 px-1 flex flex-col gap-0.5">
 							{options.map((opt) => (
@@ -102,8 +102,8 @@ export function Select({
 									className={cn(
 										"relative flex w-full cursor-pointer select-none items-center rounded-md px-2 py-1.5 text-sm outline-none transition-colors data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
 										opt.value === selected.value
-											? "bg-white/10 text-white"
-											: "text-white/80 hover:bg-white/8"
+											? "bg-[hsl(var(--glass-bg-hover))] text-[hsl(var(--text-primary))]"
+											: "text-[hsl(var(--text-secondary))] hover:bg-[hsl(var(--glass-bg))]"
 									)}
 								>
 									{opt.label}
@@ -131,7 +131,7 @@ export function Select({
 				aria-expanded={open}
 				onClick={() => setOpen((v) => !v)}
 				className={cn(
-					"flex h-9 w-full items-center justify-between rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm text-white/90 shadow-sm ring-offset-background placeholder:text-white/50 focus:outline-none focus:ring-1 focus:ring-blue-500/50 disabled:cursor-not-allowed disabled:opacity-50 hover:bg-white/10 transition-colors backdrop-blur-sm",
+					"flex h-9 w-full items-center justify-between rounded-md border border-[hsl(var(--border-default))] bg-[hsl(var(--glass-bg))] px-3 py-2 text-sm text-[hsl(var(--text-primary))] shadow-sm ring-offset-background placeholder:text-[hsl(var(--text-tertiary))] focus:outline-none focus:ring-1 focus:ring-blue-500/50 disabled:cursor-not-allowed disabled:opacity-50 hover:bg-[hsl(var(--glass-bg-hover))] transition-colors backdrop-blur-sm",
 				)}
 			>
 				<span className="truncate">{selected.label}</span>

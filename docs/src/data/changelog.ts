@@ -32,6 +32,39 @@ export interface ChangelogEntry {
 
 export const changelog: ChangelogEntry[] = [
   {
+    version: '1.4.0',
+    date: '2025-01-22',
+    title: 'Showcase Redesign & Animation Improvements',
+    description: 'Major showcase page redesign with new interactive components, global animation configuration system, improved UX fixes, and Agentic Coding documentation.',
+    changes: [
+      // Added
+      { type: 'added', description: 'FloatingElement component with multi-dimensional parallax animations' },
+      { type: 'added', description: 'HeroComponentPreview with interactive component rotation showcase' },
+      { type: 'added', description: 'AgenticCodingSection with typing animation for AI integration showcase' },
+      { type: 'added', description: 'Variable-size grid cells in ComponentShowcaseSection for dynamic layouts' },
+      { type: 'added', description: 'Premium CTA section with gradient effects in footer redesign' },
+      { type: 'added', description: 'Global animation configuration system (animation-config.ts) for centralized animation control' },
+      { type: 'added', description: 'prefers-reduced-motion support across all animated components' },
+      { type: 'added', description: 'Agentic Coding documentation page with Context7 integration for AI assistants' },
+      { type: 'added', component: 'Sidebar', description: 'Collapsible mode with tooltip navigation' },
+      // Changed
+      { type: 'changed', description: 'ShowcasePage completely redesigned with animated hero section and feature highlights' },
+      { type: 'changed', description: 'DashboardDemoSection upgraded with Production title badge and glow effects' },
+      { type: 'changed', description: 'ComponentGridSection refactored to ComponentShowcaseSection with improved architecture' },
+      { type: 'changed', component: 'DropdownMenu', description: 'Click timing improved - changed mousedown to click event for reliable item selection' },
+      { type: 'changed', component: 'Select', description: 'Click timing improved - changed mousedown to click event for reliable option selection' },
+      { type: 'changed', component: 'Tooltip', description: 'Animation changed to opacity-only (removed Y-axis shift that caused hover flicker)' },
+      { type: 'changed', component: 'Checkbox', description: 'Scale animation removed for better UX - checkbox no longer moves away from cursor' },
+      { type: 'changed', component: 'Badge', description: 'Hover effects removed - badges are status indicators and should not suggest interactivity' },
+      // Fixed
+      { type: 'fixed', description: 'ComponentShowcaseSection grid layout and responsive styling' },
+      { type: 'fixed', description: 'Section spacing optimization for better responsive layouts' },
+      { type: 'fixed', description: 'Removed duplicate Agentic Ready badge from AgenticCodingSection' },
+      { type: 'fixed', component: 'DropdownMenu', description: 'Menu items now register clicks reliably on first tap' },
+      { type: 'fixed', component: 'Select', description: 'Options now register selection reliably on first tap' },
+    ],
+  },
+  {
     version: '1.3.0',
     date: '2025-12-31',
     title: 'Changelog Feature & Branding Update',

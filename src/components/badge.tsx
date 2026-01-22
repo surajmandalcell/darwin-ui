@@ -32,9 +32,9 @@ export function Badge({
 	...props
 }: BadgeProps) {
 	const variants: Record<BadgeVariant, string> = {
-		default: "border-white/10 bg-white/8 text-white/80",
-		secondary: "border-transparent bg-white/5 text-white/60",
-		outline: "border-white/15 text-white/70 bg-transparent",
+		default: "border-[hsl(var(--border-default))] bg-[hsl(var(--glass-bg))] text-[hsl(var(--text-secondary))]",
+		secondary: "border-transparent bg-[hsl(var(--glass-bg))] text-[hsl(var(--text-tertiary))]",
+		outline: "border-[hsl(var(--border-strong))] text-[hsl(var(--text-secondary))] bg-transparent",
 		destructive: "border-transparent bg-red-500/15 text-red-400/90",
 		success: "border-transparent bg-green-500/15 text-green-400/90",
 		published: "border-transparent bg-green-500/15 text-green-400/90",
@@ -44,7 +44,7 @@ export function Badge({
 		info: "border-transparent bg-blue-500/15 text-blue-400/90",
 		new: "border-transparent bg-blue-500/15 text-blue-400/90",
 		responded: "border-transparent bg-emerald-500/15 text-emerald-400/90",
-		archived: "border-transparent bg-white/5 text-white/40",
+		archived: "border-transparent bg-[hsl(var(--glass-bg))] text-[hsl(var(--text-muted))]",
 	};
 
 	return (

@@ -150,7 +150,7 @@ function Slider({
 				{/* Track */}
 				<div
 					className={cn(
-						"relative w-full rounded-full bg-white/10",
+						"relative w-full rounded-full bg-[hsl(var(--glass-bg-hover))]",
 						sizeClasses[size].track
 					)}
 				>
@@ -181,7 +181,7 @@ function Slider({
 			</div>
 
 			{showValue && (
-				<div className="mt-1 text-right text-xs text-white/60">{value}</div>
+				<div className="mt-1 text-right text-xs text-[hsl(var(--text-tertiary))]">{value}</div>
 			)}
 		</div>
 	);

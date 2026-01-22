@@ -95,7 +95,7 @@ export function Image({
 					aria-label={`Enlarged view of ${getImageAlt()}`}
 				>
 					<button
-						className="absolute top-4 right-4 text-white/70 hover:text-white transition-colors cursor-pointer z-10"
+						className="absolute top-4 right-4 text-[hsl(var(--text-secondary))] hover:text-[hsl(var(--text-primary))] transition-colors cursor-pointer z-10"
 						onClick={(e) => {
 							e.stopPropagation();
 							handleClose();

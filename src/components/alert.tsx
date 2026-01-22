@@ -144,7 +144,7 @@ export function Alert({
 							onClick={handleDismiss}
 							className={cn(
 								"shrink-0 p-1 rounded-lg transition-colors",
-								"hover:bg-white/10 active:bg-white/15",
+								"hover:bg-[hsl(var(--glass-bg-hover))] active:bg-[hsl(var(--glass-bg-active))]",
 								styles.icon,
 								"opacity-60 hover:opacity-100"
 							)}
@@ -263,7 +263,7 @@ export function AlertProvider({ children }: { children: React.ReactNode }) {
 							onClick={() => handleClose(alert.onCancel)}
 						/>
 						<div
-							className={`relative bg-neutral-900/95 backdrop-blur-md shadow-md border border-white/10 rounded-md w-full max-w-md ${
+							className={`relative bg-[hsl(var(--overlay-bg))] backdrop-blur-md shadow-md border border-[hsl(var(--border-default))] rounded-md w-full max-w-md ${
 								isClosing
 									? "animate-out zoom-out-95 duration-200"
 									: "animate-in zoom-in-95 duration-200"
@@ -279,11 +279,11 @@ export function AlertProvider({ children }: { children: React.ReactNode }) {
 									<div className="flex-1">
 										<h3
 											id="alert-title"
-											className="text-white/90 text-base font-semibold mb-1"
+											className="text-[hsl(var(--text-primary))] text-base font-semibold mb-1"
 										>
 											{alert.title}
 										</h3>
-										<p id="alert-message" className="text-white/60 text-sm">
+										<p id="alert-message" className="text-[hsl(var(--text-secondary))] text-sm">
 											{alert.message}
 										</p>
 									</div>

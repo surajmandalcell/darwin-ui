@@ -128,7 +128,7 @@ function DialogContent({ children, className, size = "md" }: DialogContentProps)
 							role="dialog"
 							aria-modal="true"
 							className={cn(
-								"relative w-full bg-neutral-900/95 backdrop-blur-md border border-white/10 rounded-xl shadow-2xl",
+								"relative w-full bg-[hsl(var(--overlay-bg))] backdrop-blur-md border border-[hsl(var(--border-default))] rounded-xl shadow-2xl",
 								sizeClasses[size],
 								className
 							)}
@@ -166,7 +166,7 @@ interface DialogTitleProps {
 
 function DialogTitle({ children, className }: DialogTitleProps) {
 	return (
-		<h2 className={cn("text-lg font-semibold text-white", className)}>
+		<h2 className={cn("text-lg font-semibold text-[hsl(var(--text-primary))]", className)}>
 			{children}
 		</h2>
 	);
@@ -179,7 +179,7 @@ interface DialogDescriptionProps {
 
 function DialogDescription({ children, className }: DialogDescriptionProps) {
 	return (
-		<p className={cn("mt-1 text-sm text-white/60", className)}>
+		<p className={cn("mt-1 text-sm text-[hsl(var(--text-secondary))]", className)}>
 			{children}
 		</p>
 	);
@@ -228,7 +228,7 @@ function DialogClose({ children, className, asChild }: DialogCloseProps) {
 				type="button"
 				onClick={() => onOpenChange(false)}
 				className={cn(
-					"absolute right-4 top-4 rounded-md p-1 text-white/40 hover:text-white/80 hover:bg-white/10 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-500/50",
+					"absolute right-4 top-4 rounded-md p-1 text-[hsl(var(--text-muted))] hover:text-[hsl(var(--text-secondary))] hover:bg-[hsl(var(--glass-bg-hover))] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-500/50",
 					className
 				)}
 			>

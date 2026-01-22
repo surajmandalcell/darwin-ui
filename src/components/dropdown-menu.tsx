@@ -170,7 +170,7 @@ function DropdownMenuContent({
 					role="menu"
 					aria-orientation="vertical"
 					className={cn(
-						"fixed min-w-[180px] overflow-hidden rounded-lg border border-white/10 bg-neutral-900/95 backdrop-blur-md p-1 shadow-xl",
+						"fixed min-w-[180px] overflow-hidden rounded-lg border border-[hsl(var(--border-default))] bg-[hsl(var(--overlay-bg))] backdrop-blur-md p-1 shadow-xl",
 						className
 					)}
 					style={{
@@ -222,7 +222,7 @@ function DropdownMenuItem({
 			disabled={disabled}
 			onClick={handleClick}
 			className={cn(
-				"flex w-full items-center rounded-md px-2 py-1.5 text-sm text-white/80 outline-none transition-colors hover:bg-white/10 focus:bg-white/10",
+				"flex w-full items-center rounded-md px-2 py-1.5 text-sm text-[hsl(var(--text-secondary))] outline-none transition-colors hover:bg-[hsl(var(--glass-bg-hover))] focus:bg-[hsl(var(--glass-bg-hover))]",
 				disabled && "pointer-events-none opacity-50",
 				destructive && "text-red-400 hover:text-red-300 hover:bg-red-500/10 focus:bg-red-500/10",
 				className
@@ -256,7 +256,7 @@ function DropdownMenuCheckboxItem({
 			disabled={disabled}
 			onClick={() => onCheckedChange?.(!checked)}
 			className={cn(
-				"flex w-full items-center rounded-md px-2 py-1.5 text-sm text-white/80 outline-none transition-colors hover:bg-white/10 focus:bg-white/10",
+				"flex w-full items-center rounded-md px-2 py-1.5 text-sm text-[hsl(var(--text-secondary))] outline-none transition-colors hover:bg-[hsl(var(--glass-bg-hover))] focus:bg-[hsl(var(--glass-bg-hover))]",
 				disabled && "pointer-events-none opacity-50",
 				className
 			)}
@@ -276,7 +276,7 @@ interface DropdownMenuLabelProps {
 
 function DropdownMenuLabel({ children, className }: DropdownMenuLabelProps) {
 	return (
-		<div className={cn("px-2 py-1.5 text-xs font-semibold text-white/50", className)}>
+		<div className={cn("px-2 py-1.5 text-xs font-semibold text-[hsl(var(--text-tertiary))]", className)}>
 			{children}
 		</div>
 	);
@@ -287,7 +287,7 @@ interface DropdownMenuSeparatorProps {
 }
 
 function DropdownMenuSeparator({ className }: DropdownMenuSeparatorProps) {
-	return <div className={cn("-mx-1 my-1 h-px bg-white/10", className)} />;
+	return <div className={cn("-mx-1 my-1 h-px bg-[hsl(var(--border-default))]", className)} />;
 }
 
 interface DropdownMenuShortcutProps {
@@ -297,7 +297,7 @@ interface DropdownMenuShortcutProps {
 
 function DropdownMenuShortcut({ children, className }: DropdownMenuShortcutProps) {
 	return (
-		<span className={cn("ml-auto text-xs tracking-widest text-white/40", className)}>
+		<span className={cn("ml-auto text-xs tracking-widest text-[hsl(var(--text-muted))]", className)}>
 			{children}
 		</span>
 	);

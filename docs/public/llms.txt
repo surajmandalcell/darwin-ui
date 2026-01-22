@@ -1,17 +1,18 @@
 # Darwin UI
 
-> Darwin UI is a macOS-inspired React component library featuring glass-morphism aesthetics, dark theme, and Tailwind CSS integration. It provides 30+ production-ready components with Framer Motion animations and full accessibility support.
+> Darwin UI is a macOS-inspired React component library featuring glass-morphism aesthetics, dark theme (with light mode support), and Tailwind CSS integration. It provides 36+ production-ready components with Framer Motion animations and full accessibility support.
 
 ## Overview
 
 Darwin UI brings the refined aesthetics of macOS to React applications. Key features include:
 
 - **macOS-inspired design**: Glass-morphism effects, traffic light buttons, window chrome
-- **Dark theme by default**: Optimized for dark mode with carefully chosen color palettes
-- **Framer Motion animations**: Smooth spring physics and micro-interactions
+- **Dark & Light themes**: Optimized for dark mode by default with full light mode support
+- **Framer Motion animations**: Smooth spring physics and micro-interactions with prefers-reduced-motion support
 - **Tailwind CSS**: Full integration with Tailwind for easy customization
 - **Accessible**: WAI-ARIA compliant with keyboard navigation support
 - **TypeScript**: Full type definitions included
+- **Animation Configuration**: Global animation settings via configureAnimations()
 
 ### Installation
 
@@ -25,53 +26,97 @@ Import the styles in your app entry point:
 import '@pikoloo/darwin-ui/styles.css';
 ```
 
+## Agentic Coding
+
+Darwin UI is indexed on Context7 for AI assistant integration. AI agents can fetch up-to-date documentation:
+
+- **Context7**: https://context7.com/surajmandalcell/darwin-ui
+- **Documentation**: https://darwin-ui.mandalsuraj.com
+
+When working with Darwin UI in AI assistants (Claude, Cursor, etc.), reference Context7 for the latest API documentation.
+
 ## Getting Started
 
-- [Introduction](https://darwin-ui.pikoloo.com/docs#introduction): Overview of Darwin UI and its macOS-inspired design philosophy
-- [Installation](https://darwin-ui.pikoloo.com/docs#installation): How to install and set up Darwin UI in your project
-- [Quick Start](https://darwin-ui.pikoloo.com/docs#quick-start): Get up and running with your first Darwin UI components
+- [Introduction](https://darwin-ui.mandalsuraj.com/docs#introduction): Overview of Darwin UI and its macOS-inspired design philosophy
+- [Agentic Coding](https://darwin-ui.mandalsuraj.com/docs#agentic-coding): How to use Darwin UI with AI coding assistants
+- [Installation](https://darwin-ui.mandalsuraj.com/docs#installation): How to install and set up Darwin UI in your project
+- [Quick Start](https://darwin-ui.mandalsuraj.com/docs#quick-start): Get up and running with your first Darwin UI components
 
 ## Components
 
-- [Accordion](https://darwin-ui.pikoloo.com/docs#accordion): Collapsible content sections
-- [Avatar](https://darwin-ui.pikoloo.com/docs#avatar): User avatar with fallback and group support
-- [Badge](https://darwin-ui.pikoloo.com/docs#badge): Status badges with semantic colors
-- [Button](https://darwin-ui.pikoloo.com/docs#button): Versatile button with 10 variants and 3 sizes
-- [Card](https://darwin-ui.pikoloo.com/docs#card): Container component with header, content, and footer sections
-- [Charts](https://darwin-ui.pikoloo.com/docs#charts): Line, Bar, Area, Pie, Donut, and Stacked Bar charts
-- [Checkbox](https://darwin-ui.pikoloo.com/docs#checkbox): Checkbox with indeterminate state and spring animations
-- [CloseButton](https://darwin-ui.pikoloo.com/docs#close-button): Red close button matching macOS style
-- [ContactForm](https://darwin-ui.pikoloo.com/docs#contact-form): Pre-built contact form component
-- [ContextMenu](https://darwin-ui.pikoloo.com/docs#context-menu): Right-click context menu
-- [DateSelect](https://darwin-ui.pikoloo.com/docs#date-select): Date picker with calendar interface
-- [Dialog](https://darwin-ui.pikoloo.com/docs#dialog): Modal dialog with focus trap and portal rendering
-- [DropdownMenu](https://darwin-ui.pikoloo.com/docs#dropdown-menu): Full-featured dropdown menu with keyboard navigation
-- [Image](https://darwin-ui.pikoloo.com/docs#image): Image component with click-to-enlarge
-- [Input](https://darwin-ui.pikoloo.com/docs#input): Text input with validation states
-- [MdEditor](https://darwin-ui.pikoloo.com/docs#md-editor): Markdown editor with preview
-- [Modal](https://darwin-ui.pikoloo.com/docs#modal): Modal dialog with backdrop
-- [MultiSelect](https://darwin-ui.pikoloo.com/docs#multi-select): Multi-selection dropdown with tags
-- [Popover](https://darwin-ui.pikoloo.com/docs#popover): Flexible popover component with portal support
-- [Progress](https://darwin-ui.pikoloo.com/docs#progress): Linear and circular progress indicators
-- [Reveal](https://darwin-ui.pikoloo.com/docs#reveal): Scroll-triggered reveal animations
-- [SearchInput](https://darwin-ui.pikoloo.com/docs#search-input): Search input with icon
-- [Select](https://darwin-ui.pikoloo.com/docs#select): Dropdown select with custom styling
-- [Sidebar](https://darwin-ui.pikoloo.com/docs#sidebar): Navigation sidebar with active state
-- [Skeleton](https://darwin-ui.pikoloo.com/docs#skeleton): Loading placeholder with shimmer effect
-- [Slider](https://darwin-ui.pikoloo.com/docs#slider): Range slider with customizable track and thumb
-- [Switch](https://darwin-ui.pikoloo.com/docs#switch): Toggle switch component with spring physics
-- [Table](https://darwin-ui.pikoloo.com/docs#table): Data table with sorting and loading states
-- [Tabs](https://darwin-ui.pikoloo.com/docs#tabs): Tabbed navigation component
-- [Textarea](https://darwin-ui.pikoloo.com/docs#textarea): Multi-line text input with auto-resize
-- [Tooltip](https://darwin-ui.pikoloo.com/docs#tooltip): Accessible tooltip with multiple positions
-- [Upload](https://darwin-ui.pikoloo.com/docs#upload): File upload with drag-and-drop support
-- [Window](https://darwin-ui.pikoloo.com/docs#window): macOS-style window chrome with traffic lights
+### Layout & Navigation
+- [Accordion](https://darwin-ui.mandalsuraj.com/docs#accordion): Collapsible content sections with smooth animations
+- [Card](https://darwin-ui.mandalsuraj.com/docs#card): Container component with header, content, and footer sections
+- [Sidebar](https://darwin-ui.mandalsuraj.com/docs#sidebar): Navigation sidebar with collapsible mode and tooltip support
+- [Tabs](https://darwin-ui.mandalsuraj.com/docs#tabs): Tabbed navigation component
+- [Window](https://darwin-ui.mandalsuraj.com/docs#window): macOS-style window chrome with traffic lights
+
+### Forms & Inputs
+- [Button](https://darwin-ui.mandalsuraj.com/docs#button): Versatile button with 10 variants and 3 sizes
+- [Checkbox](https://darwin-ui.mandalsuraj.com/docs#checkbox): Checkbox with indeterminate state and smooth animations
+- [Input](https://darwin-ui.mandalsuraj.com/docs#input): Text input with validation states
+- [SearchInput](https://darwin-ui.mandalsuraj.com/docs#search-input): Search input with icon
+- [Select](https://darwin-ui.mandalsuraj.com/docs#select): Dropdown select with custom styling
+- [MultiSelect](https://darwin-ui.mandalsuraj.com/docs#multi-select): Multi-selection dropdown with tags
+- [Slider](https://darwin-ui.mandalsuraj.com/docs#slider): Range slider with customizable track and thumb
+- [Switch](https://darwin-ui.mandalsuraj.com/docs#switch): Toggle switch component with spring physics
+- [Textarea](https://darwin-ui.mandalsuraj.com/docs#textarea): Multi-line text input with auto-resize
+- [DateSelect](https://darwin-ui.mandalsuraj.com/docs#date-select): Date picker with calendar interface
+- [Upload](https://darwin-ui.mandalsuraj.com/docs#upload): File upload with drag-and-drop support
+- [ContactForm](https://darwin-ui.mandalsuraj.com/docs#contact-form): Pre-built contact form component
+
+### Feedback & Overlays
+- [Alert](https://darwin-ui.mandalsuraj.com/docs#alert): Inline alerts and modal-style alert dialogs
+- [Badge](https://darwin-ui.mandalsuraj.com/docs#badge): Status badges with semantic colors
+- [Dialog](https://darwin-ui.mandalsuraj.com/docs#dialog): Modal dialog with focus trap and portal rendering
+- [DropdownMenu](https://darwin-ui.mandalsuraj.com/docs#dropdown-menu): Full-featured dropdown menu with keyboard navigation
+- [Modal](https://darwin-ui.mandalsuraj.com/docs#modal): Modal dialog with backdrop
+- [Popover](https://darwin-ui.mandalsuraj.com/docs#popover): Flexible popover component with portal support
+- [Toast](https://darwin-ui.mandalsuraj.com/docs#toast): Toast notification system
+- [Tooltip](https://darwin-ui.mandalsuraj.com/docs#tooltip): Accessible tooltip with multiple positions
+- [ContextMenu](https://darwin-ui.mandalsuraj.com/docs#context-menu): Right-click context menu
+
+### Data Display
+- [Avatar](https://darwin-ui.mandalsuraj.com/docs#avatar): User avatar with fallback and group support
+- [Charts](https://darwin-ui.mandalsuraj.com/docs#charts): Line, Bar, Area, Pie, Donut, and Stacked Bar charts
+- [Image](https://darwin-ui.mandalsuraj.com/docs#image): Image component with click-to-enlarge
+- [Progress](https://darwin-ui.mandalsuraj.com/docs#progress): Linear and circular progress indicators
+- [Skeleton](https://darwin-ui.mandalsuraj.com/docs#skeleton): Loading placeholder with shimmer effect
+- [Table](https://darwin-ui.mandalsuraj.com/docs#table): Data table with sorting and loading states
+
+### Utilities
+- [CloseButton](https://darwin-ui.mandalsuraj.com/docs#close-button): Red close button matching macOS style
+- [MdEditor](https://darwin-ui.mandalsuraj.com/docs#md-editor): Markdown editor with preview
+- [Reveal](https://darwin-ui.mandalsuraj.com/docs#reveal): Scroll-triggered reveal animations
+
+## Animation Configuration
+
+Darwin UI provides a global animation configuration system:
+
+```typescript
+import { configureAnimations, ANIMATION_CONFIG } from '@pikoloo/darwin-ui';
+
+// Disable all animations
+configureAnimations({ enabled: false });
+
+// Customize durations
+configureAnimations({
+  durations: { fast: 0.05, normal: 0.1, slow: 0.15 }
+});
+
+// Disable specific animation types
+configureAnimations({
+  disable: { hover: true, scale: true }
+});
+```
+
+The library automatically respects `prefers-reduced-motion` system preference.
 
 ## Theming
 
-- [Colors](https://darwin-ui.pikoloo.com/docs#colors): Color system and CSS variables
-- [Dark Mode](https://darwin-ui.pikoloo.com/docs#dark-mode): Dark theme configuration and customization
-- [Customization](https://darwin-ui.pikoloo.com/docs#customization): How to customize components with CSS variables and Tailwind
+- [Colors](https://darwin-ui.mandalsuraj.com/docs#colors): Color system and CSS variables
+- [Dark Mode](https://darwin-ui.mandalsuraj.com/docs#dark-mode): Dark theme configuration and customization
+- [Customization](https://darwin-ui.mandalsuraj.com/docs#customization): How to customize components with CSS variables and Tailwind
 
 ## Hooks
 
@@ -80,8 +125,17 @@ import '@pikoloo/darwin-ui/styles.css';
 - **useEscapeKey**: Hook for modal dismissal on Escape key
 - **useContactForm**: Form handling hook with validation
 
-## Optional
+## Utilities
 
-- [GitHub Repository](https://github.com/pikoloo/darwin-ui): Source code and issue tracking
+- **cn**: Class name utility for merging Tailwind classes
+- **prefersReducedMotion**: Check if user prefers reduced motion
+- **getDuration**: Get animation duration respecting reduced motion
+- **getSpring**: Get spring animation config respecting reduced motion
+- **configureAnimations**: Configure global animation settings
+
+## Resources
+
+- [GitHub Repository](https://github.com/surajmandalcell/darwin-ui): Source code and issue tracking
 - [NPM Package](https://www.npmjs.com/package/@pikoloo/darwin-ui): Package details and version history
-- [Changelog](https://darwin-ui.pikoloo.com/changelog): Release notes and version history
+- [Changelog](https://darwin-ui.mandalsuraj.com/changelog): Release notes and version history
+- [Context7 Docs](https://context7.com/surajmandalcell/darwin-ui): AI-optimized documentation

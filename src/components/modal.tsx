@@ -78,16 +78,16 @@ export function Modal({
 									duration: 0.3,
 									ease: [0.16, 1, 0.3, 1],
 								}}
-								className={`bg-neutral-900/80 backdrop-blur-md shadow-md border border-white/10 rounded-md w-full ${sizeClasses[size]} flex flex-col max-h-[calc(100vh-2rem)] ${className} pointer-events-auto`}
+								className={`bg-[hsl(var(--overlay-bg))] backdrop-blur-md shadow-md border border-[hsl(var(--border-default))] rounded-md w-full ${sizeClasses[size]} flex flex-col max-h-[calc(100vh-2rem)] ${className} pointer-events-auto`}
 								role="dialog"
 								aria-modal="true"
 								aria-labelledby="modal-title"
 							>
-								<div className="flex items-center justify-start px-4 py-2 border-b border-white/10 relative shrink-0">
+								<div className="flex items-center justify-start px-4 py-2 border-b border-[hsl(var(--border-default))] relative shrink-0">
 									<CloseButton onClick={onClose} />
 									<div
 										id="modal-title"
-										className="text-white/90 text-sm font-medium ml-2"
+										className="text-[hsl(var(--text-primary))] text-sm font-medium ml-2"
 									>
 										{title}
 									</div>
