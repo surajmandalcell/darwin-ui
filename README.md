@@ -1,6 +1,6 @@
 # Darwin UI
 
-A beautiful macOS-inspired dark theme React component library with glass-morphism aesthetic.
+A beautiful macOS-inspired React component library with glass-morphism aesthetic and full light/dark theme support.
 
 [![npm version](https://img.shields.io/npm/v/@pikoloo/darwin-ui.svg)](https://www.npmjs.com/package/@pikoloo/darwin-ui)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
@@ -10,12 +10,14 @@ A beautiful macOS-inspired dark theme React component library with glass-morphis
 ## Features
 
 - 35+ beautifully crafted React components
-- Dark theme with glass-morphism styling
+- Light & Dark mode with theme-aware styling
+- Glass-morphism aesthetic throughout
 - Built for React 19 with TypeScript
 - Tailwind CSS v4 + Framer Motion powered
 - shadcn-compatible registry
 - Accessible and keyboard-friendly
 - Lightweight and tree-shakeable
+- AI-friendly with llms.txt documentation
 
 ## Installation
 
@@ -130,14 +132,23 @@ useEscapeKey(() => closeModal());
 
 ## Theming
 
-Darwin UI uses CSS variables for theming. Override them in your CSS:
+Darwin UI supports both light and dark modes with CSS variables. The theme automatically adapts to user preference, or you can toggle manually.
 
 ```css
+/* Dark mode (default) */
 :root {
   --background: 0 0% 4%;
   --foreground: 0 0% 95%;
   --card: 0 0% 6%;
   --border: 0 0% 15%;
+}
+
+/* Light mode */
+.light {
+  --background: 0 0% 98%;
+  --foreground: 0 0% 10%;
+  --card: 0 0% 100%;
+  --border: 0 0% 85%;
 }
 ```
 
