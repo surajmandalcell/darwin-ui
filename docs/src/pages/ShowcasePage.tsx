@@ -24,7 +24,7 @@ export default function ShowcasePage() {
   const heroY = useTransform(scrollYProgress, [0, 0.5], [0, 100]);
 
   return (
-    <div className="min-h-screen bg-[#030305] text-white overflow-x-hidden">
+    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <UnifiedNavbar />
 
       {/* Hero Section */}
@@ -102,7 +102,7 @@ export default function ShowcasePage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
               >
-                <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium bg-white/[0.03] border border-white/[0.06] text-white/50 backdrop-blur-sm">
+                <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium bg-muted/30 border border-border/60 text-muted-foreground backdrop-blur-sm">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                   v1.3.0 — 36+ Components
                 </span>
@@ -115,17 +115,17 @@ export default function ShowcasePage() {
                 transition={{ duration: 0.8, delay: 0.1 }}
               >
                 <h1 className="text-[clamp(3rem,8vw,6rem)] font-bold leading-[0.95] tracking-[-0.03em] font-heading">
-                  <span className="block text-white">Build</span>
-                  <span className="block bg-gradient-to-r from-white via-white/90 to-white/40 bg-clip-text text-transparent">
+                  <span className="block text-foreground">Build</span>
+                  <span className="block bg-gradient-to-r from-foreground via-foreground/90 to-foreground/40 bg-clip-text text-transparent">
                     beautiful
                   </span>
-                  <span className="block text-white/20">interfaces.</span>
+                  <span className="block text-muted-foreground/50">interfaces.</span>
                 </h1>
               </motion.div>
 
               {/* Description */}
               <motion.p
-                className="text-lg md:text-xl text-white/40 max-w-md leading-relaxed"
+                className="text-lg md:text-xl text-muted-foreground max-w-md leading-relaxed"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
@@ -147,7 +147,7 @@ export default function ShowcasePage() {
                   </Button>
                 </Link>
                 <a href="https://github.com/surajmandalcell/darwin-ui" target="_blank" rel="noopener noreferrer">
-                  <button className="h-12 px-6 text-sm font-medium text-white/60 hover:text-white border border-white/10 hover:border-white/20 rounded-lg transition-all flex items-center gap-2 hover:bg-white/[0.02]">
+                  <button className="h-12 px-6 text-sm font-medium text-muted-foreground hover:text-foreground border border-border hover:border-border/80 rounded-lg transition-all flex items-center gap-2 hover:bg-muted/20">
                     <Github className="w-4 h-4" />
                     View on GitHub
                   </button>
@@ -156,7 +156,7 @@ export default function ShowcasePage() {
 
               {/* Stats */}
               <motion.div
-                className="flex gap-10 pt-8 border-t border-white/[0.06]"
+                className="flex gap-10 pt-8 border-t border-border/60"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.6 }}
@@ -167,8 +167,8 @@ export default function ShowcasePage() {
                   { value: '<5kb', label: 'Per component' },
                 ].map((stat, i) => (
                   <div key={i} className="space-y-1">
-                    <div className="text-2xl font-semibold text-white">{stat.value}</div>
-                    <div className="text-xs text-white/30 uppercase tracking-wider">{stat.label}</div>
+                    <div className="text-2xl font-semibold text-foreground">{stat.value}</div>
+                    <div className="text-xs text-muted-foreground/70 uppercase tracking-wider">{stat.label}</div>
                   </div>
                 ))}
               </motion.div>
@@ -194,12 +194,12 @@ export default function ShowcasePage() {
           transition={{ delay: 1.5 }}
         >
           <motion.div
-            className="flex flex-col items-center gap-2 text-white/20"
+            className="flex flex-col items-center gap-2 text-muted-foreground/50"
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
           >
             <span className="text-[10px] uppercase tracking-[0.2em]">Scroll</span>
-            <div className="w-px h-8 bg-gradient-to-b from-white/20 to-transparent" />
+            <div className="w-px h-8 bg-gradient-to-b from-muted-foreground/50 to-transparent" />
           </motion.div>
         </motion.div>
       </section>
@@ -233,7 +233,7 @@ export default function ShowcasePage() {
             ].map((feature, i) => (
               <motion.div
                 key={i}
-                className="group relative bg-white/[0.02] border border-white/[0.06] rounded-2xl p-8 hover:bg-white/[0.04] hover:border-white/[0.1] transition-all duration-500"
+                className="group relative bg-muted/20 border border-border/60 rounded-2xl p-8 hover:bg-muted/40 hover:border-border transition-all duration-500"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -241,10 +241,10 @@ export default function ShowcasePage() {
               >
                 <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
                 <div className="relative">
-                  <h3 className="text-lg font-semibold text-white mb-3 font-heading">{feature.title}</h3>
-                  <p className="text-sm text-white/40 leading-relaxed">{feature.desc}</p>
+                  <h3 className="text-lg font-semibold text-foreground mb-3 font-heading">{feature.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{feature.desc}</p>
                 </div>
-                <ArrowUpRight className="absolute top-6 right-6 w-5 h-5 text-white/10 group-hover:text-white/40 transition-colors" />
+                <ArrowUpRight className="absolute top-6 right-6 w-5 h-5 text-muted-foreground/30 group-hover:text-muted-foreground transition-colors" />
               </motion.div>
             ))}
           </motion.div>
@@ -270,10 +270,10 @@ export default function ShowcasePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 font-heading">
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 font-heading">
                 Ready to build something beautiful?
               </h2>
-              <p className="text-lg text-white/40 mb-8 max-w-xl mx-auto">
+              <p className="text-lg text-muted-foreground mb-8 max-w-xl mx-auto">
                 Start using Darwin UI in your projects today. Free, open source, and designed for developers.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
@@ -284,7 +284,7 @@ export default function ShowcasePage() {
                   </Button>
                 </Link>
                 <a href="https://github.com/surajmandalcell/darwin-ui" target="_blank" rel="noopener noreferrer">
-                  <button className="h-12 px-8 text-sm font-medium text-white/60 hover:text-white border border-white/10 hover:border-white/20 rounded-lg transition-all flex items-center gap-2 hover:bg-white/[0.02]">
+                  <button className="h-12 px-8 text-sm font-medium text-muted-foreground hover:text-foreground border border-border hover:border-border/80 rounded-lg transition-all flex items-center gap-2 hover:bg-muted/20">
                     <Github className="w-4 h-4" />
                     Star on GitHub
                   </button>
@@ -295,19 +295,19 @@ export default function ShowcasePage() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-white/[0.04] py-8 px-6 md:px-12 lg:px-20">
+        <div className="border-t border-border/40 py-8 px-6 md:px-12 lg:px-20">
           <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-3">
               <DarwinLogo className="w-6 h-6" />
-              <span className="text-white/40 text-sm">Darwin UI</span>
-              <span className="text-white/20 text-sm">·</span>
-              <span className="text-white/20 text-xs">Open source under MIT</span>
+              <span className="text-muted-foreground text-sm">Darwin UI</span>
+              <span className="text-muted-foreground/50 text-sm">·</span>
+              <span className="text-muted-foreground/50 text-xs">Open source under MIT</span>
             </div>
             <div className="flex items-center gap-6">
-              <Link to="/docs" className="text-sm text-white/30 hover:text-white transition-colors">Docs</Link>
-              <Link to="/changelog" className="text-sm text-white/30 hover:text-white transition-colors">Changelog</Link>
-              <a href="https://github.com/surajmandalcell/darwin-ui" target="_blank" rel="noopener noreferrer" className="text-sm text-white/30 hover:text-white transition-colors">GitHub</a>
-              <a href="https://twitter.com/surajmandalcell" target="_blank" rel="noopener noreferrer" className="text-sm text-white/30 hover:text-white transition-colors">Twitter</a>
+              <Link to="/docs" className="text-sm text-muted-foreground/70 hover:text-foreground transition-colors">Docs</Link>
+              <Link to="/changelog" className="text-sm text-muted-foreground/70 hover:text-foreground transition-colors">Changelog</Link>
+              <a href="https://github.com/surajmandalcell/darwin-ui" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground/70 hover:text-foreground transition-colors">GitHub</a>
+              <a href="https://twitter.com/surajmandalcell" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground/70 hover:text-foreground transition-colors">Twitter</a>
             </div>
           </div>
         </div>
