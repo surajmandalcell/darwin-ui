@@ -94,12 +94,12 @@ function AvatarGroup({ children, max, className }: AvatarGroupProps) {
 	return (
 		<div className={cn("flex -space-x-2", className)}>
 			{visibleChildren.map((child, index) => (
-				<div key={index} className="relative ring-2 ring-neutral-900 rounded-full">
+				<div key={index} className="relative ring-2 ring-background rounded-full">
 					{child}
 				</div>
 			))}
 			{remainingCount > 0 && (
-				<div className="relative flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-sm font-medium text-white/80 ring-2 ring-neutral-900">
+				<div className="relative flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-sm font-medium text-white/80 ring-2 ring-background">
 					+{remainingCount}
 				</div>
 			)}
