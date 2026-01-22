@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useDesktop, apps } from "../../contexts/desktop-context";
+import { useTheme } from "../../contexts/theme-context";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -59,9 +60,9 @@ function AboutModal({
 						exit={{ opacity: 0, scale: 0.9, y: 20 }}
 						transition={{ type: "spring", damping: 25, stiffness: 300 }}
 					>
-						<div className="w-[320px] bg-neutral-900/95 backdrop-blur-xl rounded-xl border border-white/10 shadow-2xl shadow-black/50 overflow-hidden">
+						<div className="w-[320px] bg-card/95 backdrop-blur-xl rounded-xl border border-border shadow-2xl shadow-black/50 overflow-hidden">
 							{/* Header with close button */}
-							<div className="relative flex items-center justify-center h-8 bg-[#171717]">
+							<div className="relative flex items-center justify-center h-8 bg-secondary">
 								<motion.button
 									className="absolute left-2 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-red-500 flex items-center justify-center group"
 									whileHover={{ scale: 1.1 }}
@@ -70,7 +71,7 @@ function AboutModal({
 								>
 									<X className="w-2 h-2 text-red-900 opacity-0 group-hover:opacity-100 transition-opacity" />
 								</motion.button>
-								<span className="text-xs text-white/50 font-medium">
+								<span className="text-xs text-foreground/50 font-medium">
 									About Darwin UI
 								</span>
 							</div>
@@ -83,12 +84,12 @@ function AboutModal({
 									animate={{ scale: 1, rotate: 0 }}
 									transition={{ delay: 0.1, type: "spring", damping: 15 }}
 								>
-									<DarwinLogo className="w-16 h-16 text-white" />
+									<DarwinLogo className="w-16 h-16 text-foreground" />
 								</motion.div>
 
 								{/* App Name */}
 								<motion.h1
-									className="text-xl font-semibold text-white mb-1"
+									className="text-xl font-semibold text-foreground mb-1"
 									initial={{ opacity: 0, y: 10 }}
 									animate={{ opacity: 1, y: 0 }}
 									transition={{ delay: 0.15 }}
@@ -98,7 +99,7 @@ function AboutModal({
 
 								{/* Version */}
 								<motion.p
-									className="text-sm text-white/60 mb-4"
+									className="text-sm text-foreground/60 mb-4"
 									initial={{ opacity: 0, y: 10 }}
 									animate={{ opacity: 1, y: 0 }}
 									transition={{ delay: 0.2 }}
@@ -108,7 +109,7 @@ function AboutModal({
 
 								{/* Description */}
 								<motion.p
-									className="text-sm text-white/70 mb-4 leading-relaxed"
+									className="text-sm text-foreground/70 mb-4 leading-relaxed"
 									initial={{ opacity: 0, y: 10 }}
 									animate={{ opacity: 1, y: 0 }}
 									transition={{ delay: 0.25 }}
@@ -119,7 +120,7 @@ function AboutModal({
 
 								{/* Divider */}
 								<motion.div
-									className="w-full h-px bg-white/10 mb-4"
+									className="w-full h-px bg-border mb-4"
 									initial={{ scaleX: 0 }}
 									animate={{ scaleX: 1 }}
 									transition={{ delay: 0.3 }}
@@ -127,7 +128,7 @@ function AboutModal({
 
 								{/* Credits */}
 								<motion.div
-									className="text-xs text-white/50 space-y-1"
+									className="text-xs text-foreground/50 space-y-1"
 									initial={{ opacity: 0 }}
 									animate={{ opacity: 1 }}
 									transition={{ delay: 0.35 }}
@@ -141,7 +142,7 @@ function AboutModal({
 									href="https://github.com/surajmandalcell/darwin-ui"
 									target="_blank"
 									rel="noopener noreferrer"
-									className="mt-4 flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 rounded-lg text-sm text-white/80 hover:text-white transition-colors border border-white/10"
+									className="mt-4 flex items-center gap-2 px-4 py-2 bg-foreground/5 hover:bg-foreground/10 rounded-lg text-sm text-foreground/80 hover:text-foreground transition-colors border border-border"
 									whileHover={{ scale: 1.02 }}
 									whileTap={{ scale: 0.98 }}
 									initial={{ opacity: 0, y: 10 }}
@@ -160,12 +161,12 @@ function AboutModal({
 										/>
 									</svg>
 									<span>View on GitHub</span>
-									<ExternalLink className="w-3 h-3 text-white/40" />
+									<ExternalLink className="w-3 h-3 text-foreground/40" />
 								</motion.a>
 
 								{/* Copyright */}
 								<motion.p
-									className="mt-4 text-[10px] text-white/30"
+									className="mt-4 text-[10px] text-foreground/30"
 									initial={{ opacity: 0 }}
 									animate={{ opacity: 1 }}
 									transition={{ delay: 0.45 }}
@@ -215,7 +216,7 @@ function AnimatedWifi({ connected = true }: { connected?: boolean }) {
 					</motion.div>
 				</motion.div>
 			) : (
-				<WifiOff className="w-4 h-4 text-white/50" />
+				<WifiOff className="w-4 h-4 text-foreground/50" />
 			)}
 		</div>
 	);
@@ -308,6 +309,8 @@ export function MenuBar() {
 		setAboutModal,
 		state,
 	} = useDesktop();
+	const { resolvedTheme } = useTheme();
+	const isDark = resolvedTheme === "dark";
 	const [activeMenu, setActiveMenu] = useState<string | null>(null);
 
 	const activeWindow = getActiveWindow();
@@ -508,10 +511,10 @@ export function MenuBar() {
 	return (
 		<div className="fixed top-0 left-0 right-0 h-7 z-[9000]">
 			{/* Glass background */}
-			<div className="absolute inset-0 bg-black/40 backdrop-blur-md border-b border-white/10" />
+			<div className={`absolute inset-0 backdrop-blur-md border-b border-border ${isDark ? "bg-black/40" : "bg-white/70"}`} />
 
 			{/* Content */}
-			<div className="relative h-full flex items-center justify-between px-4 text-white/90 text-[13px] font-medium">
+			<div className="relative h-full flex items-center justify-between px-4 text-foreground/90 text-[13px] font-medium">
 				{/* Left side - Logo and App Menu / Nav Items */}
 				<div
 					className="flex items-center gap-4"
@@ -525,10 +528,10 @@ export function MenuBar() {
 							animate={{
 								backgroundColor:
 									activeMenu === "darwin"
-										? "rgba(255,255,255,0.2)"
-										: "rgba(255,255,255,0)",
+										? isDark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.15)"
+										: "rgba(0,0,0,0)",
 							}}
-							whileHover={{ backgroundColor: "rgba(255,255,255,0.1)" }}
+							whileHover={{ backgroundColor: isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)" }}
 							transition={{ duration: 0.15 }}
 							onClick={() =>
 								setActiveMenu(activeMenu === "darwin" ? null : "darwin")
@@ -545,20 +548,20 @@ export function MenuBar() {
 									initial="hidden"
 									animate="visible"
 									exit="exit"
-									className="absolute top-full left-0 mt-1 min-w-[200px] py-1 bg-neutral-800/95 backdrop-blur-md rounded-lg border border-white/10 shadow-2xl shadow-black/50"
+									className={`absolute top-full left-0 mt-1 min-w-[200px] py-1 backdrop-blur-md rounded-lg border border-border shadow-2xl ${isDark ? "bg-neutral-800/95 shadow-black/50" : "bg-white/95 shadow-black/20"}`}
 								>
 									{darwinMenuItems.map((item, idx) =>
 										item.separator ? (
 											<motion.div
 												key={idx}
 												variants={menuItemVariants}
-												className="my-1 h-px bg-white/10"
+												className="my-1 h-px bg-border"
 											/>
 										) : (
 											<motion.button
 												key={idx}
 												variants={menuItemVariants}
-												className="w-full px-3 py-1.5 text-left text-[13px] text-white/90 flex items-center justify-between transition-colors duration-100 hover:bg-blue-500 hover:text-white rounded-sm mx-0.5"
+												className="w-full px-3 py-1.5 text-left text-[13px] text-foreground/90 flex items-center justify-between transition-colors duration-100 hover:bg-blue-500 hover:text-white rounded-sm mx-0.5"
 												style={{ width: "calc(100% - 4px)" }}
 												onClick={() => {
 													item.action?.();
@@ -596,7 +599,7 @@ export function MenuBar() {
 									>
 										<Link
 											to={item.path}
-											className="flex items-center gap-1.5 px-2 py-0.5 rounded text-white/80 hover:text-white hover:bg-white/10 transition-colors"
+											className={`flex items-center gap-1.5 px-2 py-0.5 rounded text-foreground/80 hover:text-foreground transition-colors ${isDark ? "hover:bg-white/10" : "hover:bg-black/10"}`}
 										>
 											<item.icon className="w-3.5 h-3.5" />
 											<span>{item.label}</span>
@@ -626,14 +629,14 @@ export function MenuBar() {
 									animate={{
 										backgroundColor:
 											activeMenu === menu
-												? "rgba(255,255,255,0.2)"
-												: "rgba(255,255,255,0)",
+												? isDark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.15)"
+												: "rgba(0,0,0,0)",
 									}}
 									whileHover={{
 										backgroundColor:
 											activeMenu === menu
-												? "rgba(255,255,255,0.2)"
-												: "rgba(255,255,255,0.1)",
+												? isDark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.15)"
+												: isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)",
 									}}
 									transition={{ duration: 0.15 }}
 									onClick={() =>
@@ -652,14 +655,14 @@ export function MenuBar() {
 											initial="hidden"
 											animate="visible"
 											exit="exit"
-											className="absolute top-full left-0 mt-1 min-w-[200px] py-1 bg-neutral-800/95 backdrop-blur-md rounded-lg border border-white/10 shadow-2xl shadow-black/50"
+											className={`absolute top-full left-0 mt-1 min-w-[200px] py-1 backdrop-blur-md rounded-lg border border-border shadow-2xl ${isDark ? "bg-neutral-800/95 shadow-black/50" : "bg-white/95 shadow-black/20"}`}
 										>
 											{menuItems[menu].map((item, idx) =>
 												item.separator ? (
 													<motion.div
 														key={idx}
 														variants={menuItemVariants}
-														className="my-1 h-px bg-white/10"
+														className="my-1 h-px bg-border"
 													/>
 												) : (
 													<motion.button
@@ -667,8 +670,8 @@ export function MenuBar() {
 														variants={menuItemVariants}
 														className={`w-full px-3 py-1.5 text-left text-[13px] flex items-center justify-between rounded-sm mx-0.5 ${
 															item.disabled
-																? "text-white/30 cursor-default"
-																: "text-white/90 hover:bg-blue-500 hover:text-white"
+																? "text-foreground/30 cursor-default"
+																: "text-foreground/90 hover:bg-blue-500 hover:text-white"
 														}`}
 														style={{ width: "calc(100% - 4px)" }}
 														onClick={() => {
@@ -684,7 +687,7 @@ export function MenuBar() {
 														<span>{item.label}</span>
 														{item.shortcut && (
 															<span
-																className={`text-xs ml-4 ${item.disabled ? "text-white/20" : "text-white/50"}`}
+																className={`text-xs ml-4 ${item.disabled ? "text-foreground/20" : "text-foreground/50"}`}
 															>
 																{item.shortcut}
 															</span>
@@ -715,10 +718,10 @@ export function MenuBar() {
 							className="p-1 rounded flex items-center justify-center"
 							animate={{
 								backgroundColor: showNav
-									? "rgba(255,255,255,0.2)"
-									: "rgba(255,255,255,0)",
+									? isDark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.15)"
+									: "rgba(0,0,0,0)",
 							}}
-							whileHover={{ backgroundColor: "rgba(255,255,255,0.1)" }}
+							whileHover={{ backgroundColor: isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)" }}
 							whileTap={{ scale: 0.95 }}
 							onClick={() => setShowNav(!showNav)}
 						>
@@ -732,13 +735,13 @@ export function MenuBar() {
 									initial="hidden"
 									animate="visible"
 									exit="exit"
-									className="absolute top-full right-0 mt-1 min-w-[160px] py-1 bg-neutral-800/95 backdrop-blur-md rounded-lg border border-white/10 shadow-2xl shadow-black/50"
+									className={`absolute top-full right-0 mt-1 min-w-[160px] py-1 backdrop-blur-md rounded-lg border border-border shadow-2xl ${isDark ? "bg-neutral-800/95 shadow-black/50" : "bg-white/95 shadow-black/20"}`}
 								>
 									{navItems.map((item) => (
 										<motion.div key={item.path} variants={menuItemVariants}>
 											<Link
 												to={item.path}
-												className="flex items-center gap-2 px-3 py-1.5 text-[13px] text-white/90 hover:bg-blue-500 hover:text-white rounded-sm mx-0.5 transition-colors"
+												className="flex items-center gap-2 px-3 py-1.5 text-[13px] text-foreground/90 hover:bg-blue-500 hover:text-white rounded-sm mx-0.5 transition-colors"
 												onClick={() => setShowNav(false)}
 											>
 												<item.icon className="w-4 h-4" />

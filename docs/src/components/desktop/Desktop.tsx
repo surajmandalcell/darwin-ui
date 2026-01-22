@@ -1,6 +1,7 @@
 "use client";
 
 import { useDesktop, apps } from '../../contexts/desktop-context';
+import { useTheme } from '../../contexts/theme-context';
 import { MenuBar } from './MenuBar';
 import { Dock } from './Dock';
 import { DesktopWindow } from './DesktopWindow';
@@ -9,6 +10,8 @@ import { DarwinLogo } from '../icons/DarwinLogo';
 
 export function Desktop() {
   const { state } = useDesktop();
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === 'dark';
 
   // Filter visible windows (open and not minimized)
   const visibleWindows = state.windows.filter(w => w.isOpen && !w.isMinimized);
@@ -17,18 +20,30 @@ export function Desktop() {
     <div className="fixed inset-0 h-screen w-screen overflow-hidden select-none">
       {/* Artistic Gradient Mesh Background - Inspired by Vercel/Linear */}
       <div className="absolute inset-0 overflow-hidden">
-        {/* Deep space base */}
-        <div className="absolute inset-0 bg-[#050508]" />
+        {/* Base background */}
+        <div
+          className={`absolute inset-0 ${
+            isDark
+              ? 'bg-[#050508]'
+              : 'bg-gradient-to-br from-slate-100 via-blue-50/50 to-slate-50'
+          }`}
+        />
 
         {/* Mesh gradient layer */}
         <div
           className="absolute inset-0 opacity-80"
           style={{
-            background: `
-              radial-gradient(ellipse 80% 50% at 20% 40%, rgba(120, 80, 200, 0.15), transparent 50%),
-              radial-gradient(ellipse 60% 80% at 80% 20%, rgba(60, 100, 180, 0.12), transparent 50%),
-              radial-gradient(ellipse 50% 60% at 60% 80%, rgba(100, 60, 160, 0.1), transparent 50%)
-            `
+            background: isDark
+              ? `
+                radial-gradient(ellipse 80% 50% at 20% 40%, rgba(120, 80, 200, 0.15), transparent 50%),
+                radial-gradient(ellipse 60% 80% at 80% 20%, rgba(60, 100, 180, 0.12), transparent 50%),
+                radial-gradient(ellipse 50% 60% at 60% 80%, rgba(100, 60, 160, 0.1), transparent 50%)
+              `
+              : `
+                radial-gradient(ellipse 80% 50% at 20% 40%, rgba(147, 197, 253, 0.3), transparent 50%),
+                radial-gradient(ellipse 60% 80% at 80% 20%, rgba(196, 181, 253, 0.25), transparent 50%),
+                radial-gradient(ellipse 50% 60% at 60% 80%, rgba(253, 186, 116, 0.15), transparent 50%)
+              `
           }}
         />
 
@@ -36,7 +51,9 @@ export function Desktop() {
         <motion.div
           className="absolute w-[800px] h-[600px] rounded-full"
           style={{
-            background: 'radial-gradient(ellipse at center, rgba(139, 92, 246, 0.15) 0%, rgba(139, 92, 246, 0.05) 40%, transparent 70%)',
+            background: isDark
+              ? 'radial-gradient(ellipse at center, rgba(139, 92, 246, 0.15) 0%, rgba(139, 92, 246, 0.05) 40%, transparent 70%)'
+              : 'radial-gradient(ellipse at center, rgba(147, 197, 253, 0.4) 0%, rgba(147, 197, 253, 0.15) 40%, transparent 70%)',
             filter: 'blur(60px)',
             top: '-10%',
             left: '10%',
@@ -53,7 +70,9 @@ export function Desktop() {
         <motion.div
           className="absolute w-[600px] h-[500px] rounded-full"
           style={{
-            background: 'radial-gradient(ellipse at center, rgba(59, 130, 246, 0.12) 0%, rgba(59, 130, 246, 0.04) 50%, transparent 70%)',
+            background: isDark
+              ? 'radial-gradient(ellipse at center, rgba(59, 130, 246, 0.12) 0%, rgba(59, 130, 246, 0.04) 50%, transparent 70%)'
+              : 'radial-gradient(ellipse at center, rgba(196, 181, 253, 0.35) 0%, rgba(196, 181, 253, 0.1) 50%, transparent 70%)',
             filter: 'blur(80px)',
             top: '30%',
             right: '-5%',
@@ -70,7 +89,9 @@ export function Desktop() {
         <motion.div
           className="absolute w-[500px] h-[400px] rounded-full"
           style={{
-            background: 'radial-gradient(ellipse at center, rgba(236, 72, 153, 0.08) 0%, transparent 60%)',
+            background: isDark
+              ? 'radial-gradient(ellipse at center, rgba(236, 72, 153, 0.08) 0%, transparent 60%)'
+              : 'radial-gradient(ellipse at center, rgba(253, 186, 116, 0.25) 0%, transparent 60%)',
             filter: 'blur(100px)',
             bottom: '10%',
             left: '40%',
@@ -87,7 +108,9 @@ export function Desktop() {
         <motion.div
           className="absolute w-[400px] h-[300px] rounded-full"
           style={{
-            background: 'radial-gradient(ellipse at center, rgba(34, 211, 238, 0.06) 0%, transparent 60%)',
+            background: isDark
+              ? 'radial-gradient(ellipse at center, rgba(34, 211, 238, 0.06) 0%, transparent 60%)'
+              : 'radial-gradient(ellipse at center, rgba(134, 239, 172, 0.2) 0%, transparent 60%)',
             filter: 'blur(70px)',
             bottom: '-5%',
             right: '20%',
@@ -103,7 +126,9 @@ export function Desktop() {
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: 'radial-gradient(ellipse 80% 60% at 50% 50%, transparent 20%, rgba(0, 0, 0, 0.4) 100%)'
+            background: isDark
+              ? 'radial-gradient(ellipse 80% 60% at 50% 50%, transparent 20%, rgba(0, 0, 0, 0.4) 100%)'
+              : 'radial-gradient(ellipse 80% 60% at 50% 50%, transparent 40%, rgba(148, 163, 184, 0.15) 100%)'
           }}
         />
 
