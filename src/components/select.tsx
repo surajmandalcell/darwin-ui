@@ -3,6 +3,7 @@
 import React from "react";
 import { createPortal } from "react-dom";
 import { cn } from "../lib/utils";
+import { getDuration } from "../lib/animation-config";
 import { motion, AnimatePresence } from "framer-motion";
 
 type OptionLike = { value: string; label: React.ReactNode };
@@ -65,8 +66,8 @@ export function Select({
 			if (!containerRef.current) return;
 			if (!containerRef.current.contains(e.target as Node)) setOpen(false);
 		}
-		if (open) document.addEventListener("mousedown", onDocClick);
-		return () => document.removeEventListener("mousedown", onDocClick);
+		if (open) document.addEventListener("click", onDocClick);
+		return () => document.removeEventListener("click", onDocClick);
 	}, [open]);
 
 	function handleSelect(val: string) {
@@ -82,7 +83,7 @@ export function Select({
 						initial={{ opacity: 0, scale: 0.95, y: -10 }}
 						animate={{ opacity: 1, scale: 1, y: 0 }}
 						exit={{ opacity: 0, scale: 0.95, y: -10 }}
-						transition={{ duration: 0.15, ease: "easeOut" }}
+						transition={{ duration: getDuration("normal"), ease: "easeOut" }}
 						style={{
 							position: 'fixed',
 							top: `${dropdownPosition.top}px`,
@@ -137,7 +138,7 @@ export function Select({
 				<span className="ml-2 h-4 w-4 opacity-50">
 					<motion.svg
 						animate={{ rotate: open ? 180 : 0 }}
-						transition={{ duration: 0.2, ease: "easeOut" }}
+						transition={{ duration: getDuration("slow"), ease: "easeOut" }}
 						xmlns="http://www.w3.org/2000/svg"
 						width="24"
 						height="24"

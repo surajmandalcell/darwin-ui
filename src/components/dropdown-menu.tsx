@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check } from "lucide-react";
 import { cn } from "../lib/utils";
+import { getDuration } from "../lib/animation-config";
 
 interface DropdownMenuContextValue {
 	open: boolean;
@@ -48,11 +49,11 @@ function DropdownMenu({ children, open: controlledOpen, onOpenChange }: Dropdown
 			}
 		};
 
-		document.addEventListener("mousedown", handleClickOutside);
+		document.addEventListener("click", handleClickOutside);
 		document.addEventListener("keydown", handleEscape);
 
 		return () => {
-			document.removeEventListener("mousedown", handleClickOutside);
+			document.removeEventListener("click", handleClickOutside);
 			document.removeEventListener("keydown", handleEscape);
 		};
 	}, [open, handleOpenChange]);
@@ -165,7 +166,7 @@ function DropdownMenuContent({
 					initial={{ opacity: 0, scale: 0.95, y: side === "bottom" ? -5 : 5 }}
 					animate={{ opacity: 1, scale: 1, y: 0 }}
 					exit={{ opacity: 0, scale: 0.95, y: side === "bottom" ? -5 : 5 }}
-					transition={{ duration: 0.15, ease: "easeOut" }}
+					transition={{ duration: getDuration("normal"), ease: "easeOut" }}
 					role="menu"
 					aria-orientation="vertical"
 					className={cn(

@@ -3,6 +3,7 @@
 import * as React from "react";
 import { motion } from "framer-motion";
 import { cn } from "../lib/utils";
+import { getDuration } from "../lib/animation-config";
 
 interface SliderProps {
 	value?: number;
@@ -175,7 +176,7 @@ function Slider({
 					animate={{
 						scale: isDragging ? 1.1 : 1,
 					}}
-					transition={{ duration: 0.15 }}
+					transition={{ duration: getDuration("normal") }}
 				/>
 			</div>
 

@@ -3,6 +3,7 @@
 import { useId } from "react";
 import type React from "react";
 import { motion } from "framer-motion";
+import { getSpring, getDuration } from "../lib/animation-config";
 
 interface CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
 	boxClassName?: string;
@@ -46,12 +47,10 @@ export function Checkbox({
 					animate={{
 						backgroundColor: isActive ? "rgb(14 165 233)" : "rgb(15 23 42)",
 						borderColor: isActive ? "rgb(14 165 233)" : "rgb(100 116 139)",
-						scale: checked && !disabled ? 1.05 : 1,
 					}}
 					transition={{
-						backgroundColor: { type: "spring", stiffness: 500, damping: 30 },
-						borderColor: { type: "spring", stiffness: 500, damping: 30 },
-						scale: { type: "spring", stiffness: 400, damping: 15 },
+						backgroundColor: getSpring("snappy"),
+						borderColor: getSpring("snappy"),
 					}}
 					className={`flex h-4 w-4 items-center justify-center rounded-sm border text-white ${boxClassName}`}
 				>
@@ -59,7 +58,7 @@ export function Checkbox({
 						<motion.div
 							initial={{ scale: 0 }}
 							animate={{ scale: 1 }}
-							transition={{ type: "spring", stiffness: 500, damping: 25 }}
+							transition={getSpring("snappy")}
 							className="w-2 h-0.5 bg-white rounded"
 						/>
 					) : (
@@ -72,11 +71,7 @@ export function Checkbox({
 								opacity: checked ? 1 : 0,
 								scale: checked ? 1 : 0.5,
 							}}
-							transition={{
-								type: "spring",
-								stiffness: 500,
-								damping: 25,
-							}}
+							transition={getSpring("snappy")}
 						>
 							<motion.polyline
 								points="3.5 8.5 6.5 11.5 12.5 4.5"
@@ -87,7 +82,7 @@ export function Checkbox({
 								strokeLinejoin="round"
 								initial={{ pathLength: 0 }}
 								animate={{ pathLength: checked ? 1 : 0 }}
-								transition={{ duration: 0.2 }}
+								transition={{ duration: getDuration("slow") }}
 							/>
 						</motion.svg>
 					)}

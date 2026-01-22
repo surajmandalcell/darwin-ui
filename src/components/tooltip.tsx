@@ -4,6 +4,7 @@ import * as React from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "../lib/utils";
+import { getDuration } from "../lib/animation-config";
 
 interface TooltipContextValue {
 	open: boolean;
@@ -185,18 +186,9 @@ function TooltipContent({
 	};
 
 	const getAnimationProps = () => {
-		switch (side) {
-			case "top":
-				return { initial: { opacity: 0, y: 4 }, animate: { opacity: 1, y: 0 }, exit: { opacity: 0, y: 4 } };
-			case "bottom":
-				return { initial: { opacity: 0, y: -4 }, animate: { opacity: 1, y: 0 }, exit: { opacity: 0, y: -4 } };
-			case "left":
-				return { initial: { opacity: 0, x: 4 }, animate: { opacity: 1, x: 0 }, exit: { opacity: 0, x: 4 } };
-			case "right":
-				return { initial: { opacity: 0, x: -4 }, animate: { opacity: 1, x: 0 }, exit: { opacity: 0, x: -4 } };
-			default:
-				return { initial: { opacity: 0 }, animate: { opacity: 1 }, exit: { opacity: 0 } };
-		}
+		// Using opacity-only animation to prevent hover detection issues
+		// Y/X axis shifts can cause tooltip to move under cursor and flicker
+		return { initial: { opacity: 0 }, animate: { opacity: 1 }, exit: { opacity: 0 } };
 	};
 
 	const animationProps = getAnimationProps();
@@ -207,7 +199,7 @@ function TooltipContent({
 				<motion.div
 					role="tooltip"
 					{...animationProps}
-					transition={{ duration: 0.15, ease: "easeOut" }}
+					transition={{ duration: getDuration("normal"), ease: "easeOut" }}
 					className={cn(
 						"fixed overflow-hidden rounded-md bg-neutral-800 px-3 py-1.5 text-xs text-white/90 shadow-lg border border-white/10",
 						className

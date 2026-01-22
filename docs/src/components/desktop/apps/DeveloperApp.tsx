@@ -226,6 +226,7 @@ const docSections = {
     title: 'Getting Started',
     icon: <Zap className="w-4 h-4" />,
     pages: [
+      { id: 'agentic-coding', title: 'Agentic Coding' },
       { id: 'introduction', title: 'Introduction' },
       { id: 'installation', title: 'Installation' },
       { id: 'shadcn-cli', title: 'shadcn CLI' },
@@ -364,6 +365,183 @@ function CodeBlock({ code, language = 'bash' }: { code: string; language?: strin
           {code}
         </motion.code>
       </motion.pre>
+    </motion.div>
+  );
+}
+
+// Agentic Coding page - AI agent documentation access
+function AgenticCodingPage() {
+  const context7Example = `Use Context7 to fetch Darwin UI documentation:
+https://context7.com/surajmandalcell/darwin-ui`;
+
+  const cursorPrompt = `When working with Darwin UI, always fetch the latest
+documentation from Context7 first:
+
+"Use context7 MCP to get Darwin UI docs before implementing"`;
+
+  const claudePrompt = `For Darwin UI components, reference the latest docs:
+- Context7: context7.com/surajmandalcell/darwin-ui
+- Docs: darwin-ui.mandalsuraj.com`;
+
+  return (
+    <motion.div
+      variants={pageTransitionVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      className="space-y-8"
+    >
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="show"
+      >
+        <motion.div className="flex items-center gap-2 mb-4" variants={itemVariants}>
+          <Badge variant="new">New</Badge>
+          <Badge variant="info">AI-Ready</Badge>
+        </motion.div>
+        <motion.h1
+          className="text-4xl font-bold text-white mb-4"
+          variants={itemVariants}
+        >
+          Agentic Coding
+        </motion.h1>
+        <motion.p
+          className="text-lg text-white/70"
+          variants={itemVariants}
+        >
+          Get up-to-date Darwin UI documentation directly in your AI coding assistant.
+        </motion.p>
+      </motion.div>
+
+      {/* What is Agentic Coding */}
+      <motion.div
+        variants={itemVariants}
+        initial="hidden"
+        animate="show"
+        transition={{ delay: 0.1 }}
+        className="space-y-4"
+      >
+        <h2 className="text-2xl font-semibold text-white">What is Agentic Coding?</h2>
+        <p className="text-white/70">
+          Agentic coding uses AI assistants like Claude, Cursor, or GitHub Copilot to help you write code.
+          The challenge? AI models have knowledge cutoffs and may not know about the latest API changes.
+        </p>
+        <p className="text-white/70">
+          <strong className="text-white">Solution:</strong> Use Context7 to give your AI assistant access to
+          the latest Darwin UI documentation in real-time.
+        </p>
+      </motion.div>
+
+      {/* Context7 Integration */}
+      <motion.div
+        variants={itemVariants}
+        initial="hidden"
+        animate="show"
+        transition={{ delay: 0.2 }}
+        className="space-y-4"
+      >
+        <h2 className="text-2xl font-semibold text-white">Context7 Integration</h2>
+        <p className="text-white/70">
+          Darwin UI is indexed on Context7, providing structured documentation that AI agents can fetch and understand.
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <a
+            href="https://context7.com/surajmandalcell/darwin-ui"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors group"
+          >
+            <div className="flex items-center gap-2 mb-2">
+              <Code2 className="w-5 h-5 text-blue-400" />
+              <h3 className="font-semibold text-white">Context7 Library</h3>
+              <ExternalLink className="w-4 h-4 text-white/40 group-hover:text-white/60" />
+            </div>
+            <p className="text-sm text-white/60">context7.com/surajmandalcell/darwin-ui</p>
+            <p className="text-xs text-white/40 mt-2">Structured docs for AI agents</p>
+          </a>
+
+          <a
+            href="https://darwin-ui.mandalsuraj.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors group"
+          >
+            <div className="flex items-center gap-2 mb-2">
+              <BookOpen className="w-5 h-5 text-green-400" />
+              <h3 className="font-semibold text-white">Documentation</h3>
+              <ExternalLink className="w-4 h-4 text-white/40 group-hover:text-white/60" />
+            </div>
+            <p className="text-sm text-white/60">darwin-ui.mandalsuraj.com</p>
+            <p className="text-xs text-white/40 mt-2">Human-readable documentation</p>
+          </a>
+        </div>
+      </motion.div>
+
+      {/* How to Use */}
+      <motion.div
+        variants={itemVariants}
+        initial="hidden"
+        animate="show"
+        transition={{ delay: 0.3 }}
+        className="space-y-4"
+      >
+        <h2 className="text-2xl font-semibold text-white">How to Use</h2>
+
+        <div className="space-y-4">
+          <div className="p-4 rounded-xl bg-white/5 border border-white/10">
+            <h3 className="font-semibold text-white mb-2">With Cursor / Claude Code</h3>
+            <p className="text-sm text-white/60 mb-3">
+              If you have Context7 MCP configured, simply ask your AI to fetch Darwin UI docs:
+            </p>
+            <CodeBlock code={cursorPrompt} language="text" />
+          </div>
+
+          <div className="p-4 rounded-xl bg-white/5 border border-white/10">
+            <h3 className="font-semibold text-white mb-2">Manual Reference</h3>
+            <p className="text-sm text-white/60 mb-3">
+              Include this in your prompt to help AI find the latest docs:
+            </p>
+            <CodeBlock code={claudePrompt} language="text" />
+          </div>
+
+          <div className="p-4 rounded-xl bg-white/5 border border-white/10">
+            <h3 className="font-semibold text-white mb-2">Direct URL</h3>
+            <p className="text-sm text-white/60 mb-3">
+              AI agents can fetch documentation directly:
+            </p>
+            <CodeBlock code={context7Example} language="text" />
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Benefits */}
+      <motion.div
+        variants={itemVariants}
+        initial="hidden"
+        animate="show"
+        transition={{ delay: 0.4 }}
+        className="space-y-4"
+      >
+        <h2 className="text-2xl font-semibold text-white">Benefits</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          {[
+            { title: 'Always Up-to-Date', desc: 'AI gets the latest API and component changes' },
+            { title: 'Accurate Code', desc: 'Reduces hallucinations and incorrect prop usage' },
+            { title: 'Faster Development', desc: 'No need to manually copy-paste docs into prompts' },
+            { title: 'Better Examples', desc: 'AI can reference real code examples from docs' },
+          ].map((benefit) => (
+            <div key={benefit.title} className="flex gap-3 p-3 rounded-lg bg-white/5">
+              <div className="w-2 h-2 rounded-full bg-green-400 mt-2 shrink-0" />
+              <div>
+                <p className="font-medium text-white">{benefit.title}</p>
+                <p className="text-sm text-white/60">{benefit.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </motion.div>
     </motion.div>
   );
 }
@@ -3246,6 +3424,8 @@ function ThemingPage({ name }: { name: string }) {
 function PageContent({ section, page, onNavigate }: { section: string; page: string; onNavigate?: (section: string, page: string) => void }) {
   if (section === 'getting-started') {
     switch (page) {
+      case 'agentic-coding':
+        return <AgenticCodingPage />;
       case 'introduction':
         return <IntroductionPage />;
       case 'installation':

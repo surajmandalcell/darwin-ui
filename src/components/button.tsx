@@ -3,6 +3,7 @@ import { twMerge } from "tailwind-merge";
 import { clsx, type ClassValue } from "clsx";
 import { motion } from "framer-motion";
 import { Loader2 } from "lucide-react";
+import { getDuration } from "../lib/animation-config";
 
 function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
@@ -76,7 +77,7 @@ export function Button({
 			disabled={isDisabled}
 			whileHover={!isDisabled ? { opacity: 0.9 } : {}}
 			whileTap={!isDisabled ? { scale: 0.99 } : {}}
-			transition={{ duration: 0.1 }}
+			transition={{ duration: getDuration("fast") }}
 			className={cn(
 				"inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-500/50 disabled:pointer-events-none disabled:opacity-50",
 				variants[variant],
