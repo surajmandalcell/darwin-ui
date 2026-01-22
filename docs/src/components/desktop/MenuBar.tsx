@@ -757,7 +757,7 @@ export function MenuBar() {
 					{/* Search/Spotlight */}
 					<motion.button
 						className="p-1 rounded"
-						whileHover={{ backgroundColor: "rgba(255,255,255,0.1)" }}
+						whileHover={{ backgroundColor: isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)" }}
 						whileTap={{ scale: 0.95 }}
 						transition={{ duration: 0.1 }}
 					>
@@ -767,7 +767,7 @@ export function MenuBar() {
 					{/* Wifi with animated indicator */}
 					<motion.button
 						className="p-1 rounded"
-						whileHover={{ backgroundColor: "rgba(255,255,255,0.1)" }}
+						whileHover={{ backgroundColor: isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)" }}
 						whileTap={{ scale: 0.95 }}
 						transition={{ duration: 0.1 }}
 					>
