@@ -7,10 +7,14 @@ import { ArrowRight, Github } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ComponentGridSection } from '../components/showcase/ComponentGridSection';
 import { DashboardDemoSection } from '../components/showcase/DashboardDemoSection';
+import { UnifiedNavbar } from '../components/UnifiedNavbar';
 
 export default function ShowcasePage() {
   return (
     <div className="min-h-screen bg-[#050508] text-white overflow-x-hidden">
+      {/* Floating navbar - expands on hover */}
+      <UnifiedNavbar />
+
       {/* Hero Section */}
       <section className="min-h-screen flex flex-col items-center justify-center px-4 relative">
         {/* Background gradient */}
