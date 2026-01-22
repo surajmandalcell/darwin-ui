@@ -554,6 +554,7 @@ function SettingsContent() {
   );
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function ExampleApp({ windowState: _windowState }: ExampleAppProps) {
   const [activeNav, setActiveNav] = useState('dashboard');
 

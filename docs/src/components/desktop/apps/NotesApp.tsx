@@ -54,15 +54,17 @@ const saveNotes = (notes: Note[]) => {
   }
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function NotesApp({ windowState: _windowState }: NotesAppProps) {
   const [notes, setNotes] = useState<Note[]>([]);
   const [selectedNoteId, setSelectedNoteId] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // Load notes from localStorage on mount
+  // Load notes from localStorage on mount - intentional hydration pattern
   useEffect(() => {
     const loaded = loadNotes();
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setNotes(loaded);
     if (loaded.length > 0) {
       setSelectedNoteId(loaded[0].id);

@@ -174,6 +174,7 @@ function VersionCard({ entry, isExpanded, onToggle }: {
   );
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function ChangelogApp({ windowState: _windowState }: ChangelogAppProps) {
   const [expandedVersions, setExpandedVersions] = useState<Set<string>>(new Set([changelog[0]?.version]));
 

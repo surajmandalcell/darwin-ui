@@ -66,7 +66,7 @@ const availableCommands = [
 ];
 
 // Environment variables
-let envVars: Record<string, string> = {
+const envVars: Record<string, string> = {
   USER: 'guest',
   HOME: '/home/guest',
   SHELL: '/bin/bash',

@@ -212,6 +212,7 @@ function AnimatedCard({ children, className = '', onClick }: AnimatedCardProps) 
   );
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function SettingsApp({ windowState: _windowState }: SettingsAppProps) {
   const [activeSection, setActiveSection] = useState('appearance');
   const [theme, setTheme] = useState<'light' | 'dark' | 'system'>('dark');

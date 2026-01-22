@@ -28,9 +28,11 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setThemeState] = useState<Theme>(getStoredTheme);
   const [resolvedTheme, setResolvedTheme] = useState<ResolvedTheme>('dark');
 
+  // Intentional: syncing theme state with DOM and computing resolved theme
   useEffect(() => {
     // Resolve the actual theme to apply
     const newResolvedTheme = theme === 'system' ? getSystemTheme() : theme;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setResolvedTheme(newResolvedTheme);
 
     // Apply theme to document
@@ -71,6 +73,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useTheme() {
   const context = useContext(ThemeContext);
   if (context === undefined) {

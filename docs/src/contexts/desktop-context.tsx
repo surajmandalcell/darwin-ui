@@ -119,7 +119,8 @@ const getResponsiveSize = (
   };
 };
 
-// App definitions
+// App definitions - shared constant for desktop environment
+// eslint-disable-next-line react-refresh/only-export-components
 export const apps: Record<string, AppDefinition> = {
   developer: {
     id: 'developer',
@@ -554,7 +555,8 @@ export function DesktopProvider({ children }: { children: ReactNode }) {
   );
 }
 
-// Hook
+// Hook for accessing desktop context
+// eslint-disable-next-line react-refresh/only-export-components
 export function useDesktop() {
   const context = useContext(DesktopContext);
   if (!context) {

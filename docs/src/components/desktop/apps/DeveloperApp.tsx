@@ -3099,6 +3099,7 @@ function DocsNavigation({
   );
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function DeveloperApp({ windowState: _windowState }: DeveloperAppProps) {
   const [activeSection, setActiveSection] = useState('getting-started');
   const [activePage, setActivePage] = useState('introduction');
