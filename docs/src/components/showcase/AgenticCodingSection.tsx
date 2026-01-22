@@ -115,7 +115,7 @@ export function AgenticCodingSection() {
 			<div className="absolute top-1/4 right-1/4 w-[400px] h-[400px] bg-emerald-400/5 blur-[100px] rounded-full" />
 
 			<div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 relative z-10">
-				<div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+				<div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
 					{/* Left side - Code editor */}
 					<motion.div
 						ref={codeRef}

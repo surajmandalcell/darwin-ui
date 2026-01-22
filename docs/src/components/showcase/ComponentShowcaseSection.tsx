@@ -250,7 +250,7 @@ const COMPONENTS: ComponentDef[] = [
     category: 'form-controls',
     size: 'sm',
     preview: (
-      <div className="space-y-1">
+      <div className="flex flex-col gap-2.5">
         <Switch label="Active" defaultChecked />
         <Switch label="Notify" />
       </div>
