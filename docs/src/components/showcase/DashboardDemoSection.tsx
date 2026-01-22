@@ -22,8 +22,8 @@ export function DashboardDemoSection() {
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 font-heading">Build Production Interfaces</h2>
-        <p className="text-lg text-white/40 max-w-2xl mx-auto">
+        <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4 font-heading">Build Production Interfaces</h2>
+        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
           See how Darwin UI components come together in a complete dashboard application.
         </p>
       </motion.div>
@@ -36,7 +36,7 @@ export function DashboardDemoSection() {
       >
         {/* Wrapper with horizontal scroll for small screens */}
         <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
-          <div className="min-w-[320px] sm:min-w-0 rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-black/50">
+          <div className="min-w-[320px] sm:min-w-0 rounded-2xl overflow-hidden border border-border shadow-2xl shadow-foreground/20">
             <DashboardShowcase />
           </div>
         </div>
