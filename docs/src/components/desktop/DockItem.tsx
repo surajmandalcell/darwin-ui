@@ -15,12 +15,12 @@ interface DockItemProps {
 
 // Map app IDs to their Lucide icons
 const appIcons: Record<string, React.ReactNode> = {
-  developer: <Hammer className="w-6 h-6 text-white" />,
-  example: <LayoutDashboard className="w-6 h-6 text-white" />,
-  terminal: <Terminal className="w-6 h-6 text-white" />,
-  notes: <StickyNote className="w-6 h-6 text-white" />,
-  settings: <Settings className="w-6 h-6 text-white" />,
-  changelog: <FileText className="w-6 h-6 text-white" />,
+  developer: <Hammer className="w-6 h-6 text-foreground" />,
+  example: <LayoutDashboard className="w-6 h-6 text-foreground" />,
+  terminal: <Terminal className="w-6 h-6 text-foreground" />,
+  notes: <StickyNote className="w-6 h-6 text-foreground" />,
+  settings: <Settings className="w-6 h-6 text-foreground" />,
+  changelog: <FileText className="w-6 h-6 text-foreground" />,
 };
 
 export function DockItem({
@@ -67,7 +67,7 @@ export function DockItem({
       whileTap={{ scale: 0.95 }}
     >
       {/* Icon Container */}
-      <div className="w-8 h-8 md:w-12 md:h-12 rounded-xl bg-white/10 flex items-center justify-center">
+      <div className="w-8 h-8 md:w-12 md:h-12 rounded-xl bg-foreground/10 flex items-center justify-center">
         {icon}
       </div>
 
@@ -75,7 +75,7 @@ export function DockItem({
       {isRunning && (
         <motion.div
           className={`absolute -bottom-1 w-1 h-1 rounded-full ${
-            hasMinimizedWindow ? 'bg-amber-400' : 'bg-white/80'
+            hasMinimizedWindow ? 'bg-amber-400' : 'bg-foreground/80'
           }`}
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -85,7 +85,7 @@ export function DockItem({
 
       {/* Tooltip */}
       <motion.div
-        className="absolute -top-10 px-3 py-1.5 bg-black/90 backdrop-blur-sm rounded-md text-xs text-white whitespace-nowrap pointer-events-none border border-white/10"
+        className="absolute -top-10 px-3 py-1.5 bg-popover backdrop-blur-sm rounded-md text-xs text-popover-foreground whitespace-nowrap pointer-events-none border border-border"
         initial={{ opacity: 0, y: 5 }}
         animate={{
           opacity: isHovered ? 1 : 0,
@@ -95,7 +95,7 @@ export function DockItem({
       >
         {app.name}
         {/* Tooltip arrow */}
-        <div className="absolute left-1/2 -translate-x-1/2 -bottom-1 w-2 h-2 bg-black/90 rotate-45 border-r border-b border-white/10" />
+        <div className="absolute left-1/2 -translate-x-1/2 -bottom-1 w-2 h-2 bg-popover rotate-45 border-r border-b border-border" />
       </motion.div>
     </motion.button>
   );
