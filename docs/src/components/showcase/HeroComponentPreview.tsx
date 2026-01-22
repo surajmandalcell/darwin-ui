@@ -31,15 +31,15 @@ const componentShowcases: ComponentShowcase[] = [
     render: () => (
       <div className="space-y-4">
         <div className="flex items-center gap-4">
-          <span className="text-xs text-white/50">Dark Mode</span>
+          <span className="text-xs text-muted-foreground">Dark Mode</span>
           <Switch defaultChecked />
         </div>
         <div className="space-y-2">
-          <span className="text-xs text-white/50">Volume</span>
+          <span className="text-xs text-muted-foreground">Volume</span>
           <Slider defaultValue={65} max={100} step={1} className="w-full" />
         </div>
         <div className="space-y-2">
-          <span className="text-xs text-white/50">Progress</span>
+          <span className="text-xs text-muted-foreground">Progress</span>
           <Progress value={72} className="h-2" />
         </div>
       </div>
@@ -85,18 +85,18 @@ export function HeroComponentPreview() {
     <div className="relative">
       {/* Main card */}
       <FloatingElement pattern="figure8" depth={2} duration={8}>
-        <div className="relative bg-white/[0.02] backdrop-blur-xl border border-white/[0.08] rounded-2xl p-6 shadow-2xl">
+        <div className="relative bg-muted/20 backdrop-blur-xl border border-border/80 rounded-2xl p-6 shadow-2xl">
           {/* Header */}
           <div className="flex items-center gap-3 mb-6">
             <DarwinLogo showBackground className="w-10 h-10" />
             <div>
-              <div className="text-sm font-medium text-white">Darwin UI</div>
-              <div className="text-xs text-white/40">Component Library</div>
+              <div className="text-sm font-medium text-foreground">Darwin UI</div>
+              <div className="text-xs text-muted-foreground">Component Library</div>
             </div>
           </div>
 
           {/* Tab navigation */}
-          <div className="p-1 bg-white/[0.02] rounded-lg mb-4">
+          <div className="p-1 bg-muted/20 rounded-lg mb-4">
             <div className="flex gap-1">
               {componentShowcases.map((showcase, index) => (
                 <button
@@ -104,8 +104,8 @@ export function HeroComponentPreview() {
                   onClick={() => handleTabClick(index)}
                   className={`flex-1 px-3 py-1.5 text-xs font-medium rounded-md transition-all duration-200 ${
                     activeIndex === index
-                      ? 'bg-white/10 text-white'
-                      : 'text-white/40 hover:text-white/60'
+                      ? 'bg-muted text-foreground'
+                      : 'text-muted-foreground hover:text-foreground/60'
                   }`}
                 >
                   {showcase.label}
@@ -139,14 +139,14 @@ export function HeroComponentPreview() {
         delay={0.5}
         className="absolute -top-6 -right-6"
       >
-        <div className="bg-white/[0.03] backdrop-blur border border-white/[0.08] rounded-xl p-4">
+        <div className="bg-muted/30 backdrop-blur border border-border/80 rounded-xl p-4">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center text-xs font-medium text-white">
               JD
             </div>
             <div className="text-xs">
-              <div className="text-white/80">John Doe</div>
-              <div className="text-white/30">Online</div>
+              <div className="text-foreground/80">John Doe</div>
+              <div className="text-muted-foreground">Online</div>
             </div>
           </div>
         </div>
@@ -160,10 +160,10 @@ export function HeroComponentPreview() {
         delay={1}
         className="absolute -bottom-4 -left-8"
       >
-        <div className="bg-white/[0.03] backdrop-blur border border-white/[0.08] rounded-xl p-3 px-4">
+        <div className="bg-muted/30 backdrop-blur border border-border/80 rounded-xl p-3 px-4">
           <div className="flex items-center gap-3">
             <div className="w-2 h-2 rounded-full bg-emerald-400" />
-            <span className="text-xs text-white/60">Build passing</span>
+            <span className="text-xs text-muted-foreground">Build passing</span>
           </div>
         </div>
       </FloatingElement>
