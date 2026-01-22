@@ -20,7 +20,6 @@ export function UnifiedNavbar() {
   const [isHovered, setIsHovered] = useState(false);
   const hoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Don't render on desktop route (MenuBar handles navigation)
   if (isDesktop) return null;
 
   const handleMouseEnter = () => {
@@ -32,13 +31,11 @@ export function UnifiedNavbar() {
   };
 
   const handleMouseLeave = () => {
-    // Keep items visible for 500ms after hover ends
     hoverTimeoutRef.current = setTimeout(() => {
       setIsHovered(false);
     }, 500);
   };
 
-  // Cleanup timeout on unmount
   useEffect(() => {
     return () => {
       if (hoverTimeoutRef.current) {
@@ -47,15 +44,14 @@ export function UnifiedNavbar() {
     };
   }, []);
 
-  // Homepage: same layout, no background/border, hover-reveal nav items
+  // Homepage: same layout, fixed position, no bg/border, hover reveal
   if (isHomepage) {
     return (
       <nav
-        className="flex-shrink-0 h-10 flex items-center px-4 gap-6"
+        className="fixed top-0 left-0 right-0 z-50 h-10 flex items-center px-4 gap-6"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        {/* Logo - links to home */}
         <Link
           to="/"
           className="flex items-center justify-center text-white/70 hover:text-white transition-colors"
@@ -63,7 +59,6 @@ export function UnifiedNavbar() {
           <DarwinLogo className="w-5 h-5" />
         </Link>
 
-        {/* Nav items - appear on hover */}
         <AnimatePresence>
           {isHovered && navItems.map(({ path, label, icon: Icon }, index) => {
             const isActive = location.pathname === path || location.pathname.startsWith(path + '/');
@@ -76,7 +71,7 @@ export function UnifiedNavbar() {
                 exit={{ opacity: 0, x: -10 }}
                 transition={{
                   duration: 0.2,
-                  delay: index * 0.05,
+                  delay: index * 0.04,
                   ease: [0.16, 1, 0.3, 1]
                 }}
               >
@@ -104,10 +99,9 @@ export function UnifiedNavbar() {
     );
   }
 
-  // Docs/Changelog: full-width bar with background and border
+  // Docs/Changelog: same layout with bg/border
   return (
     <nav className="flex-shrink-0 h-10 bg-neutral-900 border-b border-white/10 flex items-center px-4 gap-6">
-      {/* Logo - links to home */}
       <Link
         to="/"
         className="flex items-center justify-center text-white/70 hover:text-white transition-colors"
@@ -115,7 +109,6 @@ export function UnifiedNavbar() {
         <DarwinLogo className="w-5 h-5" />
       </Link>
 
-      {/* Nav items */}
       {navItems.map(({ path, label, icon: Icon }) => {
         const isActive = location.pathname === path || location.pathname.startsWith(path + '/');
 
