@@ -13,6 +13,7 @@ import {
 	ExternalLink,
 	ChevronUp,
 	Home,
+	Monitor,
 	BookOpen,
 	History,
 } from "lucide-react";
@@ -480,10 +481,29 @@ export function MenuBar() {
 	};
 
 	const navItems = [
-		{ path: "/", label: "Desktop", icon: Home },
+		{ path: "/", label: "Home", icon: Home },
+		{ path: "/desktop", label: "Desktop", icon: Monitor },
 		{ path: "/docs", label: "Docs", icon: BookOpen },
 		{ path: "/changelog", label: "Changelog", icon: History },
 	];
+
+	// Logo hover state - shows compact nav instead of app menus
+	const [logoHovered, setLogoHovered] = useState(false);
+	const logoHoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+	const handleLogoMouseEnter = () => {
+		if (logoHoverTimeoutRef.current) {
+			clearTimeout(logoHoverTimeoutRef.current);
+			logoHoverTimeoutRef.current = null;
+		}
+		setLogoHovered(true);
+	};
+
+	const handleLogoMouseLeave = () => {
+		logoHoverTimeoutRef.current = setTimeout(() => {
+			setLogoHovered(false);
+		}, 1500);
+	};
 
 	return (
 		<div className="fixed top-0 left-0 right-0 h-7 z-[9000]">
@@ -492,8 +512,12 @@ export function MenuBar() {
 
 			{/* Content */}
 			<div className="relative h-full flex items-center justify-between px-4 text-white/90 text-[13px] font-medium">
-				{/* Left side - Logo and App Menu */}
-				<div className="flex items-center gap-4">
+				{/* Left side - Logo and App Menu / Nav Items */}
+				<div
+					className="flex items-center gap-4"
+					onMouseEnter={handleLogoMouseEnter}
+					onMouseLeave={handleLogoMouseLeave}
+				>
 					{/* Darwin Logo (Apple position) */}
 					<div className="relative">
 						<motion.button
@@ -515,7 +539,7 @@ export function MenuBar() {
 
 						{/* Darwin Menu Dropdown */}
 						<AnimatePresence>
-							{activeMenu === "darwin" && (
+							{activeMenu === "darwin" && !logoHovered && (
 								<motion.div
 									variants={dropdownVariants}
 									initial="hidden"
@@ -552,21 +576,47 @@ export function MenuBar() {
 						</AnimatePresence>
 					</div>
 
-					{/* Active App Name */}
+					{/* Compact Nav Items - shown on logo hover */}
 					<AnimatePresence mode="wait">
-						{activeApp && (
-							<motion.span
-								key={activeApp.name}
-								className="font-semibold"
-								initial={{ opacity: 0, y: -5 }}
-								animate={{ opacity: 1, y: 0 }}
-								exit={{ opacity: 0, y: 5 }}
-								transition={{ duration: 0.15 }}
+						{logoHovered ? (
+							<motion.div
+								key="nav-items"
+								className="flex items-center gap-3"
+								initial={{ opacity: 0, x: -10 }}
+								animate={{ opacity: 1, x: 0 }}
+								exit={{ opacity: 0, x: -10 }}
+								transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
 							>
-								{activeApp.name}
-							</motion.span>
-						)}
-					</AnimatePresence>
+								{navItems.map((item, index) => (
+									<motion.div
+										key={item.path}
+										initial={{ opacity: 0, x: -8 }}
+										animate={{ opacity: 1, x: 0 }}
+										transition={{ delay: index * 0.03, duration: 0.15 }}
+									>
+										<Link
+											to={item.path}
+											className="flex items-center gap-1.5 px-2 py-0.5 rounded text-white/80 hover:text-white hover:bg-white/10 transition-colors"
+										>
+											<item.icon className="w-3.5 h-3.5" />
+											<span>{item.label}</span>
+										</Link>
+									</motion.div>
+								))}
+							</motion.div>
+						) : (
+							<motion.div
+								key="app-content"
+								className="flex items-center gap-4"
+								initial={{ opacity: 0, x: 10 }}
+								animate={{ opacity: 1, x: 0 }}
+								exit={{ opacity: 0, x: 10 }}
+								transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+							>
+								{/* Active App Name */}
+								{activeApp && (
+									<span className="font-semibold">{activeApp.name}</span>
+								)}
 
 					          {/* App Menus */}
 					          <div className="hidden md:flex items-center gap-3">
@@ -648,6 +698,9 @@ export function MenuBar() {
 							</div>
 						))}
 					</div>
+							</motion.div>
+						)}
+					</AnimatePresence>
 				</div>
 
 				{/* Right side - System Tray */}

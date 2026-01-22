@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { WindowState } from '../../../contexts/desktop-context';
 import {
@@ -22,8 +22,12 @@ import {
   Trash2,
   AlertTriangle,
   Shield,
+  List,
+  Layers,
 } from 'lucide-react';
 import { Badge } from '@pikoloo/darwin-ui';
+
+const CHANGELOG_VIEW_KEY = 'darwin-ui-changelog-view';
 
 interface ChangelogAppProps {
   windowState: WindowState;
