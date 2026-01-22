@@ -109,8 +109,8 @@ export function Dock() {
         transition={{ type: 'spring', stiffness: 400, damping: 17 }}
         onClick={handleAboutClick}
       >
-        <div className="w-8 h-8 md:w-12 md:h-12 rounded-xl bg-blue-600 flex items-center justify-center shadow-lg">
-          <Info className="w-6 h-6 text-white/80" />
+        <div className="w-8 h-8 md:w-12 md:h-12 rounded-xl bg-muted flex items-center justify-center shadow-lg">
+          <Info className="w-6 h-6 text-foreground/80" />
         </div>
         {/* Tooltip */}
         <motion.div
