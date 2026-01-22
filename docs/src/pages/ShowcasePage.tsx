@@ -106,6 +106,22 @@ export default function ShowcasePage() {
 
       {/* Dashboard Demo Section */}
       <DashboardDemoSection />
+
+      {/* Footer */}
+      <footer className="py-12 px-4 border-t border-white/10">
+        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-2">
+            <DarwinLogo className="w-5 h-5" />
+            <span className="text-white/40 text-sm">Darwin UI</span>
+          </div>
+          <div className="flex gap-6 text-sm text-white/40">
+            <a href="/docs" className="hover:text-white transition-colors">Docs</a>
+            <a href="/changelog" className="hover:text-white transition-colors">Changelog</a>
+            <a href="/desktop" className="hover:text-white transition-colors">Desktop</a>
+            <a href="https://github.com/pikoloo/darwin-ui" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">GitHub</a>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
