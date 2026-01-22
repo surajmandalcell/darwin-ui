@@ -45,7 +45,7 @@ export function AboutApp(_props: AboutAppProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
         >
-          Version 1.3.0
+          Version 1.5.0
         </motion.p>
 
         {/* Description */}

@@ -32,6 +32,37 @@ export interface ChangelogEntry {
 
 export const changelog: ChangelogEntry[] = [
   {
+    version: '1.5.0',
+    date: '2025-01-22',
+    title: 'Light Mode & Theme System',
+    description: 'Full light mode support with theme-aware styling across all components, dock hover scaling effects, and improved desktop experience.',
+    changes: [
+      // Added
+      { type: 'added', description: 'Full light mode support with theme toggle in navbar and menu bar' },
+      { type: 'added', description: 'Theme-aware wallpaper that adapts to light/dark mode' },
+      { type: 'added', component: 'Dock', description: 'Mouse hover scaling effect with smooth animations' },
+      { type: 'added', component: 'Dock', description: 'Theme toggle button in dock for quick theme switching' },
+      { type: 'added', description: 'Light mode compatibility rules documentation for future development' },
+      { type: 'added', description: 'Makefile for managing documentation build and development tasks' },
+      { type: 'added', description: 'Darwin UI documentation and llms.txt generator for AI assistants' },
+      // Changed
+      { type: 'changed', description: 'All desktop components now use theme-aware colors (foreground, background, border CSS variables)' },
+      { type: 'changed', component: 'MenuBar', description: 'Updated to use theme-aware backgrounds and hover states' },
+      { type: 'changed', component: 'DesktopWindow', description: 'Updated to use theme-aware colors for light mode' },
+      { type: 'changed', component: 'DockItem', description: 'Updated to use theme-aware colors and hover effects' },
+      { type: 'changed', description: 'Showcase components updated with theme-aware styling throughout' },
+      { type: 'changed', description: 'Components updated to use new color variables for consistent styling' },
+      // Fixed
+      { type: 'fixed', component: 'Avatar', description: 'Ring color now uses theme-aware colors for avatar groups' },
+      { type: 'fixed', component: 'Button', description: 'Primary variant now has proper white text in light mode' },
+      { type: 'fixed', component: 'SearchInput', description: 'Placeholder color now adapts to current theme' },
+      { type: 'fixed', component: 'ContextMenu', description: 'Hover background now uses theme-aware colors' },
+      { type: 'fixed', description: 'Desktop window drag glitch resolved by syncing transform reset with layout update' },
+      { type: 'fixed', description: 'Focus state overlay and resize handle visibility improvements' },
+      { type: 'fixed', description: 'Mobile responsiveness improvements across desktop components' },
+    ],
+  },
+  {
     version: '1.4.0',
     date: '2025-01-22',
     title: 'Showcase Redesign & Animation Improvements',

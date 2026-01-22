@@ -1,6 +1,6 @@
 {
   "name": "@pikoloo/darwin-ui",
-  "version": "1.3.0",
+  "version": "1.5.0",
   "description": "A beautiful macOS-inspired dark theme React component library with glass-morphism aesthetic",
   "author": "Suraj Mandal <contact@mandalsuraj.com>",
   "license": "MIT",
