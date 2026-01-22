@@ -229,7 +229,7 @@ const docSections = {
       { id: 'agentic-coding', title: 'Agentic Coding' },
       { id: 'introduction', title: 'Introduction' },
       { id: 'installation', title: 'Installation' },
-      { id: 'shadcn-cli', title: 'shadcn CLI' },
+      { id: 'shadcn-cli', title: 'ShadCN CLI' },
       { id: 'quick-start', title: 'Quick Start' },
     ],
   },
@@ -296,23 +296,23 @@ function CodeBlock({ code, language = 'bash' }: { code: string; language?: strin
 
   return (
     <motion.div
-      className="relative group rounded-lg overflow-hidden bg-neutral-900 border border-white/10"
+      className="relative group rounded-lg overflow-hidden bg-card border border-border"
       variants={codeBlockVariants}
       initial="initial"
       whileHover="hover"
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
     >
-      <div className="flex items-center justify-between px-4 py-2 bg-white/5 border-b border-white/10">
+      <div className="flex items-center justify-between px-4 py-2 bg-muted/50 border-b border-border">
         <motion.span
-          className="text-xs text-white/50 font-mono"
+          className="text-xs text-muted-foreground font-mono"
           animate={{ opacity: isHovered ? 0.8 : 0.5 }}
         >
           {language}
         </motion.span>
         <motion.button
           onClick={handleCopy}
-          className="flex items-center gap-1.5 px-2 py-1 text-xs text-white/60 hover:text-white/90 hover:bg-white/10 rounded transition-colors overflow-hidden"
+          className="flex items-center gap-1.5 px-2 py-1 text-xs text-muted-foreground hover:text-foreground/90 hover:bg-muted rounded transition-colors overflow-hidden"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
@@ -352,7 +352,7 @@ function CodeBlock({ code, language = 'bash' }: { code: string; language?: strin
         </motion.button>
       </div>
       <motion.pre
-        className="p-4 overflow-x-auto text-sm font-mono text-white/90"
+        className="p-4 overflow-x-auto text-sm font-mono text-foreground/90"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.1, duration: 0.3 }}
@@ -401,13 +401,13 @@ documentation from Context7 first:
           <Badge variant="info">AI-Ready</Badge>
         </motion.div>
         <motion.h1
-          className="text-4xl font-bold text-white mb-4"
+          className="text-4xl font-bold text-foreground mb-4"
           variants={itemVariants}
         >
           Agentic Coding
         </motion.h1>
         <motion.p
-          className="text-lg text-white/70"
+          className="text-lg text-muted-foreground"
           variants={itemVariants}
         >
           Get up-to-date Darwin UI documentation directly in your AI coding assistant.
@@ -422,13 +422,13 @@ documentation from Context7 first:
         transition={{ delay: 0.1 }}
         className="space-y-4"
       >
-        <h2 className="text-2xl font-semibold text-white">What is Agentic Coding?</h2>
-        <p className="text-white/70">
+        <h2 className="text-2xl font-semibold text-foreground">What is Agentic Coding?</h2>
+        <p className="text-muted-foreground">
           Agentic coding uses AI assistants like Claude, Cursor, or GitHub Copilot to help you write code.
           The challenge? AI models have knowledge cutoffs and may not know about the latest API changes.
         </p>
-        <p className="text-white/70">
-          <strong className="text-white">Solution:</strong> Use Context7 to give your AI assistant access to
+        <p className="text-muted-foreground">
+          <strong className="text-foreground">Solution:</strong> Use Context7 to give your AI assistant access to
           the latest Darwin UI documentation in real-time.
         </p>
       </motion.div>
@@ -441,8 +441,8 @@ documentation from Context7 first:
         transition={{ delay: 0.2 }}
         className="space-y-4"
       >
-        <h2 className="text-2xl font-semibold text-white">Context7 Integration</h2>
-        <p className="text-white/70">
+        <h2 className="text-2xl font-semibold text-foreground">Context7 Integration</h2>
+        <p className="text-muted-foreground">
           Darwin UI is indexed on Context7, providing structured documentation that AI agents can fetch and understand.
         </p>
 
@@ -451,30 +451,30 @@ documentation from Context7 first:
             href="https://context7.com/surajmandalcell/darwin-ui"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors group"
+            className="p-4 rounded-xl bg-muted/50 border border-border hover:bg-muted transition-colors group"
           >
             <div className="flex items-center gap-2 mb-2">
               <Code2 className="w-5 h-5 text-blue-400" />
-              <h3 className="font-semibold text-white">Context7 Library</h3>
-              <ExternalLink className="w-4 h-4 text-white/40 group-hover:text-white/60" />
+              <h3 className="font-semibold text-foreground">Context7 Library</h3>
+              <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-muted-foreground" />
             </div>
-            <p className="text-sm text-white/60">context7.com/surajmandalcell/darwin-ui</p>
-            <p className="text-xs text-white/40 mt-2">Structured docs for AI agents</p>
+            <p className="text-sm text-muted-foreground">context7.com/surajmandalcell/darwin-ui</p>
+            <p className="text-xs text-muted-foreground mt-2">Structured docs for AI agents</p>
           </a>
 
           <a
             href="https://darwin-ui.mandalsuraj.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors group"
+            className="p-4 rounded-xl bg-muted/50 border border-border hover:bg-muted transition-colors group"
           >
             <div className="flex items-center gap-2 mb-2">
               <BookOpen className="w-5 h-5 text-green-400" />
-              <h3 className="font-semibold text-white">Documentation</h3>
-              <ExternalLink className="w-4 h-4 text-white/40 group-hover:text-white/60" />
+              <h3 className="font-semibold text-foreground">Documentation</h3>
+              <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-muted-foreground" />
             </div>
-            <p className="text-sm text-white/60">darwin-ui.mandalsuraj.com</p>
-            <p className="text-xs text-white/40 mt-2">Human-readable documentation</p>
+            <p className="text-sm text-muted-foreground">darwin-ui.mandalsuraj.com</p>
+            <p className="text-xs text-muted-foreground mt-2">Human-readable documentation</p>
           </a>
         </div>
       </motion.div>
@@ -487,28 +487,28 @@ documentation from Context7 first:
         transition={{ delay: 0.3 }}
         className="space-y-4"
       >
-        <h2 className="text-2xl font-semibold text-white">How to Use</h2>
+        <h2 className="text-2xl font-semibold text-foreground">How to Use</h2>
 
         <div className="space-y-4">
-          <div className="p-4 rounded-xl bg-white/5 border border-white/10">
-            <h3 className="font-semibold text-white mb-2">With Cursor / Claude Code</h3>
-            <p className="text-sm text-white/60 mb-3">
+          <div className="p-4 rounded-xl bg-muted/50 border border-border">
+            <h3 className="font-semibold text-foreground mb-2">With Cursor / Claude Code</h3>
+            <p className="text-sm text-muted-foreground mb-3">
               If you have Context7 MCP configured, simply ask your AI to fetch Darwin UI docs:
             </p>
             <CodeBlock code={cursorPrompt} language="text" />
           </div>
 
-          <div className="p-4 rounded-xl bg-white/5 border border-white/10">
-            <h3 className="font-semibold text-white mb-2">Manual Reference</h3>
-            <p className="text-sm text-white/60 mb-3">
+          <div className="p-4 rounded-xl bg-muted/50 border border-border">
+            <h3 className="font-semibold text-foreground mb-2">Manual Reference</h3>
+            <p className="text-sm text-muted-foreground mb-3">
               Include this in your prompt to help AI find the latest docs:
             </p>
             <CodeBlock code={claudePrompt} language="text" />
           </div>
 
-          <div className="p-4 rounded-xl bg-white/5 border border-white/10">
-            <h3 className="font-semibold text-white mb-2">Direct URL</h3>
-            <p className="text-sm text-white/60 mb-3">
+          <div className="p-4 rounded-xl bg-muted/50 border border-border">
+            <h3 className="font-semibold text-foreground mb-2">Direct URL</h3>
+            <p className="text-sm text-muted-foreground mb-3">
               AI agents can fetch documentation directly:
             </p>
             <CodeBlock code={context7Example} language="text" />
@@ -524,7 +524,7 @@ documentation from Context7 first:
         transition={{ delay: 0.4 }}
         className="space-y-4"
       >
-        <h2 className="text-2xl font-semibold text-white">Benefits</h2>
+        <h2 className="text-2xl font-semibold text-foreground">Benefits</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {[
             { title: 'Always Up-to-Date', desc: 'AI gets the latest API and component changes' },
@@ -532,11 +532,11 @@ documentation from Context7 first:
             { title: 'Faster Development', desc: 'No need to manually copy-paste docs into prompts' },
             { title: 'Better Examples', desc: 'AI can reference real code examples from docs' },
           ].map((benefit) => (
-            <div key={benefit.title} className="flex gap-3 p-3 rounded-lg bg-white/5">
+            <div key={benefit.title} className="flex gap-3 p-3 rounded-lg bg-muted/50">
               <div className="w-2 h-2 rounded-full bg-green-400 mt-2 shrink-0" />
               <div>
-                <p className="font-medium text-white">{benefit.title}</p>
-                <p className="text-sm text-white/60">{benefit.desc}</p>
+                <p className="font-medium text-foreground">{benefit.title}</p>
+                <p className="text-sm text-muted-foreground">{benefit.desc}</p>
               </div>
             </div>
           ))}
@@ -571,13 +571,13 @@ function IntroductionPage() {
         animate="show"
       >
         <motion.h1
-          className="text-4xl font-bold text-white mb-4"
+          className="text-4xl font-bold text-foreground mb-4"
           variants={itemVariants}
         >
           Darwin UI
         </motion.h1>
         <motion.p
-          className="text-xl text-white/70 leading-relaxed"
+          className="text-xl text-muted-foreground leading-relaxed"
           variants={itemVariants}
         >
           A beautiful, macOS-inspired React component library with native-feeling
@@ -587,14 +587,14 @@ function IntroductionPage() {
 
       {/* Design Philosophy */}
       <motion.div
-        className="p-6 rounded-xl bg-gradient-to-br from-blue-500/10 to-purple-500/10 border border-white/10"
+        className="p-6 rounded-xl bg-gradient-to-br from-blue-500/10 to-purple-500/10 border border-border"
         variants={itemVariants}
         initial="hidden"
         animate="show"
         transition={{ delay: 0.15 }}
       >
-        <h2 className="text-xl font-semibold text-white mb-3">Design Philosophy</h2>
-        <p className="text-white/70 leading-relaxed">
+        <h2 className="text-xl font-semibold text-foreground mb-3">Design Philosophy</h2>
+        <p className="text-muted-foreground leading-relaxed">
           Darwin UI brings the polish and refinement of macOS to React applications.
           Every component is crafted with attention to detail—from subtle backdrop blurs
           and glass-morphism effects to spring-based animations that feel natural.
@@ -612,22 +612,22 @@ function IntroductionPage() {
         {features.map((feature, i) => (
           <motion.div
             key={feature.title}
-            className="p-4 rounded-xl bg-white/5 border border-white/10 cursor-pointer"
+            className="p-4 rounded-xl bg-muted/50 border border-border cursor-pointer"
             variants={featureCardVariants}
             custom={i}
             whileHover="hover"
             whileTap="tap"
           >
             <motion.div
-              className="w-10 h-10 rounded-lg bg-white/[0.06] border border-white/[0.08] flex items-center justify-center text-blue-400 mb-3"
+              className="w-10 h-10 rounded-lg bg-muted/50 border border-border/50 flex items-center justify-center text-blue-400 mb-3"
               variants={iconVariants}
               initial="initial"
               whileHover="hover"
             >
               {feature.icon}
             </motion.div>
-            <h3 className="font-semibold text-white mb-1">{feature.title}</h3>
-            <p className="text-sm text-white/60">{feature.desc}</p>
+            <h3 className="font-semibold text-foreground mb-1">{feature.title}</h3>
+            <p className="text-sm text-muted-foreground">{feature.desc}</p>
           </motion.div>
         ))}
       </motion.div>
@@ -638,7 +638,7 @@ function IntroductionPage() {
         animate="show"
         transition={{ delay: 0.4 }}
       >
-        <h2 className="text-2xl font-semibold text-white mb-4">Quick Install</h2>
+        <h2 className="text-2xl font-semibold text-foreground mb-4">Quick Install</h2>
         <CodeBlock code="npm install @pikoloo/darwin-ui" language="bash" />
       </motion.div>
     </motion.div>
@@ -701,13 +701,13 @@ function MyComponent() {
         animate="show"
       >
         <motion.h1
-          className="text-4xl font-bold text-white mb-4"
+          className="text-4xl font-bold text-foreground mb-4"
           variants={itemVariants}
         >
           Installation
         </motion.h1>
         <motion.p
-          className="text-lg text-white/70"
+          className="text-lg text-muted-foreground"
           variants={itemVariants}
         >
           Get up and running with Darwin UI in minutes.
@@ -721,11 +721,11 @@ function MyComponent() {
         initial="hidden"
         animate="show"
       >
-        <h2 className="text-2xl font-semibold text-white">1. Install the Package</h2>
+        <h2 className="text-2xl font-semibold text-foreground">1. Install the Package</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {installMethods.map((method) => (
             <motion.div key={method.title} variants={itemVariants}>
-              <h3 className="text-sm font-medium text-white/70 mb-2">{method.title}</h3>
+              <h3 className="text-sm font-medium text-muted-foreground mb-2">{method.title}</h3>
               <CodeBlock code={method.code} language="bash" />
             </motion.div>
           ))}
@@ -739,9 +739,9 @@ function MyComponent() {
         animate="show"
         transition={{ delay: 0.2 }}
       >
-        <h2 className="text-2xl font-semibold text-white mb-3">2. Import Styles</h2>
-        <p className="text-white/70 mb-4">
-          Add the Darwin UI stylesheet to your application entry point (e.g., <code className="text-blue-400 bg-white/5 px-1.5 py-0.5 rounded">_app.tsx</code>, <code className="text-blue-400 bg-white/5 px-1.5 py-0.5 rounded">main.tsx</code>, or <code className="text-blue-400 bg-white/5 px-1.5 py-0.5 rounded">layout.tsx</code>):
+        <h2 className="text-2xl font-semibold text-foreground mb-3">2. Import Styles</h2>
+        <p className="text-muted-foreground mb-4">
+          Add the Darwin UI stylesheet to your application entry point (e.g., <code className="text-blue-400 bg-muted/50 px-1.5 py-0.5 rounded">_app.tsx</code>, <code className="text-blue-400 bg-muted/50 px-1.5 py-0.5 rounded">main.tsx</code>, or <code className="text-blue-400 bg-muted/50 px-1.5 py-0.5 rounded">layout.tsx</code>):
         </p>
         <CodeBlock code={stylesImportCode} language="typescript" />
       </motion.div>
@@ -753,8 +753,8 @@ function MyComponent() {
         animate="show"
         transition={{ delay: 0.3 }}
       >
-        <h2 className="text-2xl font-semibold text-white mb-3">3. Setup Providers</h2>
-        <p className="text-white/70 mb-4">
+        <h2 className="text-2xl font-semibold text-foreground mb-3">3. Setup Providers</h2>
+        <p className="text-muted-foreground mb-4">
           Wrap your application with Darwin UI providers to enable overlays, alerts, and toasts:
         </p>
         <CodeBlock code={providerSetupCode} language="typescript" />
@@ -767,13 +767,13 @@ function MyComponent() {
         animate="show"
         transition={{ delay: 0.4 }}
       >
-        <h2 className="text-2xl font-semibold text-white mb-3">4. Start Using Components</h2>
-        <p className="text-white/70 mb-4">
+        <h2 className="text-2xl font-semibold text-foreground mb-3">4. Start Using Components</h2>
+        <p className="text-muted-foreground mb-4">
           Import and use any Darwin UI component in your application:
         </p>
         <CodeBlock code={firstComponentCode} language="typescript" />
-        <div className="mt-4 p-4 rounded-xl bg-white/5 border border-white/10">
-          <p className="text-sm text-white/50 mb-3">Preview:</p>
+        <div className="mt-4 p-4 rounded-xl bg-muted/50 border border-border">
+          <p className="text-sm text-muted-foreground mb-3">Preview:</p>
           <div className="flex items-center gap-2">
             <Button>Default</Button>
             <Button variant="primary">Primary</Button>
@@ -789,8 +789,8 @@ function MyComponent() {
         animate="show"
         transition={{ delay: 0.5 }}
       >
-        <h2 className="text-2xl font-semibold text-white mb-3">Peer Dependencies</h2>
-        <p className="text-white/70 mb-4">
+        <h2 className="text-2xl font-semibold text-foreground mb-3">Peer Dependencies</h2>
+        <p className="text-muted-foreground mb-4">
           Darwin UI requires React 18+ and Framer Motion for animations:
         </p>
         <CodeBlock
@@ -802,9 +802,9 @@ function MyComponent() {
   );
 }
 
-// shadcn CLI documentation page
+// ShadCN CLI documentation page
 function ShadcnCliPage() {
-  const shadcnInstallCode = `# Add individual components via shadcn CLI
+  const shadcnInstallCode = `# Add individual components via ShadCN CLI
 npx shadcn@latest add https://darwin-ui.mandalsuraj.com/registry/button.json
 npx shadcn@latest add https://darwin-ui.mandalsuraj.com/registry/card.json
 npx shadcn@latest add https://darwin-ui.mandalsuraj.com/registry/input.json`;
@@ -835,16 +835,16 @@ npm install @pikoloo/darwin-ui`;
         animate="show"
       >
         <motion.h1
-          className="text-4xl font-bold text-white mb-4"
+          className="text-4xl font-bold text-foreground mb-4"
           variants={itemVariants}
         >
-          shadcn CLI
+          ShadCN CLI
         </motion.h1>
         <motion.p
-          className="text-lg text-white/70"
+          className="text-lg text-muted-foreground"
           variants={itemVariants}
         >
-          Darwin UI is fully compatible with shadcn CLI for deep customization.
+          Darwin UI is fully compatible with ShadCN CLI for deep customization.
         </motion.p>
       </motion.div>
 
@@ -856,40 +856,40 @@ npm install @pikoloo/darwin-ui`;
         transition={{ delay: 0.1 }}
         className="space-y-4"
       >
-        <h2 className="text-2xl font-semibold text-white">Two Installation Methods</h2>
-        <p className="text-white/70">
+        <h2 className="text-2xl font-semibold text-foreground">Two Installation Methods</h2>
+        <p className="text-muted-foreground">
           Choose the method that best fits your project needs:
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 gap-4">
           {/* Method 1: Full Package */}
-          <div className="p-4 rounded-xl bg-white/5 border border-white/10 space-y-3">
+          <div className="p-4 rounded-xl bg-muted/50 border border-border space-y-3">
             <div className="flex items-center gap-2">
               <Badge variant="success">Recommended</Badge>
-              <h3 className="font-semibold text-white">npm install</h3>
+              <h3 className="font-semibold text-foreground">npm install</h3>
             </div>
-            <p className="text-sm text-white/60">
+            <p className="text-sm text-muted-foreground">
               Install the complete package. Get all components, automatic updates, and tree-shaking.
             </p>
             <CodeBlock code={npmInstallCode} language="bash" />
-            <div className="text-xs text-white/40 space-y-1">
+            <div className="text-xs text-muted-foreground/70 space-y-1">
               <p>✓ All components included</p>
               <p>✓ Automatic updates via npm</p>
               <p>✓ Tree-shaking removes unused code</p>
             </div>
           </div>
 
-          {/* Method 2: shadcn CLI */}
-          <div className="p-4 rounded-xl bg-white/5 border border-white/10 space-y-3">
+          {/* Method 2: ShadCN CLI */}
+          <div className="p-4 rounded-xl bg-muted/50 border border-border space-y-3">
             <div className="flex items-center gap-2">
               <Badge variant="secondary">Advanced</Badge>
-              <h3 className="font-semibold text-white">shadcn CLI</h3>
+              <h3 className="font-semibold text-foreground">ShadCN CLI</h3>
             </div>
-            <p className="text-sm text-white/60">
+            <p className="text-sm text-muted-foreground">
               Copy component source code into your project for deep customization.
             </p>
             <CodeBlock code={shadcnInstallCode} language="bash" />
-            <div className="text-xs text-white/40 space-y-1">
+            <div className="text-xs text-muted-foreground/70 space-y-1">
               <p>✓ Full control over component code</p>
               <p>✓ Customize internals freely</p>
               <p>✓ No external dependency</p>
@@ -906,7 +906,7 @@ npm install @pikoloo/darwin-ui`;
         transition={{ delay: 0.2 }}
         className="space-y-4"
       >
-        <h2 className="text-2xl font-semibold text-white">When to Use Each Method</h2>
+        <h2 className="text-2xl font-semibold text-foreground">When to Use Each Method</h2>
         <div className="overflow-auto">
           <Table>
             <TableHead>
@@ -921,12 +921,12 @@ npm install @pikoloo/darwin-ui`;
                 <TableCell><Badge variant="success">npm install</Badge></TableCell>
               </TableRow>
               <TableRow>
-                <TableCell>Adding a few components to existing shadcn project</TableCell>
-                <TableCell><Badge variant="secondary">shadcn CLI</Badge></TableCell>
+                <TableCell>Adding a few components to existing ShadCN project</TableCell>
+                <TableCell><Badge variant="secondary">ShadCN CLI</Badge></TableCell>
               </TableRow>
               <TableRow>
                 <TableCell>Need to modify component internals</TableCell>
-                <TableCell><Badge variant="secondary">shadcn CLI</Badge></TableCell>
+                <TableCell><Badge variant="secondary">ShadCN CLI</Badge></TableCell>
               </TableRow>
               <TableRow>
                 <TableCell>Want automatic updates</TableCell>
@@ -934,7 +934,7 @@ npm install @pikoloo/darwin-ui`;
               </TableRow>
               <TableRow>
                 <TableCell>Building a design system on top</TableCell>
-                <TableCell><Badge variant="secondary">shadcn CLI</Badge></TableCell>
+                <TableCell><Badge variant="secondary">ShadCN CLI</Badge></TableCell>
               </TableRow>
             </TableBody>
           </Table>
@@ -949,9 +949,9 @@ npm install @pikoloo/darwin-ui`;
         transition={{ delay: 0.3 }}
         className="space-y-4"
       >
-        <h2 className="text-2xl font-semibold text-white">Available Registry Components</h2>
-        <p className="text-white/70">
-          All these components can be installed via shadcn CLI:
+        <h2 className="text-2xl font-semibold text-foreground">Available Registry Components</h2>
+        <p className="text-muted-foreground">
+          All these components can be installed via ShadCN CLI:
         </p>
         <div className="flex flex-wrap gap-2">
           {availableComponents.map((comp) => (
@@ -963,7 +963,7 @@ npm install @pikoloo/darwin-ui`;
         <div className="p-4 rounded-xl bg-blue-500/10 border border-blue-500/20">
           <p className="text-sm text-blue-400">
             <strong>Registry URL pattern:</strong>
-            <code className="ml-2 bg-white/10 px-2 py-0.5 rounded">
+            <code className="ml-2 bg-muted px-2 py-0.5 rounded">
               https://darwin-ui.mandalsuraj.com/registry/[component].json
             </code>
           </p>
@@ -978,27 +978,27 @@ npm install @pikoloo/darwin-ui`;
         transition={{ delay: 0.4 }}
         className="space-y-4"
       >
-        <h2 className="text-2xl font-semibold text-white">Customization Workflow</h2>
+        <h2 className="text-2xl font-semibold text-foreground">Customization Workflow</h2>
         <div className="space-y-3">
           <div className="flex gap-3 items-start">
-            <div className="w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center text-xs font-bold shrink-0">1</div>
+            <div className="w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center text-xs font-bold text-white shrink-0">1</div>
             <div>
-              <p className="font-medium text-white">Install component via CLI</p>
-              <p className="text-sm text-white/60">Component source is copied to your project (usually <code className="bg-white/10 px-1 rounded">components/ui/</code>)</p>
+              <p className="font-medium text-foreground">Install component via CLI</p>
+              <p className="text-sm text-muted-foreground">Component source is copied to your project (usually <code className="bg-muted px-1 rounded">components/ui/</code>)</p>
             </div>
           </div>
           <div className="flex gap-3 items-start">
-            <div className="w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center text-xs font-bold shrink-0">2</div>
+            <div className="w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center text-xs font-bold text-white shrink-0">2</div>
             <div>
-              <p className="font-medium text-white">Dependencies installed automatically</p>
-              <p className="text-sm text-white/60">Required packages like framer-motion are added to your package.json</p>
+              <p className="font-medium text-foreground">Dependencies installed automatically</p>
+              <p className="text-sm text-muted-foreground">Required packages like framer-motion are added to your package.json</p>
             </div>
           </div>
           <div className="flex gap-3 items-start">
-            <div className="w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center text-xs font-bold shrink-0">3</div>
+            <div className="w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center text-xs font-bold text-white shrink-0">3</div>
             <div>
-              <p className="font-medium text-white">Customize freely</p>
-              <p className="text-sm text-white/60">Modify styles, props, behavior - the code is yours</p>
+              <p className="font-medium text-foreground">Customize freely</p>
+              <p className="text-sm text-muted-foreground">Modify styles, props, behavior - the code is yours</p>
             </div>
           </div>
         </div>
@@ -1044,13 +1044,13 @@ function App() {
         animate="show"
       >
         <motion.h1
-          className="text-4xl font-bold text-white mb-4"
+          className="text-4xl font-bold text-foreground mb-4"
           variants={itemVariants}
         >
           Quick Start
         </motion.h1>
         <motion.p
-          className="text-lg text-white/70"
+          className="text-lg text-muted-foreground"
           variants={itemVariants}
         >
           Build your first Darwin UI app in 5 minutes.
@@ -1063,8 +1063,8 @@ function App() {
         animate="show"
         transition={{ delay: 0.2 }}
       >
-        <h2 className="text-xl font-semibold text-white mb-3">Basic Example</h2>
-        <p className="text-white/70 mb-4">
+        <h2 className="text-xl font-semibold text-foreground mb-3">Basic Example</h2>
+        <p className="text-muted-foreground mb-4">
           Import components and start building immediately:
         </p>
         <CodeBlock code={exampleCode} language="tsx" />
@@ -1076,7 +1076,7 @@ function App() {
         animate="show"
       >
         <motion.h2
-          className="text-xl font-semibold text-white mb-3"
+          className="text-xl font-semibold text-foreground mb-3"
           variants={itemVariants}
         >
           What's Next?
@@ -1085,7 +1085,7 @@ function App() {
           {nextSteps.map((item, i) => (
             <motion.div
               key={item.title}
-              className="flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/10 cursor-pointer transition-colors"
+              className="flex items-center gap-3 p-3 rounded-lg bg-muted/50 border border-border cursor-pointer transition-colors"
               variants={itemVariants}
               custom={i}
               whileHover={{
@@ -1102,8 +1102,8 @@ function App() {
                 <ChevronRight className="w-4 h-4 text-blue-400" />
               </motion.div>
               <div>
-                <h3 className="font-medium text-white">{item.title}</h3>
-                <p className="text-sm text-white/50">{item.desc}</p>
+                <h3 className="font-medium text-foreground">{item.title}</h3>
+                <p className="text-sm text-muted-foreground">{item.desc}</p>
               </div>
             </motion.div>
           ))}
@@ -1292,8 +1292,8 @@ function WindowPreview() {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ type: "spring", stiffness: 300, damping: 25 }}
     >
-      <div className="rounded-lg border border-white/10 bg-neutral-950/80 shadow-sm overflow-hidden">
-        <div className="flex items-center justify-between border-b border-white/10 px-3 py-2 bg-white/5">
+      <div className="rounded-lg border border-border bg-card shadow-sm overflow-hidden">
+        <div className="flex items-center justify-between border-b border-border px-3 py-2 bg-muted/50">
           <motion.div
             className="flex gap-1.5"
             initial={{ opacity: 0, x: -10 }}
@@ -1312,7 +1312,7 @@ function WindowPreview() {
             ))}
           </motion.div>
           <motion.div
-            className="text-xs font-medium text-white/70"
+            className="text-xs font-medium text-muted-foreground"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
@@ -1322,7 +1322,7 @@ function WindowPreview() {
           <div className="w-12" />
         </div>
         <motion.div
-          className="p-4 text-sm text-white/70"
+          className="p-4 text-sm text-muted-foreground"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
@@ -1382,7 +1382,7 @@ function CardPreview() {
           <CardDescription>This is a description of the card content.</CardDescription>
         </CardHeader>
         <CardContent>
-          <p className="text-white/70 text-sm">
+          <p className="text-muted-foreground text-sm">
             Cards can contain any content including text, images, and other components.
           </p>
         </CardContent>
@@ -1559,16 +1559,16 @@ function CloseButtonPreview() {
     >
       <motion.div variants={itemVariants} className="flex flex-col items-center gap-2">
         <CloseButton onClick={() => {}} />
-        <span className="text-xs text-white/50">Default</span>
+        <span className="text-xs text-muted-foreground">Default</span>
       </motion.div>
       <motion.div variants={itemVariants} className="flex flex-col items-center gap-2">
-        <div className="p-3 bg-white/5 rounded-lg border border-white/10">
+        <div className="p-3 bg-muted/50 rounded-lg border border-border">
           <div className="flex items-center gap-3">
-            <span className="text-sm text-white/70">Dismissible item</span>
+            <span className="text-sm text-muted-foreground">Dismissible item</span>
             <CloseButton onClick={() => {}} />
           </div>
         </div>
-        <span className="text-xs text-white/50">In context</span>
+        <span className="text-xs text-muted-foreground">In context</span>
       </motion.div>
     </motion.div>
   );
@@ -1591,8 +1591,8 @@ function ContextMenuPreview() {
       animate={{ opacity: 1 }}
     >
       <ContextMenu items={menuItems}>
-        <div className="p-8 border border-dashed border-white/20 rounded-lg text-center">
-          <p className="text-white/60 text-sm">Right-click here to open context menu</p>
+        <div className="p-8 border border-dashed border-border rounded-lg text-center">
+          <p className="text-muted-foreground text-sm">Right-click here to open context menu</p>
         </div>
       </ContextMenu>
     </motion.div>
@@ -1618,7 +1618,7 @@ function ModalPreview() {
       {isBrowser && createPortal(
         <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} title="Example Modal">
           <div className="space-y-4">
-            <p className="text-white/70">
+            <p className="text-muted-foreground">
               This is a modal dialog. You can put any content here.
             </p>
             <div className="flex gap-2 justify-end">
@@ -1841,7 +1841,7 @@ function AvatarPreview() {
       animate="show"
     >
       <motion.div variants={itemVariants} className="flex flex-col gap-2">
-        <span className="text-xs text-white/50">Single Avatar</span>
+        <span className="text-xs text-muted-foreground">Single Avatar</span>
         <div className="flex items-center gap-3">
           <Avatar src="https://i.pravatar.cc/150?img=1" alt="User" size="sm" />
           <Avatar src="https://i.pravatar.cc/150?img=2" alt="User" size="md" />
@@ -1850,7 +1850,7 @@ function AvatarPreview() {
         </div>
       </motion.div>
       <motion.div variants={itemVariants} className="flex flex-col gap-2">
-        <span className="text-xs text-white/50">Avatar Group</span>
+        <span className="text-xs text-muted-foreground">Avatar Group</span>
         <AvatarGroup max={4}>
           <Avatar src="https://i.pravatar.cc/150?img=4" alt="User 1" />
           <Avatar src="https://i.pravatar.cc/150?img=5" alt="User 2" />
@@ -1881,7 +1881,7 @@ function DateSelectPreview() {
       />
       {dateConfig?.startDate && (
         <motion.p
-          className="mt-2 text-xs text-white/50"
+          className="mt-2 text-xs text-muted-foreground"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
@@ -1958,7 +1958,7 @@ function ImagePreview() {
       animate="show"
     >
       <motion.div variants={itemVariants} className="flex flex-col gap-2">
-        <span className="text-xs text-white/50">Click to Enlarge</span>
+        <span className="text-xs text-muted-foreground">Click to Enlarge</span>
         <Image
           src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=200&fit=crop"
           alt="Mountain landscape"
@@ -1968,7 +1968,7 @@ function ImagePreview() {
         />
       </motion.div>
       <motion.div variants={itemVariants} className="flex flex-col gap-2">
-        <span className="text-xs text-white/50">Different Rounded Options</span>
+        <span className="text-xs text-muted-foreground">Different Rounded Options</span>
         <div className="flex gap-2">
           <Image
             src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=100&h=100&fit=crop"
@@ -2001,8 +2001,8 @@ function PopoverPreview() {
         </PopoverTrigger>
         <PopoverContent>
           <div className="space-y-2">
-            <h4 className="font-medium text-white">Popover Content</h4>
-            <p className="text-sm text-white/70">
+            <h4 className="font-medium text-foreground">Popover Content</h4>
+            <p className="text-sm text-muted-foreground">
               This is a popover with some helpful information. It can contain any content.
             </p>
             <div className="flex gap-2 pt-2">
@@ -2035,14 +2035,14 @@ function ProgressPreview() {
       animate="show"
     >
       <motion.div variants={itemVariants} className="space-y-3">
-        <span className="text-xs text-white/50">Linear Progress</span>
+        <span className="text-xs text-muted-foreground">Linear Progress</span>
         <Progress value={value} showValue />
         <Progress value={45} variant="success" />
         <Progress value={75} variant="warning" />
         <Progress indeterminate variant="gradient" />
       </motion.div>
       <motion.div variants={itemVariants} className="space-y-3">
-        <span className="text-xs text-white/50">Circular Progress</span>
+        <span className="text-xs text-muted-foreground">Circular Progress</span>
         <div className="flex items-center gap-4">
           <CircularProgress value={value} showValue />
           <CircularProgress value={80} variant="success" showValue />
@@ -2068,23 +2068,23 @@ function RevealPreview() {
       </Button>
       <div key={key} className="grid grid-cols-2 gap-4">
         <Reveal type="slide" direction="up" delay={0}>
-          <div className="p-4 bg-white/5 rounded-lg border border-white/10 text-center">
-            <span className="text-sm text-white/70">Slide Up</span>
+          <div className="p-4 bg-muted/50 rounded-lg border border-border text-center">
+            <span className="text-sm text-muted-foreground">Slide Up</span>
           </div>
         </Reveal>
         <Reveal type="fade" delay={0.1}>
-          <div className="p-4 bg-white/5 rounded-lg border border-white/10 text-center">
-            <span className="text-sm text-white/70">Fade In</span>
+          <div className="p-4 bg-muted/50 rounded-lg border border-border text-center">
+            <span className="text-sm text-muted-foreground">Fade In</span>
           </div>
         </Reveal>
         <Reveal type="scale" delay={0.2}>
-          <div className="p-4 bg-white/5 rounded-lg border border-white/10 text-center">
-            <span className="text-sm text-white/70">Scale</span>
+          <div className="p-4 bg-muted/50 rounded-lg border border-border text-center">
+            <span className="text-sm text-muted-foreground">Scale</span>
           </div>
         </Reveal>
         <Reveal type="blur" delay={0.3}>
-          <div className="p-4 bg-white/5 rounded-lg border border-white/10 text-center">
-            <span className="text-sm text-white/70">Blur</span>
+          <div className="p-4 bg-muted/50 rounded-lg border border-border text-center">
+            <span className="text-sm text-muted-foreground">Blur</span>
           </div>
         </Reveal>
       </div>
@@ -2105,7 +2105,7 @@ function SliderPreview() {
     >
       <motion.div variants={itemVariants}>
         <div className="flex justify-between items-center mb-2">
-          <span className="text-sm text-white/70">Volume</span>
+          <span className="text-sm text-muted-foreground">Volume</span>
           <span className="text-sm font-mono text-blue-400">{value}%</span>
         </div>
         <Slider
@@ -2118,7 +2118,7 @@ function SliderPreview() {
       </motion.div>
       <motion.div variants={itemVariants}>
         <div className="flex justify-between items-center mb-2">
-          <span className="text-sm text-white/70">With value display</span>
+          <span className="text-sm text-muted-foreground">With value display</span>
         </div>
         <Slider
           value={value}
@@ -2150,22 +2150,22 @@ function TabsPreview() {
           <TabsTrigger value="settings">Settings</TabsTrigger>
         </TabsList>
         <TabsContent value="overview">
-          <div className="p-4 rounded-lg bg-white/5 border border-white/10">
-            <p className="text-white/70 text-sm">
+          <div className="p-4 rounded-lg bg-muted/50 border border-border">
+            <p className="text-muted-foreground text-sm">
               This is the overview tab content. It provides a general summary of the item.
             </p>
           </div>
         </TabsContent>
         <TabsContent value="features">
-          <div className="p-4 rounded-lg bg-white/5 border border-white/10">
-            <p className="text-white/70 text-sm">
+          <div className="p-4 rounded-lg bg-muted/50 border border-border">
+            <p className="text-muted-foreground text-sm">
               Features tab showing available capabilities and options.
             </p>
           </div>
         </TabsContent>
         <TabsContent value="settings">
-          <div className="p-4 rounded-lg bg-white/5 border border-white/10">
-            <p className="text-white/70 text-sm">
+          <div className="p-4 rounded-lg bg-muted/50 border border-border">
+            <p className="text-muted-foreground text-sm">
               Settings tab for configuration options and preferences.
             </p>
           </div>
@@ -2195,7 +2195,7 @@ function TextareaPreview() {
           rows={4}
         />
         <div className="flex justify-end mt-1">
-          <span className={`text-xs ${value.length >= maxChars ? 'text-red-400' : 'text-white/50'}`}>
+          <span className={`text-xs ${value.length >= maxChars ? 'text-red-400' : 'text-muted-foreground'}`}>
             {value.length}/{maxChars}
           </span>
         </div>
@@ -2303,16 +2303,16 @@ function SidebarPreview() {
       {/* Collapsible toggle */}
       <div className="flex items-center gap-2">
         <Switch checked={isCollapsed} onChange={setIsCollapsed} />
-        <span className="text-sm text-white/70">
+        <span className="text-sm text-muted-foreground">
           {isCollapsed ? 'Collapsed' : 'Expanded'}
         </span>
       </div>
 
       {/* Container to show sidebar in a realistic layout */}
-      <div className="rounded-lg border border-white/10 bg-neutral-950/80 overflow-hidden">
-        <div className="flex h-64">
+      <div className="rounded-lg border border-border bg-card overflow-hidden">
+        <div className="flex h-80">
           {/* Sidebar area - using the actual Sidebar component */}
-          <div className="border-r border-white/10 bg-neutral-900/50">
+          <div className="border-r border-border bg-muted">
             <Sidebar
               items={sidebarItems}
               activeItem={activeItem}
@@ -2325,13 +2325,13 @@ function SidebarPreview() {
           {/* Content area */}
           <div className="flex-1 p-4 flex items-center justify-center">
             <div className="text-center">
-              <p className="text-white/70 text-sm">Current page:</p>
-              <p className="text-white font-medium mt-1">{activeItem}</p>
+              <p className="text-muted-foreground text-sm">Current page:</p>
+              <p className="text-foreground font-medium mt-1">{activeItem}</p>
             </div>
           </div>
         </div>
       </div>
-      <p className="text-xs text-white/40 text-center">
+      <p className="text-xs text-muted-foreground/70 text-center">
         Use the toggle or click &quot;Collapse&quot; in the sidebar. On mobile, it shows as a slide-out menu.
       </p>
     </motion.div>
@@ -2360,8 +2360,8 @@ function ContactFormPreview() {
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
     >
-      <div className="p-4 rounded-lg bg-white/5 border border-white/10">
-        <h3 className="text-sm font-medium text-white mb-3">Quick Connect</h3>
+      <div className="p-4 rounded-lg bg-muted/50 border border-border">
+        <h3 className="text-sm font-medium text-foreground mb-3">Quick Connect</h3>
         <form onSubmit={handleSubmit} className="space-y-3">
           <Input
             placeholder="Your name"
@@ -2410,20 +2410,20 @@ console.log(greeting);
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
     >
-      <div className="rounded-lg border border-white/10 bg-neutral-950/80 overflow-hidden">
-        <div className="flex items-center gap-2 px-3 py-2 border-b border-white/10 bg-white/5">
+      <div className="rounded-lg border border-border bg-card overflow-hidden">
+        <div className="flex items-center gap-2 px-3 py-2 border-b border-border bg-muted/50">
           <div className="flex gap-1">
             <span className="px-2 py-0.5 text-xs bg-blue-500/20 text-blue-400 rounded">B</span>
-            <span className="px-2 py-0.5 text-xs bg-white/10 text-white/60 rounded italic">I</span>
-            <span className="px-2 py-0.5 text-xs bg-white/10 text-white/60 rounded">H1</span>
+            <span className="px-2 py-0.5 text-xs bg-muted text-muted-foreground rounded italic">I</span>
+            <span className="px-2 py-0.5 text-xs bg-muted text-muted-foreground rounded">H1</span>
           </div>
-          <span className="text-xs text-white/40 ml-auto">Markdown Editor</span>
+          <span className="text-xs text-muted-foreground/70 ml-auto">Markdown Editor</span>
         </div>
-        <div className="p-3 font-mono text-xs text-white/70 whitespace-pre-wrap max-h-40 overflow-y-auto">
+        <div className="p-3 font-mono text-xs text-muted-foreground whitespace-pre-wrap max-h-40 overflow-y-auto">
           {markdown}
         </div>
       </div>
-      <p className="text-xs text-white/40 mt-2 text-center">Simplified preview (full editor has rich toolbar)</p>
+      <p className="text-xs text-muted-foreground/70 mt-2 text-center">Simplified preview (full editor has rich toolbar)</p>
     </motion.div>
   );
 }
@@ -2836,7 +2836,7 @@ function ComponentPage({ name }: { name: string }) {
         animate="show"
       >
         <motion.div
-          className="flex items-center gap-2 text-sm text-white/50 mb-2"
+          className="flex items-center gap-2 text-sm text-muted-foreground mb-2"
           variants={itemVariants}
         >
           <span>Components</span>
@@ -2846,16 +2846,16 @@ function ComponentPage({ name }: { name: string }) {
           >
             <ChevronRight className="w-3 h-3" />
           </motion.div>
-          <span className="text-white/70">{displayName}</span>
+          <span className="text-muted-foreground">{displayName}</span>
         </motion.div>
         <motion.h1
-          className="text-4xl font-bold text-white mb-4"
+          className="text-4xl font-bold text-foreground mb-4"
           variants={itemVariants}
         >
           {displayName}
         </motion.h1>
         <motion.p
-          className="text-lg text-white/70"
+          className="text-lg text-muted-foreground"
           variants={itemVariants}
         >
           A beautiful, accessible {name.replace(/-/g, ' ')} component with native macOS styling.
@@ -2863,14 +2863,14 @@ function ComponentPage({ name }: { name: string }) {
       </motion.div>
 
       <motion.div
-        className="p-6 rounded-xl bg-white/5 border border-white/10 overflow-hidden"
+        className="p-6 rounded-xl bg-muted/50 border border-border overflow-hidden"
         variants={itemVariants}
         initial="hidden"
         animate="show"
         transition={{ delay: 0.2 }}
       >
         <motion.h3
-          className="text-sm font-medium text-white/50 mb-4"
+          className="text-sm font-medium text-muted-foreground mb-4"
           initial={{ opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.3 }}
@@ -2883,7 +2883,7 @@ function ComponentPage({ name }: { name: string }) {
               {PreviewComponent ? (
                 <PreviewComponent key={name} />
               ) : (
-                <p className="text-white/40 text-sm text-center">No preview available</p>
+                <p className="text-muted-foreground text-sm text-center">No preview available</p>
               )}
             </AnimatedPreviewWrapper>
           </div>
@@ -2896,7 +2896,7 @@ function ComponentPage({ name }: { name: string }) {
         animate="show"
       >
         <motion.h2
-          className="text-xl font-semibold text-white mb-3"
+          className="text-xl font-semibold text-foreground mb-3"
           variants={itemVariants}
         >
           Import
@@ -2915,7 +2915,7 @@ function ComponentPage({ name }: { name: string }) {
         animate="show"
       >
         <motion.h2
-          className="text-xl font-semibold text-white mb-3"
+          className="text-xl font-semibold text-foreground mb-3"
           variants={itemVariants}
         >
           Usage
@@ -2990,21 +2990,21 @@ function ColorsPage() {
         animate="show"
       >
         <motion.div
-          className="flex items-center gap-2 text-sm text-white/50 mb-2"
+          className="flex items-center gap-2 text-sm text-muted-foreground mb-2"
           variants={itemVariants}
         >
           <span>Theming</span>
           <ChevronRight className="w-3 h-3" />
-          <span className="text-white/70">Colors</span>
+          <span className="text-muted-foreground">Colors</span>
         </motion.div>
         <motion.h1
-          className="text-4xl font-bold text-white mb-4"
+          className="text-4xl font-bold text-foreground mb-4"
           variants={itemVariants}
         >
           Colors
         </motion.h1>
         <motion.p
-          className="text-lg text-white/70"
+          className="text-lg text-muted-foreground"
           variants={itemVariants}
         >
           Darwin UI uses CSS variables for consistent, customizable colors across all components.
@@ -3013,13 +3013,13 @@ function ColorsPage() {
 
       {/* Accent Colors Preview */}
       <motion.div
-        className="p-6 rounded-xl bg-white/5 border border-white/10"
+        className="p-6 rounded-xl bg-muted/50 border border-border"
         variants={itemVariants}
         initial="hidden"
         animate="show"
         transition={{ delay: 0.2 }}
       >
-        <h3 className="text-xl font-semibold text-white mb-4">Accent Colors</h3>
+        <h3 className="text-xl font-semibold text-foreground mb-4">Accent Colors</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {accentColors.map((accent, i) => (
             <motion.div
@@ -3030,8 +3030,8 @@ function ColorsPage() {
               whileHover={{ scale: 1.05 }}
             >
               <div className={`w-full h-16 rounded-lg ${accent.color} mb-2`} />
-              <p className="text-white font-medium">{accent.name}</p>
-              <p className="text-white/50 text-sm font-mono">{accent.hex}</p>
+              <p className="text-foreground font-medium">{accent.name}</p>
+              <p className="text-muted-foreground text-sm font-mono">{accent.hex}</p>
             </motion.div>
           ))}
         </div>
@@ -3039,13 +3039,13 @@ function ColorsPage() {
 
       {/* Badge Variants */}
       <motion.div
-        className="p-6 rounded-xl bg-white/5 border border-white/10"
+        className="p-6 rounded-xl bg-muted/50 border border-border"
         variants={itemVariants}
         initial="hidden"
         animate="show"
         transition={{ delay: 0.25 }}
       >
-        <h3 className="text-xl font-semibold text-white mb-4">Semantic Colors</h3>
+        <h3 className="text-xl font-semibold text-foreground mb-4">Semantic Colors</h3>
         <div className="flex flex-wrap gap-2">
           {[
             { variant: undefined, label: 'Default' },
@@ -3067,8 +3067,8 @@ function ColorsPage() {
         animate="show"
         transition={{ delay: 0.3 }}
       >
-        <h2 className="text-2xl font-semibold text-white mb-3">CSS Variables Reference</h2>
-        <p className="text-white/70 mb-4">
+        <h2 className="text-2xl font-semibold text-foreground mb-3">CSS Variables Reference</h2>
+        <p className="text-muted-foreground mb-4">
           All colors are defined as CSS custom properties using RGB values for easy opacity manipulation:
         </p>
         <CodeBlock code={cssVariablesCode} language="css" />
@@ -3081,7 +3081,7 @@ function ColorsPage() {
         animate="show"
         transition={{ delay: 0.4 }}
       >
-        <h2 className="text-2xl font-semibold text-white mb-3">Usage Examples</h2>
+        <h2 className="text-2xl font-semibold text-foreground mb-3">Usage Examples</h2>
         <CodeBlock code={accentUsageCode} language="typescript" />
       </motion.div>
     </motion.div>
@@ -3140,21 +3140,21 @@ localStorage.getItem('darwin-theme'); // Returns: 'light' | 'dark' | 'system'`;
         animate="show"
       >
         <motion.div
-          className="flex items-center gap-2 text-sm text-white/50 mb-2"
+          className="flex items-center gap-2 text-sm text-muted-foreground mb-2"
           variants={itemVariants}
         >
           <span>Theming</span>
           <ChevronRight className="w-3 h-3" />
-          <span className="text-white/70">Dark Mode</span>
+          <span className="text-muted-foreground">Dark Mode</span>
         </motion.div>
         <motion.h1
-          className="text-4xl font-bold text-white mb-4"
+          className="text-4xl font-bold text-foreground mb-4"
           variants={itemVariants}
         >
           Dark Mode
         </motion.h1>
         <motion.p
-          className="text-lg text-white/70"
+          className="text-lg text-muted-foreground"
           variants={itemVariants}
         >
           Darwin UI supports automatic dark mode with system preference detection and localStorage persistence.
@@ -3163,13 +3163,13 @@ localStorage.getItem('darwin-theme'); // Returns: 'light' | 'dark' | 'system'`;
 
       {/* Preview */}
       <motion.div
-        className="p-6 rounded-xl bg-white/5 border border-white/10"
+        className="p-6 rounded-xl bg-muted/50 border border-border"
         variants={itemVariants}
         initial="hidden"
         animate="show"
         transition={{ delay: 0.2 }}
       >
-        <h3 className="text-xl font-semibold text-white mb-4">Preview</h3>
+        <h3 className="text-xl font-semibold text-foreground mb-4">Preview</h3>
         <div className="flex flex-col gap-3 max-w-sm">
           <div className="flex items-center gap-3">
             <Skeleton className="h-12 w-12 rounded-full" />
@@ -3193,8 +3193,8 @@ localStorage.getItem('darwin-theme'); // Returns: 'light' | 'dark' | 'system'`;
         animate="show"
         transition={{ delay: 0.3 }}
       >
-        <h2 className="text-2xl font-semibold text-white mb-3">ThemeProvider Setup</h2>
-        <p className="text-white/70 mb-4">
+        <h2 className="text-2xl font-semibold text-foreground mb-3">ThemeProvider Setup</h2>
+        <p className="text-muted-foreground mb-4">
           Wrap your application with ThemeProvider to enable dark mode support:
         </p>
         <CodeBlock code={themeProviderCode} language="typescript" />
@@ -3207,8 +3207,8 @@ localStorage.getItem('darwin-theme'); // Returns: 'light' | 'dark' | 'system'`;
         animate="show"
         transition={{ delay: 0.35 }}
       >
-        <h2 className="text-2xl font-semibold text-white mb-3">localStorage Persistence</h2>
-        <p className="text-white/70 mb-4">
+        <h2 className="text-2xl font-semibold text-foreground mb-3">localStorage Persistence</h2>
+        <p className="text-muted-foreground mb-4">
           Theme preference is automatically saved and restored from localStorage:
         </p>
         <CodeBlock code={localStorageNote} language="typescript" />
@@ -3221,9 +3221,9 @@ localStorage.getItem('darwin-theme'); // Returns: 'light' | 'dark' | 'system'`;
         animate="show"
         transition={{ delay: 0.4 }}
       >
-        <h2 className="text-2xl font-semibold text-white mb-3">Toggle Implementation</h2>
-        <p className="text-white/70 mb-4">
-          Use the <code className="text-blue-400 bg-white/5 px-1.5 py-0.5 rounded">useTheme</code> hook to access and change the current theme:
+        <h2 className="text-2xl font-semibold text-foreground mb-3">Toggle Implementation</h2>
+        <p className="text-muted-foreground mb-4">
+          Use the <code className="text-blue-400 bg-muted/50 px-1.5 py-0.5 rounded">useTheme</code> hook to access and change the current theme:
         </p>
         <CodeBlock code={useThemeCode} language="typescript" />
       </motion.div>
@@ -3310,21 +3310,21 @@ module.exports = {
         animate="show"
       >
         <motion.div
-          className="flex items-center gap-2 text-sm text-white/50 mb-2"
+          className="flex items-center gap-2 text-sm text-muted-foreground mb-2"
           variants={itemVariants}
         >
           <span>Theming</span>
           <ChevronRight className="w-3 h-3" />
-          <span className="text-white/70">Customization</span>
+          <span className="text-muted-foreground">Customization</span>
         </motion.div>
         <motion.h1
-          className="text-4xl font-bold text-white mb-4"
+          className="text-4xl font-bold text-foreground mb-4"
           variants={itemVariants}
         >
           Customization
         </motion.h1>
         <motion.p
-          className="text-lg text-white/70"
+          className="text-lg text-muted-foreground"
           variants={itemVariants}
         >
           Customize Darwin UI components to match your brand with CSS variables, className props, and Tailwind integration.
@@ -3333,13 +3333,13 @@ module.exports = {
 
       {/* Preview */}
       <motion.div
-        className="p-6 rounded-xl bg-white/5 border border-white/10"
+        className="p-6 rounded-xl bg-muted/50 border border-border"
         variants={itemVariants}
         initial="hidden"
         animate="show"
         transition={{ delay: 0.2 }}
       >
-        <h3 className="text-xl font-semibold text-white mb-4">Customization Examples</h3>
+        <h3 className="text-xl font-semibold text-foreground mb-4">Customization Examples</h3>
         <div className="flex flex-wrap gap-3">
           <Button className="bg-gradient-to-r from-pink-500 to-violet-500 hover:from-pink-600 hover:to-violet-600">
             Gradient
@@ -3360,8 +3360,8 @@ module.exports = {
         animate="show"
         transition={{ delay: 0.3 }}
       >
-        <h2 className="text-2xl font-semibold text-white mb-3">CSS Variable Overrides</h2>
-        <p className="text-white/70 mb-4">
+        <h2 className="text-2xl font-semibold text-foreground mb-3">CSS Variable Overrides</h2>
+        <p className="text-muted-foreground mb-4">
           Override CSS custom properties to change colors globally across all components:
         </p>
         <CodeBlock code={cssOverridesCode} language="css" />
@@ -3374,9 +3374,9 @@ module.exports = {
         animate="show"
         transition={{ delay: 0.35 }}
       >
-        <h2 className="text-2xl font-semibold text-white mb-3">Component className Prop</h2>
-        <p className="text-white/70 mb-4">
-          Every Darwin UI component accepts a <code className="text-blue-400 bg-white/5 px-1.5 py-0.5 rounded">className</code> prop for inline customization:
+        <h2 className="text-2xl font-semibold text-foreground mb-3">Component className Prop</h2>
+        <p className="text-muted-foreground mb-4">
+          Every Darwin UI component accepts a <code className="text-blue-400 bg-muted/50 px-1.5 py-0.5 rounded">className</code> prop for inline customization:
         </p>
         <CodeBlock code={classNameCode} language="typescript" />
       </motion.div>
@@ -3388,8 +3388,8 @@ module.exports = {
         animate="show"
         transition={{ delay: 0.4 }}
       >
-        <h2 className="text-2xl font-semibold text-white mb-3">Tailwind CSS Integration</h2>
-        <p className="text-white/70 mb-4">
+        <h2 className="text-2xl font-semibold text-foreground mb-3">Tailwind CSS Integration</h2>
+        <p className="text-muted-foreground mb-4">
           Extend your Tailwind config to use Darwin UI&apos;s CSS variables as custom colors:
         </p>
         <CodeBlock code={tailwindConfigCode} language="javascript" />
@@ -3410,7 +3410,7 @@ function ThemingPage({ name }: { name: string }) {
     default:
       return (
         <motion.div
-          className="text-white/50"
+          className="text-muted-foreground"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
@@ -3448,7 +3448,7 @@ function PageContent({ section, page, onNavigate }: { section: string; page: str
   // Default fallback
   return (
     <motion.div
-      className="text-white/50"
+      className="text-muted-foreground"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
     >
@@ -3475,7 +3475,7 @@ function SidebarNavItem({
       className={`relative w-full text-left px-2 py-1.5 text-sm rounded-md transition-colors ${
         isActive
           ? 'text-blue-400'
-          : 'text-white/60 hover:text-white hover:bg-white/5'
+          : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
       }`}
       variants={sidebarItemVariants}
       custom={index}
@@ -3527,7 +3527,7 @@ function DocsNavigation({
         >
           <motion.button
             onClick={() => toggleSection(sectionId)}
-            className="w-full flex items-center gap-2 px-2 py-1.5 text-sm text-white/70 hover:text-white hover:bg-white/5 rounded-md transition-colors"
+            className="w-full flex items-center gap-2 px-2 py-1.5 text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-md transition-colors"
             whileHover={{ x: 4 }}
             whileTap={{ scale: 0.98 }}
           >
@@ -3689,18 +3689,18 @@ export function DeveloperApp({ windowState: _windowState }: DeveloperAppProps) {
   };
 
   return (
-    <div className="flex flex-col md:flex-row h-full bg-neutral-900 relative">
+    <div className="flex flex-col md:flex-row h-full bg-card relative">
       {/* Mobile Header */}
-      <div className="md:hidden flex items-center justify-between p-4 border-b border-white/10 bg-neutral-950 flex-shrink-0">
+      <div className="md:hidden flex items-center justify-between p-4 border-b border-border bg-card flex-shrink-0">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded bg-white/[0.08] border border-white/[0.08] flex items-center justify-center">
+          <div className="w-8 h-8 rounded bg-muted border border-border/50 flex items-center justify-center">
             <BookOpen className="w-4 h-4 text-blue-400" />
           </div>
-          <span className="font-semibold text-white">Documentation</span>
+          <span className="font-semibold text-foreground">Documentation</span>
         </div>
         <button
           onClick={() => setShowMobileMenu(true)}
-          className="p-2 -mr-2 text-white/70 hover:text-white transition-colors"
+          className="p-2 -mr-2 text-muted-foreground hover:text-foreground transition-colors"
         >
           <Menu className="w-6 h-6" />
         </button>
@@ -3718,17 +3718,17 @@ export function DeveloperApp({ windowState: _windowState }: DeveloperAppProps) {
               onClick={() => setShowMobileMenu(false)}
             />
             <motion.div
-              className="fixed inset-y-0 right-0 w-64 bg-neutral-950 z-50 border-l border-white/10 flex flex-col shadow-2xl"
+              className="fixed inset-y-0 right-0 w-64 bg-card z-50 border-l border-border flex flex-col shadow-2xl"
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
             >
-              <div className="p-4 border-b border-white/10 flex items-center justify-between">
-                <span className="font-semibold text-white">Menu</span>
+              <div className="p-4 border-b border-border flex items-center justify-between">
+                <span className="font-semibold text-foreground">Menu</span>
                 <button
                   onClick={() => setShowMobileMenu(false)}
-                  className="p-1 text-white/50 hover:text-white transition-colors"
+                  className="p-1 text-muted-foreground hover:text-foreground transition-colors"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -3748,27 +3748,27 @@ export function DeveloperApp({ windowState: _windowState }: DeveloperAppProps) {
 
       {/* Desktop Sidebar */}
       <motion.div
-        className="hidden md:flex w-56 bg-neutral-950 border-r border-white/10 flex-col overflow-hidden flex-shrink-0"
+        className="hidden md:flex w-56 bg-card border-r border-border flex-col overflow-hidden flex-shrink-0"
         initial={{ x: -56, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
       >
         {/* Sidebar Header */}
         <motion.div
-          className="p-4 border-b border-white/10"
+          className="p-4 border-b border-border"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
         >
           <div className="flex items-center gap-2">
             <motion.div
-              className="w-6 h-6 rounded bg-white/[0.08] border border-white/[0.08] flex items-center justify-center"
+              className="w-6 h-6 rounded bg-muted border border-border/50 flex items-center justify-center"
               whileHover={{ scale: 1.1, rotate: 5 }}
               whileTap={{ scale: 0.95 }}
             >
               <BookOpen className="w-3.5 h-3.5 text-blue-400" />
             </motion.div>
-            <span className="font-semibold text-white text-sm">Documentation</span>
+            <span className="font-semibold text-foreground text-sm">Documentation</span>
           </div>
         </motion.div>
 
@@ -3783,7 +3783,7 @@ export function DeveloperApp({ windowState: _windowState }: DeveloperAppProps) {
 
         {/* Sidebar Footer */}
         <motion.div
-          className="p-3 border-t border-white/10"
+          className="p-3 border-t border-border"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
@@ -3792,7 +3792,7 @@ export function DeveloperApp({ windowState: _windowState }: DeveloperAppProps) {
             href="https://github.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-2 py-1.5 text-sm text-white/50 hover:text-white hover:bg-white/5 rounded-md transition-colors"
+            className="flex items-center gap-2 px-2 py-1.5 text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-md transition-colors"
             whileHover={{ x: 4 }}
             whileTap={{ scale: 0.98 }}
           >
@@ -3819,7 +3819,7 @@ export function DeveloperApp({ windowState: _windowState }: DeveloperAppProps) {
           {/* Copy for AI button */}
           <div className="flex justify-end mb-4">
             <motion.button
-              className="px-3 py-1.5 text-xs text-white/60 hover:text-white/90 hover:bg-white/10 rounded-md transition-colors flex items-center gap-1.5 border border-white/10"
+              className="px-3 py-1.5 text-xs text-muted-foreground hover:text-foreground/90 hover:bg-muted rounded-md transition-colors flex items-center gap-1.5 border border-border"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={copyForAI}
