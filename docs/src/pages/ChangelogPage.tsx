@@ -1,6 +1,6 @@
 "use client";
 
-import { StandaloneNav } from '../components/StandaloneNav';
+import { UnifiedNavbar } from '../components/UnifiedNavbar';
 import { ChangelogApp } from '../components/desktop/apps/ChangelogApp';
 import type { WindowState } from '../contexts/desktop-context';
 
@@ -21,7 +21,7 @@ export default function ChangelogPage() {
 
   return (
     <div className="h-screen w-screen bg-neutral-900 overflow-hidden flex flex-col">
-      <StandaloneNav />
+      <UnifiedNavbar />
       <div className="flex-1 overflow-hidden">
         <ChangelogApp windowState={mockWindowState} />
       </div>
