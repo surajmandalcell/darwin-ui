@@ -2,6 +2,7 @@
 
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Button,
   Input,
@@ -239,7 +240,7 @@ const COMPONENTS: ComponentDef[] = [
     category: 'form-controls',
     size: 'sm',
     preview: (
-      <div className="space-y-1">
+      <div className="space-y-2">
         <Checkbox label="Option A" defaultChecked />
         <Checkbox label="Option B" />
       </div>
@@ -273,19 +274,14 @@ const COMPONENTS: ComponentDef[] = [
     id: 'select',
     name: 'Select',
     category: 'form-controls',
-    size: 'tall',
+    size: 'sm',
     preview: (
-      <div className="w-full space-y-2">
+      <div className="w-full">
         <Select defaultValue="react" className="w-full">
           <option value="react">React</option>
           <option value="vue">Vue</option>
           <option value="svelte">Svelte</option>
         </Select>
-        <div className="text-[10px] text-white/40 space-y-1 pl-1">
-          <div className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-cyan-500"></span> React</div>
-          <div className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-emerald-500"></span> Vue</div>
-          <div className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-orange-500"></span> Svelte</div>
-        </div>
       </div>
     ),
   },
@@ -293,18 +289,13 @@ const COMPONENTS: ComponentDef[] = [
     id: 'multiselect',
     name: 'MultiSelect',
     category: 'form-controls',
-    size: 'tall',
+    size: 'sm',
     preview: (
-      <div className="w-full space-y-2">
+      <div className="w-full">
         <div className="flex items-center gap-1 flex-wrap p-2 rounded-lg bg-white/5 border border-white/10">
           <Badge variant="info" className="text-[10px]">React</Badge>
           <Badge variant="success" className="text-[10px]">Vue</Badge>
-          <Badge variant="warning" className="text-[10px]">Svelte</Badge>
-          <span className="text-white/40 text-xs">+2</span>
-        </div>
-        <div className="text-[10px] text-white/40 space-y-1 pl-1">
-          <div className="flex items-center gap-2"><Checkbox label="Angular" /></div>
-          <div className="flex items-center gap-2"><Checkbox label="Next.js" /></div>
+          <span className="text-white/40 text-xs">+3</span>
         </div>
       </div>
     ),
@@ -334,7 +325,7 @@ const COMPONENTS: ComponentDef[] = [
     category: 'form-controls',
     size: 'sm',
     preview: (
-      <div className="flex flex-col items-center gap-1 p-2 rounded-lg border border-dashed border-white/20 bg-white/[0.02]">
+      <div className="flex flex-col items-center gap-1 p-2 px-4 rounded-lg border border-dashed border-white/20 bg-white/[0.02]">
         <UploadIcon className="w-4 h-4 text-white/40" />
         <span className="text-[10px] text-white/40">Drop files</span>
       </div>
@@ -373,14 +364,18 @@ const COMPONENTS: ComponentDef[] = [
     id: 'card',
     name: 'Card',
     category: 'data-display',
-    size: 'sm',
+    size: 'wide',
     preview: (
-      <Card className="bg-white/[0.02] p-2">
-        <CardHeader className="p-1">
-          <CardTitle className="text-xs">Dashboard</CardTitle>
+      <Card className="bg-white/[0.02] p-3 w-full">
+        <CardHeader className="p-1 pb-2">
+          <CardTitle className="text-sm">Dashboard Overview</CardTitle>
         </CardHeader>
         <CardContent className="p-1">
-          <p className="text-[10px] text-white/50">Stats ready</p>
+          <p className="text-[11px] text-white/50">Your analytics and metrics are ready to view.</p>
+          <div className="flex gap-2 mt-2">
+            <Badge variant="success" className="text-[9px]">Active</Badge>
+            <Badge variant="info" className="text-[9px]">3 updates</Badge>
+          </div>
         </CardContent>
       </Card>
     ),
@@ -480,14 +475,14 @@ const COMPONENTS: ComponentDef[] = [
     id: 'dialog',
     name: 'Dialog',
     category: 'feedback',
-    size: 'sm',
+    size: 'wide',
     preview: (
-      <div className="p-2 rounded-lg bg-white/5 border border-white/10 shadow-xl">
-        <div className="text-xs font-medium text-white mb-1">Confirm?</div>
-        <p className="text-[10px] text-white/50 mb-2">Are you sure?</p>
-        <div className="flex gap-1">
-          <Button size="sm" className="text-[10px] h-5 px-2">Yes</Button>
-          <Button size="sm" variant="ghost" className="text-[10px] h-5 px-2">No</Button>
+      <div className="p-3 rounded-lg bg-white/5 border border-white/10 shadow-xl w-full">
+        <div className="text-sm font-medium text-white mb-1">Confirm Action</div>
+        <p className="text-[11px] text-white/50 mb-3">Are you sure you want to continue with this action?</p>
+        <div className="flex gap-2 justify-end">
+          <Button size="sm" variant="ghost" className="text-[10px] h-6 px-3">Cancel</Button>
+          <Button size="sm" className="text-[10px] h-6 px-3">Confirm</Button>
         </div>
       </div>
     ),
@@ -496,14 +491,17 @@ const COMPONENTS: ComponentDef[] = [
     id: 'modal',
     name: 'Modal',
     category: 'feedback',
-    size: 'sm',
+    size: 'wide',
     preview: (
-      <div className="relative p-2 rounded-lg bg-neutral-900/90 border border-white/10 shadow-2xl">
-        <button className="absolute top-1 right-1 text-white/40 hover:text-white/60">
-          <X className="w-3 h-3" />
+      <div className="relative p-3 rounded-lg bg-neutral-900/90 border border-white/10 shadow-2xl w-full">
+        <button className="absolute top-2 right-2 text-white/40 hover:text-white/60">
+          <X className="w-3.5 h-3.5" />
         </button>
-        <div className="text-xs font-medium text-white mb-1">Modal</div>
-        <p className="text-[10px] text-white/50">Full-screen overlay</p>
+        <div className="text-sm font-medium text-white mb-1">Modal Window</div>
+        <p className="text-[11px] text-white/50 mb-2">Full-screen overlay with backdrop</p>
+        <div className="flex gap-2 mt-3">
+          <Button size="sm" className="text-[10px] h-6 px-3 flex-1">Save Changes</Button>
+        </div>
       </div>
     ),
   },
@@ -526,17 +524,18 @@ const COMPONENTS: ComponentDef[] = [
     id: 'popover',
     name: 'Popover',
     category: 'feedback',
-    size: 'sm',
+    size: 'wide',
     preview: (
-      <div className="flex flex-col items-center gap-1">
-        <div className="p-2 rounded-lg bg-white/5 border border-white/10 shadow-lg">
-          <div className="text-[10px] text-white/80">Quick actions</div>
-          <div className="flex gap-1 mt-1">
-            <div className="w-4 h-4 rounded bg-white/10" />
-            <div className="w-4 h-4 rounded bg-white/10" />
+      <div className="flex items-start gap-3 w-full">
+        <Button size="sm" variant="outline" className="text-[10px] h-6">Open Popover</Button>
+        <div className="p-2 rounded-lg bg-white/5 border border-white/10 shadow-lg flex-1">
+          <div className="text-[11px] text-white/80 mb-1">Quick Actions</div>
+          <div className="flex gap-2">
+            <div className="w-6 h-6 rounded bg-white/10 flex items-center justify-center text-[9px] text-white/60">Edit</div>
+            <div className="w-6 h-6 rounded bg-white/10 flex items-center justify-center text-[9px] text-white/60">Copy</div>
+            <div className="w-6 h-6 rounded bg-white/10 flex items-center justify-center text-[9px] text-white/60">Share</div>
           </div>
         </div>
-        <Button size="sm" variant="outline" className="text-[10px] h-5">Open</Button>
       </div>
     ),
   },
@@ -562,20 +561,16 @@ const COMPONENTS: ComponentDef[] = [
     id: 'accordion',
     name: 'Accordion',
     category: 'navigation',
-    size: 'tall',
+    size: 'wide',
     preview: (
       <Accordion type="single" defaultValue="item-1" className="w-full">
         <AccordionItem value="item-1">
           <AccordionTrigger className="text-[10px] py-1.5">Getting Started</AccordionTrigger>
-          <AccordionContent className="text-[10px] text-white/50 pb-2">Installation guide and setup instructions</AccordionContent>
+          <AccordionContent className="text-[10px] text-white/50 pb-2">Installation guide</AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-2">
           <AccordionTrigger className="text-[10px] py-1.5">Components</AccordionTrigger>
           <AccordionContent className="text-[10px] text-white/50 pb-2">Browse all components</AccordionContent>
-        </AccordionItem>
-        <AccordionItem value="item-3">
-          <AccordionTrigger className="text-[10px] py-1.5">Theming</AccordionTrigger>
-          <AccordionContent className="text-[10px] text-white/50 pb-2">Customize colors and styles</AccordionContent>
         </AccordionItem>
       </Accordion>
     ),
@@ -584,16 +579,18 @@ const COMPONENTS: ComponentDef[] = [
     id: 'dropdownmenu',
     name: 'DropdownMenu',
     category: 'navigation',
-    size: 'sm',
+    size: 'wide',
     preview: (
-      <div className="flex flex-col items-center gap-1">
-        <div className="p-1 rounded-lg bg-white/5 border border-white/10 shadow-lg w-full">
-          <div className="px-2 py-1 text-[10px] text-white/80 hover:bg-white/5 rounded">Edit</div>
-          <div className="px-2 py-1 text-[10px] text-white/80 hover:bg-white/5 rounded">Delete</div>
-        </div>
-        <Button size="sm" variant="outline" className="text-[10px] h-5">
-          <MoreHorizontal className="w-3 h-3" />
+      <div className="flex items-start gap-3 w-full">
+        <Button size="sm" variant="outline" className="text-[10px] h-6">
+          <MoreHorizontal className="w-3 h-3 mr-1" /> Options
         </Button>
+        <div className="p-1.5 rounded-lg bg-white/5 border border-white/10 shadow-lg flex-1">
+          <div className="px-2 py-1 text-[10px] text-white/80 hover:bg-white/5 rounded">Edit Item</div>
+          <div className="px-2 py-1 text-[10px] text-white/80 hover:bg-white/5 rounded">Duplicate</div>
+          <div className="h-px bg-white/10 my-1" />
+          <div className="px-2 py-1 text-[10px] text-red-400 hover:bg-white/5 rounded">Delete</div>
+        </div>
       </div>
     ),
   },
@@ -618,22 +615,41 @@ const COMPONENTS: ComponentDef[] = [
     id: 'sidebar',
     name: 'Sidebar',
     category: 'navigation',
-    size: 'tall',
+    size: 'large',
     preview: (
-      <div className="flex gap-2 h-full">
-        <div className="w-16 bg-white/5 border border-white/10 rounded p-2 flex flex-col">
-          <div className="w-full h-4 bg-white/10 rounded mb-2" />
-          <div className="w-full h-4 bg-indigo-500/30 rounded mb-2" />
-          <div className="w-full h-4 bg-white/10 rounded mb-2" />
-          <div className="w-full h-4 bg-white/10 rounded mb-2" />
-          <div className="mt-auto w-full h-4 bg-white/5 rounded" />
+      <div className="flex gap-3 h-full w-full">
+        <div className="w-24 bg-white/5 border border-white/10 rounded-lg p-2 flex flex-col">
+          <div className="w-full h-5 bg-white/10 rounded mb-2 flex items-center px-2">
+            <div className="w-3 h-3 rounded bg-indigo-500/50 mr-2" />
+            <span className="text-[9px] text-white/60">Home</span>
+          </div>
+          <div className="w-full h-5 bg-indigo-500/30 rounded mb-2 flex items-center px-2">
+            <div className="w-3 h-3 rounded bg-indigo-500 mr-2" />
+            <span className="text-[9px] text-white">Dashboard</span>
+          </div>
+          <div className="w-full h-5 bg-white/10 rounded mb-2 flex items-center px-2">
+            <div className="w-3 h-3 rounded bg-white/30 mr-2" />
+            <span className="text-[9px] text-white/60">Settings</span>
+          </div>
+          <div className="w-full h-5 bg-white/10 rounded mb-2 flex items-center px-2">
+            <div className="w-3 h-3 rounded bg-white/30 mr-2" />
+            <span className="text-[9px] text-white/60">Profile</span>
+          </div>
+          <div className="mt-auto w-full h-5 bg-white/5 rounded flex items-center px-2">
+            <div className="w-3 h-3 rounded-full bg-emerald-500/50 mr-2" />
+            <span className="text-[9px] text-white/40">User</span>
+          </div>
         </div>
         <div className="flex-1 text-[10px] text-white/50 flex flex-col">
-          <div className="text-white/80 mb-2">Main Content</div>
-          <div className="flex-1 bg-white/[0.02] rounded-lg p-2">
-            <Skeleton className="h-2 w-full rounded mb-1" />
-            <Skeleton className="h-2 w-3/4 rounded mb-1" />
-            <Skeleton className="h-2 w-1/2 rounded" />
+          <div className="text-white/80 mb-2 text-xs">Main Content Area</div>
+          <div className="flex-1 bg-white/[0.02] rounded-lg p-3 border border-white/5">
+            <Skeleton className="h-3 w-full rounded mb-2" />
+            <Skeleton className="h-3 w-3/4 rounded mb-2" />
+            <Skeleton className="h-3 w-1/2 rounded mb-3" />
+            <div className="flex gap-2">
+              <Skeleton className="h-8 w-16 rounded" />
+              <Skeleton className="h-8 w-16 rounded" />
+            </div>
           </div>
         </div>
       </div>
@@ -705,24 +721,24 @@ const COMPONENTS: ComponentDef[] = [
     id: 'piechart',
     name: 'PieChart',
     category: 'charts',
-    size: 'large',
+    size: 'wide',
     preview: (
-      <div className="h-full w-full flex items-center gap-4">
-        <div className="h-28 w-28 flex-shrink-0">
+      <div className="h-full w-full flex items-center gap-3">
+        <div className="h-16 w-16 flex-shrink-0">
           <MiniPieChart />
         </div>
-        <div className="flex-1 space-y-2">
-          <div className="flex items-center gap-2 text-[10px]">
+        <div className="flex-1 space-y-1">
+          <div className="flex items-center gap-2 text-[9px]">
             <div className="w-2 h-2 rounded-full bg-indigo-500"></div>
             <span className="text-white/60">Desktop</span>
             <span className="text-white/80 ml-auto">45%</span>
           </div>
-          <div className="flex items-center gap-2 text-[10px]">
+          <div className="flex items-center gap-2 text-[9px]">
             <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
             <span className="text-white/60">Mobile</span>
             <span className="text-white/80 ml-auto">32%</span>
           </div>
-          <div className="flex items-center gap-2 text-[10px]">
+          <div className="flex items-center gap-2 text-[9px]">
             <div className="w-2 h-2 rounded-full bg-pink-500"></div>
             <span className="text-white/60">Tablet</span>
             <span className="text-white/80 ml-auto">23%</span>
@@ -735,30 +751,29 @@ const COMPONENTS: ComponentDef[] = [
     id: 'donutchart',
     name: 'DonutChart',
     category: 'charts',
-    size: 'large',
+    size: 'wide',
     preview: (
-      <div className="h-full w-full flex items-center gap-4">
-        <div className="h-28 w-28 flex-shrink-0 relative">
+      <div className="h-full w-full flex items-center gap-3">
+        <div className="h-16 w-16 flex-shrink-0 relative">
           <MiniDonutChart />
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center">
-              <div className="text-sm font-bold text-white">73%</div>
-              <div className="text-[8px] text-white/40">Complete</div>
+              <div className="text-[10px] font-bold text-white">73%</div>
             </div>
           </div>
         </div>
-        <div className="flex-1 space-y-2">
-          <div className="flex items-center gap-2 text-[10px]">
+        <div className="flex-1 space-y-1">
+          <div className="flex items-center gap-2 text-[9px]">
             <div className="w-2 h-2 rounded-full bg-indigo-500"></div>
-            <span className="text-white/60">Completed</span>
+            <span className="text-white/60">Done</span>
             <span className="text-white/80 ml-auto">73%</span>
           </div>
-          <div className="flex items-center gap-2 text-[10px]">
+          <div className="flex items-center gap-2 text-[9px]">
             <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
-            <span className="text-white/60">In Progress</span>
+            <span className="text-white/60">Active</span>
             <span className="text-white/80 ml-auto">18%</span>
           </div>
-          <div className="flex items-center gap-2 text-[10px]">
+          <div className="flex items-center gap-2 text-[9px]">
             <div className="w-2 h-2 rounded-full bg-pink-500"></div>
             <span className="text-white/60">Pending</span>
             <span className="text-white/80 ml-auto">9%</span>
@@ -933,8 +948,13 @@ function ComponentCard({ component, delay = 0 }: ComponentCardProps) {
         }}
       />
 
-      {/* Component name */}
-      <p className="text-[10px] text-white/40 uppercase tracking-wider mb-3 font-medium">{component.name}</p>
+      {/* Component name - clickable link to docs */}
+      <Link
+        to={`/docs/components/${component.id}`}
+        className="text-[10px] text-white/40 uppercase tracking-wider mb-3 font-medium block hover:text-white/70 transition-colors"
+      >
+        {component.name}
+      </Link>
 
       {/* Preview - adjust height based on size */}
       <div className={`relative z-10 flex items-center justify-center ${
