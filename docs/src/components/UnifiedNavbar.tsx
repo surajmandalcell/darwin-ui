@@ -2,9 +2,10 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Monitor, BookOpen, History } from 'lucide-react';
+import { Monitor, BookOpen, History, Gauge } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { DarwinLogo } from './icons/DarwinLogo';
+import { useAnimationSpeed } from '../contexts/animation-speed-context';
 
 const navItems = [
   { path: '/desktop', label: 'Desktop', icon: Monitor },
@@ -100,6 +101,8 @@ export function UnifiedNavbar() {
   }
 
   // Docs/Changelog: same layout with bg/border
+  const { speed, setSpeed } = useAnimationSpeed();
+
   return (
     <nav className="flex-shrink-0 h-10 bg-neutral-900 border-b border-white/10 flex items-center px-4 gap-6">
       <Link
@@ -132,6 +135,22 @@ export function UnifiedNavbar() {
           </Link>
         );
       })}
+
+      {/* Animation Speed Control */}
+      <div className="ml-auto flex items-center gap-2">
+        <Gauge className="w-3.5 h-3.5 text-white/30" />
+        <input
+          type="range"
+          min="0.25"
+          max="3"
+          step="0.25"
+          value={speed}
+          onChange={(e) => setSpeed(parseFloat(e.target.value))}
+          className="w-16 h-1 bg-white/10 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-2.5 [&::-webkit-slider-thumb]:h-2.5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white/60 [&::-webkit-slider-thumb]:hover:bg-white/80 [&::-webkit-slider-thumb]:transition-colors"
+          title={`Animation speed: ${speed}x`}
+        />
+        <span className="text-[10px] text-white/40 w-6 tabular-nums">{speed}x</span>
+      </div>
     </nav>
   );
 }

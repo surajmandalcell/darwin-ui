@@ -268,26 +268,25 @@ export default function DashboardShowcase() {
 
                         <div className="grid xl:grid-cols-3 gap-4 mb-5">
                             {/* Main Chart */}
-                            <div className="xl:col-span-2 space-y-4">
-                                <Card className="p-4">
-                                    <div className="flex items-center justify-between mb-4">
-                                        <div>
-                                            <h3 className="text-base font-semibold text-white">Revenue Trend</h3>
-                                            <div className="flex items-center gap-2 mt-1">
-                                                <span className="text-xs text-emerald-400 font-medium">+12.5%</span>
-                                                <span className="text-xs text-white/40">vs last month</span>
-                                            </div>
-                                        </div>
-                                        <div className="flex gap-2">
-                                            <Button size="sm" variant="ghost" className="text-xs">
-                                                Last 6 months <ChevronDown className="w-3 h-3 ml-2" />
-                                            </Button>
-                                            <Button size="icon" variant="ghost" className="h-7 w-7">
-                                                <Download className="w-3.5 h-3.5" />
-                                            </Button>
+                            <Card className="xl:col-span-2 p-4 flex flex-col">
+                                <div className="flex items-center justify-between mb-4">
+                                    <div>
+                                        <h3 className="text-base font-semibold text-white">Revenue Trend</h3>
+                                        <div className="flex items-center gap-2 mt-1">
+                                            <span className="text-xs text-emerald-400 font-medium">+12.5%</span>
+                                            <span className="text-xs text-white/40">vs last month</span>
                                         </div>
                                     </div>
-                                    <div className="h-[220px] w-full min-w-0">
+                                    <div className="flex gap-2">
+                                        <Button size="sm" variant="ghost" className="text-xs">
+                                            Last 6 months <ChevronDown className="w-3 h-3 ml-2" />
+                                        </Button>
+                                        <Button size="icon" variant="ghost" className="h-7 w-7">
+                                            <Download className="w-3.5 h-3.5" />
+                                        </Button>
+                                    </div>
+                                </div>
+                                <div className="flex-1 min-h-[220px] w-full min-w-0">
                                         {mounted ? (
                                             <ResponsiveContainer width="100%" height="100%">
                                                 <AreaChart data={revenueData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
@@ -350,12 +349,11 @@ export default function DashboardShowcase() {
                                                     />
                                                 </AreaChart>
                                             </ResponsiveContainer>
-                                        ) : (
-                                            <div className="w-full h-full flex items-center justify-center text-white/10">Loading chart...</div>
-                                        )}
-                                    </div>
-                                </Card>
-                            </div>
+                                    ) : (
+                                        <div className="w-full h-full flex items-center justify-center text-white/10">Loading chart...</div>
+                                    )}
+                                </div>
+                            </Card>
 
                             {/* Pie Chart Card */}
                             <Card className="p-4 flex flex-col">
