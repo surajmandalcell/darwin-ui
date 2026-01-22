@@ -22,14 +22,14 @@ export function DashboardDemoSection() {
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Build Production Interfaces</h2>
+        <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 font-heading">Build Production Interfaces</h2>
         <p className="text-lg text-white/40 max-w-2xl mx-auto">
           See how Darwin UI components come together in a complete dashboard application.
         </p>
       </motion.div>
 
       <motion.div
-        className="max-w-7xl mx-auto relative z-10"
+        className="max-w-[1600px] mx-auto relative z-10"
         initial={{ opacity: 0, y: 60, scale: 0.95 }}
         animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
         transition={{ delay: 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}

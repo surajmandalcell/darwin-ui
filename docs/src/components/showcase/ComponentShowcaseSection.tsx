@@ -969,7 +969,7 @@ export function ComponentShowcaseSection() {
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6 }}
       >
-        <h2 className="text-4xl sm:text-5xl font-bold mb-4">Beautiful Components</h2>
+        <h2 className="text-4xl sm:text-5xl font-bold mb-4 font-heading">Beautiful Components</h2>
         <p className="text-lg text-white/50">35 production-ready components with smooth animations and accessibility built-in.</p>
       </motion.div>
 

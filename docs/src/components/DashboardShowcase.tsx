@@ -136,7 +136,7 @@ export default function DashboardShowcase() {
                 <div className="w-12" />
             </div>
 
-            <div className="flex flex-col md:flex-row min-h-[600px] md:h-[700px] xl:h-[750px]">
+            <div className="flex flex-col md:flex-row min-h-[650px] md:h-[800px] xl:h-[850px]">
                 {/* Sidebar - Compact */}
                 <div className="w-[200px] flex-shrink-0 border-r border-white/10 bg-neutral-950 hidden md:flex flex-col">
                     <div className="p-3">
@@ -225,7 +225,7 @@ export default function DashboardShowcase() {
                         {/* Header */}
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
                             <div>
-                                <h1 className="text-2xl font-bold text-white tracking-tight">Dashboard Overview</h1>
+                                <h1 className="text-2xl font-bold text-white tracking-tight" style={{ fontFamily: 'var(--font-heading)' }}>Dashboard Overview</h1>
                                 <p className="text-sm text-white/50 mt-1">Monitor your key metrics and performance</p>
                             </div>
                             <div className="flex items-center gap-3">

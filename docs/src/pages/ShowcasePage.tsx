@@ -114,7 +114,7 @@ export default function ShowcasePage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.1 }}
               >
-                <h1 className="text-[clamp(3rem,8vw,6rem)] font-bold leading-[0.95] tracking-[-0.03em]">
+                <h1 className="text-[clamp(3rem,8vw,6rem)] font-bold leading-[0.95] tracking-[-0.03em] font-heading">
                   <span className="block text-white">Build</span>
                   <span className="block bg-gradient-to-r from-white via-white/90 to-white/40 bg-clip-text text-transparent">
                     beautiful
@@ -241,7 +241,7 @@ export default function ShowcasePage() {
               >
                 <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
                 <div className="relative">
-                  <h3 className="text-lg font-semibold text-white mb-3">{feature.title}</h3>
+                  <h3 className="text-lg font-semibold text-white mb-3 font-heading">{feature.title}</h3>
                   <p className="text-sm text-white/40 leading-relaxed">{feature.desc}</p>
                 </div>
                 <ArrowUpRight className="absolute top-6 right-6 w-5 h-5 text-white/10 group-hover:text-white/40 transition-colors" />
@@ -270,7 +270,7 @@ export default function ShowcasePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 font-heading">
                 Ready to build something beautiful?
               </h2>
               <p className="text-lg text-white/40 mb-8 max-w-xl mx-auto">
