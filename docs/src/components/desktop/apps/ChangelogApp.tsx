@@ -35,17 +35,6 @@ interface ChangelogAppProps {
 }
 
 // Animation variants
-const containerVariants = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.05,
-      delayChildren: 0.1,
-    },
-  },
-};
-
 const itemVariants = {
   hidden: { opacity: 0, y: 10 },
   show: {
@@ -449,25 +438,29 @@ export function ChangelogApp({ windowState: _windowState }: ChangelogAppProps) {
 
       {/* Version List */}
       <div className="flex-1 overflow-y-auto p-4 md:p-6">
-        <motion.div
-          className="space-y-4"
-          variants={containerVariants}
-          initial="hidden"
-          animate="show"
-        >
-          {changelog.map((entry) => (
-            viewMode === 'flat' ? (
-              <FlatVersionCard key={entry.version} entry={entry} />
-            ) : (
-              <VersionCard
-                key={entry.version}
-                entry={entry}
-                isExpanded={expandedVersions.has(entry.version)}
-                onToggle={() => toggleVersion(entry.version)}
-              />
-            )
-          ))}
-        </motion.div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={viewMode}
+            className="space-y-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
+          >
+            {changelog.map((entry) => (
+              viewMode === 'flat' ? (
+                <FlatVersionCard key={entry.version} entry={entry} />
+              ) : (
+                <VersionCard
+                  key={entry.version}
+                  entry={entry}
+                  isExpanded={expandedVersions.has(entry.version)}
+                  onToggle={() => toggleVersion(entry.version)}
+                />
+              )
+            ))}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   );
