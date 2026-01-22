@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { ComponentGridSection } from '../components/showcase/ComponentGridSection';
 import { DashboardDemoSection } from '../components/showcase/DashboardDemoSection';
 import { UnifiedNavbar } from '../components/UnifiedNavbar';
+import { HeroComponentPreview } from '../components/showcase/HeroComponentPreview';
 import { useRef } from 'react';
 
 export default function ShowcasePage() {
@@ -179,65 +180,7 @@ export default function ShowcasePage() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, delay: 0.3 }}
             >
-              {/* Floating card preview */}
-              <div className="relative">
-                {/* Main card */}
-                <motion.div
-                  className="relative bg-white/[0.02] backdrop-blur-xl border border-white/[0.08] rounded-2xl p-6 shadow-2xl"
-                  animate={{ y: [0, -10, 0] }}
-                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                >
-                  <div className="flex items-center gap-3 mb-6">
-                    <DarwinLogo showBackground className="w-10 h-10" />
-                    <div>
-                      <div className="text-sm font-medium text-white">Darwin UI</div>
-                      <div className="text-xs text-white/40">Component Library</div>
-                    </div>
-                  </div>
-
-                  {/* Mini component previews */}
-                  <div className="space-y-4">
-                    <div className="flex gap-2">
-                      <div className="h-9 px-4 bg-white/10 rounded-lg flex items-center text-sm text-white/80">Primary</div>
-                      <div className="h-9 px-4 border border-white/10 rounded-lg flex items-center text-sm text-white/50">Secondary</div>
-                      <div className="h-9 px-4 bg-white/[0.02] rounded-lg flex items-center text-sm text-white/30">Ghost</div>
-                    </div>
-                    <div className="h-10 bg-white/[0.03] rounded-lg border border-white/[0.06] flex items-center px-4">
-                      <span className="text-sm text-white/30">Search components...</span>
-                    </div>
-                    <div className="flex gap-3">
-                      <div className="flex-1 h-24 bg-gradient-to-br from-indigo-500/20 to-purple-500/10 rounded-xl border border-white/[0.06]" />
-                      <div className="flex-1 h-24 bg-gradient-to-br from-emerald-500/20 to-cyan-500/10 rounded-xl border border-white/[0.06]" />
-                    </div>
-                  </div>
-                </motion.div>
-
-                {/* Floating elements */}
-                <motion.div
-                  className="absolute -top-6 -right-6 bg-white/[0.03] backdrop-blur border border-white/[0.08] rounded-xl p-4"
-                  animate={{ y: [0, -15, 0], rotate: [0, 2, 0] }}
-                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                >
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center text-xs font-medium">JD</div>
-                    <div className="text-xs">
-                      <div className="text-white/80">John Doe</div>
-                      <div className="text-white/30">Online</div>
-                    </div>
-                  </div>
-                </motion.div>
-
-                <motion.div
-                  className="absolute -bottom-4 -left-8 bg-white/[0.03] backdrop-blur border border-white/[0.08] rounded-xl p-3 px-4"
-                  animate={{ y: [0, 10, 0], rotate: [0, -1, 0] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 rounded-full bg-emerald-400" />
-                    <span className="text-xs text-white/60">Build passing</span>
-                  </div>
-                </motion.div>
-              </div>
+              <HeroComponentPreview />
             </motion.div>
           </div>
         </motion.div>
