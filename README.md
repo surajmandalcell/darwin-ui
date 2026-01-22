@@ -42,8 +42,14 @@ npx shadcn add https://darwin-ui.mandalsuraj.com/registry/card.json
 ## Quick Start
 
 ```tsx
-import { Button, Card, CardHeader, CardTitle, CardContent } from '@pikoloo/darwin-ui';
-import '@pikoloo/darwin-ui/styles';
+import {
+  Button,
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+} from "@pikoloo/darwin-ui";
+import "@pikoloo/darwin-ui/styles";
 
 function App() {
   return (
@@ -62,6 +68,7 @@ function App() {
 ## Components
 
 ### Layout
+
 - **Card** - Composable card with header, content, footer
 - **Window** - macOS-style window container
 - **Sidebar** - Responsive navigation sidebar
@@ -69,6 +76,7 @@ function App() {
 - **Accordion** - Collapsible content sections
 
 ### Forms
+
 - **Button** - 11 variants (primary, secondary, destructive, ghost, etc.)
 - **Input** - Glass-effect styled input
 - **Textarea** - Multi-line text input
@@ -82,6 +90,7 @@ function App() {
 - **Upload** - File upload component
 
 ### Data Display
+
 - **Table** - Full table system with loading/empty states
 - **Badge** - Status badges with 13 variants
 - **Avatar** - User avatar with fallback
@@ -90,6 +99,7 @@ function App() {
 - **Image** - Optimized image component
 
 ### Overlays
+
 - **Modal** - Accessible modal dialog
 - **Dialog** - Composable dialog component
 - **Popover** - Floating popover content
@@ -98,10 +108,12 @@ function App() {
 - **ContextMenu** - Right-click context menu
 
 ### Feedback
+
 - **Toast** - Toast notifications with auto-dismiss
 - **Alert** - Alert dialogs with type indicators
 
 ### Charts
+
 - **AreaChart** - Area chart visualization
 - **BarChart** - Bar chart visualization
 - **LineChart** - Line chart visualization
@@ -110,6 +122,7 @@ function App() {
 - **StackedBarChart** - Stacked bar chart
 
 ### Utility
+
 - **CloseButton** - Consistent close button
 - **MdEditor** - Markdown editor
 - **Reveal** - Animation reveal component
@@ -118,13 +131,13 @@ function App() {
 ## Hooks
 
 ```tsx
-import { useIsMobile, useMediaQuery, useEscapeKey } from '@pikoloo/darwin-ui';
+import { useIsMobile, useMediaQuery, useEscapeKey } from "@pikoloo/darwin-ui";
 
 // Detect mobile devices
 const isMobile = useIsMobile();
 
 // Custom media query
-const isDesktop = useMediaQuery('(min-width: 1024px)');
+const isDesktop = useMediaQuery("(min-width: 1024px)");
 
 // ESC key handler
 useEscapeKey(() => closeModal());
@@ -177,6 +190,6 @@ Contributions are welcome! Please read our [Contributing Guide](CONTRIBUTING.md)
 
 MIT License - see [LICENSE](LICENSE) for details.
 
-<br>
+---
 
 Made with care by [Suraj Mandal](https://github.com/surajmandalcell)
