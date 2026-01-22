@@ -109,7 +109,7 @@ function DialogContent({ children, className, size = "md" }: DialogContentProps)
 						animate={{ opacity: 1 }}
 						exit={{ opacity: 0 }}
 						transition={{ duration: 0.2 }}
-						className="fixed inset-0 bg-black/50 backdrop-blur-sm p-4 overflow-y-auto flex items-center justify-center"
+						className="fixed inset-0 bg-[hsl(var(--overlay-backdrop))] backdrop-blur-sm p-4 overflow-y-auto flex items-center justify-center"
 						style={{ zIndex: 9999 }}
 						onClick={(e) => {
 							if (e.target === e.currentTarget) {
@@ -228,7 +228,7 @@ function DialogClose({ children, className, asChild }: DialogCloseProps) {
 				type="button"
 				onClick={() => onOpenChange(false)}
 				className={cn(
-					"absolute right-4 top-4 rounded-md p-1 text-[hsl(var(--text-muted))] hover:text-[hsl(var(--text-secondary))] hover:bg-[hsl(var(--glass-bg-hover))] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-500/50",
+					"absolute right-4 top-4 rounded-md p-1 text-[hsl(var(--text-muted))] hover:text-[hsl(var(--text-secondary))] hover:bg-[hsl(var(--glass-bg-hover))] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[hsl(var(--ring))]",
 					className
 				)}
 			>

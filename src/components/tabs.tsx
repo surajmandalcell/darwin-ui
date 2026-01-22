@@ -44,7 +44,7 @@ function TabsList({ children, className }: TabsListProps) {
 		<div
 			role="tablist"
 			className={cn(
-				"inline-flex h-10 items-center justify-center rounded-lg bg-white/5 p-1 text-white/60 backdrop-blur-sm border border-white/10",
+				"inline-flex h-10 items-center justify-center rounded-lg bg-[hsl(var(--glass-bg))] p-1 text-[hsl(var(--text-secondary))] backdrop-blur-sm border border-[hsl(var(--border-default))]",
 				className
 			)}
 		>
@@ -73,14 +73,14 @@ function TabsTrigger({ value, children, className, disabled }: TabsTriggerProps)
 			disabled={disabled}
 			onClick={() => onValueChange(value)}
 			className={cn(
-				"relative inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1.5 text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-500/50 disabled:pointer-events-none disabled:opacity-50",
+				"relative inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1.5 text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[hsl(var(--ring))] disabled:pointer-events-none disabled:opacity-50",
 				className
 			)}
 		>
 			{isSelected && (
 				<motion.span
 					layoutId="active-tab"
-					className="absolute inset-0 bg-white/10 rounded-md"
+					className="absolute inset-0 bg-[hsl(var(--glass-bg-hover))] rounded-md"
 					transition={{
 						type: "spring",
 						bounce: 0.15,
@@ -91,7 +91,7 @@ function TabsTrigger({ value, children, className, disabled }: TabsTriggerProps)
 			<span
 				className={cn(
 					"relative z-10 transition-colors duration-200",
-					isSelected ? "text-white" : "text-white/60 hover:text-white/80"
+					isSelected ? "text-[hsl(var(--text-primary))]" : "text-[hsl(var(--text-secondary))] hover:text-[hsl(var(--text-primary))]"
 				)}
 			>
 				{children}

@@ -54,6 +54,22 @@
     /* Focus ring */
     --ring: 217 91% 60% / 0.5;
 
+    /* Button text on filled backgrounds */
+    --text-on-filled: 0 0% 100%;
+    --text-on-warning: 0 0% 0%;
+
+    /* Interactive control colors */
+    --switch-checked: 160 84% 39%;
+    --switch-unchecked: 215 16% 47%;
+    --checkbox-checked: 199 89% 48%;
+    --checkbox-unchecked: 222 47% 11%;
+    --checkbox-border-unchecked: 215 20% 47%;
+    --control-knob: 0 0% 100%;
+
+    /* Accent color */
+    --accent: 270 91% 60%;
+    --accent-hover: 270 91% 55%;
+
     /* Shadows (for dark mode, shadows are subtle) */
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
     --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4);
@@ -112,6 +128,22 @@
     /* Focus ring */
     --ring: 217 91% 55% / 0.5;
 
+    /* Button text on filled backgrounds */
+    --text-on-filled: 0 0% 100%;
+    --text-on-warning: 0 0% 0%;
+
+    /* Interactive control colors */
+    --switch-checked: 160 84% 39%;
+    --switch-unchecked: 215 16% 65%;
+    --checkbox-checked: 199 89% 48%;
+    --checkbox-unchecked: 0 0% 96%;
+    --checkbox-border-unchecked: 215 20% 75%;
+    --control-knob: 0 0% 100%;
+
+    /* Accent color */
+    --accent: 270 91% 55%;
+    --accent-hover: 270 91% 50%;
+
     /* Shadows (more prominent in light mode) */
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
     --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
@@ -167,6 +199,22 @@
 
       /* Focus ring */
       --ring: 217 91% 55% / 0.5;
+
+      /* Button text on filled backgrounds */
+      --text-on-filled: 0 0% 100%;
+      --text-on-warning: 0 0% 0%;
+
+      /* Interactive control colors */
+      --switch-checked: 160 84% 39%;
+      --switch-unchecked: 215 16% 65%;
+      --checkbox-checked: 199 89% 48%;
+      --checkbox-unchecked: 0 0% 96%;
+      --checkbox-border-unchecked: 215 20% 75%;
+      --control-knob: 0 0% 100%;
+
+      /* Accent color */
+      --accent: 270 91% 55%;
+      --accent-hover: 270 91% 50%;
 
       /* Shadows */
       --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);

@@ -43,23 +43,19 @@ export function Checkbox({
 					{...props}
 					className="peer absolute inset-0 h-full w-full cursor-pointer opacity-0"
 				/>
-				<motion.span
-					animate={{
-						backgroundColor: isActive ? "rgb(14 165 233)" : "rgb(15 23 42)",
-						borderColor: isActive ? "rgb(14 165 233)" : "rgb(100 116 139)",
-					}}
-					transition={{
-						backgroundColor: getSpring("snappy"),
-						borderColor: getSpring("snappy"),
-					}}
-					className={`flex h-4 w-4 items-center justify-center rounded-sm border text-white ${boxClassName}`}
+				<span
+					className={`flex h-4 w-4 items-center justify-center rounded-sm border transition-colors duration-150 text-[hsl(var(--control-knob))] ${
+						isActive
+							? "bg-[hsl(var(--checkbox-checked))] border-[hsl(var(--checkbox-checked))]"
+							: "bg-[hsl(var(--checkbox-unchecked))] border-[hsl(var(--checkbox-border-unchecked))]"
+					} ${boxClassName}`}
 				>
 					{indeterminate ? (
 						<motion.div
 							initial={{ scale: 0 }}
 							animate={{ scale: 1 }}
 							transition={getSpring("snappy")}
-							className="w-2 h-0.5 bg-white rounded"
+							className="w-2 h-0.5 bg-[hsl(var(--control-knob))] rounded"
 						/>
 					) : (
 						<motion.svg
@@ -86,7 +82,7 @@ export function Checkbox({
 							/>
 						</motion.svg>
 					)}
-				</motion.span>
+				</span>
 			</span>
 			{label ? <span>{label}</span> : null}
 		</label>

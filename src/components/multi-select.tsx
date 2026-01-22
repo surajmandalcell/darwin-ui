@@ -196,7 +196,7 @@ export function MultiSelect({
 				aria-expanded={open}
 				onClick={() => setOpen((v) => !v)}
 				className={cn(
-					"flex h-9 w-full items-center justify-between rounded-md border border-[hsl(var(--border-default))] bg-[hsl(var(--glass-bg))] px-3 py-2 text-sm text-[hsl(var(--text-primary))] shadow-sm ring-offset-background placeholder:text-[hsl(var(--text-tertiary))] focus:outline-none focus:ring-1 focus:ring-blue-500/50 disabled:cursor-not-allowed disabled:opacity-50 hover:bg-[hsl(var(--glass-bg-hover))] transition-colors backdrop-blur-sm",
+					"flex h-9 w-full items-center justify-between rounded-md border border-[hsl(var(--border-default))] bg-[hsl(var(--glass-bg))] px-3 py-2 text-sm text-[hsl(var(--text-primary))] shadow-sm ring-offset-background placeholder:text-[hsl(var(--text-tertiary))] focus:outline-none focus:ring-1 focus:ring-[hsl(var(--ring))] disabled:cursor-not-allowed disabled:opacity-50 hover:bg-[hsl(var(--glass-bg-hover))] transition-colors backdrop-blur-sm",
 				)}
 			>
 				<span className={cn("truncate", !displayValue && "text-[hsl(var(--text-tertiary))]")}>

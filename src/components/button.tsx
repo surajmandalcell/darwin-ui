@@ -47,19 +47,19 @@ export function Button({
 		default:
 			"bg-[hsl(var(--glass-bg-hover))] text-[hsl(var(--text-primary))] hover:bg-[hsl(var(--glass-bg-active))] border border-[hsl(var(--border-default))]",
 		primary:
-			"bg-blue-500 text-[#ffffff] hover:bg-blue-500/90",
+			"bg-[hsl(var(--brand-primary))] text-[hsl(var(--text-on-filled))] hover:bg-[hsl(var(--brand-primary-hover))]",
 		secondary:
 			"bg-[hsl(var(--glass-bg))] text-[hsl(var(--text-secondary))] hover:bg-[hsl(var(--glass-bg-hover))] border border-[hsl(var(--border-default))]",
-		success: "bg-green-500 text-[#ffffff] hover:bg-green-500/90",
-		warning: "bg-amber-500 text-black hover:bg-amber-500/90",
-		info: "bg-blue-400 text-[#ffffff] hover:bg-blue-400/90",
+		success: "bg-[hsl(var(--success))] text-[hsl(var(--text-on-filled))] hover:bg-[hsl(var(--success)/0.9)]",
+		warning: "bg-[hsl(var(--warning))] text-[hsl(var(--text-on-warning))] hover:bg-[hsl(var(--warning)/0.9)]",
+		info: "bg-[hsl(var(--info))] text-[hsl(var(--text-on-filled))] hover:bg-[hsl(var(--info)/0.9)]",
 		destructive:
-			"bg-red-500 text-[#ffffff] hover:bg-red-500/90",
+			"bg-[hsl(var(--error))] text-[hsl(var(--text-on-filled))] hover:bg-[hsl(var(--error)/0.9)]",
 		outline:
 			"border border-[hsl(var(--border-strong))] bg-transparent hover:bg-[hsl(var(--glass-bg))] text-[hsl(var(--text-secondary))]",
 		ghost: "hover:bg-[hsl(var(--glass-bg-hover))] text-[hsl(var(--text-secondary))]",
-		link: "text-blue-400 underline-offset-4 hover:underline",
-		accent: "bg-purple-500 text-[#ffffff] hover:bg-purple-500/90",
+		link: "text-[hsl(var(--brand-primary))] underline-offset-4 hover:underline",
+		accent: "bg-[hsl(var(--accent))] text-[hsl(var(--text-on-filled))] hover:bg-[hsl(var(--accent-hover))]",
 	};
 
 	const sizes: Record<Size, string> = {
@@ -79,7 +79,7 @@ export function Button({
 			whileTap={!isDisabled ? { scale: 0.99 } : {}}
 			transition={{ duration: getDuration("fast") }}
 			className={cn(
-				"inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-500/50 disabled:pointer-events-none disabled:opacity-50",
+				"inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[hsl(var(--ring))] disabled:pointer-events-none disabled:opacity-50",
 				variants[variant],
 				sizes[size],
 				className,

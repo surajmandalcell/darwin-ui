@@ -37,12 +37,12 @@ export function Switch({
 					{...props}
 					className="peer absolute inset-0 h-full w-full cursor-pointer opacity-0"
 				/>
-				<motion.span
-					animate={{
-						backgroundColor: checked ? "rgb(16 185 129)" : "rgb(71 85 105)",
-					}}
-					transition={{ duration: 0.2 }}
-					className="flex h-5 w-9 items-center rounded-full px-0.5"
+				<span
+					className={`flex h-5 w-9 items-center rounded-full px-0.5 transition-colors duration-200 ${
+						checked
+							? "bg-[hsl(var(--switch-checked))]"
+							: "bg-[hsl(var(--switch-unchecked))]"
+					}`}
 				>
 					<motion.span
 						animate={{
@@ -53,9 +53,9 @@ export function Switch({
 							stiffness: 300,
 							damping: 15,
 						}}
-						className="h-4 w-4 rounded-full bg-white shadow-sm"
+						className="h-4 w-4 rounded-full bg-[hsl(var(--control-knob))] shadow-sm"
 					/>
-				</motion.span>
+				</span>
 			</span>
 			{label ? <span>{label}</span> : null}
 		</label>

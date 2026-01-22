@@ -258,7 +258,7 @@ export function AlertProvider({ children }: { children: React.ReactNode }) {
 					>
 						<button
 							type="button"
-							className="absolute inset-0 bg-black/50 backdrop-blur-[6px]"
+							className="absolute inset-0 bg-[hsl(var(--overlay-backdrop))] backdrop-blur-[6px]"
 							aria-label={alert.cancelText || "Dismiss alert"}
 							onClick={() => handleClose(alert.onCancel)}
 						/>

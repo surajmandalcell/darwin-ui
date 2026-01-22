@@ -26,10 +26,10 @@ function SidebarItem({
 			type="button"
 			onClick={onClick}
 			className={cn(
-				"group flex w-full items-center rounded-md text-sm font-medium transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-500/50",
+				"group flex w-full items-center rounded-md text-sm font-medium transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[hsl(var(--ring))]",
 				isCollapsed ? "justify-center px-2 py-2" : "gap-3 px-3 py-2",
 				active
-					? "bg-blue-600 text-white shadow-sm"
+					? "bg-[hsl(var(--brand-primary))] text-[hsl(var(--text-on-filled))] shadow-sm"
 					: "text-[hsl(var(--text-tertiary))] hover:bg-[hsl(var(--glass-bg))] hover:text-[hsl(var(--text-primary))]",
 			)}
 		>
@@ -37,7 +37,7 @@ function SidebarItem({
 				<Icon
 					className={cn(
 						"h-4 w-4 shrink-0 transition-colors",
-						active ? "text-white" : "text-[hsl(var(--text-tertiary))] group-hover:text-[hsl(var(--text-primary))]",
+						active ? "text-[hsl(var(--text-on-filled))]" : "text-[hsl(var(--text-tertiary))] group-hover:text-[hsl(var(--text-primary))]",
 					)}
 				/>
 			) : null}
@@ -148,7 +148,7 @@ export function Sidebar({
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
 						exit={{ opacity: 0 }}
-						className="fixed inset-0 z-30 bg-black/60 backdrop-blur-sm md:hidden"
+						className="fixed inset-0 z-30 bg-[hsl(var(--overlay-backdrop))] backdrop-blur-sm md:hidden"
 						onClick={closeMobileMenu}
 						role="button"
 						tabIndex={0}
@@ -224,7 +224,7 @@ export function Sidebar({
 							aria-expanded={!isCollapsed}
 							aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
 							className={cn(
-								"group flex w-full items-center rounded-md py-2 text-sm font-medium text-[hsl(var(--text-muted))] transition-all duration-200 ease-out hover:bg-[hsl(var(--glass-bg))] hover:text-[hsl(var(--text-tertiary))] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-500/50",
+								"group flex w-full items-center rounded-md py-2 text-sm font-medium text-[hsl(var(--text-muted))] transition-all duration-200 ease-out hover:bg-[hsl(var(--glass-bg))] hover:text-[hsl(var(--text-tertiary))] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[hsl(var(--ring))]",
 								isCollapsed ? "justify-center px-2" : "gap-3 px-3",
 							)}
 						>

@@ -165,7 +165,7 @@ function Slider({
 				{/* Thumb */}
 				<motion.div
 					className={cn(
-						"absolute rounded-full bg-white shadow-md ring-2 ring-blue-500/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500",
+						"absolute rounded-full bg-[hsl(var(--control-knob))] shadow-md ring-2 ring-[hsl(var(--ring))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--brand-primary))]",
 						sizeClasses[size].thumb
 					)}
 					style={{

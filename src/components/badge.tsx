@@ -54,7 +54,7 @@ export function Badge({
 			transition={{ duration: getDuration("normal") }}
 			{...(props as any)}
 			className={cn(
-				"inline-flex items-center justify-center rounded-full border px-2.5 py-0.5 text-xs font-medium focus:outline-none focus:ring-1 focus:ring-blue-500/50",
+				"inline-flex items-center justify-center rounded-full border px-2.5 py-0.5 text-xs font-medium focus:outline-none focus:ring-1 focus:ring-[hsl(var(--ring))]",
 				variants[variant],
 				className,
 			)}
