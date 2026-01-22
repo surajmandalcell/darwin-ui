@@ -274,9 +274,9 @@ const COMPONENTS: ComponentDef[] = [
     category: 'form-controls',
     size: 'sm',
     preview: (
-      <div className="w-full px-3 py-2 rounded-lg bg-white/5 border border-white/10 flex items-center justify-between">
-        <span className="text-xs text-white/70">React</span>
-        <svg className="w-3 h-3 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <div className="w-full px-3 py-2 rounded-lg bg-muted/50 border border-border flex items-center justify-between">
+        <span className="text-xs text-muted-foreground">React</span>
+        <svg className="w-3 h-3 text-muted-foreground/60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
         </svg>
       </div>
@@ -289,10 +289,10 @@ const COMPONENTS: ComponentDef[] = [
     size: 'sm',
     preview: (
       <div className="w-full">
-        <div className="flex items-center gap-1 flex-wrap p-2 rounded-lg bg-white/5 border border-white/10">
+        <div className="flex items-center gap-1 flex-wrap p-2 rounded-lg bg-muted/50 border border-border">
           <Badge variant="info" className="text-[10px]">React</Badge>
           <Badge variant="success" className="text-[10px]">Vue</Badge>
-          <span className="text-white/40 text-xs">+3</span>
+          <span className="text-muted-foreground/60 text-xs">+3</span>
         </div>
       </div>
     ),
@@ -303,9 +303,9 @@ const COMPONENTS: ComponentDef[] = [
     category: 'form-controls',
     size: 'sm',
     preview: (
-      <div className="w-full px-3 py-2 rounded-lg bg-white/5 border border-white/10 flex items-center gap-2">
-        <Calendar className="w-4 h-4 text-white/50" />
-        <span className="text-xs text-white/70">Jan 22, 2026</span>
+      <div className="w-full px-3 py-2 rounded-lg bg-muted/50 border border-border flex items-center gap-2">
+        <Calendar className="w-4 h-4 text-muted-foreground" />
+        <span className="text-xs text-muted-foreground">Jan 22, 2026</span>
       </div>
     ),
   },
@@ -322,9 +322,9 @@ const COMPONENTS: ComponentDef[] = [
     category: 'form-controls',
     size: 'sm',
     preview: (
-      <div className="flex flex-col items-center gap-1 p-2 px-4 rounded-lg border border-dashed border-white/20 bg-white/[0.02]">
-        <UploadIcon className="w-4 h-4 text-white/40" />
-        <span className="text-[10px] text-white/40">Drop files</span>
+      <div className="flex flex-col items-center gap-1 p-2 px-4 rounded-lg border border-dashed border-border bg-muted/20">
+        <UploadIcon className="w-4 h-4 text-muted-foreground/60" />
+        <span className="text-[10px] text-muted-foreground/60">Drop files</span>
       </div>
     ),
   },
@@ -363,12 +363,12 @@ const COMPONENTS: ComponentDef[] = [
     category: 'data-display',
     size: 'wide',
     preview: (
-      <Card className="bg-white/[0.02] p-3 w-full">
+      <Card className="bg-muted/20 p-3 w-full">
         <CardHeader className="p-1 pb-2">
           <CardTitle className="text-sm">Dashboard Overview</CardTitle>
         </CardHeader>
         <CardContent className="p-1">
-          <p className="text-[11px] text-white/50">Your analytics and metrics are ready to view.</p>
+          <p className="text-[11px] text-muted-foreground">Your analytics and metrics are ready to view.</p>
           <div className="flex gap-2 mt-2">
             <Badge variant="success" className="text-[9px]">Active</Badge>
             <Badge variant="info" className="text-[9px]">3 updates</Badge>
@@ -383,21 +383,21 @@ const COMPONENTS: ComponentDef[] = [
     category: 'data-display',
     size: 'wide',
     preview: (
-      <div className="text-[10px] border border-white/10 rounded overflow-hidden w-full">
-        <div className="flex bg-white/5 border-b border-white/10">
-          <div className="flex-1 px-2 py-1 text-white/60">Name</div>
-          <div className="flex-1 px-2 py-1 text-white/60">Status</div>
-          <div className="flex-1 px-2 py-1 text-white/60">Role</div>
+      <div className="text-[10px] border border-border rounded overflow-hidden w-full">
+        <div className="flex bg-muted/50 border-b border-border">
+          <div className="flex-1 px-2 py-1 text-muted-foreground">Name</div>
+          <div className="flex-1 px-2 py-1 text-muted-foreground">Status</div>
+          <div className="flex-1 px-2 py-1 text-muted-foreground">Role</div>
         </div>
-        <div className="flex border-b border-white/5">
-          <div className="flex-1 px-2 py-1 text-white/80">Alice</div>
+        <div className="flex border-b border-border/50">
+          <div className="flex-1 px-2 py-1 text-foreground/80">Alice</div>
           <div className="flex-1 px-2 py-1"><Badge variant="success" className="text-[8px] px-1">Active</Badge></div>
-          <div className="flex-1 px-2 py-1 text-white/60">Admin</div>
+          <div className="flex-1 px-2 py-1 text-muted-foreground">Admin</div>
         </div>
         <div className="flex">
-          <div className="flex-1 px-2 py-1 text-white/80">Bob</div>
+          <div className="flex-1 px-2 py-1 text-foreground/80">Bob</div>
           <div className="flex-1 px-2 py-1"><Badge variant="warning" className="text-[8px] px-1">Pending</Badge></div>
-          <div className="flex-1 px-2 py-1 text-white/60">User</div>
+          <div className="flex-1 px-2 py-1 text-muted-foreground">User</div>
         </div>
       </div>
     ),
@@ -422,9 +422,9 @@ const COMPONENTS: ComponentDef[] = [
     size: 'sm',
     preview: (
       <div className="space-y-2 w-full">
-        <div className="h-3 w-full rounded bg-white/10 animate-pulse" />
-        <div className="h-3 w-3/4 rounded bg-white/10 animate-pulse" style={{ animationDelay: '0.1s' }} />
-        <div className="h-3 w-1/2 rounded bg-white/10 animate-pulse" style={{ animationDelay: '0.2s' }} />
+        <div className="h-3 w-full rounded bg-muted animate-pulse" />
+        <div className="h-3 w-3/4 rounded bg-muted animate-pulse" style={{ animationDelay: '0.1s' }} />
+        <div className="h-3 w-1/2 rounded bg-muted animate-pulse" style={{ animationDelay: '0.2s' }} />
       </div>
     ),
   },
@@ -462,9 +462,9 @@ const COMPONENTS: ComponentDef[] = [
     category: 'feedback',
     size: 'sm',
     preview: (
-      <div className="flex items-center gap-2 px-2 py-1.5 rounded-lg bg-white/5 border border-white/10 shadow-lg">
-        <Bell className="w-3.5 h-3.5 text-white/60" />
-        <span className="text-[10px] text-white/80">Notification</span>
+      <div className="flex items-center gap-2 px-2 py-1.5 rounded-lg bg-muted/50 border border-border shadow-lg">
+        <Bell className="w-3.5 h-3.5 text-muted-foreground" />
+        <span className="text-[10px] text-foreground/80">Notification</span>
       </div>
     ),
   },
@@ -474,9 +474,9 @@ const COMPONENTS: ComponentDef[] = [
     category: 'feedback',
     size: 'wide',
     preview: (
-      <div className="p-3 rounded-lg bg-white/5 border border-white/10 shadow-xl w-full">
-        <div className="text-sm font-medium text-white mb-1">Confirm Action</div>
-        <p className="text-[11px] text-white/50 mb-3">Are you sure you want to continue with this action?</p>
+      <div className="p-3 rounded-lg bg-muted/50 border border-border shadow-xl w-full">
+        <div className="text-sm font-medium text-foreground mb-1">Confirm Action</div>
+        <p className="text-[11px] text-muted-foreground mb-3">Are you sure you want to continue with this action?</p>
         <div className="flex gap-2 justify-end">
           <Button size="sm" variant="ghost" className="text-[10px] h-6 px-3">Cancel</Button>
           <Button size="sm" className="text-[10px] h-6 px-3">Confirm</Button>
@@ -490,12 +490,12 @@ const COMPONENTS: ComponentDef[] = [
     category: 'feedback',
     size: 'wide',
     preview: (
-      <div className="relative p-3 rounded-lg bg-neutral-900/90 border border-white/10 shadow-2xl w-full">
-        <button className="absolute top-2 right-2 text-white/40 hover:text-white/60">
+      <div className="relative p-3 rounded-lg bg-card/90 border border-border shadow-2xl w-full">
+        <button className="absolute top-2 right-2 text-muted-foreground/60 hover:text-muted-foreground">
           <X className="w-3.5 h-3.5" />
         </button>
-        <div className="text-sm font-medium text-white mb-1">Modal Window</div>
-        <p className="text-[11px] text-white/50 mb-2">Full-screen overlay with backdrop</p>
+        <div className="text-sm font-medium text-foreground mb-1">Modal Window</div>
+        <p className="text-[11px] text-muted-foreground mb-2">Full-screen overlay with backdrop</p>
         <div className="flex gap-2 mt-3">
           <Button size="sm" className="text-[10px] h-6 px-3 flex-1">Save Changes</Button>
         </div>
@@ -509,11 +509,11 @@ const COMPONENTS: ComponentDef[] = [
     size: 'sm',
     preview: (
       <div className="flex flex-col items-center gap-1">
-        <div className="px-2 py-1 rounded bg-neutral-800 text-[10px] text-white shadow-lg">
+        <div className="px-2 py-1 rounded bg-muted text-[10px] text-foreground shadow-lg">
           Helpful tip
         </div>
-        <div className="w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-neutral-800" />
-        <Info className="w-4 h-4 text-white/50" />
+        <div className="w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-muted" />
+        <Info className="w-4 h-4 text-muted-foreground" />
       </div>
     ),
   },
@@ -525,12 +525,12 @@ const COMPONENTS: ComponentDef[] = [
     preview: (
       <div className="flex items-start gap-3 w-full">
         <Button size="sm" variant="outline" className="text-[10px] h-6">Open Popover</Button>
-        <div className="p-2 rounded-lg bg-white/5 border border-white/10 shadow-lg flex-1">
-          <div className="text-[11px] text-white/80 mb-1">Quick Actions</div>
+        <div className="p-2 rounded-lg bg-muted/50 border border-border shadow-lg flex-1">
+          <div className="text-[11px] text-foreground/80 mb-1">Quick Actions</div>
           <div className="flex gap-2">
-            <div className="w-6 h-6 rounded bg-white/10 flex items-center justify-center text-[9px] text-white/60">Edit</div>
-            <div className="w-6 h-6 rounded bg-white/10 flex items-center justify-center text-[9px] text-white/60">Copy</div>
-            <div className="w-6 h-6 rounded bg-white/10 flex items-center justify-center text-[9px] text-white/60">Share</div>
+            <div className="w-6 h-6 rounded bg-muted flex items-center justify-center text-[9px] text-muted-foreground">Edit</div>
+            <div className="w-6 h-6 rounded bg-muted flex items-center justify-center text-[9px] text-muted-foreground">Copy</div>
+            <div className="w-6 h-6 rounded bg-muted flex items-center justify-center text-[9px] text-muted-foreground">Share</div>
           </div>
         </div>
       </div>
@@ -545,12 +545,12 @@ const COMPONENTS: ComponentDef[] = [
     size: 'wide',
     preview: (
       <div className="w-full">
-        <div className="flex bg-white/5 rounded-lg p-0.5 mb-2">
-          <div className="flex-1 px-3 py-1.5 text-[10px] bg-white/10 text-white rounded text-center">Overview</div>
-          <div className="flex-1 px-3 py-1.5 text-[10px] text-white/50 text-center">Analytics</div>
-          <div className="flex-1 px-3 py-1.5 text-[10px] text-white/50 text-center">Reports</div>
+        <div className="flex bg-muted/50 rounded-lg p-0.5 mb-2">
+          <div className="flex-1 px-3 py-1.5 text-[10px] bg-muted text-foreground rounded text-center">Overview</div>
+          <div className="flex-1 px-3 py-1.5 text-[10px] text-muted-foreground text-center">Analytics</div>
+          <div className="flex-1 px-3 py-1.5 text-[10px] text-muted-foreground text-center">Reports</div>
         </div>
-        <div className="text-[10px] text-white/60 p-2 bg-white/[0.02] rounded-lg">Dashboard overview content</div>
+        <div className="text-[10px] text-muted-foreground p-2 bg-muted/20 rounded-lg">Dashboard overview content</div>
       </div>
     ),
   },
@@ -563,11 +563,11 @@ const COMPONENTS: ComponentDef[] = [
       <Accordion type="single" defaultValue="item-1" className="w-full">
         <AccordionItem value="item-1">
           <AccordionTrigger className="text-[10px] py-1.5">Getting Started</AccordionTrigger>
-          <AccordionContent className="text-[10px] text-white/50 pb-2">Installation guide</AccordionContent>
+          <AccordionContent className="text-[10px] text-muted-foreground pb-2">Installation guide</AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-2">
           <AccordionTrigger className="text-[10px] py-1.5">Components</AccordionTrigger>
-          <AccordionContent className="text-[10px] text-white/50 pb-2">Browse all components</AccordionContent>
+          <AccordionContent className="text-[10px] text-muted-foreground pb-2">Browse all components</AccordionContent>
         </AccordionItem>
       </Accordion>
     ),
@@ -582,11 +582,11 @@ const COMPONENTS: ComponentDef[] = [
         <Button size="sm" variant="outline" className="text-[10px] h-6">
           <MoreHorizontal className="w-3 h-3 mr-1" /> Options
         </Button>
-        <div className="p-1.5 rounded-lg bg-white/5 border border-white/10 shadow-lg flex-1">
-          <div className="px-2 py-1 text-[10px] text-white/80 hover:bg-white/5 rounded">Edit Item</div>
-          <div className="px-2 py-1 text-[10px] text-white/80 hover:bg-white/5 rounded">Duplicate</div>
-          <div className="h-px bg-white/10 my-1" />
-          <div className="px-2 py-1 text-[10px] text-red-400 hover:bg-white/5 rounded">Delete</div>
+        <div className="p-1.5 rounded-lg bg-muted/50 border border-border shadow-lg flex-1">
+          <div className="px-2 py-1 text-[10px] text-foreground/80 hover:bg-muted/50 rounded">Edit Item</div>
+          <div className="px-2 py-1 text-[10px] text-foreground/80 hover:bg-muted/50 rounded">Duplicate</div>
+          <div className="h-px bg-border my-1" />
+          <div className="px-2 py-1 text-[10px] text-red-400 hover:bg-muted/50 rounded">Delete</div>
         </div>
       </div>
     ),
@@ -598,13 +598,13 @@ const COMPONENTS: ComponentDef[] = [
     size: 'sm',
     preview: (
       <div className="text-center">
-        <div className="p-2 rounded-lg bg-white/5 border border-white/10 mb-1">
-          <div className="px-2 py-0.5 text-[10px] text-white/80 hover:bg-white/5 rounded">Copy</div>
-          <div className="px-2 py-0.5 text-[10px] text-white/80 hover:bg-white/5 rounded">Paste</div>
-          <div className="h-px bg-white/10 my-0.5" />
-          <div className="px-2 py-0.5 text-[10px] text-red-400 hover:bg-white/5 rounded">Delete</div>
+        <div className="p-2 rounded-lg bg-muted/50 border border-border mb-1">
+          <div className="px-2 py-0.5 text-[10px] text-foreground/80 hover:bg-muted/50 rounded">Copy</div>
+          <div className="px-2 py-0.5 text-[10px] text-foreground/80 hover:bg-muted/50 rounded">Paste</div>
+          <div className="h-px bg-border my-0.5" />
+          <div className="px-2 py-0.5 text-[10px] text-red-400 hover:bg-muted/50 rounded">Delete</div>
         </div>
-        <span className="text-[10px] text-white/40">Right-click menu</span>
+        <span className="text-[10px] text-muted-foreground/60">Right-click menu</span>
       </div>
     ),
   },
@@ -615,37 +615,37 @@ const COMPONENTS: ComponentDef[] = [
     size: 'large',
     preview: (
       <div className="flex gap-3 h-full w-full">
-        <div className="w-24 bg-white/5 border border-white/10 rounded-lg p-2 flex flex-col">
-          <div className="w-full h-5 bg-white/10 rounded mb-2 flex items-center px-2">
+        <div className="w-24 bg-muted/50 border border-border rounded-lg p-2 flex flex-col">
+          <div className="w-full h-5 bg-muted rounded mb-2 flex items-center px-2">
             <div className="w-3 h-3 rounded bg-indigo-500/50 mr-2" />
-            <span className="text-[9px] text-white/60">Home</span>
+            <span className="text-[9px] text-muted-foreground">Home</span>
           </div>
           <div className="w-full h-5 bg-indigo-500/30 rounded mb-2 flex items-center px-2">
             <div className="w-3 h-3 rounded bg-indigo-500 mr-2" />
-            <span className="text-[9px] text-white">Dashboard</span>
+            <span className="text-[9px] text-foreground">Dashboard</span>
           </div>
-          <div className="w-full h-5 bg-white/10 rounded mb-2 flex items-center px-2">
-            <div className="w-3 h-3 rounded bg-white/30 mr-2" />
-            <span className="text-[9px] text-white/60">Settings</span>
+          <div className="w-full h-5 bg-muted rounded mb-2 flex items-center px-2">
+            <div className="w-3 h-3 rounded bg-muted-foreground/30 mr-2" />
+            <span className="text-[9px] text-muted-foreground">Settings</span>
           </div>
-          <div className="w-full h-5 bg-white/10 rounded mb-2 flex items-center px-2">
-            <div className="w-3 h-3 rounded bg-white/30 mr-2" />
-            <span className="text-[9px] text-white/60">Profile</span>
+          <div className="w-full h-5 bg-muted rounded mb-2 flex items-center px-2">
+            <div className="w-3 h-3 rounded bg-muted-foreground/30 mr-2" />
+            <span className="text-[9px] text-muted-foreground">Profile</span>
           </div>
-          <div className="mt-auto w-full h-5 bg-white/5 rounded flex items-center px-2">
+          <div className="mt-auto w-full h-5 bg-muted/50 rounded flex items-center px-2">
             <div className="w-3 h-3 rounded-full bg-emerald-500/50 mr-2" />
-            <span className="text-[9px] text-white/40">User</span>
+            <span className="text-[9px] text-muted-foreground/60">User</span>
           </div>
         </div>
-        <div className="flex-1 text-[10px] text-white/50 flex flex-col">
-          <div className="text-white/80 mb-2 text-xs">Main Content Area</div>
-          <div className="flex-1 bg-white/[0.02] rounded-lg p-3 border border-white/5">
-            <div className="h-3 w-full rounded bg-white/10 animate-pulse mb-2" />
-            <div className="h-3 w-3/4 rounded bg-white/10 animate-pulse mb-2" />
-            <div className="h-3 w-1/2 rounded bg-white/10 animate-pulse mb-3" />
+        <div className="flex-1 text-[10px] text-muted-foreground flex flex-col">
+          <div className="text-foreground/80 mb-2 text-xs">Main Content Area</div>
+          <div className="flex-1 bg-muted/20 rounded-lg p-3 border border-border/50">
+            <div className="h-3 w-full rounded bg-muted animate-pulse mb-2" />
+            <div className="h-3 w-3/4 rounded bg-muted animate-pulse mb-2" />
+            <div className="h-3 w-1/2 rounded bg-muted animate-pulse mb-3" />
             <div className="flex gap-2">
-              <div className="h-8 w-16 rounded bg-white/10 animate-pulse" />
-              <div className="h-8 w-16 rounded bg-white/10 animate-pulse" />
+              <div className="h-8 w-16 rounded bg-muted animate-pulse" />
+              <div className="h-8 w-16 rounded bg-muted animate-pulse" />
             </div>
           </div>
         </div>
@@ -662,13 +662,13 @@ const COMPONENTS: ComponentDef[] = [
     preview: (
       <div className="h-full w-full flex flex-col">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-[10px] text-white/60">Revenue Over Time</span>
+          <span className="text-[10px] text-muted-foreground">Revenue Over Time</span>
           <Badge variant="success" className="text-[8px]">+12.5%</Badge>
         </div>
         <div className="flex-1 min-h-[100px]">
           <MiniAreaChart />
         </div>
-        <div className="flex justify-between text-[9px] text-white/40 mt-1">
+        <div className="flex justify-between text-[9px] text-muted-foreground/60 mt-1">
           <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span>
         </div>
       </div>
@@ -682,13 +682,13 @@ const COMPONENTS: ComponentDef[] = [
     preview: (
       <div className="h-full w-full flex flex-col">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-[10px] text-white/60">Monthly Sales</span>
+          <span className="text-[10px] text-muted-foreground">Monthly Sales</span>
           <Badge variant="info" className="text-[8px]">Q1 2026</Badge>
         </div>
         <div className="flex-1 min-h-[100px]">
           <MiniBarChart />
         </div>
-        <div className="flex justify-between text-[9px] text-white/40 mt-1">
+        <div className="flex justify-between text-[9px] text-muted-foreground/60 mt-1">
           <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span>
         </div>
       </div>
@@ -702,13 +702,13 @@ const COMPONENTS: ComponentDef[] = [
     preview: (
       <div className="h-full w-full flex flex-col">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-[10px] text-white/60">User Growth</span>
+          <span className="text-[10px] text-muted-foreground">User Growth</span>
           <Badge variant="warning" className="text-[8px]">Live</Badge>
         </div>
         <div className="flex-1 min-h-[100px]">
           <MiniLineChart />
         </div>
-        <div className="flex justify-between text-[9px] text-white/40 mt-1">
+        <div className="flex justify-between text-[9px] text-muted-foreground/60 mt-1">
           <span>Week 1</span><span>Week 2</span><span>Week 3</span><span>Week 4</span>
         </div>
       </div>
@@ -727,18 +727,18 @@ const COMPONENTS: ComponentDef[] = [
         <div className="flex-1 space-y-1">
           <div className="flex items-center gap-2 text-[9px]">
             <div className="w-2 h-2 rounded-full bg-indigo-500"></div>
-            <span className="text-white/60">Desktop</span>
-            <span className="text-white/80 ml-auto">45%</span>
+            <span className="text-muted-foreground">Desktop</span>
+            <span className="text-foreground/80 ml-auto">45%</span>
           </div>
           <div className="flex items-center gap-2 text-[9px]">
             <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
-            <span className="text-white/60">Mobile</span>
-            <span className="text-white/80 ml-auto">32%</span>
+            <span className="text-muted-foreground">Mobile</span>
+            <span className="text-foreground/80 ml-auto">32%</span>
           </div>
           <div className="flex items-center gap-2 text-[9px]">
             <div className="w-2 h-2 rounded-full bg-pink-500"></div>
-            <span className="text-white/60">Tablet</span>
-            <span className="text-white/80 ml-auto">23%</span>
+            <span className="text-muted-foreground">Tablet</span>
+            <span className="text-foreground/80 ml-auto">23%</span>
           </div>
         </div>
       </div>
@@ -755,25 +755,25 @@ const COMPONENTS: ComponentDef[] = [
           <MiniDonutChart />
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center">
-              <div className="text-[10px] font-bold text-white">73%</div>
+              <div className="text-[10px] font-bold text-foreground">73%</div>
             </div>
           </div>
         </div>
         <div className="flex-1 space-y-1">
           <div className="flex items-center gap-2 text-[9px]">
             <div className="w-2 h-2 rounded-full bg-indigo-500"></div>
-            <span className="text-white/60">Done</span>
-            <span className="text-white/80 ml-auto">73%</span>
+            <span className="text-muted-foreground">Done</span>
+            <span className="text-foreground/80 ml-auto">73%</span>
           </div>
           <div className="flex items-center gap-2 text-[9px]">
             <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
-            <span className="text-white/60">Active</span>
-            <span className="text-white/80 ml-auto">18%</span>
+            <span className="text-muted-foreground">Active</span>
+            <span className="text-foreground/80 ml-auto">18%</span>
           </div>
           <div className="flex items-center gap-2 text-[9px]">
             <div className="w-2 h-2 rounded-full bg-pink-500"></div>
-            <span className="text-white/60">Pending</span>
-            <span className="text-white/80 ml-auto">9%</span>
+            <span className="text-muted-foreground">Pending</span>
+            <span className="text-foreground/80 ml-auto">9%</span>
           </div>
         </div>
       </div>
@@ -787,22 +787,22 @@ const COMPONENTS: ComponentDef[] = [
     preview: (
       <div className="h-full w-full flex flex-col">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-[10px] text-white/60">Category Distribution</span>
+          <span className="text-[10px] text-muted-foreground">Category Distribution</span>
           <div className="flex gap-2">
             <div className="flex items-center gap-1 text-[8px]">
               <div className="w-2 h-2 rounded bg-indigo-500"></div>
-              <span className="text-white/40">A</span>
+              <span className="text-muted-foreground/60">A</span>
             </div>
             <div className="flex items-center gap-1 text-[8px]">
               <div className="w-2 h-2 rounded bg-emerald-500"></div>
-              <span className="text-white/40">B</span>
+              <span className="text-muted-foreground/60">B</span>
             </div>
           </div>
         </div>
         <div className="flex-1 min-h-[100px]">
           <MiniStackedBarChart />
         </div>
-        <div className="flex justify-between text-[9px] text-white/40 mt-1">
+        <div className="flex justify-between text-[9px] text-muted-foreground/60 mt-1">
           <span>Q1</span><span>Q2</span><span>Q3</span><span>Q4</span>
         </div>
       </div>
@@ -816,16 +816,16 @@ const COMPONENTS: ComponentDef[] = [
     category: 'layout',
     size: 'large',
     preview: (
-      <div className="rounded-lg border border-white/10 overflow-hidden bg-neutral-900/80 shadow-lg w-full h-full flex flex-col">
-        <div className="flex items-center gap-1.5 px-3 py-2 bg-white/5 border-b border-white/10">
+      <div className="rounded-lg border border-border overflow-hidden bg-card/80 shadow-lg w-full h-full flex flex-col">
+        <div className="flex items-center gap-1.5 px-3 py-2 bg-muted/50 border-b border-border">
           <div className="w-2.5 h-2.5 rounded-full bg-red-500/70" />
           <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/70" />
           <div className="w-2.5 h-2.5 rounded-full bg-green-500/70" />
-          <span className="text-[10px] text-white/40 ml-auto">Terminal</span>
+          <span className="text-[10px] text-muted-foreground/60 ml-auto">Terminal</span>
         </div>
-        <div className="flex-1 p-3 font-mono text-[10px] text-white/60 space-y-1">
+        <div className="flex-1 p-3 font-mono text-[10px] text-muted-foreground space-y-1">
           <div><span className="text-emerald-400">$</span> npm install @pikoloo/darwin-ui</div>
-          <div className="text-white/40">added 42 packages in 2.3s</div>
+          <div className="text-muted-foreground/60">added 42 packages in 2.3s</div>
           <div><span className="text-emerald-400">$</span> npm run dev</div>
           <div className="text-cyan-400">Ready on http://localhost:3000</div>
         </div>
@@ -840,7 +840,7 @@ const COMPONENTS: ComponentDef[] = [
     preview: (
       <div className="flex items-center justify-center gap-2">
         <CloseButton />
-        <span className="text-[10px] text-white/40">Close</span>
+        <span className="text-[10px] text-muted-foreground/60">Close</span>
       </div>
     ),
   },
@@ -851,23 +851,23 @@ const COMPONENTS: ComponentDef[] = [
     category: 'rich-content',
     size: 'large',
     preview: (
-      <div className="rounded-lg border border-white/10 overflow-hidden bg-neutral-950/80 w-full h-full flex flex-col">
-        <div className="flex items-center gap-1 px-3 py-2 border-b border-white/10 bg-white/5">
+      <div className="rounded-lg border border-border overflow-hidden bg-card/80 w-full h-full flex flex-col">
+        <div className="flex items-center gap-1 px-3 py-2 border-b border-border bg-muted/50">
           <span className="px-1.5 py-0.5 text-[9px] bg-blue-500/20 text-blue-400 rounded font-bold">B</span>
-          <span className="px-1.5 py-0.5 text-[9px] bg-white/10 text-white/60 rounded italic">I</span>
-          <span className="px-1.5 py-0.5 text-[9px] bg-white/10 text-white/60 rounded underline">U</span>
-          <div className="h-4 w-px bg-white/10 mx-1" />
-          <span className="px-1.5 py-0.5 text-[9px] bg-white/10 text-white/60 rounded">H1</span>
-          <span className="px-1.5 py-0.5 text-[9px] bg-white/10 text-white/60 rounded">H2</span>
-          <div className="h-4 w-px bg-white/10 mx-1" />
-          <span className="px-1.5 py-0.5 text-[9px] bg-white/10 text-white/60 rounded">Link</span>
-          <span className="px-1.5 py-0.5 text-[9px] bg-white/10 text-white/60 rounded">Code</span>
+          <span className="px-1.5 py-0.5 text-[9px] bg-muted text-muted-foreground rounded italic">I</span>
+          <span className="px-1.5 py-0.5 text-[9px] bg-muted text-muted-foreground rounded underline">U</span>
+          <div className="h-4 w-px bg-border mx-1" />
+          <span className="px-1.5 py-0.5 text-[9px] bg-muted text-muted-foreground rounded">H1</span>
+          <span className="px-1.5 py-0.5 text-[9px] bg-muted text-muted-foreground rounded">H2</span>
+          <div className="h-4 w-px bg-border mx-1" />
+          <span className="px-1.5 py-0.5 text-[9px] bg-muted text-muted-foreground rounded">Link</span>
+          <span className="px-1.5 py-0.5 text-[9px] bg-muted text-muted-foreground rounded">Code</span>
         </div>
-        <div className="flex-1 p-3 font-mono text-[10px] text-white/70 space-y-1">
-          <div className="text-white font-bold text-sm"># Welcome to Darwin UI</div>
-          <div className="text-white/60">A beautiful component library for React.</div>
+        <div className="flex-1 p-3 font-mono text-[10px] text-muted-foreground space-y-1">
+          <div className="text-foreground font-bold text-sm"># Welcome to Darwin UI</div>
+          <div className="text-muted-foreground">A beautiful component library for React.</div>
           <div className="mt-2"><span className="text-pink-400">**Bold**</span> and <span className="text-cyan-400">*italic*</span> text supported.</div>
-          <div className="mt-1 p-1 bg-white/5 rounded text-emerald-400 text-[9px]">`code blocks`</div>
+          <div className="mt-1 p-1 bg-muted/50 rounded text-emerald-400 text-[9px]">`code blocks`</div>
         </div>
       </div>
     ),
@@ -878,8 +878,8 @@ const COMPONENTS: ComponentDef[] = [
     category: 'rich-content',
     size: 'large',
     preview: (
-      <div className="p-4 rounded-lg bg-white/5 border border-white/10 w-full h-full flex flex-col">
-        <div className="text-sm font-medium text-white mb-3">Get in Touch</div>
+      <div className="p-4 rounded-lg bg-muted/50 border border-border w-full h-full flex flex-col">
+        <div className="text-sm font-medium text-foreground mb-3">Get in Touch</div>
         <div className="space-y-2 flex-1">
           <div className="grid grid-cols-2 gap-2">
             <Input placeholder="First name" className="text-xs" />
@@ -914,7 +914,7 @@ function ComponentCard({ component, delay = 0 }: ComponentCardProps) {
   return (
     <motion.div
       ref={ref}
-      className={`relative p-4 rounded-2xl bg-white/[0.02] border border-white/10 backdrop-blur-sm overflow-hidden group hover:border-white/20 transition-colors duration-300 ${sizeClass}`}
+      className={`relative p-4 rounded-2xl bg-muted/20 border border-border backdrop-blur-sm overflow-hidden group hover:border-border/80 transition-colors duration-300 ${sizeClass}`}
       initial={{ opacity: 0, y: 30, scale: 0.95 }}
       animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
       transition={{ delay, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
@@ -933,7 +933,7 @@ function ComponentCard({ component, delay = 0 }: ComponentCardProps) {
       {/* Component name - clickable link to docs */}
       <Link
         to={`/docs/components/${component.id}`}
-        className="text-[10px] text-white/40 uppercase tracking-wider mb-3 font-medium block hover:text-white/70 transition-colors"
+        className="text-[10px] text-muted-foreground/60 uppercase tracking-wider mb-3 font-medium block hover:text-muted-foreground transition-colors"
       >
         {component.name}
       </Link>
@@ -970,7 +970,7 @@ export function ComponentShowcaseSection() {
         transition={{ duration: 0.6 }}
       >
         <h2 className="text-4xl sm:text-5xl font-bold mb-4 font-heading">Beautiful Components</h2>
-        <p className="text-lg text-white/50">35 production-ready components with smooth animations and accessibility built-in.</p>
+        <p className="text-lg text-muted-foreground">35 production-ready components with smooth animations and accessibility built-in.</p>
       </motion.div>
 
       {/* Category Filter Tabs */}
@@ -987,13 +987,13 @@ export function ComponentShowcaseSection() {
               onClick={() => setActiveCategory(category.id)}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                 activeCategory === category.id
-                  ? 'bg-white/10 text-white border border-white/20'
-                  : 'bg-white/[0.02] text-white/50 border border-white/5 hover:bg-white/5 hover:text-white/70'
+                  ? 'bg-muted text-foreground border border-border'
+                  : 'bg-muted/20 text-muted-foreground border border-border/50 hover:bg-muted/50 hover:text-foreground/70'
               }`}
             >
               {category.label}
               {category.id !== 'all' && (
-                <span className="ml-1.5 text-xs text-white/30">
+                <span className="ml-1.5 text-xs text-muted-foreground/50">
                   {COMPONENTS.filter(c => c.category === category.id).length}
                 </span>
               )}
@@ -1027,7 +1027,7 @@ export function ComponentShowcaseSection() {
         animate={isInView ? { opacity: 1 } : {}}
         transition={{ delay: 0.6 }}
       >
-        <a href="/docs" className="inline-flex items-center text-white/60 hover:text-white transition-colors group">
+        <a href="/docs" className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors group">
           Explore all components in documentation
           <motion.span className="ml-2" animate={{ x: [0, 4, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>→</motion.span>
         </a>
