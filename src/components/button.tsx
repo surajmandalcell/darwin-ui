@@ -47,19 +47,19 @@ export function Button({
 		default:
 			"bg-[hsl(var(--glass-bg-hover))] text-[hsl(var(--text-primary))] hover:bg-[hsl(var(--glass-bg-active))] border border-[hsl(var(--border-default))]",
 		primary:
-			"bg-blue-500 text-white hover:bg-blue-500/90",
+			"bg-blue-500 text-[#ffffff] hover:bg-blue-500/90",
 		secondary:
 			"bg-[hsl(var(--glass-bg))] text-[hsl(var(--text-secondary))] hover:bg-[hsl(var(--glass-bg-hover))] border border-[hsl(var(--border-default))]",
-		success: "bg-green-500 text-white hover:bg-green-500/90",
+		success: "bg-green-500 text-[#ffffff] hover:bg-green-500/90",
 		warning: "bg-amber-500 text-black hover:bg-amber-500/90",
-		info: "bg-blue-400 text-white hover:bg-blue-400/90",
+		info: "bg-blue-400 text-[#ffffff] hover:bg-blue-400/90",
 		destructive:
-			"bg-red-500 text-white hover:bg-red-500/90",
+			"bg-red-500 text-[#ffffff] hover:bg-red-500/90",
 		outline:
 			"border border-[hsl(var(--border-strong))] bg-transparent hover:bg-[hsl(var(--glass-bg))] text-[hsl(var(--text-secondary))]",
 		ghost: "hover:bg-[hsl(var(--glass-bg-hover))] text-[hsl(var(--text-secondary))]",
 		link: "text-blue-400 underline-offset-4 hover:underline",
-		accent: "bg-purple-500 text-white hover:bg-purple-500/90",
+		accent: "bg-purple-500 text-[#ffffff] hover:bg-purple-500/90",
 	};
 
 	const sizes: Record<Size, string> = {
