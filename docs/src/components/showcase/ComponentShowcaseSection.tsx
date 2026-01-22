@@ -51,10 +51,24 @@ const CATEGORIES = [
 
 type CategoryId = typeof CATEGORIES[number]['id'];
 
+// Grid size definitions
+// sm: 1x1 (default), md: 1x1 with more padding, wide: 2x1, tall: 1x2, large: 2x2
+type GridSize = 'sm' | 'md' | 'wide' | 'tall' | 'large';
+
+// Size classes with responsive adjustments
+const SIZE_CLASSES: Record<GridSize, string> = {
+  sm: '',
+  md: '',
+  wide: 'col-span-2',
+  tall: 'row-span-2',
+  large: 'col-span-2 row-span-2',
+};
+
 interface ComponentDef {
   id: string;
   name: string;
   category: CategoryId;
+  size: GridSize;
   preview: React.ReactNode;
 }
 
@@ -185,13 +199,14 @@ function MiniStackedBarChart() {
   );
 }
 
-// All 36 components
+// All 36 components with grid sizes
 const COMPONENTS: ComponentDef[] = [
   // Form Controls (11)
   {
     id: 'button',
     name: 'Button',
     category: 'form-controls',
+    size: 'sm',
     preview: (
       <div className="flex gap-1.5 flex-wrap justify-center">
         <Button size="sm">Primary</Button>
@@ -203,18 +218,26 @@ const COMPONENTS: ComponentDef[] = [
     id: 'input',
     name: 'Input',
     category: 'form-controls',
-    preview: <Input placeholder="Type here..." className="text-xs" />,
+    size: 'wide',
+    preview: (
+      <div className="w-full space-y-2">
+        <Input placeholder="Type your email..." className="text-xs w-full" />
+        <Input placeholder="Password..." type="password" className="text-xs w-full" />
+      </div>
+    ),
   },
   {
     id: 'textarea',
     name: 'Textarea',
     category: 'form-controls',
-    preview: <Textarea placeholder="Message..." rows={2} className="text-xs resize-none" />,
+    size: 'wide',
+    preview: <Textarea placeholder="Write your message here..." rows={3} className="text-xs resize-none w-full" />,
   },
   {
     id: 'checkbox',
     name: 'Checkbox',
     category: 'form-controls',
+    size: 'sm',
     preview: (
       <div className="space-y-1">
         <Checkbox label="Option A" defaultChecked />
@@ -226,6 +249,7 @@ const COMPONENTS: ComponentDef[] = [
     id: 'switch',
     name: 'Switch',
     category: 'form-controls',
+    size: 'sm',
     preview: (
       <div className="space-y-1">
         <Switch label="Active" defaultChecked />
@@ -237,29 +261,51 @@ const COMPONENTS: ComponentDef[] = [
     id: 'slider',
     name: 'Slider',
     category: 'form-controls',
-    preview: <Slider defaultValue={65} />,
+    size: 'wide',
+    preview: (
+      <div className="w-full space-y-3 px-1">
+        <Slider defaultValue={65} />
+        <Slider defaultValue={30} />
+      </div>
+    ),
   },
   {
     id: 'select',
     name: 'Select',
     category: 'form-controls',
+    size: 'tall',
     preview: (
-      <Select defaultValue="react">
-        <option value="react">React</option>
-        <option value="vue">Vue</option>
-        <option value="svelte">Svelte</option>
-      </Select>
+      <div className="w-full space-y-2">
+        <Select defaultValue="react" className="w-full">
+          <option value="react">React</option>
+          <option value="vue">Vue</option>
+          <option value="svelte">Svelte</option>
+        </Select>
+        <div className="text-[10px] text-white/40 space-y-1 pl-1">
+          <div className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-cyan-500"></span> React</div>
+          <div className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-emerald-500"></span> Vue</div>
+          <div className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-orange-500"></span> Svelte</div>
+        </div>
+      </div>
     ),
   },
   {
     id: 'multiselect',
     name: 'MultiSelect',
     category: 'form-controls',
+    size: 'tall',
     preview: (
-      <div className="flex items-center gap-1 flex-wrap">
-        <Badge variant="info" className="text-[10px]">React</Badge>
-        <Badge variant="success" className="text-[10px]">Vue</Badge>
-        <span className="text-white/40 text-xs">+2</span>
+      <div className="w-full space-y-2">
+        <div className="flex items-center gap-1 flex-wrap p-2 rounded-lg bg-white/5 border border-white/10">
+          <Badge variant="info" className="text-[10px]">React</Badge>
+          <Badge variant="success" className="text-[10px]">Vue</Badge>
+          <Badge variant="warning" className="text-[10px]">Svelte</Badge>
+          <span className="text-white/40 text-xs">+2</span>
+        </div>
+        <div className="text-[10px] text-white/40 space-y-1 pl-1">
+          <div className="flex items-center gap-2"><Checkbox label="Angular" /></div>
+          <div className="flex items-center gap-2"><Checkbox label="Next.js" /></div>
+        </div>
       </div>
     ),
   },
@@ -267,6 +313,7 @@ const COMPONENTS: ComponentDef[] = [
     id: 'dateselect',
     name: 'DateSelect',
     category: 'form-controls',
+    size: 'sm',
     preview: (
       <div className="flex items-center gap-2 px-2 py-1.5 rounded-lg bg-white/5 border border-white/10">
         <Calendar className="w-3.5 h-3.5 text-white/50" />
@@ -278,12 +325,14 @@ const COMPONENTS: ComponentDef[] = [
     id: 'searchinput',
     name: 'SearchInput',
     category: 'form-controls',
-    preview: <SearchInput placeholder="Search..." className="text-xs" />,
+    size: 'wide',
+    preview: <SearchInput placeholder="Search components, docs, examples..." className="text-xs w-full" />,
   },
   {
     id: 'upload',
     name: 'Upload',
     category: 'form-controls',
+    size: 'sm',
     preview: (
       <div className="flex flex-col items-center gap-1 p-2 rounded-lg border border-dashed border-white/20 bg-white/[0.02]">
         <UploadIcon className="w-4 h-4 text-white/40" />
@@ -297,6 +346,7 @@ const COMPONENTS: ComponentDef[] = [
     id: 'badge',
     name: 'Badge',
     category: 'data-display',
+    size: 'sm',
     preview: (
       <div className="flex gap-1 flex-wrap justify-center">
         <Badge variant="success">Active</Badge>
@@ -309,6 +359,7 @@ const COMPONENTS: ComponentDef[] = [
     id: 'avatar',
     name: 'Avatar',
     category: 'data-display',
+    size: 'sm',
     preview: (
       <AvatarGroup max={3}>
         <Avatar fallback="JD" size="sm" />
@@ -322,6 +373,7 @@ const COMPONENTS: ComponentDef[] = [
     id: 'card',
     name: 'Card',
     category: 'data-display',
+    size: 'sm',
     preview: (
       <Card className="bg-white/[0.02] p-2">
         <CardHeader className="p-1">
@@ -337,15 +389,23 @@ const COMPONENTS: ComponentDef[] = [
     id: 'table',
     name: 'Table',
     category: 'data-display',
+    size: 'wide',
     preview: (
-      <div className="text-[10px] border border-white/10 rounded overflow-hidden">
+      <div className="text-[10px] border border-white/10 rounded overflow-hidden w-full">
         <div className="flex bg-white/5 border-b border-white/10">
           <div className="flex-1 px-2 py-1 text-white/60">Name</div>
           <div className="flex-1 px-2 py-1 text-white/60">Status</div>
+          <div className="flex-1 px-2 py-1 text-white/60">Role</div>
         </div>
         <div className="flex border-b border-white/5">
-          <div className="flex-1 px-2 py-1 text-white/80">Item 1</div>
+          <div className="flex-1 px-2 py-1 text-white/80">Alice</div>
           <div className="flex-1 px-2 py-1"><Badge variant="success" className="text-[8px] px-1">Active</Badge></div>
+          <div className="flex-1 px-2 py-1 text-white/60">Admin</div>
+        </div>
+        <div className="flex">
+          <div className="flex-1 px-2 py-1 text-white/80">Bob</div>
+          <div className="flex-1 px-2 py-1"><Badge variant="warning" className="text-[8px] px-1">Pending</Badge></div>
+          <div className="flex-1 px-2 py-1 text-white/60">User</div>
         </div>
       </div>
     ),
@@ -354,10 +414,12 @@ const COMPONENTS: ComponentDef[] = [
     id: 'progress',
     name: 'Progress',
     category: 'data-display',
+    size: 'wide',
     preview: (
-      <div className="space-y-2">
+      <div className="space-y-3 w-full px-1">
         <Progress value={75} showValue />
         <Progress value={40} variant="success" />
+        <Progress value={90} variant="warning" />
       </div>
     ),
   },
@@ -365,6 +427,7 @@ const COMPONENTS: ComponentDef[] = [
     id: 'skeleton',
     name: 'Skeleton',
     category: 'data-display',
+    size: 'sm',
     preview: (
       <div className="space-y-2">
         <Skeleton className="h-3 w-full rounded" />
@@ -377,6 +440,7 @@ const COMPONENTS: ComponentDef[] = [
     id: 'image',
     name: 'Image',
     category: 'data-display',
+    size: 'sm',
     preview: (
       <Image
         src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=100&h=60&fit=crop"
@@ -392,6 +456,7 @@ const COMPONENTS: ComponentDef[] = [
     id: 'alert',
     name: 'Alert',
     category: 'feedback',
+    size: 'sm',
     preview: (
       <div className="flex items-center gap-2 px-2 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/20">
         <AlertCircle className="w-3.5 h-3.5 text-amber-400" />
@@ -403,6 +468,7 @@ const COMPONENTS: ComponentDef[] = [
     id: 'toast',
     name: 'Toast',
     category: 'feedback',
+    size: 'sm',
     preview: (
       <div className="flex items-center gap-2 px-2 py-1.5 rounded-lg bg-white/5 border border-white/10 shadow-lg">
         <Bell className="w-3.5 h-3.5 text-white/60" />
@@ -414,6 +480,7 @@ const COMPONENTS: ComponentDef[] = [
     id: 'dialog',
     name: 'Dialog',
     category: 'feedback',
+    size: 'sm',
     preview: (
       <div className="p-2 rounded-lg bg-white/5 border border-white/10 shadow-xl">
         <div className="text-xs font-medium text-white mb-1">Confirm?</div>
@@ -429,6 +496,7 @@ const COMPONENTS: ComponentDef[] = [
     id: 'modal',
     name: 'Modal',
     category: 'feedback',
+    size: 'sm',
     preview: (
       <div className="relative p-2 rounded-lg bg-neutral-900/90 border border-white/10 shadow-2xl">
         <button className="absolute top-1 right-1 text-white/40 hover:text-white/60">
@@ -443,6 +511,7 @@ const COMPONENTS: ComponentDef[] = [
     id: 'tooltip',
     name: 'Tooltip',
     category: 'feedback',
+    size: 'sm',
     preview: (
       <div className="flex flex-col items-center gap-1">
         <div className="px-2 py-1 rounded bg-neutral-800 text-[10px] text-white shadow-lg">
@@ -457,6 +526,7 @@ const COMPONENTS: ComponentDef[] = [
     id: 'popover',
     name: 'Popover',
     category: 'feedback',
+    size: 'sm',
     preview: (
       <div className="flex flex-col items-center gap-1">
         <div className="p-2 rounded-lg bg-white/5 border border-white/10 shadow-lg">
@@ -476,13 +546,15 @@ const COMPONENTS: ComponentDef[] = [
     id: 'tabs',
     name: 'Tabs',
     category: 'navigation',
+    size: 'wide',
     preview: (
       <div className="w-full">
-        <div className="flex bg-white/5 rounded-lg p-0.5 mb-1">
-          <div className="flex-1 px-2 py-1 text-[10px] bg-white/10 text-white rounded text-center">Tab 1</div>
-          <div className="flex-1 px-2 py-1 text-[10px] text-white/50 text-center">Tab 2</div>
+        <div className="flex bg-white/5 rounded-lg p-0.5 mb-2">
+          <div className="flex-1 px-3 py-1.5 text-[10px] bg-white/10 text-white rounded text-center">Overview</div>
+          <div className="flex-1 px-3 py-1.5 text-[10px] text-white/50 text-center">Analytics</div>
+          <div className="flex-1 px-3 py-1.5 text-[10px] text-white/50 text-center">Reports</div>
         </div>
-        <div className="text-[10px] text-white/60 p-1">Content 1</div>
+        <div className="text-[10px] text-white/60 p-2 bg-white/[0.02] rounded-lg">Dashboard overview content</div>
       </div>
     ),
   },
@@ -490,11 +562,20 @@ const COMPONENTS: ComponentDef[] = [
     id: 'accordion',
     name: 'Accordion',
     category: 'navigation',
+    size: 'tall',
     preview: (
       <Accordion type="single" defaultValue="item-1" className="w-full">
         <AccordionItem value="item-1">
-          <AccordionTrigger className="text-[10px] py-1">Section 1</AccordionTrigger>
-          <AccordionContent className="text-[10px] text-white/50 pb-1">Content here</AccordionContent>
+          <AccordionTrigger className="text-[10px] py-1.5">Getting Started</AccordionTrigger>
+          <AccordionContent className="text-[10px] text-white/50 pb-2">Installation guide and setup instructions</AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="item-2">
+          <AccordionTrigger className="text-[10px] py-1.5">Components</AccordionTrigger>
+          <AccordionContent className="text-[10px] text-white/50 pb-2">Browse all components</AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="item-3">
+          <AccordionTrigger className="text-[10px] py-1.5">Theming</AccordionTrigger>
+          <AccordionContent className="text-[10px] text-white/50 pb-2">Customize colors and styles</AccordionContent>
         </AccordionItem>
       </Accordion>
     ),
@@ -503,6 +584,7 @@ const COMPONENTS: ComponentDef[] = [
     id: 'dropdownmenu',
     name: 'DropdownMenu',
     category: 'navigation',
+    size: 'sm',
     preview: (
       <div className="flex flex-col items-center gap-1">
         <div className="p-1 rounded-lg bg-white/5 border border-white/10 shadow-lg w-full">
@@ -519,6 +601,7 @@ const COMPONENTS: ComponentDef[] = [
     id: 'contextmenu',
     name: 'ContextMenu',
     category: 'navigation',
+    size: 'sm',
     preview: (
       <div className="text-center">
         <div className="p-2 rounded-lg bg-white/5 border border-white/10 mb-1">
@@ -535,28 +618,46 @@ const COMPONENTS: ComponentDef[] = [
     id: 'sidebar',
     name: 'Sidebar',
     category: 'navigation',
+    size: 'tall',
     preview: (
-      <div className="flex gap-1">
-        <div className="w-10 bg-white/5 border border-white/10 rounded p-1">
-          <div className="w-full h-3 bg-white/10 rounded mb-1" />
-          <div className="w-full h-3 bg-indigo-500/30 rounded mb-1" />
-          <div className="w-full h-3 bg-white/10 rounded" />
+      <div className="flex gap-2 h-full">
+        <div className="w-16 bg-white/5 border border-white/10 rounded p-2 flex flex-col">
+          <div className="w-full h-4 bg-white/10 rounded mb-2" />
+          <div className="w-full h-4 bg-indigo-500/30 rounded mb-2" />
+          <div className="w-full h-4 bg-white/10 rounded mb-2" />
+          <div className="w-full h-4 bg-white/10 rounded mb-2" />
+          <div className="mt-auto w-full h-4 bg-white/5 rounded" />
         </div>
-        <div className="flex-1 text-[10px] text-white/50 flex items-center justify-center">
-          Main
+        <div className="flex-1 text-[10px] text-white/50 flex flex-col">
+          <div className="text-white/80 mb-2">Main Content</div>
+          <div className="flex-1 bg-white/[0.02] rounded-lg p-2">
+            <Skeleton className="h-2 w-full rounded mb-1" />
+            <Skeleton className="h-2 w-3/4 rounded mb-1" />
+            <Skeleton className="h-2 w-1/2 rounded" />
+          </div>
         </div>
       </div>
     ),
   },
 
-  // Charts (6)
+  // Charts (6) - All large for better visualization
   {
     id: 'areachart',
     name: 'AreaChart',
     category: 'charts',
+    size: 'large',
     preview: (
-      <div className="h-12 w-full">
-        <MiniAreaChart />
+      <div className="h-full w-full flex flex-col">
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-[10px] text-white/60">Revenue Over Time</span>
+          <Badge variant="success" className="text-[8px]">+12.5%</Badge>
+        </div>
+        <div className="flex-1 min-h-[100px]">
+          <MiniAreaChart />
+        </div>
+        <div className="flex justify-between text-[9px] text-white/40 mt-1">
+          <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span>
+        </div>
       </div>
     ),
   },
@@ -564,9 +665,19 @@ const COMPONENTS: ComponentDef[] = [
     id: 'barchart',
     name: 'BarChart',
     category: 'charts',
+    size: 'large',
     preview: (
-      <div className="h-12 w-full">
-        <MiniBarChart />
+      <div className="h-full w-full flex flex-col">
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-[10px] text-white/60">Monthly Sales</span>
+          <Badge variant="info" className="text-[8px]">Q1 2026</Badge>
+        </div>
+        <div className="flex-1 min-h-[100px]">
+          <MiniBarChart />
+        </div>
+        <div className="flex justify-between text-[9px] text-white/40 mt-1">
+          <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span>
+        </div>
       </div>
     ),
   },
@@ -574,9 +685,19 @@ const COMPONENTS: ComponentDef[] = [
     id: 'linechart',
     name: 'LineChart',
     category: 'charts',
+    size: 'large',
     preview: (
-      <div className="h-12 w-full">
-        <MiniLineChart />
+      <div className="h-full w-full flex flex-col">
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-[10px] text-white/60">User Growth</span>
+          <Badge variant="warning" className="text-[8px]">Live</Badge>
+        </div>
+        <div className="flex-1 min-h-[100px]">
+          <MiniLineChart />
+        </div>
+        <div className="flex justify-between text-[9px] text-white/40 mt-1">
+          <span>Week 1</span><span>Week 2</span><span>Week 3</span><span>Week 4</span>
+        </div>
       </div>
     ),
   },
@@ -584,10 +705,28 @@ const COMPONENTS: ComponentDef[] = [
     id: 'piechart',
     name: 'PieChart',
     category: 'charts',
+    size: 'large',
     preview: (
-      <div className="h-12 w-full flex justify-center">
-        <div className="h-12 w-12">
+      <div className="h-full w-full flex items-center gap-4">
+        <div className="h-28 w-28 flex-shrink-0">
           <MiniPieChart />
+        </div>
+        <div className="flex-1 space-y-2">
+          <div className="flex items-center gap-2 text-[10px]">
+            <div className="w-2 h-2 rounded-full bg-indigo-500"></div>
+            <span className="text-white/60">Desktop</span>
+            <span className="text-white/80 ml-auto">45%</span>
+          </div>
+          <div className="flex items-center gap-2 text-[10px]">
+            <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
+            <span className="text-white/60">Mobile</span>
+            <span className="text-white/80 ml-auto">32%</span>
+          </div>
+          <div className="flex items-center gap-2 text-[10px]">
+            <div className="w-2 h-2 rounded-full bg-pink-500"></div>
+            <span className="text-white/60">Tablet</span>
+            <span className="text-white/80 ml-auto">23%</span>
+          </div>
         </div>
       </div>
     ),
@@ -596,10 +735,34 @@ const COMPONENTS: ComponentDef[] = [
     id: 'donutchart',
     name: 'DonutChart',
     category: 'charts',
+    size: 'large',
     preview: (
-      <div className="h-12 w-full flex justify-center">
-        <div className="h-12 w-12">
+      <div className="h-full w-full flex items-center gap-4">
+        <div className="h-28 w-28 flex-shrink-0 relative">
           <MiniDonutChart />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="text-center">
+              <div className="text-sm font-bold text-white">73%</div>
+              <div className="text-[8px] text-white/40">Complete</div>
+            </div>
+          </div>
+        </div>
+        <div className="flex-1 space-y-2">
+          <div className="flex items-center gap-2 text-[10px]">
+            <div className="w-2 h-2 rounded-full bg-indigo-500"></div>
+            <span className="text-white/60">Completed</span>
+            <span className="text-white/80 ml-auto">73%</span>
+          </div>
+          <div className="flex items-center gap-2 text-[10px]">
+            <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
+            <span className="text-white/60">In Progress</span>
+            <span className="text-white/80 ml-auto">18%</span>
+          </div>
+          <div className="flex items-center gap-2 text-[10px]">
+            <div className="w-2 h-2 rounded-full bg-pink-500"></div>
+            <span className="text-white/60">Pending</span>
+            <span className="text-white/80 ml-auto">9%</span>
+          </div>
         </div>
       </div>
     ),
@@ -608,9 +771,28 @@ const COMPONENTS: ComponentDef[] = [
     id: 'stackedbarchart',
     name: 'StackedBarChart',
     category: 'charts',
+    size: 'large',
     preview: (
-      <div className="h-12 w-full">
-        <MiniStackedBarChart />
+      <div className="h-full w-full flex flex-col">
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-[10px] text-white/60">Category Distribution</span>
+          <div className="flex gap-2">
+            <div className="flex items-center gap-1 text-[8px]">
+              <div className="w-2 h-2 rounded bg-indigo-500"></div>
+              <span className="text-white/40">A</span>
+            </div>
+            <div className="flex items-center gap-1 text-[8px]">
+              <div className="w-2 h-2 rounded bg-emerald-500"></div>
+              <span className="text-white/40">B</span>
+            </div>
+          </div>
+        </div>
+        <div className="flex-1 min-h-[100px]">
+          <MiniStackedBarChart />
+        </div>
+        <div className="flex justify-between text-[9px] text-white/40 mt-1">
+          <span>Q1</span><span>Q2</span><span>Q3</span><span>Q4</span>
+        </div>
       </div>
     ),
   },
@@ -620,15 +802,21 @@ const COMPONENTS: ComponentDef[] = [
     id: 'window',
     name: 'Window',
     category: 'layout',
+    size: 'large',
     preview: (
-      <div className="rounded-lg border border-white/10 overflow-hidden bg-neutral-900/80 shadow-lg">
-        <div className="flex items-center gap-1.5 px-2 py-1.5 bg-white/5 border-b border-white/10">
-          <div className="w-2 h-2 rounded-full bg-red-500/70" />
-          <div className="w-2 h-2 rounded-full bg-yellow-500/70" />
-          <div className="w-2 h-2 rounded-full bg-green-500/70" />
-          <span className="text-[9px] text-white/40 ml-auto">Window</span>
+      <div className="rounded-lg border border-white/10 overflow-hidden bg-neutral-900/80 shadow-lg w-full h-full flex flex-col">
+        <div className="flex items-center gap-1.5 px-3 py-2 bg-white/5 border-b border-white/10">
+          <div className="w-2.5 h-2.5 rounded-full bg-red-500/70" />
+          <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/70" />
+          <div className="w-2.5 h-2.5 rounded-full bg-green-500/70" />
+          <span className="text-[10px] text-white/40 ml-auto">Terminal</span>
         </div>
-        <div className="p-2 text-[10px] text-white/50">Content</div>
+        <div className="flex-1 p-3 font-mono text-[10px] text-white/60 space-y-1">
+          <div><span className="text-emerald-400">$</span> npm install @pikoloo/darwin-ui</div>
+          <div className="text-white/40">added 42 packages in 2.3s</div>
+          <div><span className="text-emerald-400">$</span> npm run dev</div>
+          <div className="text-cyan-400">Ready on http://localhost:3000</div>
+        </div>
       </div>
     ),
   },
@@ -636,6 +824,7 @@ const COMPONENTS: ComponentDef[] = [
     id: 'closebutton',
     name: 'CloseButton',
     category: 'layout',
+    size: 'sm',
     preview: (
       <div className="flex items-center justify-center gap-2">
         <CloseButton />
@@ -647,6 +836,7 @@ const COMPONENTS: ComponentDef[] = [
     id: 'reveal',
     name: 'Reveal',
     category: 'layout',
+    size: 'sm',
     preview: (
       <div className="space-y-1">
         <div className="h-2 w-full bg-gradient-to-r from-indigo-500/40 to-transparent rounded animate-pulse" />
@@ -662,15 +852,25 @@ const COMPONENTS: ComponentDef[] = [
     id: 'mdeditor',
     name: 'MdEditor',
     category: 'rich-content',
+    size: 'large',
     preview: (
-      <div className="rounded-lg border border-white/10 overflow-hidden bg-neutral-950/80">
-        <div className="flex items-center gap-1 px-2 py-1 border-b border-white/10 bg-white/5">
-          <span className="px-1 py-0.5 text-[8px] bg-blue-500/20 text-blue-400 rounded">B</span>
-          <span className="px-1 py-0.5 text-[8px] bg-white/10 text-white/60 rounded italic">I</span>
-          <span className="px-1 py-0.5 text-[8px] bg-white/10 text-white/60 rounded">H1</span>
+      <div className="rounded-lg border border-white/10 overflow-hidden bg-neutral-950/80 w-full h-full flex flex-col">
+        <div className="flex items-center gap-1 px-3 py-2 border-b border-white/10 bg-white/5">
+          <span className="px-1.5 py-0.5 text-[9px] bg-blue-500/20 text-blue-400 rounded font-bold">B</span>
+          <span className="px-1.5 py-0.5 text-[9px] bg-white/10 text-white/60 rounded italic">I</span>
+          <span className="px-1.5 py-0.5 text-[9px] bg-white/10 text-white/60 rounded underline">U</span>
+          <div className="h-4 w-px bg-white/10 mx-1" />
+          <span className="px-1.5 py-0.5 text-[9px] bg-white/10 text-white/60 rounded">H1</span>
+          <span className="px-1.5 py-0.5 text-[9px] bg-white/10 text-white/60 rounded">H2</span>
+          <div className="h-4 w-px bg-white/10 mx-1" />
+          <span className="px-1.5 py-0.5 text-[9px] bg-white/10 text-white/60 rounded">Link</span>
+          <span className="px-1.5 py-0.5 text-[9px] bg-white/10 text-white/60 rounded">Code</span>
         </div>
-        <div className="p-2 font-mono text-[9px] text-white/60">
-          # Markdown<br />**Bold** text
+        <div className="flex-1 p-3 font-mono text-[10px] text-white/70 space-y-1">
+          <div className="text-white font-bold text-sm"># Welcome to Darwin UI</div>
+          <div className="text-white/60">A beautiful component library for React.</div>
+          <div className="mt-2"><span className="text-pink-400">**Bold**</span> and <span className="text-cyan-400">*italic*</span> text supported.</div>
+          <div className="mt-1 p-1 bg-white/5 rounded text-emerald-400 text-[9px]">`code blocks`</div>
         </div>
       </div>
     ),
@@ -679,14 +879,19 @@ const COMPONENTS: ComponentDef[] = [
     id: 'contactform',
     name: 'ContactForm',
     category: 'rich-content',
+    size: 'large',
     preview: (
-      <div className="p-2 rounded-lg bg-white/5 border border-white/10">
-        <div className="text-[10px] font-medium text-white mb-1">Contact</div>
-        <div className="space-y-1">
-          <div className="h-4 w-full rounded bg-white/5 border border-white/10" />
-          <div className="h-4 w-full rounded bg-white/5 border border-white/10" />
-          <Button size="sm" className="w-full text-[10px] h-5">Send</Button>
+      <div className="p-4 rounded-lg bg-white/5 border border-white/10 w-full h-full flex flex-col">
+        <div className="text-sm font-medium text-white mb-3">Get in Touch</div>
+        <div className="space-y-2 flex-1">
+          <div className="grid grid-cols-2 gap-2">
+            <Input placeholder="First name" className="text-xs" />
+            <Input placeholder="Last name" className="text-xs" />
+          </div>
+          <Input placeholder="Email address" className="text-xs" />
+          <Textarea placeholder="Your message..." rows={2} className="text-xs resize-none" />
         </div>
+        <Button size="sm" className="w-full mt-3 text-xs">Send Message</Button>
       </div>
     ),
   },
@@ -701,10 +906,18 @@ function ComponentCard({ component, delay = 0 }: ComponentCardProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
+  // Get size-specific classes
+  const sizeClass = SIZE_CLASSES[component.size];
+
+  // Determine if this is a larger cell for styling adjustments
+  const isLarge = component.size === 'large';
+  const isTall = component.size === 'tall';
+  const isWide = component.size === 'wide';
+
   return (
     <motion.div
       ref={ref}
-      className="relative p-4 rounded-2xl bg-white/[0.02] border border-white/10 backdrop-blur-sm overflow-hidden group hover:border-white/20 transition-colors duration-300"
+      className={`relative p-4 rounded-2xl bg-white/[0.02] border border-white/10 backdrop-blur-sm overflow-hidden group hover:border-white/20 transition-colors duration-300 ${sizeClass}`}
       initial={{ opacity: 0, y: 30, scale: 0.95 }}
       animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
       transition={{ delay, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
@@ -723,8 +936,13 @@ function ComponentCard({ component, delay = 0 }: ComponentCardProps) {
       {/* Component name */}
       <p className="text-[10px] text-white/40 uppercase tracking-wider mb-3 font-medium">{component.name}</p>
 
-      {/* Preview */}
-      <div className="relative z-10 min-h-[60px] flex items-center justify-center">
+      {/* Preview - adjust height based on size */}
+      <div className={`relative z-10 flex items-center justify-center ${
+        isLarge ? 'min-h-[160px] h-[calc(100%-2rem)]' :
+        isTall ? 'min-h-[140px] h-[calc(100%-2rem)]' :
+        isWide ? 'min-h-[60px]' :
+        'min-h-[60px]'
+      }`}>
         {component.preview}
       </div>
     </motion.div>
@@ -783,9 +1001,9 @@ export function ComponentShowcaseSection() {
       </motion.div>
 
       {/* Component Grid */}
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
+      <div className="max-w-[1600px] mx-auto px-4 md:px-8 lg:px-12">
         <motion.div
-          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4"
+          className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-4 auto-rows-[120px]"
           layout
         >
           <AnimatePresence mode="popLayout">
@@ -793,7 +1011,7 @@ export function ComponentShowcaseSection() {
               <ComponentCard
                 key={component.id}
                 component={component}
-                delay={index * 0.05}
+                delay={index * 0.03}
               />
             ))}
           </AnimatePresence>
