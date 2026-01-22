@@ -3429,13 +3429,61 @@ function DocsNavigation({
   );
 }
 
+// Generate markdown context for AI from current page
+function generatePageContext(section: string, page: string): string {
+  const sectionData = docSections[section as keyof typeof docSections];
+  const pageData = sectionData?.pages.find(p => p.id === page);
+  const pageTitle = pageData?.title || page;
+  const sectionTitle = sectionData?.title || section;
+
+  let context = `# Darwin UI Documentation\n\n`;
+  context += `## ${sectionTitle} > ${pageTitle}\n\n`;
+
+  // Add relevant context based on section/page
+  if (section === 'getting-started') {
+    if (page === 'introduction') {
+      context += `Darwin UI is a macOS-inspired React component library with:\n`;
+      context += `- Glass-morphism effects with backdrop blur\n`;
+      context += `- Framer Motion animations with spring physics\n`;
+      context += `- Tailwind CSS styling\n`;
+      context += `- Full TypeScript support\n`;
+      context += `- ARIA-compliant accessibility\n\n`;
+    } else if (page === 'installation') {
+      context += `### Installation\n\n`;
+      context += `\`\`\`bash\nnpm install @pikoloo/darwin-ui\n\`\`\`\n\n`;
+      context += `### Peer Dependencies\n`;
+      context += `- react >= 18\n- react-dom >= 18\n- framer-motion >= 10\n- tailwindcss >= 3\n\n`;
+    }
+  } else if (section === 'components') {
+    context += `### Component: ${pageTitle}\n\n`;
+    context += `Import: \`import { ${pageTitle} } from '@pikoloo/darwin-ui'\`\n\n`;
+    context += `This is a Darwin UI component. For detailed props and examples, refer to the documentation.\n\n`;
+  } else if (section === 'theming') {
+    context += `### Theming: ${pageTitle}\n\n`;
+    context += `Darwin UI supports dark theme by default with customizable CSS variables.\n\n`;
+  }
+
+  context += `---\n`;
+  context += `Source: Darwin UI Documentation - ${sectionTitle}/${pageTitle}\n`;
+
+  return context;
+}
+
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function DeveloperApp({ windowState: _windowState }: DeveloperAppProps) {
   const [activeSection, setActiveSection] = useState('getting-started');
   const [activePage, setActivePage] = useState('introduction');
   const [expandedSections, setExpandedSections] = useState<string[]>(['getting-started', 'components', 'theming']);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [copied, setCopied] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
+
+  const copyForAI = async () => {
+    const markdown = generatePageContext(activeSection, activePage);
+    await navigator.clipboard.writeText(markdown);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   const toggleSection = (sectionId: string) => {
     setExpandedSections((prev) =>
@@ -3588,6 +3636,28 @@ export function DeveloperApp({ windowState: _windowState }: DeveloperAppProps) {
         transition={{ delay: 0.2 }}
       >
         <div className="max-w-3xl mx-auto p-4 md:p-8">
+          {/* Copy for AI button */}
+          <div className="flex justify-end mb-4">
+            <motion.button
+              className="px-3 py-1.5 text-xs text-white/60 hover:text-white/90 hover:bg-white/10 rounded-md transition-colors flex items-center gap-1.5 border border-white/10"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={copyForAI}
+              title="Copy page context for AI"
+            >
+              {copied ? (
+                <>
+                  <Check className="w-3 h-3 text-green-400" />
+                  Copied
+                </>
+              ) : (
+                <>
+                  <Copy className="w-3 h-3" />
+                  Copy for AI
+                </>
+              )}
+            </motion.button>
+          </div>
           <AnimatePresence mode="wait">
             <PageContent
               key={`${activeSection}-${activePage}`}
