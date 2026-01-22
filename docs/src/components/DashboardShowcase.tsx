@@ -109,6 +109,7 @@ export default function DashboardShowcase() {
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- Intentional hydration pattern for client-only chart rendering
         setMounted(true);
     }, []);
 
@@ -313,7 +314,7 @@ export default function DashboardShowcase() {
                                                         tickFormatter={(value) => `$${value}`}
                                                     />
                                                     <Tooltip
-                                                        content={({ active, payload, label: _label }) => {
+                                                        content={({ active, payload }) => {
                                                             if (active && payload && payload.length) {
                                                                 return (
                                                                     <div className="bg-neutral-950/90 backdrop-blur-md border border-white/10 rounded-xl shadow-sm p-3">

@@ -8,7 +8,8 @@ interface AboutAppProps {
   windowState: WindowState;
 }
 
-export function AboutApp({ windowState: _windowState }: AboutAppProps) {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export function AboutApp(_props: AboutAppProps) {
   return (
     <div className="h-full bg-neutral-900 flex items-center justify-center p-8">
       <motion.div
