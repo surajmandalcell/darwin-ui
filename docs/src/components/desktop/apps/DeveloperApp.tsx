@@ -84,6 +84,10 @@ import {
   ContextMenu,
   LineChart,
   BarChart,
+  AreaChart,
+  PieChart,
+  DonutChart,
+  StackedBarChart,
   CloseButton,
 } from '@pikoloo/darwin-ui';
 
@@ -224,6 +228,7 @@ const docSections = {
     pages: [
       { id: 'introduction', title: 'Introduction' },
       { id: 'installation', title: 'Installation' },
+      { id: 'shadcn-cli', title: 'shadcn CLI' },
       { id: 'quick-start', title: 'Quick Start' },
     ],
   },
@@ -619,6 +624,211 @@ function MyComponent() {
   );
 }
 
+// shadcn CLI documentation page
+function ShadcnCliPage() {
+  const shadcnInstallCode = `# Add individual components via shadcn CLI
+npx shadcn@latest add https://darwin-ui.mandalsuraj.com/registry/button.json
+npx shadcn@latest add https://darwin-ui.mandalsuraj.com/registry/card.json
+npx shadcn@latest add https://darwin-ui.mandalsuraj.com/registry/input.json`;
+
+  const npmInstallCode = `# Install the full package
+npm install @pikoloo/darwin-ui`;
+
+  const availableComponents = [
+    'accordion', 'avatar', 'badge', 'button', 'card', 'checkbox',
+    'close-button', 'context-menu', 'date-select', 'dialog',
+    'dropdown-menu', 'image', 'input', 'modal', 'multi-select',
+    'popover', 'progress', 'reveal', 'search-input', 'select',
+    'sidebar', 'skeleton', 'slider', 'switch', 'table', 'tabs',
+    'textarea', 'tooltip', 'upload', 'charts'
+  ];
+
+  return (
+    <motion.div
+      variants={pageTransitionVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      className="space-y-8"
+    >
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="show"
+      >
+        <motion.h1
+          className="text-4xl font-bold text-white mb-4"
+          variants={itemVariants}
+        >
+          shadcn CLI
+        </motion.h1>
+        <motion.p
+          className="text-lg text-white/70"
+          variants={itemVariants}
+        >
+          Darwin UI is fully compatible with shadcn CLI for deep customization.
+        </motion.p>
+      </motion.div>
+
+      {/* Two Methods Comparison */}
+      <motion.div
+        variants={itemVariants}
+        initial="hidden"
+        animate="show"
+        transition={{ delay: 0.1 }}
+        className="space-y-4"
+      >
+        <h2 className="text-2xl font-semibold text-white">Two Installation Methods</h2>
+        <p className="text-white/70">
+          Choose the method that best fits your project needs:
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* Method 1: Full Package */}
+          <div className="p-4 rounded-xl bg-white/5 border border-white/10 space-y-3">
+            <div className="flex items-center gap-2">
+              <Badge variant="success">Recommended</Badge>
+              <h3 className="font-semibold text-white">npm install</h3>
+            </div>
+            <p className="text-sm text-white/60">
+              Install the complete package. Get all components, automatic updates, and tree-shaking.
+            </p>
+            <CodeBlock code={npmInstallCode} language="bash" />
+            <div className="text-xs text-white/40 space-y-1">
+              <p>✓ All components included</p>
+              <p>✓ Automatic updates via npm</p>
+              <p>✓ Tree-shaking removes unused code</p>
+            </div>
+          </div>
+
+          {/* Method 2: shadcn CLI */}
+          <div className="p-4 rounded-xl bg-white/5 border border-white/10 space-y-3">
+            <div className="flex items-center gap-2">
+              <Badge variant="secondary">Advanced</Badge>
+              <h3 className="font-semibold text-white">shadcn CLI</h3>
+            </div>
+            <p className="text-sm text-white/60">
+              Copy component source code into your project for deep customization.
+            </p>
+            <CodeBlock code={shadcnInstallCode} language="bash" />
+            <div className="text-xs text-white/40 space-y-1">
+              <p>✓ Full control over component code</p>
+              <p>✓ Customize internals freely</p>
+              <p>✓ No external dependency</p>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* When to Use Each */}
+      <motion.div
+        variants={itemVariants}
+        initial="hidden"
+        animate="show"
+        transition={{ delay: 0.2 }}
+        className="space-y-4"
+      >
+        <h2 className="text-2xl font-semibold text-white">When to Use Each Method</h2>
+        <div className="overflow-auto">
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableHeaderCell>Scenario</TableHeaderCell>
+                <TableHeaderCell>Recommended</TableHeaderCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <TableRow>
+                <TableCell>New project using Darwin UI throughout</TableCell>
+                <TableCell><Badge variant="success">npm install</Badge></TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Adding a few components to existing shadcn project</TableCell>
+                <TableCell><Badge variant="secondary">shadcn CLI</Badge></TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Need to modify component internals</TableCell>
+                <TableCell><Badge variant="secondary">shadcn CLI</Badge></TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Want automatic updates</TableCell>
+                <TableCell><Badge variant="success">npm install</Badge></TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Building a design system on top</TableCell>
+                <TableCell><Badge variant="secondary">shadcn CLI</Badge></TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </div>
+      </motion.div>
+
+      {/* Available Components */}
+      <motion.div
+        variants={itemVariants}
+        initial="hidden"
+        animate="show"
+        transition={{ delay: 0.3 }}
+        className="space-y-4"
+      >
+        <h2 className="text-2xl font-semibold text-white">Available Registry Components</h2>
+        <p className="text-white/70">
+          All these components can be installed via shadcn CLI:
+        </p>
+        <div className="flex flex-wrap gap-2">
+          {availableComponents.map((comp) => (
+            <Badge key={comp} variant="outline" className="text-xs">
+              {comp}
+            </Badge>
+          ))}
+        </div>
+        <div className="p-4 rounded-xl bg-blue-500/10 border border-blue-500/20">
+          <p className="text-sm text-blue-400">
+            <strong>Registry URL pattern:</strong>
+            <code className="ml-2 bg-white/10 px-2 py-0.5 rounded">
+              https://darwin-ui.mandalsuraj.com/registry/[component].json
+            </code>
+          </p>
+        </div>
+      </motion.div>
+
+      {/* Customization Workflow */}
+      <motion.div
+        variants={itemVariants}
+        initial="hidden"
+        animate="show"
+        transition={{ delay: 0.4 }}
+        className="space-y-4"
+      >
+        <h2 className="text-2xl font-semibold text-white">Customization Workflow</h2>
+        <div className="space-y-3">
+          <div className="flex gap-3 items-start">
+            <div className="w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center text-xs font-bold shrink-0">1</div>
+            <div>
+              <p className="font-medium text-white">Install component via CLI</p>
+              <p className="text-sm text-white/60">Component source is copied to your project (usually <code className="bg-white/10 px-1 rounded">components/ui/</code>)</p>
+            </div>
+          </div>
+          <div className="flex gap-3 items-start">
+            <div className="w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center text-xs font-bold shrink-0">2</div>
+            <div>
+              <p className="font-medium text-white">Dependencies installed automatically</p>
+              <p className="text-sm text-white/60">Required packages like framer-motion are added to your package.json</p>
+            </div>
+          </div>
+          <div className="flex gap-3 items-start">
+            <div className="w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center text-xs font-bold shrink-0">3</div>
+            <div>
+              <p className="font-medium text-white">Customize freely</p>
+              <p className="text-sm text-white/60">Modify styles, props, behavior - the code is yours</p>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
 // Quick Start page content with enhanced animations
 function QuickStartPage({ onNavigate }: { onNavigate?: (section: string, page: string) => void }) {
   const exampleCode = `import { Button, Window, Input } from '@pikoloo/darwin-ui';
@@ -1007,48 +1217,154 @@ function CardPreview() {
   );
 }
 
-// Charts Preview
+// Charts Preview with dynamic switching
+type ChartType = 'bar' | 'line' | 'area' | 'stacked' | 'pie' | 'donut';
+
 function ChartsPreview() {
-  const chartData = [
-    { name: 'Jan', value: 400, value2: 240 },
-    { name: 'Feb', value: 300, value2: 139 },
-    { name: 'Mar', value: 200, value2: 980 },
-    { name: 'Apr', value: 278, value2: 390 },
-    { name: 'May', value: 189, value2: 480 },
+  const [chartType, setChartType] = useState<ChartType>('bar');
+
+  // Time-series data for bar/line/area/stacked
+  const timeSeriesData = [
+    { name: 'Jan', revenue: 4000, expenses: 2400, profit: 1600 },
+    { name: 'Feb', revenue: 3000, expenses: 1398, profit: 1602 },
+    { name: 'Mar', revenue: 5000, expenses: 3200, profit: 1800 },
+    { name: 'Apr', revenue: 2780, expenses: 1908, profit: 872 },
+    { name: 'May', revenue: 1890, expenses: 1200, profit: 690 },
   ];
+
+  // Category data for pie/donut
+  const pieData = [
+    { category: 'Product A', sales: 400 },
+    { category: 'Product B', sales: 300 },
+    { category: 'Product C', sales: 200 },
+    { category: 'Product D', sales: 100 },
+  ];
+
+  const chartTypeOptions: { value: ChartType; label: string }[] = [
+    { value: 'bar', label: 'Bar' },
+    { value: 'line', label: 'Line' },
+    { value: 'area', label: 'Area' },
+    { value: 'stacked', label: 'Stacked' },
+    { value: 'pie', label: 'Pie' },
+    { value: 'donut', label: 'Donut' },
+  ];
+
+  const renderChart = () => {
+    switch (chartType) {
+      case 'bar':
+        return (
+          <BarChart
+            data={timeSeriesData}
+            xKey="name"
+            bars={[
+              { dataKey: 'revenue', name: 'Revenue', fill: '#60a5fa' },
+              { dataKey: 'expenses', name: 'Expenses', fill: '#f87171' },
+            ]}
+            height={220}
+            showLegend
+          />
+        );
+      case 'line':
+        return (
+          <LineChart
+            data={timeSeriesData}
+            xKey="name"
+            lines={[
+              { dataKey: 'revenue', name: 'Revenue', stroke: '#60a5fa' },
+              { dataKey: 'expenses', name: 'Expenses', stroke: '#34d399' },
+            ]}
+            height={220}
+            showLegend
+          />
+        );
+      case 'area':
+        return (
+          <AreaChart
+            data={timeSeriesData}
+            xKey="name"
+            areas={[
+              { dataKey: 'revenue', name: 'Revenue', fill: '#60a5fa', stroke: '#60a5fa' },
+              { dataKey: 'profit', name: 'Profit', fill: '#34d399', stroke: '#34d399' },
+            ]}
+            height={220}
+            showLegend
+            stacked
+          />
+        );
+      case 'stacked':
+        return (
+          <StackedBarChart
+            data={timeSeriesData}
+            xKey="name"
+            stackKeys={[
+              { dataKey: 'expenses', name: 'Expenses', fill: '#f87171' },
+              { dataKey: 'profit', name: 'Profit', fill: '#34d399' },
+            ]}
+            height={220}
+            showLegend
+          />
+        );
+      case 'pie':
+        return (
+          <PieChart
+            data={pieData}
+            nameKey="category"
+            valueKey="sales"
+            height={220}
+            showLegend
+          />
+        );
+      case 'donut':
+        return (
+          <DonutChart
+            data={pieData}
+            nameKey="category"
+            valueKey="sales"
+            height={220}
+            showLegend
+          />
+        );
+      default:
+        return null;
+    }
+  };
 
   return (
     <motion.div
-      className="w-full min-w-0 space-y-6"
+      className="w-full min-w-0 space-y-4"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}
       style={{ width: '100%' }}
     >
-      <div className="w-full min-w-0">
-        <h4 className="text-sm font-medium text-white/70 mb-3">Bar Chart</h4>
-        <div style={{ width: '100%', height: 200 }}>
-          <BarChart
-            data={chartData}
-            xKey="name"
-            bars={[{ dataKey: 'value', name: 'Sales', fill: '#60a5fa' }]}
-            height={200}
-          />
-        </div>
+      {/* Chart type selector */}
+      <div className="flex flex-wrap gap-2">
+        {chartTypeOptions.map((option) => (
+          <Button
+            key={option.value}
+            variant={chartType === option.value ? 'primary' : 'ghost'}
+            size="sm"
+            onClick={() => setChartType(option.value)}
+          >
+            {option.label}
+          </Button>
+        ))}
       </div>
+
+      {/* Chart display with animation */}
       <div className="w-full min-w-0">
-        <h4 className="text-sm font-medium text-white/70 mb-3">Line Chart</h4>
-        <div style={{ width: '100%', height: 200 }}>
-          <LineChart
-            data={chartData}
-            xKey="name"
-            lines={[
-              { dataKey: 'value', name: 'Revenue', stroke: '#60a5fa' },
-              { dataKey: 'value2', name: 'Cost', stroke: '#34d399' },
-            ]}
-            height={200}
-          />
-        </div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={chartType}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            style={{ width: '100%', height: 220 }}
+          >
+            {renderChart()}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </motion.div>
   );
@@ -1791,6 +2107,7 @@ function UploadPreview() {
 // Sidebar Preview - Shows the actual Sidebar component in a contained preview
 function SidebarPreview() {
   const [activeItem, setActiveItem] = useState('Dashboard');
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   const sidebarItems = [
     { label: 'Dashboard', onClick: () => setActiveItem('Dashboard') },
@@ -1801,10 +2118,18 @@ function SidebarPreview() {
 
   return (
     <motion.div
-      className="w-full"
+      className="w-full space-y-4"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
     >
+      {/* Collapsible toggle */}
+      <div className="flex items-center gap-2">
+        <Switch checked={isCollapsed} onChange={setIsCollapsed} />
+        <span className="text-sm text-white/70">
+          {isCollapsed ? 'Collapsed' : 'Expanded'}
+        </span>
+      </div>
+
       {/* Container to show sidebar in a realistic layout */}
       <div className="rounded-lg border border-white/10 bg-neutral-950/80 overflow-hidden">
         <div className="flex h-64">
@@ -1814,6 +2139,9 @@ function SidebarPreview() {
               items={sidebarItems}
               activeItem={activeItem}
               onLogout={() => setActiveItem('Logged out')}
+              collapsed={isCollapsed}
+              onCollapsedChange={setIsCollapsed}
+              collapsible
             />
           </div>
           {/* Content area */}
@@ -1825,8 +2153,8 @@ function SidebarPreview() {
           </div>
         </div>
       </div>
-      <p className="text-xs text-white/40 mt-2 text-center">
-        The sidebar is responsive - on mobile it shows as a slide-out menu
+      <p className="text-xs text-white/40 text-center">
+        Use the toggle or click &quot;Collapse&quot; in the sidebar. On mobile, it shows as a slide-out menu.
       </p>
     </motion.div>
   );
@@ -2922,6 +3250,8 @@ function PageContent({ section, page, onNavigate }: { section: string; page: str
         return <IntroductionPage />;
       case 'installation':
         return <InstallationPage />;
+      case 'shadcn-cli':
+        return <ShadcnCliPage />;
       case 'quick-start':
         return <QuickStartPage onNavigate={onNavigate} />;
     }

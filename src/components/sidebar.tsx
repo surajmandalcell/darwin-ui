@@ -1,24 +1,33 @@
 "use client";
 
-import { LogOut, Menu, X } from "lucide-react";
+import { ChevronsLeft, LogOut, Menu, X } from "lucide-react";
 import React from "react";
 import { cn } from "../lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
+import { Tooltip, TooltipTrigger, TooltipContent } from "./tooltip";
 
 interface SidebarItemProps {
 	label: string;
 	onClick: () => void;
 	active?: boolean;
 	icon?: React.ComponentType<{ className?: string }>;
+	isCollapsed?: boolean;
 }
 
-function SidebarItem({ label, onClick, active, icon: Icon }: SidebarItemProps) {
-	return (
+function SidebarItem({
+	label,
+	onClick,
+	active,
+	icon: Icon,
+	isCollapsed,
+}: SidebarItemProps) {
+	const buttonContent = (
 		<button
 			type="button"
 			onClick={onClick}
 			className={cn(
-				"group flex w-full items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors duration-200 ease-out focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-500/50",
+				"group flex w-full items-center rounded-md text-sm font-medium transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-500/50",
+				isCollapsed ? "justify-center px-2 py-2" : "gap-3 px-3 py-2",
 				active
 					? "bg-blue-600 text-white shadow-sm"
 					: "text-white/60 hover:bg-white/5 hover:text-white",
@@ -32,9 +41,35 @@ function SidebarItem({ label, onClick, active, icon: Icon }: SidebarItemProps) {
 					)}
 				/>
 			) : null}
-			<span>{label}</span>
+			<AnimatePresence mode="wait">
+				{!isCollapsed && (
+					<motion.span
+						initial={{ opacity: 0, width: 0 }}
+						animate={{ opacity: 1, width: "auto" }}
+						exit={{ opacity: 0, width: 0 }}
+						transition={{ duration: 0.15 }}
+						className="whitespace-nowrap overflow-hidden"
+					>
+						{label}
+					</motion.span>
+				)}
+			</AnimatePresence>
 		</button>
 	);
+
+	// Wrap with tooltip only when collapsed
+	if (isCollapsed) {
+		return (
+			<Tooltip delayDuration={100}>
+				<TooltipTrigger asChild>{buttonContent}</TooltipTrigger>
+				<TooltipContent side="right" sideOffset={8}>
+					{label}
+				</TooltipContent>
+			</Tooltip>
+		);
+	}
+
+	return buttonContent;
 }
 
 interface SidebarProps {
@@ -45,10 +80,39 @@ interface SidebarProps {
 	}[];
 	activeItem: string;
 	onLogout: () => void;
+	/** Controlled collapsed state */
+	collapsed?: boolean;
+	/** Default collapsed state for uncontrolled mode */
+	defaultCollapsed?: boolean;
+	/** Callback when collapsed state changes */
+	onCollapsedChange?: (collapsed: boolean) => void;
+	/** Whether to show the collapse toggle button. Auto-enabled if collapsed props are provided */
+	collapsible?: boolean;
 }
 
-export function Sidebar({ items, activeItem, onLogout }: SidebarProps) {
+export function Sidebar({
+	items,
+	activeItem,
+	onLogout,
+	collapsed,
+	defaultCollapsed = false,
+	onCollapsedChange,
+	collapsible,
+}: SidebarProps) {
 	const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+	const [internalCollapsed, setInternalCollapsed] =
+		React.useState(defaultCollapsed);
+
+	// Determine if controlled or uncontrolled
+	const isCollapsed = collapsed !== undefined ? collapsed : internalCollapsed;
+	const handleCollapsedChange = onCollapsedChange ?? setInternalCollapsed;
+
+	// Auto-enable collapsible if any collapse prop is provided
+	const isCollapsible =
+		collapsible ??
+		(collapsed !== undefined ||
+			onCollapsedChange !== undefined ||
+			defaultCollapsed === true);
 
 	// Explicitly filter out Settings to handle it separately
 	const topItems = items.filter((item) => item.label !== "Settings");
@@ -133,7 +197,11 @@ export function Sidebar({ items, activeItem, onLogout }: SidebarProps) {
 			</motion.div>
 
 			{/* Desktop Sidebar */}
-			<div className="hidden h-full w-48 shrink-0 flex-col p-4 md:flex">
+			<motion.div
+				animate={{ width: isCollapsed ? 64 : 192 }}
+				transition={{ type: "spring", damping: 25, stiffness: 200 }}
+				className="hidden h-full shrink-0 flex-col p-4 md:flex"
+			>
 				<div className="flex-1 space-y-1">
 					{topItems.map((item) => (
 						<SidebarItem
@@ -142,11 +210,46 @@ export function Sidebar({ items, activeItem, onLogout }: SidebarProps) {
 							onClick={item.onClick}
 							icon={item.icon}
 							active={activeItem === item.label}
+							isCollapsed={isCollapsed}
 						/>
 					))}
 				</div>
 
 				<div className="mt-auto space-y-1 border-t border-white/10 pt-4">
+					{/* Collapse toggle button */}
+					{isCollapsible && (
+						<button
+							type="button"
+							onClick={() => handleCollapsedChange(!isCollapsed)}
+							aria-expanded={!isCollapsed}
+							aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+							className={cn(
+								"group flex w-full items-center rounded-md py-2 text-sm font-medium text-white/40 transition-all duration-200 ease-out hover:bg-white/5 hover:text-white/60 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-500/50",
+								isCollapsed ? "justify-center px-2" : "gap-3 px-3",
+							)}
+						>
+							<motion.div
+								animate={{ rotate: isCollapsed ? 180 : 0 }}
+								transition={{ duration: 0.2, ease: "easeInOut" }}
+							>
+								<ChevronsLeft className="h-4 w-4" />
+							</motion.div>
+							<AnimatePresence mode="wait">
+								{!isCollapsed && (
+									<motion.span
+										initial={{ opacity: 0, width: 0 }}
+										animate={{ opacity: 1, width: "auto" }}
+										exit={{ opacity: 0, width: 0 }}
+										transition={{ duration: 0.15 }}
+										className="whitespace-nowrap overflow-hidden"
+									>
+										Collapse
+									</motion.span>
+								)}
+							</AnimatePresence>
+						</button>
+					)}
+
 					{settingsItem && (
 						<SidebarItem
 							key={settingsItem.label}
@@ -154,11 +257,17 @@ export function Sidebar({ items, activeItem, onLogout }: SidebarProps) {
 							onClick={settingsItem.onClick}
 							icon={settingsItem.icon}
 							active={activeItem === settingsItem.label}
+							isCollapsed={isCollapsed}
 						/>
 					)}
-					<SidebarItem label="Logout" onClick={onLogout} icon={LogOut} />
+					<SidebarItem
+						label="Logout"
+						onClick={onLogout}
+						icon={LogOut}
+						isCollapsed={isCollapsed}
+					/>
 				</div>
-			</div>
+			</motion.div>
 		</>
 	);
 }
