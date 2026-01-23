@@ -214,7 +214,7 @@ body {
   }
 
   .component-preview {
-    @apply flex items-center justify-center p-8 rounded-xl border border-border bg-muted/30 backdrop-blur-sm;
+    @apply flex items-center justify-center p-8;
   }
 
   /* Design System Utilities */
