@@ -1,0 +1,65 @@
+import { Zap, Layout, Palette } from 'lucide-react';
+import type { DocSection } from './types';
+
+// Documentation structure
+export const docSections: Record<string, DocSection> = {
+  'getting-started': {
+    title: 'Getting Started',
+    icon: <Zap className="w-4 h-4" />,
+    pages: [
+      { id: 'agentic-coding', title: 'Agentic Coding' },
+      { id: 'introduction', title: 'Introduction' },
+      { id: 'installation', title: 'Installation' },
+      { id: 'shadcn-cli', title: 'ShadCN CLI' },
+      { id: 'quick-start', title: 'Quick Start' },
+    ],
+  },
+  'components': {
+    title: 'Components',
+    icon: <Layout className="w-4 h-4" />,
+    pages: [
+      { id: 'accordion', title: 'Accordion' },
+      { id: 'avatar', title: 'Avatar' },
+      { id: 'badge', title: 'Badge' },
+      { id: 'button', title: 'Button' },
+      { id: 'card', title: 'Card' },
+      { id: 'charts', title: 'Charts' },
+      { id: 'checkbox', title: 'Checkbox' },
+      { id: 'close-button', title: 'CloseButton' },
+      { id: 'contact-form', title: 'ContactForm' },
+      { id: 'context-menu', title: 'ContextMenu' },
+      { id: 'date-select', title: 'DateSelect' },
+      { id: 'dialog', title: 'Dialog' },
+      { id: 'dropdown-menu', title: 'DropdownMenu' },
+      { id: 'image', title: 'Image' },
+      { id: 'input', title: 'Input' },
+      { id: 'md-editor', title: 'MdEditor' },
+      { id: 'modal', title: 'Modal' },
+      { id: 'multi-select', title: 'MultiSelect' },
+      { id: 'popover', title: 'Popover' },
+      { id: 'progress', title: 'Progress' },
+      { id: 'reveal', title: 'Reveal' },
+      { id: 'search-input', title: 'SearchInput' },
+      { id: 'select', title: 'Select' },
+      { id: 'sidebar', title: 'Sidebar' },
+      { id: 'skeleton', title: 'Skeleton' },
+      { id: 'slider', title: 'Slider' },
+      { id: 'switch', title: 'Switch' },
+      { id: 'table', title: 'Table' },
+      { id: 'tabs', title: 'Tabs' },
+      { id: 'textarea', title: 'Textarea' },
+      { id: 'tooltip', title: 'Tooltip' },
+      { id: 'upload', title: 'Upload' },
+      { id: 'window', title: 'Window' },
+    ],
+  },
+  'theming': {
+    title: 'Theming',
+    icon: <Palette className="w-4 h-4" />,
+    pages: [
+      { id: 'colors', title: 'Colors' },
+      { id: 'dark-mode', title: 'Dark Mode' },
+      { id: 'customization', title: 'Customization' },
+    ],
+  },
+};

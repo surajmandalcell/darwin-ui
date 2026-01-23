@@ -71,16 +71,16 @@ const iconSizeClasses: Record<InputSize, string> = {
 // ============================================================================
 
 const baseInputClasses =
-	"flex w-full rounded-md border bg-black/5 dark:bg-white/5 text-zinc-900 dark:text-zinc-100 shadow-sm transition-colors duration-150 placeholder:text-zinc-600 dark:placeholder:text-zinc-400 outline-none disabled:cursor-not-allowed disabled:opacity-50 backdrop-blur-sm hover:bg-black/10 dark:hover:bg-white/10";
+	"flex w-full rounded-md border bg-black/5 dark:bg-white/5 text-zinc-900 dark:text-zinc-100 shadow-sm transition-all duration-200 placeholder:text-zinc-500 dark:placeholder:text-zinc-400 outline-none disabled:cursor-not-allowed disabled:opacity-50 backdrop-blur-sm hover:bg-black/10 dark:hover:bg-white/10";
 
 const getStateClasses = (error?: boolean, success?: boolean) => {
 	if (error) {
-		return "border-red-500/50 focus-visible:border-red-500";
+		return "border-red-500/50 focus:ring-2 focus:ring-inset focus:ring-red-500";
 	}
 	if (success) {
-		return "border-emerald-500/50 focus-visible:border-emerald-500";
+		return "border-emerald-500/50 focus:ring-2 focus:ring-inset focus:ring-emerald-500";
 	}
-	return "border-black/10 dark:border-white/10 focus-visible:border-blue-500";
+	return "border-black/10 dark:border-white/10 focus:ring-2 focus:ring-inset focus:ring-blue-500";
 };
 
 // ============================================================================
@@ -126,7 +126,11 @@ const InputBase = React.forwardRef<HTMLInputElement, InputProps>(
 		const hasRightContent = error || success || !!rightIcon;
 
 		const inputType =
-			variant === "text" ? type || "text" : variant === "search" ? "search" : variant;
+			variant === "text"
+				? type || "text"
+				: variant === "search"
+					? "search"
+					: variant;
 
 		return (
 			<div className={cn("relative w-full", wrapperClassName)}>
