@@ -26,7 +26,7 @@ import {
 
 // Import from local files
 import { pageTransitionVariants, containerVariants, itemVariants, featureCardVariants, iconVariants } from './animations';
-import { CodeBlock } from './CodeBlock';
+import { CodeBlock } from '../../../CodeBlock';
 import { componentPreviews } from './previews';
 import { componentCodeExamples } from './code-examples';
 
@@ -187,7 +187,7 @@ documentation from Context7 first:
             <p className="text-sm text-muted-foreground mb-3">
               If you have Context7 MCP configured, simply ask your AI to fetch Darwin UI docs:
             </p>
-            <CodeBlock code={cursorPrompt} language="text" />
+            <CodeBlock code={cursorPrompt} language="bash" />
           </div>
 
           <div className="p-4 rounded-xl bg-muted/50 border border-border">
@@ -195,7 +195,7 @@ documentation from Context7 first:
             <p className="text-sm text-muted-foreground mb-3">
               Include this in your prompt to help AI find the latest docs:
             </p>
-            <CodeBlock code={claudePrompt} language="text" />
+            <CodeBlock code={claudePrompt} language="bash" />
           </div>
 
           <div className="p-4 rounded-xl bg-muted/50 border border-border">
@@ -203,7 +203,7 @@ documentation from Context7 first:
             <p className="text-sm text-muted-foreground mb-3">
               AI agents can fetch documentation directly:
             </p>
-            <CodeBlock code={context7Example} language="text" />
+            <CodeBlock code={context7Example} language="bash" />
           </div>
         </div>
       </motion.div>

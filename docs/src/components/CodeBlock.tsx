@@ -1,9 +1,10 @@
 "use client";
 
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { coldarkDark, coldarkCold } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { Check, Copy } from 'lucide-react';
 import { useState } from 'react';
+import { useTheme } from '../contexts/theme-context';
 
 interface CodeBlockProps {
   code: string;
@@ -21,6 +22,8 @@ export function CodeBlock({
   highlightLines = []
 }: CodeBlockProps) {
   const [copied, setCopied] = useState(false);
+  const { theme } = useTheme();
+  const syntaxTheme = theme === 'light' ? coldarkCold : coldarkDark;
 
   const handleCopy = async () => {
     try {
@@ -66,7 +69,7 @@ export function CodeBlock({
       {/* Code Content */}
       <SyntaxHighlighter
         language={language}
-        style={vscDarkPlus}
+        style={syntaxTheme}
         showLineNumbers={showLineNumbers}
         wrapLines={highlightLines.length > 0}
         lineProps={(lineNumber) => ({
