@@ -19,6 +19,12 @@ import {
   ExternalLink,
   Menu,
   X,
+  Plus,
+  Settings,
+  Heart,
+  Share2,
+  Trash2,
+  Download,
 } from 'lucide-react';
 import {
   Accordion,
@@ -1156,37 +1162,100 @@ function ButtonPreview() {
 
   return (
     <motion.div
-      className="flex flex-wrap gap-3"
+      className="space-y-6"
       variants={containerVariants}
       initial="hidden"
       animate="show"
     >
-      {[
-        { variant: 'primary' as const, label: 'Primary' },
-        { variant: 'secondary' as const, label: 'Secondary' },
-        { variant: 'outline' as const, label: 'Outline' },
-        { variant: 'ghost' as const, label: 'Ghost' },
-        { variant: 'destructive' as const, label: 'Destructive' },
-      ].map((btn, i) => (
-        <motion.div
-          key={btn.variant}
-          variants={itemVariants}
-          custom={i}
-          whileHover={{ y: -2 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <Button variant={btn.variant}>{btn.label}</Button>
-        </motion.div>
-      ))}
-      <motion.div
-        variants={itemVariants}
-        whileHover={{ y: -2 }}
-        whileTap={{ scale: 0.95 }}
-      >
-        <Button variant="primary" loading={loading} onClick={handleLoadingClick}>
-          {loading ? 'Loading...' : 'Click me'}
-        </Button>
-      </motion.div>
+      {/* Text Buttons */}
+      <div>
+        <div className="text-xs text-muted-foreground mb-3 uppercase tracking-wider">Text Buttons</div>
+        <div className="flex flex-wrap gap-3">
+          {[
+            { variant: 'primary' as const, label: 'Primary' },
+            { variant: 'secondary' as const, label: 'Secondary' },
+            { variant: 'outline' as const, label: 'Outline' },
+            { variant: 'ghost' as const, label: 'Ghost' },
+            { variant: 'destructive' as const, label: 'Destructive' },
+          ].map((btn, i) => (
+            <motion.div
+              key={btn.variant}
+              variants={itemVariants}
+              custom={i}
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Button variant={btn.variant}>{btn.label}</Button>
+            </motion.div>
+          ))}
+          <motion.div
+            variants={itemVariants}
+            whileHover={{ y: -2 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Button variant="primary" loading={loading} onClick={handleLoadingClick}>
+              {loading ? 'Loading...' : 'Click me'}
+            </Button>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Icon Buttons */}
+      <div>
+        <div className="text-xs text-muted-foreground mb-3 uppercase tracking-wider">Icon Buttons</div>
+        <div className="flex flex-wrap gap-3 items-center">
+          <motion.div variants={itemVariants} whileHover={{ y: -2 }} whileTap={{ scale: 0.95 }}>
+            <Button variant="primary" size="icon">
+              <Plus className="h-4 w-4" />
+            </Button>
+          </motion.div>
+          <motion.div variants={itemVariants} whileHover={{ y: -2 }} whileTap={{ scale: 0.95 }}>
+            <Button variant="secondary" size="icon">
+              <Settings className="h-4 w-4" />
+            </Button>
+          </motion.div>
+          <motion.div variants={itemVariants} whileHover={{ y: -2 }} whileTap={{ scale: 0.95 }}>
+            <Button variant="outline" size="icon">
+              <Heart className="h-4 w-4" />
+            </Button>
+          </motion.div>
+          <motion.div variants={itemVariants} whileHover={{ y: -2 }} whileTap={{ scale: 0.95 }}>
+            <Button variant="ghost" size="icon">
+              <Share2 className="h-4 w-4" />
+            </Button>
+          </motion.div>
+          <motion.div variants={itemVariants} whileHover={{ y: -2 }} whileTap={{ scale: 0.95 }}>
+            <Button variant="destructive" size="icon">
+              <Trash2 className="h-4 w-4" />
+            </Button>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Buttons with Icons */}
+      <div>
+        <div className="text-xs text-muted-foreground mb-3 uppercase tracking-wider">With Icons</div>
+        <div className="flex flex-wrap gap-3">
+          <motion.div variants={itemVariants} whileHover={{ y: -2 }} whileTap={{ scale: 0.95 }}>
+            <Button variant="primary">
+              <Plus className="h-4 w-4 mr-2" />
+              Create New
+            </Button>
+          </motion.div>
+          <motion.div variants={itemVariants} whileHover={{ y: -2 }} whileTap={{ scale: 0.95 }}>
+            <Button variant="secondary">
+              <Download className="h-4 w-4 mr-2" />
+              Download
+            </Button>
+          </motion.div>
+          <motion.div variants={itemVariants} whileHover={{ y: -2 }} whileTap={{ scale: 0.95 }}>
+            <Button variant="outline">
+              <Share2 className="h-4 w-4 mr-2" />
+              Share
+            </Button>
+          </motion.div>
+        </div>
+      </div>
     </motion.div>
   );
 }
@@ -2498,11 +2567,33 @@ const componentCodeExamples: Record<string, { importCode: string; usageCode: str
 <Badge variant="destructive">Error</Badge>`,
   },
   'button': {
-    importCode: `import { Button } from '@pikoloo/darwin-ui';`,
-    usageCode: `<Button variant="primary">Primary</Button>
+    importCode: `import { Button } from '@pikoloo/darwin-ui';
+import { Plus, Settings, Download } from 'lucide-react';`,
+    usageCode: `// Text Buttons
+<Button variant="primary">Primary</Button>
 <Button variant="secondary">Secondary</Button>
 <Button variant="outline">Outline</Button>
-<Button loading>Loading...</Button>`,
+<Button variant="ghost">Ghost</Button>
+<Button variant="destructive">Delete</Button>
+<Button loading>Loading...</Button>
+
+// Icon Buttons
+<Button variant="primary" size="icon">
+  <Plus className="h-4 w-4" />
+</Button>
+<Button variant="secondary" size="icon">
+  <Settings className="h-4 w-4" />
+</Button>
+
+// Buttons with Icons
+<Button variant="primary">
+  <Plus className="h-4 w-4 mr-2" />
+  Create New
+</Button>
+<Button variant="secondary">
+  <Download className="h-4 w-4 mr-2" />
+  Download
+</Button>`,
   },
   'card': {
     importCode: `import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@pikoloo/darwin-ui';`,
