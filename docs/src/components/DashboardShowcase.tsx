@@ -76,11 +76,11 @@ function MetricCard({
     icon: React.ElementType;
 }) {
     return (
-        <div className="group relative p-3 rounded-lg border border-border/60 bg-muted/30 hover-card-lift overflow-hidden">
+        <div className="group relative p-3 rounded-lg border border-border bg-card hover-card-lift overflow-hidden">
             <div className="absolute inset-0 bg-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
             <div className="relative flex items-center justify-between mb-2">
-                <div className="p-2 rounded-md bg-muted/40 border border-border/60 text-muted-foreground group-hover:text-blue-400 transition-colors">
+                <div className="p-2 rounded-md bg-muted border border-border text-muted-foreground group-hover:text-blue-400 transition-colors">
                     <Icon className="w-4 h-4" />
                 </div>
                 <div className={cn(
@@ -104,9 +104,10 @@ function MetricCard({
 
 interface DashboardShowcaseProps {
     showTitleBar?: boolean;
+    interactive?: boolean;
 }
 
-export default function DashboardShowcase({ showTitleBar = true }: DashboardShowcaseProps) {
+export default function DashboardShowcase({ showTitleBar = true, interactive = true }: DashboardShowcaseProps) {
     const { resolvedTheme } = useTheme();
     const isDark = resolvedTheme === "dark";
     const [activeNav, setActiveNav] = useState("dashboard");
@@ -137,7 +138,7 @@ export default function DashboardShowcase({ showTitleBar = true }: DashboardShow
 
     return (
         <div
-            className="relative w-full overflow-hidden font-sans bg-card"
+            className={`relative w-full overflow-hidden font-sans bg-card ${!showTitleBar ? 'h-full' : ''}`}
         >
             {/* Window Title Bar - Compact */}
             {showTitleBar && (
@@ -155,7 +156,7 @@ export default function DashboardShowcase({ showTitleBar = true }: DashboardShow
                 </div>
             )}
 
-            <div className="flex flex-col md:flex-row min-h-[650px] md:h-[800px] xl:h-[850px]">
+            <div className={`flex flex-col md:flex-row ${showTitleBar ? 'min-h-[650px] md:h-[800px] xl:h-[850px]' : 'h-full'}`}>
                 {/* Sidebar - Compact */}
                 <div className="w-[200px] flex-shrink-0 border-r border-border bg-card hidden md:flex flex-col">
                     <div className="p-3">
@@ -605,6 +606,10 @@ export default function DashboardShowcase({ showTitleBar = true }: DashboardShow
                 </div>
             )}
 
+            {/* Non-interactive overlay */}
+            {!interactive && (
+                <div className="absolute inset-0 z-40" aria-hidden="true" />
+            )}
         </div>
     );
 }

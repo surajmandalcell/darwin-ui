@@ -37,7 +37,7 @@ export function DashboardDemoSection() {
         {/* Wrapper with horizontal scroll for small screens */}
         <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
           <div className="min-w-[320px] sm:min-w-0 rounded-2xl overflow-hidden border border-border shadow-2xl shadow-foreground/20">
-            <DashboardShowcase />
+            <DashboardShowcase interactive={false} />
           </div>
         </div>
       </motion.div>
