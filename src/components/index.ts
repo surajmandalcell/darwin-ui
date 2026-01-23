@@ -43,13 +43,13 @@ export type { ContextMenuItem } from "./context-menu";
 export { ContextMenu } from "./context-menu";
 export { DateSelect } from "./date-select";
 export { Image } from "./image";
-export { Input } from "./input";
+export type { InputProps, TextAreaProps as TextareaProps } from "./input";
+export { Input, Textarea } from "./input";
 export { MdEditor } from "./md-editor";
 export { Modal } from "./modal";
-export { MultiSelect } from "./multi-select";
 export { default as Reveal } from "./reveal";
-export { SearchInput } from "./search-input";
-export { Select } from "./select";
+export type { SelectOption, SelectProps } from "./select";
+export { Select, MultiSelect } from "./select";
 export { Sidebar } from "./sidebar";
 export { Skeleton } from "./skeleton";
 export { Switch } from "./switch";
@@ -83,10 +83,6 @@ export { Progress, CircularProgress } from "./progress";
 // Slider
 export { Slider } from "./slider";
 
-// Textarea
-export type { TextareaProps } from "./textarea";
-export { Textarea } from "./textarea";
-
 // Dialog
 export {
 	Dialog,
@@ -112,8 +108,11 @@ export {
 	DropdownMenuShortcut,
 } from "./dropdown-menu";
 
-// Popover
-export { Popover, PopoverTrigger, PopoverContent, PopoverClose } from "./popover";
+// Floating (unified Popover/Tooltip)
+export { Floating } from "./floating";
 
-// Tooltip
-export { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "./tooltip";
+// Popover (pre-configured Floating)
+export { Popover, PopoverTrigger, PopoverContent, PopoverClose } from "./floating";
+
+// Tooltip (pre-configured Floating)
+export { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "./floating";

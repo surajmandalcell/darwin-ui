@@ -5,123 +5,216 @@ import { createPortal } from "react-dom";
 import { cn } from "../lib/utils";
 import { getDuration } from "../lib/animation-config";
 import { motion, AnimatePresence } from "framer-motion";
+import { Check, ChevronDown, X } from "lucide-react";
 
-type OptionLike = { value: string; label: React.ReactNode };
+// ============================================================================
+// Types
+// ============================================================================
 
-interface SelectProps
-	extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange" | "children"> {
-	children: React.ReactNode;
-	onChange?: (e: { target: { value: string } }) => void;
-	value?: string;
-	defaultValue?: string;
+export interface SelectOption {
+	value: string;
+	label: React.ReactNode;
 	disabled?: boolean;
 }
 
-export function Select({
-	children,
-	className = "",
-	value,
-	defaultValue,
-	onChange,
-	disabled,
-	...props
-}: SelectProps) {
-	const [open, setOpen] = React.useState(false);
-	const containerRef = React.useRef<HTMLDivElement | null>(null);
-	const buttonRef = React.useRef<HTMLButtonElement | null>(null);
-	const [dropdownPosition, setDropdownPosition] = React.useState({ top: 0, left: 0, width: 0 });
+interface BaseSelectProps {
+	/** Placeholder text when no selection */
+	placeholder?: string;
+	/** Disable the select */
+	disabled?: boolean;
+	/** Additional class for the container */
+	className?: string;
+	/** Max items to display as text before showing count */
+	maxDisplayCount?: number;
+}
 
-	const options = React.useMemo<OptionLike[]>(() => {
-		return React.Children.toArray(children).flatMap((child) => {
-			if (!React.isValidElement(child)) return [] as OptionLike[];
-			const props = child.props as {
-				value?: string;
-				children?: React.ReactNode;
-			};
-			const val = props.value ?? String(props.children ?? "");
-			return [{ value: String(val), label: props.children }];
-		});
-	}, [children]);
+interface SingleSelectProps extends BaseSelectProps {
+	type?: "single";
+	value?: string;
+	defaultValue?: string;
+	onChange?: (e: { target: { value: string } }) => void;
+	/** Options as array (alternative to children) */
+	options?: SelectOption[];
+	/** Children (SelectOption elements) */
+	children?: React.ReactNode;
+}
 
-	const selected = React.useMemo(() => {
-		const v =
-			(value as string) ?? (defaultValue as string) ?? options[0]?.value ?? "";
-		const match = options.find((o) => o.value === v);
-		return { value: v, label: match?.label ?? v };
-	}, [value, defaultValue, options]);
+interface MultiSelectProps extends BaseSelectProps {
+	type: "multiple";
+	value: string[];
+	onChange: (values: string[]) => void;
+	/** Options as array */
+	options: SelectOption[];
+	/** Show tags below the select */
+	showTags?: boolean;
+}
+
+export type SelectProps = SingleSelectProps | MultiSelectProps;
+
+// ============================================================================
+// Hooks
+// ============================================================================
+
+function useDropdownPosition(
+	open: boolean,
+	buttonRef: React.RefObject<HTMLButtonElement | null>,
+) {
+	const [position, setPosition] = React.useState({ top: 0, left: 0, width: 0 });
 
 	React.useEffect(() => {
 		if (open && buttonRef.current) {
 			const rect = buttonRef.current.getBoundingClientRect();
-			setDropdownPosition({
+			setPosition({
 				top: rect.bottom + window.scrollY + 4,
 				left: rect.left + window.scrollX,
 				width: rect.width,
 			});
 		}
-	}, [open]);
+	}, [open, buttonRef]);
 
+	return position;
+}
+
+function useClickOutside(
+	ref: React.RefObject<HTMLElement | null>,
+	open: boolean,
+	onClose: () => void,
+) {
 	React.useEffect(() => {
-		function onDocClick(e: MouseEvent) {
-			if (!containerRef.current) return;
-			if (!containerRef.current.contains(e.target as Node)) setOpen(false);
+		function handleClick(e: MouseEvent) {
+			if (ref.current && !ref.current.contains(e.target as Node)) {
+				onClose();
+			}
 		}
-		if (open) document.addEventListener("click", onDocClick);
-		return () => document.removeEventListener("click", onDocClick);
-	}, [open]);
+		if (open) document.addEventListener("mousedown", handleClick);
+		return () => document.removeEventListener("mousedown", handleClick);
+	}, [open, onClose, ref]);
+}
+
+// ============================================================================
+// Select Component
+// ============================================================================
+
+function SelectBase(props: SelectProps) {
+	const isMultiple = props.type === "multiple";
+
+	if (isMultiple) {
+		return <MultiSelectInternal {...(props as MultiSelectProps)} />;
+	}
+	return <SingleSelectInternal {...(props as SingleSelectProps)} />;
+}
+
+// ============================================================================
+// Single Select Internal
+// ============================================================================
+
+function SingleSelectInternal({
+	children,
+	className,
+	value,
+	defaultValue,
+	onChange,
+	disabled,
+	options: optionsProp,
+	placeholder,
+}: SingleSelectProps) {
+	const [open, setOpen] = React.useState(false);
+	const containerRef = React.useRef<HTMLDivElement>(null);
+	const buttonRef = React.useRef<HTMLButtonElement>(null);
+	const position = useDropdownPosition(open, buttonRef);
+
+	useClickOutside(containerRef, open, () => setOpen(false));
+
+	// Parse options from children or props
+	const options = React.useMemo<SelectOption[]>(() => {
+		if (optionsProp) return optionsProp;
+		return React.Children.toArray(children).flatMap((child) => {
+			if (!React.isValidElement(child)) return [];
+			const childProps = child.props as {
+				value?: string;
+				children?: React.ReactNode;
+				disabled?: boolean;
+			};
+			const val = childProps.value ?? String(childProps.children ?? "");
+			return [
+				{
+					value: String(val),
+					label: childProps.children,
+					disabled: childProps.disabled,
+				},
+			];
+		});
+	}, [children, optionsProp]);
+
+	// Determine selected value
+	const selected = React.useMemo(() => {
+		const v = value ?? defaultValue ?? options[0]?.value ?? "";
+		const match = options.find((o) => o.value === v);
+		return { value: v, label: match?.label ?? v };
+	}, [value, defaultValue, options]);
 
 	function handleSelect(val: string) {
 		onChange?.({ target: { value: val } });
 		setOpen(false);
 	}
 
-	const dropdown = typeof window !== "undefined" ? (
-		createPortal(
-			<AnimatePresence>
-				{open && (
-					<motion.div
-						initial={{ opacity: 0, scale: 0.95, y: -10 }}
-						animate={{ opacity: 1, scale: 1, y: 0 }}
-						exit={{ opacity: 0, scale: 0.95, y: -10 }}
-						transition={{ duration: getDuration("normal"), ease: "easeOut" }}
-						style={{
-							position: 'fixed',
-							top: `${dropdownPosition.top}px`,
-							left: `${dropdownPosition.left}px`,
-							minWidth: `${dropdownPosition.width}px`,
-						}}
-						className="z-50 min-w-[8rem] overflow-hidden rounded-md border border-[hsl(var(--border-default))] bg-[hsl(var(--overlay-bg))] backdrop-blur-md shadow-md"
-					>
-						<ul role="listbox" className="py-1 px-1 flex flex-col gap-0.5">
-							{options.map((opt) => (
-								<li
-									key={opt.value}
-									role="option"
-									aria-selected={opt.value === selected.value}
-									onClick={() => handleSelect(opt.value)}
-									className={cn(
-										"relative flex w-full cursor-pointer select-none items-center rounded-md px-2 py-1.5 text-sm outline-none transition-colors data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
-										opt.value === selected.value
-											? "bg-[hsl(var(--glass-bg-hover))] text-[hsl(var(--text-primary))]"
-											: "text-[hsl(var(--text-secondary))] hover:bg-[hsl(var(--glass-bg))]"
-									)}
-								>
-									{opt.label}
-								</li>
-							))}
-						</ul>
-					</motion.div>
-				)}
-			</AnimatePresence>,
-			document.body
-		)
-	) : null;
+	const dropdown =
+		typeof window !== "undefined"
+			? createPortal(
+					<AnimatePresence>
+						{open && (
+							<motion.div
+								initial={{ opacity: 0, scale: 0.95, y: -10 }}
+								animate={{ opacity: 1, scale: 1, y: 0 }}
+								exit={{ opacity: 0, scale: 0.95, y: -10 }}
+								transition={{ duration: getDuration("normal"), ease: "easeOut" }}
+								style={{
+									position: "fixed",
+									top: `${position.top}px`,
+									left: `${position.left}px`,
+									minWidth: `${position.width}px`,
+								}}
+								className="z-50 min-w-[8rem] overflow-hidden rounded-md border border-[hsl(var(--border-default))] bg-[hsl(var(--overlay-bg))] backdrop-blur-md shadow-md"
+							>
+								<ul role="listbox" className="py-1 px-1 flex flex-col gap-0.5">
+									{options.map((opt) => (
+										<li
+											key={opt.value}
+											role="option"
+											aria-selected={opt.value === selected.value}
+											data-disabled={opt.disabled || undefined}
+											onClick={() => !opt.disabled && handleSelect(opt.value)}
+											onKeyDown={(e) => {
+												if (e.key === "Enter" || e.key === " ") {
+													e.preventDefault();
+													if (!opt.disabled) handleSelect(opt.value);
+												}
+											}}
+											tabIndex={opt.disabled ? -1 : 0}
+											className={cn(
+												"relative flex w-full cursor-pointer select-none items-center rounded-md px-2 py-1.5 text-sm outline-none transition-colors",
+												opt.disabled &&
+													"pointer-events-none opacity-50 cursor-not-allowed",
+												opt.value === selected.value
+													? "bg-[hsl(var(--glass-bg-hover))] text-[hsl(var(--text-primary))]"
+													: "text-[hsl(var(--text-secondary))] hover:bg-[hsl(var(--glass-bg))]",
+											)}
+										>
+											{opt.label}
+										</li>
+									))}
+								</ul>
+							</motion.div>
+						)}
+					</AnimatePresence>,
+					document.body,
+				)
+			: null;
 
 	return (
 		<div
 			ref={containerRef}
 			className={cn("relative inline-block w-full", className)}
-			{...props}
 		>
 			<button
 				ref={buttonRef}
@@ -134,27 +227,237 @@ export function Select({
 					"flex h-9 w-full items-center justify-between rounded-md border border-[hsl(var(--border-default))] bg-[hsl(var(--glass-bg))] px-3 py-2 text-sm text-[hsl(var(--text-primary))] shadow-sm ring-offset-background placeholder:text-[hsl(var(--text-tertiary))] focus:outline-none focus:ring-1 focus:ring-[hsl(var(--ring))] disabled:cursor-not-allowed disabled:opacity-50 hover:bg-[hsl(var(--glass-bg-hover))] transition-colors backdrop-blur-sm",
 				)}
 			>
-				<span className="truncate">{selected.label}</span>
-				<span className="ml-2 h-4 w-4 opacity-50">
-					<motion.svg
-						animate={{ rotate: open ? 180 : 0 }}
-						transition={{ duration: getDuration("slow"), ease: "easeOut" }}
-						xmlns="http://www.w3.org/2000/svg"
-						width="24"
-						height="24"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						strokeWidth="2"
-						strokeLinecap="round"
-						strokeLinejoin="round"
-						className="h-4 w-4"
-					>
-						<path d="m6 9 6 6 6-6" />
-					</motion.svg>
+				<span
+					className={cn(
+						"truncate",
+						!selected.label && "text-[hsl(var(--text-tertiary))]",
+					)}
+				>
+					{selected.label || placeholder || "Select..."}
 				</span>
+				<motion.span
+					animate={{ rotate: open ? 180 : 0 }}
+					transition={{ duration: getDuration("slow"), ease: "easeOut" }}
+					className="ml-2 h-4 w-4 opacity-50"
+				>
+					<ChevronDown className="h-4 w-4" />
+				</motion.span>
 			</button>
 			{dropdown}
 		</div>
 	);
 }
+
+// ============================================================================
+// Multi Select Internal
+// ============================================================================
+
+function MultiSelectInternal({
+	value,
+	onChange,
+	options,
+	placeholder = "Select...",
+	disabled = false,
+	className,
+	maxDisplayCount = 2,
+	showTags = true,
+}: MultiSelectProps) {
+	const [open, setOpen] = React.useState(false);
+	const containerRef = React.useRef<HTMLDivElement>(null);
+	const buttonRef = React.useRef<HTMLButtonElement>(null);
+	const position = useDropdownPosition(open, buttonRef);
+
+	useClickOutside(containerRef, open, () => setOpen(false));
+
+	function toggle(val: string) {
+		const has = value.includes(val);
+		onChange(has ? value.filter((v) => v !== val) : [...value, val]);
+	}
+
+	function removeTag(e: React.MouseEvent, val: string) {
+		e.stopPropagation();
+		onChange(value.filter((v) => v !== val));
+	}
+
+	const displayValue = React.useMemo(() => {
+		if (value.length === 0) return null;
+		if (value.length <= maxDisplayCount) {
+			return value
+				.map((v) => options.find((o) => o.value === v)?.label || v)
+				.join(", ");
+		}
+		return `${value.length} selected`;
+	}, [value, options, maxDisplayCount]);
+
+	const dropdown =
+		typeof window !== "undefined"
+			? createPortal(
+					<AnimatePresence>
+						{open && (
+							<motion.div
+								initial={{ opacity: 0, scale: 0.95, y: -10 }}
+								animate={{ opacity: 1, scale: 1, y: 0 }}
+								exit={{ opacity: 0, scale: 0.95, y: -10 }}
+								transition={{ duration: getDuration("normal"), ease: "easeOut" }}
+								style={{
+									position: "fixed",
+									top: `${position.top}px`,
+									left: `${position.left}px`,
+									minWidth: `${position.width}px`,
+								}}
+								className="z-50 min-w-[8rem] overflow-hidden rounded-md border border-[hsl(var(--border-default))] bg-[hsl(var(--overlay-bg))] backdrop-blur-md shadow-md"
+							>
+								<ul role="listbox" className="p-1">
+									{options.map((opt) => {
+										const isSelected = value.includes(opt.value);
+										return (
+											<li
+												key={opt.value}
+												role="option"
+												aria-selected={isSelected}
+												data-disabled={opt.disabled || undefined}
+												onClick={() => !opt.disabled && toggle(opt.value)}
+												onKeyDown={(e) => {
+													if (e.key === "Enter" || e.key === " ") {
+														e.preventDefault();
+														if (!opt.disabled) toggle(opt.value);
+													}
+												}}
+												tabIndex={opt.disabled ? -1 : 0}
+												className={cn(
+													"relative flex w-full cursor-pointer select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none transition-colors hover:bg-[hsl(var(--glass-bg-hover))]",
+													opt.disabled &&
+														"pointer-events-none opacity-50 cursor-not-allowed",
+													isSelected
+														? "text-[hsl(var(--text-primary))]"
+														: "text-[hsl(var(--text-secondary))]",
+												)}
+											>
+												<span className="absolute left-2 flex h-4 w-4 items-center justify-center">
+													<AnimatePresence>
+														{isSelected && (
+															<motion.span
+																initial={{ scale: 0, opacity: 0 }}
+																animate={{ scale: 1, opacity: 1 }}
+																exit={{ scale: 0, opacity: 0 }}
+																transition={{ duration: getDuration("fast") }}
+															>
+																<Check className="h-3 w-3 text-[hsl(var(--brand-primary))]" />
+															</motion.span>
+														)}
+													</AnimatePresence>
+												</span>
+												{opt.label}
+											</li>
+										);
+									})}
+								</ul>
+							</motion.div>
+						)}
+					</AnimatePresence>,
+					document.body,
+				)
+			: null;
+
+	return (
+		<div
+			ref={containerRef}
+			className={cn("relative inline-block w-full", className)}
+		>
+			<button
+				ref={buttonRef}
+				type="button"
+				disabled={disabled}
+				aria-haspopup="listbox"
+				aria-expanded={open}
+				onClick={() => setOpen((v) => !v)}
+				className={cn(
+					"flex h-9 w-full items-center justify-between rounded-md border border-[hsl(var(--border-default))] bg-[hsl(var(--glass-bg))] px-3 py-2 text-sm text-[hsl(var(--text-primary))] shadow-sm ring-offset-background placeholder:text-[hsl(var(--text-tertiary))] focus:outline-none focus:ring-1 focus:ring-[hsl(var(--ring))] disabled:cursor-not-allowed disabled:opacity-50 hover:bg-[hsl(var(--glass-bg-hover))] transition-colors backdrop-blur-sm",
+				)}
+			>
+				<span
+					className={cn(
+						"truncate",
+						!displayValue && "text-[hsl(var(--text-tertiary))]",
+					)}
+				>
+					{displayValue || placeholder}
+				</span>
+				<motion.span
+					animate={{ rotate: open ? 180 : 0 }}
+					transition={{ duration: getDuration("slow"), ease: "easeOut" }}
+					className="ml-2 h-4 w-4 opacity-50"
+				>
+					<ChevronDown className="h-4 w-4" />
+				</motion.span>
+			</button>
+			{dropdown}
+			{showTags && value.length > 0 && (
+				<div className="flex flex-wrap gap-1.5 mt-2">
+					<AnimatePresence>
+						{value.map((v) => (
+							<motion.span
+								key={v}
+								initial={{ scale: 0.8, opacity: 0 }}
+								animate={{ scale: 1, opacity: 1 }}
+								exit={{ scale: 0.8, opacity: 0 }}
+								transition={{ duration: getDuration("normal") }}
+								className="inline-flex items-center gap-1.5 px-2 py-1 bg-[hsl(var(--glass-bg))] border border-[hsl(var(--border-default))] rounded-md text-[hsl(var(--text-secondary))] text-xs backdrop-blur-sm"
+							>
+								{options.find((o) => o.value === v)?.label || v}
+								<button
+									type="button"
+									className="text-[hsl(var(--text-muted))] hover:text-[hsl(var(--text-secondary))] transition-colors rounded-sm hover:bg-[hsl(var(--glass-bg-hover))] p-0.5"
+									onClick={(e) => removeTag(e, v)}
+								>
+									<X className="h-3 w-3" />
+								</button>
+							</motion.span>
+						))}
+					</AnimatePresence>
+				</div>
+			)}
+		</div>
+	);
+}
+
+// ============================================================================
+// Compound Components
+// ============================================================================
+
+interface SelectOptionProps {
+	value?: string;
+	children: React.ReactNode;
+	disabled?: boolean;
+}
+
+function SelectOptionComponent(_props: SelectOptionProps) {
+	// This is a marker component - options are extracted by the parent
+	return null;
+}
+SelectOptionComponent.displayName = "Select.Option";
+
+// Multi Select convenience component
+const MultiSelectComponent = React.forwardRef<
+	HTMLDivElement,
+	Omit<MultiSelectProps, "type">
+>((props, _ref) => <SelectBase type="multiple" {...props} />);
+MultiSelectComponent.displayName = "Select.Multiple";
+
+// ============================================================================
+// Export
+// ============================================================================
+
+type SelectComponent = typeof SelectBase & {
+	Option: typeof SelectOptionComponent;
+	Multiple: typeof MultiSelectComponent;
+};
+
+const Select = SelectBase as SelectComponent;
+Select.Option = SelectOptionComponent;
+Select.Multiple = MultiSelectComponent;
+
+export { Select };
+
+// Backward compatibility - will be removed in next major version
+export { MultiSelectComponent as MultiSelect };

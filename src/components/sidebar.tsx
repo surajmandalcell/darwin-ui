@@ -4,7 +4,7 @@ import { ChevronsLeft, LogOut, Menu, X } from "lucide-react";
 import React from "react";
 import { cn } from "../lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
-import { Tooltip, TooltipTrigger, TooltipContent } from "./tooltip";
+import { Tooltip, TooltipTrigger, TooltipContent } from "./floating";
 
 interface SidebarItemProps {
 	label: string;

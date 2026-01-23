@@ -1,57 +1,342 @@
+"use client";
+
 import * as React from "react";
 import { motion } from "framer-motion";
 import { cn } from "../lib/utils";
-import { Check, X } from "lucide-react";
+import { Check, X, Search } from "lucide-react";
+import { getDuration } from "../lib/animation-config";
 
-export interface InputProps
-	extends React.InputHTMLAttributes<HTMLInputElement> {
-	variant?: "default" | "search";
+// ============================================================================
+// Types
+// ============================================================================
+
+type InputVariant = "text" | "search" | "password" | "email" | "number";
+type InputSize = "sm" | "md" | "lg";
+
+interface BaseInputProps {
+	/** Size variant */
+	size?: InputSize;
+	/** Error state - shows red border and X icon */
 	error?: boolean;
+	/** Success state - shows green border and check icon */
 	success?: boolean;
+	/** Icon to show on the left */
+	leftIcon?: React.ReactNode;
+	/** Icon to show on the right (overridden by error/success icons) */
+	rightIcon?: React.ReactNode;
+	/** Additional wrapper class */
+	wrapperClassName?: string;
 }
 
-const Input = React.forwardRef<HTMLInputElement, InputProps>(
-	({ className, type, variant = "default", error, success, ...props }, ref) => {
-		const [shouldShake, setShouldShake] = React.useState(false);
+export interface InputProps
+	extends BaseInputProps,
+		Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"> {
+	/** Input type variant */
+	variant?: InputVariant;
+}
 
-		React.useEffect(() => {
-			if (error) {
-				setShouldShake(true);
-				const timer = setTimeout(() => setShouldShake(false), 500);
-				return () => clearTimeout(timer);
-			}
-		}, [error]);
+export interface TextAreaProps
+	extends BaseInputProps,
+		Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, "size"> {
+	/** Resize behavior */
+	resize?: "none" | "vertical" | "horizontal" | "both";
+	/** Auto-resize based on content */
+	autoResize?: boolean;
+}
+
+// ============================================================================
+// Size Classes
+// ============================================================================
+
+const inputSizeClasses: Record<InputSize, string> = {
+	sm: "h-8 text-xs px-2.5",
+	md: "h-9 text-sm px-3",
+	lg: "h-10 text-base px-4",
+};
+
+const textareaSizeClasses: Record<InputSize, string> = {
+	sm: "text-xs px-2.5 py-1.5 min-h-[60px]",
+	md: "text-sm px-3 py-2 min-h-[80px]",
+	lg: "text-base px-4 py-2.5 min-h-[100px]",
+};
+
+const iconSizeClasses: Record<InputSize, string> = {
+	sm: "w-3.5 h-3.5",
+	md: "w-4 h-4",
+	lg: "w-5 h-5",
+};
+
+// ============================================================================
+// Shared Styles
+// ============================================================================
+
+const baseInputClasses =
+	"flex w-full rounded-md border bg-[hsl(var(--glass-bg))] text-[hsl(var(--text-primary))] shadow-sm transition-colors placeholder:text-[hsl(var(--text-muted))] focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50 backdrop-blur-sm hover:bg-[hsl(var(--glass-bg-hover))]";
+
+const getStateClasses = (error?: boolean, success?: boolean) => {
+	if (error) {
+		return "border-[hsl(var(--error)/0.5)] focus-visible:ring-[hsl(var(--error)/0.5)]";
+	}
+	if (success) {
+		return "border-[hsl(var(--success)/0.5)] focus-visible:ring-[hsl(var(--success)/0.5)]";
+	}
+	return "border-[hsl(var(--border-default))] focus-visible:ring-[hsl(var(--ring))]";
+};
+
+// ============================================================================
+// Shake Animation Hook
+// ============================================================================
+
+function useShakeAnimation(error?: boolean) {
+	const [shouldShake, setShouldShake] = React.useState(false);
+
+	React.useEffect(() => {
+		if (error) {
+			setShouldShake(true);
+			const timer = setTimeout(() => setShouldShake(false), 500);
+			return () => clearTimeout(timer);
+		}
+	}, [error]);
+
+	return shouldShake;
+}
+
+// ============================================================================
+// Input Component
+// ============================================================================
+
+const InputBase = React.forwardRef<HTMLInputElement, InputProps>(
+	(
+		{
+			className,
+			type,
+			variant = "text",
+			size = "md",
+			error,
+			success,
+			leftIcon,
+			rightIcon,
+			wrapperClassName,
+			...props
+		},
+		ref,
+	) => {
+		const shouldShake = useShakeAnimation(error);
+		const hasLeftIcon = !!leftIcon;
+		const hasRightContent = error || success || !!rightIcon;
+
+		const inputType =
+			variant === "text" ? type || "text" : variant === "search" ? "search" : variant;
 
 		return (
-			<div className="relative w-full">
+			<div className={cn("relative w-full", wrapperClassName)}>
+				{hasLeftIcon && (
+					<span
+						className={cn(
+							"absolute left-3 top-1/2 -translate-y-1/2 text-[hsl(var(--text-muted))] pointer-events-none z-10",
+							iconSizeClasses[size],
+						)}
+					>
+						{leftIcon}
+					</span>
+				)}
 				<motion.input
-					type={type}
+					type={inputType}
 					animate={shouldShake ? { x: [-6, 6, -6, 6, 0] } : {}}
 					transition={{
-						duration: 0.3,
-						ease: "easeInOut"
+						duration: getDuration("normal") * 2,
+						ease: "easeInOut",
 					}}
 					className={cn(
-						// Glass effect for input
-						"flex h-9 w-full rounded-md border bg-[hsl(var(--glass-bg))] px-3 py-1 text-sm text-[hsl(var(--text-primary))] shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-[hsl(var(--text-muted))] focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50 backdrop-blur-sm hover:bg-[hsl(var(--glass-bg-hover))]",
-						error && "border-[hsl(var(--error)/0.5)] focus-visible:ring-[hsl(var(--error)/0.5)]",
-						success && "border-[hsl(var(--success)/0.5)] focus-visible:ring-[hsl(var(--success)/0.5)]",
-						!error && !success && "border-[hsl(var(--border-default))] focus-visible:ring-[hsl(var(--ring))]",
+						baseInputClasses,
+						inputSizeClasses[size],
+						getStateClasses(error, success),
+						hasLeftIcon && "pl-9",
+						hasRightContent && "pr-9",
+						"file:border-0 file:bg-transparent file:text-sm file:font-medium",
 						className,
 					)}
 					ref={ref}
+					// biome-ignore lint/suspicious/noExplicitAny: Framer Motion onDrag conflicts with HTML onDrag
 					{...(props as any)}
 				/>
 				{error && (
-					<X className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[hsl(var(--error))]" />
+					<X
+						className={cn(
+							"absolute right-3 top-1/2 -translate-y-1/2 text-[hsl(var(--error))]",
+							iconSizeClasses[size],
+						)}
+					/>
 				)}
 				{success && !error && (
-					<Check className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[hsl(var(--success))]" />
+					<Check
+						className={cn(
+							"absolute right-3 top-1/2 -translate-y-1/2 text-[hsl(var(--success))]",
+							iconSizeClasses[size],
+						)}
+					/>
+				)}
+				{!error && !success && rightIcon && (
+					<span
+						className={cn(
+							"absolute right-3 top-1/2 -translate-y-1/2 text-[hsl(var(--text-muted))] pointer-events-none",
+							iconSizeClasses[size],
+						)}
+					>
+						{rightIcon}
+					</span>
 				)}
 			</div>
 		);
 	},
 );
-Input.displayName = "Input";
+InputBase.displayName = "Input";
+
+// ============================================================================
+// TextArea Component
+// ============================================================================
+
+const TextAreaBase = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
+	(
+		{
+			className,
+			size = "md",
+			error,
+			success,
+			leftIcon,
+			rightIcon,
+			wrapperClassName,
+			resize = "vertical",
+			autoResize = false,
+			onChange,
+			...props
+		},
+		ref,
+	) => {
+		const shouldShake = useShakeAnimation(error);
+		const textareaRef = React.useRef<HTMLTextAreaElement | null>(null);
+
+		const resizeClasses = {
+			none: "resize-none",
+			vertical: "resize-y",
+			horizontal: "resize-x",
+			both: "resize",
+		};
+
+		const handleAutoResize = React.useCallback(() => {
+			const textarea = textareaRef.current;
+			if (textarea && autoResize) {
+				textarea.style.height = "auto";
+				textarea.style.height = `${textarea.scrollHeight}px`;
+			}
+		}, [autoResize]);
+
+		const handleChange = React.useCallback(
+			(event: React.ChangeEvent<HTMLTextAreaElement>) => {
+				handleAutoResize();
+				onChange?.(event);
+			},
+			[handleAutoResize, onChange],
+		);
+
+		React.useEffect(() => {
+			handleAutoResize();
+		}, [handleAutoResize]);
+
+		const setRefs = React.useCallback(
+			(element: HTMLTextAreaElement | null) => {
+				textareaRef.current = element;
+				if (typeof ref === "function") {
+					ref(element);
+				} else if (ref) {
+					ref.current = element;
+				}
+			},
+			[ref],
+		);
+
+		return (
+			<div className={cn("relative w-full", wrapperClassName)}>
+				<motion.textarea
+					ref={setRefs}
+					animate={shouldShake ? { x: [-6, 6, -6, 6, 0] } : {}}
+					transition={{
+						duration: getDuration("normal") * 2,
+						ease: "easeInOut",
+					}}
+					onChange={handleChange}
+					className={cn(
+						baseInputClasses,
+						textareaSizeClasses[size],
+						getStateClasses(error, success),
+						autoResize ? "resize-none overflow-hidden" : resizeClasses[resize],
+						className,
+					)}
+					// biome-ignore lint/suspicious/noExplicitAny: Framer Motion onDrag conflicts with HTML onDrag
+					{...(props as any)}
+				/>
+				{error && (
+					<X
+						className={cn(
+							"absolute right-3 top-3 text-[hsl(var(--error))]",
+							iconSizeClasses[size],
+						)}
+					/>
+				)}
+				{success && !error && (
+					<Check
+						className={cn(
+							"absolute right-3 top-3 text-[hsl(var(--success))]",
+							iconSizeClasses[size],
+						)}
+					/>
+				)}
+			</div>
+		);
+	},
+);
+TextAreaBase.displayName = "Input.TextArea";
+
+// ============================================================================
+// Compound Components
+// ============================================================================
+
+type InputComponent = typeof InputBase & {
+	Search: typeof SearchInput;
+	TextArea: typeof TextAreaBase;
+	Password: typeof PasswordInput;
+};
+
+const SearchInput = React.forwardRef<
+	HTMLInputElement,
+	Omit<InputProps, "variant" | "leftIcon">
+>((props, ref) => (
+	<InputBase
+		ref={ref}
+		variant="search"
+		leftIcon={<Search className="w-full h-full" />}
+		{...props}
+	/>
+));
+SearchInput.displayName = "Input.Search";
+
+const PasswordInput = React.forwardRef<
+	HTMLInputElement,
+	Omit<InputProps, "variant" | "type">
+>((props, ref) => <InputBase ref={ref} variant="password" {...props} />);
+PasswordInput.displayName = "Input.Password";
+
+// ============================================================================
+// Export
+// ============================================================================
+
+const Input = InputBase as InputComponent;
+Input.Search = SearchInput;
+Input.TextArea = TextAreaBase;
+Input.Password = PasswordInput;
 
 export { Input };
+
+// Backward compatibility - will be removed in next major version
+export { TextAreaBase as Textarea };
+export type { TextAreaProps as TextareaProps };
