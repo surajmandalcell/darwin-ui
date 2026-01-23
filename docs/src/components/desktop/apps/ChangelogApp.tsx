@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import type { WindowState } from '../../../contexts/desktop-context';
 import {
   changelog,
-  getChangeTypeColor,
   getChangeTypeLabel,
   type ChangelogEntry,
   type ChangelogChange,
@@ -61,6 +60,19 @@ function getChangeTypeIcon(type: ChangelogChange['type']) {
   return icons[type];
 }
 
+// Map change type to Badge variant
+function getChangeTypeBadgeVariant(type: ChangelogChange['type']): 'success' | 'info' | 'warning' | 'destructive' | 'default' {
+  const variants = {
+    added: 'success' as const,
+    changed: 'info' as const,
+    fixed: 'warning' as const,
+    removed: 'destructive' as const,
+    deprecated: 'warning' as const,
+    security: 'destructive' as const,
+  };
+  return variants[type];
+}
+
 // Flat version card component (always expanded, no toggle)
 function FlatVersionCard({ entry }: { entry: ChangelogEntry }) {
   // Group changes by type
@@ -79,12 +91,11 @@ function FlatVersionCard({ entry }: { entry: ChangelogEntry }) {
     >
       {/* Header */}
       <div className="p-4 flex flex-col md:flex-row items-start md:items-center justify-between border-b border-border gap-4 md:gap-0">
-        <div className="flex items-center gap-4 w-full md:w-auto justify-between md:justify-start">
-          <div className="flex items-center gap-2">
-            <Tag className="w-4 h-4 text-blue-400" />
-            <span className="text-lg font-semibold text-foreground">v{entry.version}</span>
-          </div>
-          <Badge variant="info">{entry.title}</Badge>
+        <div className="flex items-center gap-2 w-full md:w-auto">
+          <Tag className="w-4 h-4 text-blue-400" />
+          <span className="text-lg font-semibold text-foreground">v{entry.version}</span>
+          <span className="text-muted-foreground/40">—</span>
+          <span className="text-sm font-light text-muted-foreground">{entry.title}</span>
         </div>
         <div className="flex items-center gap-1.5 text-muted-foreground text-sm">
           <Calendar className="w-3.5 h-3.5" />
@@ -104,15 +115,15 @@ function FlatVersionCard({ entry }: { entry: ChangelogEntry }) {
             if (!changes || changes.length === 0) return null;
 
             const Icon = getChangeTypeIcon(type);
-            const colorClass = getChangeTypeColor(type);
+            const badgeVariant = getChangeTypeBadgeVariant(type);
 
             return (
               <div key={type}>
                 <div className="flex items-center gap-2 mb-2">
-                  <span className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-xs font-medium border ${colorClass}`}>
+                  <Badge variant={badgeVariant} className="gap-1.5">
                     <Icon className="w-3 h-3" />
                     {getChangeTypeLabel(type)}
-                  </span>
+                  </Badge>
                   <span className="text-muted-foreground text-xs">({changes.length})</span>
                 </div>
                 <ul className="space-y-1.5 ml-1">
@@ -167,12 +178,11 @@ function VersionCard({ entry, isExpanded, onToggle }: {
         className="w-full p-4 flex flex-col md:flex-row items-start md:items-center justify-between text-left hover:bg-foreground/5 transition-colors gap-4 md:gap-0"
         onClick={onToggle}
       >
-        <div className="flex items-center gap-4 w-full md:w-auto justify-between md:justify-start">
-          <div className="flex items-center gap-2">
-            <Tag className="w-4 h-4 text-blue-400" />
-            <span className="text-lg font-semibold text-foreground">v{entry.version}</span>
-          </div>
-          <Badge variant="info">{entry.title}</Badge>
+        <div className="flex items-center gap-2 w-full md:w-auto">
+          <Tag className="w-4 h-4 text-blue-400" />
+          <span className="text-lg font-semibold text-foreground">v{entry.version}</span>
+          <span className="text-muted-foreground/40">—</span>
+          <span className="text-sm font-light text-muted-foreground">{entry.title}</span>
         </div>
         <div className="flex items-center gap-3 w-full md:w-auto justify-between md:justify-start">
           <div className="flex items-center gap-1.5 text-muted-foreground text-sm">
@@ -208,15 +218,15 @@ function VersionCard({ entry, isExpanded, onToggle }: {
                   if (!changes || changes.length === 0) return null;
 
                   const Icon = getChangeTypeIcon(type);
-                  const colorClass = getChangeTypeColor(type);
+                  const badgeVariant = getChangeTypeBadgeVariant(type);
 
                   return (
                     <div key={type}>
                       <div className="flex items-center gap-2 mb-2">
-                        <span className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-xs font-medium border ${colorClass}`}>
+                        <Badge variant={badgeVariant} className="gap-1.5">
                           <Icon className="w-3 h-3" />
                           {getChangeTypeLabel(type)}
-                        </span>
+                        </Badge>
                         <span className="text-muted-foreground text-xs">({changes.length})</span>
                       </div>
                       <ul className="space-y-1.5 ml-1">
