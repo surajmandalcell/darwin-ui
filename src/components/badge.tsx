@@ -32,19 +32,19 @@ export function Badge({
 	...props
 }: BadgeProps) {
 	const variants: Record<BadgeVariant, string> = {
-		default: "border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 text-zinc-400 dark:text-zinc-500",
-		secondary: "border-transparent bg-black/5 dark:bg-white/5 text-zinc-400 dark:text-zinc-500",
-		outline: "border-black/20 dark:border-white/20 text-zinc-400 dark:text-zinc-500 bg-transparent",
-		destructive: "border-transparent bg-red-500/15 text-red-500",
-		success: "border-transparent bg-emerald-500/15 text-emerald-500",
-		published: "border-transparent bg-emerald-500/15 text-emerald-500",
-		warning: "border-transparent bg-amber-500/15 text-amber-500",
-		draft: "border-transparent bg-amber-500/15 text-amber-500",
-		read: "border-transparent bg-amber-500/15 text-amber-500",
-		info: "border-transparent bg-sky-500/15 text-sky-500",
-		new: "border-transparent bg-sky-500/15 text-sky-500",
-		responded: "border-transparent bg-emerald-500/15 text-emerald-500",
-		archived: "border-transparent bg-black/5 dark:bg-white/5 text-zinc-400 dark:text-zinc-600",
+		default: "border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 text-zinc-700 dark:text-zinc-300",
+		secondary: "border-transparent bg-black/5 dark:bg-white/5 text-zinc-700 dark:text-zinc-300",
+		outline: "border-black/20 dark:border-white/20 text-zinc-700 dark:text-zinc-300 bg-transparent",
+		destructive: "border-transparent bg-red-500/15 text-red-600 dark:text-red-400",
+		success: "border-transparent bg-emerald-500/15 text-emerald-600 dark:text-emerald-400",
+		published: "border-transparent bg-emerald-500/15 text-emerald-600 dark:text-emerald-400",
+		warning: "border-transparent bg-amber-500/15 text-amber-600 dark:text-amber-400",
+		draft: "border-transparent bg-amber-500/15 text-amber-600 dark:text-amber-400",
+		read: "border-transparent bg-amber-500/15 text-amber-600 dark:text-amber-400",
+		info: "border-transparent bg-sky-500/15 text-sky-600 dark:text-sky-400",
+		new: "border-transparent bg-sky-500/15 text-sky-600 dark:text-sky-400",
+		responded: "border-transparent bg-emerald-500/15 text-emerald-600 dark:text-emerald-400",
+		archived: "border-transparent bg-black/5 dark:bg-white/5 text-zinc-700 dark:text-zinc-300",
 	};
 
 	return (

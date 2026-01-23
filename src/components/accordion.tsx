@@ -107,7 +107,7 @@ function AccordionTrigger({ children, className, itemValue }: AccordionTriggerPr
 				animate={{ rotate: isExpanded ? 180 : 0 }}
 				transition={{ duration: getDuration("slow"), ease: "easeInOut" }}
 			>
-				<ChevronDown className="h-4 w-4 text-zinc-400 dark:text-zinc-500" />
+				<ChevronDown className="h-4 w-4 text-zinc-500 dark:text-zinc-400" />
 			</motion.div>
 		</button>
 	);
@@ -133,7 +133,7 @@ function AccordionContent({ children, className, itemValue }: AccordionContentPr
 					transition={{ duration: getDuration("slow"), ease: "easeInOut" }}
 					className="overflow-hidden"
 				>
-					<div className={cn("pb-4 text-sm text-zinc-600 dark:text-zinc-400", className)}>
+					<div className={cn("pb-4 text-sm text-zinc-700 dark:text-zinc-300", className)}>
 						{children}
 					</div>
 				</motion.div>

@@ -44,7 +44,7 @@ function TabsList({ children, className }: TabsListProps) {
 		<div
 			role="tablist"
 			className={cn(
-				"inline-flex h-10 items-center justify-center rounded-lg bg-black/5 dark:bg-white/5 p-1 text-zinc-400 dark:text-zinc-500 backdrop-blur-sm border border-black/10 dark:border-white/10",
+				"inline-flex h-10 items-center justify-center rounded-lg bg-black/5 dark:bg-white/5 p-1 text-zinc-800 dark:text-zinc-200 backdrop-blur-sm border border-black/10 dark:border-white/10",
 				className
 			)}
 		>
@@ -91,7 +91,7 @@ function TabsTrigger({ value, children, className, disabled }: TabsTriggerProps)
 			<span
 				className={cn(
 					"relative z-10 transition-colors duration-200",
-					isSelected ? "text-zinc-900 dark:text-zinc-100" : "text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100"
+					isSelected ? "text-zinc-900 dark:text-zinc-100" : "text-zinc-800 dark:text-zinc-200 hover:text-zinc-900 dark:hover:text-zinc-100"
 				)}
 			>
 				{children}

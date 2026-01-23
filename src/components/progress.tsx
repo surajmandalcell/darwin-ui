@@ -72,7 +72,7 @@ function Progress({
 				)}
 			</div>
 			{showValue && !indeterminate && (
-				<div className="mt-1 text-right text-xs text-zinc-400 dark:text-zinc-500">
+				<div className="mt-1 text-right text-xs text-zinc-600 dark:text-zinc-400">
 					{Math.round(percentage)}%
 				</div>
 			)}
@@ -130,7 +130,7 @@ function CircularProgress({
 					fill="none"
 					stroke="currentColor"
 					strokeWidth={strokeWidth}
-					className="text-white/10 dark:text-black/10"
+					className="text-black/10 dark:text-white/10"
 				/>
 				{indeterminate ? (
 					<motion.circle
@@ -170,7 +170,7 @@ function CircularProgress({
 				)}
 			</svg>
 			{showValue && !indeterminate && (
-				<span className="absolute text-xs font-medium text-zinc-400 dark:text-zinc-500">
+				<span className="absolute text-xs font-medium text-zinc-700 dark:text-zinc-300">
 					{Math.round(percentage)}%
 				</span>
 			)}
