@@ -174,7 +174,7 @@ function SingleSelectInternal({
 									left: `${position.left}px`,
 									minWidth: `${position.width}px`,
 								}}
-								className="z-50 min-w-[8rem] overflow-hidden rounded-md border border-black/10 dark:border-white/10 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md shadow-md"
+								className="z-50 min-w-[8rem] overflow-hidden rounded-[var(--radius-md,0.5rem)] border border-black/10 dark:border-white/10 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md shadow-md"
 							>
 								<ul role="listbox" className="py-1 px-1 flex flex-col gap-0.5">
 									{options.map((opt) => (
@@ -192,7 +192,7 @@ function SingleSelectInternal({
 											}}
 											tabIndex={opt.disabled ? -1 : 0}
 											className={cn(
-												"relative flex w-full cursor-pointer select-none items-center rounded-md px-2 py-1.5 text-sm outline-none transition-colors",
+												"relative flex w-full cursor-pointer select-none items-center rounded-[var(--radius-md,0.5rem)] px-2 py-1.5 text-sm outline-none transition-colors",
 												opt.disabled &&
 													"pointer-events-none opacity-50 cursor-not-allowed",
 												opt.value === selected.value
@@ -224,7 +224,7 @@ function SingleSelectInternal({
 				aria-expanded={open}
 				onClick={() => setOpen((v) => !v)}
 				className={cn(
-					"flex h-9 w-full items-center justify-between rounded-md ring-1 ring-inset ring-black/10 dark:ring-white/10 bg-black/5 dark:bg-white/5 px-3 py-2 text-sm text-zinc-900 dark:text-zinc-100 shadow-sm placeholder:text-zinc-500 dark:placeholder:text-zinc-400 outline-none focus-visible:ring-2 focus-visible:ring-blue-500 disabled:cursor-not-allowed disabled:opacity-50 hover:bg-black/10 dark:hover:bg-white/10 transition-all duration-150 backdrop-blur-sm",
+					"flex h-9 w-full items-center justify-between rounded-[var(--radius-md,0.5rem)] ring-1 ring-inset ring-black/10 dark:ring-white/10 bg-black/5 dark:bg-white/5 px-3 py-2 text-sm text-zinc-900 dark:text-zinc-100 shadow-sm placeholder:text-zinc-500 dark:placeholder:text-zinc-400 outline-none focus-visible:ring-2 focus-visible:ring-blue-500 disabled:cursor-not-allowed disabled:opacity-50 hover:bg-black/10 dark:hover:bg-white/10 transition-all duration-150 backdrop-blur-sm",
 				)}
 			>
 				<span
@@ -305,7 +305,7 @@ function MultiSelectInternal({
 									left: `${position.left}px`,
 									minWidth: `${position.width}px`,
 								}}
-								className="z-50 min-w-[8rem] overflow-hidden rounded-md border border-black/10 dark:border-white/10 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md shadow-md"
+								className="z-50 min-w-[8rem] overflow-hidden rounded-[var(--radius-md,0.5rem)] border border-black/10 dark:border-white/10 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md shadow-md"
 							>
 								<ul role="listbox" className="p-1">
 									{options.map((opt) => {
@@ -325,7 +325,7 @@ function MultiSelectInternal({
 												}}
 												tabIndex={opt.disabled ? -1 : 0}
 												className={cn(
-													"relative flex w-full cursor-pointer select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none transition-colors hover:bg-black/10 dark:hover:bg-white/10",
+													"relative flex w-full cursor-pointer select-none items-center rounded-[var(--radius-sm,0.375rem)] py-1.5 pl-8 pr-2 text-sm outline-none transition-colors hover:bg-black/10 dark:hover:bg-white/10",
 													opt.disabled &&
 														"pointer-events-none opacity-50 cursor-not-allowed",
 													isSelected
@@ -372,7 +372,7 @@ function MultiSelectInternal({
 				aria-expanded={open}
 				onClick={() => setOpen((v) => !v)}
 				className={cn(
-					"flex h-9 w-full items-center justify-between rounded-md ring-1 ring-inset ring-black/10 dark:ring-white/10 bg-black/5 dark:bg-white/5 px-3 py-2 text-sm text-zinc-900 dark:text-zinc-100 shadow-sm placeholder:text-zinc-500 dark:placeholder:text-zinc-400 outline-none focus-visible:ring-2 focus-visible:ring-blue-500 disabled:cursor-not-allowed disabled:opacity-50 hover:bg-black/10 dark:hover:bg-white/10 transition-all duration-150 backdrop-blur-sm",
+					"flex h-9 w-full items-center justify-between rounded-[var(--radius-md,0.5rem)] ring-1 ring-inset ring-black/10 dark:ring-white/10 bg-black/5 dark:bg-white/5 px-3 py-2 text-sm text-zinc-900 dark:text-zinc-100 shadow-sm placeholder:text-zinc-500 dark:placeholder:text-zinc-400 outline-none focus-visible:ring-2 focus-visible:ring-blue-500 disabled:cursor-not-allowed disabled:opacity-50 hover:bg-black/10 dark:hover:bg-white/10 transition-all duration-150 backdrop-blur-sm",
 				)}
 			>
 				<span
@@ -402,12 +402,12 @@ function MultiSelectInternal({
 								animate={{ scale: 1, opacity: 1 }}
 								exit={{ scale: 0.8, opacity: 0 }}
 								transition={{ duration: getDuration("normal") }}
-								className="inline-flex items-center gap-1.5 px-2 py-1 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-md text-zinc-700 dark:text-zinc-300 text-xs backdrop-blur-sm"
+								className="inline-flex items-center gap-1.5 px-2 py-1 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-[var(--radius-md,0.5rem)] text-zinc-700 dark:text-zinc-300 text-xs backdrop-blur-sm"
 							>
 								{options.find((o) => o.value === v)?.label || v}
 								<button
 									type="button"
-									className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 transition-colors rounded-sm hover:bg-black/5 dark:hover:bg-white/10 p-0.5"
+									className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 transition-colors rounded-[var(--radius-sm,0.375rem)] hover:bg-black/5 dark:hover:bg-white/10 p-0.5"
 									onClick={(e) => removeTag(e, v)}
 								>
 									<X className="h-3 w-3" />

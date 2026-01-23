@@ -187,7 +187,7 @@ function ContextMenuContent({ children, className }: ContextMenuContentProps) {
 					role="menu"
 					aria-orientation="vertical"
 					className={cn(
-						"fixed min-w-[180px] overflow-hidden rounded-lg border border-black/10 dark:border-white/10 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md p-1 shadow-xl",
+						"fixed min-w-[180px] overflow-hidden rounded-[var(--radius-lg,0.75rem)] border border-black/10 dark:border-white/10 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md p-1 shadow-xl",
 						className,
 					)}
 					style={{
@@ -249,7 +249,7 @@ function ContextMenuItem({
 			onClick={handleClick}
 			onKeyDown={handleKeyDown}
 			className={cn(
-				"flex w-full items-center rounded-md px-2 py-1.5 text-sm text-zinc-700 dark:text-zinc-300 outline-none transition-colors hover:bg-black/10 dark:hover:bg-white/10 hover:text-zinc-900 dark:hover:text-zinc-100 focus:bg-black/5 dark:focus:bg-white/10",
+				"flex w-full items-center rounded-[var(--radius-md,0.5rem)] px-2 py-1.5 text-sm text-zinc-700 dark:text-zinc-300 outline-none transition-colors hover:bg-black/10 dark:hover:bg-white/10 hover:text-zinc-900 dark:hover:text-zinc-100 focus:bg-black/5 dark:focus:bg-white/10",
 				disabled && "pointer-events-none opacity-50",
 				destructive &&
 					"text-red-500 hover:text-red-500 hover:bg-red-500/10 focus:bg-red-500/10",
@@ -296,7 +296,7 @@ function ContextMenuCheckboxItem({
 			onClick={() => onCheckedChange?.(!checked)}
 			onKeyDown={handleKeyDown}
 			className={cn(
-				"flex w-full items-center rounded-md px-2 py-1.5 text-sm text-zinc-700 dark:text-zinc-300 outline-none transition-colors hover:bg-black/10 dark:hover:bg-white/10 hover:text-zinc-900 dark:hover:text-zinc-100 focus:bg-black/5 dark:focus:bg-white/10",
+				"flex w-full items-center rounded-[var(--radius-md,0.5rem)] px-2 py-1.5 text-sm text-zinc-700 dark:text-zinc-300 outline-none transition-colors hover:bg-black/10 dark:hover:bg-white/10 hover:text-zinc-900 dark:hover:text-zinc-100 focus:bg-black/5 dark:focus:bg-white/10",
 				disabled && "pointer-events-none opacity-50",
 				className,
 			)}

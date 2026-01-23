@@ -122,7 +122,7 @@ export function Upload({
 		return (
 			<div className="flex flex-col gap-1">
 				{fileInput}
-				<div className="flex items-center gap-2 h-10 px-3 rounded-lg border border-[hsl(var(--border))] bg-[hsl(var(--muted))] overflow-hidden">
+				<div className="flex items-center gap-2 h-10 px-3 rounded-[var(--radius-lg,0.75rem)] border border-[hsl(var(--border))] bg-[hsl(var(--muted))] overflow-hidden">
 					{/* Thumbnails */}
 					{hasImages && (
 						<div className="flex items-center gap-1.5 overflow-x-auto py-1 flex-1">
@@ -210,7 +210,7 @@ export function Upload({
 		return (
 			<div className="flex flex-col gap-2">
 				{fileInput}
-				<div className="relative flex flex-col overflow-hidden rounded-lg border border-dashed border-[hsl(var(--border))] p-3">
+				<div className="relative flex flex-col overflow-hidden rounded-[var(--radius-lg,0.75rem)] border border-dashed border-[hsl(var(--border))] p-3">
 					{(value?.length || 0) + (pending.length || 0) > 0 ? (
 						<div className="flex w-full flex-col gap-2">
 							<div className="flex items-center justify-between gap-2">
@@ -437,7 +437,7 @@ export function Upload({
 				)}
 				<div className="py-3 px-0">
 					<div
-						className="border border-dashed border-black/20 dark:border-white/20 rounded-lg min-h-[50px] flex items-center justify-center text-zinc-500 dark:text-zinc-400 text-sm cursor-pointer hover:bg-black/5 dark:bg-white/5"
+						className="border border-dashed border-black/20 dark:border-white/20 rounded-[var(--radius-lg,0.75rem)] min-h-[50px] flex items-center justify-center text-zinc-500 dark:text-zinc-400 text-sm cursor-pointer hover:bg-black/5 dark:bg-white/5"
 						onClick={() => fileInputRef.current?.click()}
 					>
 						Click to select images

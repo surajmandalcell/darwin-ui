@@ -5,7 +5,7 @@ import { Skeleton } from "./skeleton";
 
 export function Table({ children }: { children: React.ReactNode }) {
 	return (
-		<div className="w-full border border-black/10 dark:border-white/10 rounded-md overflow-x-auto md:overflow-visible">
+		<div className="w-full border border-black/10 dark:border-white/10 rounded-[var(--radius-lg,0.75rem)] overflow-x-auto md:overflow-visible">
 			<table className="w-full text-sm text-zinc-900 dark:text-zinc-100">{children}</table>
 		</div>
 	);

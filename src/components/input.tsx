@@ -71,7 +71,7 @@ const iconSizeClasses: Record<InputSize, string> = {
 // ============================================================================
 
 const baseInputClasses =
-	"flex w-full rounded-md bg-black/5 dark:bg-white/5 text-zinc-900 dark:text-zinc-100 shadow-sm transition-all duration-200 placeholder:text-zinc-500 dark:placeholder:text-zinc-400 outline-none disabled:cursor-not-allowed disabled:opacity-50 backdrop-blur-sm hover:bg-black/10 dark:hover:bg-white/10";
+	"flex w-full rounded-[var(--radius-md,0.5rem)] bg-black/5 dark:bg-white/5 text-zinc-900 dark:text-zinc-100 shadow-sm transition-all duration-200 placeholder:text-zinc-500 dark:placeholder:text-zinc-400 outline-none disabled:cursor-not-allowed disabled:opacity-50 backdrop-blur-sm hover:bg-black/10 dark:hover:bg-white/10";
 
 const getStateClasses = (error?: boolean, success?: boolean) => {
 	if (error) {

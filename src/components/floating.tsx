@@ -415,7 +415,7 @@ function FloatingContent({
 					{...animationProps}
 					transition={{ duration: getDuration("normal"), ease: "easeOut" }}
 					className={cn(
-						"fixed overflow-hidden rounded-lg border border-black/10 dark:border-white/10 bg-white/95 dark:bg-zinc-900/95 text-zinc-900 dark:text-zinc-100 shadow-xl backdrop-blur-md",
+						"fixed overflow-hidden rounded-[var(--radius-lg,0.75rem)] border border-black/10 dark:border-white/10 bg-white/95 dark:bg-zinc-900/95 text-zinc-900 dark:text-zinc-100 shadow-xl backdrop-blur-md",
 						sizeClasses[size],
 						className,
 					)}

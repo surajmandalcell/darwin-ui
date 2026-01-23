@@ -27,7 +27,7 @@ function SidebarItem({
 			type="button"
 			onClick={onClick}
 			className={cn(
-				"group flex w-full items-center rounded-lg text-sm font-medium transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50",
+				"group flex w-full items-center rounded-[var(--radius-lg,0.75rem)] text-sm font-medium transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50",
 				isCollapsed
 					? "justify-center aspect-square p-0"
 					: "gap-3 px-3 py-2",
@@ -238,7 +238,7 @@ export function Sidebar({
 									aria-expanded={!isCollapsed}
 									aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
 									className={cn(
-										"group flex w-full items-center rounded-lg text-sm font-medium text-zinc-500 dark:text-zinc-400 transition-all duration-200 ease-out hover:bg-zinc-100 dark:hover:bg-white/10 hover:text-zinc-700 dark:hover:text-zinc-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50",
+										"group flex w-full items-center rounded-[var(--radius-lg,0.75rem)] text-sm font-medium text-zinc-500 dark:text-zinc-400 transition-all duration-200 ease-out hover:bg-zinc-100 dark:hover:bg-white/10 hover:text-zinc-700 dark:hover:text-zinc-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50",
 										isCollapsed ? "justify-center aspect-square p-0" : "gap-3 px-3 py-2",
 									)}
 								>
