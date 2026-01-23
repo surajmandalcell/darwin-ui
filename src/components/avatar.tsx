@@ -74,7 +74,10 @@ function Avatar({ src, alt, fallback, size = "md", className }: AvatarProps) {
 					onError={() => setImgError(true)}
 				/>
 			) : (
-				<span className="font-medium text-[hsl(var(--avatar-fallback-text))]">{initials}</span>
+				<span className={cn(
+					"font-medium",
+					fallback ? "text-white" : "text-[hsl(var(--avatar-fallback-text))]"
+				)}>{initials}</span>
 			)}
 		</div>
 	);

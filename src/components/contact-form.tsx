@@ -83,12 +83,12 @@ export function CompactContactForm({
 								<div className="mt-3 text-left">
 									{submitStatus === "success" ? (
 										<p
-											className={`${manrope.className} text-sm text-green-400`}
+											className={`${manrope.className} text-sm text-[hsl(var(--success))]`}
 										>
 											Thank you! Your message has been sent.
 										</p>
 									) : (
-										<p className={`${manrope.className} text-sm text-red-400`}>
+										<p className={`${manrope.className} text-sm text-[hsl(var(--error))]`}>
 											Sorry, there was an error. Try again or email
 											connect@lunatecz.com
 										</p>

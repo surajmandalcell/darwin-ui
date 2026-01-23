@@ -100,10 +100,10 @@ export function Upload({
 									/>
 									<Button
 										onClick={() => removeAt(index)}
-										className="border-background focus-visible:border-background absolute top-0 right-0 size-6 rounded-full shadow-none bg-red-500 hover:bg-red-600 flex items-center justify-center p-0"
+										className="border-background focus-visible:border-background absolute top-0 right-0 size-6 rounded-full shadow-none bg-[hsl(var(--error))] hover:bg-[hsl(var(--error)/0.9)] flex items-center justify-center p-0"
 										aria-label="Remove image"
 									>
-										<XIcon className="size-3.5 text-white" />
+										<XIcon className="size-3.5 text-[hsl(var(--text-on-filled))]" />
 									</Button>
 									<div className="flex min-w-0 items-center justify-between gap-2 border-t border-[hsl(var(--border-default))] p-2">
 										<span className="truncate text-[12px] text-[hsl(var(--text-secondary))]">
@@ -116,7 +116,7 @@ export function Upload({
 												className="p-1 rounded bg-[hsl(var(--glass-bg-hover))] hover:bg-[hsl(var(--glass-bg-active))] text-[hsl(var(--text-primary))]"
 											>
 												{index === 0 ? (
-													<StarIcon className="w-3.5 h-3.5 text-yellow-300" />
+													<StarIcon className="w-3.5 h-3.5 text-[hsl(var(--warning))]" />
 												) : (
 													<StarOffIcon className="w-3.5 h-3.5" />
 												)}
