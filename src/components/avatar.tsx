@@ -20,17 +20,18 @@ function getInitials(name: string): string {
 }
 
 function stringToColor(str: string): string {
+	// Use CSS variable-based colors for theme compatibility
 	const colors = [
-		"bg-blue-500",
-		"bg-purple-500",
-		"bg-pink-500",
-		"bg-red-500",
-		"bg-orange-500",
-		"bg-amber-500",
-		"bg-green-500",
-		"bg-teal-500",
-		"bg-cyan-500",
-		"bg-indigo-500",
+		"bg-[hsl(var(--avatar-color-1))]",
+		"bg-[hsl(var(--avatar-color-2))]",
+		"bg-[hsl(var(--avatar-color-3))]",
+		"bg-[hsl(var(--avatar-color-4))]",
+		"bg-[hsl(var(--avatar-color-5))]",
+		"bg-[hsl(var(--avatar-color-6))]",
+		"bg-[hsl(var(--avatar-color-7))]",
+		"bg-[hsl(var(--avatar-color-8))]",
+		"bg-[hsl(var(--avatar-color-9))]",
+		"bg-[hsl(var(--avatar-color-10))]",
 	];
 
 	let hash = 0;
@@ -76,7 +77,7 @@ function Avatar({ src, alt, fallback, size = "md", className }: AvatarProps) {
 			) : (
 				<span className={cn(
 					"font-medium",
-					fallback ? "text-white" : "text-[hsl(var(--avatar-fallback-text))]"
+					fallback ? "text-[hsl(var(--avatar-color-text))]" : "text-[hsl(var(--avatar-fallback-text))]"
 				)}>{initials}</span>
 			)}
 		</div>

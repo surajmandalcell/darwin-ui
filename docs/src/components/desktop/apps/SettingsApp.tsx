@@ -70,7 +70,7 @@ function ToggleSwitch({ enabled, onToggle }: ToggleSwitchProps) {
     <motion.button
       onClick={onToggle}
       className={`relative w-12 h-7 rounded-full transition-colors duration-200 ${
-        enabled ? 'bg-blue-500' : 'bg-white/20'
+        enabled ? 'bg-blue-500' : 'bg-foreground/20'
       }`}
       whileTap={{ scale: 0.95 }}
       transition={{ type: 'spring', stiffness: 400, damping: 25 }}
@@ -123,13 +123,13 @@ function AnimatedSlider({ value, onChange, min = 0, max = 100, label }: Animated
     <div className="relative pt-2 pb-2">
       {label && (
         <div className="flex justify-between mb-3">
-          <span className="text-sm text-white/70">{label}</span>
-          <span className="text-sm text-white/50">{value}%</span>
+          <span className="text-sm text-foreground/70">{label}</span>
+          <span className="text-sm text-muted-foreground">{value}%</span>
         </div>
       )}
       <div className="relative h-2">
         {/* Track background */}
-        <div className="absolute inset-0 bg-white/10 rounded-full overflow-hidden">
+        <div className="absolute inset-0 bg-foreground/10 rounded-full overflow-hidden">
           {/* Filled track with smooth animation */}
           <motion.div
             className="h-full bg-gradient-to-r from-blue-500 to-blue-400 rounded-full"
@@ -170,7 +170,7 @@ function AnimatedSlider({ value, onChange, min = 0, max = 100, label }: Animated
         <AnimatePresence>
           {showTooltip && (
             <motion.div
-              className="absolute -top-8 bg-neutral-800 text-white text-xs px-2 py-1 rounded pointer-events-none"
+              className="absolute -top-8 bg-muted text-foreground text-xs px-2 py-1 rounded pointer-events-none"
               style={{ left: `calc(${percentage}% - 16px)` }}
               initial={{ opacity: 0, y: 5, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -196,13 +196,13 @@ interface AnimatedCardProps {
 function AnimatedCard({ children, className = '', onClick }: AnimatedCardProps) {
   return (
     <motion.div
-      className={`bg-white/5 rounded-xl backdrop-blur-sm ${className}`}
+      className={`bg-foreground/5 rounded-xl backdrop-blur-sm ${className}`}
       initial={{ scale: 1, y: 0 }}
       whileHover={{
         scale: 1.01,
         y: -2,
         boxShadow: '0 10px 40px rgba(0, 0, 0, 0.2)',
-        backgroundColor: 'rgba(255, 255, 255, 0.07)'
+        backgroundColor: 'hsl(var(--foreground) / 0.07)'
       }}
       whileTap={onClick ? { scale: 0.99, y: 0 } : undefined}
       onClick={onClick}
@@ -235,7 +235,7 @@ export function SettingsApp({ windowState: _windowState }: SettingsAppProps) {
             className="space-y-6"
           >
             <motion.div variants={staggerItemVariants}>
-              <h3 className="text-lg font-semibold text-white mb-4">Theme</h3>
+              <h3 className="text-lg font-semibold text-foreground mb-4">Theme</h3>
               <div className="grid grid-cols-3 gap-3">
                 {[
                   { id: 'light', name: 'Light', icon: <Sun className="w-5 h-5" /> },
@@ -248,20 +248,20 @@ export function SettingsApp({ windowState: _windowState }: SettingsAppProps) {
                     className={`flex flex-col items-center gap-2 p-4 rounded-xl transition-colors ${
                       theme === option.id
                         ? 'bg-blue-500/20 border-2 border-blue-500'
-                        : 'bg-white/5 border-2 border-transparent'
+                        : 'bg-foreground/5 border-2 border-transparent'
                     }`}
                     whileHover={{ scale: 1.03, y: -2 }}
                     whileTap={{ scale: 0.97 }}
                     transition={{ type: 'spring', stiffness: 400, damping: 25 }}
                   >
                     <motion.div
-                      className={theme === option.id ? 'text-blue-400' : 'text-white/60'}
+                      className={theme === option.id ? 'text-blue-400' : 'text-foreground/60'}
                       animate={{ rotate: theme === option.id ? [0, -10, 10, 0] : 0 }}
                       transition={{ duration: 0.4 }}
                     >
                       {option.icon}
                     </motion.div>
-                    <span className={`text-sm ${theme === option.id ? 'text-blue-400' : 'text-white/70'}`}>
+                    <span className={`text-sm ${theme === option.id ? 'text-blue-400' : 'text-foreground/70'}`}>
                       {option.name}
                     </span>
                   </motion.button>
@@ -279,13 +279,13 @@ export function SettingsApp({ windowState: _windowState }: SettingsAppProps) {
 
             <motion.div
               variants={staggerItemVariants}
-              className="pt-4 border-t border-white/10"
+              className="pt-4 border-t border-border"
             >
               <AnimatedCard className="p-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h4 className="font-medium text-white">Sound Effects</h4>
-                    <p className="text-sm text-white/50">Play sounds for interactions</p>
+                    <h4 className="font-medium text-foreground">Sound Effects</h4>
+                    <p className="text-sm text-muted-foreground">Play sounds for interactions</p>
                   </div>
                   <ToggleSwitch enabled={soundEffects} onToggle={() => setSoundEffects(!soundEffects)} />
                 </div>
@@ -304,7 +304,7 @@ export function SettingsApp({ windowState: _windowState }: SettingsAppProps) {
           >
             <motion.h3
               variants={staggerItemVariants}
-              className="text-lg font-semibold text-white mb-4"
+              className="text-lg font-semibold text-foreground mb-4"
             >
               Accent Color
             </motion.h3>
@@ -317,10 +317,10 @@ export function SettingsApp({ windowState: _windowState }: SettingsAppProps) {
                   onClick={() => setAccentColor(color.id)}
                   className={`relative flex flex-col items-center gap-2 p-3 rounded-xl transition-colors ${
                     accentColor === color.id
-                      ? 'bg-white/10'
+                      ? 'bg-foreground/10'
                       : ''
                   }`}
-                  whileHover={{ scale: 1.08, y: -2, backgroundColor: 'rgba(255, 255, 255, 0.05)' }}
+                  whileHover={{ scale: 1.08, y: -2, backgroundColor: 'hsl(var(--foreground) / 0.05)' }}
                   whileTap={{ scale: 0.95 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 25 }}
                 >
@@ -336,10 +336,10 @@ export function SettingsApp({ windowState: _windowState }: SettingsAppProps) {
                     whileHover={{ scale: 1.15 }}
                     transition={{ type: 'spring', stiffness: 400, damping: 25 }}
                   />
-                  <span className="text-xs text-white/60">{color.name}</span>
+                  <span className="text-xs text-foreground/60">{color.name}</span>
                   {accentColor === color.id && (
                     <motion.div
-                      className="absolute -bottom-1 w-1 h-1 bg-white rounded-full"
+                      className="absolute -bottom-1 w-1 h-1 bg-foreground rounded-full"
                       layoutId="accent-indicator"
                       transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                     />
@@ -359,16 +359,16 @@ export function SettingsApp({ windowState: _windowState }: SettingsAppProps) {
             className="space-y-6"
           >
             <motion.div variants={staggerItemVariants}>
-              <h3 className="text-lg font-semibold text-white mb-4">Animation Speed</h3>
-              <div className="flex gap-2 p-1 bg-white/5 rounded-xl">
+              <h3 className="text-lg font-semibold text-foreground mb-4">Animation Speed</h3>
+              <div className="flex gap-2 p-1 bg-foreground/5 rounded-xl">
                 {(['slow', 'normal', 'fast'] as const).map((speed) => (
                   <motion.button
                     key={speed}
                     onClick={() => setAnimationSpeed(speed)}
                     className={`relative flex-1 py-2 px-4 rounded-lg text-sm font-medium ${
                       animationSpeed === speed
-                        ? 'text-white'
-                        : 'text-white/70'
+                        ? 'text-foreground'
+                        : 'text-foreground/70'
                     }`}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
@@ -401,13 +401,13 @@ export function SettingsApp({ windowState: _windowState }: SettingsAppProps) {
 
             <motion.div
               variants={staggerItemVariants}
-              className="pt-4 border-t border-white/10"
+              className="pt-4 border-t border-border"
             >
               <AnimatedCard className="p-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h4 className="font-medium text-white">Reduce Motion</h4>
-                    <p className="text-sm text-white/50">Minimize animations</p>
+                    <h4 className="font-medium text-foreground">Reduce Motion</h4>
+                    <p className="text-sm text-muted-foreground">Minimize animations</p>
                   </div>
                   <ToggleSwitch enabled={reduceMotion} onToggle={() => setReduceMotion(!reduceMotion)} />
                 </div>
@@ -417,7 +417,7 @@ export function SettingsApp({ windowState: _windowState }: SettingsAppProps) {
             {/* Animation preview */}
             <motion.div variants={staggerItemVariants}>
               <AnimatedCard className="p-4">
-                <h4 className="font-medium text-white mb-3">Preview</h4>
+                <h4 className="font-medium text-foreground mb-3">Preview</h4>
                 <div className="flex gap-3">
                   {[1, 2, 3].map((i) => (
                     <motion.div
@@ -450,7 +450,7 @@ export function SettingsApp({ windowState: _windowState }: SettingsAppProps) {
           >
             <motion.h3
               variants={staggerItemVariants}
-              className="text-lg font-semibold text-white mb-4"
+              className="text-lg font-semibold text-foreground mb-4"
             >
               Accessibility
             </motion.h3>
@@ -468,8 +468,8 @@ export function SettingsApp({ windowState: _windowState }: SettingsAppProps) {
                 <AnimatedCard className="p-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h4 className="font-medium text-white">{option.name}</h4>
-                      <p className="text-sm text-white/50">{option.desc}</p>
+                      <h4 className="font-medium text-foreground">{option.name}</h4>
+                      <p className="text-sm text-muted-foreground">{option.desc}</p>
                     </div>
                     <ToggleSwitch enabled={option.enabled} onToggle={option.toggle} />
                   </div>
@@ -489,7 +489,7 @@ export function SettingsApp({ windowState: _windowState }: SettingsAppProps) {
           >
             <motion.div
               variants={staggerItemVariants}
-              className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-blue-500/20 to-indigo-500/20 border border-white/[0.08] flex items-center justify-center backdrop-blur-sm"
+              className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-blue-500/20 to-indigo-500/20 border border-border flex items-center justify-center backdrop-blur-sm"
               whileHover={{ scale: 1.1, rotate: 5 }}
               transition={{ type: 'spring', stiffness: 400, damping: 25 }}
             >
@@ -499,25 +499,25 @@ export function SettingsApp({ windowState: _windowState }: SettingsAppProps) {
                 }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
-                <Apple className="w-10 h-10 text-white" />
+                <Apple className="w-10 h-10 text-foreground" />
               </motion.div>
             </motion.div>
             <motion.h2
               variants={staggerItemVariants}
-              className="text-2xl font-bold text-white mb-1"
+              className="text-2xl font-bold text-foreground mb-1"
             >
               Darwin UI
             </motion.h2>
             <motion.p
               variants={staggerItemVariants}
-              className="text-white/50 mb-6"
+              className="text-muted-foreground mb-6"
             >
               Version 1.0.0
             </motion.p>
 
             <motion.div
               variants={staggerItemVariants}
-              className="space-y-2 text-sm text-white/60"
+              className="space-y-2 text-sm text-foreground/60"
             >
               <p>A beautiful, macOS-inspired React component library</p>
               <p>Built with React, TypeScript, and Framer Motion</p>
@@ -525,10 +525,10 @@ export function SettingsApp({ windowState: _windowState }: SettingsAppProps) {
 
             <motion.div
               variants={staggerItemVariants}
-              className="mt-8 pt-6 border-t border-white/10"
+              className="mt-8 pt-6 border-t border-border"
             >
               <motion.p
-                className="text-xs text-white/40"
+                className="text-xs text-muted-foreground"
                 animate={{ opacity: [0.4, 0.7, 0.4] }}
                 transition={{ duration: 3, repeat: Infinity }}
               >
@@ -544,10 +544,10 @@ export function SettingsApp({ windowState: _windowState }: SettingsAppProps) {
   };
 
   return (
-    <div className="flex h-full bg-neutral-900">
+    <div className="flex h-full bg-card">
       {/* Sidebar */}
       <motion.div
-        className="w-52 bg-neutral-950 border-r border-white/10 flex flex-col p-3"
+        className="w-52 bg-secondary border-r border-border flex flex-col p-3"
         initial={{ x: -20, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
@@ -560,12 +560,12 @@ export function SettingsApp({ windowState: _windowState }: SettingsAppProps) {
               className={`relative w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm ${
                 activeSection === section.id
                   ? 'text-blue-400'
-                  : 'text-white/70'
+                  : 'text-foreground/70'
               }`}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: index * 0.05, type: 'spring', stiffness: 300, damping: 30 }}
-              whileHover={{ backgroundColor: 'rgba(255, 255, 255, 0.05)' }}
+              whileHover={{ backgroundColor: 'hsl(var(--foreground) / 0.05)' }}
               whileTap={{ scale: 0.97 }}
             >
               {/* Active indicator bar - slides in from left */}
@@ -591,7 +591,7 @@ export function SettingsApp({ windowState: _windowState }: SettingsAppProps) {
               <motion.span
                 animate={{
                   scale: activeSection === section.id ? 1.1 : 1,
-                  color: activeSection === section.id ? '#60a5fa' : 'rgba(255, 255, 255, 0.7)'
+                  color: activeSection === section.id ? '#60a5fa' : 'hsl(var(--foreground) / 0.7)'
                 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 25 }}
               >

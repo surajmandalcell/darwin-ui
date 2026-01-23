@@ -250,7 +250,7 @@ function TimePickerButton({
 							onChange(e.target.value);
 							setOpenPopover(null);
 						}}
-						className="px-3 py-2 bg-[hsl(var(--glass-bg))] border border-[hsl(var(--border-default))] rounded text-[hsl(var(--text-primary))] focus:outline-none focus:border-blue-500"
+						className="px-3 py-2 bg-[hsl(var(--glass-bg))] border border-[hsl(var(--border-default))] rounded text-[hsl(var(--text-primary))] focus:outline-none focus:border-[hsl(var(--brand-primary))]"
 					/>
 				</Popover.Content>
 			</Popover.Portal>

@@ -173,100 +173,12 @@ body {
   @apply bg-white/20;
 }
 
-/* Light mode overrides for hardcoded dark backgrounds */
-[data-theme='light'] {
-  /* Override neutral backgrounds */
-  .bg-neutral-900 {
-    background-color: hsl(var(--card)) !important;
-  }
-  .bg-neutral-950 {
-    background-color: hsl(var(--secondary)) !important;
-  }
-
-  /* Override white text colors */
-  .text-white {
-    color: hsl(var(--foreground)) !important;
-  }
-  .text-white\/90 {
-    color: hsl(var(--foreground) / 0.9) !important;
-  }
-  .text-white\/80 {
-    color: hsl(var(--foreground) / 0.8) !important;
-  }
-  .text-white\/70 {
-    color: hsl(var(--foreground) / 0.7) !important;
-  }
-  .text-white\/60 {
-    color: hsl(var(--foreground) / 0.6) !important;
-  }
-  .text-white\/50 {
-    color: hsl(var(--foreground) / 0.5) !important;
-  }
-  .text-white\/40 {
-    color: hsl(var(--foreground) / 0.4) !important;
-  }
-  .text-white\/30 {
-    color: hsl(var(--foreground) / 0.3) !important;
-  }
-
-  /* Override white border colors */
-  .border-white\/10 {
-    border-color: hsl(var(--border)) !important;
-  }
-  .border-white\/20 {
-    border-color: hsl(var(--border)) !important;
-  }
-  .border-white\/5 {
-    border-color: hsl(var(--border) / 0.5) !important;
-  }
-
-  /* Override white background colors */
-  .bg-white\/5 {
-    background-color: hsl(var(--foreground) / 0.03) !important;
-  }
-  .bg-white\/10 {
-    background-color: hsl(var(--foreground) / 0.06) !important;
-  }
-  .bg-white\/20 {
-    background-color: hsl(var(--foreground) / 0.1) !important;
-  }
-
-  /* Scrollbar for light mode */
-  ::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.1);
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(0, 0, 0, 0.2);
-  }
-
-  /* Badge variants - improved contrast for light mode */
-  [data-variant="info"] {
-    background-color: rgba(59, 130, 246, 0.15) !important;
-    color: rgb(29, 78, 216) !important;
-    border-color: rgba(59, 130, 246, 0.3) !important;
-  }
-  [data-variant="success"] {
-    background-color: rgba(34, 197, 94, 0.15) !important;
-    color: rgb(21, 128, 61) !important;
-    border-color: rgba(34, 197, 94, 0.3) !important;
-  }
-  [data-variant="warning"] {
-    background-color: rgba(245, 158, 11, 0.15) !important;
-    color: rgb(180, 83, 9) !important;
-    border-color: rgba(245, 158, 11, 0.3) !important;
-  }
-  [data-variant="destructive"] {
-    background-color: rgba(239, 68, 68, 0.15) !important;
-    color: rgb(185, 28, 28) !important;
-    border-color: rgba(239, 68, 68, 0.3) !important;
-  }
-
-  /* Checkbox - fix dark circles in light mode */
-  [data-state="checked"] > span,
-  [data-state="checked"] .checkbox-indicator {
-    background-color: hsl(var(--primary)) !important;
-    border-color: hsl(var(--primary)) !important;
-  }
+/* Light mode scrollbar */
+[data-theme='light'] ::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+[data-theme='light'] ::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 /* Utilities for Animations */
@@ -299,20 +211,20 @@ body {
   }
 
   .component-preview {
-    @apply flex items-center justify-center p-8 rounded-xl border border-white/10 bg-white/[0.02] backdrop-blur-sm;
+    @apply flex items-center justify-center p-8 rounded-xl border border-border bg-muted/30 backdrop-blur-sm;
   }
 
   /* Design System Utilities */
   .card-border {
-    @apply border border-white/10 transition-all duration-300;
+    @apply border border-border transition-all duration-300;
   }
 
   .card-background {
-    @apply bg-white/[0.02];
+    @apply bg-muted/30;
   }
 
   .card-background-elevated {
-    @apply bg-white/[0.03];
+    @apply bg-muted/50;
   }
 
   .screenshot-shadow {

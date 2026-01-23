@@ -11,7 +11,7 @@ interface AboutAppProps {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function AboutApp(_props: AboutAppProps) {
   return (
-    <div className="h-full bg-neutral-900 flex items-center justify-center p-8">
+    <div className="h-full bg-card flex items-center justify-center p-8">
       <motion.div
         className="flex flex-col items-center text-center max-w-sm"
         initial={{ opacity: 0, y: 20 }}
@@ -20,17 +20,17 @@ export function AboutApp(_props: AboutAppProps) {
       >
         {/* Logo */}
         <motion.div
-          className="w-24 h-24 mb-6 rounded-3xl bg-gradient-to-br from-blue-500/20 via-indigo-500/15 to-purple-500/20 border border-white/10 flex items-center justify-center shadow-xl"
+          className="w-24 h-24 mb-6 rounded-3xl bg-gradient-to-br from-blue-500/20 via-indigo-500/15 to-purple-500/20 border border-border flex items-center justify-center shadow-xl"
           initial={{ scale: 0.8, rotate: -10 }}
           animate={{ scale: 1, rotate: 0 }}
           transition={{ delay: 0.1, type: 'spring', damping: 15 }}
         >
-          <Apple className="w-12 h-12 text-white" />
+          <Apple className="w-12 h-12 text-foreground" />
         </motion.div>
 
         {/* App Name */}
         <motion.h1
-          className="text-2xl font-bold text-white mb-2"
+          className="text-2xl font-bold text-foreground mb-2"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15 }}
@@ -40,7 +40,7 @@ export function AboutApp(_props: AboutAppProps) {
 
         {/* Version */}
         <motion.p
-          className="text-sm text-white/50 mb-6"
+          className="text-sm text-muted-foreground mb-6"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
@@ -50,7 +50,7 @@ export function AboutApp(_props: AboutAppProps) {
 
         {/* Description */}
         <motion.p
-          className="text-sm text-white/70 mb-6 leading-relaxed"
+          className="text-sm text-foreground/70 mb-6 leading-relaxed"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.25 }}
@@ -68,7 +68,7 @@ export function AboutApp(_props: AboutAppProps) {
           {['React', 'Vite', 'TypeScript', 'Tailwind CSS', 'Framer Motion'].map((tech, i) => (
             <motion.span
               key={tech}
-              className="px-3 py-1 bg-white/5 rounded-full text-xs text-white/60 border border-white/10"
+              className="px-3 py-1 bg-foreground/5 rounded-full text-xs text-foreground/60 border border-border"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.3 + i * 0.05 }}
@@ -80,7 +80,7 @@ export function AboutApp(_props: AboutAppProps) {
 
         {/* Divider */}
         <motion.div
-          className="w-full h-px bg-white/10 mb-6"
+          className="w-full h-px bg-border mb-6"
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ delay: 0.4 }}
@@ -88,7 +88,7 @@ export function AboutApp(_props: AboutAppProps) {
 
         {/* Credits */}
         <motion.div
-          className="text-xs text-white/40 mb-6 space-y-1"
+          className="text-xs text-muted-foreground mb-6 space-y-1"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.45 }}
@@ -103,7 +103,7 @@ export function AboutApp(_props: AboutAppProps) {
           href="https://github.com/surajmandalcell/darwin-ui"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 px-5 py-2.5 bg-white/5 hover:bg-white/10 rounded-xl text-sm text-white/80 hover:text-white transition-colors border border-white/10"
+          className="flex items-center gap-2 px-5 py-2.5 bg-foreground/5 hover:bg-foreground/10 rounded-xl text-sm text-foreground/80 hover:text-foreground transition-colors border border-border"
           whileHover={{ scale: 1.02, y: -2 }}
           whileTap={{ scale: 0.98 }}
           initial={{ opacity: 0, y: 10 }}
@@ -112,12 +112,12 @@ export function AboutApp(_props: AboutAppProps) {
         >
           <Github className="w-4 h-4" />
           <span>View on GitHub</span>
-          <ExternalLink className="w-3 h-3 text-white/40" />
+          <ExternalLink className="w-3 h-3 text-foreground/40" />
         </motion.a>
 
         {/* Copyright */}
         <motion.p
-          className="mt-6 text-[10px] text-white/25"
+          className="mt-6 text-[10px] text-muted-foreground"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.55 }}

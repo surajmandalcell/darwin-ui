@@ -554,7 +554,7 @@ export function MenuBar() {
 									initial="hidden"
 									animate="visible"
 									exit="exit"
-									className={`absolute top-full left-0 mt-1 min-w-[200px] py-1 backdrop-blur-md rounded-lg border border-border shadow-2xl ${isDark ? "bg-neutral-800/95 shadow-black/50" : "bg-white/95 shadow-black/20"}`}
+									className="absolute top-full left-0 mt-1 min-w-[200px] py-1 backdrop-blur-md rounded-lg border border-border shadow-2xl shadow-black/50 bg-card/95"
 								>
 									{darwinMenuItems.map((item, idx) =>
 										item.separator ? (
@@ -663,7 +663,7 @@ export function MenuBar() {
 											initial="hidden"
 											animate="visible"
 											exit="exit"
-											className={`absolute top-full left-0 mt-1 min-w-[200px] py-1 backdrop-blur-md rounded-lg border border-border shadow-2xl ${isDark ? "bg-neutral-800/95 shadow-black/50" : "bg-white/95 shadow-black/20"}`}
+											className="absolute top-full left-0 mt-1 min-w-[200px] py-1 backdrop-blur-md rounded-lg border border-border shadow-2xl shadow-black/50 bg-card/95"
 										>
 											{menuItems[menu].map((item, idx) =>
 												item.separator ? (
@@ -743,7 +743,7 @@ export function MenuBar() {
 									initial="hidden"
 									animate="visible"
 									exit="exit"
-									className={`absolute top-full right-0 mt-1 min-w-[160px] py-1 backdrop-blur-md rounded-lg border border-border shadow-2xl ${isDark ? "bg-neutral-800/95 shadow-black/50" : "bg-white/95 shadow-black/20"}`}
+									className="absolute top-full right-0 mt-1 min-w-[160px] py-1 backdrop-blur-md rounded-lg border border-border shadow-2xl shadow-black/50 bg-card/95"
 								>
 									{navItems.map((item) => (
 										<motion.div key={item.path} variants={menuItemVariants}>

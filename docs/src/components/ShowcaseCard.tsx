@@ -23,7 +23,7 @@ export function ShowcaseCard({
 
   return (
     <div className="min-h-[280px]">
-      <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] transition-all duration-300 flex flex-col h-full min-h-[280px]">
+      <div className="group relative overflow-hidden rounded-2xl border border-border bg-card/50 transition-all duration-300 flex flex-col h-full min-h-[280px]">
         {/* Badge (if provided) */}
         {badge && (
           <Badge
@@ -42,15 +42,15 @@ export function ShowcaseCard({
         </div>
 
         {/* Info footer - compact for bento */}
-        <div className="border-t border-white/10 bg-black/20 backdrop-blur-md p-3">
+        <div className="border-t border-border bg-muted/50 backdrop-blur-md p-3">
           <div className="flex items-center justify-between gap-3">
             <div className="min-w-0 flex-1">
-              <h3 className="font-semibold text-white text-sm mb-0.5">{title}</h3>
-              <p className="text-xs text-white/50 line-clamp-1">{description}</p>
+              <h3 className="font-semibold text-foreground text-sm mb-0.5">{title}</h3>
+              <p className="text-xs text-muted-foreground line-clamp-1">{description}</p>
             </div>
             <Link
               to={`/docs/components/${slug}`}
-              className="shrink-0 inline-flex items-center justify-center w-7 h-7 rounded-full bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-colors"
+              className="shrink-0 inline-flex items-center justify-center w-7 h-7 rounded-full bg-foreground/5 hover:bg-foreground/10 text-foreground/60 hover:text-foreground transition-colors"
               aria-label={`View ${title} docs`}
             >
               <ArrowRight className="w-3.5 h-3.5" />

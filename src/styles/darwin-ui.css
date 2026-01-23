@@ -106,6 +106,19 @@
     --calendar-day-text: 0 0% 100% / 0.7;
     --calendar-day-hover: 0 0% 100% / 0.1;
     --calendar-weekday: 0 0% 100% / 0.5;
+
+    /* Avatar color palette (10 colors) */
+    --avatar-color-1: 217 91% 60%;   /* Blue */
+    --avatar-color-2: 270 91% 60%;   /* Purple */
+    --avatar-color-3: 330 81% 60%;   /* Pink */
+    --avatar-color-4: 0 84% 60%;     /* Red */
+    --avatar-color-5: 25 95% 53%;    /* Orange */
+    --avatar-color-6: 45 93% 47%;    /* Amber */
+    --avatar-color-7: 142 71% 45%;   /* Green */
+    --avatar-color-8: 172 66% 50%;   /* Teal */
+    --avatar-color-9: 189 94% 43%;   /* Cyan */
+    --avatar-color-10: 239 84% 67%;  /* Indigo */
+    --avatar-color-text: 0 0% 100%;  /* White text on colored backgrounds */
   }
 
   /* ========================================
@@ -212,6 +225,19 @@
     --calendar-day-text: 0 0% 0% / 0.8;
     --calendar-day-hover: 0 0% 0% / 0.08;
     --calendar-weekday: 0 0% 0% / 0.5;
+
+    /* Avatar color palette (10 colors - slightly darker for light mode contrast) */
+    --avatar-color-1: 217 91% 50%;   /* Blue */
+    --avatar-color-2: 270 91% 50%;   /* Purple */
+    --avatar-color-3: 330 81% 50%;   /* Pink */
+    --avatar-color-4: 0 84% 50%;     /* Red */
+    --avatar-color-5: 25 95% 45%;    /* Orange */
+    --avatar-color-6: 45 93% 40%;    /* Amber */
+    --avatar-color-7: 142 71% 40%;   /* Green */
+    --avatar-color-8: 172 66% 45%;   /* Teal */
+    --avatar-color-9: 189 94% 38%;   /* Cyan */
+    --avatar-color-10: 239 84% 57%;  /* Indigo */
+    --avatar-color-text: 0 0% 100%;  /* White text on colored backgrounds */
   }
 
   /* System preference fallback */
@@ -316,6 +342,19 @@
       --calendar-day-text: 0 0% 0% / 0.8;
       --calendar-day-hover: 0 0% 0% / 0.08;
       --calendar-weekday: 0 0% 0% / 0.5;
+
+      /* Avatar color palette (10 colors - slightly darker for light mode contrast) */
+      --avatar-color-1: 217 91% 50%;   /* Blue */
+      --avatar-color-2: 270 91% 50%;   /* Purple */
+      --avatar-color-3: 330 81% 50%;   /* Pink */
+      --avatar-color-4: 0 84% 50%;     /* Red */
+      --avatar-color-5: 25 95% 45%;    /* Orange */
+      --avatar-color-6: 45 93% 40%;    /* Amber */
+      --avatar-color-7: 142 71% 40%;   /* Green */
+      --avatar-color-8: 172 66% 45%;   /* Teal */
+      --avatar-color-9: 189 94% 38%;   /* Cyan */
+      --avatar-color-10: 239 84% 57%;  /* Indigo */
+      --avatar-color-text: 0 0% 100%;  /* White text on colored backgrounds */
     }
   }
 }
@@ -377,6 +416,32 @@
     border-color: hsl(var(--border-subtle));
   }
   .border-strong {
+    border-color: hsl(var(--border-strong));
+  }
+
+  /* Input modal class for contact forms */
+  .input-modal {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: hsl(var(--glass-bg));
+    border: 1px solid hsl(var(--border-default));
+    border-radius: 0.375rem;
+    color: hsl(var(--text-primary));
+    font-size: 0.875rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .input-modal::placeholder {
+    color: hsl(var(--text-muted));
+  }
+
+  .input-modal:focus {
+    outline: none;
+    border-color: hsl(var(--brand-primary));
+    box-shadow: 0 0 0 2px hsl(var(--ring));
+  }
+
+  .input-modal:hover:not(:focus) {
     border-color: hsl(var(--border-strong));
   }
 }

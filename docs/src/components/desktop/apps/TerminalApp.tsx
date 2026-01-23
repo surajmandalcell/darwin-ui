@@ -843,23 +843,23 @@ export function TerminalApp({ windowState }: TerminalAppProps) {
   return (
     <div className="flex flex-col h-full bg-[#0a0a0a]">
       {/* Tabs */}
-      <div className="flex items-center bg-neutral-900 border-b border-white/10">
+      <div className="flex items-center bg-secondary border-b border-border">
         <div className="flex-1 flex items-center overflow-x-auto">
           {tabs.map((tab) => (
             <div
               key={tab.id}
               onClick={() => switchTab(tab.id)}
-              className={`flex items-center gap-2 px-4 py-2 cursor-pointer border-r border-white/10 transition-colors ${
+              className={`flex items-center gap-2 px-4 py-2 cursor-pointer border-r border-border transition-colors ${
                 activeTabId === tab.id
-                  ? 'bg-[#0a0a0a] text-white'
-                  : 'bg-neutral-900 text-white/50 hover:text-white/80'
+                  ? 'bg-[#0a0a0a] text-foreground'
+                  : 'bg-secondary text-foreground/50 hover:text-foreground/80'
               }`}
             >
               <span className="text-xs font-mono">{tab.name}</span>
               {tabs.length > 1 && (
                 <button
                   onClick={(e) => closeTab(tab.id, e)}
-                  className="p-0.5 hover:bg-white/10 rounded"
+                  className="p-0.5 hover:bg-foreground/10 rounded"
                 >
                   <X className="w-3 h-3" />
                 </button>
@@ -869,7 +869,7 @@ export function TerminalApp({ windowState }: TerminalAppProps) {
         </div>
         <button
           onClick={addTab}
-          className="p-2 text-white/50 hover:text-white hover:bg-white/5 transition-colors"
+          className="p-2 text-foreground/50 hover:text-foreground hover:bg-foreground/5 transition-colors"
         >
           <Plus className="w-4 h-4" />
         </button>
@@ -883,9 +883,9 @@ export function TerminalApp({ windowState }: TerminalAppProps) {
       />
 
       {/* Status Bar */}
-      <div className="flex items-center justify-between px-3 py-1 bg-neutral-900 border-t border-white/10 text-xs font-mono">
-        <span className="text-white/40">{currentDir}</span>
-        <span className="text-white/40">bash</span>
+      <div className="flex items-center justify-between px-3 py-1 bg-secondary border-t border-border text-xs font-mono">
+        <span className="text-muted-foreground">{currentDir}</span>
+        <span className="text-muted-foreground">bash</span>
       </div>
     </div>
   );

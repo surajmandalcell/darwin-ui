@@ -263,7 +263,7 @@ export default function ShowcasePage() {
       {/* Footer */}
       <footer>
         {/* Top CTA Section */}
-        <div className="py-20 px-6 md:px-12 lg:px-20">
+        <div className="pt-0 pb-48 px-6 md:px-12 lg:px-20">
           <div className="max-w-[1400px] mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}

@@ -71,7 +71,7 @@ const MENU_STYLES = {
 	menuItem:
 		"w-full text-left px-1.5 py-1 transition-all duration-150 ease-out flex items-center justify-between rounded-[4px] truncate cursor-pointer whitespace-nowrap text-[hsl(var(--text-primary))]",
 	menuItemDisabled: "text-[hsl(var(--text-muted))] cursor-not-allowed",
-	menuItemEnabled: "hover:bg-accent focus:outline-hidden focus:ring-0",
+	menuItemEnabled: "hover:bg-[hsl(var(--accent))] focus:outline-hidden focus:ring-0",
 };
 
 const useMenuPosition = () => {

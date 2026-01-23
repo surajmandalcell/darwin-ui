@@ -33,20 +33,20 @@ export function CodeBlock({
   };
 
   return (
-    <div className="relative group rounded-xl overflow-hidden border border-white/10 bg-neutral-950 my-4">
+    <div className="relative group rounded-xl overflow-hidden border border-border bg-card my-4">
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-2 border-b border-white/10 bg-white/[0.02]">
+      <div className="flex items-center justify-between px-4 py-2 border-b border-border bg-muted/30">
         <div className="flex items-center gap-2">
-          <span className="text-xs font-mono text-white/40 uppercase tracking-wider">
+          <span className="text-xs font-mono text-muted-foreground uppercase tracking-wider">
             {language}
           </span>
           {fileName && (
-            <span className="text-xs text-white/60 font-mono">{fileName}</span>
+            <span className="text-xs text-foreground/60 font-mono">{fileName}</span>
           )}
         </div>
         <button
           onClick={handleCopy}
-          className="flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-medium transition-all duration-200 hover:bg-white/10 text-white/70 hover:text-white focus:outline-none focus:ring-2 focus:ring-white/20"
+          className="flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-medium transition-all duration-200 hover:bg-foreground/10 text-foreground/70 hover:text-foreground focus:outline-none focus:ring-2 focus:ring-foreground/20"
           aria-label="Copy code to clipboard"
         >
           {copied ? (

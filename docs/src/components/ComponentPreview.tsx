@@ -163,8 +163,8 @@ export function CardPreview() {
                 <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center border border-blue-500/20 text-blue-500 mb-4">
                     <Settings className="w-6 h-6" />
                 </div>
-                <h3 className="text-lg font-bold text-white mb-2">Advanced Configuration</h3>
-                <p className="text-sm text-white/50 mb-6 leading-relaxed">
+                <h3 className="text-lg font-bold text-foreground mb-2">Advanced Configuration</h3>
+                <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
                     Customize your workspace with advanced settings. Manage team permissions, integrations, and billing.
                 </p>
                 <div className="flex gap-3">
@@ -190,11 +190,11 @@ export function AlertPreview() {
 export function SkeletonPreview() {
     return (
         <div className="component-preview">
-            <div className="flex items-center gap-5 w-full max-w-xs p-4 border border-white/[0.06] rounded-xl bg-white/[0.02]">
+            <div className="flex items-center gap-5 w-full max-w-xs p-4 border border-border rounded-xl bg-muted/30">
                 <Skeleton className="w-12 h-12 rounded-full flex-shrink-0" />
                 <div className="flex-1 space-y-2.5">
-                    <Skeleton className="h-4 w-3/4 bg-white/[0.08]" />
-                    <Skeleton className="h-3 w-1/2 bg-white/[0.08]" />
+                    <Skeleton className="h-4 w-3/4 bg-muted" />
+                    <Skeleton className="h-3 w-1/2 bg-muted" />
                 </div>
             </div>
         </div>
@@ -216,26 +216,26 @@ export function ModalPreview() {
                     onClick={() => setIsOpen(false)}
                 >
                     <Card
-                        className="w-[90%] max-w-md bg-neutral-950 border-white/10 p-6 shadow-md relative overflow-hidden"
+                        className="w-[90%] max-w-md bg-card border-border p-6 shadow-md relative overflow-hidden"
                         onClick={(e: React.MouseEvent) => e.stopPropagation()}
                     >
-                        <div className="absolute top-0 left-0 right-0 h-24 bg-white/[0.02] pointer-events-none" />
+                        <div className="absolute top-0 left-0 right-0 h-24 bg-muted/30 pointer-events-none" />
 
                         <div className="relative">
                             <div className="flex items-center justify-between mb-5">
-                                <div className="w-10 h-10 rounded-lg bg-white/[0.06] flex items-center justify-center border border-white/[0.04]">
-                                    <Info className="w-5 h-5 text-white/80" />
+                                <div className="w-10 h-10 rounded-lg bg-muted flex items-center justify-center border border-border">
+                                    <Info className="w-5 h-5 text-foreground/80" />
                                 </div>
                                 <button
                                     onClick={() => setIsOpen(false)}
-                                    className="p-1.5 rounded-lg text-white/40 hover:text-white hover:bg-white/[0.06] transition-colors"
+                                    className="p-1.5 rounded-lg text-foreground/40 hover:text-foreground hover:bg-foreground/[0.06] transition-colors"
                                 >
                                     <X className="w-5 h-5" />
                                 </button>
                             </div>
 
-                            <h3 className="text-lg font-bold text-white mb-2">Confirm Action</h3>
-                            <p className="text-sm text-white/60 mb-8 leading-relaxed">
+                            <h3 className="text-lg font-bold text-foreground mb-2">Confirm Action</h3>
+                            <p className="text-sm text-muted-foreground mb-8 leading-relaxed">
                                 Are you sure you want to continue? This action cannot be undone and will permanently make changes to your account.
                             </p>
 
@@ -267,14 +267,14 @@ export function ToastPreview() {
 
             {showToast && (
                 <div
-                    className="absolute bottom-4 z-20 flex items-center gap-3 px-4 py-3 bg-slate-900 border border-emerald-500/20 rounded-xl shadow-md animate-in slide-in-from-bottom-5 fade-in duration-300"
+                    className="absolute bottom-4 z-20 flex items-center gap-3 px-4 py-3 bg-card border border-emerald-500/20 rounded-xl shadow-md animate-in slide-in-from-bottom-5 fade-in duration-300"
                 >
                     <div className="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-500/10 flex items-center justify-center">
                         <Check className="w-4 h-4 text-emerald-500" />
                     </div>
                     <div>
-                        <p className="text-sm font-semibold text-white">Success</p>
-                        <p className="text-xs text-white/50">Your changes have been saved.</p>
+                        <p className="text-sm font-semibold text-foreground">Success</p>
+                        <p className="text-xs text-muted-foreground">Your changes have been saved.</p>
                     </div>
                 </div>
             )}
@@ -290,27 +290,27 @@ export function SelectPreview() {
     return (
         <div className="component-preview min-h-[200px] items-start pt-10">
             <div className="relative w-64">
-                <label className="text-xs font-medium text-white/60 mb-1.5 block ml-1">Assign To</label>
+                <label className="text-xs font-medium text-foreground/60 mb-1.5 block ml-1">Assign To</label>
                 <button
                     onClick={() => setIsOpen(!isOpen)}
                     className={cn(
                         "w-full h-10 px-4 rounded-lg text-sm text-left flex items-center justify-between transition-all duration-200",
-                        "bg-white/[0.04] border",
+                        "bg-foreground/[0.04] border",
                         isOpen
-                            ? "border-blue-500/50 bg-white/[0.06] ring-2 ring-blue-500/20"
-                            : "border-white/[0.08] hover:border-white/[0.12] text-white"
+                            ? "border-blue-500/50 bg-foreground/[0.06] ring-2 ring-blue-500/20"
+                            : "border-foreground/[0.08] hover:border-foreground/[0.12] text-foreground"
                     )}
                 >
                     <div className="flex items-center gap-2">
-                        <User className="w-4 h-4 text-white/40" />
+                        <User className="w-4 h-4 text-foreground/40" />
                         {selected}
                     </div>
-                    <ChevronDown className={cn("w-4 h-4 text-white/40 transition-transform duration-200", isOpen && "rotate-180")} />
+                    <ChevronDown className={cn("w-4 h-4 text-foreground/40 transition-transform duration-200", isOpen && "rotate-180")} />
                 </button>
 
                 {isOpen && (
                     <div
-                        className="absolute top-full left-0 right-0 mt-2 py-1.5 bg-neutral-950 border border-white/10 rounded-xl shadow-md z-10 overflow-hidden animate-in fade-in zoom-in-95 duration-200"
+                        className="absolute top-full left-0 right-0 mt-2 py-1.5 bg-card border border-border rounded-xl shadow-md z-10 overflow-hidden animate-in fade-in zoom-in-95 duration-200"
                     >
                         {options.map((option) => (
                             <button
@@ -320,7 +320,7 @@ export function SelectPreview() {
                                     "w-full px-4 py-2.5 text-sm text-left flex items-center justify-between transition-colors",
                                     option === selected
                                         ? "bg-blue-600/10 text-blue-400 font-medium"
-                                        : "text-white/70 hover:text-white hover:bg-white/[0.04]"
+                                        : "text-foreground/70 hover:text-foreground hover:bg-foreground/[0.04]"
                                 )}
                             >
                                 {option}
@@ -346,23 +346,23 @@ export function TablePreview() {
             <div className="w-full overflow-x-auto">
                 <table className="w-full">
                     <thead>
-                        <tr className="bg-white/[0.02] border-b border-white/[0.06]">
-                            <th className="px-6 py-3 text-left text-[11px] font-semibold text-white/50 uppercase tracking-wider">User</th>
-                            <th className="px-6 py-3 text-left text-[11px] font-semibold text-white/50 uppercase tracking-wider">Role</th>
-                            <th className="px-6 py-3 text-left text-[11px] font-semibold text-white/50 uppercase tracking-wider">Status</th>
+                        <tr className="bg-muted/30 border-b border-border">
+                            <th className="px-6 py-3 text-left text-[11px] font-semibold text-muted-foreground uppercase tracking-wider">User</th>
+                            <th className="px-6 py-3 text-left text-[11px] font-semibold text-muted-foreground uppercase tracking-wider">Role</th>
+                            <th className="px-6 py-3 text-left text-[11px] font-semibold text-muted-foreground uppercase tracking-wider">Status</th>
                             <th className="px-6 py-3 text-right"></th>
                         </tr>
                     </thead>
-                    <tbody className="divide-y divide-white/[0.04]">
+                    <tbody className="divide-y divide-border">
                         {data.map((row, i) => (
-                            <tr key={i} className="group hover:bg-white/[0.02] transition-colors">
+                            <tr key={i} className="group hover:bg-muted/30 transition-colors">
                                 <td className="px-6 py-3.5">
                                     <div className="flex flex-col">
-                                        <span className="text-sm font-medium text-white">{row.name}</span>
-                                        <span className="text-xs text-white/40">{row.email}</span>
+                                        <span className="text-sm font-medium text-foreground">{row.name}</span>
+                                        <span className="text-xs text-muted-foreground">{row.email}</span>
                                     </div>
                                 </td>
-                                <td className="px-6 py-3.5 text-sm text-white/60">{row.role}</td>
+                                <td className="px-6 py-3.5 text-sm text-foreground/60">{row.role}</td>
                                 <td className="px-6 py-3.5">
                                     <Badge variant={row.status === "Active" ? "success" : row.status === "Pending" ? "warning" : "destructive"}>
                                         {row.status}
