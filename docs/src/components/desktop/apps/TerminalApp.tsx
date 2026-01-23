@@ -842,24 +842,24 @@ export function TerminalApp({ windowState }: TerminalAppProps) {
 
   return (
     <div className="flex flex-col h-full bg-[#0a0a0a]">
-      {/* Tabs */}
-      <div className="flex items-center bg-secondary border-b border-border">
+      {/* Tabs - themed */}
+      <div className="flex items-center bg-zinc-900 border-b border-zinc-800">
         <div className="flex-1 flex items-center overflow-x-auto">
           {tabs.map((tab) => (
             <div
               key={tab.id}
               onClick={() => switchTab(tab.id)}
-              className={`flex items-center gap-2 px-4 py-2 cursor-pointer border-r border-border transition-colors ${
+              className={`flex items-center gap-2 px-4 py-2 cursor-pointer border-r border-zinc-800 transition-colors ${
                 activeTabId === tab.id
-                  ? 'bg-[#0a0a0a] text-foreground'
-                  : 'bg-secondary text-foreground/50 hover:text-foreground/80'
+                  ? 'bg-[#0a0a0a] text-zinc-100'
+                  : 'bg-zinc-900 text-zinc-500 hover:text-zinc-300'
               }`}
             >
               <span className="text-xs font-mono">{tab.name}</span>
               {tabs.length > 1 && (
                 <button
                   onClick={(e) => closeTab(tab.id, e)}
-                  className="p-0.5 hover:bg-foreground/10 rounded"
+                  className="p-0.5 hover:bg-zinc-700 rounded"
                 >
                   <X className="w-3 h-3" />
                 </button>
@@ -869,7 +869,7 @@ export function TerminalApp({ windowState }: TerminalAppProps) {
         </div>
         <button
           onClick={addTab}
-          className="p-2 text-foreground/50 hover:text-foreground hover:bg-foreground/5 transition-colors"
+          className="p-2 text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800 transition-colors"
         >
           <Plus className="w-4 h-4" />
         </button>
@@ -882,10 +882,10 @@ export function TerminalApp({ windowState }: TerminalAppProps) {
         style={{ minHeight: 0 }}
       />
 
-      {/* Status Bar */}
-      <div className="flex items-center justify-between px-3 py-1 bg-secondary border-t border-border text-xs font-mono">
-        <span className="text-muted-foreground">{currentDir}</span>
-        <span className="text-muted-foreground">bash</span>
+      {/* Status Bar - matches terminal dark theme */}
+      <div className="flex items-center justify-between px-3 py-1 bg-zinc-900 border-t border-zinc-800 text-xs font-mono">
+        <span className="text-zinc-500">{currentDir}</span>
+        <span className="text-zinc-500">bash</span>
       </div>
     </div>
   );

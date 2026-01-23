@@ -75,7 +75,7 @@ export function UnifiedNavbar() {
       >
         <Link
           to="/"
-          className="flex items-center justify-center text-white/70 hover:text-white transition-colors"
+          className="flex items-center justify-center text-foreground/70 hover:text-foreground transition-colors"
         >
           <DarwinLogo className="w-5 h-5" />
         </Link>
@@ -101,15 +101,15 @@ export function UnifiedNavbar() {
                   className={`
                     relative flex items-center gap-2 text-sm transition-colors pb-[11px] pt-[11px]
                     ${isActive
-                      ? 'text-white'
-                      : 'text-white/50 hover:text-white/80'
+                      ? 'text-foreground'
+                      : 'text-foreground/50 hover:text-foreground/80'
                     }
                   `}
                 >
                   <Icon className="w-4 h-4" />
                   <span>{label}</span>
                   {isActive && (
-                    <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-white/60 rounded-t-full" />
+                    <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-foreground/60 rounded-t-full" />
                   )}
                 </Link>
               </motion.div>

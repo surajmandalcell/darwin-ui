@@ -156,18 +156,18 @@ export function NotesApp({ windowState: _windowState }: NotesAppProps) {
   };
 
   return (
-    <div className="flex h-full bg-neutral-900">
+    <div className="flex h-full bg-background">
       {/* Notes List Sidebar */}
       <motion.div
-        className="w-72 bg-neutral-950 border-r border-white/10 flex flex-col"
+        className="w-72 bg-card border-r border-border flex flex-col"
         initial={{ x: -20, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
       >
         {/* Header with New Note button */}
-        <div className="p-3 border-b border-white/10">
+        <div className="p-3 border-b border-border">
           <button
             onClick={handleCreateNote}
-            className="w-full flex items-center justify-center gap-2 px-3 py-2 bg-yellow-500/20 text-yellow-500 hover:bg-yellow-500/30 rounded-lg text-sm font-medium transition-colors"
+            className="w-full flex items-center justify-center gap-2 px-3 py-2 bg-yellow-500/20 text-yellow-600 dark:text-yellow-500 hover:bg-yellow-500/30 rounded-lg text-sm font-medium transition-colors"
           >
             <Plus className="w-4 h-4" />
             New Note
@@ -175,15 +175,15 @@ export function NotesApp({ windowState: _windowState }: NotesAppProps) {
         </div>
 
         {/* Search */}
-        <div className="p-3 border-b border-white/10">
+        <div className="p-3 border-b border-border">
           <div className="relative">
-            <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
+            <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search notes..."
-              className="w-full pl-8 pr-3 py-1.5 bg-white/5 border border-white/10 rounded-md text-sm text-white placeholder:text-white/40 focus:outline-none focus:border-yellow-500/50"
+              className="w-full pl-8 pr-3 py-1.5 bg-muted/50 border border-border rounded-md text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-yellow-500/50"
             />
           </div>
         </div>
@@ -191,30 +191,30 @@ export function NotesApp({ windowState: _windowState }: NotesAppProps) {
         {/* Notes List */}
         <div className="flex-1 overflow-y-auto">
           {filteredNotes.length === 0 ? (
-            <div className="p-4 text-center text-white/40 text-sm">
+            <div className="p-4 text-center text-muted-foreground text-sm">
               {searchQuery ? 'No notes found' : 'No notes yet'}
             </div>
           ) : (
             filteredNotes.map((note) => (
               <motion.div
                 key={note.id}
-                className={`relative group border-b border-white/5 ${
+                className={`relative group border-b border-border/50 ${
                   selectedNoteId === note.id
                     ? 'bg-yellow-500/10'
-                    : 'hover:bg-white/5'
+                    : 'hover:bg-muted/50'
                 }`}
               >
                 <button
                   onClick={() => setSelectedNoteId(note.id)}
                   className="w-full text-left p-3"
                 >
-                  <h3 className="font-medium text-white text-sm truncate pr-8">
+                  <h3 className="font-medium text-foreground text-sm truncate pr-8">
                     {note.title || 'Untitled Note'}
                   </h3>
-                  <p className="text-xs text-white/40 mt-1">
+                  <p className="text-xs text-muted-foreground mt-1">
                     {formatDate(note.updatedAt)}
                   </p>
-                  <p className="text-xs text-white/50 mt-1 line-clamp-2">
+                  <p className="text-xs text-foreground/50 mt-1 line-clamp-2">
                     {getPreview(note.content)}
                   </p>
                 </button>
@@ -224,7 +224,7 @@ export function NotesApp({ windowState: _windowState }: NotesAppProps) {
                     e.stopPropagation();
                     handleDeleteNote(note.id);
                   }}
-                  className="absolute top-3 right-3 p-1 text-white/30 hover:text-red-400 hover:bg-red-500/10 rounded opacity-0 group-hover:opacity-100 transition-all"
+                  className="absolute top-3 right-3 p-1 text-foreground/30 hover:text-red-500 hover:bg-red-500/10 rounded opacity-0 group-hover:opacity-100 transition-all"
                   title="Delete note"
                 >
                   <Trash2 className="w-3.5 h-3.5" />
@@ -253,9 +253,9 @@ export function NotesApp({ windowState: _windowState }: NotesAppProps) {
                   value={selectedNote.title}
                   onChange={(e) => handleTitleChange(e.target.value)}
                   placeholder="Note title..."
-                  className="w-full text-2xl font-bold text-white bg-transparent border-none outline-none placeholder:text-white/30"
+                  className="w-full text-2xl font-bold text-foreground bg-transparent border-none outline-none placeholder:text-muted-foreground/50"
                 />
-                <p className="text-xs text-white/40 mt-1">
+                <p className="text-xs text-muted-foreground mt-1">
                   Last edited {formatDate(selectedNote.updatedAt)}
                 </p>
               </div>
@@ -266,19 +266,19 @@ export function NotesApp({ windowState: _windowState }: NotesAppProps) {
                   value={selectedNote.content}
                   onChange={(e) => handleContentChange(e.target.value)}
                   placeholder="Start writing..."
-                  className="w-full h-full text-white/80 bg-transparent border-none outline-none resize-none text-sm leading-relaxed placeholder:text-white/30"
+                  className="w-full h-full text-foreground/80 bg-transparent border-none outline-none resize-none text-sm leading-relaxed placeholder:text-muted-foreground/50"
                 />
               </div>
             </motion.div>
           </AnimatePresence>
         ) : (
-          <div className="flex-1 flex items-center justify-center text-white/40">
+          <div className="flex-1 flex items-center justify-center text-muted-foreground">
             <div className="text-center">
               <FileText className="w-12 h-12 mx-auto mb-3 opacity-50" />
               <p className="mb-2">No note selected</p>
               <button
                 onClick={handleCreateNote}
-                className="text-yellow-500 hover:text-yellow-400 text-sm"
+                className="text-yellow-600 dark:text-yellow-500 hover:text-yellow-500 dark:hover:text-yellow-400 text-sm"
               >
                 Create a new note
               </button>

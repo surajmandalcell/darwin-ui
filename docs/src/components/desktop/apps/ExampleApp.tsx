@@ -100,19 +100,19 @@ function StatCard({ title, value, change, trend, icon: Icon }: {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       whileHover={{ y: -2 }}
-      className="p-4 rounded-xl bg-white/5 border border-white/10"
+      className="p-4 rounded-xl bg-muted/50 border border-border"
     >
       <div className="flex items-start justify-between mb-3">
-        <div className="p-2 rounded-lg bg-white/5">
-          <Icon className="w-4 h-4 text-white/60" />
+        <div className="p-2 rounded-lg bg-muted">
+          <Icon className="w-4 h-4 text-muted-foreground" />
         </div>
         <Badge variant={trend === 'up' ? 'success' : 'destructive'}>
           {trend === 'up' ? <ArrowUpRight className="w-3 h-3 mr-1" /> : <ArrowDownRight className="w-3 h-3 mr-1" />}
           {change}
         </Badge>
       </div>
-      <p className="text-2xl font-bold text-white mb-1">{value}</p>
-      <p className="text-sm text-white/50">{title}</p>
+      <p className="text-2xl font-bold text-foreground mb-1">{value}</p>
+      <p className="text-sm text-muted-foreground">{title}</p>
     </motion.div>
   );
 }
@@ -127,8 +127,8 @@ function DashboardContent() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white">Dashboard</h1>
-          <p className="text-white/50 text-sm">Welcome back, here's your overview</p>
+          <h1 className="text-2xl font-bold text-foreground">Dashboard</h1>
+          <p className="text-muted-foreground text-sm">Welcome back, here's your overview</p>
         </div>
         <div className="flex items-center gap-3">
           <SearchInput
@@ -243,8 +243,8 @@ function DashboardContent() {
                 <div className="flex items-center gap-3">
                   <Avatar fallback={member.avatar} size="sm" />
                   <div>
-                    <p className="text-sm text-white font-medium">{member.name}</p>
-                    <p className="text-xs text-white/50">{member.role}</p>
+                    <p className="text-sm text-foreground font-medium">{member.name}</p>
+                    <p className="text-xs text-muted-foreground">{member.role}</p>
                   </div>
                 </div>
                 <Badge variant={member.status === 'online' ? 'success' : member.status === 'away' ? 'warning' : 'secondary'}>
@@ -273,7 +273,7 @@ function DashboardContent() {
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.1 }}
-                  className="flex items-center justify-between py-2 border-b border-white/5 last:border-0"
+                  className="flex items-center justify-between py-2 border-b border-border/50 last:border-0"
                 >
                   <div className="flex items-center gap-3">
                     <div className={`w-2 h-2 rounded-full ${
@@ -281,11 +281,11 @@ function DashboardContent() {
                       activity.type === 'pr' ? 'bg-green-400' :
                       activity.type === 'design' ? 'bg-purple-400' : 'bg-orange-400'
                     }`} />
-                    <span className="text-sm text-white/80">
-                      <span className="font-medium text-white">{activity.user}</span> {activity.action}
+                    <span className="text-sm text-foreground/80">
+                      <span className="font-medium text-foreground">{activity.user}</span> {activity.action}
                     </span>
                   </div>
-                  <span className="text-xs text-white/40">{activity.time}</span>
+                  <span className="text-xs text-muted-foreground">{activity.time}</span>
                 </motion.div>
               ))}
             </div>
@@ -294,14 +294,14 @@ function DashboardContent() {
       </div>
 
       {/* Quick Actions */}
-      <div className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10">
+      <div className="flex items-center gap-4 p-4 rounded-xl bg-muted/50 border border-border">
         <div className="flex-1">
-          <h3 className="font-medium text-white mb-1">Quick Actions</h3>
-          <p className="text-sm text-white/50">Common tasks and settings</p>
+          <h3 className="font-medium text-foreground mb-1">Quick Actions</h3>
+          <p className="text-sm text-muted-foreground">Common tasks and settings</p>
         </div>
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2">
-            <span className="text-sm text-white/60">Notifications</span>
+            <span className="text-sm text-muted-foreground">Notifications</span>
             <Switch checked={notifications} onChange={setNotifications} />
           </div>
           <Checkbox label="Dark mode" checked={true} onChange={() => {}} />
@@ -322,7 +322,7 @@ function TeamContent() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-white">Team Members</h1>
+        <h1 className="text-2xl font-bold text-foreground">Team Members</h1>
         <Button variant="primary">
           <Plus className="w-4 h-4 mr-2" />
           Invite Member
@@ -343,8 +343,8 @@ function TeamContent() {
                   <div className="flex items-center gap-4">
                     <Avatar fallback={member.avatar} size="lg" />
                     <div className="flex-1">
-                      <p className="font-medium text-white">{member.name}</p>
-                      <p className="text-sm text-white/50">{member.role}</p>
+                      <p className="font-medium text-foreground">{member.name}</p>
+                      <p className="text-sm text-muted-foreground">{member.role}</p>
                     </div>
                     <Badge variant={member.status === 'online' ? 'success' : 'secondary'}>
                       {member.status}
@@ -363,8 +363,8 @@ function TeamContent() {
                   <div className="flex items-center gap-4">
                     <Avatar fallback={member.avatar} size="lg" />
                     <div className="flex-1">
-                      <p className="font-medium text-white">{member.name}</p>
-                      <p className="text-sm text-white/50">{member.role}</p>
+                      <p className="font-medium text-foreground">{member.name}</p>
+                      <p className="text-sm text-muted-foreground">{member.role}</p>
                     </div>
                     <Badge variant="success">online</Badge>
                   </div>
@@ -381,8 +381,8 @@ function TeamContent() {
                   <div className="flex items-center gap-4">
                     <Avatar fallback={member.avatar} size="lg" />
                     <div className="flex-1">
-                      <p className="font-medium text-white">{member.name}</p>
-                      <p className="text-sm text-white/50">{member.role}</p>
+                      <p className="font-medium text-foreground">{member.name}</p>
+                      <p className="text-sm text-muted-foreground">{member.role}</p>
                     </div>
                     <Badge variant="secondary">{member.status}</Badge>
                   </div>
@@ -422,36 +422,36 @@ function AnalyticsContent() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-white">Analytics</h1>
+      <h1 className="text-2xl font-bold text-foreground">Analytics</h1>
 
       <div className="grid grid-cols-3 gap-4">
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm text-white/50">Page Views</span>
+              <span className="text-sm text-muted-foreground">Page Views</span>
               <Badge variant="info">Live</Badge>
             </div>
-            <p className="text-3xl font-bold text-white">24,892</p>
+            <p className="text-3xl font-bold text-foreground">24,892</p>
             <Progress value={75} className="mt-3" />
           </CardContent>
         </Card>
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm text-white/50">Bounce Rate</span>
+              <span className="text-sm text-muted-foreground">Bounce Rate</span>
               <Badge variant="warning">Attention</Badge>
             </div>
-            <p className="text-3xl font-bold text-white">32.4%</p>
+            <p className="text-3xl font-bold text-foreground">32.4%</p>
             <Progress value={32} variant="warning" className="mt-3" />
           </CardContent>
         </Card>
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm text-white/50">Avg. Session</span>
+              <span className="text-sm text-muted-foreground">Avg. Session</span>
               <Badge variant="success">Good</Badge>
             </div>
-            <p className="text-3xl font-bold text-white">4m 32s</p>
+            <p className="text-3xl font-bold text-foreground">4m 32s</p>
             <Progress value={85} variant="success" className="mt-3" />
           </CardContent>
         </Card>
@@ -489,7 +489,7 @@ function SettingsContent() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-white">Settings</h1>
+      <h1 className="text-2xl font-bold text-foreground">Settings</h1>
 
       <Card>
         <CardHeader>
@@ -499,22 +499,22 @@ function SettingsContent() {
         <CardContent className="space-y-4">
           <div className="flex items-center justify-between py-2">
             <div>
-              <p className="text-sm font-medium text-white">Email Notifications</p>
-              <p className="text-xs text-white/50">Receive updates via email</p>
+              <p className="text-sm font-medium text-foreground">Email Notifications</p>
+              <p className="text-xs text-muted-foreground">Receive updates via email</p>
             </div>
             <Switch checked={emailNotif} onChange={setEmailNotif} />
           </div>
           <div className="flex items-center justify-between py-2">
             <div>
-              <p className="text-sm font-medium text-white">Push Notifications</p>
-              <p className="text-xs text-white/50">Receive push notifications</p>
+              <p className="text-sm font-medium text-foreground">Push Notifications</p>
+              <p className="text-xs text-muted-foreground">Receive push notifications</p>
             </div>
             <Switch checked={pushNotif} onChange={setPushNotif} />
           </div>
           <div className="flex items-center justify-between py-2">
             <div>
-              <p className="text-sm font-medium text-white">Weekly Digest</p>
-              <p className="text-xs text-white/50">Get a weekly summary</p>
+              <p className="text-sm font-medium text-foreground">Weekly Digest</p>
+              <p className="text-xs text-muted-foreground">Get a weekly summary</p>
             </div>
             <Switch checked={weeklyDigest} onChange={setWeeklyDigest} />
           </div>
@@ -528,7 +528,7 @@ function SettingsContent() {
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="flex items-center justify-between">
-            <span className="text-sm text-white/70">Theme</span>
+            <span className="text-sm text-muted-foreground">Theme</span>
             <Select defaultValue="dark">
               <option value="dark">Dark</option>
               <option value="light">Light</option>
@@ -536,7 +536,7 @@ function SettingsContent() {
             </Select>
           </div>
           <div className="flex items-center justify-between">
-            <span className="text-sm text-white/70">Language</span>
+            <span className="text-sm text-muted-foreground">Language</span>
             <Select defaultValue="en">
               <option value="en">English</option>
               <option value="es">Spanish</option>
@@ -569,10 +569,10 @@ export function ExampleApp({ windowState: _windowState }: ExampleAppProps) {
   };
 
   return (
-    <div className="flex h-full bg-neutral-900">
+    <div className="flex h-full bg-background">
       {/* Sidebar */}
       <motion.div
-        className="w-16 bg-neutral-950 border-r border-white/10 flex flex-col items-center py-4"
+        className="w-16 bg-card border-r border-border flex flex-col items-center py-4"
         initial={{ x: -16, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
       >
@@ -597,8 +597,8 @@ export function ExampleApp({ windowState: _windowState }: ExampleAppProps) {
                     onClick={() => setActiveNav(item.id)}
                     className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${
                       isActive
-                        ? 'bg-white/10 text-white'
-                        : 'text-white/40 hover:text-white hover:bg-white/5'
+                        ? 'bg-foreground/10 text-foreground'
+                        : 'text-muted-foreground hover:text-foreground hover:bg-foreground/5'
                     }`}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}

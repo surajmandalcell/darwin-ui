@@ -42,19 +42,19 @@ export function Breadcrumbs() {
           return (
             <li key={index} className="flex items-center gap-2">
               {index > 0 && (
-                <ChevronRight className="w-4 h-4 text-white/30" aria-hidden="true" />
+                <ChevronRight className="w-4 h-4 text-foreground/30" aria-hidden="true" />
               )}
 
               {crumb.href && !isLast ? (
                 <Link
                   to={crumb.href}
-                  className="text-white/60 hover:text-white transition-colors"
+                  className="text-muted-foreground hover:text-foreground transition-colors"
                 >
                   {crumb.label}
                 </Link>
               ) : (
                 <span
-                  className={isLast ? 'text-white font-medium' : 'text-white/40'}
+                  className={isLast ? 'text-foreground font-medium' : 'text-muted-foreground'}
                   aria-current={isLast ? 'page' : undefined}
                 >
                   {crumb.label}
