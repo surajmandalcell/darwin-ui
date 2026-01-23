@@ -36,7 +36,9 @@ function FeatureCard({ icon, title, description, delay }: FeatureCardProps) {
 			</div>
 			<div>
 				<h4 className="text-sm font-semibold text-foreground mb-1">{title}</h4>
-				<p className="text-xs text-muted-foreground leading-relaxed">{description}</p>
+				<p className="text-xs text-muted-foreground leading-relaxed">
+					{description}
+				</p>
 			</div>
 		</motion.div>
 	);
@@ -106,7 +108,7 @@ export function AgenticCodingSection() {
 	return (
 		<section
 			ref={sectionRef}
-			className="min-h-screen pt-24 md:pt-32 lg:pt-40 pb-16 md:pb-20 lg:pb-24 px-4 md:px-6 lg:px-8 relative overflow-hidden"
+			className="pt-24 md:pt-32 lg:pt-40 pb-32 max-sm:pb-20 lg:pb-48 px-4 md:px-6 lg:px-8 relative overflow-hidden"
 		>
 			{/* Emerald glow effect */}
 			<div className="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -200,7 +202,9 @@ export function AgenticCodingSection() {
 							<h2 className="text-4xl md:text-5xl font-bold leading-tight font-heading">
 								<span className="text-foreground">Agentic Coding</span>
 								<br />
-								<span className="text-muted-foreground">Supported by Default</span>
+								<span className="text-muted-foreground">
+									Supported by Default
+								</span>
 							</h2>
 						</motion.div>
 
