@@ -1466,6 +1466,311 @@ console.log(greeting);
   );
 }
 
+// Background presets
+type BackgroundPreset = 'hero' | 'sunset' | 'ocean' | 'aurora' | 'minimal';
+
+const backgroundPresets: Record<BackgroundPreset, {
+  name: string;
+  orbs: Array<{
+    color: string;
+    size: number;
+    position: { top?: string; bottom?: string; left?: string; right?: string };
+    animation: { scale: number[]; x?: number[]; y?: number[] };
+    duration: number;
+  }>;
+}> = {
+  hero: {
+    name: 'Hero Default',
+    orbs: [
+      {
+        color: 'rgba(99, 102, 241, 0.15)',
+        size: 300,
+        position: { top: '-20%', right: '-10%' },
+        animation: { scale: [1, 1.2, 1], x: [0, 15, 0], y: [0, -10, 0] },
+        duration: 20,
+      },
+      {
+        color: 'rgba(236, 72, 153, 0.12)',
+        size: 220,
+        position: { bottom: '-10%', left: '-5%' },
+        animation: { scale: [1, 1.15, 1], x: [0, -10, 0], y: [0, 15, 0] },
+        duration: 15,
+      },
+      {
+        color: 'rgba(34, 211, 238, 0.08)',
+        size: 150,
+        position: { top: '40%', left: '30%' },
+        animation: { scale: [1, 1.3, 1] },
+        duration: 12,
+      },
+    ],
+  },
+  sunset: {
+    name: 'Sunset',
+    orbs: [
+      {
+        color: 'rgba(249, 115, 22, 0.18)',
+        size: 280,
+        position: { top: '-15%', right: '-5%' },
+        animation: { scale: [1, 1.15, 1], x: [0, 20, 0] },
+        duration: 18,
+      },
+      {
+        color: 'rgba(236, 72, 153, 0.15)',
+        size: 250,
+        position: { bottom: '-20%', left: '10%' },
+        animation: { scale: [1, 1.2, 1], y: [0, -15, 0] },
+        duration: 14,
+      },
+      {
+        color: 'rgba(234, 179, 8, 0.1)',
+        size: 180,
+        position: { top: '30%', left: '50%' },
+        animation: { scale: [1, 1.25, 1] },
+        duration: 16,
+      },
+    ],
+  },
+  ocean: {
+    name: 'Ocean',
+    orbs: [
+      {
+        color: 'rgba(59, 130, 246, 0.18)',
+        size: 300,
+        position: { top: '-25%', right: '0%' },
+        animation: { scale: [1, 1.2, 1], x: [0, 15, 0] },
+        duration: 20,
+      },
+      {
+        color: 'rgba(34, 211, 238, 0.15)',
+        size: 220,
+        position: { bottom: '-15%', left: '-10%' },
+        animation: { scale: [1, 1.15, 1], y: [0, 20, 0] },
+        duration: 16,
+      },
+      {
+        color: 'rgba(6, 182, 212, 0.1)',
+        size: 160,
+        position: { top: '50%', left: '40%' },
+        animation: { scale: [1, 1.2, 1] },
+        duration: 14,
+      },
+    ],
+  },
+  aurora: {
+    name: 'Aurora',
+    orbs: [
+      {
+        color: 'rgba(34, 197, 94, 0.15)',
+        size: 320,
+        position: { top: '-30%', left: '20%' },
+        animation: { scale: [1, 1.3, 1], x: [0, -20, 0] },
+        duration: 22,
+      },
+      {
+        color: 'rgba(168, 85, 247, 0.12)',
+        size: 250,
+        position: { top: '10%', right: '-10%' },
+        animation: { scale: [1, 1.2, 1], y: [0, 15, 0] },
+        duration: 18,
+      },
+      {
+        color: 'rgba(34, 211, 238, 0.08)',
+        size: 180,
+        position: { bottom: '-5%', left: '30%' },
+        animation: { scale: [1, 1.25, 1] },
+        duration: 15,
+      },
+    ],
+  },
+  minimal: {
+    name: 'Minimal',
+    orbs: [
+      {
+        color: 'rgba(99, 102, 241, 0.08)',
+        size: 400,
+        position: { top: '50%', left: '50%' },
+        animation: { scale: [1, 1.15, 1] },
+        duration: 20,
+      },
+    ],
+  },
+};
+
+// Backgrounds Preview
+function BackgroundsPreview() {
+  const [preset, setPreset] = useState<BackgroundPreset>('hero');
+  const currentPreset = backgroundPresets[preset];
+
+  return (
+    <motion.div
+      className="w-full space-y-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+    >
+      {/* Preset selector */}
+      <div className="flex flex-wrap gap-2">
+        {(Object.entries(backgroundPresets) as [BackgroundPreset, typeof backgroundPresets[BackgroundPreset]][]).map(([key, value]) => (
+          <Button
+            key={key}
+            type="button"
+            variant={preset === key ? 'primary' : 'ghost'}
+            size="sm"
+            onClick={() => setPreset(key)}
+          >
+            {value.name}
+          </Button>
+        ))}
+      </div>
+
+      {/* Preview container */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={preset}
+          className="relative h-64 rounded-xl overflow-hidden bg-background border border-border"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          {/* Gradient orbs */}
+          {currentPreset.orbs.map((orb, i) => (
+            <motion.div
+              key={`${preset}-orb-${i}`}
+              className="absolute rounded-full"
+              style={{
+                width: orb.size,
+                height: orb.size,
+                background: `radial-gradient(circle, ${orb.color} 0%, transparent 70%)`,
+                ...orb.position,
+                transform: orb.position.top === '50%' && orb.position.left === '50%' ? 'translate(-50%, -50%)' : undefined,
+              }}
+              animate={orb.animation}
+              transition={{ duration: orb.duration, repeat: Infinity, ease: "linear" }}
+            />
+          ))}
+
+          {/* Noise texture */}
+          <div
+            className="absolute inset-0 opacity-[0.03] pointer-events-none"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+            }}
+          />
+
+          {/* Grid */}
+          <div className="absolute inset-0 opacity-[0.03]">
+            <div className="absolute inset-0" style={{
+              backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
+              backgroundSize: '40px 40px',
+            }} />
+          </div>
+
+          {/* Center label */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="text-sm text-muted-foreground/60 font-medium">
+              {currentPreset.name}
+            </span>
+          </div>
+        </motion.div>
+      </AnimatePresence>
+    </motion.div>
+  );
+}
+
+// Hover Effects Preview
+function HoverEffectsPreview() {
+  return (
+    <motion.div
+      className="w-full"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+    >
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+        {/* Gradient Reveal */}
+        <motion.div
+          className="relative p-4 bg-muted/20 border border-border/60 rounded-xl overflow-hidden cursor-pointer"
+          whileHover="hover"
+        >
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-br from-violet-500/20 to-indigo-500/5 rounded-xl"
+            initial={{ opacity: 0 }}
+            variants={{ hover: { opacity: 1 } }}
+            transition={{ duration: 0.3 }}
+          />
+          <div className="relative z-10 text-center">
+            <span className="text-xs font-medium text-muted-foreground">Gradient Reveal</span>
+          </div>
+        </motion.div>
+
+        {/* Lift */}
+        <motion.div
+          className="p-4 bg-muted/20 border border-border/60 rounded-xl cursor-pointer text-center"
+          whileHover={{ y: -4, scale: 1.02 }}
+          transition={{ type: "spring", stiffness: 400, damping: 25 }}
+        >
+          <span className="text-xs font-medium text-muted-foreground">Lift</span>
+        </motion.div>
+
+        {/* Scale */}
+        <motion.div
+          className="p-4 bg-muted/20 border border-border/60 rounded-xl cursor-pointer text-center"
+          whileHover={{ scale: 1.05 }}
+          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+        >
+          <span className="text-xs font-medium text-muted-foreground">Scale</span>
+        </motion.div>
+
+        {/* Glow */}
+        <div className="relative group cursor-pointer">
+          <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl blur opacity-0 group-hover:opacity-30 transition duration-300" />
+          <div className="relative p-4 bg-muted/20 border border-border/60 rounded-xl text-center">
+            <span className="text-xs font-medium text-muted-foreground">Glow</span>
+          </div>
+        </div>
+
+        {/* Border Glow */}
+        <motion.div
+          className="relative p-4 rounded-xl cursor-pointer text-center overflow-hidden"
+          whileHover="hover"
+        >
+          <motion.div
+            className="absolute inset-0 rounded-xl"
+            style={{
+              background: 'linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899, #3b82f6)',
+              backgroundSize: '300% 100%',
+            }}
+            initial={{ opacity: 0 }}
+            variants={{ hover: { opacity: 1 } }}
+            animate={{ backgroundPosition: ['0% 0%', '100% 0%', '0% 0%'] }}
+            transition={{
+              opacity: { duration: 0.3 },
+              backgroundPosition: { duration: 3, repeat: Infinity, ease: "linear" }
+            }}
+          />
+          <div className="absolute inset-[1px] rounded-[11px] bg-muted/90" />
+          <span className="relative z-10 text-xs font-medium text-muted-foreground">Border Glow</span>
+        </motion.div>
+
+        {/* Slide Arrow */}
+        <motion.div
+          className="p-4 bg-muted/20 border border-border/60 rounded-xl cursor-pointer flex items-center justify-center gap-2"
+          whileHover="hover"
+        >
+          <span className="text-xs font-medium text-muted-foreground">Slide Arrow</span>
+          <motion.span
+            className="text-muted-foreground"
+            variants={{ hover: { x: 4 } }}
+            transition={{ type: "spring", stiffness: 400, damping: 25 }}
+          >
+            →
+          </motion.span>
+        </motion.div>
+      </div>
+    </motion.div>
+  );
+}
+
 // Component previews map
 export const componentPreviews: Record<string, React.ComponentType> = {
   'accordion': AccordionPreview,
@@ -1501,4 +1806,6 @@ export const componentPreviews: Record<string, React.ComponentType> = {
   'tooltip': TooltipPreview,
   'upload': UploadPreview,
   'window': WindowPreview,
+  'backgrounds': BackgroundsPreview,
+  'hover-effects': HoverEffectsPreview,
 };

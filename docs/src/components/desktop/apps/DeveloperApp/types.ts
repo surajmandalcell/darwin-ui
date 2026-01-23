@@ -6,14 +6,20 @@ export interface DeveloperAppProps {
   initialPage?: string;
 }
 
+export interface DocPage {
+  id: string;
+  title: string;
+  group?: string;
+}
+
 export interface DocSection {
   title: string;
   icon: React.ReactNode;
-  pages: { id: string; title: string }[];
+  pages: DocPage[];
 }
 
 export interface SidebarNavItemProps {
-  page: { id: string; title: string };
+  page: DocPage;
   isActive: boolean;
   onClick: () => void;
   index: number;
@@ -26,6 +32,7 @@ export interface DocsNavigationProps {
   toggleSection: (id: string) => void;
   navigateTo: (section: string, page: string) => void;
   onNavigate?: () => void;
+  searchQuery?: string;
 }
 
 export interface PageContentProps {

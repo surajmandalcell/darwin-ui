@@ -457,4 +457,116 @@ const handleUpload = async (files: File[]) => {
   <div className="p-4">Window content</div>
 </Window>`,
   },
+  'backgrounds': {
+    importCode: `import { motion } from 'framer-motion';`,
+    usageCode: `// Hero Default - Three animated gradient orbs
+<div className="relative overflow-hidden">
+  {/* Indigo orb - top right */}
+  <motion.div
+    className="absolute w-[800px] h-[800px] rounded-full"
+    style={{
+      background: 'radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%)',
+      top: '-20%',
+      right: '-10%',
+    }}
+    animate={{
+      scale: [1, 1.2, 1],
+      x: [0, 30, 0],
+      y: [0, -20, 0],
+    }}
+    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+  />
+
+  {/* Pink orb - bottom left */}
+  <motion.div
+    className="absolute w-[600px] h-[600px] rounded-full"
+    style={{
+      background: 'radial-gradient(circle, rgba(236, 72, 153, 0.12) 0%, transparent 70%)',
+      bottom: '-10%',
+      left: '-5%',
+    }}
+    animate={{
+      scale: [1, 1.15, 1],
+      x: [0, -20, 0],
+      y: [0, 30, 0],
+    }}
+    transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+  />
+
+  {/* Cyan orb - center */}
+  <motion.div
+    className="absolute w-[400px] h-[400px] rounded-full"
+    style={{
+      background: 'radial-gradient(circle, rgba(34, 211, 238, 0.08) 0%, transparent 70%)',
+      top: '40%',
+      left: '30%',
+    }}
+    animate={{ scale: [1, 1.3, 1] }}
+    transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+  />
+
+  {/* Noise texture overlay */}
+  <div
+    className="absolute inset-0 opacity-[0.03] pointer-events-none"
+    style={{
+      backgroundImage: \`url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")\`,
+    }}
+  />
+
+  {/* Grid overlay */}
+  <div className="absolute inset-0 opacity-[0.03]">
+    <div className="absolute inset-0" style={{
+      backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
+      backgroundSize: '100px 100px',
+    }} />
+  </div>
+
+  {/* Your content goes here */}
+  <div className="relative z-10">
+    {children}
+  </div>
+</div>`,
+  },
+  'hover-effects': {
+    importCode: `import { motion } from 'framer-motion';`,
+    usageCode: `// Gradient Reveal - gradient fades in on hover
+<motion.div
+  className="relative bg-muted/20 border border-border/60 rounded-2xl p-8 overflow-hidden"
+  whileHover="hover"
+>
+  <motion.div
+    className="absolute inset-0 bg-gradient-to-br from-violet-500/20 to-indigo-500/5 rounded-2xl"
+    initial={{ opacity: 0 }}
+    variants={{ hover: { opacity: 1 } }}
+    transition={{ duration: 0.3 }}
+  />
+  <div className="relative z-10">Card content</div>
+</motion.div>
+
+// Lift Effect - card lifts on hover
+<motion.div
+  className="bg-card border border-border rounded-lg p-4"
+  whileHover={{ y: -4, scale: 1.02 }}
+  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+>
+  Card content
+</motion.div>
+
+// Scale Effect
+<motion.div
+  className="bg-card border border-border rounded-lg p-4"
+  whileHover={{ scale: 1.05 }}
+  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+>
+  Card content
+</motion.div>
+
+// Glow Effect
+<div className="relative group">
+  <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg blur opacity-0 group-hover:opacity-25 transition duration-300" />
+  <div className="relative bg-card border border-border rounded-lg p-4">
+    Card content
+  </div>
+</div>`,
+  },
 };

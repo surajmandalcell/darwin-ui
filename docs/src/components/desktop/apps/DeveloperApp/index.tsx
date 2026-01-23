@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { BookOpen, Menu, X, ExternalLink, Copy, Check } from 'lucide-react';
+import { BookOpen, Menu, X, ExternalLink, Copy, Check, Search } from 'lucide-react';
 
 import type { DeveloperAppProps } from './types';
 import { docSections } from './doc-sections';
@@ -35,7 +35,31 @@ export function DeveloperApp({ windowState: _windowState, initialSection, initia
   const [expandedSections, setExpandedSections] = useState<string[]>(['getting-started', 'components', 'theming', validSection]);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const contentRef = useRef<HTMLDivElement>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  const mobileSearchInputRef = useRef<HTMLInputElement>(null);
+
+  // Keyboard shortcut: Ctrl+K (Windows) / Cmd+K (Mac) to focus search
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        const inputToFocus = showMobileMenu ? mobileSearchInputRef.current : searchInputRef.current;
+        inputToFocus?.focus();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [showMobileMenu]);
+
+  // Clear search on Escape
+  const handleSearchKeyDown = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Escape') {
+      setSearchQuery('');
+      (e.target as HTMLInputElement).blur();
+    }
+  }, []);
 
   // Sync URL params to state on navigation/reload - only when URL has specific page
   useEffect(() => {
@@ -136,6 +160,30 @@ export function DeveloperApp({ windowState: _windowState, initialSection, initia
                   <X className="w-5 h-5" />
                 </button>
               </div>
+              {/* Mobile Search */}
+              <div className="p-3 border-b border-border">
+                <div className="relative">
+                  <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground pointer-events-none" />
+                  <input
+                    ref={mobileSearchInputRef}
+                    type="text"
+                    placeholder="Search..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onKeyDown={handleSearchKeyDown}
+                    className="w-full h-8 pl-8 pr-8 text-sm bg-muted/50 border border-border rounded-md placeholder:text-muted-foreground/60 text-foreground focus:outline-none focus:ring-1 focus:ring-blue-500/50 focus:border-blue-500/50 transition-colors"
+                  />
+                  {searchQuery && (
+                    <button
+                      type="button"
+                      onClick={() => setSearchQuery('')}
+                      className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      <X className="w-3.5 h-3.5" />
+                    </button>
+                  )}
+                </div>
+              </div>
               <DocsNavigation
                 activeSection={activeSection}
                 activePage={activePage}
@@ -143,6 +191,7 @@ export function DeveloperApp({ windowState: _windowState, initialSection, initia
                 toggleSection={toggleSection}
                 navigateTo={navigateTo}
                 onNavigate={() => setShowMobileMenu(false)}
+                searchQuery={searchQuery}
               />
             </motion.div>
           </>
@@ -156,22 +205,37 @@ export function DeveloperApp({ windowState: _windowState, initialSection, initia
         animate={{ x: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
       >
-        {/* Sidebar Header */}
+        {/* Sidebar Header - Search Bar */}
         <motion.div
-          className="p-4 border-b border-border"
+          className="p-3 border-b border-border"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
         >
-          <div className="flex items-center gap-2">
-            <motion.div
-              className="w-6 h-6 rounded bg-muted border border-border/50 flex items-center justify-center"
-              whileHover={{ scale: 1.1, rotate: 5 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <BookOpen className="w-3.5 h-3.5 text-blue-400" />
-            </motion.div>
-            <span className="font-semibold text-foreground text-sm">Documentation</span>
+          <div className="relative">
+            <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground pointer-events-none" />
+            <input
+              ref={searchInputRef}
+              type="text"
+              placeholder="Search..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={handleSearchKeyDown}
+              className="w-full h-8 pl-8 pr-8 text-sm bg-muted/50 border border-border rounded-md placeholder:text-muted-foreground/60 text-foreground focus:outline-none focus:ring-1 focus:ring-blue-500/50 focus:border-blue-500/50 transition-colors"
+            />
+            {searchQuery ? (
+              <button
+                type="button"
+                onClick={() => setSearchQuery('')}
+                className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            ) : (
+              <span className="absolute right-2 top-1/2 -translate-y-1/2 text-[10px] text-muted-foreground/50 font-mono">
+                ⌘K
+              </span>
+            )}
           </div>
         </motion.div>
 
@@ -182,6 +246,7 @@ export function DeveloperApp({ windowState: _windowState, initialSection, initia
           expandedSections={expandedSections}
           toggleSection={toggleSection}
           navigateTo={navigateTo}
+          searchQuery={searchQuery}
         />
 
         {/* Sidebar Footer */}

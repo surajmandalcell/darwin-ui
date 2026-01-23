@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
 import { containerVariants, sidebarItemVariants } from './animations';
@@ -52,11 +53,49 @@ export function DocsNavigation({
   expandedSections,
   toggleSection,
   navigateTo,
-  onNavigate
+  onNavigate,
+  searchQuery = ''
 }: DocsNavigationProps) {
+  // Filter sections and pages based on search query
+  const filteredSections = useMemo(() => {
+    if (!searchQuery.trim()) return docSections;
+
+    const query = searchQuery.toLowerCase().trim();
+    const filtered: typeof docSections = {};
+
+    for (const [sectionId, section] of Object.entries(docSections)) {
+      // Check if section title matches
+      const sectionMatches = section.title.toLowerCase().includes(query);
+
+      // Filter pages that match
+      const matchingPages = section.pages.filter(page =>
+        page.title.toLowerCase().includes(query)
+      );
+
+      // Include section if it matches or has matching pages
+      if (sectionMatches || matchingPages.length > 0) {
+        filtered[sectionId] = {
+          ...section,
+          pages: sectionMatches ? section.pages : matchingPages
+        };
+      }
+    }
+
+    return filtered;
+  }, [searchQuery]);
+
+  // Show "no results" message when filtering yields nothing
+  const hasResults = Object.keys(filteredSections).length > 0;
+
   return (
     <nav className="flex-1 overflow-y-auto p-3 space-y-1">
-      {Object.entries(docSections).map(([sectionId, section], sectionIndex) => (
+      {!hasResults && searchQuery.trim() && (
+        <div className="px-2 py-4 text-center">
+          <p className="text-sm text-muted-foreground">No results found</p>
+          <p className="text-xs text-muted-foreground/60 mt-1">Try a different search term</p>
+        </div>
+      )}
+      {Object.entries(filteredSections).map(([sectionId, section], sectionIndex) => (
         <motion.div
           key={sectionId}
           initial={{ opacity: 0, x: -20 }}
@@ -126,18 +165,36 @@ export function DocsNavigation({
                   initial="hidden"
                   animate="show"
                 >
-                  {section.pages.map((page, pageIndex) => (
-                    <SidebarNavItem
-                      key={page.id}
-                      page={page}
-                      isActive={activeSection === sectionId && activePage === page.id}
-                      onClick={() => {
-                        navigateTo(sectionId, page.id);
-                        onNavigate?.();
-                      }}
-                      index={pageIndex}
-                    />
-                  ))}
+                  {section.pages.map((page, pageIndex) => {
+                    const prevPage = pageIndex > 0 ? section.pages[pageIndex - 1] : null;
+                    const showGroupDivider = page.group && page.group !== prevPage?.group;
+
+                    return (
+                      <div key={page.id}>
+                        {showGroupDivider && (
+                          <motion.div
+                            className="pt-2 pb-1 px-2 first:pt-0"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: pageIndex * 0.02 }}
+                          >
+                            <span className="text-[10px] uppercase tracking-wider text-muted-foreground/60 font-medium">
+                              {page.group}
+                            </span>
+                          </motion.div>
+                        )}
+                        <SidebarNavItem
+                          page={page}
+                          isActive={activeSection === sectionId && activePage === page.id}
+                          onClick={() => {
+                            navigateTo(sectionId, page.id);
+                            onNavigate?.();
+                          }}
+                          index={pageIndex}
+                        />
+                      </div>
+                    );
+                  })}
                 </motion.div>
               </motion.div>
             )}
