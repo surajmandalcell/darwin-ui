@@ -34,6 +34,8 @@ import {
   MoreHorizontal,
   Info,
   X,
+  Plus,
+  Settings,
 } from 'lucide-react';
 
 // Category definitions
@@ -207,9 +209,14 @@ const COMPONENTS: ComponentDef[] = [
     category: 'form-controls',
     size: 'sm',
     preview: (
-      <div className="flex gap-1.5 flex-wrap justify-center">
+      <div className="flex gap-1.5 flex-wrap justify-center items-center">
         <Button size="sm">Primary</Button>
-        <Button size="sm" variant="secondary">Alt</Button>
+        <Button size="icon" variant="secondary" className="h-8 w-8">
+          <Plus className="h-4 w-4" />
+        </Button>
+        <Button size="icon" variant="ghost" className="h-8 w-8">
+          <Settings className="h-4 w-4" />
+        </Button>
       </div>
     ),
   },

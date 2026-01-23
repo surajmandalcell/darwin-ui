@@ -93,6 +93,8 @@ import {
 
 interface DeveloperAppProps {
   windowState: WindowState;
+  initialSection?: string;
+  initialPage?: string;
 }
 
 // Animation variants for staggered children
@@ -3650,10 +3652,27 @@ function generatePageContext(section: string, page: string): string {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export function DeveloperApp({ windowState: _windowState }: DeveloperAppProps) {
-  const [activeSection, setActiveSection] = useState('getting-started');
-  const [activePage, setActivePage] = useState('introduction');
-  const [expandedSections, setExpandedSections] = useState<string[]>(['getting-started', 'components', 'theming']);
+export function DeveloperApp({ windowState: _windowState, initialSection, initialPage }: DeveloperAppProps) {
+  // Validate and use initial section/page from URL if provided
+  const getValidSection = () => {
+    if (initialSection && initialSection in docSections) {
+      return initialSection;
+    }
+    return 'getting-started';
+  };
+
+  const getValidPage = (section: string) => {
+    const sectionData = docSections[section as keyof typeof docSections];
+    if (initialPage && sectionData?.pages.some(p => p.id === initialPage)) {
+      return initialPage;
+    }
+    return sectionData?.pages[0]?.id || 'introduction';
+  };
+
+  const validSection = getValidSection();
+  const [activeSection, setActiveSection] = useState(validSection);
+  const [activePage, setActivePage] = useState(getValidPage(validSection));
+  const [expandedSections, setExpandedSections] = useState<string[]>(['getting-started', 'components', 'theming', validSection]);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [copied, setCopied] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);

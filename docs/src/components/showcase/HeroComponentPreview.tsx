@@ -1,93 +1,19 @@
 "use client";
 
-import { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Button, Badge, Switch, Slider, Progress } from '@pikoloo/darwin-ui';
+import { Plus, Settings } from 'lucide-react';
 import { DarwinLogo } from '../icons/DarwinLogo';
 import { FloatingElement } from './FloatingElement';
 
-interface ComponentShowcase {
-  id: string;
-  label: string;
-  render: () => React.ReactNode;
-}
-
-const componentShowcases: ComponentShowcase[] = [
-  {
-    id: 'buttons',
-    label: 'Buttons',
-    render: () => (
-      <div className="flex flex-wrap gap-2">
-        <Button variant="default" size="sm">Primary</Button>
-        <Button variant="secondary" size="sm">Secondary</Button>
-        <Button variant="ghost" size="sm">Ghost</Button>
-        <Button variant="destructive" size="sm">Delete</Button>
-      </div>
-    ),
-  },
-  {
-    id: 'inputs',
-    label: 'Controls',
-    render: () => (
-      <div className="space-y-4">
-        <div className="flex items-center gap-4">
-          <span className="text-xs text-muted-foreground">Dark Mode</span>
-          <Switch defaultChecked />
-        </div>
-        <div className="space-y-2">
-          <span className="text-xs text-muted-foreground">Volume</span>
-          <Slider defaultValue={65} max={100} step={1} className="w-full" />
-        </div>
-        <div className="space-y-2">
-          <span className="text-xs text-muted-foreground">Progress</span>
-          <Progress value={72} className="h-2" />
-        </div>
-      </div>
-    ),
-  },
-  {
-    id: 'badges',
-    label: 'Badges',
-    render: () => (
-      <div className="flex flex-wrap gap-2">
-        <Badge variant="default">Default</Badge>
-        <Badge variant="secondary">Secondary</Badge>
-        <Badge variant="outline">Outline</Badge>
-        <Badge variant="destructive">Destructive</Badge>
-      </div>
-    ),
-  },
-];
-
 export function HeroComponentPreview() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-
-  const handleTabClick = useCallback((index: number) => {
-    setActiveIndex(index);
-    setIsPaused(true);
-    // Resume auto-rotation after 8 seconds
-    setTimeout(() => setIsPaused(false), 8000);
-  }, []);
-
-  // Auto-rotate every 4 seconds
-  useEffect(() => {
-    if (isPaused) return;
-
-    const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % componentShowcases.length);
-    }, 4000);
-
-    return () => clearInterval(interval);
-  }, [isPaused]);
-
   return (
     <div className="relative">
       {/* Main card */}
       <FloatingElement pattern="figure8" depth={2} duration={8}>
-        <div className="relative bg-muted/20 backdrop-blur-xl border border-border/80 rounded-2xl p-6 shadow-2xl">
+        <div className="relative bg-card/80 backdrop-blur-xl border border-border rounded-2xl p-5 shadow-2xl">
           {/* Header */}
-          <div className="flex items-center gap-3 mb-6">
+          <div className="flex items-center gap-3 mb-4">
             <DarwinLogo showBackground className="w-10 h-10" />
             <div>
               <div className="text-sm font-medium text-foreground">Darwin UI</div>
@@ -95,38 +21,67 @@ export function HeroComponentPreview() {
             </div>
           </div>
 
-          {/* Tab navigation */}
-          <div className="p-1 bg-muted/20 rounded-lg mb-4">
-            <div className="flex gap-1">
-              {componentShowcases.map((showcase, index) => (
-                <button
-                  key={showcase.id}
-                  onClick={() => handleTabClick(index)}
-                  className={`flex-1 px-3 py-1.5 text-xs font-medium rounded-md transition-all duration-200 ${
-                    activeIndex === index
-                      ? 'bg-muted text-foreground'
-                      : 'text-muted-foreground hover:text-foreground/60'
-                  }`}
-                >
-                  {showcase.label}
-                </button>
-              ))}
-            </div>
-          </div>
+          {/* Bento Grid */}
+          <div className="grid grid-cols-2 gap-3">
+            {/* Buttons cell */}
+            <motion.div
+              className="bg-muted/50 border border-border/60 rounded-xl p-3"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+            >
+              <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2">Buttons</div>
+              <div className="flex flex-wrap gap-1.5">
+                <Button variant="default" size="sm" className="text-xs h-7 px-2">Primary</Button>
+                <Button variant="ghost" size="icon" className="h-7 w-7">
+                  <Plus className="h-3.5 w-3.5" />
+                </Button>
+                <Button variant="secondary" size="icon" className="h-7 w-7">
+                  <Settings className="h-3.5 w-3.5" />
+                </Button>
+              </div>
+            </motion.div>
 
-          {/* Component showcase area */}
-          <div className="min-h-[120px] relative overflow-hidden">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={componentShowcases[activeIndex].id}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-              >
-                {componentShowcases[activeIndex].render()}
-              </motion.div>
-            </AnimatePresence>
+            {/* Badges cell */}
+            <motion.div
+              className="bg-muted/50 border border-border/60 rounded-xl p-3"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2">Badges</div>
+              <div className="flex flex-wrap gap-1.5">
+                <Badge variant="default" className="text-[10px]">Default</Badge>
+                <Badge variant="secondary" className="text-[10px]">Secondary</Badge>
+              </div>
+            </motion.div>
+
+            {/* Controls cell - spans full width */}
+            <motion.div
+              className="col-span-2 bg-muted/50 border border-border/60 rounded-xl p-3"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+            >
+              <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2">Controls</div>
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-muted-foreground">Dark Mode</span>
+                  <Switch defaultChecked />
+                </div>
+                <div className="space-y-1.5">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-muted-foreground">Volume</span>
+                    <span className="text-xs text-foreground/70">65%</span>
+                  </div>
+                  <Slider defaultValue={65} max={100} step={1} className="w-full" />
+                </div>
+                <div className="space-y-1.5">
+                  <span className="text-xs text-muted-foreground">Progress</span>
+                  <Progress value={72} className="h-1.5" />
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </FloatingElement>

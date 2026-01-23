@@ -49,16 +49,20 @@ export function DarwinLogo({ className, showBackground = false }: DarwinLogoProp
       "rounded-[22%] overflow-hidden",
       className
     )}>
-      {/* iOS-style gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-neutral-800 to-neutral-900" />
-      {/* Shine overlay */}
+      {/* Subtle light gray background */}
       <div
-        className="absolute inset-0 opacity-30"
+        className="absolute inset-0"
+        style={{ background: 'linear-gradient(to bottom right, #f5f5f5, #e8e8e8)' }}
+      />
+      {/* Subtle shine overlay */}
+      <div
+        className="absolute inset-0 opacity-20"
         style={{
-          background: 'linear-gradient(135deg, rgba(255,255,255,0.4) 0%, transparent 50%, transparent 100%)'
+          background: 'linear-gradient(135deg, rgba(255,255,255,0.8) 0%, transparent 50%, transparent 100%)'
         }}
       />
-      <div className="relative text-white p-2">
+      {/* Icon with dark color for contrast against light bg */}
+      <div className="relative p-2" style={{ color: '#374151' }}>
         {logo}
       </div>
     </div>

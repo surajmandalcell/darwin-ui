@@ -6,6 +6,7 @@ import { Desktop } from "./components/desktop/Desktop";
 import DocsPage from "./pages/DocsPage";
 import ChangelogPage from "./pages/ChangelogPage";
 import ShowcasePage from "./pages/ShowcasePage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
 
               {/* Standalone Documentation */}
               <Route path="/docs" element={<DocsPage />} />
+              <Route path="/docs/:section/:page" element={<DocsPage />} />
 
               {/* Standalone Changelog */}
               <Route path="/changelog" element={<ChangelogPage />} />
@@ -32,6 +34,9 @@ function App() {
                   </DesktopProvider>
                 }
               />
+
+              {/* 404 Not Found */}
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </ToastProvider>
         </AlertProvider>
