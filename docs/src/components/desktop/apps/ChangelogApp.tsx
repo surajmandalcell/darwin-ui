@@ -132,9 +132,9 @@ function FlatVersionCard({ entry }: { entry: ChangelogEntry }) {
                       <span className="text-foreground/30 mt-1">•</span>
                       <span className="text-foreground/80">
                         {change.component && (
-                          <code className="text-blue-400 bg-blue-500/10 px-1.5 py-0.5 rounded text-xs mr-1.5">
+                          <Badge variant="secondary" className="mr-1.5 text-[11px] py-0">
                             {change.component}
-                          </code>
+                          </Badge>
                         )}
                         {change.description}
                         {change.breaking && (
@@ -235,9 +235,9 @@ function VersionCard({ entry, isExpanded, onToggle }: {
                             <span className="text-foreground/30 mt-1">•</span>
                             <span className="text-foreground/80">
                               {change.component && (
-                                <code className="text-blue-400 bg-blue-500/10 px-1.5 py-0.5 rounded text-xs mr-1.5">
+                                <Badge variant="secondary" className="mr-1.5 text-[11px] py-0">
                                   {change.component}
-                                </code>
+                                </Badge>
                               )}
                               {change.description}
                               {change.breaking && (
