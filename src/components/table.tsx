@@ -45,7 +45,7 @@ export function TableHeaderCell({
 	return (
 		<th
 			scope="col"
-			className={`px-4 py-2 text-left align-middle font-medium text-zinc-400 dark:text-zinc-500 ${className}`}
+			className={`px-4 py-2 text-left align-middle font-medium text-zinc-600 dark:text-zinc-400 ${className}`}
 			{...props}
 		>
 			{children}

@@ -1127,6 +1127,7 @@ function AnimatedPreviewWrapper({ children, componentKey }: { children: React.Re
     <AnimatePresence mode="wait">
       <motion.div
         key={componentKey}
+        className="component-preview"
         initial={{ opacity: 0, scale: 0.95, filter: "blur(4px)" }}
         animate={{
           opacity: 1,

@@ -42,3 +42,5 @@ coverage/
 rework.md
 .playwright-mcp/
 tmp/
+docs/test-results/
+docs/playwright-report/

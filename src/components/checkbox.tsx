@@ -47,7 +47,7 @@ export function Checkbox({
 					className={`flex h-4 w-4 items-center justify-center rounded-sm border transition-all duration-150 text-white peer-focus-visible:ring-2 peer-focus-visible:ring-blue-500/50 peer-focus-visible:ring-inset ${
 						isActive
 							? "bg-blue-500 border-blue-500"
-							: "bg-zinc-800 border-zinc-600"
+							: "bg-white dark:bg-zinc-800 border-black/20 dark:border-zinc-600"
 					} ${boxClassName}`}
 				>
 					{indeterminate ? (

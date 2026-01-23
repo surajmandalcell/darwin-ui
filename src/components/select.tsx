@@ -197,7 +197,7 @@ function SingleSelectInternal({
 													"pointer-events-none opacity-50 cursor-not-allowed",
 												opt.value === selected.value
 													? "bg-black/10 dark:bg-white/10 text-zinc-900 dark:text-zinc-100"
-													: "text-zinc-400 dark:text-zinc-500 hover:bg-black/5 dark:hover:bg-white/5",
+													: "text-zinc-700 dark:text-zinc-300 hover:bg-black/5 dark:hover:bg-white/5",
 											)}
 										>
 											{opt.label}
@@ -330,7 +330,7 @@ function MultiSelectInternal({
 														"pointer-events-none opacity-50 cursor-not-allowed",
 													isSelected
 														? "text-zinc-900 dark:text-zinc-100"
-														: "text-zinc-400 dark:text-zinc-500",
+														: "text-zinc-700 dark:text-zinc-300",
 												)}
 											>
 												<span className="absolute left-2 flex h-4 w-4 items-center justify-center">
@@ -402,7 +402,7 @@ function MultiSelectInternal({
 								animate={{ scale: 1, opacity: 1 }}
 								exit={{ scale: 0.8, opacity: 0 }}
 								transition={{ duration: getDuration("normal") }}
-								className="inline-flex items-center gap-1.5 px-2 py-1 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-md text-zinc-400 dark:text-zinc-500 text-xs backdrop-blur-sm"
+								className="inline-flex items-center gap-1.5 px-2 py-1 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-md text-zinc-700 dark:text-zinc-300 text-xs backdrop-blur-sm"
 							>
 								{options.find((o) => o.value === v)?.label || v}
 								<button

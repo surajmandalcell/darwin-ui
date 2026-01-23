@@ -56,7 +56,7 @@ function Accordion({
 
 	return (
 		<AccordionContext.Provider value={{ expandedItems, toggleItem, type }}>
-			<div className={cn("w-full divide-y divide-white/10 dark:divide-black/10", className)}>
+			<div className={cn("w-full divide-y divide-black/10 dark:divide-white/10", className)}>
 				{children}
 			</div>
 		</AccordionContext.Provider>
@@ -133,7 +133,7 @@ function AccordionContent({ children, className, itemValue }: AccordionContentPr
 					transition={{ duration: getDuration("slow"), ease: "easeInOut" }}
 					className="overflow-hidden"
 				>
-					<div className={cn("pb-4 text-sm text-zinc-400 dark:text-zinc-500", className)}>
+					<div className={cn("pb-4 text-sm text-zinc-600 dark:text-zinc-400", className)}>
 						{children}
 					</div>
 				</motion.div>
