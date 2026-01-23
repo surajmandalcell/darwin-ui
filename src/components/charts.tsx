@@ -18,8 +18,19 @@ import {
 	YAxis,
 } from "recharts";
 
-// Darwin UI color palette
-const COLORS = {
+// Darwin UI color palette - uses CSS variables for theming
+// These are resolved at render time using getComputedStyle
+const getCSSColor = (varName: string, fallback: string): string => {
+	if (typeof window === "undefined") return fallback;
+	const value = getComputedStyle(document.documentElement)
+		.getPropertyValue(varName)
+		.trim();
+	if (!value) return fallback;
+	return `hsl(${value})`;
+};
+
+// Fallback colors for SSR
+const FALLBACK_COLORS = {
 	blue: "#60a5fa",
 	green: "#34d399",
 	yellow: "#fbbf24",
@@ -30,16 +41,34 @@ const COLORS = {
 	teal: "#2dd4bf",
 };
 
-const DEFAULT_COLORS = [
-	COLORS.blue,
-	COLORS.green,
-	COLORS.yellow,
-	COLORS.red,
-	COLORS.purple,
-	COLORS.pink,
-	COLORS.orange,
-	COLORS.teal,
-];
+// Chart color getters
+const getChartColors = () => ({
+	blue: getCSSColor("--chart-blue", FALLBACK_COLORS.blue),
+	green: getCSSColor("--chart-green", FALLBACK_COLORS.green),
+	yellow: getCSSColor("--chart-yellow", FALLBACK_COLORS.yellow),
+	red: getCSSColor("--chart-red", FALLBACK_COLORS.red),
+	purple: getCSSColor("--chart-purple", FALLBACK_COLORS.purple),
+	pink: getCSSColor("--chart-pink", FALLBACK_COLORS.pink),
+	orange: getCSSColor("--chart-orange", FALLBACK_COLORS.orange),
+	teal: getCSSColor("--chart-teal", FALLBACK_COLORS.teal),
+});
+
+const getDefaultColors = () => {
+	const colors = getChartColors();
+	return [
+		colors.blue,
+		colors.green,
+		colors.yellow,
+		colors.red,
+		colors.purple,
+		colors.pink,
+		colors.orange,
+		colors.teal,
+	];
+};
+
+// For SSR, provide static fallbacks
+const DEFAULT_COLORS = Object.values(FALLBACK_COLORS);
 
 // Custom Tooltip Component
 interface TooltipPayload {

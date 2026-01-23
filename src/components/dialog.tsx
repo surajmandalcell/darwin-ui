@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import FocusLock from "react-focus-lock";
 import { X } from "lucide-react";
 import { cn } from "../lib/utils";
+import { getDuration } from "../lib/animation-config";
 import { useOverlay } from "../contexts/overlay-context";
 import { useEscapeKey } from "../hooks/use-escape-key";
 
@@ -108,7 +109,7 @@ function DialogContent({ children, className, size = "md" }: DialogContentProps)
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
 						exit={{ opacity: 0 }}
-						transition={{ duration: 0.2 }}
+						transition={{ duration: getDuration("fast") }}
 						className="fixed inset-0 bg-[hsl(var(--overlay-backdrop))] backdrop-blur-sm p-4 overflow-y-auto flex items-center justify-center"
 						style={{ zIndex: 9999 }}
 						onClick={(e) => {
@@ -122,7 +123,7 @@ function DialogContent({ children, className, size = "md" }: DialogContentProps)
 							animate={{ opacity: 1, scale: 1, y: 0 }}
 							exit={{ opacity: 0, scale: 0.95, y: 10 }}
 							transition={{
-								duration: 0.2,
+								duration: getDuration("slow"),
 								ease: [0.16, 1, 0.3, 1],
 							}}
 							role="dialog"

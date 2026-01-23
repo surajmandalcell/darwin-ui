@@ -3,6 +3,7 @@
 import { useId } from "react";
 import type React from "react";
 import { motion } from "framer-motion";
+import { getSpring } from "../lib/animation-config";
 
 interface SwitchProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
 	label?: string;
@@ -48,11 +49,7 @@ export function Switch({
 						animate={{
 							x: checked ? 16 : 0,
 						}}
-						transition={{
-							type: "spring",
-							stiffness: 300,
-							damping: 15,
-						}}
+						transition={getSpring("snappy")}
 						className="h-4 w-4 rounded-full bg-[hsl(var(--control-knob))] shadow-sm"
 					/>
 				</span>

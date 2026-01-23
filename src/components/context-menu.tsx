@@ -1,45 +1,15 @@
 "use client";
 
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { twMerge } from "tailwind-merge";
+import * as React from "react";
+import { createPortal } from "react-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { Check } from "lucide-react";
+import { cn } from "../lib/utils";
+import { getDuration } from "../lib/animation-config";
 
-// Framework-agnostic pathname hook
-const usePathname = () => {
-	const [pathname, setPathname] = useState(
-		typeof window !== "undefined" ? window.location.pathname : "/"
-	);
-
-	useEffect(() => {
-		const handleLocationChange = () => {
-			setPathname(window.location.pathname);
-		};
-
-		// Listen to popstate for browser back/forward
-		window.addEventListener("popstate", handleLocationChange);
-
-		// For SPAs using pushState/replaceState
-		const originalPushState = window.history.pushState;
-		const originalReplaceState = window.history.replaceState;
-
-		window.history.pushState = function(...args) {
-			originalPushState.apply(this, args);
-			handleLocationChange();
-		};
-
-		window.history.replaceState = function(...args) {
-			originalReplaceState.apply(this, args);
-			handleLocationChange();
-		};
-
-		return () => {
-			window.removeEventListener("popstate", handleLocationChange);
-			window.history.pushState = originalPushState;
-			window.history.replaceState = originalReplaceState;
-		};
-	}, []);
-
-	return pathname;
-};
+// ============================================================================
+// Types
+// ============================================================================
 
 export interface ContextMenuItem {
 	label: string;
@@ -49,349 +19,420 @@ export interface ContextMenuItem {
 	separator?: boolean;
 }
 
-interface ContextMenuProps {
-	children: React.ReactNode;
-	items: ContextMenuItem[];
-	className?: string;
-	trigger?: "contextmenu" | "click";
+interface ContextMenuContextValue {
+	open: boolean;
+	onOpenChange: (open: boolean) => void;
+	position: { x: number; y: number };
+	setPosition: (pos: { x: number; y: number }) => void;
 }
 
-const MENU_CONFIG = {
-	WIDTH: 200,
-	ITEM_HEIGHT: 32,
-	PADDING: 16,
-	OFFSET: 10,
-};
+const ContextMenuContext = React.createContext<
+	ContextMenuContextValue | undefined
+>(undefined);
 
-const MENU_STYLES = {
-	base: "text-[hsl(var(--text-primary))] bg-[hsl(var(--overlay-bg))] backdrop-blur-md shadow-md border border-[hsl(var(--border-default))]",
-	contextMenu: "fixed z-50 min-w-32 text-sm p-1 w-fit rounded-[6px]",
-	clickMenu:
-		"absolute left-0 top-full z-50 min-w-32 w-56 text-sm p-1 rounded-[6px] transition-all duration-150 ease-out",
-	menuItem:
-		"w-full text-left px-1.5 py-1 transition-all duration-150 ease-out flex items-center justify-between rounded-[4px] truncate cursor-pointer whitespace-nowrap text-[hsl(var(--text-primary))]",
-	menuItemDisabled: "text-[hsl(var(--text-muted))] cursor-not-allowed",
-	menuItemEnabled: "hover:bg-[hsl(var(--accent))] focus:outline-hidden focus:ring-0",
-};
+function useContextMenuContext() {
+	const context = React.useContext(ContextMenuContext);
+	if (!context) {
+		throw new Error(
+			"ContextMenu components must be used within a ContextMenu provider",
+		);
+	}
+	return context;
+}
 
-const useMenuPosition = () => {
-	return useCallback((clientX: number, clientY: number, itemCount: number) => {
-		const menuHeight =
-			itemCount * MENU_CONFIG.ITEM_HEIGHT + MENU_CONFIG.PADDING;
-		let x = clientX;
-		let y = clientY;
+// ============================================================================
+// Context Menu Root
+// ============================================================================
 
-		if (x + MENU_CONFIG.WIDTH > window.innerWidth) {
-			x = window.innerWidth - MENU_CONFIG.WIDTH - MENU_CONFIG.OFFSET;
-		}
-		if (y + menuHeight > window.innerHeight) {
-			y = window.innerHeight - menuHeight - MENU_CONFIG.OFFSET;
-		}
+interface ContextMenuRootProps {
+	children: React.ReactNode;
+	open?: boolean;
+	onOpenChange?: (open: boolean) => void;
+}
 
-		return { x, y };
-	}, []);
-};
-
-const useClickOutside = (isOpen: boolean, onClose: () => void) => {
-	const ref = useRef<HTMLDivElement>(null);
-
-	useEffect(() => {
-		if (!isOpen) return;
-
-		const handleMouseDown = (event: MouseEvent) => {
-			if (ref.current && !ref.current.contains(event.target as Node)) {
-				onClose();
-			}
-		};
-
-		const handleKeyDown = (event: KeyboardEvent) => {
-			if (event.key === "Escape") onClose();
-		};
-
-		document.addEventListener("mousedown", handleMouseDown);
-		document.addEventListener("scroll", onClose);
-		document.addEventListener("keydown", handleKeyDown);
-
-		return () => {
-			document.removeEventListener("mousedown", handleMouseDown);
-			document.removeEventListener("scroll", onClose);
-			document.removeEventListener("keydown", handleKeyDown);
-		};
-	}, [isOpen, onClose]);
-
-	return ref;
-};
-
-const MenuItems: React.FC<{
-	items: ContextMenuItem[];
-	onItemClick: (item: ContextMenuItem) => void;
-}> = ({ items, onItemClick }) => (
-	<div className="py-1">
-		{items.map((item, index) => (
-			<React.Fragment key={index}>
-				{item.separator && <div className="my-1 h-px bg-[hsl(var(--border-default))]" />}
-				<button
-					onClick={() => onItemClick(item)}
-					disabled={item.disabled}
-					className={twMerge(
-						MENU_STYLES.menuItem,
-						item.disabled
-							? MENU_STYLES.menuItemDisabled
-							: MENU_STYLES.menuItemEnabled,
-					)}
-				>
-					<span>{item.label}</span>
-					{item.shortcut && (
-						<span className="ml-auto text-xs tracking-widest text-[hsl(var(--text-secondary))]">
-							{item.shortcut}
-						</span>
-					)}
-				</button>
-			</React.Fragment>
-		))}
-	</div>
-);
-
-export function ContextMenu({
+function ContextMenuRoot({
 	children,
-	items,
-	className = "",
-	trigger = "contextmenu",
-}: ContextMenuProps) {
-	const [isOpen, setIsOpen] = useState(false);
-	const [position, setPosition] = useState({ x: 0, y: 0 });
-	const containerRef = useRef<HTMLDivElement>(null);
-	const getMenuPosition = useMenuPosition();
-	const menuRef = useClickOutside(isOpen, () => setIsOpen(false));
+	open: controlledOpen,
+	onOpenChange,
+}: ContextMenuRootProps) {
+	const [internalOpen, setInternalOpen] = React.useState(false);
+	const [position, setPosition] = React.useState({ x: 0, y: 0 });
 
-	const handleContextMenu = useCallback(
-		(event: React.MouseEvent) => {
-			if (trigger !== "contextmenu") return;
-			event.preventDefault();
-			event.stopPropagation();
+	const open = controlledOpen !== undefined ? controlledOpen : internalOpen;
+	const handleOpenChange = onOpenChange || setInternalOpen;
 
-			const newPosition = getMenuPosition(
-				event.clientX,
-				event.clientY,
-				items.length,
+	// Handle click outside and escape
+	React.useEffect(() => {
+		if (!open) return;
+
+		const handleClickOutside = (event: MouseEvent) => {
+			const contentElement = document.querySelector(
+				"[data-context-menu-content]",
 			);
-			setPosition(newPosition);
-			setIsOpen(true);
-		},
-		[trigger, getMenuPosition, items.length],
-	);
+			if (contentElement && !contentElement.contains(event.target as Node)) {
+				handleOpenChange(false);
+			}
+		};
 
-	const handleClick = useCallback(
-		(event: React.MouseEvent) => {
-			if (trigger !== "click") return;
-			event.preventDefault();
-			event.stopPropagation();
-			setIsOpen((prev) => !prev);
-		},
-		[trigger],
-	);
+		const handleEscape = (event: KeyboardEvent) => {
+			if (event.key === "Escape") {
+				handleOpenChange(false);
+			}
+		};
 
-	const handleItemClick = useCallback((item: ContextMenuItem) => {
-		if (!item.disabled) {
-			item.onClick();
-			setIsOpen(false);
-		}
-	}, []);
+		const handleScroll = () => {
+			handleOpenChange(false);
+		};
 
-	const containerClasses = twMerge(
-		"flex flex-row items-center gap-[8px] hover:cursor-pointer text-sm transition-colors duration-150 rounded text-foreground/90 hover:text-primary hover:bg-foreground/5",
-		className,
-		trigger === "click" ? "relative py-2 px-4" : "",
-	);
+		// Small delay to avoid immediately closing on the same click
+		const timeoutId = setTimeout(() => {
+			document.addEventListener("mousedown", handleClickOutside);
+		}, 0);
+
+		document.addEventListener("keydown", handleEscape);
+		document.addEventListener("scroll", handleScroll, true);
+
+		return () => {
+			clearTimeout(timeoutId);
+			document.removeEventListener("mousedown", handleClickOutside);
+			document.removeEventListener("keydown", handleEscape);
+			document.removeEventListener("scroll", handleScroll, true);
+		};
+	}, [open, handleOpenChange]);
 
 	return (
-		<>
-			<div
-				ref={containerRef}
-				onContextMenu={handleContextMenu}
-				onClick={handleClick}
-				className={containerClasses}
-			>
-				{children}
-			</div>
-
-			{isOpen && (
-				<>
-					<div
-						className="fixed inset-0 z-40"
-						style={{ backgroundColor: "transparent" }}
-					/>
-
-					<div
-						ref={menuRef}
-						className={twMerge(
-							MENU_STYLES.base,
-							trigger === "contextmenu"
-								? MENU_STYLES.contextMenu
-								: MENU_STYLES.clickMenu,
-							trigger === "click" &&
-								(isOpen
-									? "opacity-100 translate-y-1 pointer-events-auto"
-									: "opacity-0 -translate-y-1 pointer-events-none"),
-						)}
-						style={
-							trigger === "contextmenu"
-								? { left: position.x, top: position.y }
-								: undefined
-						}
-					>
-						<MenuItems items={items} onItemClick={handleItemClick} />
-					</div>
-				</>
-			)}
-		</>
+		<ContextMenuContext.Provider
+			value={{ open, onOpenChange: handleOpenChange, position, setPosition }}
+		>
+			{children}
+		</ContextMenuContext.Provider>
 	);
 }
 
-export function ContextMenuFlat({
-	children,
-	items,
-	className = "",
-	trigger = "click",
-}: {
+// ============================================================================
+// Context Menu Trigger
+// ============================================================================
+
+interface ContextMenuTriggerProps {
 	children: React.ReactNode;
-	items: ContextMenuItem[];
 	className?: string;
-	trigger?: "contextmenu" | "click";
-}) {
-	const pathname = usePathname();
-	const [open, setOpen] = useState(false);
-	const containerRef = useRef<HTMLDivElement>(null);
+	asChild?: boolean;
+}
 
-	const closeMenu = useCallback(() => setOpen(false), []);
+function ContextMenuTrigger({
+	children,
+	className,
+	asChild,
+}: ContextMenuTriggerProps) {
+	const { onOpenChange, setPosition } = useContextMenuContext();
 
-	useEffect(() => {
-		const handleMouseDown = (e: MouseEvent) => {
-			if (
-				containerRef.current &&
-				!containerRef.current.contains(e.target as Node)
-			) {
-				closeMenu();
-			}
-		};
+	const handleContextMenu = (event: React.MouseEvent) => {
+		event.preventDefault();
+		event.stopPropagation();
 
-		const handleKeyDown = (e: KeyboardEvent) => {
-			if (e.key === "Escape") closeMenu();
-		};
+		// Calculate position with viewport bounds checking
+		const x = Math.min(event.clientX, window.innerWidth - 200);
+		const y = Math.min(event.clientY, window.innerHeight - 200);
 
-		document.addEventListener("mousedown", handleMouseDown);
-		document.addEventListener("keydown", handleKeyDown);
+		setPosition({ x, y });
+		onOpenChange(true);
+	};
 
-		return () => {
-			document.removeEventListener("mousedown", handleMouseDown);
-			document.removeEventListener("keydown", handleKeyDown);
-		};
-	}, [closeMenu]);
-
-	const isActive = useCallback(
-		(href: string) => {
-			const base = href.split("#")[0] || "/";
-			return base === "/"
-				? pathname === "/"
-				: pathname === base || pathname.startsWith(base + "/");
-		},
-		[pathname],
-	);
-
-	const handleTrigger = useCallback(
-		(e: React.MouseEvent, triggerType: string) => {
-			if (trigger !== triggerType) return;
-			e.preventDefault();
-			e.stopPropagation();
-			setOpen((prev) => !prev);
-		},
-		[trigger],
-	);
-
-	const handleBlur = useCallback(
-		(e: React.FocusEvent) => {
-			const next = e.relatedTarget as Node | null;
-			if (!(next && containerRef.current?.contains(next))) {
-				closeMenu();
-			}
-		},
-		[closeMenu],
-	);
+	if (asChild && React.isValidElement(children)) {
+		return React.cloneElement(
+			children as React.ReactElement<{
+				onContextMenu?: (e: React.MouseEvent) => void;
+				className?: string;
+			}>,
+			{
+				onContextMenu: handleContextMenu,
+			},
+		);
+	}
 
 	return (
-		<div
-			ref={containerRef}
-			className={`relative inline-block ${className}`}
-			onContextMenu={(e) => handleTrigger(e, "contextmenu")}
-			onBlur={handleBlur}
-		>
-			<button
-				type="button"
-				aria-haspopup="menu"
-				aria-expanded={open}
-				className={twMerge(
-					"text-sm text-foreground/90 hover:text-primary hover:bg-foreground/5 transition-colors duration-150 inline-flex items-center gap-1 rounded focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-foreground/30",
-					trigger === "click" ? "px-4 py-2" : "",
-				)}
-				onClick={(e) => handleTrigger(e, "click")}
-			>
-				{children}
-			</button>
-
-			<div
-				role="menu"
-				className={twMerge(
-					"absolute left-0 top-full z-60 w-56 rounded-md bg-background/95 p-1 shadow-lg backdrop-blur transition-all duration-150 ease-out hover:cursor-pointer",
-					open
-						? "opacity-100 translate-y-1 pointer-events-auto"
-						: "opacity-0 -translate-y-1 pointer-events-none",
-				)}
-				style={{ boxShadow: "var(--shadow-md)" }}
-			>
-				<nav className="flex flex-col items-start">
-					{items.map((item, index) => {
-						const href = (item as unknown as { href?: string })?.href;
-						const active = href ? isActive(href) : false;
-						const disabled = item.disabled;
-
-						const handleItemClick = () => {
-							if (!disabled) {
-								item.onClick?.();
-								closeMenu();
-							}
-						};
-
-						const itemClasses = twMerge(
-							"w-full text-left rounded px-2 py-1.5 text-sm transition-colors duration-150 whitespace-nowrap flex items-center justify-between",
-							disabled
-								? "text-foreground/40 cursor-not-allowed"
-								: active
-									? "font-medium text-primary/70 bg-foreground/5"
-									: "text-foreground/90 hover:bg-foreground/5 hover:text-primary",
-						);
-
-						return (
-							<button
-								key={index}
-								type="button"
-								role="menuitem"
-								onClick={handleItemClick}
-								disabled={disabled}
-								className={itemClasses}
-							>
-								<span>{item.label}</span>
-								{item.shortcut && (
-									<span className="ml-auto text-xs tracking-widest text-foreground/60">
-										{item.shortcut}
-									</span>
-								)}
-							</button>
-						);
-					})}
-				</nav>
-			</div>
+		<div onContextMenu={handleContextMenu} className={className}>
+			{children}
 		</div>
 	);
 }
 
+// ============================================================================
+// Context Menu Content
+// ============================================================================
+
+interface ContextMenuContentProps {
+	children: React.ReactNode;
+	className?: string;
+}
+
+function ContextMenuContent({ children, className }: ContextMenuContentProps) {
+	const { open, position } = useContextMenuContext();
+	const [mounted, setMounted] = React.useState(false);
+
+	React.useEffect(() => {
+		setMounted(true);
+	}, []);
+
+	const content = (
+		<AnimatePresence>
+			{open && (
+				<motion.div
+					data-context-menu-content
+					initial={{ opacity: 0, scale: 0.95 }}
+					animate={{ opacity: 1, scale: 1 }}
+					exit={{ opacity: 0, scale: 0.95 }}
+					transition={{ duration: getDuration("normal"), ease: "easeOut" }}
+					role="menu"
+					aria-orientation="vertical"
+					className={cn(
+						"fixed min-w-[180px] overflow-hidden rounded-lg border border-[hsl(var(--border-default))] bg-[hsl(var(--overlay-bg))] backdrop-blur-md p-1 shadow-xl",
+						className,
+					)}
+					style={{
+						zIndex: 9999,
+						top: position.y,
+						left: position.x,
+						transformOrigin: "top left",
+					}}
+				>
+					{children}
+				</motion.div>
+			)}
+		</AnimatePresence>
+	);
+
+	if (!mounted) return null;
+	return createPortal(content, document.body);
+}
+
+// ============================================================================
+// Context Menu Item
+// ============================================================================
+
+interface ContextMenuItemProps {
+	children: React.ReactNode;
+	className?: string;
+	disabled?: boolean;
+	onSelect?: () => void;
+	destructive?: boolean;
+}
+
+function ContextMenuItem({
+	children,
+	className,
+	disabled,
+	onSelect,
+	destructive,
+}: ContextMenuItemProps) {
+	const { onOpenChange } = useContextMenuContext();
+
+	const handleClick = () => {
+		if (disabled) return;
+		onSelect?.();
+		onOpenChange(false);
+	};
+
+	const handleKeyDown = (e: React.KeyboardEvent) => {
+		if (e.key === "Enter" || e.key === " ") {
+			e.preventDefault();
+			handleClick();
+		}
+	};
+
+	return (
+		<button
+			type="button"
+			role="menuitem"
+			disabled={disabled}
+			onClick={handleClick}
+			onKeyDown={handleKeyDown}
+			className={cn(
+				"flex w-full items-center rounded-md px-2 py-1.5 text-sm text-[hsl(var(--text-secondary))] outline-none transition-colors hover:bg-[hsl(var(--glass-bg-hover))] focus:bg-[hsl(var(--glass-bg-hover))]",
+				disabled && "pointer-events-none opacity-50",
+				destructive &&
+					"text-[hsl(var(--error))] hover:text-[hsl(var(--error))] hover:bg-[hsl(var(--error)/0.1)] focus:bg-[hsl(var(--error)/0.1)]",
+				className,
+			)}
+		>
+			{children}
+		</button>
+	);
+}
+
+// ============================================================================
+// Context Menu Checkbox Item
+// ============================================================================
+
+interface ContextMenuCheckboxItemProps {
+	children: React.ReactNode;
+	className?: string;
+	checked?: boolean;
+	onCheckedChange?: (checked: boolean) => void;
+	disabled?: boolean;
+}
+
+function ContextMenuCheckboxItem({
+	children,
+	className,
+	checked,
+	onCheckedChange,
+	disabled,
+}: ContextMenuCheckboxItemProps) {
+	const handleKeyDown = (e: React.KeyboardEvent) => {
+		if (e.key === "Enter" || e.key === " ") {
+			e.preventDefault();
+			onCheckedChange?.(!checked);
+		}
+	};
+
+	return (
+		<button
+			type="button"
+			role="menuitemcheckbox"
+			aria-checked={checked}
+			disabled={disabled}
+			onClick={() => onCheckedChange?.(!checked)}
+			onKeyDown={handleKeyDown}
+			className={cn(
+				"flex w-full items-center rounded-md px-2 py-1.5 text-sm text-[hsl(var(--text-secondary))] outline-none transition-colors hover:bg-[hsl(var(--glass-bg-hover))] focus:bg-[hsl(var(--glass-bg-hover))]",
+				disabled && "pointer-events-none opacity-50",
+				className,
+			)}
+		>
+			<span className="mr-2 flex h-4 w-4 items-center justify-center">
+				{checked && <Check className="h-3 w-3" />}
+			</span>
+			{children}
+		</button>
+	);
+}
+
+// ============================================================================
+// Context Menu Label
+// ============================================================================
+
+interface ContextMenuLabelProps {
+	children: React.ReactNode;
+	className?: string;
+}
+
+function ContextMenuLabel({ children, className }: ContextMenuLabelProps) {
+	return (
+		<div
+			className={cn(
+				"px-2 py-1.5 text-xs font-semibold text-[hsl(var(--text-tertiary))]",
+				className,
+			)}
+		>
+			{children}
+		</div>
+	);
+}
+
+// ============================================================================
+// Context Menu Separator
+// ============================================================================
+
+interface ContextMenuSeparatorProps {
+	className?: string;
+}
+
+function ContextMenuSeparator({ className }: ContextMenuSeparatorProps) {
+	return (
+		<div
+			className={cn("-mx-1 my-1 h-px bg-[hsl(var(--border-default))]", className)}
+		/>
+	);
+}
+
+// ============================================================================
+// Context Menu Shortcut
+// ============================================================================
+
+interface ContextMenuShortcutProps {
+	children: React.ReactNode;
+	className?: string;
+}
+
+function ContextMenuShortcut({
+	children,
+	className,
+}: ContextMenuShortcutProps) {
+	return (
+		<span
+			className={cn(
+				"ml-auto text-xs tracking-widest text-[hsl(var(--text-muted))]",
+				className,
+			)}
+		>
+			{children}
+		</span>
+	);
+}
+
+// ============================================================================
+// Legacy API: fromItems helper
+// ============================================================================
+
+interface LegacyContextMenuProps {
+	children: React.ReactNode;
+	items: ContextMenuItem[];
+	className?: string;
+}
+
+function LegacyContextMenu({
+	children,
+	items,
+	className,
+}: LegacyContextMenuProps) {
+	return (
+		<ContextMenuRoot>
+			<ContextMenuTrigger className={className}>{children}</ContextMenuTrigger>
+			<ContextMenuContent>
+				{items.map((item, index) => (
+					<React.Fragment key={index}>
+						{item.separator && <ContextMenuSeparator />}
+						<ContextMenuItem
+							disabled={item.disabled}
+							onSelect={item.onClick}
+						>
+							<span>{item.label}</span>
+							{item.shortcut && (
+								<ContextMenuShortcut>{item.shortcut}</ContextMenuShortcut>
+							)}
+						</ContextMenuItem>
+					</React.Fragment>
+				))}
+			</ContextMenuContent>
+		</ContextMenuRoot>
+	);
+}
+
+// ============================================================================
+// Compound Export
+// ============================================================================
+
+type ContextMenuComponent = typeof ContextMenuRoot & {
+	Trigger: typeof ContextMenuTrigger;
+	Content: typeof ContextMenuContent;
+	Item: typeof ContextMenuItem;
+	CheckboxItem: typeof ContextMenuCheckboxItem;
+	Label: typeof ContextMenuLabel;
+	Separator: typeof ContextMenuSeparator;
+	Shortcut: typeof ContextMenuShortcut;
+	fromItems: typeof LegacyContextMenu;
+};
+
+const ContextMenu = ContextMenuRoot as ContextMenuComponent;
+ContextMenu.Trigger = ContextMenuTrigger;
+ContextMenu.Content = ContextMenuContent;
+ContextMenu.Item = ContextMenuItem;
+ContextMenu.CheckboxItem = ContextMenuCheckboxItem;
+ContextMenu.Label = ContextMenuLabel;
+ContextMenu.Separator = ContextMenuSeparator;
+ContextMenu.Shortcut = ContextMenuShortcut;
+ContextMenu.fromItems = LegacyContextMenu;
+
+export { ContextMenu };
 export default ContextMenu;

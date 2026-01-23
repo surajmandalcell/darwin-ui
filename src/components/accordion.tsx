@@ -4,6 +4,7 @@ import * as React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { cn } from "../lib/utils";
+import { getDuration } from "../lib/animation-config";
 
 interface AccordionContextValue {
 	expandedItems: string[];
@@ -104,7 +105,7 @@ function AccordionTrigger({ children, className, itemValue }: AccordionTriggerPr
 			{children}
 			<motion.div
 				animate={{ rotate: isExpanded ? 180 : 0 }}
-				transition={{ duration: 0.2, ease: "easeInOut" }}
+				transition={{ duration: getDuration("slow"), ease: "easeInOut" }}
 			>
 				<ChevronDown className="h-4 w-4 text-[hsl(var(--text-secondary))]" />
 			</motion.div>
@@ -129,7 +130,7 @@ function AccordionContent({ children, className, itemValue }: AccordionContentPr
 					initial={{ height: 0, opacity: 0 }}
 					animate={{ height: "auto", opacity: 1 }}
 					exit={{ height: 0, opacity: 0 }}
-					transition={{ duration: 0.2, ease: "easeInOut" }}
+					transition={{ duration: getDuration("slow"), ease: "easeInOut" }}
 					className="overflow-hidden"
 				>
 					<div className={cn("pb-4 text-sm text-[hsl(var(--text-secondary))]", className)}>

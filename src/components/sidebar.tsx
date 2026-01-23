@@ -4,6 +4,7 @@ import { ChevronsLeft, LogOut, Menu, X } from "lucide-react";
 import React from "react";
 import { cn } from "../lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
+import { getDuration, getSpring } from "../lib/animation-config";
 import { Tooltip, TooltipTrigger, TooltipContent } from "./floating";
 
 interface SidebarItemProps {
@@ -47,7 +48,7 @@ function SidebarItem({
 						initial={{ opacity: 0, width: 0 }}
 						animate={{ opacity: 1, width: "auto" }}
 						exit={{ opacity: 0, width: 0 }}
-						transition={{ duration: 0.15 }}
+						transition={{ duration: getDuration("normal") }}
 						className="whitespace-nowrap overflow-hidden"
 					>
 						{label}
@@ -161,7 +162,7 @@ export function Sidebar({
 			<motion.div
 				initial={{ x: "-100%" }}
 				animate={{ x: mobileMenuOpen ? 0 : "-100%" }}
-				transition={{ type: "spring", damping: 25, stiffness: 200 }}
+				transition={getSpring("smooth")}
 				className="fixed left-0 top-0 z-40 h-full w-64 border-r border-[hsl(var(--border-default))] bg-[hsl(var(--overlay-bg))] p-4 pt-20 shadow-lg backdrop-blur-md md:hidden"
 			>
 				<div className="flex h-full flex-col">
@@ -199,7 +200,7 @@ export function Sidebar({
 			{/* Desktop Sidebar */}
 			<motion.div
 				animate={{ width: isCollapsed ? 64 : 192 }}
-				transition={{ type: "spring", damping: 25, stiffness: 200 }}
+				transition={getSpring("smooth")}
 				className="hidden h-full shrink-0 flex-col p-4 md:flex"
 			>
 				<div className="flex-1 space-y-1">
@@ -230,7 +231,7 @@ export function Sidebar({
 						>
 							<motion.div
 								animate={{ rotate: isCollapsed ? 180 : 0 }}
-								transition={{ duration: 0.2, ease: "easeInOut" }}
+								transition={{ duration: getDuration("slow"), ease: "easeInOut" }}
 							>
 								<ChevronsLeft className="h-4 w-4" />
 							</motion.div>
@@ -240,7 +241,7 @@ export function Sidebar({
 										initial={{ opacity: 0, width: 0 }}
 										animate={{ opacity: 1, width: "auto" }}
 										exit={{ opacity: 0, width: 0 }}
-										transition={{ duration: 0.15 }}
+										transition={{ duration: getDuration("normal") }}
 										className="whitespace-nowrap overflow-hidden"
 									>
 										Collapse

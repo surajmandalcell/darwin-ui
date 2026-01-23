@@ -84,6 +84,16 @@
     --chart-tooltip-text: 0 0% 100% / 0.9;
     --chart-tooltip-text-muted: 0 0% 100% / 0.6;
 
+    /* Chart color palette */
+    --chart-blue: 217 91% 68%;
+    --chart-green: 160 84% 60%;
+    --chart-yellow: 45 93% 58%;
+    --chart-red: 0 84% 65%;
+    --chart-purple: 270 76% 70%;
+    --chart-pink: 330 81% 72%;
+    --chart-orange: 25 95% 60%;
+    --chart-teal: 172 66% 55%;
+
     /* Fullscreen & Overlay colors */
     --fullscreen-backdrop: 0 0% 0% / 0.9;
     --hover-overlay: 0 0% 0% / 0.2;
@@ -202,6 +212,16 @@
     --chart-tooltip-border: 0 0% 0% / 0.1;
     --chart-tooltip-text: 0 0% 0% / 0.9;
     --chart-tooltip-text-muted: 0 0% 0% / 0.6;
+
+    /* Chart color palette (slightly darker for light mode) */
+    --chart-blue: 217 91% 55%;
+    --chart-green: 160 84% 50%;
+    --chart-yellow: 45 93% 48%;
+    --chart-red: 0 84% 55%;
+    --chart-purple: 270 76% 60%;
+    --chart-pink: 330 81% 62%;
+    --chart-orange: 25 95% 50%;
+    --chart-teal: 172 66% 45%;
 
     /* Fullscreen & Overlay colors */
     --fullscreen-backdrop: 0 0% 0% / 0.85;
