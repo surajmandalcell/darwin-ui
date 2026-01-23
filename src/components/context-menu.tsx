@@ -248,7 +248,7 @@ function ContextMenuItem({
 			onClick={handleClick}
 			onKeyDown={handleKeyDown}
 			className={cn(
-				"flex w-full items-center rounded-md px-2 py-1.5 text-sm text-zinc-600 dark:text-zinc-400 outline-none transition-colors hover:bg-black/10 dark:hover:bg-white/10 hover:text-zinc-900 dark:hover:text-zinc-100 focus:bg-white/10 dark:focus:bg-black/10",
+				"flex w-full items-center rounded-md px-2 py-1.5 text-sm text-zinc-700 dark:text-zinc-300 outline-none transition-colors hover:bg-black/10 dark:hover:bg-white/10 hover:text-zinc-900 dark:hover:text-zinc-100 focus:bg-white/10 dark:focus:bg-black/10",
 				disabled && "pointer-events-none opacity-50",
 				destructive &&
 					"text-red-500 hover:text-red-500 hover:bg-red-500/10 focus:bg-red-500/10",
@@ -295,7 +295,7 @@ function ContextMenuCheckboxItem({
 			onClick={() => onCheckedChange?.(!checked)}
 			onKeyDown={handleKeyDown}
 			className={cn(
-				"flex w-full items-center rounded-md px-2 py-1.5 text-sm text-zinc-600 dark:text-zinc-400 outline-none transition-colors hover:bg-black/10 dark:hover:bg-white/10 hover:text-zinc-900 dark:hover:text-zinc-100 focus:bg-white/10 dark:focus:bg-black/10",
+				"flex w-full items-center rounded-md px-2 py-1.5 text-sm text-zinc-700 dark:text-zinc-300 outline-none transition-colors hover:bg-black/10 dark:hover:bg-white/10 hover:text-zinc-900 dark:hover:text-zinc-100 focus:bg-white/10 dark:focus:bg-black/10",
 				disabled && "pointer-events-none opacity-50",
 				className,
 			)}

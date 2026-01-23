@@ -31,14 +31,14 @@ function SidebarItem({
 				isCollapsed ? "justify-center px-2 py-2" : "gap-3 px-3 py-2",
 				active
 					? "bg-blue-500 text-white shadow-sm"
-					: "text-zinc-600 dark:text-zinc-400 hover:bg-black/5 dark:hover:bg-white/5 hover:text-zinc-900 dark:hover:text-zinc-100",
+					: "text-zinc-700 dark:text-zinc-300 hover:bg-black/5 dark:hover:bg-white/5 hover:text-zinc-900 dark:hover:text-zinc-100",
 			)}
 		>
 			{Icon ? (
 				<Icon
 					className={cn(
 						"h-4 w-4 shrink-0 transition-colors",
-						active ? "text-white" : "text-zinc-600 dark:text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-100",
+						active ? "text-white" : "text-zinc-700 dark:text-zinc-300 group-hover:text-zinc-900 dark:group-hover:text-zinc-100",
 					)}
 				/>
 			) : null}
