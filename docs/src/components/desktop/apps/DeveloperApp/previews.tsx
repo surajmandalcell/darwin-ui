@@ -522,7 +522,8 @@ function ChartsPreview() {
             data={pieData}
             nameKey="category"
             valueKey="sales"
-            height={220}
+            height={280}
+            outerRadius={70}
             showLegend
           />
         );
@@ -532,7 +533,9 @@ function ChartsPreview() {
             data={pieData}
             nameKey="category"
             valueKey="sales"
-            height={220}
+            height={280}
+            innerRadius={50}
+            outerRadius={70}
             showLegend
           />
         );
@@ -573,7 +576,7 @@ function ChartsPreview() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            style={{ width: '100%', height: 220 }}
+            style={{ width: '100%', height: chartType === 'pie' || chartType === 'donut' ? 280 : 220 }}
           >
             {renderChart()}
           </motion.div>
