@@ -167,7 +167,7 @@ export function MultiSelect({
 													exit={{ scale: 0, opacity: 0 }}
 													transition={{ duration: 0.1 }}
 												>
-													<CheckIcon className="h-3 w-3 text-blue-400" />
+													<CheckIcon className="h-3 w-3 text-[hsl(var(--brand-primary))]" />
 												</motion.span>
 											)}
 										</span>

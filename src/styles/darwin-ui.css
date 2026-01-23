@@ -74,6 +74,38 @@
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
     --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4);
     --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5);
+
+    /* Chart colors */
+    --chart-grid: 0 0% 100% / 0.1;
+    --chart-axis: 0 0% 100% / 0.6;
+    --chart-tick: 0 0% 100% / 0.9;
+    --chart-tooltip-bg: 0 0% 20%;
+    --chart-tooltip-border: 0 0% 100% / 0.1;
+    --chart-tooltip-text: 0 0% 100% / 0.9;
+    --chart-tooltip-text-muted: 0 0% 100% / 0.6;
+
+    /* Fullscreen & Overlay colors */
+    --fullscreen-backdrop: 0 0% 0% / 0.9;
+    --hover-overlay: 0 0% 0% / 0.2;
+    --upload-pending-bg: 0 0% 0% / 0.3;
+    --upload-progress-track: 0 0% 0% / 0.4;
+
+    /* Avatar colors */
+    --avatar-fallback-bg: 0 0% 100% / 0.2;
+    --avatar-fallback-text: 0 0% 100%;
+    --avatar-group-overflow-bg: 0 0% 100% / 0.1;
+    --avatar-group-overflow-text: 0 0% 100% / 0.8;
+
+    /* Inline select colors */
+    --inline-select-bg: 217 91% 60% / 0.2;
+    --inline-select-bg-hover: 217 91% 60% / 0.3;
+    --inline-select-border: 217 91% 60% / 0.3;
+    --inline-select-text: 210 100% 70%;
+
+    /* Calendar colors */
+    --calendar-day-text: 0 0% 100% / 0.7;
+    --calendar-day-hover: 0 0% 100% / 0.1;
+    --calendar-weekday: 0 0% 100% / 0.5;
   }
 
   /* ========================================
@@ -148,6 +180,38 @@
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
     --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
     --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.15);
+
+    /* Chart colors */
+    --chart-grid: 0 0% 0% / 0.1;
+    --chart-axis: 0 0% 0% / 0.5;
+    --chart-tick: 0 0% 0% / 0.8;
+    --chart-tooltip-bg: 0 0% 100%;
+    --chart-tooltip-border: 0 0% 0% / 0.1;
+    --chart-tooltip-text: 0 0% 0% / 0.9;
+    --chart-tooltip-text-muted: 0 0% 0% / 0.6;
+
+    /* Fullscreen & Overlay colors */
+    --fullscreen-backdrop: 0 0% 0% / 0.85;
+    --hover-overlay: 0 0% 0% / 0.15;
+    --upload-pending-bg: 0 0% 100% / 0.5;
+    --upload-progress-track: 0 0% 0% / 0.2;
+
+    /* Avatar colors */
+    --avatar-fallback-bg: 0 0% 0% / 0.1;
+    --avatar-fallback-text: 0 0% 9%;
+    --avatar-group-overflow-bg: 0 0% 0% / 0.08;
+    --avatar-group-overflow-text: 0 0% 0% / 0.7;
+
+    /* Inline select colors */
+    --inline-select-bg: 217 91% 55% / 0.15;
+    --inline-select-bg-hover: 217 91% 55% / 0.25;
+    --inline-select-border: 217 91% 55% / 0.3;
+    --inline-select-text: 217 91% 45%;
+
+    /* Calendar colors */
+    --calendar-day-text: 0 0% 0% / 0.8;
+    --calendar-day-hover: 0 0% 0% / 0.08;
+    --calendar-weekday: 0 0% 0% / 0.5;
   }
 
   /* System preference fallback */
@@ -220,6 +284,38 @@
       --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
       --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
       --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.15);
+
+      /* Chart colors */
+      --chart-grid: 0 0% 0% / 0.1;
+      --chart-axis: 0 0% 0% / 0.5;
+      --chart-tick: 0 0% 0% / 0.8;
+      --chart-tooltip-bg: 0 0% 100%;
+      --chart-tooltip-border: 0 0% 0% / 0.1;
+      --chart-tooltip-text: 0 0% 0% / 0.9;
+      --chart-tooltip-text-muted: 0 0% 0% / 0.6;
+
+      /* Fullscreen & Overlay colors */
+      --fullscreen-backdrop: 0 0% 0% / 0.85;
+      --hover-overlay: 0 0% 0% / 0.15;
+      --upload-pending-bg: 0 0% 100% / 0.5;
+      --upload-progress-track: 0 0% 0% / 0.2;
+
+      /* Avatar colors */
+      --avatar-fallback-bg: 0 0% 0% / 0.1;
+      --avatar-fallback-text: 0 0% 9%;
+      --avatar-group-overflow-bg: 0 0% 0% / 0.08;
+      --avatar-group-overflow-text: 0 0% 0% / 0.7;
+
+      /* Inline select colors */
+      --inline-select-bg: 217 91% 55% / 0.15;
+      --inline-select-bg-hover: 217 91% 55% / 0.25;
+      --inline-select-border: 217 91% 55% / 0.3;
+      --inline-select-text: 217 91% 45%;
+
+      /* Calendar colors */
+      --calendar-day-text: 0 0% 0% / 0.8;
+      --calendar-day-hover: 0 0% 0% / 0.08;
+      --calendar-weekday: 0 0% 0% / 0.5;
     }
   }
 }

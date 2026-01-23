@@ -77,13 +77,13 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
 		const iconClass = "w-4 h-4";
 		switch (type) {
 			case "success":
-				return <CheckCircle className={`${iconClass} text-green-400`} />;
+				return <CheckCircle className={`${iconClass} text-[hsl(var(--success))]`} />;
 			case "warning":
-				return <AlertTriangle className={`${iconClass} text-yellow-400`} />;
+				return <AlertTriangle className={`${iconClass} text-[hsl(var(--warning))]`} />;
 			case "error":
-				return <XCircle className={`${iconClass} text-red-400`} />;
+				return <XCircle className={`${iconClass} text-[hsl(var(--error))]`} />;
 			default:
-				return <Info className={`${iconClass} text-blue-400`} />;
+				return <Info className={`${iconClass} text-[hsl(var(--info))]`} />;
 		}
 	};
 

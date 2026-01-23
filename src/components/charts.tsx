@@ -57,8 +57,12 @@ interface CustomTooltipProps {
 const CustomTooltip = ({ active, payload, label }: CustomTooltipProps) => {
 	if (active && payload && payload.length) {
 		return (
-			<div className="bg-neutral-800 border border-white/10 rounded-md p-3 shadow-sm backdrop-blur-sm">
-				{label && <p className="text-white/90 font-medium mb-2">{label}</p>}
+			<div className="bg-[hsl(var(--chart-tooltip-bg))] border border-[hsl(var(--chart-tooltip-border))] rounded-md p-3 shadow-sm backdrop-blur-sm">
+				{label && (
+					<p className="text-[hsl(var(--chart-tooltip-text))] font-medium mb-2">
+						{label}
+					</p>
+				)}
 				{payload.map((entry, index) => (
 					<div
 						key={`${entry.name}-${index}`}
@@ -68,8 +72,12 @@ const CustomTooltip = ({ active, payload, label }: CustomTooltipProps) => {
 							className="w-3 h-3 rounded-full"
 							style={{ backgroundColor: entry.color }}
 						/>
-						<span className="text-white/60">{entry.name}:</span>
-						<span className="text-white/90 font-medium">{entry.value}</span>
+						<span className="text-[hsl(var(--chart-tooltip-text-muted))]">
+							{entry.name}:
+						</span>
+						<span className="text-[hsl(var(--chart-tooltip-text))] font-medium">
+							{entry.value}
+						</span>
 					</div>
 				))}
 			</div>
@@ -100,21 +108,24 @@ export function BarChart({
 		<ResponsiveContainer width="100%" height={height}>
 			<RechartsBarChart data={data}>
 				{showGrid && (
-					<CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
+					<CartesianGrid
+						strokeDasharray="3 3"
+						stroke="hsl(var(--chart-grid))"
+					/>
 				)}
 				<XAxis
 					dataKey={xKey}
-					stroke="rgba(255,255,255,0.6)"
-					tick={{ fill: "rgba(255,255,255,0.9)", fontSize: 12 }}
+					stroke="hsl(var(--chart-axis))"
+					tick={{ fill: "hsl(var(--chart-tick))", fontSize: 12 }}
 				/>
 				<YAxis
-					stroke="rgba(255,255,255,0.6)"
-					tick={{ fill: "rgba(255,255,255,0.9)", fontSize: 12 }}
+					stroke="hsl(var(--chart-axis))"
+					tick={{ fill: "hsl(var(--chart-tick))", fontSize: 12 }}
 				/>
 				<Tooltip content={<CustomTooltip />} />
 				{showLegend && (
 					<Legend
-						wrapperStyle={{ color: "rgba(255,255,255,0.9)" }}
+						wrapperStyle={{ color: "hsl(var(--chart-tick))" }}
 						iconType="circle"
 					/>
 				)}
@@ -159,21 +170,24 @@ export function LineChart({
 		<ResponsiveContainer width="100%" height={height}>
 			<RechartsLineChart data={data}>
 				{showGrid && (
-					<CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
+					<CartesianGrid
+						strokeDasharray="3 3"
+						stroke="hsl(var(--chart-grid))"
+					/>
 				)}
 				<XAxis
 					dataKey={xKey}
-					stroke="rgba(255,255,255,0.6)"
-					tick={{ fill: "rgba(255,255,255,0.9)", fontSize: 12 }}
+					stroke="hsl(var(--chart-axis))"
+					tick={{ fill: "hsl(var(--chart-tick))", fontSize: 12 }}
 				/>
 				<YAxis
-					stroke="rgba(255,255,255,0.6)"
-					tick={{ fill: "rgba(255,255,255,0.9)", fontSize: 12 }}
+					stroke="hsl(var(--chart-axis))"
+					tick={{ fill: "hsl(var(--chart-tick))", fontSize: 12 }}
 				/>
 				<Tooltip content={<CustomTooltip />} />
 				{showLegend && (
 					<Legend
-						wrapperStyle={{ color: "rgba(255,255,255,0.9)" }}
+						wrapperStyle={{ color: "hsl(var(--chart-tick))" }}
 						iconType="circle"
 					/>
 				)}
@@ -229,21 +243,24 @@ export function AreaChart({
 		<ResponsiveContainer width="100%" height={height}>
 			<RechartsAreaChart data={data}>
 				{showGrid && (
-					<CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
+					<CartesianGrid
+						strokeDasharray="3 3"
+						stroke="hsl(var(--chart-grid))"
+					/>
 				)}
 				<XAxis
 					dataKey={xKey}
-					stroke="rgba(255,255,255,0.6)"
-					tick={{ fill: "rgba(255,255,255,0.9)", fontSize: 12 }}
+					stroke="hsl(var(--chart-axis))"
+					tick={{ fill: "hsl(var(--chart-tick))", fontSize: 12 }}
 				/>
 				<YAxis
-					stroke="rgba(255,255,255,0.6)"
-					tick={{ fill: "rgba(255,255,255,0.9)", fontSize: 12 }}
+					stroke="hsl(var(--chart-axis))"
+					tick={{ fill: "hsl(var(--chart-tick))", fontSize: 12 }}
 				/>
 				<Tooltip content={<CustomTooltip />} />
 				{showLegend && (
 					<Legend
-						wrapperStyle={{ color: "rgba(255,255,255,0.9)" }}
+						wrapperStyle={{ color: "hsl(var(--chart-tick))" }}
 						iconType="circle"
 					/>
 				)}
@@ -307,7 +324,7 @@ export function PieChart({
 						const entry = data[props.index];
 						return `${entry[nameKey]}: ${entry[valueKey]}`;
 					}}
-					labelLine={{ stroke: "rgba(255,255,255,0.6)" }}
+					labelLine={{ stroke: "hsl(var(--chart-axis))" }}
 				>
 					{data.map((item, index) => (
 						<Cell
@@ -319,7 +336,7 @@ export function PieChart({
 				<Tooltip content={<CustomTooltip />} />
 				{showLegend && (
 					<Legend
-						wrapperStyle={{ color: "rgba(255,255,255,0.9)" }}
+						wrapperStyle={{ color: "hsl(var(--chart-tick))" }}
 						iconType="circle"
 					/>
 				)}
@@ -377,21 +394,24 @@ export function StackedBarChart({
 		<ResponsiveContainer width="100%" height={height}>
 			<RechartsBarChart data={data}>
 				{showGrid && (
-					<CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
+					<CartesianGrid
+						strokeDasharray="3 3"
+						stroke="hsl(var(--chart-grid))"
+					/>
 				)}
 				<XAxis
 					dataKey={xKey}
-					stroke="rgba(255,255,255,0.6)"
-					tick={{ fill: "rgba(255,255,255,0.9)", fontSize: 12 }}
+					stroke="hsl(var(--chart-axis))"
+					tick={{ fill: "hsl(var(--chart-tick))", fontSize: 12 }}
 				/>
 				<YAxis
-					stroke="rgba(255,255,255,0.6)"
-					tick={{ fill: "rgba(255,255,255,0.9)", fontSize: 12 }}
+					stroke="hsl(var(--chart-axis))"
+					tick={{ fill: "hsl(var(--chart-tick))", fontSize: 12 }}
 				/>
 				<Tooltip content={<CustomTooltip />} />
 				{showLegend && (
 					<Legend
-						wrapperStyle={{ color: "rgba(255,255,255,0.9)" }}
+						wrapperStyle={{ color: "hsl(var(--chart-tick))" }}
 						iconType="circle"
 					/>
 				)}

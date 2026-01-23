@@ -83,7 +83,7 @@ export function Image({
 		return (
 			<FocusLock returnFocus>
 				<div
-					className={`fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 ${
+					className={`fixed inset-0 bg-[hsl(var(--fullscreen-backdrop))] backdrop-blur-sm flex items-center justify-center p-4 ${
 						isClosing
 							? "animate-out fade-out duration-200"
 							: "animate-in fade-in duration-200"
@@ -141,8 +141,8 @@ export function Image({
 					className="cursor-pointer group relative inline-block"
 				>
 					{element}
-					<div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center pointer-events-none rounded-lg">
-						<Expand className="text-white/0 group-hover:text-white/90 text-sm transition-all duration-300" />
+					<div className="absolute inset-0 bg-transparent group-hover:bg-[hsl(var(--hover-overlay))] transition-colors duration-300 flex items-center justify-center pointer-events-none rounded-lg">
+						<Expand className="text-transparent group-hover:text-[hsl(var(--text-primary))] text-sm transition-all duration-300" />
 					</div>
 				</div>
 				{renderEnlargedOverlay()}

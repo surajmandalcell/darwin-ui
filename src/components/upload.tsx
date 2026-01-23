@@ -77,7 +77,7 @@ export function Upload({
 								</button>
 								<button
 									onClick={() => onChange([])}
-									className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 hover:border-red-500/30 rounded-md text-xs text-red-300 hover:text-red-200 transition-all duration-200"
+									className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[hsl(var(--error-bg))] hover:bg-[hsl(var(--error)/0.2)] border border-[hsl(var(--error)/0.2)] hover:border-[hsl(var(--error)/0.3)] rounded-md text-xs text-[hsl(var(--error))] hover:text-[hsl(var(--error))] transition-all duration-200"
 								>
 									<Trash2Icon className="size-3.5" />
 									Remove all
@@ -139,7 +139,7 @@ export function Upload({
 									key={"pending-" + p.id}
 									className="relative flex flex-col rounded-md border border-[hsl(var(--border-default))] bg-[hsl(var(--glass-bg))] overflow-hidden"
 								>
-									<div className="aspect-square w-full bg-black/30">
+									<div className="aspect-square w-full bg-[hsl(var(--upload-pending-bg))]">
 										{/* eslint-disable-next-line @next/next/no-img-element */}
 										<img
 											src={p.preview}
@@ -148,9 +148,9 @@ export function Upload({
 										/>
 									</div>
 									<div className="absolute inset-x-0 bottom-0 p-2">
-										<div className="h-1.5 w-full bg-black/40 rounded-full overflow-hidden">
+										<div className="h-1.5 w-full bg-[hsl(var(--upload-progress-track))] rounded-full overflow-hidden">
 											<div
-												className="h-full bg-blue-500 rounded-full transition-all"
+												className="h-full bg-[hsl(var(--brand-primary))] rounded-full transition-all"
 												style={{ width: `${p.progress}%` }}
 											/>
 										</div>
@@ -236,7 +236,7 @@ export function Upload({
 
 			{errors.length > 0 && (
 				<div
-					className="flex items-center gap-1 text-xs text-red-300"
+					className="flex items-center gap-1 text-xs text-[hsl(var(--error))]"
 					role="alert"
 				>
 					<span>{errors[0]}</span>

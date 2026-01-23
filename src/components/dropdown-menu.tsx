@@ -224,7 +224,7 @@ function DropdownMenuItem({
 			className={cn(
 				"flex w-full items-center rounded-md px-2 py-1.5 text-sm text-[hsl(var(--text-secondary))] outline-none transition-colors hover:bg-[hsl(var(--glass-bg-hover))] focus:bg-[hsl(var(--glass-bg-hover))]",
 				disabled && "pointer-events-none opacity-50",
-				destructive && "text-red-400 hover:text-red-300 hover:bg-red-500/10 focus:bg-red-500/10",
+				destructive && "text-[hsl(var(--error))] hover:text-[hsl(var(--error))] hover:bg-[hsl(var(--error-bg))] focus:bg-[hsl(var(--error-bg))]",
 				className
 			)}
 		>

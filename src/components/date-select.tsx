@@ -73,7 +73,7 @@ function InlineSelect({
 			<Popover.Trigger asChild>
 				<button
 					type="button"
-					className="inline-flex items-center gap-1 px-2 py-0.5 bg-blue-500/20 hover:bg-blue-500/30 border border-blue-500/30 rounded text-blue-300 transition-all group"
+					className="inline-flex items-center gap-1 px-2 py-0.5 bg-[hsl(var(--inline-select-bg))] hover:bg-[hsl(var(--inline-select-bg-hover))] border border-[hsl(var(--inline-select-border))] rounded text-[hsl(var(--inline-select-text))] transition-all group"
 				>
 					<span className="font-medium">
 						{options.find((o) => o.value === value)?.label || value}
@@ -96,8 +96,8 @@ function InlineSelect({
 							}}
 							className={`w-full px-3 py-2 text-left text-sm rounded transition ${
 								value === option.value
-									? "bg-blue-500/20 text-blue-300"
-									: "text-[hsl(var(--text-secondary))] hover:bg-[hsl(var(--glass-bg-hover))] hover:text-white"
+									? "bg-[hsl(var(--inline-select-bg))] text-[hsl(var(--inline-select-text))]"
+									: "text-[hsl(var(--text-secondary))] hover:bg-[hsl(var(--glass-bg-hover))] hover:text-[hsl(var(--text-primary))]"
 							}`}
 						>
 							{option.label}
@@ -135,7 +135,7 @@ function DatePickerButton({
 			<Popover.Trigger asChild>
 				<button
 					type="button"
-					className="inline-flex items-center gap-1 px-2 py-0.5 bg-blue-500/20 hover:bg-blue-500/30 border border-blue-500/30 rounded text-blue-300 transition-all group"
+					className="inline-flex items-center gap-1 px-2 py-0.5 bg-[hsl(var(--inline-select-bg))] hover:bg-[hsl(var(--inline-select-bg-hover))] border border-[hsl(var(--inline-select-border))] rounded text-[hsl(var(--inline-select-text))] transition-all group"
 				>
 					<span className="font-medium">
 						{date
@@ -157,37 +157,37 @@ function DatePickerButton({
 					<div className="rdp-custom">
 						<style>{`
               .rdp-custom {
-                --rdp-accent-color: #3b82f6;
-                --rdp-background-color: rgba(59, 130, 246, 0.1);
+                --rdp-accent-color: hsl(var(--brand-primary));
+                --rdp-background-color: hsl(var(--inline-select-bg));
               }
               .rdp-custom .rdp {
                 margin: 0;
-                color: rgba(255, 255, 255, 0.9);
+                color: hsl(var(--chart-tick));
               }
               .rdp-custom .rdp-month_caption {
-                color: rgba(255, 255, 255, 0.9);
+                color: hsl(var(--chart-tick));
                 font-weight: 500;
                 margin-bottom: 0.5rem;
               }
               .rdp-custom .rdp-day {
-                color: rgba(255, 255, 255, 0.7);
+                color: hsl(var(--calendar-day-text));
                 border-radius: 4px;
               }
               .rdp-custom .rdp-day:hover:not(.rdp-day_selected) {
-                background-color: rgba(255, 255, 255, 0.1);
+                background-color: hsl(var(--calendar-day-hover));
               }
               .rdp-custom .rdp-day_selected {
-                background-color: #3b82f6;
-                color: white;
+                background-color: hsl(var(--brand-primary));
+                color: hsl(var(--text-on-filled));
               }
               .rdp-custom .rdp-day_outside {
                 opacity: 0.3;
               }
               .rdp-custom .rdp-button:hover:not([disabled]) {
-                background-color: rgba(255, 255, 255, 0.1);
+                background-color: hsl(var(--calendar-day-hover));
               }
               .rdp-custom .rdp-weekday {
-                color: rgba(255, 255, 255, 0.5);
+                color: hsl(var(--calendar-weekday));
                 font-size: 0.75rem;
                 font-weight: 500;
               }
@@ -232,7 +232,7 @@ function TimePickerButton({
 			<Popover.Trigger asChild>
 				<button
 					type="button"
-					className="inline-flex items-center gap-1 px-2 py-0.5 bg-blue-500/20 hover:bg-blue-500/30 border border-blue-500/30 rounded text-blue-300 transition-all group"
+					className="inline-flex items-center gap-1 px-2 py-0.5 bg-[hsl(var(--inline-select-bg))] hover:bg-[hsl(var(--inline-select-bg-hover))] border border-[hsl(var(--inline-select-border))] rounded text-[hsl(var(--inline-select-text))] transition-all group"
 				>
 					<span className="font-medium">{time || placeholder}</span>
 					<ChevronDown className="w-3 h-3 opacity-60 group-hover:opacity-100" />
@@ -907,7 +907,7 @@ export function DateSelect({
 				</Dialog.Trigger>
 
 				<Dialog.Portal>
-					<Dialog.Overlay className="fixed inset-0 bg-black/50 backdrop-blur-[6px] z-9998" />
+					<Dialog.Overlay className="fixed inset-0 bg-[hsl(var(--overlay-backdrop))] backdrop-blur-[6px] z-9998" />
 					<Dialog.Content className="fixed w-fit max-w-2xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[hsl(var(--surface-elevated))] border border-[hsl(var(--border-default))] rounded-lg shadow-md p-6 z-9999">
 						<Dialog.Title className="text-lg font-semibold text-[hsl(var(--text-primary))] mb-4">
 							Select Date & Time
@@ -931,13 +931,13 @@ export function DateSelect({
 							</div>
 
 							{/* Questionnaire sentence */}
-							<div className="p-4 bg-black/20 rounded border border-white/5 min-h-[60px]">
+							<div className="p-4 bg-[hsl(var(--glass-bg))] rounded border border-[hsl(var(--border-subtle))] min-h-[60px]">
 								{renderQuestionnaire()}
 							</div>
 
 							{/* Summary */}
 							{startDate && (
-								<div className="text-xs text-[hsl(var(--text-tertiary))] text-center pt-2 border-t border-white/5">
+								<div className="text-xs text-[hsl(var(--text-tertiary))] text-center pt-2 border-t border-[hsl(var(--border-subtle))]">
 									{eventType === "single" ? (
 										<>
 											{dateMode === "datetime" && (
@@ -1055,7 +1055,7 @@ export function DateSelect({
 							<button
 								type="button"
 								onClick={handleConfirm}
-								className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+								className="px-4 py-2 bg-[hsl(var(--brand-primary))] text-[hsl(var(--text-on-filled))] rounded hover:bg-[hsl(var(--brand-primary-hover))] transition"
 							>
 								Confirm
 							</button>

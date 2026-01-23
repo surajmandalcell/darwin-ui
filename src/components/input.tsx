@@ -43,10 +43,10 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 					{...(props as any)}
 				/>
 				{error && (
-					<X className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-red-400" />
+					<X className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[hsl(var(--error))]" />
 				)}
 				{success && !error && (
-					<Check className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-green-400" />
+					<Check className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[hsl(var(--success))]" />
 				)}
 			</div>
 		);

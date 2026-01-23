@@ -18,8 +18,8 @@ import "@uiw/react-markdown-preview/markdown.css";
 
 function EditorSkeleton() {
 	return (
-		<div className="rounded-[6px] overflow-hidden border border-white/10 bg-neutral-800 h-[420px] flex flex-col">
-			<div className="border-b border-white/10 p-2 h-10">
+		<div className="rounded-[6px] overflow-hidden border border-[hsl(var(--border-default))] bg-[hsl(var(--surface-1))] h-[420px] flex flex-col">
+			<div className="border-b border-[hsl(var(--border-default))] p-2 h-10">
 				<div className="flex gap-2">
 					<Skeleton className="h-6 w-16" />
 					<Skeleton className="h-6 w-12" />
@@ -131,7 +131,7 @@ export function MdEditor({ value, onChange, placeholder }: MdEditorProps) {
 			/>
 			<div
 				data-color-mode="dark"
-				className="rounded-[6px] overflow-hidden border border-white/10 bg-white/5"
+				className="rounded-[6px] overflow-hidden border border-[hsl(var(--border-default))] bg-[hsl(var(--glass-bg))]"
 			>
 				<Suspense fallback={<EditorSkeleton />}>
 					<MDEditorLazy

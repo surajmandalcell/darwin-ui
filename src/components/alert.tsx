@@ -29,39 +29,39 @@ interface InlineAlertProps {
 
 const alertVariants: Record<AlertVariant, { bg: string; border: string; icon: string; title: string; description: string }> = {
 	info: {
-		bg: "bg-blue-500/[0.08]",
-		border: "border-blue-500/20",
-		icon: "text-blue-400",
-		title: "text-blue-50",
-		description: "text-blue-200/70",
+		bg: "bg-[hsl(var(--info-bg))]",
+		border: "border-[hsl(var(--info)/0.2)]",
+		icon: "text-[hsl(var(--info))]",
+		title: "text-[hsl(var(--text-primary))]",
+		description: "text-[hsl(var(--text-secondary))]",
 	},
 	success: {
-		bg: "bg-emerald-500/[0.08]",
-		border: "border-emerald-500/20",
-		icon: "text-emerald-400",
-		title: "text-emerald-50",
-		description: "text-emerald-200/70",
+		bg: "bg-[hsl(var(--success-bg))]",
+		border: "border-[hsl(var(--success)/0.2)]",
+		icon: "text-[hsl(var(--success))]",
+		title: "text-[hsl(var(--text-primary))]",
+		description: "text-[hsl(var(--text-secondary))]",
 	},
 	warning: {
-		bg: "bg-amber-500/[0.08]",
-		border: "border-amber-500/20",
-		icon: "text-amber-400",
-		title: "text-amber-50",
-		description: "text-amber-200/70",
+		bg: "bg-[hsl(var(--warning-bg))]",
+		border: "border-[hsl(var(--warning)/0.2)]",
+		icon: "text-[hsl(var(--warning))]",
+		title: "text-[hsl(var(--text-primary))]",
+		description: "text-[hsl(var(--text-secondary))]",
 	},
 	error: {
-		bg: "bg-red-500/[0.08]",
-		border: "border-red-500/20",
-		icon: "text-red-400",
-		title: "text-red-50",
-		description: "text-red-200/70",
+		bg: "bg-[hsl(var(--error-bg))]",
+		border: "border-[hsl(var(--error)/0.2)]",
+		icon: "text-[hsl(var(--error))]",
+		title: "text-[hsl(var(--text-primary))]",
+		description: "text-[hsl(var(--text-secondary))]",
 	},
 	destructive: {
-		bg: "bg-red-500/[0.08]",
-		border: "border-red-500/20",
-		icon: "text-red-400",
-		title: "text-red-50",
-		description: "text-red-200/70",
+		bg: "bg-[hsl(var(--error-bg))]",
+		border: "border-[hsl(var(--error)/0.2)]",
+		icon: "text-[hsl(var(--error))]",
+		title: "text-[hsl(var(--text-primary))]",
+		description: "text-[hsl(var(--text-secondary))]",
 	},
 };
 
@@ -233,13 +233,13 @@ export function AlertProvider({ children }: { children: React.ReactNode }) {
 		const iconClass = "w-5 h-5";
 		switch (type) {
 			case "success":
-				return <CheckCircle className={`${iconClass} text-green-400`} />;
+				return <CheckCircle className={`${iconClass} text-[hsl(var(--success))]`} />;
 			case "warning":
-				return <AlertTriangle className={`${iconClass} text-yellow-400`} />;
+				return <AlertTriangle className={`${iconClass} text-[hsl(var(--warning))]`} />;
 			case "error":
-				return <XCircle className={`${iconClass} text-red-400`} />;
+				return <XCircle className={`${iconClass} text-[hsl(var(--error))]`} />;
 			default:
-				return <Info className={`${iconClass} text-blue-400`} />;
+				return <Info className={`${iconClass} text-[hsl(var(--info))]`} />;
 		}
 	};
 

@@ -54,7 +54,7 @@ function Avatar({ src, alt, fallback, size = "md", className }: AvatarProps) {
 
 	const showFallback = !src || imgError;
 	const initials = fallback ? getInitials(fallback) : "?";
-	const bgColor = fallback ? stringToColor(fallback) : "bg-white/20";
+	const bgColor = fallback ? stringToColor(fallback) : "bg-[hsl(var(--avatar-fallback-bg))]";
 
 	return (
 		<div
@@ -62,7 +62,7 @@ function Avatar({ src, alt, fallback, size = "md", className }: AvatarProps) {
 				"relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full",
 				sizeClasses[size],
 				showFallback && bgColor,
-				"ring-1 ring-white/10",
+				"ring-1 ring-[hsl(var(--border-default))]",
 				className
 			)}
 		>
@@ -74,7 +74,7 @@ function Avatar({ src, alt, fallback, size = "md", className }: AvatarProps) {
 					onError={() => setImgError(true)}
 				/>
 			) : (
-				<span className="font-medium text-white">{initials}</span>
+				<span className="font-medium text-[hsl(var(--avatar-fallback-text))]">{initials}</span>
 			)}
 		</div>
 	);
@@ -99,7 +99,7 @@ function AvatarGroup({ children, max, className }: AvatarGroupProps) {
 				</div>
 			))}
 			{remainingCount > 0 && (
-				<div className="relative flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-sm font-medium text-white/80 ring-2 ring-background">
+				<div className="relative flex h-10 w-10 items-center justify-center rounded-full bg-[hsl(var(--avatar-group-overflow-bg))] text-sm font-medium text-[hsl(var(--avatar-group-overflow-text))] ring-2 ring-background">
 					+{remainingCount}
 				</div>
 			)}

@@ -346,7 +346,7 @@ export function ContextMenuFlat({
 						? "opacity-100 translate-y-1 pointer-events-auto"
 						: "opacity-0 -translate-y-1 pointer-events-none",
 				)}
-				style={{ boxShadow: "0px 4px 12px 4px #cccccc14" }}
+				style={{ boxShadow: "var(--shadow-md)" }}
 			>
 				<nav className="flex flex-col items-start">
 					{items.map((item, index) => {

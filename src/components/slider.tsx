@@ -156,7 +156,7 @@ function Slider({
 				>
 					{/* Filled track */}
 					<motion.div
-						className="absolute left-0 top-0 h-full rounded-full bg-blue-500"
+						className="absolute left-0 top-0 h-full rounded-full bg-[hsl(var(--brand-primary))]"
 						style={{ width: `${percentage}%` }}
 						transition={{ duration: isDragging ? 0 : 0.1 }}
 					/>
