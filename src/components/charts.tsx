@@ -86,9 +86,9 @@ interface CustomTooltipProps {
 const CustomTooltip = ({ active, payload, label }: CustomTooltipProps) => {
 	if (active && payload && payload.length) {
 		return (
-			<div className="bg-[hsl(var(--chart-tooltip-bg))] border border-[hsl(var(--chart-tooltip-border))] rounded-md p-3 shadow-sm backdrop-blur-sm">
+			<div className="bg-zinc-900/95 border border-white/10 rounded-md p-3 shadow-sm backdrop-blur-sm">
 				{label && (
-					<p className="text-[hsl(var(--chart-tooltip-text))] font-medium mb-2">
+					<p className="text-zinc-100 font-medium mb-2">
 						{label}
 					</p>
 				)}
@@ -101,10 +101,10 @@ const CustomTooltip = ({ active, payload, label }: CustomTooltipProps) => {
 							className="w-3 h-3 rounded-full"
 							style={{ backgroundColor: entry.color }}
 						/>
-						<span className="text-[hsl(var(--chart-tooltip-text-muted))]">
+						<span className="text-zinc-400">
 							{entry.name}:
 						</span>
-						<span className="text-[hsl(var(--chart-tooltip-text))] font-medium">
+						<span className="text-zinc-100 font-medium">
 							{entry.value}
 						</span>
 					</div>
@@ -139,22 +139,22 @@ export function BarChart({
 				{showGrid && (
 					<CartesianGrid
 						strokeDasharray="3 3"
-						stroke="hsl(var(--chart-grid))"
+						stroke="#27272a"
 					/>
 				)}
 				<XAxis
 					dataKey={xKey}
-					stroke="hsl(var(--chart-axis))"
-					tick={{ fill: "hsl(var(--chart-tick))", fontSize: 12 }}
+					stroke="#3f3f46"
+					tick={{ fill: "#a1a1aa", fontSize: 12 }}
 				/>
 				<YAxis
-					stroke="hsl(var(--chart-axis))"
-					tick={{ fill: "hsl(var(--chart-tick))", fontSize: 12 }}
+					stroke="#3f3f46"
+					tick={{ fill: "#a1a1aa", fontSize: 12 }}
 				/>
 				<Tooltip content={<CustomTooltip />} />
 				{showLegend && (
 					<Legend
-						wrapperStyle={{ color: "hsl(var(--chart-tick))" }}
+						wrapperStyle={{ color: "#a1a1aa" }}
 						iconType="circle"
 					/>
 				)}
@@ -201,22 +201,22 @@ export function LineChart({
 				{showGrid && (
 					<CartesianGrid
 						strokeDasharray="3 3"
-						stroke="hsl(var(--chart-grid))"
+						stroke="#27272a"
 					/>
 				)}
 				<XAxis
 					dataKey={xKey}
-					stroke="hsl(var(--chart-axis))"
-					tick={{ fill: "hsl(var(--chart-tick))", fontSize: 12 }}
+					stroke="#3f3f46"
+					tick={{ fill: "#a1a1aa", fontSize: 12 }}
 				/>
 				<YAxis
-					stroke="hsl(var(--chart-axis))"
-					tick={{ fill: "hsl(var(--chart-tick))", fontSize: 12 }}
+					stroke="#3f3f46"
+					tick={{ fill: "#a1a1aa", fontSize: 12 }}
 				/>
 				<Tooltip content={<CustomTooltip />} />
 				{showLegend && (
 					<Legend
-						wrapperStyle={{ color: "hsl(var(--chart-tick))" }}
+						wrapperStyle={{ color: "#a1a1aa" }}
 						iconType="circle"
 					/>
 				)}
@@ -274,22 +274,22 @@ export function AreaChart({
 				{showGrid && (
 					<CartesianGrid
 						strokeDasharray="3 3"
-						stroke="hsl(var(--chart-grid))"
+						stroke="#27272a"
 					/>
 				)}
 				<XAxis
 					dataKey={xKey}
-					stroke="hsl(var(--chart-axis))"
-					tick={{ fill: "hsl(var(--chart-tick))", fontSize: 12 }}
+					stroke="#3f3f46"
+					tick={{ fill: "#a1a1aa", fontSize: 12 }}
 				/>
 				<YAxis
-					stroke="hsl(var(--chart-axis))"
-					tick={{ fill: "hsl(var(--chart-tick))", fontSize: 12 }}
+					stroke="#3f3f46"
+					tick={{ fill: "#a1a1aa", fontSize: 12 }}
 				/>
 				<Tooltip content={<CustomTooltip />} />
 				{showLegend && (
 					<Legend
-						wrapperStyle={{ color: "hsl(var(--chart-tick))" }}
+						wrapperStyle={{ color: "#a1a1aa" }}
 						iconType="circle"
 					/>
 				)}
@@ -353,7 +353,7 @@ export function PieChart({
 						const entry = data[props.index];
 						return `${entry[nameKey]}: ${entry[valueKey]}`;
 					}}
-					labelLine={{ stroke: "hsl(var(--chart-axis))" }}
+					labelLine={{ stroke: "#3f3f46" }}
 				>
 					{data.map((item, index) => (
 						<Cell
@@ -365,7 +365,7 @@ export function PieChart({
 				<Tooltip content={<CustomTooltip />} />
 				{showLegend && (
 					<Legend
-						wrapperStyle={{ color: "hsl(var(--chart-tick))" }}
+						wrapperStyle={{ color: "#a1a1aa" }}
 						iconType="circle"
 					/>
 				)}
@@ -425,22 +425,22 @@ export function StackedBarChart({
 				{showGrid && (
 					<CartesianGrid
 						strokeDasharray="3 3"
-						stroke="hsl(var(--chart-grid))"
+						stroke="#27272a"
 					/>
 				)}
 				<XAxis
 					dataKey={xKey}
-					stroke="hsl(var(--chart-axis))"
-					tick={{ fill: "hsl(var(--chart-tick))", fontSize: 12 }}
+					stroke="#3f3f46"
+					tick={{ fill: "#a1a1aa", fontSize: 12 }}
 				/>
 				<YAxis
-					stroke="hsl(var(--chart-axis))"
-					tick={{ fill: "hsl(var(--chart-tick))", fontSize: 12 }}
+					stroke="#3f3f46"
+					tick={{ fill: "#a1a1aa", fontSize: 12 }}
 				/>
 				<Tooltip content={<CustomTooltip />} />
 				{showLegend && (
 					<Legend
-						wrapperStyle={{ color: "hsl(var(--chart-tick))" }}
+						wrapperStyle={{ color: "#a1a1aa" }}
 						iconType="circle"
 					/>
 				)}

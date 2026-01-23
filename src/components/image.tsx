@@ -83,7 +83,7 @@ export function Image({
 		return (
 			<FocusLock returnFocus>
 				<div
-					className={`fixed inset-0 bg-[hsl(var(--fullscreen-backdrop))] backdrop-blur-sm flex items-center justify-center p-4 ${
+					className={`fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 ${
 						isClosing
 							? "animate-out fade-out duration-200"
 							: "animate-in fade-in duration-200"
@@ -95,7 +95,7 @@ export function Image({
 					aria-label={`Enlarged view of ${getImageAlt()}`}
 				>
 					<button
-						className="absolute top-4 right-4 text-[hsl(var(--text-secondary))] hover:text-[hsl(var(--text-primary))] transition-colors cursor-pointer z-10"
+						className="absolute top-4 right-4 text-zinc-400 hover:text-zinc-100 transition-colors cursor-pointer z-10"
 						onClick={(e) => {
 							e.stopPropagation();
 							handleClose();
@@ -141,8 +141,8 @@ export function Image({
 					className="cursor-pointer group relative inline-block"
 				>
 					{element}
-					<div className="absolute inset-0 bg-transparent group-hover:bg-[hsl(var(--hover-overlay))] transition-colors duration-300 flex items-center justify-center pointer-events-none rounded-lg">
-						<Expand className="text-transparent group-hover:text-[hsl(var(--text-primary))] text-sm transition-all duration-300" />
+					<div className="absolute inset-0 bg-transparent group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center pointer-events-none rounded-lg">
+						<Expand className="text-transparent group-hover:text-zinc-100 text-sm transition-all duration-300" />
 					</div>
 				</div>
 				{renderEnlargedOverlay()}

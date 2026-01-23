@@ -150,13 +150,13 @@ function Slider({
 				{/* Track */}
 				<div
 					className={cn(
-						"relative w-full rounded-full bg-[hsl(var(--glass-bg-hover))]",
+						"relative w-full rounded-full bg-white/10 dark:bg-black/10",
 						sizeClasses[size].track
 					)}
 				>
 					{/* Filled track */}
 					<motion.div
-						className="absolute left-0 top-0 h-full rounded-full bg-[hsl(var(--brand-primary))]"
+						className="absolute left-0 top-0 h-full rounded-full bg-blue-500"
 						style={{ width: `${percentage}%` }}
 						transition={{ duration: isDragging ? 0 : 0.1 }}
 					/>
@@ -165,7 +165,7 @@ function Slider({
 				{/* Thumb */}
 				<motion.div
 					className={cn(
-						"absolute rounded-full bg-[hsl(var(--control-knob))] shadow-md ring-2 ring-[hsl(var(--ring))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--brand-primary))]",
+						"absolute rounded-full bg-white shadow-md ring-2 ring-blue-500/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500",
 						sizeClasses[size].thumb
 					)}
 					style={{
@@ -181,7 +181,7 @@ function Slider({
 			</div>
 
 			{showValue && (
-				<div className="mt-1 text-right text-xs text-[hsl(var(--text-tertiary))]">{value}</div>
+				<div className="mt-1 text-right text-xs text-zinc-500 dark:text-zinc-400">{value}</div>
 			)}
 		</div>
 	);

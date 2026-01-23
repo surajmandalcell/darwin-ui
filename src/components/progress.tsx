@@ -31,11 +31,11 @@ function Progress({
 	};
 
 	const variantClasses = {
-		default: "bg-[hsl(var(--brand-primary))]",
-		success: "bg-[hsl(var(--success))]",
-		warning: "bg-[hsl(var(--warning))]",
-		danger: "bg-[hsl(var(--error))]",
-		gradient: "bg-gradient-to-r from-[hsl(var(--brand-primary))] via-[hsl(var(--accent))] to-[hsl(var(--error))]",
+		default: "bg-blue-500",
+		success: "bg-emerald-500",
+		warning: "bg-amber-500",
+		danger: "bg-red-500",
+		gradient: "bg-gradient-to-r from-blue-500 via-violet-500 to-red-500",
 	};
 
 	return (
@@ -46,7 +46,7 @@ function Progress({
 				aria-valuemin={0}
 				aria-valuemax={max}
 				className={cn(
-					"w-full overflow-hidden rounded-full bg-[hsl(var(--glass-bg-hover))]",
+					"w-full overflow-hidden rounded-full bg-white/10 dark:bg-black/10",
 					sizeClasses[size]
 				)}
 			>
@@ -72,7 +72,7 @@ function Progress({
 				)}
 			</div>
 			{showValue && !indeterminate && (
-				<div className="mt-1 text-right text-xs text-[hsl(var(--text-secondary))]">
+				<div className="mt-1 text-right text-xs text-zinc-400 dark:text-zinc-500">
 					{Math.round(percentage)}%
 				</div>
 			)}
@@ -107,10 +107,10 @@ function CircularProgress({
 	const offset = circumference - (percentage / 100) * circumference;
 
 	const variantColors = {
-		default: "stroke-[hsl(var(--brand-primary))]",
-		success: "stroke-[hsl(var(--success))]",
-		warning: "stroke-[hsl(var(--warning))]",
-		danger: "stroke-[hsl(var(--error))]",
+		default: "stroke-blue-500",
+		success: "stroke-emerald-500",
+		warning: "stroke-amber-500",
+		danger: "stroke-red-500",
 	};
 
 	return (
@@ -130,7 +130,7 @@ function CircularProgress({
 					fill="none"
 					stroke="currentColor"
 					strokeWidth={strokeWidth}
-					className="text-[hsl(var(--glass-bg-hover))]"
+					className="text-white/10 dark:text-black/10"
 				/>
 				{indeterminate ? (
 					<motion.circle
@@ -170,7 +170,7 @@ function CircularProgress({
 				)}
 			</svg>
 			{showValue && !indeterminate && (
-				<span className="absolute text-xs font-medium text-[hsl(var(--text-secondary))]">
+				<span className="absolute text-xs font-medium text-zinc-400 dark:text-zinc-500">
 					{Math.round(percentage)}%
 				</span>
 			)}

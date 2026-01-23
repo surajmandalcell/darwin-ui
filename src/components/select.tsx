@@ -174,7 +174,7 @@ function SingleSelectInternal({
 									left: `${position.left}px`,
 									minWidth: `${position.width}px`,
 								}}
-								className="z-50 min-w-[8rem] overflow-hidden rounded-md border border-[hsl(var(--border-default))] bg-[hsl(var(--overlay-bg))] backdrop-blur-md shadow-md"
+								className="z-50 min-w-[8rem] overflow-hidden rounded-md border border-white/10 dark:border-black/10 bg-zinc-900/95 dark:bg-white/95 backdrop-blur-md shadow-md"
 							>
 								<ul role="listbox" className="py-1 px-1 flex flex-col gap-0.5">
 									{options.map((opt) => (
@@ -196,8 +196,8 @@ function SingleSelectInternal({
 												opt.disabled &&
 													"pointer-events-none opacity-50 cursor-not-allowed",
 												opt.value === selected.value
-													? "bg-[hsl(var(--glass-bg-hover))] text-[hsl(var(--text-primary))]"
-													: "text-[hsl(var(--text-secondary))] hover:bg-[hsl(var(--glass-bg))]",
+													? "bg-white/10 dark:bg-black/10 text-zinc-100 dark:text-zinc-900"
+													: "text-zinc-400 dark:text-zinc-500 hover:bg-white/5 dark:hover:bg-black/5",
 											)}
 										>
 											{opt.label}
@@ -224,13 +224,13 @@ function SingleSelectInternal({
 				aria-expanded={open}
 				onClick={() => setOpen((v) => !v)}
 				className={cn(
-					"flex h-9 w-full items-center justify-between rounded-md border border-[hsl(var(--border-default))] bg-[hsl(var(--glass-bg))] px-3 py-2 text-sm text-[hsl(var(--text-primary))] shadow-sm ring-offset-background placeholder:text-[hsl(var(--text-tertiary))] focus:outline-none focus:ring-1 focus:ring-[hsl(var(--ring))] disabled:cursor-not-allowed disabled:opacity-50 hover:bg-[hsl(var(--glass-bg-hover))] transition-colors backdrop-blur-sm",
+					"flex h-9 w-full items-center justify-between rounded-md border border-white/10 dark:border-black/10 bg-white/5 dark:bg-black/5 px-3 py-2 text-sm text-zinc-100 dark:text-zinc-900 shadow-sm ring-offset-background placeholder:text-zinc-500 dark:placeholder:text-zinc-400 focus:outline-none focus:ring-1 focus:ring-blue-500/50 disabled:cursor-not-allowed disabled:opacity-50 hover:bg-white/10 dark:hover:bg-black/10 transition-colors backdrop-blur-sm",
 				)}
 			>
 				<span
 					className={cn(
 						"truncate",
-						!selected.label && "text-[hsl(var(--text-tertiary))]",
+						!selected.label && "text-zinc-500 dark:text-zinc-400",
 					)}
 				>
 					{selected.label || placeholder || "Select..."}
@@ -305,7 +305,7 @@ function MultiSelectInternal({
 									left: `${position.left}px`,
 									minWidth: `${position.width}px`,
 								}}
-								className="z-50 min-w-[8rem] overflow-hidden rounded-md border border-[hsl(var(--border-default))] bg-[hsl(var(--overlay-bg))] backdrop-blur-md shadow-md"
+								className="z-50 min-w-[8rem] overflow-hidden rounded-md border border-white/10 dark:border-black/10 bg-zinc-900/95 dark:bg-white/95 backdrop-blur-md shadow-md"
 							>
 								<ul role="listbox" className="p-1">
 									{options.map((opt) => {
@@ -325,12 +325,12 @@ function MultiSelectInternal({
 												}}
 												tabIndex={opt.disabled ? -1 : 0}
 												className={cn(
-													"relative flex w-full cursor-pointer select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none transition-colors hover:bg-[hsl(var(--glass-bg-hover))]",
+													"relative flex w-full cursor-pointer select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none transition-colors hover:bg-white/10 dark:hover:bg-black/10",
 													opt.disabled &&
 														"pointer-events-none opacity-50 cursor-not-allowed",
 													isSelected
-														? "text-[hsl(var(--text-primary))]"
-														: "text-[hsl(var(--text-secondary))]",
+														? "text-zinc-100 dark:text-zinc-900"
+														: "text-zinc-400 dark:text-zinc-500",
 												)}
 											>
 												<span className="absolute left-2 flex h-4 w-4 items-center justify-center">
@@ -342,7 +342,7 @@ function MultiSelectInternal({
 																exit={{ scale: 0, opacity: 0 }}
 																transition={{ duration: getDuration("fast") }}
 															>
-																<Check className="h-3 w-3 text-[hsl(var(--brand-primary))]" />
+																<Check className="h-3 w-3 text-blue-500" />
 															</motion.span>
 														)}
 													</AnimatePresence>
@@ -372,13 +372,13 @@ function MultiSelectInternal({
 				aria-expanded={open}
 				onClick={() => setOpen((v) => !v)}
 				className={cn(
-					"flex h-9 w-full items-center justify-between rounded-md border border-[hsl(var(--border-default))] bg-[hsl(var(--glass-bg))] px-3 py-2 text-sm text-[hsl(var(--text-primary))] shadow-sm ring-offset-background placeholder:text-[hsl(var(--text-tertiary))] focus:outline-none focus:ring-1 focus:ring-[hsl(var(--ring))] disabled:cursor-not-allowed disabled:opacity-50 hover:bg-[hsl(var(--glass-bg-hover))] transition-colors backdrop-blur-sm",
+					"flex h-9 w-full items-center justify-between rounded-md border border-white/10 dark:border-black/10 bg-white/5 dark:bg-black/5 px-3 py-2 text-sm text-zinc-100 dark:text-zinc-900 shadow-sm ring-offset-background placeholder:text-zinc-500 dark:placeholder:text-zinc-400 focus:outline-none focus:ring-1 focus:ring-blue-500/50 disabled:cursor-not-allowed disabled:opacity-50 hover:bg-white/10 dark:hover:bg-black/10 transition-colors backdrop-blur-sm",
 				)}
 			>
 				<span
 					className={cn(
 						"truncate",
-						!displayValue && "text-[hsl(var(--text-tertiary))]",
+						!displayValue && "text-zinc-500 dark:text-zinc-400",
 					)}
 				>
 					{displayValue || placeholder}
@@ -402,12 +402,12 @@ function MultiSelectInternal({
 								animate={{ scale: 1, opacity: 1 }}
 								exit={{ scale: 0.8, opacity: 0 }}
 								transition={{ duration: getDuration("normal") }}
-								className="inline-flex items-center gap-1.5 px-2 py-1 bg-[hsl(var(--glass-bg))] border border-[hsl(var(--border-default))] rounded-md text-[hsl(var(--text-secondary))] text-xs backdrop-blur-sm"
+								className="inline-flex items-center gap-1.5 px-2 py-1 bg-white/5 dark:bg-black/5 border border-white/10 dark:border-black/10 rounded-md text-zinc-400 dark:text-zinc-500 text-xs backdrop-blur-sm"
 							>
 								{options.find((o) => o.value === v)?.label || v}
 								<button
 									type="button"
-									className="text-[hsl(var(--text-muted))] hover:text-[hsl(var(--text-secondary))] transition-colors rounded-sm hover:bg-[hsl(var(--glass-bg-hover))] p-0.5"
+									className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-400 dark:text-zinc-500 transition-colors rounded-sm hover:bg-white/10 dark:hover:bg-black/10 p-0.5"
 									onClick={(e) => removeTag(e, v)}
 								>
 									<X className="h-3 w-3" />

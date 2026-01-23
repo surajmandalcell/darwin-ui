@@ -77,13 +77,13 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
 		const iconClass = "w-4 h-4";
 		switch (type) {
 			case "success":
-				return <CheckCircle className={`${iconClass} text-[hsl(var(--success))]`} />;
+				return <CheckCircle className={`${iconClass} text-emerald-500`} />;
 			case "warning":
-				return <AlertTriangle className={`${iconClass} text-[hsl(var(--warning))]`} />;
+				return <AlertTriangle className={`${iconClass} text-amber-500`} />;
 			case "error":
-				return <XCircle className={`${iconClass} text-[hsl(var(--error))]`} />;
+				return <XCircle className={`${iconClass} text-red-500`} />;
 			default:
-				return <Info className={`${iconClass} text-[hsl(var(--info))]`} />;
+				return <Info className={`${iconClass} text-sky-500`} />;
 		}
 	};
 
@@ -97,22 +97,22 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
 				{toasts.map((toast) => (
 					<div
 						key={toast.id}
-						className="bg-[hsl(var(--overlay-bg))] backdrop-blur-md shadow-md border border-[hsl(var(--border-default))] rounded-md min-w-80 max-w-md pointer-events-auto animate-in slide-in-from-right duration-300"
+						className="bg-zinc-900/95 dark:bg-white/95 backdrop-blur-md shadow-md border border-white/10 dark:border-black/10 rounded-md min-w-80 max-w-md pointer-events-auto animate-in slide-in-from-right duration-300"
 					>
 						<div className="p-4 flex items-start gap-3">
 							{getIcon(toast.type)}
 							<div className="flex-1 min-w-0">
 								{toast.title && (
-									<div className="text-[hsl(var(--text-primary))] text-sm font-semibold mb-0.5">
+									<div className="text-zinc-100 dark:text-zinc-900 text-sm font-semibold mb-0.5">
 										{toast.title}
 									</div>
 								)}
-								<div className="text-[hsl(var(--text-secondary))] text-sm">{toast.message}</div>
+								<div className="text-zinc-400 dark:text-zinc-500 text-sm">{toast.message}</div>
 							</div>
 							<button
 								type="button"
 								onClick={() => removeToast(toast.id)}
-								className="text-[hsl(var(--text-muted))] hover:text-[hsl(var(--text-secondary))] transition-colors shrink-0"
+								className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-400 dark:hover:text-zinc-500 transition-colors shrink-0"
 								aria-label="Close"
 							>
 								<X className="w-4 h-4" />

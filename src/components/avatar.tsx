@@ -20,18 +20,18 @@ function getInitials(name: string): string {
 }
 
 function stringToColor(str: string): string {
-	// Use CSS variable-based colors for theme compatibility
+	// Hardcoded vibrant colors for avatar backgrounds
 	const colors = [
-		"bg-[hsl(var(--avatar-color-1))]",
-		"bg-[hsl(var(--avatar-color-2))]",
-		"bg-[hsl(var(--avatar-color-3))]",
-		"bg-[hsl(var(--avatar-color-4))]",
-		"bg-[hsl(var(--avatar-color-5))]",
-		"bg-[hsl(var(--avatar-color-6))]",
-		"bg-[hsl(var(--avatar-color-7))]",
-		"bg-[hsl(var(--avatar-color-8))]",
-		"bg-[hsl(var(--avatar-color-9))]",
-		"bg-[hsl(var(--avatar-color-10))]",
+		"bg-rose-500",
+		"bg-pink-500",
+		"bg-fuchsia-500",
+		"bg-purple-500",
+		"bg-violet-500",
+		"bg-indigo-500",
+		"bg-blue-500",
+		"bg-cyan-500",
+		"bg-teal-500",
+		"bg-emerald-500",
 	];
 
 	let hash = 0;
@@ -55,7 +55,7 @@ function Avatar({ src, alt, fallback, size = "md", className }: AvatarProps) {
 
 	const showFallback = !src || imgError;
 	const initials = fallback ? getInitials(fallback) : "?";
-	const bgColor = fallback ? stringToColor(fallback) : "bg-[hsl(var(--avatar-fallback-bg))]";
+	const bgColor = fallback ? stringToColor(fallback) : "bg-zinc-700";
 
 	return (
 		<div
@@ -63,7 +63,7 @@ function Avatar({ src, alt, fallback, size = "md", className }: AvatarProps) {
 				"relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full",
 				sizeClasses[size],
 				showFallback && bgColor,
-				"ring-1 ring-[hsl(var(--border-default))]",
+				"ring-1 ring-white/10 dark:ring-black/10",
 				className
 			)}
 		>
@@ -76,8 +76,7 @@ function Avatar({ src, alt, fallback, size = "md", className }: AvatarProps) {
 				/>
 			) : (
 				<span className={cn(
-					"font-medium",
-					fallback ? "text-[hsl(var(--avatar-color-text))]" : "text-[hsl(var(--avatar-fallback-text))]"
+					"font-medium text-white"
 				)}>{initials}</span>
 			)}
 		</div>
@@ -103,7 +102,7 @@ function AvatarGroup({ children, max, className }: AvatarGroupProps) {
 				</div>
 			))}
 			{remainingCount > 0 && (
-				<div className="relative flex h-10 w-10 items-center justify-center rounded-full bg-[hsl(var(--avatar-group-overflow-bg))] text-sm font-medium text-[hsl(var(--avatar-group-overflow-text))] ring-2 ring-background">
+				<div className="relative flex h-10 w-10 items-center justify-center rounded-full bg-zinc-700 text-sm font-medium text-white ring-2 ring-background">
 					+{remainingCount}
 				</div>
 			)}

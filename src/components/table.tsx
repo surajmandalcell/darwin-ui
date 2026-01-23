@@ -5,14 +5,14 @@ import { Skeleton } from "./skeleton";
 
 export function Table({ children }: { children: React.ReactNode }) {
 	return (
-		<div className="w-full border border-[hsl(var(--border-default))] rounded-md overflow-x-auto md:overflow-visible">
-			<table className="w-full text-sm text-[hsl(var(--text-primary))]">{children}</table>
+		<div className="w-full border border-white/10 dark:border-black/10 rounded-md overflow-x-auto md:overflow-visible">
+			<table className="w-full text-sm text-zinc-100 dark:text-zinc-900">{children}</table>
 		</div>
 	);
 }
 
 export function TableHead({ children }: { children: React.ReactNode }) {
-	return <thead className="bg-[hsl(var(--glass-bg))]">{children}</thead>;
+	return <thead className="bg-white/5 dark:bg-black/5">{children}</thead>;
 }
 
 export function TableBody({ children }: { children: React.ReactNode }) {
@@ -45,7 +45,7 @@ export function TableHeaderCell({
 	return (
 		<th
 			scope="col"
-			className={`px-4 py-2 text-left align-middle font-medium text-[hsl(var(--text-secondary))] ${className}`}
+			className={`px-4 py-2 text-left align-middle font-medium text-zinc-400 dark:text-zinc-500 ${className}`}
 			{...props}
 		>
 			{children}
@@ -72,7 +72,7 @@ export function TableRow({
 
 	return (
 		<tr
-			className={`border-b border-[hsl(var(--border-default))] transition-opacity duration-300 ${className}`}
+			className={`border-b border-white/10 dark:border-black/10 transition-opacity duration-300 ${className}`}
 			style={{ opacity: visible ? 1 : 0 }}
 		>
 			{children}

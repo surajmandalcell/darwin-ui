@@ -63,25 +63,19 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantClasses: Record<ButtonVariant, string> = {
 	default:
-		"bg-[hsl(var(--glass-bg-hover))] text-[hsl(var(--text-primary))] hover:bg-[hsl(var(--glass-bg-active))] border border-[hsl(var(--border-default))]",
-	primary:
-		"bg-[hsl(var(--brand-primary))] text-[hsl(var(--text-on-filled))] hover:bg-[hsl(var(--brand-primary-hover))]",
+		"bg-white/10 dark:bg-black/10 text-zinc-100 dark:text-zinc-900 hover:bg-white/15 dark:hover:bg-black/15 border border-white/10 dark:border-black/10",
+	primary: "bg-blue-500 text-white hover:bg-blue-600",
 	secondary:
-		"bg-[hsl(var(--glass-bg))] text-[hsl(var(--text-secondary))] hover:bg-[hsl(var(--glass-bg-hover))] border border-[hsl(var(--border-default))]",
-	success:
-		"bg-[hsl(var(--success))] text-[hsl(var(--text-on-filled))] hover:bg-[hsl(var(--success)/0.9)]",
-	warning:
-		"bg-[hsl(var(--warning))] text-[hsl(var(--text-on-warning))] hover:bg-[hsl(var(--warning)/0.9)]",
-	info: "bg-[hsl(var(--info))] text-[hsl(var(--text-on-filled))] hover:bg-[hsl(var(--info)/0.9)]",
-	destructive:
-		"bg-[hsl(var(--error))] text-[hsl(var(--text-on-filled))] hover:bg-[hsl(var(--error)/0.9)]",
+		"bg-white/5 dark:bg-black/5 text-zinc-400 dark:text-zinc-500 hover:bg-white/10 dark:hover:bg-black/10 border border-white/10 dark:border-black/10",
+	success: "bg-emerald-500 text-white hover:bg-emerald-500/90",
+	warning: "bg-amber-500 text-black hover:bg-amber-500/90",
+	info: "bg-sky-500 text-white hover:bg-sky-500/90",
+	destructive: "bg-red-500 text-white hover:bg-red-500/90",
 	outline:
-		"border border-[hsl(var(--border-strong))] bg-transparent hover:bg-[hsl(var(--glass-bg))] text-[hsl(var(--text-secondary))]",
-	ghost:
-		"hover:bg-[hsl(var(--glass-bg-hover))] text-[hsl(var(--text-secondary))]",
-	link: "text-[hsl(var(--brand-primary))] underline-offset-4 hover:underline",
-	accent:
-		"bg-[hsl(var(--accent))] text-[hsl(var(--text-on-filled))] hover:bg-[hsl(var(--accent-hover))]",
+		"border border-white/20 dark:border-black/20 bg-transparent hover:bg-white/5 dark:hover:bg-black/5 text-zinc-400 dark:text-zinc-500",
+	ghost: "hover:bg-white/10 dark:hover:bg-black/10 text-zinc-400 dark:text-zinc-500",
+	link: "text-blue-500 underline-offset-4 hover:underline",
+	accent: "bg-violet-500 text-white hover:bg-violet-600",
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
@@ -149,7 +143,7 @@ const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonProps>(
 				whileTap={!isDisabled ? { scale: 0.99 } : {}}
 				transition={{ duration: getDuration("fast") }}
 				className={cn(
-					"inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[hsl(var(--ring))] disabled:pointer-events-none disabled:opacity-50",
+					"inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-500/50 disabled:pointer-events-none disabled:opacity-50",
 					variantClasses[variant],
 					sizeClasses[effectiveSize],
 					fullWidth && "w-full",

@@ -29,7 +29,7 @@ export function Checkbox({
 	return (
 		<label
 			htmlFor={id}
-			className={`inline-flex items-center gap-2 text-[13px] text-[hsl(var(--text-primary))] ${
+			className={`inline-flex items-center gap-2 text-[13px] text-zinc-100 dark:text-zinc-900 ${
 				disabled ? "opacity-50 cursor-default" : "cursor-pointer"
 			} ${className}`}
 		>
@@ -44,10 +44,10 @@ export function Checkbox({
 					className="peer absolute inset-0 h-full w-full cursor-pointer opacity-0"
 				/>
 				<span
-					className={`flex h-4 w-4 items-center justify-center rounded-sm border transition-colors duration-150 text-[hsl(var(--control-knob))] ${
+					className={`flex h-4 w-4 items-center justify-center rounded-sm border transition-colors duration-150 text-white ${
 						isActive
-							? "bg-[hsl(var(--checkbox-checked))] border-[hsl(var(--checkbox-checked))]"
-							: "bg-[hsl(var(--checkbox-unchecked))] border-[hsl(var(--checkbox-border-unchecked))]"
+							? "bg-blue-500 border-blue-500"
+							: "bg-zinc-800 border-zinc-600"
 					} ${boxClassName}`}
 				>
 					{indeterminate ? (
@@ -55,7 +55,7 @@ export function Checkbox({
 							initial={{ scale: 0 }}
 							animate={{ scale: 1 }}
 							transition={getSpring("snappy")}
-							className="w-2 h-0.5 bg-[hsl(var(--control-knob))] rounded"
+							className="w-2 h-0.5 bg-white rounded"
 						/>
 					) : (
 						<motion.svg

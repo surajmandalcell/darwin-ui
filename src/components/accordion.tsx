@@ -56,7 +56,7 @@ function Accordion({
 
 	return (
 		<AccordionContext.Provider value={{ expandedItems, toggleItem, type }}>
-			<div className={cn("w-full divide-y divide-[hsl(var(--border-default))]", className)}>
+			<div className={cn("w-full divide-y divide-white/10 dark:divide-black/10", className)}>
 				{children}
 			</div>
 		</AccordionContext.Provider>
@@ -98,7 +98,7 @@ function AccordionTrigger({ children, className, itemValue }: AccordionTriggerPr
 			onClick={() => itemValue && toggleItem(itemValue)}
 			aria-expanded={isExpanded}
 			className={cn(
-				"flex w-full items-center justify-between py-4 text-sm font-medium text-[hsl(var(--text-primary))] transition-all hover:text-[hsl(var(--text-primary))] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[hsl(var(--ring))] rounded-md",
+				"flex w-full items-center justify-between py-4 text-sm font-medium text-zinc-100 dark:text-zinc-900 transition-all hover:text-zinc-100 dark:hover:text-zinc-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-500/50 rounded-md",
 				className
 			)}
 		>
@@ -107,7 +107,7 @@ function AccordionTrigger({ children, className, itemValue }: AccordionTriggerPr
 				animate={{ rotate: isExpanded ? 180 : 0 }}
 				transition={{ duration: getDuration("slow"), ease: "easeInOut" }}
 			>
-				<ChevronDown className="h-4 w-4 text-[hsl(var(--text-secondary))]" />
+				<ChevronDown className="h-4 w-4 text-zinc-400 dark:text-zinc-500" />
 			</motion.div>
 		</button>
 	);
@@ -133,7 +133,7 @@ function AccordionContent({ children, className, itemValue }: AccordionContentPr
 					transition={{ duration: getDuration("slow"), ease: "easeInOut" }}
 					className="overflow-hidden"
 				>
-					<div className={cn("pb-4 text-sm text-[hsl(var(--text-secondary))]", className)}>
+					<div className={cn("pb-4 text-sm text-zinc-400 dark:text-zinc-500", className)}>
 						{children}
 					</div>
 				</motion.div>

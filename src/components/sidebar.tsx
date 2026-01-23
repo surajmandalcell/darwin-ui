@@ -27,18 +27,18 @@ function SidebarItem({
 			type="button"
 			onClick={onClick}
 			className={cn(
-				"group flex w-full items-center rounded-md text-sm font-medium transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[hsl(var(--ring))]",
+				"group flex w-full items-center rounded-md text-sm font-medium transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-500/50",
 				isCollapsed ? "justify-center px-2 py-2" : "gap-3 px-3 py-2",
 				active
-					? "bg-[hsl(var(--brand-primary))] text-[hsl(var(--text-on-filled))] shadow-sm"
-					: "text-[hsl(var(--text-tertiary))] hover:bg-[hsl(var(--glass-bg))] hover:text-[hsl(var(--text-primary))]",
+					? "bg-blue-500 text-white shadow-sm"
+					: "text-zinc-500 dark:text-zinc-400 hover:bg-white/5 dark:hover:bg-black/5 hover:text-zinc-100 dark:hover:text-zinc-900",
 			)}
 		>
 			{Icon ? (
 				<Icon
 					className={cn(
 						"h-4 w-4 shrink-0 transition-colors",
-						active ? "text-[hsl(var(--text-on-filled))]" : "text-[hsl(var(--text-tertiary))] group-hover:text-[hsl(var(--text-primary))]",
+						active ? "text-white" : "text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-100 dark:group-hover:text-zinc-900",
 					)}
 				/>
 			) : null}
@@ -132,13 +132,13 @@ export function Sidebar({
 			<button
 				type="button"
 				onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-				className="fixed right-2 top-2 z-50 bg-[hsl(var(--glass-bg-hover))] backdrop-blur-md p-2 rounded-full md:hidden border border-[hsl(var(--border-default))] transition-colors hover:bg-[hsl(var(--glass-bg-active))]"
+				className="fixed right-2 top-2 z-50 bg-white/10 dark:bg-black/10 backdrop-blur-md p-2 rounded-full md:hidden border border-white/10 dark:border-black/10 transition-colors hover:bg-white/15 dark:hover:bg-black/15"
 				aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
 			>
 				{mobileMenuOpen ? (
-					<X className="h-5 w-5 text-[hsl(var(--text-primary))]" />
+					<X className="h-5 w-5 text-zinc-100 dark:text-zinc-900" />
 				) : (
-					<Menu className="h-5 w-5 text-[hsl(var(--text-primary))]" />
+					<Menu className="h-5 w-5 text-zinc-100 dark:text-zinc-900" />
 				)}
 			</button>
 
@@ -149,7 +149,7 @@ export function Sidebar({
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
 						exit={{ opacity: 0 }}
-						className="fixed inset-0 z-30 bg-[hsl(var(--overlay-backdrop))] backdrop-blur-sm md:hidden"
+						className="fixed inset-0 z-30 bg-black/50 dark:bg-black/30 backdrop-blur-sm md:hidden"
 						onClick={closeMobileMenu}
 						role="button"
 						tabIndex={0}
@@ -163,7 +163,7 @@ export function Sidebar({
 				initial={{ x: "-100%" }}
 				animate={{ x: mobileMenuOpen ? 0 : "-100%" }}
 				transition={getSpring("smooth")}
-				className="fixed left-0 top-0 z-40 h-full w-64 border-r border-[hsl(var(--border-default))] bg-[hsl(var(--overlay-bg))] p-4 pt-20 shadow-lg backdrop-blur-md md:hidden"
+				className="fixed left-0 top-0 z-40 h-full w-64 border-r border-white/10 dark:border-black/10 bg-zinc-900/95 dark:bg-white/95 p-4 pt-20 shadow-lg backdrop-blur-md md:hidden"
 			>
 				<div className="flex h-full flex-col">
 					<div className="space-y-1">
@@ -178,7 +178,7 @@ export function Sidebar({
 						))}
 					</div>
 
-					<div className="mt-auto space-y-1 border-t border-[hsl(var(--border-default))] pt-4">
+					<div className="mt-auto space-y-1 border-t border-white/10 dark:border-black/10 pt-4">
 						{settingsItem && (
 							<SidebarItem
 								key={settingsItem.label}
@@ -216,7 +216,7 @@ export function Sidebar({
 					))}
 				</div>
 
-				<div className="mt-auto space-y-1 border-t border-[hsl(var(--border-default))] pt-4">
+				<div className="mt-auto space-y-1 border-t border-white/10 dark:border-black/10 pt-4">
 					{/* Collapse toggle button */}
 					{isCollapsible && (
 						<button
@@ -225,7 +225,7 @@ export function Sidebar({
 							aria-expanded={!isCollapsed}
 							aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
 							className={cn(
-								"group flex w-full items-center rounded-md py-2 text-sm font-medium text-[hsl(var(--text-muted))] transition-all duration-200 ease-out hover:bg-[hsl(var(--glass-bg))] hover:text-[hsl(var(--text-tertiary))] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[hsl(var(--ring))]",
+								"group flex w-full items-center rounded-md py-2 text-sm font-medium text-zinc-600 dark:text-zinc-400 transition-all duration-200 ease-out hover:bg-white/5 dark:hover:bg-black/5 hover:text-zinc-500 dark:hover:text-zinc-400 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-500/50",
 								isCollapsed ? "justify-center px-2" : "gap-3 px-3",
 							)}
 						>

@@ -14,7 +14,7 @@ export function CloseButton({
 	className = "",
 }: CloseButtonProps) {
 	const baseClasses =
-		"w-3.5 h-3.5 bg-[hsl(var(--error))] rounded-full hover:bg-[hsl(var(--error)/0.8)] transition-all after:content-[''] after:absolute after:inset-0 after:m-auto after:w-1/3 after:h-1/3 after:rounded-full after:bg-[hsl(var(--error)/0.6)] after:opacity-0 hover:after:opacity-100 after:transition-opacity relative";
+		"w-3.5 h-3.5 bg-red-500 rounded-full hover:bg-red-500/80 transition-all after:content-[''] after:absolute after:inset-0 after:m-auto after:w-1/3 after:h-1/3 after:rounded-full after:bg-red-500/60 after:opacity-0 hover:after:opacity-100 after:transition-opacity relative";
 
 	const wrapperClasses =
 		"inline-flex items-center justify-center min-w-3.5 min-h-3.5";

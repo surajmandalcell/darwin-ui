@@ -71,16 +71,16 @@ const iconSizeClasses: Record<InputSize, string> = {
 // ============================================================================
 
 const baseInputClasses =
-	"flex w-full rounded-md border bg-[hsl(var(--glass-bg))] text-[hsl(var(--text-primary))] shadow-sm transition-colors placeholder:text-[hsl(var(--text-muted))] focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50 backdrop-blur-sm hover:bg-[hsl(var(--glass-bg-hover))]";
+	"flex w-full rounded-md border bg-white/5 dark:bg-black/5 text-zinc-100 dark:text-zinc-900 shadow-sm transition-colors placeholder:text-zinc-600 dark:placeholder:text-zinc-400 focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50 backdrop-blur-sm hover:bg-white/10 dark:hover:bg-black/10";
 
 const getStateClasses = (error?: boolean, success?: boolean) => {
 	if (error) {
-		return "border-[hsl(var(--error)/0.5)] focus-visible:ring-[hsl(var(--error)/0.5)]";
+		return "border-red-500/50 focus-visible:ring-red-500/50";
 	}
 	if (success) {
-		return "border-[hsl(var(--success)/0.5)] focus-visible:ring-[hsl(var(--success)/0.5)]";
+		return "border-emerald-500/50 focus-visible:ring-emerald-500/50";
 	}
-	return "border-[hsl(var(--border-default))] focus-visible:ring-[hsl(var(--ring))]";
+	return "border-white/10 dark:border-black/10 focus-visible:ring-blue-500/50";
 };
 
 // ============================================================================
@@ -133,7 +133,7 @@ const InputBase = React.forwardRef<HTMLInputElement, InputProps>(
 				{hasLeftIcon && (
 					<span
 						className={cn(
-							"absolute left-3 top-1/2 -translate-y-1/2 text-[hsl(var(--text-muted))] pointer-events-none z-10",
+							"absolute left-3 top-1/2 -translate-y-1/2 text-zinc-600 dark:text-zinc-400 pointer-events-none z-10",
 							iconSizeClasses[size],
 						)}
 					>
@@ -163,7 +163,7 @@ const InputBase = React.forwardRef<HTMLInputElement, InputProps>(
 				{error && (
 					<X
 						className={cn(
-							"absolute right-3 top-1/2 -translate-y-1/2 text-[hsl(var(--error))]",
+							"absolute right-3 top-1/2 -translate-y-1/2 text-red-500",
 							iconSizeClasses[size],
 						)}
 					/>
@@ -171,7 +171,7 @@ const InputBase = React.forwardRef<HTMLInputElement, InputProps>(
 				{success && !error && (
 					<Check
 						className={cn(
-							"absolute right-3 top-1/2 -translate-y-1/2 text-[hsl(var(--success))]",
+							"absolute right-3 top-1/2 -translate-y-1/2 text-emerald-500",
 							iconSizeClasses[size],
 						)}
 					/>
@@ -179,7 +179,7 @@ const InputBase = React.forwardRef<HTMLInputElement, InputProps>(
 				{!error && !success && rightIcon && (
 					<span
 						className={cn(
-							"absolute right-3 top-1/2 -translate-y-1/2 text-[hsl(var(--text-muted))] pointer-events-none",
+							"absolute right-3 top-1/2 -translate-y-1/2 text-zinc-600 dark:text-zinc-400 pointer-events-none",
 							iconSizeClasses[size],
 						)}
 					>
@@ -278,7 +278,7 @@ const TextAreaBase = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
 				{error && (
 					<X
 						className={cn(
-							"absolute right-3 top-3 text-[hsl(var(--error))]",
+							"absolute right-3 top-3 text-red-500",
 							iconSizeClasses[size],
 						)}
 					/>
@@ -286,7 +286,7 @@ const TextAreaBase = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
 				{success && !error && (
 					<Check
 						className={cn(
-							"absolute right-3 top-3 text-[hsl(var(--success))]",
+							"absolute right-3 top-3 text-emerald-500",
 							iconSizeClasses[size],
 						)}
 					/>

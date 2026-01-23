@@ -170,7 +170,7 @@ function DropdownMenuContent({
 					role="menu"
 					aria-orientation="vertical"
 					className={cn(
-						"fixed min-w-[180px] overflow-hidden rounded-lg border border-[hsl(var(--border-default))] bg-[hsl(var(--overlay-bg))] backdrop-blur-md p-1 shadow-xl",
+						"fixed min-w-[180px] overflow-hidden rounded-lg border border-white/10 dark:border-black/10 bg-zinc-900/95 dark:bg-white/95 backdrop-blur-md p-1 shadow-xl",
 						className
 					)}
 					style={{
@@ -222,9 +222,9 @@ function DropdownMenuItem({
 			disabled={disabled}
 			onClick={handleClick}
 			className={cn(
-				"flex w-full items-center rounded-md px-2 py-1.5 text-sm text-[hsl(var(--text-secondary))] outline-none transition-colors hover:bg-[hsl(var(--glass-bg-hover))] focus:bg-[hsl(var(--glass-bg-hover))]",
+				"flex w-full items-center rounded-md px-2 py-1.5 text-sm text-zinc-400 dark:text-zinc-500 outline-none transition-colors hover:bg-white/10 dark:hover:bg-black/10 focus:bg-white/10 dark:focus:bg-black/10",
 				disabled && "pointer-events-none opacity-50",
-				destructive && "text-[hsl(var(--error))] hover:text-[hsl(var(--error))] hover:bg-[hsl(var(--error-bg))] focus:bg-[hsl(var(--error-bg))]",
+				destructive && "text-red-500 hover:text-red-500 hover:bg-red-500/15 focus:bg-red-500/15",
 				className
 			)}
 		>
@@ -256,7 +256,7 @@ function DropdownMenuCheckboxItem({
 			disabled={disabled}
 			onClick={() => onCheckedChange?.(!checked)}
 			className={cn(
-				"flex w-full items-center rounded-md px-2 py-1.5 text-sm text-[hsl(var(--text-secondary))] outline-none transition-colors hover:bg-[hsl(var(--glass-bg-hover))] focus:bg-[hsl(var(--glass-bg-hover))]",
+				"flex w-full items-center rounded-md px-2 py-1.5 text-sm text-zinc-400 dark:text-zinc-500 outline-none transition-colors hover:bg-white/10 dark:hover:bg-black/10 focus:bg-white/10 dark:focus:bg-black/10",
 				disabled && "pointer-events-none opacity-50",
 				className
 			)}
@@ -276,7 +276,7 @@ interface DropdownMenuLabelProps {
 
 function DropdownMenuLabel({ children, className }: DropdownMenuLabelProps) {
 	return (
-		<div className={cn("px-2 py-1.5 text-xs font-semibold text-[hsl(var(--text-tertiary))]", className)}>
+		<div className={cn("px-2 py-1.5 text-xs font-semibold text-zinc-500 dark:text-zinc-400", className)}>
 			{children}
 		</div>
 	);
@@ -287,7 +287,7 @@ interface DropdownMenuSeparatorProps {
 }
 
 function DropdownMenuSeparator({ className }: DropdownMenuSeparatorProps) {
-	return <div className={cn("-mx-1 my-1 h-px bg-[hsl(var(--border-default))]", className)} />;
+	return <div className={cn("-mx-1 my-1 h-px bg-white/10 dark:bg-black/10", className)} />;
 }
 
 interface DropdownMenuShortcutProps {
@@ -297,7 +297,7 @@ interface DropdownMenuShortcutProps {
 
 function DropdownMenuShortcut({ children, className }: DropdownMenuShortcutProps) {
 	return (
-		<span className={cn("ml-auto text-xs tracking-widest text-[hsl(var(--text-muted))]", className)}>
+		<span className={cn("ml-auto text-xs tracking-widest text-zinc-600 dark:text-zinc-400", className)}>
 			{children}
 		</span>
 	);

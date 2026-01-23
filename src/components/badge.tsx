@@ -32,19 +32,19 @@ export function Badge({
 	...props
 }: BadgeProps) {
 	const variants: Record<BadgeVariant, string> = {
-		default: "border-[hsl(var(--border-default))] bg-[hsl(var(--glass-bg))] text-[hsl(var(--text-secondary))]",
-		secondary: "border-transparent bg-[hsl(var(--glass-bg))] text-[hsl(var(--text-tertiary))]",
-		outline: "border-[hsl(var(--border-strong))] text-[hsl(var(--text-secondary))] bg-transparent",
-		destructive: "border-transparent bg-[hsl(var(--error-bg))] text-[hsl(var(--error))]",
-		success: "border-transparent bg-[hsl(var(--success-bg))] text-[hsl(var(--success))]",
-		published: "border-transparent bg-[hsl(var(--success-bg))] text-[hsl(var(--success))]",
-		warning: "border-transparent bg-[hsl(var(--warning-bg))] text-[hsl(var(--warning))]",
-		draft: "border-transparent bg-[hsl(var(--warning-bg))] text-[hsl(var(--warning))]",
-		read: "border-transparent bg-[hsl(var(--warning-bg))] text-[hsl(var(--warning))]",
-		info: "border-transparent bg-[hsl(var(--info-bg))] text-[hsl(var(--info))]",
-		new: "border-transparent bg-[hsl(var(--info-bg))] text-[hsl(var(--info))]",
-		responded: "border-transparent bg-[hsl(var(--success-bg))] text-[hsl(var(--success))]",
-		archived: "border-transparent bg-[hsl(var(--glass-bg))] text-[hsl(var(--text-muted))]",
+		default: "border-white/10 dark:border-black/10 bg-white/5 dark:bg-black/5 text-zinc-400 dark:text-zinc-500",
+		secondary: "border-transparent bg-white/5 dark:bg-black/5 text-zinc-500 dark:text-zinc-400",
+		outline: "border-white/20 dark:border-black/20 text-zinc-400 dark:text-zinc-500 bg-transparent",
+		destructive: "border-transparent bg-red-500/15 text-red-500",
+		success: "border-transparent bg-emerald-500/15 text-emerald-500",
+		published: "border-transparent bg-emerald-500/15 text-emerald-500",
+		warning: "border-transparent bg-amber-500/15 text-amber-500",
+		draft: "border-transparent bg-amber-500/15 text-amber-500",
+		read: "border-transparent bg-amber-500/15 text-amber-500",
+		info: "border-transparent bg-sky-500/15 text-sky-500",
+		new: "border-transparent bg-sky-500/15 text-sky-500",
+		responded: "border-transparent bg-emerald-500/15 text-emerald-500",
+		archived: "border-transparent bg-white/5 dark:bg-black/5 text-zinc-600 dark:text-zinc-400",
 	};
 
 	return (
@@ -54,7 +54,7 @@ export function Badge({
 			transition={{ duration: getDuration("normal") }}
 			{...(props as any)}
 			className={cn(
-				"inline-flex items-center justify-center rounded-full border px-2.5 py-0.5 text-xs font-medium focus:outline-none focus:ring-1 focus:ring-[hsl(var(--ring))]",
+				"inline-flex items-center justify-center rounded-full border px-2.5 py-0.5 text-xs font-medium focus:outline-none focus:ring-1 focus:ring-blue-500/50",
 				variants[variant],
 				className,
 			)}

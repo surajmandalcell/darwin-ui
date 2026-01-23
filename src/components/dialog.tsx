@@ -110,7 +110,7 @@ function DialogContent({ children, className, size = "md" }: DialogContentProps)
 						animate={{ opacity: 1 }}
 						exit={{ opacity: 0 }}
 						transition={{ duration: getDuration("fast") }}
-						className="fixed inset-0 bg-[hsl(var(--overlay-backdrop))] backdrop-blur-sm p-4 overflow-y-auto flex items-center justify-center"
+						className="fixed inset-0 bg-black/50 dark:bg-black/30 backdrop-blur-sm p-4 overflow-y-auto flex items-center justify-center"
 						style={{ zIndex: 9999 }}
 						onClick={(e) => {
 							if (e.target === e.currentTarget) {
@@ -129,7 +129,7 @@ function DialogContent({ children, className, size = "md" }: DialogContentProps)
 							role="dialog"
 							aria-modal="true"
 							className={cn(
-								"relative w-full bg-[hsl(var(--overlay-bg))] backdrop-blur-md border border-[hsl(var(--border-default))] rounded-xl shadow-2xl",
+								"relative w-full bg-zinc-900/95 dark:bg-white/95 backdrop-blur-md border border-white/10 dark:border-black/10 rounded-xl shadow-2xl",
 								sizeClasses[size],
 								className
 							)}
@@ -167,7 +167,7 @@ interface DialogTitleProps {
 
 function DialogTitle({ children, className }: DialogTitleProps) {
 	return (
-		<h2 className={cn("text-lg font-semibold text-[hsl(var(--text-primary))]", className)}>
+		<h2 className={cn("text-lg font-semibold text-zinc-100 dark:text-zinc-900", className)}>
 			{children}
 		</h2>
 	);
@@ -180,7 +180,7 @@ interface DialogDescriptionProps {
 
 function DialogDescription({ children, className }: DialogDescriptionProps) {
 	return (
-		<p className={cn("mt-1 text-sm text-[hsl(var(--text-secondary))]", className)}>
+		<p className={cn("mt-1 text-sm text-zinc-400 dark:text-zinc-500", className)}>
 			{children}
 		</p>
 	);
@@ -229,7 +229,7 @@ function DialogClose({ children, className, asChild }: DialogCloseProps) {
 				type="button"
 				onClick={() => onOpenChange(false)}
 				className={cn(
-					"absolute right-4 top-4 rounded-md p-1 text-[hsl(var(--text-muted))] hover:text-[hsl(var(--text-secondary))] hover:bg-[hsl(var(--glass-bg-hover))] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[hsl(var(--ring))]",
+					"absolute right-4 top-4 rounded-md p-1 text-zinc-600 dark:text-zinc-400 hover:text-zinc-400 dark:hover:text-zinc-500 hover:bg-white/10 dark:hover:bg-black/10 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-500/50",
 					className
 				)}
 			>

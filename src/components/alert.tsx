@@ -29,39 +29,39 @@ interface InlineAlertProps {
 
 const alertVariants: Record<AlertVariant, { bg: string; border: string; icon: string; title: string; description: string }> = {
 	info: {
-		bg: "bg-[hsl(var(--info-bg))]",
-		border: "border-[hsl(var(--info)/0.2)]",
-		icon: "text-[hsl(var(--info))]",
-		title: "text-[hsl(var(--text-primary))]",
-		description: "text-[hsl(var(--text-secondary))]",
+		bg: "bg-sky-500/15",
+		border: "border-sky-500/20",
+		icon: "text-sky-500",
+		title: "text-zinc-100 dark:text-zinc-900",
+		description: "text-zinc-400 dark:text-zinc-500",
 	},
 	success: {
-		bg: "bg-[hsl(var(--success-bg))]",
-		border: "border-[hsl(var(--success)/0.2)]",
-		icon: "text-[hsl(var(--success))]",
-		title: "text-[hsl(var(--text-primary))]",
-		description: "text-[hsl(var(--text-secondary))]",
+		bg: "bg-emerald-500/15",
+		border: "border-emerald-500/20",
+		icon: "text-emerald-500",
+		title: "text-zinc-100 dark:text-zinc-900",
+		description: "text-zinc-400 dark:text-zinc-500",
 	},
 	warning: {
-		bg: "bg-[hsl(var(--warning-bg))]",
-		border: "border-[hsl(var(--warning)/0.2)]",
-		icon: "text-[hsl(var(--warning))]",
-		title: "text-[hsl(var(--text-primary))]",
-		description: "text-[hsl(var(--text-secondary))]",
+		bg: "bg-amber-500/15",
+		border: "border-amber-500/20",
+		icon: "text-amber-500",
+		title: "text-zinc-100 dark:text-zinc-900",
+		description: "text-zinc-400 dark:text-zinc-500",
 	},
 	error: {
-		bg: "bg-[hsl(var(--error-bg))]",
-		border: "border-[hsl(var(--error)/0.2)]",
-		icon: "text-[hsl(var(--error))]",
-		title: "text-[hsl(var(--text-primary))]",
-		description: "text-[hsl(var(--text-secondary))]",
+		bg: "bg-red-500/15",
+		border: "border-red-500/20",
+		icon: "text-red-500",
+		title: "text-zinc-100 dark:text-zinc-900",
+		description: "text-zinc-400 dark:text-zinc-500",
 	},
 	destructive: {
-		bg: "bg-[hsl(var(--error-bg))]",
-		border: "border-[hsl(var(--error)/0.2)]",
-		icon: "text-[hsl(var(--error))]",
-		title: "text-[hsl(var(--text-primary))]",
-		description: "text-[hsl(var(--text-secondary))]",
+		bg: "bg-red-500/15",
+		border: "border-red-500/20",
+		icon: "text-red-500",
+		title: "text-zinc-100 dark:text-zinc-900",
+		description: "text-zinc-400 dark:text-zinc-500",
 	},
 };
 
@@ -144,7 +144,7 @@ export function Alert({
 							onClick={handleDismiss}
 							className={cn(
 								"shrink-0 p-1 rounded-lg transition-colors",
-								"hover:bg-[hsl(var(--glass-bg-hover))] active:bg-[hsl(var(--glass-bg-active))]",
+								"hover:bg-white/10 dark:hover:bg-black/10 active:bg-white/15 dark:active:bg-black/15",
 								styles.icon,
 								"opacity-60 hover:opacity-100"
 							)}
@@ -233,13 +233,13 @@ export function AlertProvider({ children }: { children: React.ReactNode }) {
 		const iconClass = "w-5 h-5";
 		switch (type) {
 			case "success":
-				return <CheckCircle className={`${iconClass} text-[hsl(var(--success))]`} />;
+				return <CheckCircle className={`${iconClass} text-emerald-500`} />;
 			case "warning":
-				return <AlertTriangle className={`${iconClass} text-[hsl(var(--warning))]`} />;
+				return <AlertTriangle className={`${iconClass} text-amber-500`} />;
 			case "error":
-				return <XCircle className={`${iconClass} text-[hsl(var(--error))]`} />;
+				return <XCircle className={`${iconClass} text-red-500`} />;
 			default:
-				return <Info className={`${iconClass} text-[hsl(var(--info))]`} />;
+				return <Info className={`${iconClass} text-sky-500`} />;
 		}
 	};
 
@@ -258,12 +258,12 @@ export function AlertProvider({ children }: { children: React.ReactNode }) {
 					>
 						<button
 							type="button"
-							className="absolute inset-0 bg-[hsl(var(--overlay-backdrop))] backdrop-blur-[6px]"
+							className="absolute inset-0 bg-black/50 dark:bg-black/30 backdrop-blur-[6px]"
 							aria-label={alert.cancelText || "Dismiss alert"}
 							onClick={() => handleClose(alert.onCancel)}
 						/>
 						<div
-							className={`relative bg-[hsl(var(--overlay-bg))] backdrop-blur-md shadow-md border border-[hsl(var(--border-default))] rounded-md w-full max-w-md ${
+							className={`relative bg-zinc-900/95 dark:bg-white/95 backdrop-blur-md shadow-md border border-white/10 dark:border-black/10 rounded-md w-full max-w-md ${
 								isClosing
 									? "animate-out zoom-out-95 duration-200"
 									: "animate-in zoom-in-95 duration-200"
@@ -279,11 +279,11 @@ export function AlertProvider({ children }: { children: React.ReactNode }) {
 									<div className="flex-1">
 										<h3
 											id="alert-title"
-											className="text-[hsl(var(--text-primary))] text-base font-semibold mb-1"
+											className="text-zinc-100 dark:text-zinc-900 text-base font-semibold mb-1"
 										>
 											{alert.title}
 										</h3>
-										<p id="alert-message" className="text-[hsl(var(--text-secondary))] text-sm">
+										<p id="alert-message" className="text-zinc-400 dark:text-zinc-500 text-sm">
 											{alert.message}
 										</p>
 									</div>

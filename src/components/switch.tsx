@@ -24,7 +24,7 @@ export function Switch({
 	return (
 		<label
 			htmlFor={id}
-			className={`inline-flex items-center gap-2 text-[13px] text-[hsl(var(--text-primary))] ${
+			className={`inline-flex items-center gap-2 text-[13px] text-zinc-100 dark:text-zinc-900 ${
 				disabled ? "opacity-50 cursor-default" : "cursor-pointer"
 			} ${className}`}
 		>
@@ -41,8 +41,8 @@ export function Switch({
 				<span
 					className={`flex h-5 w-9 items-center rounded-full px-0.5 transition-colors duration-200 ${
 						checked
-							? "bg-[hsl(var(--switch-checked))]"
-							: "bg-[hsl(var(--switch-unchecked))]"
+							? "bg-emerald-500"
+							: "bg-zinc-600"
 					}`}
 				>
 					<motion.span
@@ -50,7 +50,7 @@ export function Switch({
 							x: checked ? 16 : 0,
 						}}
 						transition={getSpring("snappy")}
-						className="h-4 w-4 rounded-full bg-[hsl(var(--control-knob))] shadow-sm"
+						className="h-4 w-4 rounded-full bg-white shadow-sm"
 					/>
 				</span>
 			</span>
