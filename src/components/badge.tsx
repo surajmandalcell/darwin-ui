@@ -18,7 +18,8 @@ export type BadgeVariant =
 	| "archived"
 	| "new"
 	| "read"
-	| "responded";
+	| "responded"
+	| "glass";
 
 interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
 	variant?: BadgeVariant;
@@ -35,6 +36,7 @@ export function Badge({
 		default: "border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 text-zinc-700 dark:text-zinc-300",
 		secondary: "border-transparent bg-black/5 dark:bg-white/5 text-zinc-700 dark:text-zinc-300",
 		outline: "border-black/20 dark:border-white/20 text-zinc-700 dark:text-zinc-300 bg-transparent",
+		glass: "bg-white/60 dark:bg-zinc-900/60 backdrop-blur-sm border-white/30 dark:border-white/10 text-zinc-700 dark:text-zinc-300",
 		destructive: "border-transparent bg-red-500/15 text-red-600 dark:text-red-400",
 		success: "border-transparent bg-emerald-500/15 text-emerald-600 dark:text-emerald-400",
 		published: "border-transparent bg-emerald-500/15 text-emerald-600 dark:text-emerald-400",

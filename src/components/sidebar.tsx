@@ -92,6 +92,8 @@ interface SidebarProps {
 	onCollapsedChange?: (collapsed: boolean) => void;
 	/** Whether to show the collapse toggle button. Auto-enabled if collapsed props are provided */
 	collapsible?: boolean;
+	/** Enable frosted glass effect on desktop sidebar */
+	glass?: boolean;
 }
 
 export function Sidebar({
@@ -102,6 +104,7 @@ export function Sidebar({
 	defaultCollapsed = false,
 	onCollapsedChange,
 	collapsible,
+	glass = false,
 }: SidebarProps) {
 	const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
 	const [internalCollapsed, setInternalCollapsed] =
@@ -206,7 +209,8 @@ export function Sidebar({
 				transition={getSpring("smooth")}
 				className={cn(
 					"hidden h-full shrink-0 flex-col md:flex",
-					isCollapsed ? "p-2" : "p-3"
+					isCollapsed ? "p-2" : "p-3",
+					glass && "bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border-r border-white/20 dark:border-white/10"
 				)}
 			>
 				<div className={cn("flex-1", isCollapsed ? "space-y-1" : "space-y-1")}>

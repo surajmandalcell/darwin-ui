@@ -10,6 +10,7 @@ interface AccordionContextValue {
 	expandedItems: string[];
 	toggleItem: (value: string) => void;
 	type: "single" | "multiple";
+	glass: boolean;
 }
 
 const AccordionContext = React.createContext<AccordionContextValue | undefined>(undefined);
@@ -27,6 +28,8 @@ interface AccordionProps {
 	defaultValue?: string | string[];
 	children: React.ReactNode;
 	className?: string;
+	/** Enable frosted glass effect on items */
+	glass?: boolean;
 }
 
 function Accordion({
@@ -34,6 +37,7 @@ function Accordion({
 	defaultValue,
 	children,
 	className,
+	glass = false,
 }: AccordionProps) {
 	const [expandedItems, setExpandedItems] = React.useState<string[]>(() => {
 		if (!defaultValue) return [];
@@ -55,8 +59,12 @@ function Accordion({
 	);
 
 	return (
-		<AccordionContext.Provider value={{ expandedItems, toggleItem, type }}>
-			<div className={cn("w-full divide-y divide-black/10 dark:divide-white/10", className)}>
+		<AccordionContext.Provider value={{ expandedItems, toggleItem, type, glass }}>
+			<div className={cn(
+				"w-full",
+				glass ? "space-y-2" : "divide-y divide-black/10 dark:divide-white/10",
+				className
+			)}>
 				{children}
 			</div>
 		</AccordionContext.Provider>
@@ -70,8 +78,16 @@ interface AccordionItemProps {
 }
 
 function AccordionItem({ value, children, className }: AccordionItemProps) {
+	const { glass } = useAccordionContext();
 	return (
-		<div className={cn("py-0", className)} data-value={value}>
+		<div
+			className={cn(
+				"py-0",
+				glass && "bg-white/60 dark:bg-zinc-900/60 backdrop-blur-sm border border-white/20 dark:border-white/10 rounded-[var(--radius-lg,0.75rem)] px-4",
+				className
+			)}
+			data-value={value}
+		>
 			{React.Children.map(children, (child) => {
 				if (React.isValidElement(child)) {
 					return React.cloneElement(child as React.ReactElement<{ itemValue?: string }>, { itemValue: value });

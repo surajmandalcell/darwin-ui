@@ -3,19 +3,26 @@
 import React from "react";
 import { cn } from "../lib/utils";
 
-export const Card = React.forwardRef<
-	HTMLDivElement,
-	React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-	<div
-		ref={ref}
-		{...(props as any)}
-		className={cn(
-			"rounded-[var(--radius-xl,1rem)] border border-[hsl(var(--border))] bg-[hsl(var(--card))] text-[hsl(var(--card-foreground))] transition-colors duration-150 hover:border-[hsl(var(--border))]/80",
-			className,
-		)}
-	/>
-));
+interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+	/** Enable frosted glass effect */
+	glass?: boolean;
+}
+
+export const Card = React.forwardRef<HTMLDivElement, CardProps>(
+	({ className, glass, ...props }, ref) => (
+		<div
+			ref={ref}
+			{...(props as any)}
+			className={cn(
+				"rounded-[var(--radius-xl,1rem)] border text-[hsl(var(--card-foreground))] transition-colors duration-150",
+				glass
+					? "bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border-white/20 dark:border-white/10"
+					: "bg-[hsl(var(--card))] border-[hsl(var(--border))] hover:border-[hsl(var(--border))]/80",
+				className,
+			)}
+		/>
+	)
+);
 Card.displayName = "Card";
 
 export const CardHeader = React.forwardRef<

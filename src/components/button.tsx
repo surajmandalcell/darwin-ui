@@ -55,6 +55,8 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	fullWidth?: boolean;
 	/** Render as icon-only button (square aspect ratio) */
 	iconOnly?: boolean;
+	/** Enable frosted glass hover effect */
+	glass?: boolean;
 }
 
 // ============================================================================
@@ -109,6 +111,7 @@ const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonProps>(
 			rightIcon,
 			fullWidth = false,
 			iconOnly = false,
+			glass = false,
 			disabled,
 			...props
 		},
@@ -146,6 +149,7 @@ const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonProps>(
 					variantClasses[variant],
 					sizeClasses[effectiveSize],
 					fullWidth && "w-full",
+					glass && "hover:bg-white/80 dark:hover:bg-zinc-900/80 hover:backdrop-blur-md",
 					className,
 				)}
 				// biome-ignore lint/suspicious/noExplicitAny: Framer Motion onDrag conflicts with HTML onDrag
