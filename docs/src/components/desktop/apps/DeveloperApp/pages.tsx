@@ -805,6 +805,252 @@ function App() {
   );
 }
 
+// CSS Isolation page - using Darwin UI with other CSS libraries
+export function CssIsolationPage() {
+  const cssLayersExample = `/* In your global CSS file (e.g., globals.css) */
+@layer base, darwin-ui, components, utilities;
+
+/* Import Darwin UI in its own layer */
+@import '@pikoloo/darwin-ui/styles.css' layer(darwin-ui);
+
+/* Your custom styles go in the components/utilities layers */
+@layer components {
+  .my-custom-button {
+    /* These styles won't conflict with Darwin UI */
+  }
+}`;
+
+  const tailwindConfigExample = `// tailwind.config.js
+module.exports = {
+  // Use a prefix to avoid class collisions
+  prefix: 'tw-',
+
+  // Or use important: true if Darwin UI should take precedence
+  // important: true,
+
+  content: ['./src/**/*.{js,ts,jsx,tsx}'],
+}
+
+/* Now Tailwind classes use prefix: tw-flex, tw-p-4, tw-text-white */
+/* Darwin UI classes remain unchanged */`;
+
+  const cssVariablesExample = `/* Darwin UI uses CSS variables for theming */
+:root {
+  --background: 0 0% 100%;
+  --foreground: 222 47% 11%;
+  --card: 0 0% 100%;
+  --border: 220 13% 91%;
+  /* ... other variables */
+}
+
+/* Override specific variables for your brand */
+:root {
+  --primary: 210 100% 50%;  /* Your brand color */
+}
+
+/* Or scope overrides to specific sections */
+.marketing-section {
+  --primary: 340 82% 52%;  /* Different accent for marketing */
+}`;
+
+  const importOrderExample = `/* CORRECT: Darwin UI first, then your overrides */
+import '@pikoloo/darwin-ui/styles.css';
+import './your-styles.css';  /* Your styles override Darwin UI */
+
+/* OR with CSS @import */
+@import '@pikoloo/darwin-ui/styles.css';
+@import './your-tailwind.css';  /* Tailwind utilities last */`;
+
+  const troubleshootingCode = `/* Problem: Tailwind's reset overrides Darwin UI */
+/* Solution: Exclude Darwin UI elements from Tailwind's preflight */
+
+// tailwind.config.js
+module.exports = {
+  corePlugins: {
+    preflight: false,  // Disable Tailwind's reset completely
+  },
+}
+
+/* Or use @layer to control specificity */
+@layer base {
+  /* Tailwind reset styles */
+}
+@layer darwin-ui {
+  /* Darwin UI styles (higher specificity) */
+}`;
+
+  return (
+    <motion.div
+      variants={pageTransitionVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      className="space-y-8"
+    >
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="show"
+      >
+        <motion.div className="flex items-center gap-2 mb-4" variants={itemVariants}>
+          <Badge variant="info">Integration Guide</Badge>
+        </motion.div>
+        <motion.h1
+          className="text-4xl font-bold text-foreground mb-4"
+          variants={itemVariants}
+        >
+          CSS Isolation
+        </motion.h1>
+        <motion.p
+          className="text-lg text-muted-foreground"
+          variants={itemVariants}
+        >
+          Using Darwin UI alongside Tailwind, Bootstrap, or other CSS frameworks without conflicts.
+        </motion.p>
+      </motion.div>
+
+      {/* Why CSS Isolation Matters */}
+      <motion.div
+        variants={itemVariants}
+        initial="hidden"
+        animate="show"
+        transition={{ delay: 0.1 }}
+        className="space-y-4"
+      >
+        <h2 className="text-2xl font-semibold text-foreground">Why CSS Isolation Matters</h2>
+        <p className="text-muted-foreground">
+          When multiple CSS frameworks coexist, they can conflict through:
+        </p>
+        <ul className="list-disc list-inside text-muted-foreground space-y-1 ml-2">
+          <li><strong className="text-foreground">CSS resets</strong> - Tailwind&apos;s Preflight can override Darwin UI&apos;s base styles</li>
+          <li><strong className="text-foreground">Class name collisions</strong> - Shared utility class names like <code className="text-blue-400 bg-muted/50 px-1 rounded">.border</code> or <code className="text-blue-400 bg-muted/50 px-1 rounded">.shadow</code></li>
+          <li><strong className="text-foreground">Specificity wars</strong> - Both frameworks competing for the same selectors</li>
+          <li><strong className="text-foreground">CSS variable conflicts</strong> - Same variable names with different values</li>
+        </ul>
+      </motion.div>
+
+      {/* Method 1: CSS Layers */}
+      <motion.div
+        variants={itemVariants}
+        initial="hidden"
+        animate="show"
+        transition={{ delay: 0.2 }}
+        className="space-y-4"
+      >
+        <h2 className="text-2xl font-semibold text-foreground">Method 1: CSS Layers (Recommended)</h2>
+        <p className="text-muted-foreground">
+          CSS <code className="text-blue-400 bg-muted/50 px-1 rounded">@layer</code> gives you explicit control over cascade order.
+          Later layers have higher specificity.
+        </p>
+        <CodeBlock code={cssLayersExample} language="css" />
+        <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
+          <p className="text-sm text-emerald-400">
+            <strong>Pro tip:</strong> CSS layers are supported in all modern browsers (Chrome 99+, Firefox 97+, Safari 15.4+).
+          </p>
+        </div>
+      </motion.div>
+
+      {/* Method 2: Import Order */}
+      <motion.div
+        variants={itemVariants}
+        initial="hidden"
+        animate="show"
+        transition={{ delay: 0.3 }}
+        className="space-y-4"
+      >
+        <h2 className="text-2xl font-semibold text-foreground">Method 2: Import Order</h2>
+        <p className="text-muted-foreground">
+          The simplest approach: import Darwin UI first, then your custom styles. Later imports override earlier ones.
+        </p>
+        <CodeBlock code={importOrderExample} language="typescript" />
+      </motion.div>
+
+      {/* Method 3: Tailwind Prefix */}
+      <motion.div
+        variants={itemVariants}
+        initial="hidden"
+        animate="show"
+        transition={{ delay: 0.4 }}
+        className="space-y-4"
+      >
+        <h2 className="text-2xl font-semibold text-foreground">Method 3: Tailwind Prefix</h2>
+        <p className="text-muted-foreground">
+          Add a prefix to all Tailwind classes to eliminate any possibility of collision.
+        </p>
+        <CodeBlock code={tailwindConfigExample} language="javascript" />
+      </motion.div>
+
+      {/* CSS Variables */}
+      <motion.div
+        variants={itemVariants}
+        initial="hidden"
+        animate="show"
+        transition={{ delay: 0.5 }}
+        className="space-y-4"
+      >
+        <h2 className="text-2xl font-semibold text-foreground">CSS Variables Strategy</h2>
+        <p className="text-muted-foreground">
+          Darwin UI uses CSS variables for all colors and theming. You can override specific variables
+          without replacing the entire stylesheet.
+        </p>
+        <CodeBlock code={cssVariablesExample} language="css" />
+      </motion.div>
+
+      {/* Troubleshooting */}
+      <motion.div
+        variants={itemVariants}
+        initial="hidden"
+        animate="show"
+        transition={{ delay: 0.6 }}
+        className="space-y-4"
+      >
+        <h2 className="text-2xl font-semibold text-foreground">Troubleshooting</h2>
+        <p className="text-muted-foreground">
+          If Tailwind&apos;s reset (Preflight) is overriding Darwin UI styles:
+        </p>
+        <CodeBlock code={troubleshootingCode} language="javascript" />
+      </motion.div>
+
+      {/* Quick Reference Table */}
+      <motion.div
+        variants={itemVariants}
+        initial="hidden"
+        animate="show"
+        transition={{ delay: 0.7 }}
+        className="space-y-4"
+      >
+        <h2 className="text-2xl font-semibold text-foreground">Quick Reference</h2>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableHeaderCell>Scenario</TableHeaderCell>
+              <TableHeaderCell>Recommended Solution</TableHeaderCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <TableRow>
+              <TableCell>New project with Tailwind</TableCell>
+              <TableCell>CSS Layers or import order</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Existing Tailwind project</TableCell>
+              <TableCell>Tailwind prefix + CSS layers</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Bootstrap project</TableCell>
+              <TableCell>CSS layers (Bootstrap last)</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Only Darwin UI</TableCell>
+              <TableCell>No isolation needed</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </motion.div>
+    </motion.div>
+  );
+}
+
 // Generic component page with enhanced animations
 export function ComponentPage({ name }: { name: string }) {
   // Convert kebab-case to PascalCase for display
@@ -1428,6 +1674,8 @@ export function PageContent({ section, page, onNavigate }: { section: string; pa
         return <ShadcnCliPage />;
       case 'quick-start':
         return <QuickStartPage onNavigate={onNavigate} />;
+      case 'css-isolation':
+        return <CssIsolationPage />;
     }
   }
 

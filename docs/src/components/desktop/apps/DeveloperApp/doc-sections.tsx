@@ -12,6 +12,7 @@ export const docSections: Record<string, DocSection> = {
       { id: 'installation', title: 'Installation' },
       { id: 'shadcn-cli', title: 'ShadCN CLI' },
       { id: 'quick-start', title: 'Quick Start' },
+      { id: 'css-isolation', title: 'CSS Isolation' },
     ],
   },
   'components': {

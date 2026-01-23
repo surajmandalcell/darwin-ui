@@ -75,18 +75,18 @@ function FlatVersionCard({ entry }: { entry: ChangelogEntry }) {
   return (
     <motion.div
       variants={itemVariants}
-      className="rounded-xl border border-white/10 bg-white/5 overflow-hidden"
+      className="rounded-xl border border-border bg-card/50 overflow-hidden"
     >
       {/* Header */}
-      <div className="p-4 flex flex-col md:flex-row items-start md:items-center justify-between border-b border-white/10 gap-4 md:gap-0">
+      <div className="p-4 flex flex-col md:flex-row items-start md:items-center justify-between border-b border-border gap-4 md:gap-0">
         <div className="flex items-center gap-4 w-full md:w-auto justify-between md:justify-start">
           <div className="flex items-center gap-2">
             <Tag className="w-4 h-4 text-blue-400" />
-            <span className="text-lg font-semibold text-white">v{entry.version}</span>
+            <span className="text-lg font-semibold text-foreground">v{entry.version}</span>
           </div>
           <Badge variant="info">{entry.title}</Badge>
         </div>
-        <div className="flex items-center gap-1.5 text-white/50 text-sm">
+        <div className="flex items-center gap-1.5 text-muted-foreground text-sm">
           <Calendar className="w-3.5 h-3.5" />
           <span>{entry.date}</span>
         </div>
@@ -95,7 +95,7 @@ function FlatVersionCard({ entry }: { entry: ChangelogEntry }) {
       {/* Content - always visible */}
       <div className="px-4 pb-4 pt-4">
         {entry.description && (
-          <p className="text-white/70 text-sm mb-4">{entry.description}</p>
+          <p className="text-foreground/70 text-sm mb-4">{entry.description}</p>
         )}
 
         <div className="space-y-4">
@@ -113,13 +113,13 @@ function FlatVersionCard({ entry }: { entry: ChangelogEntry }) {
                     <Icon className="w-3 h-3" />
                     {getChangeTypeLabel(type)}
                   </span>
-                  <span className="text-white/40 text-xs">({changes.length})</span>
+                  <span className="text-muted-foreground text-xs">({changes.length})</span>
                 </div>
                 <ul className="space-y-1.5 ml-1">
                   {changes.map((change, idx) => (
                     <li key={idx} className="flex items-start gap-2 text-sm">
-                      <span className="text-white/30 mt-1">•</span>
-                      <span className="text-white/80">
+                      <span className="text-foreground/30 mt-1">•</span>
+                      <span className="text-foreground/80">
                         {change.component && (
                           <code className="text-blue-400 bg-blue-500/10 px-1.5 py-0.5 rounded text-xs mr-1.5">
                             {change.component}
@@ -160,22 +160,22 @@ function VersionCard({ entry, isExpanded, onToggle }: {
   return (
     <motion.div
       variants={itemVariants}
-      className="rounded-xl border border-white/10 bg-white/5 overflow-hidden"
+      className="rounded-xl border border-border bg-card/50 overflow-hidden"
     >
       {/* Header */}
       <motion.button
-        className="w-full p-4 flex flex-col md:flex-row items-start md:items-center justify-between text-left hover:bg-white/5 transition-colors gap-4 md:gap-0"
+        className="w-full p-4 flex flex-col md:flex-row items-start md:items-center justify-between text-left hover:bg-foreground/5 transition-colors gap-4 md:gap-0"
         onClick={onToggle}
       >
         <div className="flex items-center gap-4 w-full md:w-auto justify-between md:justify-start">
           <div className="flex items-center gap-2">
             <Tag className="w-4 h-4 text-blue-400" />
-            <span className="text-lg font-semibold text-white">v{entry.version}</span>
+            <span className="text-lg font-semibold text-foreground">v{entry.version}</span>
           </div>
           <Badge variant="info">{entry.title}</Badge>
         </div>
         <div className="flex items-center gap-3 w-full md:w-auto justify-between md:justify-start">
-          <div className="flex items-center gap-1.5 text-white/50 text-sm">
+          <div className="flex items-center gap-1.5 text-muted-foreground text-sm">
             <Calendar className="w-3.5 h-3.5" />
             <span>{entry.date}</span>
           </div>
@@ -183,7 +183,7 @@ function VersionCard({ entry, isExpanded, onToggle }: {
             animate={{ rotate: isExpanded ? 90 : 0 }}
             transition={{ duration: 0.2 }}
           >
-            <ChevronRight className="w-5 h-5 text-white/50" />
+            <ChevronRight className="w-5 h-5 text-muted-foreground" />
           </motion.div>
         </div>
       </motion.button>
@@ -197,9 +197,9 @@ function VersionCard({ entry, isExpanded, onToggle }: {
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="px-4 pb-4 border-t border-white/10 pt-4">
+            <div className="px-4 pb-4 border-t border-border pt-4">
               {entry.description && (
-                <p className="text-white/70 text-sm mb-4">{entry.description}</p>
+                <p className="text-foreground/70 text-sm mb-4">{entry.description}</p>
               )}
 
               <div className="space-y-4">
@@ -217,13 +217,13 @@ function VersionCard({ entry, isExpanded, onToggle }: {
                           <Icon className="w-3 h-3" />
                           {getChangeTypeLabel(type)}
                         </span>
-                        <span className="text-white/40 text-xs">({changes.length})</span>
+                        <span className="text-muted-foreground text-xs">({changes.length})</span>
                       </div>
                       <ul className="space-y-1.5 ml-1">
                         {changes.map((change, idx) => (
                           <li key={idx} className="flex items-start gap-2 text-sm">
-                            <span className="text-white/30 mt-1">•</span>
-                            <span className="text-white/80">
+                            <span className="text-foreground/30 mt-1">•</span>
+                            <span className="text-foreground/80">
                               {change.component && (
                                 <code className="text-blue-400 bg-blue-500/10 px-1.5 py-0.5 rounded text-xs mr-1.5">
                                   {change.component}
@@ -333,21 +333,21 @@ export function ChangelogApp({ windowState: _windowState }: ChangelogAppProps) {
   };
 
   return (
-    <div className="h-full flex flex-col bg-neutral-950">
+    <div className="h-full flex flex-col bg-background">
       {/* Header */}
-      <div className="p-4 md:p-6 border-b border-white/10 bg-neutral-900/50">
+      <div className="p-4 md:p-6 border-b border-border bg-card/50">
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-4 md:gap-0">
           <div>
-            <h1 className="text-xl font-bold text-white">Changelog</h1>
-            <p className="text-white/50 text-sm">All notable changes to Darwin UI</p>
+            <h1 className="text-xl font-bold text-foreground">Changelog</h1>
+            <p className="text-muted-foreground text-sm">All notable changes to Darwin UI</p>
           </div>
           <div className="flex flex-wrap items-center gap-2">
             {/* View mode toggle */}
             <motion.button
               className={`px-3 py-1.5 text-xs rounded-md transition-colors flex items-center gap-1.5 ${
                 viewMode === 'flat'
-                  ? 'text-white/90 bg-white/10'
-                  : 'text-white/60 hover:text-white/90 hover:bg-white/10'
+                  ? 'text-foreground/90 bg-foreground/10'
+                  : 'text-muted-foreground hover:text-foreground/90 hover:bg-foreground/10'
               }`}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
@@ -369,7 +369,7 @@ export function ChangelogApp({ windowState: _windowState }: ChangelogAppProps) {
             {viewMode === 'collapsible' && (
               <>
                 <motion.button
-                  className="px-3 py-1.5 text-xs text-white/60 hover:text-white/90 hover:bg-white/10 rounded-md transition-colors"
+                  className="px-3 py-1.5 text-xs text-muted-foreground hover:text-foreground/90 hover:bg-foreground/10 rounded-md transition-colors"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={expandAll}
@@ -377,7 +377,7 @@ export function ChangelogApp({ windowState: _windowState }: ChangelogAppProps) {
                   Expand All
                 </motion.button>
                 <motion.button
-                  className="px-3 py-1.5 text-xs text-white/60 hover:text-white/90 hover:bg-white/10 rounded-md transition-colors"
+                  className="px-3 py-1.5 text-xs text-muted-foreground hover:text-foreground/90 hover:bg-foreground/10 rounded-md transition-colors"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={collapseAll}
@@ -387,7 +387,7 @@ export function ChangelogApp({ windowState: _windowState }: ChangelogAppProps) {
               </>
             )}
             <motion.button
-              className="px-3 py-1.5 text-xs text-white/60 hover:text-white/90 hover:bg-white/10 rounded-md transition-colors flex items-center gap-1.5"
+              className="px-3 py-1.5 text-xs text-muted-foreground hover:text-foreground/90 hover:bg-foreground/10 rounded-md transition-colors flex items-center gap-1.5"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={copyForAI}
@@ -409,7 +409,7 @@ export function ChangelogApp({ windowState: _windowState }: ChangelogAppProps) {
               href="https://github.com/surajmandalcell/darwin-ui/releases"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs text-white/60 hover:text-white/90 hover:bg-white/10 rounded-md transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs text-muted-foreground hover:text-foreground/90 hover:bg-foreground/10 rounded-md transition-colors"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -422,16 +422,16 @@ export function ChangelogApp({ windowState: _windowState }: ChangelogAppProps) {
         {/* Stats */}
         <div className="flex flex-wrap items-center gap-4 md:gap-6 text-sm">
           <div className="flex items-center gap-2">
-            <span className="text-white/40">Latest:</span>
+            <span className="text-muted-foreground">Latest:</span>
             <Badge variant="secondary">v{changelog[0]?.version}</Badge>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-white/40">Total Releases:</span>
-            <span className="text-white/80">{changelog.length}</span>
+            <span className="text-muted-foreground">Total Releases:</span>
+            <span className="text-foreground/80">{changelog.length}</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-white/40">Components:</span>
-            <span className="text-white/80">35+</span>
+            <span className="text-muted-foreground">Components:</span>
+            <span className="text-foreground/80">35+</span>
           </div>
         </div>
       </div>
