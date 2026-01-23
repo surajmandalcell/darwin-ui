@@ -180,7 +180,7 @@ interface DialogDescriptionProps {
 
 function DialogDescription({ children, className }: DialogDescriptionProps) {
 	return (
-		<p className={cn("mt-1 text-sm text-zinc-400 dark:text-zinc-500", className)}>
+		<p className={cn("mt-1 text-sm text-zinc-500 dark:text-zinc-400", className)}>
 			{children}
 		</p>
 	);
@@ -229,7 +229,7 @@ function DialogClose({ children, className, asChild }: DialogCloseProps) {
 				type="button"
 				onClick={() => onOpenChange(false)}
 				className={cn(
-					"absolute right-4 top-4 rounded-md p-1 text-zinc-400 dark:text-zinc-600 hover:text-zinc-400 dark:hover:text-zinc-500 hover:bg-black/10 dark:hover:bg-white/10 transition-all duration-150 outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50 focus-visible:ring-inset",
+					"absolute right-4 top-4 rounded-md p-1 text-zinc-500 dark:text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 hover:bg-black/5 dark:hover:bg-white/10 transition-all duration-150 outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50 focus-visible:ring-inset",
 					className
 				)}
 			>

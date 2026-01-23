@@ -133,7 +133,7 @@ const InputBase = React.forwardRef<HTMLInputElement, InputProps>(
 				{hasLeftIcon && (
 					<span
 						className={cn(
-							"absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 dark:text-zinc-600 pointer-events-none z-10",
+							"absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500 dark:text-zinc-400 pointer-events-none z-10",
 							iconSizeClasses[size],
 						)}
 					>
@@ -179,7 +179,7 @@ const InputBase = React.forwardRef<HTMLInputElement, InputProps>(
 				{!error && !success && rightIcon && (
 					<span
 						className={cn(
-							"absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 dark:text-zinc-600 pointer-events-none",
+							"absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 dark:text-zinc-400 pointer-events-none",
 							iconSizeClasses[size],
 						)}
 					>

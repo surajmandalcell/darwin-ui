@@ -85,6 +85,47 @@ className="text-gray-900"
 className="bg-white/10"
 ```
 
+## Dark Mode Pattern (CRITICAL)
+
+When using Tailwind's `dark:` prefix, light mode gets the BASE class, dark mode gets the `dark:` class.
+
+**Light mode = lighter background = DARKER text (higher zinc numbers)**
+**Dark mode = darker background = LIGHTER text (lower zinc numbers)**
+
+```tsx
+// CORRECT - darker text in light mode, lighter in dark
+text-zinc-900 dark:text-zinc-100  // primary text
+text-zinc-700 dark:text-zinc-300  // secondary text
+text-zinc-500 dark:text-zinc-400  // muted text
+bg-zinc-100 dark:bg-zinc-800      // subtle backgrounds
+bg-black/5 dark:bg-white/5        // glass backgrounds
+hover:bg-black/10 dark:hover:bg-white/10  // hover states
+
+// WRONG - backwards (light text in light mode = invisible)
+text-zinc-400 dark:text-zinc-500  // ❌ lighter in light mode
+text-zinc-300 dark:text-zinc-700  // ❌ backwards
+focus:bg-white/10 dark:focus:bg-black/10  // ❌ backwards
+```
+
+### Quick Reference
+
+| Purpose | Light Mode (base) | Dark Mode (dark:) |
+|---------|-------------------|-------------------|
+| Primary text | zinc-900 | zinc-100 |
+| Secondary text | zinc-700 | zinc-300 |
+| Muted/disabled | zinc-500 | zinc-400 |
+| Borders | black/10 | white/10 |
+| Hover bg | black/5 or black/10 | white/5 or white/10 |
+| Focus bg | black/5 | white/10 |
+
+### Validation
+
+After editing any component, grep for backwards patterns:
+```bash
+grep -E "text-zinc-[3-4][0-9]{2} dark:text-zinc-[5-6]" src/components/
+```
+If this returns results, the colors are backwards.
+
 ## Compound Component Pattern
 
 Use compound components for related UI:

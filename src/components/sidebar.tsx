@@ -225,7 +225,7 @@ export function Sidebar({
 							aria-expanded={!isCollapsed}
 							aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
 							className={cn(
-								"group flex w-full items-center rounded-md py-2 text-sm font-medium text-zinc-400 dark:text-zinc-600 transition-all duration-200 ease-out hover:bg-black/5 dark:hover:bg-white/5 hover:text-zinc-500 dark:hover:text-zinc-400 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-500/50",
+								"group flex w-full items-center rounded-md py-2 text-sm font-medium text-zinc-500 dark:text-zinc-400 transition-all duration-200 ease-out hover:bg-black/5 dark:hover:bg-white/5 hover:text-zinc-700 dark:hover:text-zinc-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-500/50",
 								isCollapsed ? "justify-center px-2" : "gap-3 px-3",
 							)}
 						>

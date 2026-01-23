@@ -64,3 +64,17 @@ npx biome check src/app/admin/**/*.tsx src/components/**/*.tsx
 5. Only then move to next task
 
 **NO EXCEPTIONS.**
+
+## Dark Mode Pattern Check (Components Only)
+
+After editing any component in `src/components/`, also check for backwards dark mode colors:
+
+```bash
+# Check for backwards dark: patterns (light text in light mode)
+grep -E "text-zinc-[3-4][0-9]{2} dark:text-zinc-[5-6]" src/components/*.tsx
+```
+
+**If this returns ANY results, the colors are backwards and will be invisible in light mode.**
+
+Correct pattern: `text-zinc-500 dark:text-zinc-400` (darker in light, lighter in dark)
+Wrong pattern: `text-zinc-400 dark:text-zinc-500` (lighter in light = invisible)

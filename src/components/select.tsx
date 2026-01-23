@@ -230,7 +230,7 @@ function SingleSelectInternal({
 				<span
 					className={cn(
 						"truncate",
-						!selected.label && "text-zinc-400 dark:text-zinc-500",
+						!selected.label && "text-zinc-500 dark:text-zinc-400",
 					)}
 				>
 					{selected.label || placeholder || "Select..."}
@@ -378,7 +378,7 @@ function MultiSelectInternal({
 				<span
 					className={cn(
 						"truncate",
-						!displayValue && "text-zinc-400 dark:text-zinc-500",
+						!displayValue && "text-zinc-500 dark:text-zinc-400",
 					)}
 				>
 					{displayValue || placeholder}
@@ -407,7 +407,7 @@ function MultiSelectInternal({
 								{options.find((o) => o.value === v)?.label || v}
 								<button
 									type="button"
-									className="text-zinc-400 dark:text-zinc-600 hover:text-zinc-400 dark:text-zinc-500 transition-colors rounded-sm hover:bg-black/10 dark:hover:bg-white/10 p-0.5"
+									className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 transition-colors rounded-sm hover:bg-black/5 dark:hover:bg-white/10 p-0.5"
 									onClick={(e) => removeTag(e, v)}
 								>
 									<X className="h-3 w-3" />

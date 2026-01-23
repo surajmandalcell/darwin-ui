@@ -37,6 +37,12 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
     // Apply theme to document
     document.documentElement.setAttribute('data-theme', newResolvedTheme);
+    // Also set the class for Tailwind's dark: prefix
+    if (newResolvedTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
 
     // Update meta theme-color for mobile browsers
     const metaTheme = document.querySelector('meta[name="theme-color"]');
@@ -54,6 +60,12 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
         const newResolvedTheme = e.matches ? 'dark' : 'light';
         setResolvedTheme(newResolvedTheme);
         document.documentElement.setAttribute('data-theme', newResolvedTheme);
+        // Also set the class for Tailwind's dark: prefix
+        if (newResolvedTheme === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
       }
     };
 

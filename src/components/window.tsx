@@ -20,7 +20,7 @@ export function Window({ children, title }: WindowProps) {
 					href="/"
 					className="absolute left-4 top-1/2 -translate-y-1/2"
 				/>
-				<div className="text-xs font-medium text-zinc-400 dark:text-zinc-500 tracking-wide">
+				<div className="text-xs font-medium text-zinc-500 dark:text-zinc-400 tracking-wide">
 					{title}
 				</div>
 			</div>

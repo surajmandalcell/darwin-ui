@@ -64,13 +64,13 @@ export function Upload({
 				{(value?.length || 0) + (pending.length || 0) > 0 ? (
 					<div className="flex w-full flex-col gap-3">
 						<div className="flex items-center justify-between gap-2">
-							<h3 className="truncate text-sm font-medium text-zinc-400 dark:text-zinc-500">
+							<h3 className="truncate text-sm font-medium text-zinc-500 dark:text-zinc-400">
 								Images ({value.length + pending.length})
 							</h3>
 							<div className="flex gap-2">
 								<button
 									onClick={() => fileInputRef.current?.click()}
-									className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 border border-black/10 dark:border-white/10 hover:border-black/20 dark:border-white/20 rounded-md text-xs text-zinc-400 dark:text-zinc-500 hover:text-zinc-900 dark:text-zinc-100 transition-all duration-200"
+									className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 border border-black/10 dark:border-white/10 hover:border-black/20 dark:border-white/20 rounded-md text-xs text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:text-zinc-100 transition-all duration-200"
 								>
 									<UploadIcon className="size-3.5" />
 									Add
@@ -106,7 +106,7 @@ export function Upload({
 										<XIcon className="size-3.5 text-white" />
 									</Button>
 									<div className="flex min-w-0 items-center justify-between gap-2 border-t border-black/10 dark:border-white/10 p-2">
-										<span className="truncate text-[12px] text-zinc-400 dark:text-zinc-500">
+										<span className="truncate text-[12px] text-zinc-500 dark:text-zinc-400">
 											{index === 0 ? "Cover" : `Image ${index + 1}`}
 										</span>
 										<div className="flex gap-1">
@@ -154,7 +154,7 @@ export function Upload({
 												style={{ width: `${p.progress}%` }}
 											/>
 										</div>
-										<div className="text-[11px] text-zinc-400 dark:text-zinc-500 mt-1">
+										<div className="text-[11px] text-zinc-500 dark:text-zinc-400 mt-1">
 											Uploading… {p.progress}%
 										</div>
 									</div>
@@ -168,13 +168,13 @@ export function Upload({
 							className="mb-2 flex size-11 shrink-0 items-center justify-center rounded-full border border-black/20 dark:border-white/20 bg-black/5 dark:bg-white/5"
 							aria-hidden="true"
 						>
-							<ImageIcon className="size-4 text-zinc-400 dark:text-zinc-500" />
+							<ImageIcon className="size-4 text-zinc-500 dark:text-zinc-400" />
 						</div>
 						<p className="mb-1.5 text-sm font-medium text-zinc-900 dark:text-zinc-100">
 							Drop your images here
 						</p>
-						{label && <p className="text-xs text-zinc-400 dark:text-zinc-500 mb-1">{label}</p>}
-						<p className="text-xs text-zinc-400 dark:text-zinc-500">Max {maxFiles} files</p>
+						{label && <p className="text-xs text-zinc-500 dark:text-zinc-400 mb-1">{label}</p>}
+						<p className="text-xs text-zinc-500 dark:text-zinc-400">Max {maxFiles} files</p>
 						<div className="mt-3" />
 					</div>
 				)}
@@ -226,7 +226,7 @@ export function Upload({
 						}}
 					/>
 					<div
-						className="border border-dashed border-black/20 dark:border-white/20 rounded-lg min-h-[50px] flex items-center justify-center text-zinc-400 dark:text-zinc-500 text-sm cursor-pointer hover:bg-black/5 dark:bg-white/5"
+						className="border border-dashed border-black/20 dark:border-white/20 rounded-lg min-h-[50px] flex items-center justify-center text-zinc-500 dark:text-zinc-400 text-sm cursor-pointer hover:bg-black/5 dark:bg-white/5"
 						onClick={() => fileInputRef.current?.click()}
 					>
 						Click to select images

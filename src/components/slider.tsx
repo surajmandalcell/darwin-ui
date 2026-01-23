@@ -181,7 +181,7 @@ function Slider({
 			</div>
 
 			{showValue && (
-				<div className="mt-1 text-right text-xs text-zinc-400 dark:text-zinc-500">{value}</div>
+				<div className="mt-1 text-right text-xs text-zinc-500 dark:text-zinc-400">{value}</div>
 			)}
 		</div>
 	);

@@ -2,6 +2,9 @@
 @import "tailwindcss";
 @source "../../src";
 
+/* Configure Tailwind v4 to use class-based dark mode */
+@variant dark (&:where(.dark, .dark *));
+
 html, body, #root {
   height: 100%;
 }

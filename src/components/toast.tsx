@@ -107,12 +107,12 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
 										{toast.title}
 									</div>
 								)}
-								<div className="text-zinc-400 dark:text-zinc-500 text-sm">{toast.message}</div>
+								<div className="text-zinc-500 dark:text-zinc-400 text-sm">{toast.message}</div>
 							</div>
 							<button
 								type="button"
 								onClick={() => removeToast(toast.id)}
-								className="text-zinc-400 dark:text-zinc-600 hover:text-zinc-400 dark:hover:text-zinc-500 transition-colors shrink-0"
+								className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 transition-colors shrink-0"
 								aria-label="Close"
 							>
 								<X className="w-4 h-4" />

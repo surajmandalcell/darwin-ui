@@ -63,18 +63,18 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantClasses: Record<ButtonVariant, string> = {
 	default:
-		"bg-black/10 dark:bg-white/10 text-zinc-900 dark:text-zinc-100 hover:bg-black/15 dark:hover:bg-white/15 border border-black/10 dark:border-white/10",
+		"bg-zinc-200 dark:bg-white/10 text-zinc-900 dark:text-zinc-100 hover:bg-zinc-300 dark:hover:bg-white/15 border border-zinc-300 dark:border-white/10",
 	primary: "bg-blue-500 text-white hover:bg-blue-600",
 	secondary:
-		"bg-black/5 dark:bg-white/5 text-zinc-700 dark:text-zinc-300 hover:bg-black/10 dark:hover:bg-white/10 hover:text-zinc-900 dark:hover:text-zinc-100 border border-black/10 dark:border-white/10",
-	success: "bg-emerald-500 text-white hover:bg-emerald-500/90",
-	warning: "bg-amber-500 text-black hover:bg-amber-500/90",
-	info: "bg-sky-500 text-white hover:bg-sky-500/90",
-	destructive: "bg-red-500 text-white hover:bg-red-500/90",
+		"bg-zinc-100 dark:bg-white/5 text-zinc-800 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-white/10 border border-zinc-200 dark:border-white/10",
+	success: "bg-emerald-500 text-white hover:bg-emerald-600",
+	warning: "bg-amber-500 text-black hover:bg-amber-600",
+	info: "bg-sky-500 text-white hover:bg-sky-600",
+	destructive: "bg-red-500 text-white hover:bg-red-600",
 	outline:
-		"border border-zinc-300 dark:border-zinc-600 bg-transparent hover:bg-black/5 dark:hover:bg-white/5 text-zinc-600 dark:text-zinc-300",
-	ghost: "hover:bg-black/10 dark:hover:bg-white/10 text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100",
-	link: "text-blue-500 underline-offset-4 hover:underline",
+		"border-2 border-zinc-400 dark:border-zinc-500 bg-transparent hover:bg-zinc-100 dark:hover:bg-white/5 text-zinc-800 dark:text-zinc-200",
+	ghost: "hover:bg-zinc-100 dark:hover:bg-white/10 text-zinc-800 dark:text-zinc-300",
+	link: "text-blue-600 dark:text-blue-400 underline-offset-4 hover:underline",
 	accent: "bg-violet-500 text-white hover:bg-violet-600",
 };
 
@@ -139,8 +139,7 @@ const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonProps>(
 			<motion.button
 				ref={ref}
 				disabled={isDisabled}
-				whileHover={!isDisabled ? { opacity: 0.9 } : {}}
-				whileTap={!isDisabled ? { scale: 0.99 } : {}}
+				whileTap={!isDisabled ? { scale: 0.98 } : {}}
 				transition={{ duration: getDuration("fast") }}
 				className={cn(
 					"inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-all duration-150 outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50 focus-visible:ring-inset disabled:pointer-events-none disabled:opacity-50",

@@ -33,35 +33,35 @@ const alertVariants: Record<AlertVariant, { bg: string; border: string; icon: st
 		border: "border-sky-500/20",
 		icon: "text-sky-500",
 		title: "text-zinc-900 dark:text-zinc-100",
-		description: "text-zinc-400 dark:text-zinc-500",
+		description: "text-zinc-500 dark:text-zinc-400",
 	},
 	success: {
 		bg: "bg-emerald-500/15",
 		border: "border-emerald-500/20",
 		icon: "text-emerald-500",
 		title: "text-zinc-900 dark:text-zinc-100",
-		description: "text-zinc-400 dark:text-zinc-500",
+		description: "text-zinc-500 dark:text-zinc-400",
 	},
 	warning: {
 		bg: "bg-amber-500/15",
 		border: "border-amber-500/20",
 		icon: "text-amber-500",
 		title: "text-zinc-900 dark:text-zinc-100",
-		description: "text-zinc-400 dark:text-zinc-500",
+		description: "text-zinc-500 dark:text-zinc-400",
 	},
 	error: {
 		bg: "bg-red-500/15",
 		border: "border-red-500/20",
 		icon: "text-red-500",
 		title: "text-zinc-900 dark:text-zinc-100",
-		description: "text-zinc-400 dark:text-zinc-500",
+		description: "text-zinc-500 dark:text-zinc-400",
 	},
 	destructive: {
 		bg: "bg-red-500/15",
 		border: "border-red-500/20",
 		icon: "text-red-500",
 		title: "text-zinc-900 dark:text-zinc-100",
-		description: "text-zinc-400 dark:text-zinc-500",
+		description: "text-zinc-500 dark:text-zinc-400",
 	},
 };
 
@@ -283,7 +283,7 @@ export function AlertProvider({ children }: { children: React.ReactNode }) {
 										>
 											{alert.title}
 										</h3>
-										<p id="alert-message" className="text-zinc-400 dark:text-zinc-500 text-sm">
+										<p id="alert-message" className="text-zinc-500 dark:text-zinc-400 text-sm">
 											{alert.message}
 										</p>
 									</div>

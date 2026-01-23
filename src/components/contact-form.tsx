@@ -41,7 +41,7 @@ export function CompactContactForm({
 								>
 									{title}
 								</h3>
-								<p className="text-xs text-zinc-400 dark:text-zinc-600 mt-auto">
+								<p className="text-xs text-zinc-500 dark:text-zinc-400 mt-auto">
 									Will reach out asap, thats a promise!
 								</p>
 							</Reveal>
@@ -74,7 +74,7 @@ export function CompactContactForm({
 								<button
 									type="submit"
 									disabled={isSubmitting}
-									className={`${manrope.className} w-full sm:w-auto px-6 py-3 min-h-11 ${isSubmitting ? "bg-black/5 dark:bg-white/5 text-zinc-400 dark:text-zinc-500 cursor-not-allowed" : "bg-black/10 dark:bg-white/10 hover:bg-black/15 dark:hover:bg-white/15 text-zinc-900 dark:text-zinc-100"} border border-black/20 dark:border-white/20 rounded-md transition-colors font-medium text-sm`}
+									className={`${manrope.className} w-full sm:w-auto px-6 py-3 min-h-11 ${isSubmitting ? "bg-black/5 dark:bg-white/5 text-zinc-500 dark:text-zinc-400 cursor-not-allowed" : "bg-black/10 dark:bg-white/10 hover:bg-black/15 dark:hover:bg-white/15 text-zinc-900 dark:text-zinc-100"} border border-black/20 dark:border-white/20 rounded-md transition-colors font-medium text-sm`}
 								>
 									{isSubmitting ? "Submitting..." : "Submit"}
 								</button>
