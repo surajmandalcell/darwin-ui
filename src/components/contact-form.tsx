@@ -59,7 +59,7 @@ export function CompactContactForm({
 									value={formData.name}
 									onChange={handleInputChange}
 									required
-									className="flex-1 py-3 px-4 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-md text-zinc-900 dark:text-zinc-100 text-sm transition-all duration-200 placeholder:text-zinc-600 dark:placeholder:text-zinc-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 hover:border-black/20 dark:hover:border-white/20"
+									className="flex-1 py-3 px-4 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-md text-zinc-900 dark:text-zinc-100 text-sm transition-all duration-200 placeholder:text-zinc-600 dark:placeholder:text-zinc-400 outline-none focus:border-blue-500 hover:border-black/20 dark:hover:border-white/20"
 									placeholder="Your Name"
 								/>
 								<input
@@ -68,7 +68,7 @@ export function CompactContactForm({
 									value={formData.email}
 									onChange={handleInputChange}
 									required
-									className="flex-1 py-3 px-4 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-md text-zinc-900 dark:text-zinc-100 text-sm transition-all duration-200 placeholder:text-zinc-600 dark:placeholder:text-zinc-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 hover:border-black/20 dark:hover:border-white/20"
+									className="flex-1 py-3 px-4 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-md text-zinc-900 dark:text-zinc-100 text-sm transition-all duration-200 placeholder:text-zinc-600 dark:placeholder:text-zinc-400 outline-none focus:border-blue-500 hover:border-black/20 dark:hover:border-white/20"
 									placeholder="your@email.com"
 								/>
 								<button

@@ -39,7 +39,7 @@ export function Switch({
 					className="peer absolute inset-0 h-full w-full cursor-pointer opacity-0"
 				/>
 				<span
-					className={`flex h-5 w-9 items-center rounded-full px-0.5 transition-colors duration-200 ${
+					className={`flex h-5 w-9 items-center rounded-full px-0.5 transition-all duration-200 peer-focus-visible:ring-2 peer-focus-visible:ring-blue-500/50 ${
 						checked
 							? "bg-emerald-500"
 							: "bg-zinc-600"

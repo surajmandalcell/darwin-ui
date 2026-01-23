@@ -143,7 +143,7 @@ const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonProps>(
 				whileTap={!isDisabled ? { scale: 0.99 } : {}}
 				transition={{ duration: getDuration("fast") }}
 				className={cn(
-					"inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-500/50 disabled:pointer-events-none disabled:opacity-50",
+					"inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-all duration-150 outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50 focus-visible:ring-inset disabled:pointer-events-none disabled:opacity-50",
 					variantClasses[variant],
 					sizeClasses[effectiveSize],
 					fullWidth && "w-full",

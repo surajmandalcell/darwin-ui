@@ -224,7 +224,7 @@ function SingleSelectInternal({
 				aria-expanded={open}
 				onClick={() => setOpen((v) => !v)}
 				className={cn(
-					"flex h-9 w-full items-center justify-between rounded-md border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 px-3 py-2 text-sm text-zinc-900 dark:text-zinc-100 shadow-sm ring-offset-background placeholder:text-zinc-500 dark:placeholder:text-zinc-400 focus:outline-none focus:ring-1 focus:ring-blue-500/50 disabled:cursor-not-allowed disabled:opacity-50 hover:bg-black/10 dark:hover:bg-white/10 transition-colors backdrop-blur-sm",
+					"flex h-9 w-full items-center justify-between rounded-md border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 px-3 py-2 text-sm text-zinc-900 dark:text-zinc-100 shadow-sm placeholder:text-zinc-500 dark:placeholder:text-zinc-400 outline-none focus-visible:border-blue-500 disabled:cursor-not-allowed disabled:opacity-50 hover:bg-black/10 dark:hover:bg-white/10 transition-colors duration-150 backdrop-blur-sm",
 				)}
 			>
 				<span
@@ -372,7 +372,7 @@ function MultiSelectInternal({
 				aria-expanded={open}
 				onClick={() => setOpen((v) => !v)}
 				className={cn(
-					"flex h-9 w-full items-center justify-between rounded-md border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 px-3 py-2 text-sm text-zinc-900 dark:text-zinc-100 shadow-sm ring-offset-background placeholder:text-zinc-500 dark:placeholder:text-zinc-400 focus:outline-none focus:ring-1 focus:ring-blue-500/50 disabled:cursor-not-allowed disabled:opacity-50 hover:bg-black/10 dark:hover:bg-white/10 transition-colors backdrop-blur-sm",
+					"flex h-9 w-full items-center justify-between rounded-md border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 px-3 py-2 text-sm text-zinc-900 dark:text-zinc-100 shadow-sm placeholder:text-zinc-500 dark:placeholder:text-zinc-400 outline-none focus-visible:border-blue-500 disabled:cursor-not-allowed disabled:opacity-50 hover:bg-black/10 dark:hover:bg-white/10 transition-colors duration-150 backdrop-blur-sm",
 				)}
 			>
 				<span
