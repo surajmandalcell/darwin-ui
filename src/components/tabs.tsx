@@ -91,7 +91,7 @@ function TabsTrigger({ value, children, className, disabled }: TabsTriggerProps)
 			<span
 				className={cn(
 					"relative z-10 transition-colors duration-200",
-					isSelected ? "text-zinc-900 dark:text-zinc-100" : "text-zinc-400 dark:text-zinc-500 hover:text-zinc-100 dark:hover:text-zinc-900"
+					isSelected ? "text-zinc-900 dark:text-zinc-100" : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100"
 				)}
 			>
 				{children}

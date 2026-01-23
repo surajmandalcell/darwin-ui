@@ -98,7 +98,7 @@ function AccordionTrigger({ children, className, itemValue }: AccordionTriggerPr
 			onClick={() => itemValue && toggleItem(itemValue)}
 			aria-expanded={isExpanded}
 			className={cn(
-				"flex w-full items-center justify-between py-4 text-sm font-medium text-zinc-900 dark:text-zinc-100 transition-all hover:text-zinc-100 dark:hover:text-zinc-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-500/50 rounded-md",
+				"flex w-full items-center justify-between py-4 text-sm font-medium text-zinc-900 dark:text-zinc-100 transition-all hover:text-zinc-600 dark:hover:text-zinc-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-500/50 rounded-md",
 				className
 			)}
 		>
