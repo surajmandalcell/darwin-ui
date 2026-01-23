@@ -44,7 +44,7 @@ export { ContextMenu } from "./context-menu";
 export { DateSelect } from "./date-select";
 export { Image } from "./image";
 export type { InputProps, TextAreaProps as TextareaProps } from "./input";
-export { Input, Textarea } from "./input";
+export { Input, Textarea, SearchInput } from "./input";
 export { MdEditor } from "./md-editor";
 export { Modal } from "./modal";
 export { default as Reveal } from "./reveal";

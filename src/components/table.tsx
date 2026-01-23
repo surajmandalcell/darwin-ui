@@ -5,14 +5,14 @@ import { Skeleton } from "./skeleton";
 
 export function Table({ children }: { children: React.ReactNode }) {
 	return (
-		<div className="w-full border border-white/10 dark:border-black/10 rounded-md overflow-x-auto md:overflow-visible">
-			<table className="w-full text-sm text-zinc-100 dark:text-zinc-900">{children}</table>
+		<div className="w-full border border-black/10 dark:border-white/10 rounded-md overflow-x-auto md:overflow-visible">
+			<table className="w-full text-sm text-zinc-900 dark:text-zinc-100">{children}</table>
 		</div>
 	);
 }
 
 export function TableHead({ children }: { children: React.ReactNode }) {
-	return <thead className="bg-white/5 dark:bg-black/5">{children}</thead>;
+	return <thead className="bg-black/5 dark:bg-white/5">{children}</thead>;
 }
 
 export function TableBody({ children }: { children: React.ReactNode }) {
@@ -72,7 +72,7 @@ export function TableRow({
 
 	return (
 		<tr
-			className={`border-b border-white/10 dark:border-black/10 transition-opacity duration-300 ${className}`}
+			className={`border-b border-black/10 dark:border-white/10 transition-opacity duration-300 ${className}`}
 			style={{ opacity: visible ? 1 : 0 }}
 		>
 			{children}

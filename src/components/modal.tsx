@@ -62,7 +62,7 @@ export function Modal({
 						animate={{ opacity: 1 }}
 						exit={{ opacity: 0 }}
 						transition={{ duration: getDuration("fast") }}
-						className="fixed inset-0 bg-black/50 dark:bg-black/30 backdrop-blur-[6px] p-4 overflow-y-auto"
+						className="fixed inset-0 bg-black/30 dark:bg-black/50 backdrop-blur-[6px] p-4 overflow-y-auto"
 						style={{ zIndex: "var(--z-modal)" }}
 						onClick={(e) => {
 							if (e.target === e.currentTarget) {
@@ -79,16 +79,16 @@ export function Modal({
 									duration: getDuration("slow"),
 									ease: [0.16, 1, 0.3, 1],
 								}}
-								className={`bg-zinc-900/95 dark:bg-white/95 backdrop-blur-md shadow-md border border-white/10 dark:border-black/10 rounded-md w-full ${sizeClasses[size]} flex flex-col max-h-[calc(100vh-2rem)] ${className} pointer-events-auto`}
+								className={`bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md shadow-md border border-black/10 dark:border-white/10 rounded-md w-full ${sizeClasses[size]} flex flex-col max-h-[calc(100vh-2rem)] ${className} pointer-events-auto`}
 								role="dialog"
 								aria-modal="true"
 								aria-labelledby="modal-title"
 							>
-								<div className="flex items-center justify-start px-4 py-2 border-b border-white/10 dark:border-black/10 relative shrink-0">
+								<div className="flex items-center justify-start px-4 py-2 border-b border-black/10 dark:border-white/10 relative shrink-0">
 									<CloseButton onClick={onClose} />
 									<div
 										id="modal-title"
-										className="text-zinc-100 dark:text-zinc-900 text-sm font-medium ml-2"
+										className="text-zinc-900 dark:text-zinc-100 text-sm font-medium ml-2"
 									>
 										{title}
 									</div>

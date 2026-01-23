@@ -44,7 +44,7 @@ function TabsList({ children, className }: TabsListProps) {
 		<div
 			role="tablist"
 			className={cn(
-				"inline-flex h-10 items-center justify-center rounded-lg bg-white/5 dark:bg-black/5 p-1 text-zinc-400 dark:text-zinc-500 backdrop-blur-sm border border-white/10 dark:border-black/10",
+				"inline-flex h-10 items-center justify-center rounded-lg bg-black/5 dark:bg-white/5 p-1 text-zinc-400 dark:text-zinc-500 backdrop-blur-sm border border-black/10 dark:border-white/10",
 				className
 			)}
 		>
@@ -80,7 +80,7 @@ function TabsTrigger({ value, children, className, disabled }: TabsTriggerProps)
 			{isSelected && (
 				<motion.span
 					layoutId="active-tab"
-					className="absolute inset-0 bg-white/10 dark:bg-black/10 rounded-md"
+					className="absolute inset-0 bg-black/10 dark:bg-white/10 rounded-md"
 					transition={{
 						type: "spring",
 						bounce: 0.15,
@@ -91,7 +91,7 @@ function TabsTrigger({ value, children, className, disabled }: TabsTriggerProps)
 			<span
 				className={cn(
 					"relative z-10 transition-colors duration-200",
-					isSelected ? "text-zinc-100 dark:text-zinc-900" : "text-zinc-400 dark:text-zinc-500 hover:text-zinc-100 dark:hover:text-zinc-900"
+					isSelected ? "text-zinc-900 dark:text-zinc-100" : "text-zinc-400 dark:text-zinc-500 hover:text-zinc-100 dark:hover:text-zinc-900"
 				)}
 			>
 				{children}

@@ -32,35 +32,35 @@ const alertVariants: Record<AlertVariant, { bg: string; border: string; icon: st
 		bg: "bg-sky-500/15",
 		border: "border-sky-500/20",
 		icon: "text-sky-500",
-		title: "text-zinc-100 dark:text-zinc-900",
+		title: "text-zinc-900 dark:text-zinc-100",
 		description: "text-zinc-400 dark:text-zinc-500",
 	},
 	success: {
 		bg: "bg-emerald-500/15",
 		border: "border-emerald-500/20",
 		icon: "text-emerald-500",
-		title: "text-zinc-100 dark:text-zinc-900",
+		title: "text-zinc-900 dark:text-zinc-100",
 		description: "text-zinc-400 dark:text-zinc-500",
 	},
 	warning: {
 		bg: "bg-amber-500/15",
 		border: "border-amber-500/20",
 		icon: "text-amber-500",
-		title: "text-zinc-100 dark:text-zinc-900",
+		title: "text-zinc-900 dark:text-zinc-100",
 		description: "text-zinc-400 dark:text-zinc-500",
 	},
 	error: {
 		bg: "bg-red-500/15",
 		border: "border-red-500/20",
 		icon: "text-red-500",
-		title: "text-zinc-100 dark:text-zinc-900",
+		title: "text-zinc-900 dark:text-zinc-100",
 		description: "text-zinc-400 dark:text-zinc-500",
 	},
 	destructive: {
 		bg: "bg-red-500/15",
 		border: "border-red-500/20",
 		icon: "text-red-500",
-		title: "text-zinc-100 dark:text-zinc-900",
+		title: "text-zinc-900 dark:text-zinc-100",
 		description: "text-zinc-400 dark:text-zinc-500",
 	},
 };
@@ -144,7 +144,7 @@ export function Alert({
 							onClick={handleDismiss}
 							className={cn(
 								"shrink-0 p-1 rounded-lg transition-colors",
-								"hover:bg-white/10 dark:hover:bg-black/10 active:bg-white/15 dark:active:bg-black/15",
+								"hover:bg-black/10 dark:hover:bg-white/10 active:bg-white/15 dark:active:bg-black/15",
 								styles.icon,
 								"opacity-60 hover:opacity-100"
 							)}
@@ -258,12 +258,12 @@ export function AlertProvider({ children }: { children: React.ReactNode }) {
 					>
 						<button
 							type="button"
-							className="absolute inset-0 bg-black/50 dark:bg-black/30 backdrop-blur-[6px]"
+							className="absolute inset-0 bg-black/30 dark:bg-black/50 backdrop-blur-[6px]"
 							aria-label={alert.cancelText || "Dismiss alert"}
 							onClick={() => handleClose(alert.onCancel)}
 						/>
 						<div
-							className={`relative bg-zinc-900/95 dark:bg-white/95 backdrop-blur-md shadow-md border border-white/10 dark:border-black/10 rounded-md w-full max-w-md ${
+							className={`relative bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md shadow-md border border-black/10 dark:border-white/10 rounded-md w-full max-w-md ${
 								isClosing
 									? "animate-out zoom-out-95 duration-200"
 									: "animate-in zoom-in-95 duration-200"
@@ -279,7 +279,7 @@ export function AlertProvider({ children }: { children: React.ReactNode }) {
 									<div className="flex-1">
 										<h3
 											id="alert-title"
-											className="text-zinc-100 dark:text-zinc-900 text-base font-semibold mb-1"
+											className="text-zinc-900 dark:text-zinc-100 text-base font-semibold mb-1"
 										>
 											{alert.title}
 										</h3>

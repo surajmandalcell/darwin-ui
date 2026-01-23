@@ -60,7 +60,7 @@ export function Upload({
 	return (
 		<div className="flex flex-col gap-2">
 			{/* Drop area */}
-			<div className="relative flex min-h-52 flex-col overflow-hidden rounded-xl border border-dashed border-white/20 dark:border-black/20 p-4">
+			<div className="relative flex min-h-52 flex-col overflow-hidden rounded-xl border border-dashed border-black/20 dark:border-white/20 p-4">
 				{(value?.length || 0) + (pending.length || 0) > 0 ? (
 					<div className="flex w-full flex-col gap-3">
 						<div className="flex items-center justify-between gap-2">
@@ -70,7 +70,7 @@ export function Upload({
 							<div className="flex gap-2">
 								<button
 									onClick={() => fileInputRef.current?.click()}
-									className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/5 dark:bg-black/5 hover:bg-white/10 dark:hover:bg-black/10 border border-white/10 dark:border-black/10 hover:border-white/20 dark:border-black/20 rounded-md text-xs text-zinc-400 dark:text-zinc-500 hover:text-zinc-100 dark:text-zinc-900 transition-all duration-200"
+									className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 border border-black/10 dark:border-white/10 hover:border-black/20 dark:border-white/20 rounded-md text-xs text-zinc-400 dark:text-zinc-500 hover:text-zinc-900 dark:text-zinc-100 transition-all duration-200"
 								>
 									<UploadIcon className="size-3.5" />
 									Add
@@ -89,7 +89,7 @@ export function Upload({
 							{value.map((url, index) => (
 								<div
 									key={url + index}
-									className="relative flex flex-col rounded-md border border-white/10 dark:border-black/10 bg-white/5 dark:bg-black/5 overflow-hidden group"
+									className="relative flex flex-col rounded-md border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 overflow-hidden group"
 								>
 									<Image
 										height={80}
@@ -105,7 +105,7 @@ export function Upload({
 									>
 										<XIcon className="size-3.5 text-white" />
 									</Button>
-									<div className="flex min-w-0 items-center justify-between gap-2 border-t border-white/10 dark:border-black/10 p-2">
+									<div className="flex min-w-0 items-center justify-between gap-2 border-t border-black/10 dark:border-white/10 p-2">
 										<span className="truncate text-[12px] text-zinc-400 dark:text-zinc-500">
 											{index === 0 ? "Cover" : `Image ${index + 1}`}
 										</span>
@@ -113,7 +113,7 @@ export function Upload({
 											<button
 												title={index === 0 ? "Already cover" : "Make cover"}
 												onClick={() => setCover(index)}
-												className="p-1 rounded bg-white/10 dark:bg-black/10 hover:bg-white/15 dark:hover:bg-black/15 text-zinc-100 dark:text-zinc-900"
+												className="p-1 rounded bg-black/10 dark:bg-white/10 hover:bg-black/15 dark:hover:bg-white/15 text-zinc-900 dark:text-zinc-100"
 											>
 												{index === 0 ? (
 													<StarIcon className="w-3.5 h-3.5 text-amber-500" />
@@ -126,7 +126,7 @@ export function Upload({
 												onClick={() =>
 													swap(index, Math.min(index + 1, value.length - 1))
 												}
-												className="p-1 rounded bg-white/10 dark:bg-black/10 hover:bg-white/15 dark:hover:bg-black/15 text-zinc-100 dark:text-zinc-900"
+												className="p-1 rounded bg-black/10 dark:bg-white/10 hover:bg-black/15 dark:hover:bg-white/15 text-zinc-900 dark:text-zinc-100"
 											>
 												<ArrowLeftRightIcon className="w-3.5 h-3.5" />
 											</button>
@@ -137,7 +137,7 @@ export function Upload({
 							{pending.map((p, i) => (
 								<div
 									key={"pending-" + p.id}
-									className="relative flex flex-col rounded-md border border-white/10 dark:border-black/10 bg-white/5 dark:bg-black/5 overflow-hidden"
+									className="relative flex flex-col rounded-md border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 overflow-hidden"
 								>
 									<div className="aspect-square w-full bg-zinc-800">
 										{/* eslint-disable-next-line @next/next/no-img-element */}
@@ -165,16 +165,16 @@ export function Upload({
 				) : (
 					<div className="flex flex-col items-center justify-center px-4 py-3 text-center">
 						<div
-							className="mb-2 flex size-11 shrink-0 items-center justify-center rounded-full border border-white/20 dark:border-black/20 bg-white/5 dark:bg-black/5"
+							className="mb-2 flex size-11 shrink-0 items-center justify-center rounded-full border border-black/20 dark:border-white/20 bg-black/5 dark:bg-white/5"
 							aria-hidden="true"
 						>
 							<ImageIcon className="size-4 text-zinc-400 dark:text-zinc-500" />
 						</div>
-						<p className="mb-1.5 text-sm font-medium text-zinc-100 dark:text-zinc-900">
+						<p className="mb-1.5 text-sm font-medium text-zinc-900 dark:text-zinc-100">
 							Drop your images here
 						</p>
 						{label && <p className="text-xs text-zinc-400 dark:text-zinc-500 mb-1">{label}</p>}
-						<p className="text-xs text-zinc-500 dark:text-zinc-400">Max {maxFiles} files</p>
+						<p className="text-xs text-zinc-400 dark:text-zinc-500">Max {maxFiles} files</p>
 						<div className="mt-3" />
 					</div>
 				)}
@@ -226,7 +226,7 @@ export function Upload({
 						}}
 					/>
 					<div
-						className="border border-dashed border-white/20 dark:border-black/20 rounded-lg min-h-[50px] flex items-center justify-center text-zinc-500 dark:text-zinc-400 text-sm cursor-pointer hover:bg-white/5 dark:bg-black/5"
+						className="border border-dashed border-black/20 dark:border-white/20 rounded-lg min-h-[50px] flex items-center justify-center text-zinc-400 dark:text-zinc-500 text-sm cursor-pointer hover:bg-black/5 dark:bg-white/5"
 						onClick={() => fileInputRef.current?.click()}
 					>
 						Click to select images

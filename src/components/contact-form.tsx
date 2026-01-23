@@ -30,18 +30,18 @@ export function CompactContactForm({
 	return (
 		<section className={`relative py-14 sm:py-16 ${className}`}>
 			<div className="relative z-10 mx-auto max-w-6xl px-4">
-				<div className="relative overflow-hidden bg-zinc-900/95 dark:bg-white/95 backdrop-blur-md border border-white/10 dark:border-black/10 rounded-xl">
-					<div className="absolute inset-0 bg-white/5 dark:bg-black/5" />
+				<div className="relative overflow-hidden bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border border-black/10 dark:border-white/10 rounded-xl">
+					<div className="absolute inset-0 bg-black/5 dark:bg-white/5" />
 					<div className="relative z-10 p-5 sm:p-6">
 						{/* Row 1: Heading */}
 						<div className="text-left mb-4">
 							<Reveal className="sm:flex gap-2">
 								<h3
-									className={`${manrope.className} text-xl sm:text-2xl text-zinc-100 dark:text-zinc-900 font-light `}
+									className={`${manrope.className} text-xl sm:text-2xl text-zinc-900 dark:text-zinc-100 font-light `}
 								>
 									{title}
 								</h3>
-								<p className="text-xs text-zinc-600 dark:text-zinc-400 mt-auto">
+								<p className="text-xs text-zinc-400 dark:text-zinc-600 mt-auto">
 									Will reach out asap, thats a promise!
 								</p>
 							</Reveal>
@@ -59,7 +59,7 @@ export function CompactContactForm({
 									value={formData.name}
 									onChange={handleInputChange}
 									required
-									className="flex-1 py-3 px-4 bg-white/5 dark:bg-black/5 border border-white/10 dark:border-black/10 rounded-md text-zinc-100 dark:text-zinc-900 text-sm transition-all duration-200 placeholder:text-zinc-600 dark:placeholder:text-zinc-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 hover:border-white/20 dark:hover:border-black/20"
+									className="flex-1 py-3 px-4 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-md text-zinc-900 dark:text-zinc-100 text-sm transition-all duration-200 placeholder:text-zinc-600 dark:placeholder:text-zinc-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 hover:border-black/20 dark:hover:border-white/20"
 									placeholder="Your Name"
 								/>
 								<input
@@ -68,13 +68,13 @@ export function CompactContactForm({
 									value={formData.email}
 									onChange={handleInputChange}
 									required
-									className="flex-1 py-3 px-4 bg-white/5 dark:bg-black/5 border border-white/10 dark:border-black/10 rounded-md text-zinc-100 dark:text-zinc-900 text-sm transition-all duration-200 placeholder:text-zinc-600 dark:placeholder:text-zinc-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 hover:border-white/20 dark:hover:border-black/20"
+									className="flex-1 py-3 px-4 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-md text-zinc-900 dark:text-zinc-100 text-sm transition-all duration-200 placeholder:text-zinc-600 dark:placeholder:text-zinc-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 hover:border-black/20 dark:hover:border-white/20"
 									placeholder="your@email.com"
 								/>
 								<button
 									type="submit"
 									disabled={isSubmitting}
-									className={`${manrope.className} w-full sm:w-auto px-6 py-3 min-h-11 ${isSubmitting ? "bg-white/5 dark:bg-black/5 text-zinc-500 dark:text-zinc-400 cursor-not-allowed" : "bg-white/10 dark:bg-black/10 hover:bg-white/15 dark:hover:bg-black/15 text-zinc-100 dark:text-zinc-900"} border border-white/20 dark:border-black/20 rounded-md transition-colors font-medium text-sm`}
+									className={`${manrope.className} w-full sm:w-auto px-6 py-3 min-h-11 ${isSubmitting ? "bg-black/5 dark:bg-white/5 text-zinc-400 dark:text-zinc-500 cursor-not-allowed" : "bg-black/10 dark:bg-white/10 hover:bg-black/15 dark:hover:bg-white/15 text-zinc-900 dark:text-zinc-100"} border border-black/20 dark:border-white/20 rounded-md transition-colors font-medium text-sm`}
 								>
 									{isSubmitting ? "Submitting..." : "Submit"}
 								</button>

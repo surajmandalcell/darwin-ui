@@ -29,7 +29,7 @@ export function Checkbox({
 	return (
 		<label
 			htmlFor={id}
-			className={`inline-flex items-center gap-2 text-[13px] text-zinc-100 dark:text-zinc-900 ${
+			className={`inline-flex items-center gap-2 text-[13px] text-zinc-900 dark:text-zinc-100 ${
 				disabled ? "opacity-50 cursor-default" : "cursor-pointer"
 			} ${className}`}
 		>

@@ -46,7 +46,7 @@ function Progress({
 				aria-valuemin={0}
 				aria-valuemax={max}
 				className={cn(
-					"w-full overflow-hidden rounded-full bg-white/10 dark:bg-black/10",
+					"w-full overflow-hidden rounded-full bg-black/10 dark:bg-white/10",
 					sizeClasses[size]
 				)}
 			>

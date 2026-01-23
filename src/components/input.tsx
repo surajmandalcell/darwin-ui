@@ -71,7 +71,7 @@ const iconSizeClasses: Record<InputSize, string> = {
 // ============================================================================
 
 const baseInputClasses =
-	"flex w-full rounded-md border bg-white/5 dark:bg-black/5 text-zinc-100 dark:text-zinc-900 shadow-sm transition-colors placeholder:text-zinc-600 dark:placeholder:text-zinc-400 focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50 backdrop-blur-sm hover:bg-white/10 dark:hover:bg-black/10";
+	"flex w-full rounded-md border bg-black/5 dark:bg-white/5 text-zinc-900 dark:text-zinc-100 shadow-sm transition-colors placeholder:text-zinc-600 dark:placeholder:text-zinc-400 focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50 backdrop-blur-sm hover:bg-black/10 dark:hover:bg-white/10";
 
 const getStateClasses = (error?: boolean, success?: boolean) => {
 	if (error) {
@@ -80,7 +80,7 @@ const getStateClasses = (error?: boolean, success?: boolean) => {
 	if (success) {
 		return "border-emerald-500/50 focus-visible:ring-emerald-500/50";
 	}
-	return "border-white/10 dark:border-black/10 focus-visible:ring-blue-500/50";
+	return "border-black/10 dark:border-white/10 focus-visible:ring-blue-500/50";
 };
 
 // ============================================================================
@@ -133,7 +133,7 @@ const InputBase = React.forwardRef<HTMLInputElement, InputProps>(
 				{hasLeftIcon && (
 					<span
 						className={cn(
-							"absolute left-3 top-1/2 -translate-y-1/2 text-zinc-600 dark:text-zinc-400 pointer-events-none z-10",
+							"absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 dark:text-zinc-600 pointer-events-none z-10",
 							iconSizeClasses[size],
 						)}
 					>
@@ -179,7 +179,7 @@ const InputBase = React.forwardRef<HTMLInputElement, InputProps>(
 				{!error && !success && rightIcon && (
 					<span
 						className={cn(
-							"absolute right-3 top-1/2 -translate-y-1/2 text-zinc-600 dark:text-zinc-400 pointer-events-none",
+							"absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 dark:text-zinc-600 pointer-events-none",
 							iconSizeClasses[size],
 						)}
 					>
@@ -340,3 +340,6 @@ export { Input };
 // Backward compatibility - will be removed in next major version
 export { TextAreaBase as Textarea };
 export type { TextAreaProps as TextareaProps };
+
+// Direct export for SearchInput (also available as Input.Search)
+export { SearchInput };

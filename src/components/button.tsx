@@ -63,17 +63,17 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantClasses: Record<ButtonVariant, string> = {
 	default:
-		"bg-white/10 dark:bg-black/10 text-zinc-100 dark:text-zinc-900 hover:bg-white/15 dark:hover:bg-black/15 border border-white/10 dark:border-black/10",
+		"bg-black/10 dark:bg-white/10 text-zinc-900 dark:text-zinc-100 hover:bg-black/15 dark:hover:bg-white/15 border border-black/10 dark:border-white/10",
 	primary: "bg-blue-500 text-white hover:bg-blue-600",
 	secondary:
-		"bg-white/5 dark:bg-black/5 text-zinc-400 dark:text-zinc-500 hover:bg-white/10 dark:hover:bg-black/10 border border-white/10 dark:border-black/10",
+		"bg-black/5 dark:bg-white/5 text-zinc-400 dark:text-zinc-500 hover:bg-black/10 dark:hover:bg-white/10 border border-black/10 dark:border-white/10",
 	success: "bg-emerald-500 text-white hover:bg-emerald-500/90",
 	warning: "bg-amber-500 text-black hover:bg-amber-500/90",
 	info: "bg-sky-500 text-white hover:bg-sky-500/90",
 	destructive: "bg-red-500 text-white hover:bg-red-500/90",
 	outline:
-		"border border-white/20 dark:border-black/20 bg-transparent hover:bg-white/5 dark:hover:bg-black/5 text-zinc-400 dark:text-zinc-500",
-	ghost: "hover:bg-white/10 dark:hover:bg-black/10 text-zinc-400 dark:text-zinc-500",
+		"border border-zinc-300 dark:border-zinc-600 bg-transparent hover:bg-black/5 dark:hover:bg-white/5 text-zinc-600 dark:text-zinc-300",
+	ghost: "hover:bg-black/10 dark:hover:bg-white/10 text-zinc-400 dark:text-zinc-500",
 	link: "text-blue-500 underline-offset-4 hover:underline",
 	accent: "bg-violet-500 text-white hover:bg-violet-600",
 };

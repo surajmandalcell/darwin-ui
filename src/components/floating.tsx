@@ -415,7 +415,7 @@ function FloatingContent({
 					{...animationProps}
 					transition={{ duration: getDuration("normal"), ease: "easeOut" }}
 					className={cn(
-						"fixed overflow-hidden rounded-lg border border-white/10 dark:border-black/10 bg-zinc-900/95 dark:bg-white/95 text-zinc-100 dark:text-zinc-900 shadow-xl backdrop-blur-md",
+						"fixed overflow-hidden rounded-lg border border-black/10 dark:border-white/10 bg-white/95 dark:bg-zinc-900/95 text-zinc-900 dark:text-zinc-100 shadow-xl backdrop-blur-md",
 						sizeClasses[size],
 						className,
 					)}
@@ -483,7 +483,7 @@ function FloatingArrow({ className }: FloatingArrowProps) {
 	return (
 		<div
 			className={cn(
-				"absolute w-2 h-2 bg-zinc-900/95 dark:bg-white/95 rotate-45",
+				"absolute w-2 h-2 bg-white/95 dark:bg-zinc-900/95 rotate-45",
 				className,
 			)}
 		/>
