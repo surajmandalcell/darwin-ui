@@ -98,14 +98,28 @@ import { Plus, Settings, Download } from 'lucide-react';`,
   },
   'context-menu': {
     importCode: `import { ContextMenu } from '@pikoloo/darwin-ui';`,
-    usageCode: `<ContextMenu items={[
+    usageCode: `// Using the fromItems helper
+<ContextMenu.fromItems items={[
   { label: 'Cut', onClick: handleCut },
   { label: 'Copy', onClick: handleCopy },
-  { label: '', onClick: () => {}, separator: true },
-  { label: 'Delete', onClick: handleDelete },
+  { separator: true }, // Separator-only item
+  { label: 'Delete', onClick: handleDelete, destructive: true },
 ]}>
   <div>Right-click me</div>
-</ContextMenu>`,
+</ContextMenu.fromItems>
+
+// Using compound components
+<ContextMenu.Root>
+  <ContextMenu.Trigger>
+    <div>Right-click me</div>
+  </ContextMenu.Trigger>
+  <ContextMenu.Content>
+    <ContextMenu.Item onSelect={handleCut}>Cut</ContextMenu.Item>
+    <ContextMenu.Item onSelect={handleCopy}>Copy</ContextMenu.Item>
+    <ContextMenu.Separator />
+    <ContextMenu.Item onSelect={handleDelete} destructive>Delete</ContextMenu.Item>
+  </ContextMenu.Content>
+</ContextMenu.Root>`,
   },
   'date-select': {
     importCode: `import { DateSelect } from '@pikoloo/darwin-ui';`,
@@ -277,18 +291,77 @@ import { Plus, Settings, Download } from 'lucide-react';`,
 />`,
   },
   'sidebar': {
-    importCode: `import { Sidebar } from '@pikoloo/darwin-ui';`,
+    importCode: `import { Sidebar } from '@pikoloo/darwin-ui';
+import { Home, Folder, Settings } from 'lucide-react';`,
     usageCode: `const items = [
-  { label: 'Dashboard', onClick: () => navigate('/dashboard'), icon: HomeIcon },
-  { label: 'Projects', onClick: () => navigate('/projects'), icon: FolderIcon },
-  { label: 'Settings', onClick: () => navigate('/settings'), icon: SettingsIcon },
+  { label: 'Dashboard', onClick: () => navigate('/dashboard'), icon: Home },
+  { label: 'Projects', onClick: () => navigate('/projects'), icon: Folder },
+  { label: 'Settings', onClick: () => navigate('/settings'), icon: Settings },
 ];
+
+// Basic sidebar
+<Sidebar
+  items={items}
+  activeItem="Dashboard"
+  onLogout={() => logout()}
+/>
+
+// Collapsible sidebar
+<Sidebar
+  items={items}
+  activeItem="Dashboard"
+  onLogout={() => logout()}
+  collapsible
+  defaultCollapsed={false}
+/>
+
+// Controlled collapsed state
+const [collapsed, setCollapsed] = useState(false);
 
 <Sidebar
   items={items}
   activeItem="Dashboard"
   onLogout={() => logout()}
+  collapsed={collapsed}
+  onCollapsedChange={setCollapsed}
 />`,
+  },
+  'topbar': {
+    importCode: `import { Topbar } from '@pikoloo/darwin-ui';
+import { Home, Folder, Settings } from 'lucide-react';`,
+    usageCode: `const items = [
+  { label: 'Home', onClick: () => navigate('/'), icon: Home },
+  { label: 'Projects', onClick: () => navigate('/projects'), icon: Folder },
+  { label: 'Settings', onClick: () => navigate('/settings'), icon: Settings },
+];
+
+// Basic topbar
+<Topbar
+  items={items}
+  activeItem="Home"
+  logo={<span className="font-bold">MyApp</span>}
+/>
+
+// Sticky topbar with actions
+<Topbar
+  items={items}
+  activeItem="Home"
+  sticky
+  logo={<img src="/logo.svg" alt="Logo" />}
+  actions={
+    <>
+      <Button variant="ghost" size="icon">
+        <Bell className="h-4 w-4" />
+      </Button>
+      <Avatar src="/user.jpg" size="sm" />
+    </>
+  }
+/>
+
+// Variant styles
+<Topbar items={items} variant="default" />   // Solid background
+<Topbar items={items} variant="transparent" /> // No background
+<Topbar items={items} variant="bordered" />  // Border only`,
   },
   'slider': {
     importCode: `import { Slider } from '@pikoloo/darwin-ui';`,
@@ -350,12 +423,32 @@ const handleUpload = async (files: File[]) => {
   return urls;
 };
 
+// Default variant - full grid with thumbnails
 <Upload
   value={files}
   onChange={setFiles}
   onUpload={handleUpload}
   maxFiles={6}
   label="Drop your images here"
+/>
+
+// Compact variant - smaller drop zone, 2-column grid
+<Upload
+  variant="compact"
+  value={files}
+  onChange={setFiles}
+  onUpload={handleUpload}
+  maxFiles={4}
+/>
+
+// Inline variant - single row, same height as Input
+<Upload
+  variant="inline"
+  value={files}
+  onChange={setFiles}
+  onUpload={handleUpload}
+  maxFiles={4}
+  label="Product images"
 />`,
   },
   'window': {

@@ -17,6 +17,7 @@ export interface ContextMenuItem {
 	shortcut?: string;
 	disabled?: boolean;
 	separator?: boolean;
+	destructive?: boolean;
 }
 
 interface ContextMenuContextValue {
@@ -393,15 +394,18 @@ function LegacyContextMenu({
 				{items.map((item, index) => (
 					<React.Fragment key={index}>
 						{item.separator && <ContextMenuSeparator />}
-						<ContextMenuItem
-							disabled={item.disabled}
-							onSelect={item.onClick}
-						>
-							<span>{item.label}</span>
-							{item.shortcut && (
-								<ContextMenuShortcut>{item.shortcut}</ContextMenuShortcut>
-							)}
-						</ContextMenuItem>
+						{item.label && (
+							<ContextMenuItem
+								disabled={item.disabled}
+								onSelect={item.onClick}
+								destructive={item.destructive}
+							>
+								<span>{item.label}</span>
+								{item.shortcut && (
+									<ContextMenuShortcut>{item.shortcut}</ContextMenuShortcut>
+								)}
+							</ContextMenuItem>
+						)}
 					</React.Fragment>
 				))}
 			</ContextMenuContent>

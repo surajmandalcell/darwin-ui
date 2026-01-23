@@ -27,18 +27,21 @@ function SidebarItem({
 			type="button"
 			onClick={onClick}
 			className={cn(
-				"group flex w-full items-center rounded-md text-sm font-medium transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-500/50",
-				isCollapsed ? "justify-center px-2 py-2" : "gap-3 px-3 py-2",
+				"group flex w-full items-center rounded-lg text-sm font-medium transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50",
+				isCollapsed
+					? "justify-center aspect-square p-0"
+					: "gap-3 px-3 py-2",
 				active
-					? "bg-blue-500 text-white shadow-sm"
-					: "text-zinc-700 dark:text-zinc-300 hover:bg-black/5 dark:hover:bg-white/5 hover:text-zinc-900 dark:hover:text-zinc-100",
+					? "bg-blue-500 text-white shadow-sm shadow-blue-500/25"
+					: "text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-white/10 hover:text-zinc-900 dark:hover:text-zinc-100",
 			)}
 		>
 			{Icon ? (
 				<Icon
 					className={cn(
-						"h-4 w-4 shrink-0 transition-colors",
-						active ? "text-white" : "text-zinc-700 dark:text-zinc-300 group-hover:text-zinc-900 dark:group-hover:text-zinc-100",
+						"shrink-0 transition-colors",
+						isCollapsed ? "h-5 w-5" : "h-4 w-4",
+						active ? "text-white" : "text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-700 dark:group-hover:text-zinc-200",
 					)}
 				/>
 			) : null}
@@ -61,9 +64,9 @@ function SidebarItem({
 	// Wrap with tooltip only when collapsed
 	if (isCollapsed) {
 		return (
-			<Tooltip delayDuration={100}>
+			<Tooltip delayDuration={0}>
 				<TooltipTrigger asChild>{buttonContent}</TooltipTrigger>
-				<TooltipContent side="right" sideOffset={8}>
+				<TooltipContent side="right" sideOffset={12} className="font-medium">
 					{label}
 				</TooltipContent>
 			</Tooltip>
@@ -199,11 +202,14 @@ export function Sidebar({
 
 			{/* Desktop Sidebar */}
 			<motion.div
-				animate={{ width: isCollapsed ? 64 : 192 }}
+				animate={{ width: isCollapsed ? 56 : 200 }}
 				transition={getSpring("smooth")}
-				className="hidden h-full shrink-0 flex-col p-4 md:flex"
+				className={cn(
+					"hidden h-full shrink-0 flex-col md:flex",
+					isCollapsed ? "p-2" : "p-3"
+				)}
 			>
-				<div className="flex-1 space-y-1">
+				<div className={cn("flex-1", isCollapsed ? "space-y-1" : "space-y-1")}>
 					{topItems.map((item) => (
 						<SidebarItem
 							key={item.label}
@@ -216,39 +222,53 @@ export function Sidebar({
 					))}
 				</div>
 
-				<div className="mt-auto space-y-1 border-t border-black/10 dark:border-white/10 pt-4">
+				<div className={cn(
+					"mt-auto space-y-1 pt-3",
+					isCollapsed
+						? "border-t border-zinc-200 dark:border-white/10"
+						: "border-t border-zinc-200 dark:border-white/10"
+				)}>
 					{/* Collapse toggle button */}
 					{isCollapsible && (
-						<button
-							type="button"
-							onClick={() => handleCollapsedChange(!isCollapsed)}
-							aria-expanded={!isCollapsed}
-							aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
-							className={cn(
-								"group flex w-full items-center rounded-md py-2 text-sm font-medium text-zinc-500 dark:text-zinc-400 transition-all duration-200 ease-out hover:bg-black/5 dark:hover:bg-white/5 hover:text-zinc-700 dark:hover:text-zinc-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-500/50",
-								isCollapsed ? "justify-center px-2" : "gap-3 px-3",
-							)}
-						>
-							<motion.div
-								animate={{ rotate: isCollapsed ? 180 : 0 }}
-								transition={{ duration: getDuration("slow"), ease: "easeInOut" }}
-							>
-								<ChevronsLeft className="h-4 w-4" />
-							</motion.div>
-							<AnimatePresence mode="wait">
-								{!isCollapsed && (
-									<motion.span
-										initial={{ opacity: 0, width: 0 }}
-										animate={{ opacity: 1, width: "auto" }}
-										exit={{ opacity: 0, width: 0 }}
-										transition={{ duration: getDuration("normal") }}
-										className="whitespace-nowrap overflow-hidden"
+						<Tooltip delayDuration={0}>
+							<TooltipTrigger asChild>
+								<button
+									type="button"
+									onClick={() => handleCollapsedChange(!isCollapsed)}
+									aria-expanded={!isCollapsed}
+									aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+									className={cn(
+										"group flex w-full items-center rounded-lg text-sm font-medium text-zinc-500 dark:text-zinc-400 transition-all duration-200 ease-out hover:bg-zinc-100 dark:hover:bg-white/10 hover:text-zinc-700 dark:hover:text-zinc-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50",
+										isCollapsed ? "justify-center aspect-square p-0" : "gap-3 px-3 py-2",
+									)}
+								>
+									<motion.div
+										animate={{ rotate: isCollapsed ? 180 : 0 }}
+										transition={{ duration: getDuration("slow"), ease: "easeInOut" }}
 									>
-										Collapse
-									</motion.span>
-								)}
-							</AnimatePresence>
-						</button>
+										<ChevronsLeft className={cn(isCollapsed ? "h-5 w-5" : "h-4 w-4")} />
+									</motion.div>
+									<AnimatePresence mode="wait">
+										{!isCollapsed && (
+											<motion.span
+												initial={{ opacity: 0, width: 0 }}
+												animate={{ opacity: 1, width: "auto" }}
+												exit={{ opacity: 0, width: 0 }}
+												transition={{ duration: getDuration("normal") }}
+												className="whitespace-nowrap overflow-hidden"
+											>
+												Collapse
+											</motion.span>
+										)}
+									</AnimatePresence>
+								</button>
+							</TooltipTrigger>
+							{isCollapsed && (
+								<TooltipContent side="right" sideOffset={12} className="font-medium">
+									Expand
+								</TooltipContent>
+							)}
+						</Tooltip>
 					)}
 
 					{settingsItem && (

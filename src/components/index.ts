@@ -51,6 +51,7 @@ export { default as Reveal } from "./reveal";
 export type { SelectOption, SelectProps } from "./select";
 export { Select, MultiSelect } from "./select";
 export { Sidebar } from "./sidebar";
+export { Topbar } from "./topbar";
 export { Skeleton } from "./skeleton";
 export { Switch } from "./switch";
 export {
