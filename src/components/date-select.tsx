@@ -250,7 +250,7 @@ function TimePickerButton({
 							onChange(e.target.value);
 							setOpenPopover(null);
 						}}
-						className="px-3 py-2 bg-white/5 border border-white/10 rounded text-zinc-100 outline-none focus:border-blue-500 transition-colors duration-150"
+						className="px-3 py-2 bg-white/5 ring-1 ring-inset ring-white/10 rounded text-zinc-100 outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-150"
 					/>
 				</Popover.Content>
 			</Popover.Portal>

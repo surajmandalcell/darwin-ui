@@ -85,6 +85,33 @@ className="text-gray-900"
 className="bg-white/10"
 ```
 
+## Focus Ring Pattern (CRITICAL)
+
+For form elements (inputs, selects, textareas), use `ring-inset` instead of `border` for focus states. This ensures the focus indicator renders inside the element without gaps or layout shifts.
+
+```tsx
+// CORRECT - ring-inset for both default and focus states
+className="ring-1 ring-inset ring-black/10 dark:ring-white/10 focus:ring-2 focus:ring-blue-500"
+
+// WRONG - border-based focus (causes gaps/double borders)
+className="border border-black/10 focus:border-blue-500"  // ❌ gap between border and ring
+className="border focus:ring-2 focus:ring-blue-500"       // ❌ two separate indicators
+```
+
+### Pattern Summary
+
+| State | Classes |
+|-------|---------|
+| Default | `ring-1 ring-inset ring-black/10 dark:ring-white/10` |
+| Focus | `focus:ring-2 focus:ring-blue-500` |
+| Error | `ring-red-500/50 focus:ring-red-500` |
+| Success | `ring-emerald-500/50 focus:ring-emerald-500` |
+
+**Key points:**
+- NO `border` class on form inputs - use `ring-inset` only
+- Focus just increases ring width from 1 to 2 and changes color
+- Transitions smoothly with `transition-all duration-200`
+
 ## Dark Mode Pattern (CRITICAL)
 
 When using Tailwind's `dark:` prefix, light mode gets the BASE class, dark mode gets the `dark:` class.
