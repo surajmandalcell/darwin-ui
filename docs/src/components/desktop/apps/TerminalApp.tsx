@@ -2,10 +2,62 @@
 
 import { useEffect, useRef, useCallback, useState } from 'react';
 import type { WindowState } from '../../../contexts/desktop-context';
+import { useTheme } from '../../../contexts/theme-context';
 import { Terminal } from '@xterm/xterm';
 import { FitAddon } from '@xterm/addon-fit';
 import '@xterm/xterm/css/xterm.css';
 import { Plus, X } from 'lucide-react';
+
+// Theme configurations for xterm
+const darkTheme = {
+  background: '#0a0a0a',
+  foreground: '#e4e4e7',
+  cursor: '#22c55e',
+  cursorAccent: '#0a0a0a',
+  selectionBackground: '#3f3f46',
+  selectionForeground: '#e4e4e7',
+  black: '#18181b',
+  red: '#ef4444',
+  green: '#22c55e',
+  yellow: '#eab308',
+  blue: '#3b82f6',
+  magenta: '#a855f7',
+  cyan: '#06b6d4',
+  white: '#e4e4e7',
+  brightBlack: '#52525b',
+  brightRed: '#f87171',
+  brightGreen: '#4ade80',
+  brightYellow: '#facc15',
+  brightBlue: '#60a5fa',
+  brightMagenta: '#c084fc',
+  brightCyan: '#22d3ee',
+  brightWhite: '#fafafa',
+};
+
+const lightTheme = {
+  background: '#fafafa',
+  foreground: '#18181b',
+  cursor: '#16a34a',
+  cursorAccent: '#fafafa',
+  selectionBackground: '#d4d4d8',
+  selectionForeground: '#18181b',
+  black: '#18181b',
+  red: '#dc2626',
+  green: '#16a34a',
+  yellow: '#ca8a04',
+  blue: '#2563eb',
+  magenta: '#9333ea',
+  cyan: '#0891b2',
+  white: '#fafafa',
+  brightBlack: '#71717a',
+  brightRed: '#ef4444',
+  brightGreen: '#22c55e',
+  brightYellow: '#eab308',
+  brightBlue: '#3b82f6',
+  brightMagenta: '#a855f7',
+  brightCyan: '#06b6d4',
+  brightWhite: '#ffffff',
+};
 
 interface TerminalAppProps {
   windowState: WindowState;
@@ -499,6 +551,8 @@ function clearElement(element: HTMLElement) {
 }
 
 export function TerminalApp({ windowState }: TerminalAppProps) {
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === 'dark';
   const [tabs, setTabs] = useState<TerminalTab[]>([
     {
       id: '1',
@@ -515,11 +569,21 @@ export function TerminalApp({ windowState }: TerminalAppProps) {
   const terminalContainerRef = useRef<HTMLDivElement>(null);
   const currentInputRef = useRef('');
   const tabsRef = useRef(tabs);
+  const themeRef = useRef(isDark);
 
   // Keep tabs ref updated
   useEffect(() => {
     tabsRef.current = tabs;
   }, [tabs]);
+
+  // Keep theme ref updated and update terminal theme when it changes
+  useEffect(() => {
+    themeRef.current = isDark;
+    const activeTab = tabs.find(t => t.id === activeTabId);
+    if (activeTab?.terminal) {
+      activeTab.terminal.options.theme = isDark ? darkTheme : lightTheme;
+    }
+  }, [isDark, activeTabId, tabs]);
 
   const getPrompt = useCallback(() => {
     const dir = currentDir === envVars.HOME ? '~' : currentDir.split('/').pop() || '/';
@@ -529,6 +593,8 @@ export function TerminalApp({ windowState }: TerminalAppProps) {
   const initTerminal = useCallback((tabId: string) => {
     if (!terminalContainerRef.current) return;
 
+    const currentTheme = themeRef.current ? darkTheme : lightTheme;
+
     const terminal = new Terminal({
       cursorBlink: true,
       cursorStyle: 'block',
@@ -537,30 +603,7 @@ export function TerminalApp({ windowState }: TerminalAppProps) {
       fontWeight: '400',
       lineHeight: 1.2,
       letterSpacing: 0,
-      theme: {
-        background: '#0a0a0a',
-        foreground: '#e4e4e7',
-        cursor: '#22c55e',
-        cursorAccent: '#0a0a0a',
-        selectionBackground: '#3f3f46',
-        selectionForeground: '#e4e4e7',
-        black: '#18181b',
-        red: '#ef4444',
-        green: '#22c55e',
-        yellow: '#eab308',
-        blue: '#3b82f6',
-        magenta: '#a855f7',
-        cyan: '#06b6d4',
-        white: '#e4e4e7',
-        brightBlack: '#52525b',
-        brightRed: '#f87171',
-        brightGreen: '#4ade80',
-        brightYellow: '#facc15',
-        brightBlue: '#60a5fa',
-        brightMagenta: '#c084fc',
-        brightCyan: '#22d3ee',
-        brightWhite: '#fafafa',
-      },
+      theme: currentTheme,
       scrollback: 1000,
       convertEol: true,
       allowProposedApi: true,
@@ -841,25 +884,27 @@ export function TerminalApp({ windowState }: TerminalAppProps) {
   };
 
   return (
-    <div className="flex flex-col h-full bg-[#0a0a0a]">
+    <div className={`flex flex-col h-full ${isDark ? 'bg-[#0a0a0a]' : 'bg-[#fafafa]'}`}>
       {/* Tabs - themed */}
-      <div className="flex items-center bg-zinc-900 border-b border-zinc-800">
+      <div className={`flex items-center border-b ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-zinc-100 border-zinc-200'}`}>
         <div className="flex-1 flex items-center overflow-x-auto">
           {tabs.map((tab) => (
             <div
               key={tab.id}
               onClick={() => switchTab(tab.id)}
-              className={`flex items-center gap-2 px-4 py-2 cursor-pointer border-r border-zinc-800 transition-colors ${
+              className={`flex items-center gap-2 px-4 py-2 cursor-pointer border-r transition-colors ${
+                isDark ? 'border-zinc-800' : 'border-zinc-200'
+              } ${
                 activeTabId === tab.id
-                  ? 'bg-[#0a0a0a] text-zinc-100'
-                  : 'bg-zinc-900 text-zinc-500 hover:text-zinc-300'
+                  ? isDark ? 'bg-[#0a0a0a] text-zinc-100' : 'bg-[#fafafa] text-zinc-900'
+                  : isDark ? 'bg-zinc-900 text-zinc-500 hover:text-zinc-300' : 'bg-zinc-100 text-zinc-500 hover:text-zinc-700'
               }`}
             >
               <span className="text-xs font-mono">{tab.name}</span>
               {tabs.length > 1 && (
                 <button
                   onClick={(e) => closeTab(tab.id, e)}
-                  className="p-0.5 hover:bg-zinc-700 rounded"
+                  className={`p-0.5 rounded ${isDark ? 'hover:bg-zinc-700' : 'hover:bg-zinc-300'}`}
                 >
                   <X className="w-3 h-3" />
                 </button>
@@ -869,7 +914,7 @@ export function TerminalApp({ windowState }: TerminalAppProps) {
         </div>
         <button
           onClick={addTab}
-          className="p-2 text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800 transition-colors"
+          className={`p-2 transition-colors ${isDark ? 'text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800' : 'text-zinc-500 hover:text-zinc-700 hover:bg-zinc-200'}`}
         >
           <Plus className="w-4 h-4" />
         </button>
@@ -882,10 +927,10 @@ export function TerminalApp({ windowState }: TerminalAppProps) {
         style={{ minHeight: 0 }}
       />
 
-      {/* Status Bar - matches terminal dark theme */}
-      <div className="flex items-center justify-between px-3 py-1 bg-zinc-900 border-t border-zinc-800 text-xs font-mono">
-        <span className="text-zinc-500">{currentDir}</span>
-        <span className="text-zinc-500">bash</span>
+      {/* Status Bar - matches terminal theme */}
+      <div className={`flex items-center justify-between px-3 py-1 border-t text-xs font-mono ${isDark ? 'bg-zinc-900 border-zinc-800 text-zinc-500' : 'bg-zinc-100 border-zinc-200 text-zinc-500'}`}>
+        <span>{currentDir}</span>
+        <span>bash</span>
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
+import { useTheme } from "../contexts/theme-context";
 import {
     LayoutDashboard,
     Users,
@@ -101,12 +102,28 @@ function MetricCard({
     );
 }
 
-export default function DashboardShowcase() {
+interface DashboardShowcaseProps {
+    showTitleBar?: boolean;
+}
+
+export default function DashboardShowcase({ showTitleBar = true }: DashboardShowcaseProps) {
+    const { resolvedTheme } = useTheme();
+    const isDark = resolvedTheme === "dark";
     const [activeNav, setActiveNav] = useState("dashboard");
     const [showModal, setShowModal] = useState(false);
     const [showToast, setShowToast] = useState(false);
     const [searchFocused, setSearchFocused] = useState(false);
     const [mounted, setMounted] = useState(false);
+
+    // Theme-aware chart colors
+    const chartColors = useMemo(() => ({
+        grid: isDark ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.05)",
+        axis: isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)",
+        tick: isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.5)",
+        cursor: isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)",
+        dotStroke: isDark ? "#0a0a0a" : "#fafafa",
+        lineFaded: isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)",
+    }), [isDark]);
 
     useEffect(() => {
         // eslint-disable-next-line react-hooks/set-state-in-effect -- Intentional hydration pattern for client-only chart rendering
@@ -123,18 +140,20 @@ export default function DashboardShowcase() {
             className="relative w-full overflow-hidden font-sans bg-card"
         >
             {/* Window Title Bar - Compact */}
-            <div className="bg-card border-b border-border h-8 flex items-center px-3 justify-between select-none">
-                <div className="flex gap-1.5 group">
-                    <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f57] group-hover:bg-[#ff5f57]/80 transition-colors" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-[#febc2e] group-hover:bg-[#febc2e]/80 transition-colors" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-[#28c840] group-hover:bg-[#28c840]/80 transition-colors" />
+            {showTitleBar && (
+                <div className="bg-card border-b border-border h-8 flex items-center px-3 justify-between select-none">
+                    <div className="flex gap-1.5 group">
+                        <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f57] group-hover:bg-[#ff5f57]/80 transition-colors" />
+                        <div className="w-2.5 h-2.5 rounded-full bg-[#febc2e] group-hover:bg-[#febc2e]/80 transition-colors" />
+                        <div className="w-2.5 h-2.5 rounded-full bg-[#28c840] group-hover:bg-[#28c840]/80 transition-colors" />
+                    </div>
+                    <div className="text-[11px] font-medium text-muted-foreground/60 flex items-center gap-1.5">
+                        <LayoutDashboard className="w-3 h-3" />
+                        <span>Dashboard</span>
+                    </div>
+                    <div className="w-12" />
                 </div>
-                <div className="text-[11px] font-medium text-muted-foreground/60 flex items-center gap-1.5">
-                    <LayoutDashboard className="w-3 h-3" />
-                    <span>Dashboard</span>
-                </div>
-                <div className="w-12" />
-            </div>
+            )}
 
             <div className="flex flex-col md:flex-row min-h-[650px] md:h-[800px] xl:h-[850px]">
                 {/* Sidebar - Compact */}
@@ -296,18 +315,18 @@ export default function DashboardShowcase() {
                                                             <stop offset="95%" stopColor="#3b82f6" stopOpacity={0} />
                                                         </linearGradient>
                                                     </defs>
-                                                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.03)" vertical={false} />
+                                                    <CartesianGrid strokeDasharray="3 3" stroke={chartColors.grid} vertical={false} />
                                                     <XAxis
                                                         dataKey="month"
-                                                        stroke="rgba(255,255,255,0.1)"
-                                                        tick={{ fill: "rgba(255,255,255,0.4)", fontSize: 11 }}
+                                                        stroke={chartColors.axis}
+                                                        tick={{ fill: chartColors.tick, fontSize: 11 }}
                                                         tickLine={false}
                                                         axisLine={false}
                                                         dy={10}
                                                     />
                                                     <YAxis
-                                                        stroke="rgba(255,255,255,0.1)"
-                                                        tick={{ fill: "rgba(255,255,255,0.4)", fontSize: 11 }}
+                                                        stroke={chartColors.axis}
+                                                        tick={{ fill: chartColors.tick, fontSize: 11 }}
                                                         tickLine={false}
                                                         axisLine={false}
                                                         tickFormatter={(value) => `$${value}`}
@@ -327,7 +346,7 @@ export default function DashboardShowcase() {
                                                             }
                                                             return null;
                                                         }}
-                                                        cursor={{ stroke: 'rgba(255,255,255,0.1)', strokeWidth: 1, strokeDasharray: '4 4' }}
+                                                        cursor={{ stroke: chartColors.cursor, strokeWidth: 1, strokeDasharray: '4 4' }}
                                                     />
                                                     <Area
                                                         type="monotone"
@@ -336,12 +355,12 @@ export default function DashboardShowcase() {
                                                         strokeWidth={2}
                                                         fillOpacity={1}
                                                         fill="url(#colorRevenue)"
-                                                        activeDot={{ r: 6, fill: "#3b82f6", stroke: "#0a0a0a", strokeWidth: 2, className: "animate-pulse" }}
+                                                        activeDot={{ r: 6, fill: "#3b82f6", stroke: chartColors.dotStroke, strokeWidth: 2, className: "animate-pulse" }}
                                                     />
                                                     <Area
                                                         type="monotone"
                                                         dataKey="previous"
-                                                        stroke="rgba(255,255,255,0.1)"
+                                                        stroke={chartColors.lineFaded}
                                                         strokeWidth={2}
                                                         strokeDasharray="4 4"
                                                         fill="transparent"
@@ -525,7 +544,9 @@ export default function DashboardShowcase() {
                         className="w-full max-w-sm bg-card border border-border rounded-2xl shadow-md p-6 relative overflow-hidden animate-modal-enter"
                         onClick={(e) => e.stopPropagation()}
                         style={{
-                            boxShadow: '0 0 0 1px rgba(255,255,255,0.05), 0 20px 50px -10px rgba(0,0,0,0.8)'
+                            boxShadow: isDark
+                                ? '0 0 0 1px rgba(255,255,255,0.05), 0 20px 50px -10px rgba(0,0,0,0.8)'
+                                : '0 0 0 1px rgba(0,0,0,0.05), 0 20px 50px -10px rgba(0,0,0,0.15)'
                         }}
                     >
                         {/* Glossy header effect */}
@@ -558,9 +579,9 @@ export default function DashboardShowcase() {
             {/* Toast Notification */}
             {showToast && (
                 <div
-                    className="absolute bottom-6 right-6 z-50 flex items-center gap-3 px-5 py-4 bg-slate-900 border border-emerald-500/20 rounded-xl shadow-md animate-toast-enter overflow-hidden"
+                    className="absolute bottom-6 right-6 z-50 flex items-center gap-3 px-5 py-4 bg-card border border-emerald-500/20 rounded-xl shadow-md animate-toast-enter overflow-hidden"
                     style={{
-                        boxShadow: '0 10px 30px -5px rgba(0,0,0,0.5)'
+                        boxShadow: isDark ? '0 10px 30px -5px rgba(0,0,0,0.5)' : '0 10px 30px -5px rgba(0,0,0,0.15)'
                     }}
                 >
                     <div className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center border border-emerald-500/20 shadow-[0_0_10px_rgba(16,185,129,0.2)]">
