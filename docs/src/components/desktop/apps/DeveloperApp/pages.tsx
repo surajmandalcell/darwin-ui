@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ChevronRight,
@@ -27,7 +28,7 @@ import {
 // Import from local files
 import { pageTransitionVariants, containerVariants, itemVariants, featureCardVariants, iconVariants } from './animations';
 import { CodeBlock } from '../../../CodeBlock';
-import { componentPreviews } from './previews';
+import { componentPreviews, componentExamplePreviews } from './previews';
 import { componentCodeExamples } from './code-examples';
 
 // Component preview wrapper with animations
@@ -1167,6 +1168,111 @@ export function ComponentPage({ name }: { name: string }) {
           />
         </motion.div>
       </motion.div>
+
+      {/* Examples Section */}
+      {codeExample?.examples && codeExample.examples.length > 0 && (
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="show"
+          className="space-y-6"
+        >
+          <motion.h2
+            className="text-xl font-semibold text-foreground"
+            variants={itemVariants}
+          >
+            Examples
+          </motion.h2>
+          {codeExample.examples.map((example, index) => (
+            <ExampleCard
+              key={example.name}
+              example={example}
+              index={index}
+            />
+          ))}
+        </motion.div>
+      )}
+    </motion.div>
+  );
+}
+
+// Example card component with Preview/Code tabs
+function ExampleCard({ example, index }: { example: { name: string; description?: string; code: string; previewKey?: string }; index: number }) {
+  const [activeTab, setActiveTab] = useState<'preview' | 'code'>('preview');
+  const ExamplePreview = example.previewKey ? componentExamplePreviews[example.previewKey] : null;
+
+  return (
+    <motion.div
+      className="rounded-xl border border-border overflow-hidden"
+      variants={itemVariants}
+      custom={index}
+    >
+      {/* Example header */}
+      <div className="px-4 py-3 bg-muted/30 border-b border-border flex items-center justify-between">
+        <div>
+          <h3 className="text-sm font-medium text-foreground">{example.name}</h3>
+          {example.description && (
+            <p className="text-xs text-muted-foreground mt-0.5">{example.description}</p>
+          )}
+        </div>
+        {/* Tabs */}
+        <div className="flex gap-1 bg-muted/50 p-0.5 rounded-md">
+          <button
+            type="button"
+            onClick={() => setActiveTab('preview')}
+            className={`px-3 py-1 text-xs font-medium rounded transition-colors ${
+              activeTab === 'preview'
+                ? 'bg-background text-foreground shadow-sm'
+                : 'text-muted-foreground hover:text-foreground'
+            }`}
+          >
+            Preview
+          </button>
+          <button
+            type="button"
+            onClick={() => setActiveTab('code')}
+            className={`px-3 py-1 text-xs font-medium rounded transition-colors ${
+              activeTab === 'code'
+                ? 'bg-background text-foreground shadow-sm'
+                : 'text-muted-foreground hover:text-foreground'
+            }`}
+          >
+            Code
+          </button>
+        </div>
+      </div>
+
+      {/* Content area */}
+      <AnimatePresence mode="wait">
+        {activeTab === 'preview' ? (
+          <motion.div
+            key="preview"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
+            className="p-6 bg-muted/20"
+          >
+            {ExamplePreview ? (
+              <ExamplePreview />
+            ) : (
+              <div className="flex items-center justify-center min-h-[80px] text-muted-foreground text-sm">
+                Preview available in live docs
+              </div>
+            )}
+          </motion.div>
+        ) : (
+          <motion.div
+            key="code"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
+          >
+            <CodeBlock code={example.code} language="tsx" />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 }

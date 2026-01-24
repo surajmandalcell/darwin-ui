@@ -40,3 +40,17 @@ export interface PageContentProps {
   page: string;
   onNavigate?: (section: string, page: string) => void;
 }
+
+// Component example types
+export interface ComponentExample {
+  name: string;
+  description?: string;
+  code: string;
+  previewKey?: string; // Key to reference preview in componentExamplePreviews
+}
+
+export interface ComponentCodeExample {
+  importCode: string;
+  usageCode: string;
+  examples?: ComponentExample[];
+}

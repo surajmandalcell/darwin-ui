@@ -619,7 +619,7 @@ function ContextMenuPreview() {
     { label: 'Copy', onClick: () => {} },
     { label: 'Paste', onClick: () => {} },
     { label: '', onClick: () => {}, separator: true },
-    { label: 'Delete', onClick: () => {} },
+    { label: 'Delete', onClick: () => {}, destructive: true },
   ];
 
   return (
@@ -1808,4 +1808,731 @@ export const componentPreviews: Record<string, React.ComponentType> = {
   'window': WindowPreview,
   'backgrounds': BackgroundsPreview,
   'hover-effects': HoverEffectsPreview,
+};
+
+// ============================================================================
+// EXAMPLE PREVIEWS - Individual variant/example previews for documentation
+// ============================================================================
+
+// Button Examples
+function ButtonPrimaryExample() {
+  return (
+    <div className="flex flex-wrap gap-3">
+      <Button type="button" variant="primary">Primary</Button>
+      <Button type="button" variant="primary" size="sm">Small</Button>
+      <Button type="button" variant="primary" size="lg">Large</Button>
+    </div>
+  );
+}
+
+function ButtonSecondaryExample() {
+  return (
+    <div className="flex flex-wrap gap-3">
+      <Button type="button" variant="secondary">Secondary</Button>
+      <Button type="button" variant="outline">Outline</Button>
+      <Button type="button" variant="ghost">Ghost</Button>
+    </div>
+  );
+}
+
+function ButtonWithIconExample() {
+  return (
+    <div className="flex flex-wrap gap-3">
+      <Button type="button" variant="primary">
+        <Plus className="h-4 w-4 mr-2" />
+        Create New
+      </Button>
+      <Button type="button" variant="secondary">
+        <Download className="h-4 w-4 mr-2" />
+        Download
+      </Button>
+    </div>
+  );
+}
+
+function ButtonIconOnlyExample() {
+  return (
+    <div className="flex flex-wrap gap-3">
+      <Button type="button" variant="primary" size="icon">
+        <Plus className="h-4 w-4" />
+      </Button>
+      <Button type="button" variant="secondary" size="icon">
+        <Settings className="h-4 w-4" />
+      </Button>
+      <Button type="button" variant="ghost" size="icon">
+        <Heart className="h-4 w-4" />
+      </Button>
+      <Button type="button" variant="destructive" size="icon">
+        <Trash2 className="h-4 w-4" />
+      </Button>
+    </div>
+  );
+}
+
+function ButtonLoadingExample() {
+  const [loading, setLoading] = useState(false);
+  return (
+    <div className="flex flex-wrap gap-3 items-center">
+      <Button
+        type="button"
+        variant="primary"
+        loading={loading}
+        onClick={() => { setLoading(true); setTimeout(() => setLoading(false), 2000); }}
+      >
+        {loading ? 'Processing...' : 'Click to load'}
+      </Button>
+      <Button type="button" variant="secondary" loading>Always loading</Button>
+    </div>
+  );
+}
+
+function ButtonDestructiveExample() {
+  return (
+    <div className="flex flex-wrap gap-3">
+      <Button type="button" variant="destructive">Delete</Button>
+      <Button type="button" variant="destructive" size="icon">
+        <Trash2 className="h-4 w-4" />
+      </Button>
+    </div>
+  );
+}
+
+// Input Examples
+function InputStatesExample() {
+  return (
+    <div className="flex flex-col gap-3 max-w-xs">
+      <Input placeholder="Default input" />
+      <Input placeholder="Error state" error />
+      <Input placeholder="Success state" success />
+      <Input placeholder="Disabled" disabled />
+    </div>
+  );
+}
+
+function InputWithLabelExample() {
+  return (
+    <div className="flex flex-col gap-1 max-w-xs">
+      <label className="text-sm font-medium text-foreground">Email address</label>
+      <Input type="email" placeholder="you@example.com" />
+      <p className="text-xs text-muted-foreground">We&apos;ll never share your email.</p>
+    </div>
+  );
+}
+
+// Badge Examples
+function BadgeVariantsExample() {
+  return (
+    <div className="flex flex-wrap gap-2">
+      <Badge>Default</Badge>
+      <Badge variant="secondary">Secondary</Badge>
+      <Badge variant="outline">Outline</Badge>
+      <Badge variant="success">Success</Badge>
+      <Badge variant="warning">Warning</Badge>
+      <Badge variant="destructive">Destructive</Badge>
+      <Badge variant="info">Info</Badge>
+      <Badge variant="new">New</Badge>
+    </div>
+  );
+}
+
+// Card Examples
+function CardBasicExample() {
+  return (
+    <Card className="max-w-sm">
+      <CardHeader>
+        <CardTitle>Card Title</CardTitle>
+        <CardDescription>A brief description of the card content.</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <p className="text-sm text-muted-foreground">This is the main content area.</p>
+      </CardContent>
+    </Card>
+  );
+}
+
+function CardWithFooterExample() {
+  return (
+    <Card className="max-w-sm">
+      <CardHeader>
+        <CardTitle>Confirm Action</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <p className="text-sm text-muted-foreground">Are you sure you want to proceed?</p>
+      </CardContent>
+      <CardFooter className="flex gap-2 justify-end">
+        <Button type="button" variant="ghost">Cancel</Button>
+        <Button type="button" variant="primary">Confirm</Button>
+      </CardFooter>
+    </Card>
+  );
+}
+
+// Checkbox Examples
+function CheckboxBasicExample() {
+  const [checked, setChecked] = useState(false);
+  return (
+    <div className="flex flex-col gap-3">
+      <Checkbox label="Accept terms and conditions" checked={checked} onChange={setChecked} />
+      <Checkbox label="Subscribe to newsletter" checked={true} onChange={() => {}} />
+      <Checkbox label="Disabled option" disabled />
+    </div>
+  );
+}
+
+function CheckboxIndeterminateExample() {
+  const [all, setAll] = useState(false);
+  const [items, setItems] = useState([true, false, true]);
+
+  const someChecked = items.some(Boolean) && !items.every(Boolean);
+
+  return (
+    <div className="flex flex-col gap-2">
+      <Checkbox
+        label="Select all"
+        checked={all}
+        indeterminate={someChecked}
+        onChange={(checked) => {
+          setAll(checked);
+          setItems([checked, checked, checked]);
+        }}
+      />
+      <div className="pl-6 flex flex-col gap-1">
+        {['Item 1', 'Item 2', 'Item 3'].map((item, i) => (
+          <Checkbox
+            key={item}
+            label={item}
+            checked={items[i]}
+            onChange={(checked) => {
+              const newItems = [...items];
+              newItems[i] = checked;
+              setItems(newItems);
+              setAll(newItems.every(Boolean));
+            }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// Switch Examples
+function SwitchBasicExample() {
+  const [enabled, setEnabled] = useState(false);
+  return (
+    <div className="flex flex-col gap-3">
+      <Switch label="Enable notifications" checked={enabled} onChange={setEnabled} />
+      <Switch label="Dark mode" checked={true} onChange={() => {}} />
+      <Switch label="Disabled switch" disabled />
+    </div>
+  );
+}
+
+// Select Examples
+function SelectBasicExample() {
+  const [value, setValue] = useState('');
+  return (
+    <div className="w-full max-w-xs">
+      <Select value={value} onChange={(e) => setValue(e.target.value)}>
+        <option value="" disabled>Select an option...</option>
+        <option value="option1">Option 1</option>
+        <option value="option2">Option 2</option>
+        <option value="option3">Option 3</option>
+      </Select>
+    </div>
+  );
+}
+
+// MultiSelect Examples
+function MultiSelectBasicExample() {
+  const [selected, setSelected] = useState<string[]>([]);
+  const options = [
+    { label: 'React', value: 'react' },
+    { label: 'Vue', value: 'vue' },
+    { label: 'Angular', value: 'angular' },
+    { label: 'Svelte', value: 'svelte' },
+  ];
+  return (
+    <div className="w-full max-w-xs">
+      <MultiSelect value={selected} onChange={setSelected} options={options} placeholder="Select frameworks..." />
+    </div>
+  );
+}
+
+// Textarea Examples
+function TextareaBasicExample() {
+  const [value, setValue] = useState('');
+  return (
+    <div className="w-full max-w-sm space-y-3">
+      <Textarea placeholder="Write your message..." value={value} onChange={(e) => setValue(e.target.value)} rows={3} />
+      <div className="flex gap-3">
+        <Textarea placeholder="Error state" error rows={2} />
+        <Textarea placeholder="Success state" success rows={2} />
+      </div>
+    </div>
+  );
+}
+
+// Slider Examples
+function SliderBasicExample() {
+  const [value, setValue] = useState(50);
+  return (
+    <div className="w-full max-w-sm space-y-4">
+      <div>
+        <div className="flex justify-between mb-2">
+          <span className="text-sm text-muted-foreground">Volume</span>
+          <span className="text-sm font-mono text-blue-400">{value}%</span>
+        </div>
+        <Slider value={value} onChange={setValue} min={0} max={100} />
+      </div>
+    </div>
+  );
+}
+
+function SliderWithValueExample() {
+  const [value, setValue] = useState(75);
+  return (
+    <div className="w-full max-w-sm">
+      <Slider value={value} onChange={setValue} min={0} max={100} showValue />
+    </div>
+  );
+}
+
+// Upload Examples
+function UploadDefaultExample() {
+  const [files, setFiles] = useState<string[]>([]);
+  const handleUpload = async (uploadedFiles: File[]) => {
+    await new Promise(resolve => setTimeout(resolve, 500));
+    return uploadedFiles.map(f => URL.createObjectURL(f));
+  };
+  return (
+    <div className="w-full max-w-md">
+      <Upload value={files} onChange={setFiles} onUpload={handleUpload} maxFiles={4} label="Drop images here" />
+    </div>
+  );
+}
+
+// Progress Examples
+function ProgressVariantsExample() {
+  return (
+    <div className="w-full max-w-sm space-y-3">
+      <Progress value={65} showValue />
+      <Progress value={100} variant="success" />
+      <Progress value={45} variant="warning" />
+      <Progress indeterminate variant="gradient" />
+    </div>
+  );
+}
+
+function ProgressCircularExample() {
+  return (
+    <div className="flex items-center gap-4">
+      <CircularProgress value={75} showValue />
+      <CircularProgress value={100} variant="success" showValue />
+      <CircularProgress indeterminate />
+    </div>
+  );
+}
+
+// Skeleton Examples
+function SkeletonCardExample() {
+  return (
+    <div className="w-full max-w-sm space-y-3">
+      <div className="flex items-center gap-3">
+        <Skeleton className="h-12 w-12 rounded-full" />
+        <div className="flex-1 space-y-2">
+          <Skeleton className="h-4 w-3/4" />
+          <Skeleton className="h-3 w-1/2" />
+        </div>
+      </div>
+      <Skeleton className="h-24 w-full rounded-lg" />
+    </div>
+  );
+}
+
+// Accordion Examples
+function AccordionSingleExample() {
+  return (
+    <Accordion type="single" defaultValue="item-1" className="w-full max-w-md">
+      <AccordionItem value="item-1">
+        <AccordionTrigger>Section One</AccordionTrigger>
+        <AccordionContent>Content for section one goes here.</AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-2">
+        <AccordionTrigger>Section Two</AccordionTrigger>
+        <AccordionContent>Content for section two goes here.</AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  );
+}
+
+function AccordionMultipleExample() {
+  return (
+    <Accordion type="multiple" className="w-full max-w-md">
+      <AccordionItem value="a">
+        <AccordionTrigger>First Item</AccordionTrigger>
+        <AccordionContent>Can open multiple items at once.</AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="b">
+        <AccordionTrigger>Second Item</AccordionTrigger>
+        <AccordionContent>This stays open when others open.</AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  );
+}
+
+// Tabs Examples
+function TabsBasicExample() {
+  const [tab, setTab] = useState('tab1');
+  return (
+    <Tabs value={tab} onValueChange={setTab} className="w-full max-w-md">
+      <TabsList>
+        <TabsTrigger value="tab1">Overview</TabsTrigger>
+        <TabsTrigger value="tab2">Settings</TabsTrigger>
+        <TabsTrigger value="tab3">Advanced</TabsTrigger>
+      </TabsList>
+      <TabsContent value="tab1">
+        <div className="p-4 rounded-lg bg-muted/50 border border-border">Overview content</div>
+      </TabsContent>
+      <TabsContent value="tab2">
+        <div className="p-4 rounded-lg bg-muted/50 border border-border">Settings content</div>
+      </TabsContent>
+      <TabsContent value="tab3">
+        <div className="p-4 rounded-lg bg-muted/50 border border-border">Advanced content</div>
+      </TabsContent>
+    </Tabs>
+  );
+}
+
+// Dialog Examples
+function DialogBasicExample() {
+  const [open, setOpen] = useState(false);
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>
+        <Button type="button" variant="primary">Open Dialog</Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogClose />
+        <DialogHeader>
+          <DialogTitle>Dialog Title</DialogTitle>
+          <DialogDescription>This is a description of the dialog content.</DialogDescription>
+        </DialogHeader>
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button type="button" variant="ghost">Cancel</Button>
+          </DialogClose>
+          <Button type="button" variant="primary" onClick={() => setOpen(false)}>Save</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+// Modal Examples
+function ModalBasicExample() {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <>
+      <Button type="button" variant="primary" onClick={() => setIsOpen(true)}>Open Modal</Button>
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} title="Modal Title">
+        <p className="text-muted-foreground mb-4">Modal content goes here.</p>
+        <div className="flex gap-2 justify-end">
+          <Button type="button" variant="ghost" onClick={() => setIsOpen(false)}>Cancel</Button>
+          <Button type="button" variant="primary" onClick={() => setIsOpen(false)}>Confirm</Button>
+        </div>
+      </Modal>
+    </>
+  );
+}
+
+// Popover Examples
+function PopoverBasicExample() {
+  return (
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button type="button" variant="outline">Show Popover</Button>
+      </PopoverTrigger>
+      <PopoverContent>
+        <h4 className="font-medium text-foreground mb-1">Popover Title</h4>
+        <p className="text-sm text-muted-foreground">Additional information here.</p>
+      </PopoverContent>
+    </Popover>
+  );
+}
+
+// Tooltip Examples
+function TooltipPositionsExample() {
+  return (
+    <div className="flex flex-wrap gap-4">
+      <Tooltip>
+        <TooltipTrigger><Button type="button" variant="outline">Top</Button></TooltipTrigger>
+        <TooltipContent side="top">Tooltip on top</TooltipContent>
+      </Tooltip>
+      <Tooltip>
+        <TooltipTrigger><Button type="button" variant="outline">Bottom</Button></TooltipTrigger>
+        <TooltipContent side="bottom">Tooltip on bottom</TooltipContent>
+      </Tooltip>
+      <Tooltip>
+        <TooltipTrigger><Button type="button" variant="outline">Left</Button></TooltipTrigger>
+        <TooltipContent side="left">Tooltip on left</TooltipContent>
+      </Tooltip>
+      <Tooltip>
+        <TooltipTrigger><Button type="button" variant="outline">Right</Button></TooltipTrigger>
+        <TooltipContent side="right">Tooltip on right</TooltipContent>
+      </Tooltip>
+    </div>
+  );
+}
+
+// DropdownMenu Examples
+function DropdownMenuBasicExample() {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button type="button" variant="outline">Actions</Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuItem onSelect={() => {}}>Edit</DropdownMenuItem>
+        <DropdownMenuItem onSelect={() => {}}>Duplicate</DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem onSelect={() => {}} destructive>Delete</DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+
+// ContextMenu Examples
+function ContextMenuBasicExample() {
+  return (
+    <ContextMenu.fromItems items={[
+      { label: 'Cut', onClick: () => {} },
+      { label: 'Copy', onClick: () => {} },
+      { label: 'Paste', onClick: () => {} },
+      { label: '', onClick: () => {}, separator: true },
+      { label: 'Delete', onClick: () => {}, destructive: true },
+    ]}>
+      <div className="p-6 border border-dashed border-border rounded-lg text-center">
+        <span className="text-sm text-muted-foreground">Right-click here</span>
+      </div>
+    </ContextMenu.fromItems>
+  );
+}
+
+// Avatar Examples
+function AvatarSizesExample() {
+  return (
+    <div className="flex items-center gap-3">
+      <Avatar src="https://i.pravatar.cc/150?img=1" alt="User" size="sm" />
+      <Avatar src="https://i.pravatar.cc/150?img=2" alt="User" size="md" />
+      <Avatar src="https://i.pravatar.cc/150?img=3" alt="User" size="lg" />
+    </div>
+  );
+}
+
+function AvatarGroupExample() {
+  return (
+    <AvatarGroup max={3}>
+      <Avatar src="https://i.pravatar.cc/150?img=4" alt="User 1" />
+      <Avatar src="https://i.pravatar.cc/150?img=5" alt="User 2" />
+      <Avatar src="https://i.pravatar.cc/150?img=6" alt="User 3" />
+      <Avatar src="https://i.pravatar.cc/150?img=7" alt="User 4" />
+      <Avatar src="https://i.pravatar.cc/150?img=8" alt="User 5" />
+    </AvatarGroup>
+  );
+}
+
+function AvatarFallbackExample() {
+  return (
+    <div className="flex items-center gap-3">
+      <Avatar fallback="John Doe" size="md" />
+      <Avatar fallback="Jane Smith" size="md" />
+      <Avatar fallback="AB" size="md" />
+    </div>
+  );
+}
+
+// Table Examples
+function TableBasicExample() {
+  const data = [
+    { name: 'John Doe', email: 'john@example.com', role: 'Admin' },
+    { name: 'Jane Smith', email: 'jane@example.com', role: 'User' },
+  ];
+  return (
+    <Table>
+      <TableHead>
+        <TableRow>
+          <TableHeaderCell>Name</TableHeaderCell>
+          <TableHeaderCell>Email</TableHeaderCell>
+          <TableHeaderCell>Role</TableHeaderCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {data.map((row) => (
+          <TableRow key={row.email}>
+            <TableCell>{row.name}</TableCell>
+            <TableCell>{row.email}</TableCell>
+            <TableCell><Badge variant="secondary">{row.role}</Badge></TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  );
+}
+
+// Sidebar Examples
+function SidebarBasicExample() {
+  const [active, setActive] = useState('Dashboard');
+  const items = [
+    { label: 'Dashboard', onClick: () => setActive('Dashboard') },
+    { label: 'Projects', onClick: () => setActive('Projects') },
+    { label: 'Settings', onClick: () => setActive('Settings') },
+  ];
+  return (
+    <div className="flex h-48 rounded-lg border border-border overflow-hidden">
+      <Sidebar items={items} activeItem={active} onLogout={() => {}} />
+      <div className="flex-1 p-4 flex items-center justify-center">
+        <span className="text-muted-foreground">Current: {active}</span>
+      </div>
+    </div>
+  );
+}
+
+function SidebarCollapsibleExample() {
+  const [active, setActive] = useState('Dashboard');
+  const [collapsed, setCollapsed] = useState(false);
+  const items = [
+    { label: 'Dashboard', onClick: () => setActive('Dashboard') },
+    { label: 'Projects', onClick: () => setActive('Projects') },
+    { label: 'Settings', onClick: () => setActive('Settings') },
+  ];
+  return (
+    <div className="space-y-2">
+      <Switch label="Collapsed" checked={collapsed} onChange={setCollapsed} />
+      <div className="flex h-48 rounded-lg border border-border overflow-hidden">
+        <Sidebar items={items} activeItem={active} onLogout={() => {}} collapsed={collapsed} onCollapsedChange={setCollapsed} collapsible />
+        <div className="flex-1 p-4 flex items-center justify-center">
+          <span className="text-muted-foreground">Current: {active}</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Image Examples
+function ImageBasicExample() {
+  return (
+    <div className="flex gap-4">
+      <Image
+        src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=150&h=100&fit=crop"
+        alt="Mountain"
+        className="w-32 h-24 object-cover"
+        rounded="md"
+      />
+      <Image
+        src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=100&h=100&fit=crop"
+        alt="Ocean"
+        className="w-24 h-24 object-cover"
+        rounded="full"
+      />
+    </div>
+  );
+}
+
+function ImageClickToEnlargeExample() {
+  return (
+    <Image
+      src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=200&fit=crop"
+      alt="Mountain landscape"
+      className="w-48 h-32 object-cover"
+      rounded="lg"
+      clickToEnlarge
+    />
+  );
+}
+
+// Reveal Examples
+function RevealTypesExample() {
+  const [key, setKey] = useState(0);
+  return (
+    <div className="space-y-4">
+      <Button type="button" variant="outline" size="sm" onClick={() => setKey(k => k + 1)}>Replay</Button>
+      <div key={key} className="grid grid-cols-2 gap-3">
+        <Reveal type="slide" direction="up"><div className="p-3 bg-muted/50 rounded border border-border text-center text-sm">Slide Up</div></Reveal>
+        <Reveal type="fade" delay={0.1}><div className="p-3 bg-muted/50 rounded border border-border text-center text-sm">Fade</div></Reveal>
+        <Reveal type="scale" delay={0.2}><div className="p-3 bg-muted/50 rounded border border-border text-center text-sm">Scale</div></Reveal>
+        <Reveal type="blur" delay={0.3}><div className="p-3 bg-muted/50 rounded border border-border text-center text-sm">Blur</div></Reveal>
+      </div>
+    </div>
+  );
+}
+
+// Component example previews map
+export const componentExamplePreviews: Record<string, React.ComponentType> = {
+  // Button
+  'button-primary': ButtonPrimaryExample,
+  'button-secondary': ButtonSecondaryExample,
+  'button-with-icon': ButtonWithIconExample,
+  'button-icon-only': ButtonIconOnlyExample,
+  'button-loading': ButtonLoadingExample,
+  'button-destructive': ButtonDestructiveExample,
+  // Input
+  'input-states': InputStatesExample,
+  'input-with-label': InputWithLabelExample,
+  // Badge
+  'badge-variants': BadgeVariantsExample,
+  // Card
+  'card-basic': CardBasicExample,
+  'card-with-footer': CardWithFooterExample,
+  // Checkbox
+  'checkbox-basic': CheckboxBasicExample,
+  'checkbox-indeterminate': CheckboxIndeterminateExample,
+  // Switch
+  'switch-basic': SwitchBasicExample,
+  // Select
+  'select-basic': SelectBasicExample,
+  // MultiSelect
+  'multi-select-basic': MultiSelectBasicExample,
+  // Textarea
+  'textarea-basic': TextareaBasicExample,
+  // Slider
+  'slider-basic': SliderBasicExample,
+  'slider-with-value': SliderWithValueExample,
+  // Upload
+  'upload-default': UploadDefaultExample,
+  // Progress
+  'progress-variants': ProgressVariantsExample,
+  'progress-circular': ProgressCircularExample,
+  // Skeleton
+  'skeleton-card': SkeletonCardExample,
+  // Accordion
+  'accordion-single': AccordionSingleExample,
+  'accordion-multiple': AccordionMultipleExample,
+  // Tabs
+  'tabs-basic': TabsBasicExample,
+  // Dialog
+  'dialog-basic': DialogBasicExample,
+  // Modal
+  'modal-basic': ModalBasicExample,
+  // Popover
+  'popover-basic': PopoverBasicExample,
+  // Tooltip
+  'tooltip-positions': TooltipPositionsExample,
+  // DropdownMenu
+  'dropdown-menu-basic': DropdownMenuBasicExample,
+  // ContextMenu
+  'context-menu-basic': ContextMenuBasicExample,
+  // Avatar
+  'avatar-sizes': AvatarSizesExample,
+  'avatar-group': AvatarGroupExample,
+  'avatar-fallback': AvatarFallbackExample,
+  // Table
+  'table-basic': TableBasicExample,
+  // Sidebar
+  'sidebar-basic': SidebarBasicExample,
+  'sidebar-collapsible': SidebarCollapsibleExample,
+  // Image
+  'image-basic': ImageBasicExample,
+  'image-click-to-enlarge': ImageClickToEnlargeExample,
+  // Reveal
+  'reveal-types': RevealTypesExample,
 };
