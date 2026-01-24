@@ -31,6 +31,8 @@ interface TopbarProps {
 	variant?: "default" | "transparent" | "bordered";
 	/** Additional className */
 	className?: string;
+	/** Enable frosted glass effect */
+	glass?: boolean;
 }
 
 // ============================================================================
@@ -162,12 +164,14 @@ export function Topbar({
 	sticky = false,
 	variant = "default",
 	className,
+	glass = false,
 }: TopbarProps) {
 	const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
 
 	const variantStyles = {
-		default:
-			"bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border-b border-zinc-200 dark:border-white/10",
+		default: glass
+			? "bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl border-b border-white/20 dark:border-white/10"
+			: "bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border-b border-zinc-200 dark:border-white/10",
 		transparent: "bg-transparent",
 		bordered:
 			"bg-transparent border-b border-zinc-200 dark:border-white/10",

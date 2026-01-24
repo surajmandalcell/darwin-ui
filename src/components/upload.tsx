@@ -24,6 +24,8 @@ interface UploadProps {
 	label?: string;
 	/** Visual variant: default (full grid), compact (smaller), inline (single row) */
 	variant?: "default" | "compact" | "inline";
+	/** Enable frosted glass effect */
+	glass?: boolean;
 }
 
 export function Upload({
@@ -33,6 +35,7 @@ export function Upload({
 	maxFiles = 6,
 	label,
 	variant = "default",
+	glass = false,
 }: UploadProps) {
 	const [errors, setErrors] = React.useState<string[]>([]);
 	const fileInputRef = React.useRef<HTMLInputElement | null>(null);
@@ -317,7 +320,7 @@ export function Upload({
 		<div className="flex flex-col gap-2">
 			{fileInput}
 			{/* Drop area */}
-			<div className="relative flex min-h-52 flex-col overflow-hidden rounded-xl border border-dashed border-black/20 dark:border-white/20 p-4">
+			<div className={`relative flex min-h-52 flex-col overflow-hidden rounded-xl border border-dashed p-4 ${glass ? "bg-white/60 dark:bg-zinc-900/60 backdrop-blur-sm border-white/20 dark:border-white/10" : "border-black/20 dark:border-white/20"}`}>
 				{(value?.length || 0) + (pending.length || 0) > 0 ? (
 					<div className="flex w-full flex-col gap-3">
 						<div className="flex items-center justify-between gap-2">

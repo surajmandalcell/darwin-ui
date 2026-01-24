@@ -17,6 +17,8 @@ interface SliderProps {
 	size?: "sm" | "md" | "lg";
 	showValue?: boolean;
 	className?: string;
+	/** Enable frosted glass effect on track */
+	glass?: boolean;
 }
 
 function Slider({
@@ -31,6 +33,7 @@ function Slider({
 	size = "md",
 	showValue = false,
 	className,
+	glass = false,
 }: SliderProps) {
 	const [internalValue, setInternalValue] = React.useState(defaultValue);
 	const [isDragging, setIsDragging] = React.useState(false);
@@ -150,7 +153,10 @@ function Slider({
 				{/* Track */}
 				<div
 					className={cn(
-						"relative w-full rounded-full bg-black/10 dark:bg-white/10",
+						"relative w-full rounded-full",
+						glass
+							? "bg-white/40 dark:bg-zinc-900/40 backdrop-blur-sm"
+							: "bg-black/10 dark:bg-white/10",
 						sizeClasses[size].track
 					)}
 				>

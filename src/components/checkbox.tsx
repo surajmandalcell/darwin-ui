@@ -11,6 +11,8 @@ interface CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>
 	checked?: boolean;
 	indeterminate?: boolean;
 	onChange?: (checked: boolean) => void;
+	/** Enable frosted glass effect */
+	glass?: boolean;
 }
 
 export function Checkbox({
@@ -21,6 +23,7 @@ export function Checkbox({
 	indeterminate = false,
 	onChange,
 	disabled,
+	glass = false,
 	...props
 }: CheckboxProps) {
 	const id = useId();
@@ -47,7 +50,9 @@ export function Checkbox({
 					className={`flex h-4 w-4 items-center justify-center rounded-sm border transition-all duration-150 text-white peer-focus-visible:ring-2 peer-focus-visible:ring-blue-500/50 peer-focus-visible:ring-inset ${
 						isActive
 							? "bg-blue-500 border-blue-500"
-							: "bg-white dark:bg-zinc-800 border-black/20 dark:border-zinc-600"
+							: glass
+								? "bg-white/60 dark:bg-zinc-900/60 backdrop-blur-sm border-white/30 dark:border-white/10"
+								: "bg-white dark:bg-zinc-800 border-black/20 dark:border-zinc-600"
 					} ${boxClassName}`}
 				>
 					{indeterminate ? (

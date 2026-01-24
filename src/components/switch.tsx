@@ -9,6 +9,8 @@ interface SwitchProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 
 	label?: string;
 	checked?: boolean;
 	onChange?: (checked: boolean) => void;
+	/** Enable frosted glass effect */
+	glass?: boolean;
 }
 
 export function Switch({
@@ -17,6 +19,7 @@ export function Switch({
 	checked,
 	onChange,
 	disabled,
+	glass = false,
 	...props
 }: SwitchProps) {
 	const id = useId();
@@ -42,7 +45,9 @@ export function Switch({
 					className={`flex h-5 w-9 items-center rounded-full px-0.5 transition-all duration-200 peer-focus-visible:ring-2 peer-focus-visible:ring-blue-500/50 ${
 						checked
 							? "bg-emerald-500"
-							: "bg-zinc-600"
+							: glass
+								? "bg-white/60 dark:bg-zinc-900/60 backdrop-blur-sm"
+								: "bg-zinc-600"
 					}`}
 				>
 					<motion.span

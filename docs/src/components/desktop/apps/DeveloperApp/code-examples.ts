@@ -55,6 +55,21 @@ export const componentCodeExamples: Record<string, ComponentCodeExample> = {
   </AccordionItem>
 </Accordion>`,
       },
+      {
+        name: 'Glass',
+        description: 'Frosted glass effect with blur backdrop',
+        previewKey: 'accordion-glass',
+        code: `<Accordion type="single" defaultValue="item-1" glass>
+  <AccordionItem value="item-1">
+    <AccordionTrigger>Glass Section</AccordionTrigger>
+    <AccordionContent>Glassmorphism accordion styling.</AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="item-2">
+    <AccordionTrigger>Another Section</AccordionTrigger>
+    <AccordionContent>Frosted glass effect.</AccordionContent>
+  </AccordionItem>
+</Accordion>`,
+      },
     ],
   },
   'avatar': {
@@ -96,6 +111,13 @@ export const componentCodeExamples: Record<string, ComponentCodeExample> = {
 <Avatar fallback="Jane Smith" size="md" />
 <Avatar fallback="AB" size="md" />`,
       },
+      {
+        name: 'Glass',
+        description: 'Frosted glass effect for fallback avatars',
+        previewKey: 'avatar-glass',
+        code: `<Avatar fallback="John Doe" size="md" glass />
+<Avatar fallback="JS" size="lg" glass />`,
+      },
     ],
   },
   'badge': {
@@ -116,6 +138,12 @@ export const componentCodeExamples: Record<string, ComponentCodeExample> = {
 <Badge variant="destructive">Destructive</Badge>
 <Badge variant="info">Info</Badge>
 <Badge variant="new">New</Badge>`,
+      },
+      {
+        name: 'Glass',
+        description: 'Frosted glass effect badge',
+        previewKey: 'badge-glass',
+        code: `<Badge variant="glass">Glass Badge</Badge>`,
       },
     ],
   },
@@ -195,6 +223,14 @@ import { Plus, Settings, Download } from 'lucide-react';`,
   <Trash2 className="h-4 w-4" />
 </Button>`,
       },
+      {
+        name: 'Glass',
+        description: 'Frosted glass hover effect',
+        previewKey: 'button-glass',
+        code: `<Button variant="primary" glass>Glass Button</Button>
+<Button variant="secondary" glass>Secondary Glass</Button>
+<Button variant="outline" glass>Outline Glass</Button>`,
+      },
     ],
   },
   'card': {
@@ -239,6 +275,20 @@ import { Plus, Settings, Download } from 'lucide-react';`,
     <Button variant="ghost">Cancel</Button>
     <Button variant="primary">Confirm</Button>
   </CardFooter>
+</Card>`,
+      },
+      {
+        name: 'Glass',
+        description: 'Frosted glass effect with blur backdrop',
+        previewKey: 'card-glass',
+        code: `<Card glass>
+  <CardHeader>
+    <CardTitle>Glass Card</CardTitle>
+    <CardDescription>Frosted glass effect</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <p>Content with glassmorphism styling.</p>
+  </CardContent>
 </Card>`,
       },
     ],
@@ -298,6 +348,13 @@ const someChecked = items.some(Boolean) && !items.every(Boolean);
   ))}
 </div>`,
       },
+      {
+        name: 'Glass',
+        description: 'Frosted glass effect checkbox',
+        previewKey: 'checkbox-glass',
+        code: `<Checkbox label="Glass checkbox" glass />
+<Checkbox label="Glass checked" checked glass />`,
+      },
     ],
   },
   'close-button': {
@@ -329,6 +386,20 @@ const someChecked = items.some(Boolean) && !items.every(Boolean);
 ]}>
   <div className="p-6 border border-dashed rounded-lg text-center">
     Right-click here
+  </div>
+</ContextMenu.fromItems>`,
+      },
+      {
+        name: 'Glass',
+        description: 'Frosted glass effect context menu',
+        previewKey: 'context-menu-glass',
+        code: `<ContextMenu.fromItems items={[
+  { label: 'Cut', onClick: () => {} },
+  { label: 'Copy', onClick: () => {} },
+  { label: 'Paste', onClick: () => {} },
+]} glass>
+  <div className="p-6 border border-dashed rounded-lg text-center">
+    Right-click for glass menu
   </div>
 </ContextMenu.fromItems>`,
       },
@@ -384,6 +455,26 @@ const someChecked = items.some(Boolean) && !items.every(Boolean);
   </DialogContent>
 </Dialog>`,
       },
+      {
+        name: 'Glass',
+        description: 'Frosted glass effect dialog',
+        previewKey: 'dialog-glass',
+        code: `<Dialog open={open} onOpenChange={setOpen}>
+  <DialogTrigger asChild>
+    <Button variant="primary">Open Glass Dialog</Button>
+  </DialogTrigger>
+  <DialogContent glass>
+    <DialogClose />
+    <DialogHeader>
+      <DialogTitle>Glass Dialog</DialogTitle>
+      <DialogDescription>Frosted glass effect styling.</DialogDescription>
+    </DialogHeader>
+    <DialogFooter>
+      <Button variant="primary" onClick={() => setOpen(false)}>Done</Button>
+    </DialogFooter>
+  </DialogContent>
+</Dialog>`,
+      },
     ],
   },
   'dropdown-menu': {
@@ -409,6 +500,22 @@ const someChecked = items.some(Boolean) && !items.every(Boolean);
     <Button variant="outline">Actions</Button>
   </DropdownMenuTrigger>
   <DropdownMenuContent>
+    <DropdownMenuItem onSelect={() => {}}>Edit</DropdownMenuItem>
+    <DropdownMenuItem onSelect={() => {}}>Duplicate</DropdownMenuItem>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem onSelect={() => {}} destructive>Delete</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>`,
+      },
+      {
+        name: 'Glass',
+        description: 'Frosted glass effect dropdown',
+        previewKey: 'dropdown-menu-glass',
+        code: `<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button variant="outline">Glass Menu</Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent glass>
     <DropdownMenuItem onSelect={() => {}}>Edit</DropdownMenuItem>
     <DropdownMenuItem onSelect={() => {}}>Duplicate</DropdownMenuItem>
     <DropdownMenuSeparator />
@@ -499,6 +606,17 @@ const someChecked = items.some(Boolean) && !items.every(Boolean);
   </div>
 </Modal>`,
       },
+      {
+        name: 'Glass',
+        description: 'Frosted glass effect modal',
+        previewKey: 'modal-glass',
+        code: `<Modal isOpen={isOpen} onClose={() => setIsOpen(false)} title="Glass Modal" glass>
+  <p>Glassmorphism modal styling.</p>
+  <div className="flex gap-2 justify-end mt-4">
+    <Button variant="primary" onClick={() => setIsOpen(false)}>Done</Button>
+  </div>
+</Modal>`,
+      },
     ],
   },
   'multi-select': {
@@ -561,6 +679,20 @@ const options = [
   </PopoverContent>
 </Popover>`,
       },
+      {
+        name: 'Glass',
+        description: 'Frosted glass effect popover',
+        previewKey: 'popover-glass',
+        code: `<Popover>
+  <PopoverTrigger asChild>
+    <Button variant="outline">Glass Popover</Button>
+  </PopoverTrigger>
+  <PopoverContent glass>
+    <h4 className="font-medium mb-1">Glass Popover</h4>
+    <p className="text-sm text-muted-foreground">Frosted glass effect.</p>
+  </PopoverContent>
+</Popover>`,
+      },
     ],
   },
   'progress': {
@@ -588,6 +720,13 @@ const options = [
         code: `<CircularProgress value={75} showValue />
 <CircularProgress value={100} variant="success" showValue />
 <CircularProgress indeterminate />`,
+      },
+      {
+        name: 'Glass',
+        description: 'Frosted glass effect progress track',
+        previewKey: 'progress-glass',
+        code: `<Progress value={65} glass />
+<Progress value={80} variant="success" glass showValue />`,
       },
     ],
   },
@@ -655,6 +794,20 @@ const options = [
   <option value="option3">Option 3</option>
 </Select>`,
       },
+      {
+        name: 'Glass',
+        description: 'Frosted glass effect dropdown',
+        previewKey: 'select-glass',
+        code: `<Select
+  glass
+  placeholder="Select an option..."
+  options={[
+    { value: 'option1', label: 'Option 1' },
+    { value: 'option2', label: 'Option 2' },
+    { value: 'option3', label: 'Option 3' },
+  ]}
+/>`,
+      },
     ],
   },
   'skeleton': {
@@ -677,6 +830,16 @@ const options = [
   <Skeleton className="h-24 w-full rounded-lg" />
 </div>`,
       },
+      {
+        name: 'Glass',
+        description: 'Frosted glass effect skeleton',
+        previewKey: 'skeleton-glass',
+        code: `<div className="space-y-3">
+  <Skeleton className="h-12 w-12 rounded-full" glass />
+  <Skeleton className="h-4 w-3/4" glass />
+  <Skeleton className="h-4 w-1/2" glass />
+</div>`,
+      },
     ],
   },
   'switch': {
@@ -696,6 +859,13 @@ const options = [
 <Switch label="Enable notifications" checked={enabled} onChange={setEnabled} />
 <Switch label="Dark mode" checked={true} onChange={() => {}} />
 <Switch label="Disabled switch" disabled />`,
+      },
+      {
+        name: 'Glass',
+        description: 'Frosted glass effect switch',
+        previewKey: 'switch-glass',
+        code: `<Switch label="Glass switch" glass />
+<Switch label="Glass enabled" checked glass />`,
       },
     ],
   },
@@ -741,6 +911,25 @@ const options = [
         <TableCell><Badge variant="secondary">{row.role}</Badge></TableCell>
       </TableRow>
     ))}
+  </TableBody>
+</Table>`,
+      },
+      {
+        name: 'Glass',
+        description: 'Frosted glass effect table header',
+        previewKey: 'table-glass',
+        code: `<Table glass>
+  <TableHead>
+    <TableRow>
+      <TableHeaderCell>Name</TableHeaderCell>
+      <TableHeaderCell>Status</TableHeaderCell>
+    </TableRow>
+  </TableHead>
+  <TableBody>
+    <TableRow>
+      <TableCell>John Doe</TableCell>
+      <TableCell><Badge variant="success">Active</Badge></TableCell>
+    </TableRow>
   </TableBody>
 </Table>`,
       },
@@ -810,6 +999,17 @@ const items = [
   collapsible
 />`,
       },
+      {
+        name: 'Glass',
+        description: 'Frosted glass effect sidebar',
+        previewKey: 'sidebar-glass',
+        code: `<Sidebar
+  items={items}
+  activeItem="Dashboard"
+  onLogout={() => {}}
+  glass
+/>`,
+      },
     ],
   },
   'topbar': {
@@ -848,6 +1048,19 @@ import { Home, Folder, Settings } from 'lucide-react';`,
 <Topbar items={items} variant="default" />   // Solid background
 <Topbar items={items} variant="transparent" /> // No background
 <Topbar items={items} variant="bordered" />  // Border only`,
+    examples: [
+      {
+        name: 'Glass',
+        description: 'Frosted glass effect topbar',
+        previewKey: 'topbar-glass',
+        code: `<Topbar
+  items={items}
+  activeItem="Home"
+  glass
+  logo={<span className="font-bold">App</span>}
+/>`,
+      },
+    ],
   },
   'slider': {
     importCode: `import { Slider } from '@pikoloo/darwin-ui';`,
@@ -879,6 +1092,12 @@ import { Home, Folder, Settings } from 'lucide-react';`,
         description: 'Built-in value tooltip',
         previewKey: 'slider-with-value',
         code: `<Slider value={value} onChange={setValue} min={0} max={100} showValue />`,
+      },
+      {
+        name: 'Glass',
+        description: 'Frosted glass effect slider track',
+        previewKey: 'slider-glass',
+        code: `<Slider value={50} onChange={setValue} min={0} max={100} glass />`,
       },
     ],
   },
@@ -918,6 +1137,19 @@ import { Home, Folder, Settings } from 'lucide-react';`,
   <TabsContent value="tab3">
     <div className="p-4 bg-muted/50 rounded-lg">Advanced content</div>
   </TabsContent>
+</Tabs>`,
+      },
+      {
+        name: 'Glass',
+        description: 'Frosted glass effect tabs list',
+        previewKey: 'tabs-glass',
+        code: `<Tabs value={tab} onValueChange={setTab} glass>
+  <TabsList>
+    <TabsTrigger value="tab1">Overview</TabsTrigger>
+    <TabsTrigger value="tab2">Settings</TabsTrigger>
+  </TabsList>
+  <TabsContent value="tab1">Overview content</TabsContent>
+  <TabsContent value="tab2">Settings content</TabsContent>
 </Tabs>`,
       },
     ],
@@ -985,6 +1217,15 @@ import { Home, Folder, Settings } from 'lucide-react';`,
   <TooltipContent side="right">Tooltip on right</TooltipContent>
 </Tooltip>`,
       },
+      {
+        name: 'Glass',
+        description: 'Frosted glass effect tooltip',
+        previewKey: 'tooltip-glass',
+        code: `<Tooltip>
+  <TooltipTrigger><Button>Hover me</Button></TooltipTrigger>
+  <TooltipContent glass>Glass tooltip</TooltipContent>
+</Tooltip>`,
+      },
     ],
   },
   'upload': {
@@ -1022,6 +1263,19 @@ const handleUpload = async (uploadedFiles: File[]) => {
   onUpload={handleUpload}
   maxFiles={4}
   label="Drop images here"
+/>`,
+      },
+      {
+        name: 'Glass',
+        description: 'Frosted glass effect upload zone',
+        previewKey: 'upload-glass',
+        code: `<Upload
+  value={files}
+  onChange={setFiles}
+  onUpload={handleUpload}
+  maxFiles={4}
+  label="Glass dropzone"
+  glass
 />`,
       },
     ],

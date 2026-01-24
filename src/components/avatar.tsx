@@ -9,6 +9,8 @@ interface AvatarProps {
 	fallback?: string;
 	size?: "xs" | "sm" | "md" | "lg" | "xl";
 	className?: string;
+	/** Enable frosted glass effect */
+	glass?: boolean;
 }
 
 function getInitials(name: string): string {
@@ -42,7 +44,7 @@ function stringToColor(str: string): string {
 	return colors[Math.abs(hash) % colors.length];
 }
 
-function Avatar({ src, alt, fallback, size = "md", className }: AvatarProps) {
+function Avatar({ src, alt, fallback, size = "md", className, glass = false }: AvatarProps) {
 	const [imgError, setImgError] = React.useState(false);
 
 	const sizeClasses = {
@@ -62,8 +64,10 @@ function Avatar({ src, alt, fallback, size = "md", className }: AvatarProps) {
 			className={cn(
 				"relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full",
 				sizeClasses[size],
-				showFallback && bgColor,
-				"ring-1 ring-white/10 dark:ring-black/10",
+				showFallback && (glass ? "bg-white/60 dark:bg-zinc-900/60 backdrop-blur-sm" : bgColor),
+				glass
+					? "ring-1 ring-white/30 dark:ring-white/10"
+					: "ring-1 ring-white/10 dark:ring-black/10",
 				className
 			)}
 		>

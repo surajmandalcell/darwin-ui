@@ -82,9 +82,11 @@ interface DialogContentProps {
 	children: React.ReactNode;
 	className?: string;
 	size?: "sm" | "md" | "lg" | "xl" | "full";
+	/** Enable frosted glass effect */
+	glass?: boolean;
 }
 
-function DialogContent({ children, className, size = "md" }: DialogContentProps) {
+function DialogContent({ children, className, size = "md", glass = false }: DialogContentProps) {
 	const { open, onOpenChange } = useDialogContext();
 	const [mounted, setMounted] = React.useState(false);
 
@@ -129,7 +131,10 @@ function DialogContent({ children, className, size = "md" }: DialogContentProps)
 							role="dialog"
 							aria-modal="true"
 							className={cn(
-								"relative w-full bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border border-black/10 dark:border-white/10 rounded-[var(--radius-xl,1rem)] shadow-2xl",
+								"relative w-full border rounded-[var(--radius-xl,1rem)] shadow-2xl",
+								glass
+									? "bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl border-white/20 dark:border-white/10"
+									: "bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border-black/10 dark:border-white/10",
 								sizeClasses[size],
 								className
 							)}

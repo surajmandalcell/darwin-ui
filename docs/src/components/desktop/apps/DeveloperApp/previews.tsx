@@ -80,6 +80,7 @@ import {
   DonutChart,
   StackedBarChart,
   CloseButton,
+  Topbar,
 } from '@pikoloo/darwin-ui';
 import { containerVariants, itemVariants } from './animations';
 
@@ -2466,6 +2467,302 @@ function RevealTypesExample() {
   );
 }
 
+// Glass Example Components
+function CardGlassExample() {
+  return (
+    <Card glass className="max-w-sm">
+      <CardHeader>
+        <CardTitle>Glass Card</CardTitle>
+        <CardDescription>Frosted glass effect</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <p className="text-muted-foreground text-sm">Content with glassmorphism styling.</p>
+      </CardContent>
+    </Card>
+  );
+}
+
+function BadgeGlassExample() {
+  return (
+    <Badge variant="glass">Glass Badge</Badge>
+  );
+}
+
+function ButtonGlassExample() {
+  return (
+    <div className="flex flex-wrap gap-3">
+      <Button type="button" variant="primary" glass>Glass Button</Button>
+      <Button type="button" variant="secondary" glass>Secondary Glass</Button>
+      <Button type="button" variant="outline" glass>Outline Glass</Button>
+    </div>
+  );
+}
+
+function AccordionGlassExample() {
+  return (
+    <Accordion type="single" defaultValue="item-1" glass className="max-w-sm">
+      <AccordionItem value="item-1">
+        <AccordionTrigger>Glass Section</AccordionTrigger>
+        <AccordionContent>Glassmorphism accordion styling.</AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-2">
+        <AccordionTrigger>Another Section</AccordionTrigger>
+        <AccordionContent>Frosted glass effect.</AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  );
+}
+
+function AvatarGlassExample() {
+  return (
+    <div className="flex items-center gap-3">
+      <Avatar fallback="John Doe" size="md" glass />
+      <Avatar fallback="JS" size="lg" glass />
+    </div>
+  );
+}
+
+function CheckboxGlassExample() {
+  const [checked, setChecked] = useState(false);
+  return (
+    <div className="flex flex-col gap-3">
+      <Checkbox label="Glass checkbox" glass checked={checked} onChange={setChecked} />
+      <Checkbox label="Glass checked" checked glass onChange={() => {}} />
+    </div>
+  );
+}
+
+function SwitchGlassExample() {
+  const [enabled, setEnabled] = useState(false);
+  return (
+    <div className="flex flex-col gap-3">
+      <Switch label="Glass switch" glass checked={enabled} onChange={setEnabled} />
+      <Switch label="Glass enabled" checked glass onChange={() => {}} />
+    </div>
+  );
+}
+
+function DialogGlassExample() {
+  const [open, setOpen] = useState(false);
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>
+        <Button type="button" variant="primary">Open Glass Dialog</Button>
+      </DialogTrigger>
+      <DialogContent glass>
+        <DialogClose />
+        <DialogHeader>
+          <DialogTitle>Glass Dialog</DialogTitle>
+          <DialogDescription>Frosted glass effect styling.</DialogDescription>
+        </DialogHeader>
+        <DialogFooter>
+          <Button type="button" variant="primary" onClick={() => setOpen(false)}>Done</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+function ModalGlassExample() {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <>
+      <Button type="button" variant="primary" onClick={() => setIsOpen(true)}>Open Glass Modal</Button>
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} title="Glass Modal" glass>
+        <p className="text-muted-foreground mb-4">Glassmorphism modal styling.</p>
+        <div className="flex gap-2 justify-end">
+          <Button type="button" variant="primary" onClick={() => setIsOpen(false)}>Done</Button>
+        </div>
+      </Modal>
+    </>
+  );
+}
+
+function DropdownMenuGlassExample() {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button type="button" variant="outline">Glass Menu</Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent glass>
+        <DropdownMenuItem onSelect={() => {}}>Edit</DropdownMenuItem>
+        <DropdownMenuItem onSelect={() => {}}>Duplicate</DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem onSelect={() => {}} destructive>Delete</DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+
+function ContextMenuGlassExample() {
+  return (
+    <ContextMenu.fromItems items={[
+      { label: 'Cut', onClick: () => {} },
+      { label: 'Copy', onClick: () => {} },
+      { label: 'Paste', onClick: () => {} },
+    ]} glass>
+      <div className="p-6 border border-dashed border-border rounded-lg text-center">
+        <span className="text-sm text-muted-foreground">Right-click for glass menu</span>
+      </div>
+    </ContextMenu.fromItems>
+  );
+}
+
+function PopoverGlassExample() {
+  return (
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button type="button" variant="outline">Glass Popover</Button>
+      </PopoverTrigger>
+      <PopoverContent glass>
+        <h4 className="font-medium text-foreground mb-1">Glass Popover</h4>
+        <p className="text-sm text-muted-foreground">Frosted glass effect.</p>
+      </PopoverContent>
+    </Popover>
+  );
+}
+
+function TooltipGlassExample() {
+  return (
+    <Tooltip>
+      <TooltipTrigger><Button type="button" variant="outline">Hover me</Button></TooltipTrigger>
+      <TooltipContent glass>Glass tooltip</TooltipContent>
+    </Tooltip>
+  );
+}
+
+function ProgressGlassExample() {
+  return (
+    <div className="space-y-4 w-full max-w-xs">
+      <Progress value={65} glass />
+      <Progress value={80} variant="success" glass showValue />
+    </div>
+  );
+}
+
+function SelectGlassExample() {
+  const [value, setValue] = useState('');
+  return (
+    <div className="w-full max-w-xs">
+      <Select
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        glass
+        placeholder="Select an option..."
+        options={[
+          { value: 'option1', label: 'Option 1' },
+          { value: 'option2', label: 'Option 2' },
+          { value: 'option3', label: 'Option 3' },
+        ]}
+      />
+    </div>
+  );
+}
+
+function SkeletonGlassExample() {
+  return (
+    <div className="space-y-3">
+      <Skeleton className="h-12 w-12 rounded-full" glass />
+      <Skeleton className="h-4 w-3/4" glass />
+      <Skeleton className="h-4 w-1/2" glass />
+    </div>
+  );
+}
+
+function TableGlassExample() {
+  return (
+    <Table glass>
+      <TableHead>
+        <TableRow>
+          <TableHeaderCell>Name</TableHeaderCell>
+          <TableHeaderCell>Status</TableHeaderCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        <TableRow>
+          <TableCell>John Doe</TableCell>
+          <TableCell><Badge variant="success">Active</Badge></TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  );
+}
+
+function TabsGlassExample() {
+  const [tab, setTab] = useState('tab1');
+  return (
+    <Tabs value={tab} onValueChange={setTab} glass>
+      <TabsList>
+        <TabsTrigger value="tab1">Overview</TabsTrigger>
+        <TabsTrigger value="tab2">Settings</TabsTrigger>
+      </TabsList>
+      <TabsContent value="tab1">
+        <div className="p-4 rounded-lg bg-muted/50 border border-border">Overview content</div>
+      </TabsContent>
+      <TabsContent value="tab2">
+        <div className="p-4 rounded-lg bg-muted/50 border border-border">Settings content</div>
+      </TabsContent>
+    </Tabs>
+  );
+}
+
+function SliderGlassExample() {
+  const [value, setValue] = useState(50);
+  return (
+    <div className="w-full max-w-xs">
+      <Slider value={value} onChange={setValue} min={0} max={100} glass />
+    </div>
+  );
+}
+
+function UploadGlassExample() {
+  const [files, setFiles] = useState<string[]>([]);
+  const handleUpload = async (uploadedFiles: File[]) => {
+    await new Promise(resolve => setTimeout(resolve, 500));
+    return uploadedFiles.map(f => URL.createObjectURL(f));
+  };
+  return (
+    <Upload
+      value={files}
+      onChange={setFiles}
+      onUpload={handleUpload}
+      maxFiles={4}
+      label="Glass dropzone"
+      glass
+    />
+  );
+}
+
+function SidebarGlassExample() {
+  const [active, setActive] = useState('Dashboard');
+  const items = [
+    { label: 'Dashboard', onClick: () => setActive('Dashboard') },
+    { label: 'Projects', onClick: () => setActive('Projects') },
+    { label: 'Settings', onClick: () => setActive('Settings') },
+  ];
+  return (
+    <div className="flex h-48 rounded-lg border border-border overflow-hidden">
+      <Sidebar items={items} activeItem={active} onLogout={() => {}} glass />
+      <div className="flex-1 p-4 flex items-center justify-center">
+        <span className="text-muted-foreground">Current: {active}</span>
+      </div>
+    </div>
+  );
+}
+
+function TopbarGlassExample() {
+  const items = [
+    { label: 'Home', onClick: () => {} },
+    { label: 'Projects', onClick: () => {} },
+    { label: 'Settings', onClick: () => {} },
+  ];
+  return (
+    <div className="w-full border border-border rounded-lg overflow-hidden">
+      <Topbar items={items} activeItem="Home" glass logo={<span className="font-bold">App</span>} />
+    </div>
+  );
+}
+
 // Component example previews map
 export const componentExamplePreviews: Record<string, React.ComponentType> = {
   // Button
@@ -2535,4 +2832,27 @@ export const componentExamplePreviews: Record<string, React.ComponentType> = {
   'image-click-to-enlarge': ImageClickToEnlargeExample,
   // Reveal
   'reveal-types': RevealTypesExample,
+  // Glass Examples
+  'card-glass': CardGlassExample,
+  'badge-glass': BadgeGlassExample,
+  'button-glass': ButtonGlassExample,
+  'accordion-glass': AccordionGlassExample,
+  'avatar-glass': AvatarGlassExample,
+  'checkbox-glass': CheckboxGlassExample,
+  'switch-glass': SwitchGlassExample,
+  'dialog-glass': DialogGlassExample,
+  'modal-glass': ModalGlassExample,
+  'dropdown-menu-glass': DropdownMenuGlassExample,
+  'context-menu-glass': ContextMenuGlassExample,
+  'popover-glass': PopoverGlassExample,
+  'tooltip-glass': TooltipGlassExample,
+  'progress-glass': ProgressGlassExample,
+  'select-glass': SelectGlassExample,
+  'skeleton-glass': SkeletonGlassExample,
+  'table-glass': TableGlassExample,
+  'tabs-glass': TabsGlassExample,
+  'slider-glass': SliderGlassExample,
+  'upload-glass': UploadGlassExample,
+  'sidebar-glass': SidebarGlassExample,
+  'topbar-glass': TopbarGlassExample,
 };

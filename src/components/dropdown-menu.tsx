@@ -108,6 +108,8 @@ interface DropdownMenuContentProps {
 	align?: "start" | "center" | "end";
 	side?: "top" | "bottom";
 	sideOffset?: number;
+	/** Enable frosted glass effect */
+	glass?: boolean;
 }
 
 function DropdownMenuContent({
@@ -116,6 +118,7 @@ function DropdownMenuContent({
 	align = "start",
 	side = "bottom",
 	sideOffset = 4,
+	glass = false,
 }: DropdownMenuContentProps) {
 	const { open, triggerRef } = useDropdownMenuContext();
 	const [mounted, setMounted] = React.useState(false);
@@ -170,7 +173,10 @@ function DropdownMenuContent({
 					role="menu"
 					aria-orientation="vertical"
 					className={cn(
-						"fixed min-w-[180px] overflow-hidden rounded-[var(--radius-lg,0.75rem)] border border-black/10 dark:border-white/10 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md p-1 shadow-xl",
+						"fixed min-w-[180px] overflow-hidden rounded-[var(--radius-lg,0.75rem)] border p-1 shadow-xl",
+						glass
+							? "bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl border-white/20 dark:border-white/10"
+							: "bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border-black/10 dark:border-white/10",
 						className
 					)}
 					style={{

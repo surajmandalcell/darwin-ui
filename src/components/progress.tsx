@@ -11,6 +11,8 @@ interface ProgressProps {
 	indeterminate?: boolean;
 	showValue?: boolean;
 	className?: string;
+	/** Enable frosted glass effect on track */
+	glass?: boolean;
 }
 
 function Progress({
@@ -21,6 +23,7 @@ function Progress({
 	indeterminate = false,
 	showValue = false,
 	className,
+	glass = false,
 }: ProgressProps) {
 	const percentage = Math.min(100, Math.max(0, (value / max) * 100));
 
@@ -46,7 +49,10 @@ function Progress({
 				aria-valuemin={0}
 				aria-valuemax={max}
 				className={cn(
-					"w-full overflow-hidden rounded-full bg-black/10 dark:bg-white/10",
+					"w-full overflow-hidden rounded-full",
+					glass
+						? "bg-white/40 dark:bg-zinc-900/40 backdrop-blur-sm"
+						: "bg-black/10 dark:bg-white/10",
 					sizeClasses[size]
 				)}
 			>

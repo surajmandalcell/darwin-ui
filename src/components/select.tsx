@@ -26,6 +26,8 @@ interface BaseSelectProps {
 	className?: string;
 	/** Max items to display as text before showing count */
 	maxDisplayCount?: number;
+	/** Enable frosted glass effect on dropdown */
+	glass?: boolean;
 }
 
 interface SingleSelectProps extends BaseSelectProps {
@@ -117,6 +119,7 @@ function SingleSelectInternal({
 	disabled,
 	options: optionsProp,
 	placeholder,
+	glass = false,
 }: SingleSelectProps) {
 	const [open, setOpen] = React.useState(false);
 	const containerRef = React.useRef<HTMLDivElement>(null);
@@ -174,7 +177,12 @@ function SingleSelectInternal({
 									left: `${position.left}px`,
 									minWidth: `${position.width}px`,
 								}}
-								className="z-50 min-w-[8rem] overflow-hidden rounded-[var(--radius-md,0.5rem)] border border-black/10 dark:border-white/10 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md shadow-md"
+								className={cn(
+									"z-50 min-w-[8rem] overflow-hidden rounded-[var(--radius-md,0.5rem)] border shadow-md",
+									glass
+										? "bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl border-white/20 dark:border-white/10"
+										: "bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border-black/10 dark:border-white/10"
+								)}
 							>
 								<ul role="listbox" className="py-1 px-1 flex flex-col gap-0.5">
 									{options.map((opt) => (
@@ -261,6 +269,7 @@ function MultiSelectInternal({
 	className,
 	maxDisplayCount = 2,
 	showTags = true,
+	glass = false,
 }: MultiSelectProps) {
 	const [open, setOpen] = React.useState(false);
 	const containerRef = React.useRef<HTMLDivElement>(null);
@@ -305,7 +314,12 @@ function MultiSelectInternal({
 									left: `${position.left}px`,
 									minWidth: `${position.width}px`,
 								}}
-								className="z-50 min-w-[8rem] overflow-hidden rounded-[var(--radius-md,0.5rem)] border border-black/10 dark:border-white/10 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md shadow-md"
+								className={cn(
+									"z-50 min-w-[8rem] overflow-hidden rounded-[var(--radius-md,0.5rem)] border shadow-md",
+									glass
+										? "bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl border-white/20 dark:border-white/10"
+										: "bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border-black/10 dark:border-white/10"
+								)}
 							>
 								<ul role="listbox" className="p-1">
 									{options.map((opt) => {

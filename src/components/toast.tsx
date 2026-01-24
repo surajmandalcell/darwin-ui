@@ -11,6 +11,7 @@ interface Toast {
 	message: string;
 	type: ToastType;
 	duration?: number;
+	glass?: boolean;
 }
 
 interface ToastContextValue {
@@ -20,6 +21,8 @@ interface ToastContextValue {
 			title?: string;
 			type?: ToastType;
 			duration?: number;
+			/** Enable frosted glass effect */
+			glass?: boolean;
 		},
 	) => void;
 }
@@ -50,6 +53,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
 				title?: string;
 				type?: ToastType;
 				duration?: number;
+				glass?: boolean;
 			} = {},
 		) => {
 			const id = Math.random().toString(36).substring(7);
@@ -59,6 +63,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
 				title: options.title,
 				type: options.type || "info",
 				duration: options.duration || 3000,
+				glass: options.glass || false,
 			};
 
 			setToasts((prev) => [...prev, toast]);
@@ -97,7 +102,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
 				{toasts.map((toast) => (
 					<div
 						key={toast.id}
-						className="bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md shadow-md border border-black/10 dark:border-white/10 rounded-[var(--radius-lg,0.75rem)] min-w-80 max-w-md pointer-events-auto animate-in slide-in-from-right duration-300"
+						className={`${toast.glass ? "bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl border-white/20 dark:border-white/10" : "bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border-black/10 dark:border-white/10"} shadow-md border rounded-[var(--radius-lg,0.75rem)] min-w-80 max-w-md pointer-events-auto animate-in slide-in-from-right duration-300`}
 					>
 						<div className="p-4 flex items-start gap-3">
 							{getIcon(toast.type)}

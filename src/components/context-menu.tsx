@@ -165,9 +165,11 @@ function ContextMenuTrigger({
 interface ContextMenuContentProps {
 	children: React.ReactNode;
 	className?: string;
+	/** Enable frosted glass effect */
+	glass?: boolean;
 }
 
-function ContextMenuContent({ children, className }: ContextMenuContentProps) {
+function ContextMenuContent({ children, className, glass = false }: ContextMenuContentProps) {
 	const { open, position } = useContextMenuContext();
 	const [mounted, setMounted] = React.useState(false);
 
@@ -187,7 +189,10 @@ function ContextMenuContent({ children, className }: ContextMenuContentProps) {
 					role="menu"
 					aria-orientation="vertical"
 					className={cn(
-						"fixed min-w-[180px] overflow-hidden rounded-[var(--radius-lg,0.75rem)] border border-black/10 dark:border-white/10 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md p-1 shadow-xl",
+						"fixed min-w-[180px] overflow-hidden rounded-[var(--radius-lg,0.75rem)] border p-1 shadow-xl",
+						glass
+							? "bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl border-white/20 dark:border-white/10"
+							: "bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border-black/10 dark:border-white/10",
 						className,
 					)}
 					style={{
@@ -380,17 +385,20 @@ interface LegacyContextMenuProps {
 	children: React.ReactNode;
 	items: ContextMenuItem[];
 	className?: string;
+	/** Enable frosted glass effect */
+	glass?: boolean;
 }
 
 function LegacyContextMenu({
 	children,
 	items,
 	className,
+	glass,
 }: LegacyContextMenuProps) {
 	return (
 		<ContextMenuRoot>
 			<ContextMenuTrigger className={className}>{children}</ContextMenuTrigger>
-			<ContextMenuContent>
+			<ContextMenuContent glass={glass}>
 				{items.map((item, index) => (
 					<React.Fragment key={index}>
 						{item.separator && <ContextMenuSeparator />}

@@ -25,6 +25,8 @@ interface InlineAlertProps {
 	dismissible?: boolean;
 	onDismiss?: () => void;
 	className?: string;
+	/** Enable frosted glass effect */
+	glass?: boolean;
 }
 
 const alertVariants: Record<AlertVariant, { bg: string; border: string; icon: string; title: string; description: string }> = {
@@ -82,6 +84,7 @@ export function Alert({
 	dismissible = false,
 	onDismiss,
 	className,
+	glass = false,
 }: InlineAlertProps) {
 	const [isVisible, setIsVisible] = useState(true);
 	const styles = alertVariants[variant];
@@ -106,9 +109,9 @@ export function Alert({
 					}}
 					className={cn(
 						"relative flex items-start gap-3 rounded-[var(--radius-xl,1rem)] border p-4",
-						"backdrop-blur-sm",
-						styles.bg,
-						styles.border,
+						glass
+							? "bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl border-white/20 dark:border-white/10"
+							: cn("backdrop-blur-sm", styles.bg, styles.border),
 						className
 					)}
 					role="alert"

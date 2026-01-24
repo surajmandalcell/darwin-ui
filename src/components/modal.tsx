@@ -16,6 +16,8 @@ interface ModalProps {
 	children: React.ReactNode;
 	className?: string;
 	size?: "sm" | "md" | "lg" | "xl";
+	/** Enable frosted glass effect */
+	glass?: boolean;
 }
 
 export function Modal({
@@ -25,6 +27,7 @@ export function Modal({
 	children,
 	className = "",
 	size = "md",
+	glass = false,
 }: ModalProps) {
 	const [overlayId, setOverlayId] = useState<string | null>(null);
 	const { registerOverlay, unregisterOverlay } = useOverlay();
@@ -79,7 +82,7 @@ export function Modal({
 									duration: getDuration("slow"),
 									ease: [0.16, 1, 0.3, 1],
 								}}
-								className={`bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md shadow-md border border-black/10 dark:border-white/10 rounded-[var(--radius-lg,0.75rem)] w-full ${sizeClasses[size]} flex flex-col max-h-[calc(100vh-2rem)] ${className} pointer-events-auto`}
+								className={`${glass ? "bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl border-white/20 dark:border-white/10" : "bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border-black/10 dark:border-white/10"} shadow-md border rounded-[var(--radius-lg,0.75rem)] w-full ${sizeClasses[size]} flex flex-col max-h-[calc(100vh-2rem)] ${className} pointer-events-auto`}
 								role="dialog"
 								aria-modal="true"
 								aria-labelledby="modal-title"

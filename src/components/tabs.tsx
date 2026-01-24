@@ -7,6 +7,7 @@ import { cn } from "../lib/utils";
 interface TabsContextValue {
 	value: string;
 	onValueChange: (value: string) => void;
+	glass: boolean;
 }
 
 const TabsContext = React.createContext<TabsContextValue | undefined>(undefined);
@@ -24,11 +25,13 @@ interface TabsProps {
 	onValueChange: (value: string) => void;
 	children: React.ReactNode;
 	className?: string;
+	/** Enable frosted glass effect on TabsList */
+	glass?: boolean;
 }
 
-function Tabs({ value, onValueChange, children, className }: TabsProps) {
+function Tabs({ value, onValueChange, children, className, glass = false }: TabsProps) {
 	return (
-		<TabsContext.Provider value={{ value, onValueChange }}>
+		<TabsContext.Provider value={{ value, onValueChange, glass }}>
 			<div className={cn("w-full", className)}>{children}</div>
 		</TabsContext.Provider>
 	);
@@ -40,11 +43,15 @@ interface TabsListProps {
 }
 
 function TabsList({ children, className }: TabsListProps) {
+	const { glass } = useTabsContext();
 	return (
 		<div
 			role="tablist"
 			className={cn(
-				"inline-flex h-10 items-center justify-center rounded-[var(--radius-lg,0.75rem)] bg-black/5 dark:bg-white/5 p-1 text-zinc-800 dark:text-zinc-200 backdrop-blur-sm border border-black/10 dark:border-white/10",
+				"inline-flex h-10 items-center justify-center rounded-[var(--radius-lg,0.75rem)] p-1 text-zinc-800 dark:text-zinc-200 border",
+				glass
+					? "bg-white/60 dark:bg-zinc-900/60 backdrop-blur-xl border-white/20 dark:border-white/10"
+					: "bg-black/5 dark:bg-white/5 backdrop-blur-sm border-black/10 dark:border-white/10",
 				className
 			)}
 		>
