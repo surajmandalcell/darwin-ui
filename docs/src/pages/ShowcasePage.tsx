@@ -104,7 +104,7 @@ export default function ShowcasePage() {
               >
                 <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium bg-muted/30 border border-border/60 text-muted-foreground backdrop-blur-sm">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  v1.3.0 — 36+ Components
+                  v2.0.0 - 36+ Components
                 </span>
               </motion.div>
 

@@ -106,7 +106,7 @@ function AboutModal({
 									animate={{ opacity: 1, y: 0 }}
 									transition={{ delay: 0.2 }}
 								>
-									Version 1.5.0
+									Version 2.0.0
 								</motion.p>
 
 								{/* Description */}

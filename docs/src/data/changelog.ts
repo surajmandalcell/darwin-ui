@@ -32,6 +32,43 @@ export interface ChangelogEntry {
 
 export const changelog: ChangelogEntry[] = [
   {
+    version: '2.0.0',
+    date: '2025-01-24',
+    title: 'Frosted Glass, Accessibility & Visual Testing',
+    description: 'Major release with frosted glass effects across components, comprehensive accessibility improvements, visual regression testing infrastructure, and HSL color variable standardization.',
+    changes: [
+      // Added
+      { type: 'added', description: 'Frosted glass effect support for Accordion, Badge, Button, Card, Input, Sidebar, and Table components' },
+      { type: 'added', description: 'Visual regression testing setup with Playwright for component screenshot validation' },
+      { type: 'added', description: 'Visual regression audit command for automated component testing' },
+      { type: 'added', description: 'Pixel-based contrast validation tests for accessibility compliance' },
+      { type: 'added', description: 'CSS Isolation documentation section in DeveloperApp' },
+      { type: 'added', description: 'Component examples section with tabs for preview and code' },
+      { type: 'added', description: 'NotFoundPage component with enhanced routing' },
+      { type: 'added', description: 'Code quality guidelines and mandatory checks documentation' },
+      { type: 'added', component: 'Button', description: 'Text and icon variations' },
+      { type: 'added', component: 'DeveloperApp', description: 'Search functionality and organized documentation sections' },
+      // Changed
+      { type: 'changed', description: 'All component styles now use HSL color variables for consistent theming', breaking: true },
+      { type: 'changed', description: 'Focus ring pattern implemented for all form elements using ring-inset for improved accessibility' },
+      { type: 'changed', description: 'Animation system consolidated using animation-config.ts for consistent timing' },
+      { type: 'changed', description: 'Dark mode text colors standardized for improved contrast and readability' },
+      { type: 'changed', description: 'CSS variables adopted for border radius across all components' },
+      { type: 'changed', component: 'Floating', description: 'Replaced Tooltip component with unified Floating component' },
+      { type: 'changed', component: 'TerminalApp', description: 'Theme-aware styling with dynamic theme switching' },
+      { type: 'changed', component: 'CodeBlock', description: 'Dynamic syntax highlighting with adjusted import paths' },
+      // Fixed
+      { type: 'fixed', description: 'Text color accessibility across Button, ContextMenu, DropdownMenu, Sidebar, and Tabs' },
+      { type: 'fixed', description: 'Focus styles and transition effects consistency across components' },
+      { type: 'fixed', description: 'Avatar, CloseButton, ContactForm, and Upload components HSL color compatibility' },
+      { type: 'fixed', description: 'Styling consistency in Breadcrumbs, UnifiedNavbar, ExampleApp, NotesApp, and TerminalApp' },
+      // Removed
+      { type: 'removed', description: 'Deprecated TypeScript configuration options' },
+      { type: 'removed', description: 'Unused component examples and legacy code' },
+      { type: 'removed', description: 'Standalone Textarea component (merged into Input component)' },
+    ],
+  },
+  {
     version: '1.5.0',
     date: '2025-01-22',
     title: 'Light Mode & Theme System',
