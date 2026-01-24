@@ -26,21 +26,6 @@ export const componentCodeExamples: Record<string, ComponentCodeExample> = {
 </Accordion>`,
     examples: [
       {
-        name: 'Single Open',
-        description: 'Only one item open at a time',
-        previewKey: 'accordion-single',
-        code: `<Accordion type="single" defaultValue="item-1">
-  <AccordionItem value="item-1">
-    <AccordionTrigger>Section One</AccordionTrigger>
-    <AccordionContent>Content for section one.</AccordionContent>
-  </AccordionItem>
-  <AccordionItem value="item-2">
-    <AccordionTrigger>Section Two</AccordionTrigger>
-    <AccordionContent>Content for section two.</AccordionContent>
-  </AccordionItem>
-</Accordion>`,
-      },
-      {
         name: 'Multiple Open',
         description: 'Multiple items can be open simultaneously',
         previewKey: 'accordion-multiple',
@@ -64,10 +49,6 @@ export const componentCodeExamples: Record<string, ComponentCodeExample> = {
     <AccordionTrigger>Glass Section</AccordionTrigger>
     <AccordionContent>Glassmorphism accordion styling.</AccordionContent>
   </AccordionItem>
-  <AccordionItem value="item-2">
-    <AccordionTrigger>Another Section</AccordionTrigger>
-    <AccordionContent>Frosted glass effect.</AccordionContent>
-  </AccordionItem>
 </Accordion>`,
       },
     ],
@@ -84,34 +65,6 @@ export const componentCodeExamples: Record<string, ComponentCodeExample> = {
 </AvatarGroup>`,
     examples: [
       {
-        name: 'Size Variants',
-        description: 'Small, medium, and large avatars',
-        previewKey: 'avatar-sizes',
-        code: `<Avatar src="/user.jpg" alt="User" size="sm" />
-<Avatar src="/user.jpg" alt="User" size="md" />
-<Avatar src="/user.jpg" alt="User" size="lg" />`,
-      },
-      {
-        name: 'Avatar Group',
-        description: 'Stacked avatars with overflow count',
-        previewKey: 'avatar-group',
-        code: `<AvatarGroup max={3}>
-  <Avatar src="/user1.jpg" alt="User 1" />
-  <Avatar src="/user2.jpg" alt="User 2" />
-  <Avatar src="/user3.jpg" alt="User 3" />
-  <Avatar src="/user4.jpg" alt="User 4" />
-  <Avatar src="/user5.jpg" alt="User 5" />
-</AvatarGroup>`,
-      },
-      {
-        name: 'Fallback Initials',
-        description: 'Initials when no image is provided',
-        previewKey: 'avatar-fallback',
-        code: `<Avatar fallback="John Doe" size="md" />
-<Avatar fallback="Jane Smith" size="md" />
-<Avatar fallback="AB" size="md" />`,
-      },
-      {
         name: 'Glass',
         description: 'Frosted glass effect for fallback avatars',
         previewKey: 'avatar-glass',
@@ -127,19 +80,6 @@ export const componentCodeExamples: Record<string, ComponentCodeExample> = {
 <Badge variant="destructive">Error</Badge>`,
     examples: [
       {
-        name: 'All Variants',
-        description: 'Available badge color variants',
-        previewKey: 'badge-variants',
-        code: `<Badge>Default</Badge>
-<Badge variant="secondary">Secondary</Badge>
-<Badge variant="outline">Outline</Badge>
-<Badge variant="success">Success</Badge>
-<Badge variant="warning">Warning</Badge>
-<Badge variant="destructive">Destructive</Badge>
-<Badge variant="info">Info</Badge>
-<Badge variant="new">New</Badge>`,
-      },
-      {
         name: 'Glass',
         description: 'Frosted glass effect badge',
         previewKey: 'badge-glass',
@@ -154,22 +94,6 @@ import { Plus, Settings, Download } from 'lucide-react';`,
 <Button variant="secondary">Secondary</Button>
 <Button variant="destructive">Delete</Button>`,
     examples: [
-      {
-        name: 'Primary Variants',
-        description: 'Primary button with different sizes',
-        previewKey: 'button-primary',
-        code: `<Button variant="primary">Primary</Button>
-<Button variant="primary" size="sm">Small</Button>
-<Button variant="primary" size="lg">Large</Button>`,
-      },
-      {
-        name: 'Secondary Variants',
-        description: 'Secondary, outline, and ghost styles',
-        previewKey: 'button-secondary',
-        code: `<Button variant="secondary">Secondary</Button>
-<Button variant="outline">Outline</Button>
-<Button variant="ghost">Ghost</Button>`,
-      },
       {
         name: 'With Icons',
         description: 'Buttons with leading icons',
@@ -215,15 +139,6 @@ import { Plus, Settings, Download } from 'lucide-react';`,
 </Button>`,
       },
       {
-        name: 'Destructive',
-        description: 'Danger/delete actions',
-        previewKey: 'button-destructive',
-        code: `<Button variant="destructive">Delete</Button>
-<Button variant="destructive" size="icon">
-  <Trash2 className="h-4 w-4" />
-</Button>`,
-      },
-      {
         name: 'Glass',
         description: 'Frosted glass hover effect',
         previewKey: 'button-glass',
@@ -246,37 +161,6 @@ import { Plus, Settings, Download } from 'lucide-react';`,
   </CardFooter>
 </Card>`,
     examples: [
-      {
-        name: 'Basic Card',
-        description: 'Simple card with header and content',
-        previewKey: 'card-basic',
-        code: `<Card>
-  <CardHeader>
-    <CardTitle>Card Title</CardTitle>
-    <CardDescription>A brief description.</CardDescription>
-  </CardHeader>
-  <CardContent>
-    <p>Main content goes here.</p>
-  </CardContent>
-</Card>`,
-      },
-      {
-        name: 'With Footer Actions',
-        description: 'Card with action buttons in footer',
-        previewKey: 'card-with-footer',
-        code: `<Card>
-  <CardHeader>
-    <CardTitle>Confirm Action</CardTitle>
-  </CardHeader>
-  <CardContent>
-    <p>Are you sure you want to proceed?</p>
-  </CardContent>
-  <CardFooter className="flex gap-2 justify-end">
-    <Button variant="ghost">Cancel</Button>
-    <Button variant="primary">Confirm</Button>
-  </CardFooter>
-</Card>`,
-      },
       {
         name: 'Glass',
         description: 'Frosted glass effect with blur backdrop',
@@ -315,16 +199,6 @@ import { Plus, Settings, Download } from 'lucide-react';`,
   onChange={setChecked}
 />`,
     examples: [
-      {
-        name: 'Basic Checkbox',
-        description: 'Standard checkbox states',
-        previewKey: 'checkbox-basic',
-        code: `const [checked, setChecked] = useState(false);
-
-<Checkbox label="Accept terms" checked={checked} onChange={setChecked} />
-<Checkbox label="Already checked" checked={true} onChange={() => {}} />
-<Checkbox label="Disabled" disabled />`,
-      },
       {
         name: 'Indeterminate',
         description: 'Select all with indeterminate state',
@@ -374,22 +248,6 @@ const someChecked = items.some(Boolean) && !items.every(Boolean);
 </ContextMenu.fromItems>`,
     examples: [
       {
-        name: 'Basic Context Menu',
-        description: 'Right-click to open menu',
-        previewKey: 'context-menu-basic',
-        code: `<ContextMenu.fromItems items={[
-  { label: 'Cut', onClick: () => {} },
-  { label: 'Copy', onClick: () => {} },
-  { label: 'Paste', onClick: () => {} },
-  { label: '', onClick: () => {}, separator: true },
-  { label: 'Delete', onClick: () => {}, destructive: true },
-]}>
-  <div className="p-6 border border-dashed rounded-lg text-center">
-    Right-click here
-  </div>
-</ContextMenu.fromItems>`,
-      },
-      {
         name: 'Glass',
         description: 'Frosted glass effect context menu',
         previewKey: 'context-menu-glass',
@@ -431,31 +289,6 @@ const someChecked = items.some(Boolean) && !items.every(Boolean);
 </Dialog>`,
     examples: [
       {
-        name: 'Basic Dialog',
-        description: 'Modal dialog with header and footer',
-        previewKey: 'dialog-basic',
-        code: `const [open, setOpen] = useState(false);
-
-<Dialog open={open} onOpenChange={setOpen}>
-  <DialogTrigger asChild>
-    <Button variant="primary">Open Dialog</Button>
-  </DialogTrigger>
-  <DialogContent>
-    <DialogClose />
-    <DialogHeader>
-      <DialogTitle>Dialog Title</DialogTitle>
-      <DialogDescription>A description of the dialog.</DialogDescription>
-    </DialogHeader>
-    <DialogFooter>
-      <DialogClose asChild>
-        <Button variant="ghost">Cancel</Button>
-      </DialogClose>
-      <Button variant="primary" onClick={() => setOpen(false)}>Save</Button>
-    </DialogFooter>
-  </DialogContent>
-</Dialog>`,
-      },
-      {
         name: 'Glass',
         description: 'Frosted glass effect dialog',
         previewKey: 'dialog-glass',
@@ -492,22 +325,6 @@ const someChecked = items.some(Boolean) && !items.every(Boolean);
 </DropdownMenu>`,
     examples: [
       {
-        name: 'Basic Dropdown',
-        description: 'Menu with items and separator',
-        previewKey: 'dropdown-menu-basic',
-        code: `<DropdownMenu>
-  <DropdownMenuTrigger asChild>
-    <Button variant="outline">Actions</Button>
-  </DropdownMenuTrigger>
-  <DropdownMenuContent>
-    <DropdownMenuItem onSelect={() => {}}>Edit</DropdownMenuItem>
-    <DropdownMenuItem onSelect={() => {}}>Duplicate</DropdownMenuItem>
-    <DropdownMenuSeparator />
-    <DropdownMenuItem onSelect={() => {}} destructive>Delete</DropdownMenuItem>
-  </DropdownMenuContent>
-</DropdownMenu>`,
-      },
-      {
         name: 'Glass',
         description: 'Frosted glass effect dropdown',
         previewKey: 'dropdown-menu-glass',
@@ -535,13 +352,6 @@ const someChecked = items.some(Boolean) && !items.every(Boolean);
 />`,
     examples: [
       {
-        name: 'Rounded Variants',
-        description: 'Different border radius options',
-        previewKey: 'image-basic',
-        code: `<Image src="/mountain.jpg" alt="Mountain" className="w-32 h-24" rounded="md" />
-<Image src="/ocean.jpg" alt="Ocean" className="w-24 h-24" rounded="full" />`,
-      },
-      {
         name: 'Click to Enlarge',
         description: 'Opens full-size in lightbox',
         previewKey: 'image-click-to-enlarge',
@@ -562,15 +372,6 @@ const someChecked = items.some(Boolean) && !items.every(Boolean);
 <Input success placeholder="Success state" />`,
     examples: [
       {
-        name: 'Input States',
-        description: 'Default, error, success, and disabled',
-        previewKey: 'input-states',
-        code: `<Input placeholder="Default input" />
-<Input placeholder="Error state" error />
-<Input placeholder="Success state" success />
-<Input placeholder="Disabled" disabled />`,
-      },
-      {
         name: 'With Label',
         description: 'Input with label and helper text',
         previewKey: 'input-with-label',
@@ -590,22 +391,6 @@ const someChecked = items.some(Boolean) && !items.every(Boolean);
   <p>Modal content here</p>
 </Modal>`,
     examples: [
-      {
-        name: 'Basic Modal',
-        description: 'Simple modal with title and content',
-        previewKey: 'modal-basic',
-        code: `const [isOpen, setIsOpen] = useState(false);
-
-<Button onClick={() => setIsOpen(true)}>Open Modal</Button>
-
-<Modal isOpen={isOpen} onClose={() => setIsOpen(false)} title="Modal Title">
-  <p>Modal content goes here.</p>
-  <div className="flex gap-2 justify-end mt-4">
-    <Button variant="ghost" onClick={() => setIsOpen(false)}>Cancel</Button>
-    <Button variant="primary" onClick={() => setIsOpen(false)}>Confirm</Button>
-  </div>
-</Modal>`,
-      },
       {
         name: 'Glass',
         description: 'Frosted glass effect modal',
@@ -630,28 +415,6 @@ const someChecked = items.some(Boolean) && !items.every(Boolean);
   ]}
   placeholder="Select..."
 />`,
-    examples: [
-      {
-        name: 'Basic MultiSelect',
-        description: 'Select multiple options with tags',
-        previewKey: 'multi-select-basic',
-        code: `const [selected, setSelected] = useState<string[]>([]);
-
-const options = [
-  { label: 'React', value: 'react' },
-  { label: 'Vue', value: 'vue' },
-  { label: 'Angular', value: 'angular' },
-  { label: 'Svelte', value: 'svelte' },
-];
-
-<MultiSelect
-  value={selected}
-  onChange={setSelected}
-  options={options}
-  placeholder="Select frameworks..."
-/>`,
-      },
-    ],
   },
   'popover': {
     importCode: `import { Popover, PopoverTrigger, PopoverContent, PopoverClose } from '@pikoloo/darwin-ui';`,
@@ -665,20 +428,6 @@ const options = [
   </PopoverContent>
 </Popover>`,
     examples: [
-      {
-        name: 'Basic Popover',
-        description: 'Click-triggered floating content',
-        previewKey: 'popover-basic',
-        code: `<Popover>
-  <PopoverTrigger asChild>
-    <Button variant="outline">Show Popover</Button>
-  </PopoverTrigger>
-  <PopoverContent>
-    <h4 className="font-medium mb-1">Popover Title</h4>
-    <p className="text-sm text-muted-foreground">Additional information here.</p>
-  </PopoverContent>
-</Popover>`,
-      },
       {
         name: 'Glass',
         description: 'Frosted glass effect popover',
@@ -705,23 +454,6 @@ const options = [
 <CircularProgress indeterminate />`,
     examples: [
       {
-        name: 'Linear Progress',
-        description: 'Different variants and states',
-        previewKey: 'progress-variants',
-        code: `<Progress value={65} showValue />
-<Progress value={100} variant="success" />
-<Progress value={45} variant="warning" />
-<Progress indeterminate variant="gradient" />`,
-      },
-      {
-        name: 'Circular Progress',
-        description: 'Circular indicators',
-        previewKey: 'progress-circular',
-        code: `<CircularProgress value={75} showValue />
-<CircularProgress value={100} variant="success" showValue />
-<CircularProgress indeterminate />`,
-      },
-      {
         name: 'Glass',
         description: 'Frosted glass effect progress track',
         previewKey: 'progress-glass',
@@ -743,28 +475,6 @@ const options = [
 <Reveal type="scale">
   <div>Scales up</div>
 </Reveal>`,
-    examples: [
-      {
-        name: 'Animation Types',
-        description: 'Different reveal animations',
-        previewKey: 'reveal-types',
-        code: `<Reveal type="slide" direction="up">
-  <div>Slide Up</div>
-</Reveal>
-
-<Reveal type="fade" delay={0.1}>
-  <div>Fade In</div>
-</Reveal>
-
-<Reveal type="scale" delay={0.2}>
-  <div>Scale</div>
-</Reveal>
-
-<Reveal type="blur" delay={0.3}>
-  <div>Blur</div>
-</Reveal>`,
-      },
-    ],
   },
   'search-input': {
     importCode: `import { SearchInput } from '@pikoloo/darwin-ui';`,
@@ -781,19 +491,6 @@ const options = [
   <option value="option2">Option 2</option>
 </Select>`,
     examples: [
-      {
-        name: 'Basic Select',
-        description: 'Native select dropdown',
-        previewKey: 'select-basic',
-        code: `const [value, setValue] = useState('');
-
-<Select value={value} onChange={(e) => setValue(e.target.value)}>
-  <option value="" disabled>Select an option...</option>
-  <option value="option1">Option 1</option>
-  <option value="option2">Option 2</option>
-  <option value="option3">Option 3</option>
-</Select>`,
-      },
       {
         name: 'Glass',
         description: 'Frosted glass effect dropdown',
@@ -851,16 +548,6 @@ const options = [
 />`,
     examples: [
       {
-        name: 'Basic Switch',
-        description: 'Toggle switches with labels',
-        previewKey: 'switch-basic',
-        code: `const [enabled, setEnabled] = useState(false);
-
-<Switch label="Enable notifications" checked={enabled} onChange={setEnabled} />
-<Switch label="Dark mode" checked={true} onChange={() => {}} />
-<Switch label="Disabled switch" disabled />`,
-      },
-      {
         name: 'Glass',
         description: 'Frosted glass effect switch',
         previewKey: 'switch-glass',
@@ -886,34 +573,6 @@ const options = [
   </TableBody>
 </Table>`,
     examples: [
-      {
-        name: 'Basic Table',
-        description: 'Table with header and data rows',
-        previewKey: 'table-basic',
-        code: `const data = [
-  { name: 'John Doe', email: 'john@example.com', role: 'Admin' },
-  { name: 'Jane Smith', email: 'jane@example.com', role: 'User' },
-];
-
-<Table>
-  <TableHead>
-    <TableRow>
-      <TableHeaderCell>Name</TableHeaderCell>
-      <TableHeaderCell>Email</TableHeaderCell>
-      <TableHeaderCell>Role</TableHeaderCell>
-    </TableRow>
-  </TableHead>
-  <TableBody>
-    {data.map((row) => (
-      <TableRow key={row.email}>
-        <TableCell>{row.name}</TableCell>
-        <TableCell>{row.email}</TableCell>
-        <TableCell><Badge variant="secondary">{row.role}</Badge></TableCell>
-      </TableRow>
-    ))}
-  </TableBody>
-</Table>`,
-      },
       {
         name: 'Glass',
         description: 'Frosted glass effect table header',
@@ -964,21 +623,7 @@ import { Home, Folder, Settings } from 'lucide-react';`,
 <Sidebar items={items} activeItem="Dashboard" onLogout={() => logout()} />`,
     examples: [
       {
-        name: 'Basic Sidebar',
-        description: 'Standard navigation sidebar',
-        previewKey: 'sidebar-basic',
-        code: `const [active, setActive] = useState('Dashboard');
-
-const items = [
-  { label: 'Dashboard', onClick: () => setActive('Dashboard') },
-  { label: 'Projects', onClick: () => setActive('Projects') },
-  { label: 'Settings', onClick: () => setActive('Settings') },
-];
-
-<Sidebar items={items} activeItem={active} onLogout={() => {}} />`,
-      },
-      {
-        name: 'Collapsible Sidebar',
+        name: 'Collapsible',
         description: 'Sidebar that can collapse to icons only',
         previewKey: 'sidebar-collapsible',
         code: `const [active, setActive] = useState('Dashboard');
@@ -1076,24 +721,6 @@ import { Home, Folder, Settings } from 'lucide-react';`,
 />`,
     examples: [
       {
-        name: 'Basic Slider',
-        description: 'Range slider with custom label',
-        previewKey: 'slider-basic',
-        code: `const [value, setValue] = useState(50);
-
-<div className="flex justify-between mb-2">
-  <span>Volume</span>
-  <span className="font-mono">{value}%</span>
-</div>
-<Slider value={value} onChange={setValue} min={0} max={100} />`,
-      },
-      {
-        name: 'With Value Display',
-        description: 'Built-in value tooltip',
-        previewKey: 'slider-with-value',
-        code: `<Slider value={value} onChange={setValue} min={0} max={100} showValue />`,
-      },
-      {
         name: 'Glass',
         description: 'Frosted glass effect slider track',
         previewKey: 'slider-glass',
@@ -1116,29 +743,6 @@ import { Home, Folder, Settings } from 'lucide-react';`,
   </TabsContent>
 </Tabs>`,
     examples: [
-      {
-        name: 'Basic Tabs',
-        description: 'Tab navigation with content panels',
-        previewKey: 'tabs-basic',
-        code: `const [tab, setTab] = useState('tab1');
-
-<Tabs value={tab} onValueChange={setTab}>
-  <TabsList>
-    <TabsTrigger value="tab1">Overview</TabsTrigger>
-    <TabsTrigger value="tab2">Settings</TabsTrigger>
-    <TabsTrigger value="tab3">Advanced</TabsTrigger>
-  </TabsList>
-  <TabsContent value="tab1">
-    <div className="p-4 bg-muted/50 rounded-lg">Overview content</div>
-  </TabsContent>
-  <TabsContent value="tab2">
-    <div className="p-4 bg-muted/50 rounded-lg">Settings content</div>
-  </TabsContent>
-  <TabsContent value="tab3">
-    <div className="p-4 bg-muted/50 rounded-lg">Advanced content</div>
-  </TabsContent>
-</Tabs>`,
-      },
       {
         name: 'Glass',
         description: 'Frosted glass effect tabs list',
@@ -1164,23 +768,6 @@ import { Home, Folder, Settings } from 'lucide-react';`,
 />
 <Textarea error placeholder="Error state" />
 <Textarea success placeholder="Success state" />`,
-    examples: [
-      {
-        name: 'Basic Textarea',
-        description: 'Textarea with different states',
-        previewKey: 'textarea-basic',
-        code: `const [value, setValue] = useState('');
-
-<Textarea
-  placeholder="Write your message..."
-  value={value}
-  onChange={(e) => setValue(e.target.value)}
-  rows={3}
-/>
-<Textarea placeholder="Error state" error rows={2} />
-<Textarea placeholder="Success state" success rows={2} />`,
-      },
-    ],
   },
   'tooltip': {
     importCode: `import { Tooltip, TooltipTrigger, TooltipContent } from '@pikoloo/darwin-ui';`,
@@ -1245,26 +832,6 @@ const handleUpload = async (files: File[]) => {
   label="Drop your images here"
 />`,
     examples: [
-      {
-        name: 'Default Dropzone',
-        description: 'Standard drag-and-drop upload area',
-        previewKey: 'upload-default',
-        code: `const [files, setFiles] = useState<string[]>([]);
-
-const handleUpload = async (uploadedFiles: File[]) => {
-  // Upload to your server and return URLs
-  await new Promise(resolve => setTimeout(resolve, 500));
-  return uploadedFiles.map(f => URL.createObjectURL(f));
-};
-
-<Upload
-  value={files}
-  onChange={setFiles}
-  onUpload={handleUpload}
-  maxFiles={4}
-  label="Drop images here"
-/>`,
-      },
       {
         name: 'Glass',
         description: 'Frosted glass effect upload zone',
