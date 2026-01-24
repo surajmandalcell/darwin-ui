@@ -65,9 +65,11 @@ interface TabsTriggerProps {
 	children: React.ReactNode;
 	className?: string;
 	disabled?: boolean;
+	/** Icon to display before the label */
+	icon?: React.ReactNode;
 }
 
-function TabsTrigger({ value, children, className, disabled }: TabsTriggerProps) {
+function TabsTrigger({ value, children, className, disabled, icon }: TabsTriggerProps) {
 	const { value: selectedValue, onValueChange } = useTabsContext();
 	const isSelected = selectedValue === value;
 
@@ -97,10 +99,11 @@ function TabsTrigger({ value, children, className, disabled }: TabsTriggerProps)
 			)}
 			<span
 				className={cn(
-					"relative z-10 transition-colors duration-200",
+					"relative z-10 inline-flex items-center gap-2 transition-colors duration-200",
 					isSelected ? "text-zinc-900 dark:text-zinc-100" : "text-zinc-800 dark:text-zinc-200 hover:text-zinc-900 dark:hover:text-zinc-100"
 				)}
 			>
+				{icon && <span className="w-4 h-4 shrink-0 [&>svg]:w-full [&>svg]:h-full">{icon}</span>}
 				{children}
 			</span>
 		</button>

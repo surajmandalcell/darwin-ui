@@ -10,6 +10,8 @@ import {
   Share2,
   Trash2,
   Download,
+  LayoutDashboard,
+  Zap,
 } from 'lucide-react';
 import {
   Accordion,
@@ -1184,9 +1186,9 @@ function TabsPreview() {
     >
       <Tabs value={activeTab} onValueChange={setActiveTab}>
         <TabsList>
-          <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="features">Features</TabsTrigger>
-          <TabsTrigger value="settings">Settings</TabsTrigger>
+          <TabsTrigger value="overview" icon={<LayoutDashboard />}>Overview</TabsTrigger>
+          <TabsTrigger value="features" icon={<Zap />}>Features</TabsTrigger>
+          <TabsTrigger value="settings" icon={<Settings />}>Settings</TabsTrigger>
         </TabsList>
         <TabsContent value="overview">
           <div className="p-4 rounded-lg bg-muted/50 border border-border">

@@ -36,6 +36,9 @@ import {
   X,
   Plus,
   Settings,
+  LayoutDashboard,
+  BarChart3,
+  FileText,
 } from 'lucide-react';
 
 // Category definitions
@@ -559,9 +562,18 @@ const COMPONENTS: ComponentDef[] = [
     preview: (
       <div className="w-full">
         <div className="flex bg-muted/50 rounded-lg p-0.5 mb-2">
-          <div className="flex-1 px-3 py-1.5 text-[10px] bg-muted text-foreground rounded text-center">Overview</div>
-          <div className="flex-1 px-3 py-1.5 text-[10px] text-muted-foreground text-center">Analytics</div>
-          <div className="flex-1 px-3 py-1.5 text-[10px] text-muted-foreground text-center">Reports</div>
+          <div className="flex-1 px-3 py-1.5 text-[10px] bg-muted text-foreground rounded text-center flex items-center justify-center gap-1">
+            <LayoutDashboard className="w-3 h-3" />
+            <span>Overview</span>
+          </div>
+          <div className="flex-1 px-3 py-1.5 text-[10px] text-muted-foreground text-center flex items-center justify-center gap-1">
+            <BarChart3 className="w-3 h-3" />
+            <span>Analytics</span>
+          </div>
+          <div className="flex-1 px-3 py-1.5 text-[10px] text-muted-foreground text-center flex items-center justify-center gap-1">
+            <FileText className="w-3 h-3" />
+            <span>Reports</span>
+          </div>
         </div>
         <div className="text-[10px] text-muted-foreground p-2 bg-muted/20 rounded-lg">Dashboard overview content</div>
       </div>
