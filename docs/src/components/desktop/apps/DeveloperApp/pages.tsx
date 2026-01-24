@@ -280,7 +280,7 @@ export function IntroductionPage() {
 
       {/* Design Philosophy */}
       <motion.div
-        className="p-6 rounded-xl bg-gradient-to-br from-blue-500/10 to-purple-500/10 border border-border"
+        className="p-6 rounded-xl bg-linear-to-br from-blue-500/10 to-purple-500/10 border border-border"
         variants={itemVariants}
         initial="hidden"
         animate="show"
@@ -1118,7 +1118,7 @@ export function ComponentPage({ name }: { name: string }) {
         >
           Preview
         </motion.h3>
-        <div className="flex items-center justify-center min-h-[100px] p-4 w-full">
+        <div className="flex items-center justify-center min-h-25 p-4 w-full">
           <div className="w-full">
             <AnimatedPreviewWrapper componentKey={name}>
               {PreviewComponent ? (
@@ -1687,7 +1687,7 @@ module.exports = {
       >
         <h3 className="text-xl font-semibold text-foreground mb-4">Customization Examples</h3>
         <div className="flex flex-wrap gap-3">
-          <Button type="button" className="bg-gradient-to-r from-pink-500 to-violet-500 hover:from-pink-600 hover:to-violet-600">
+          <Button type="button" className="bg-linear-to-r from-pink-500 to-violet-500 hover:from-pink-600 hover:to-violet-600">
             Gradient
           </Button>
           <Button type="button" className="bg-emerald-500 hover:bg-emerald-600">

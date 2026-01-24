@@ -20,7 +20,7 @@ export function AboutApp(_props: AboutAppProps) {
       >
         {/* Logo */}
         <motion.div
-          className="w-24 h-24 mb-6 rounded-3xl bg-gradient-to-br from-blue-500/20 via-indigo-500/15 to-purple-500/20 border border-border flex items-center justify-center shadow-xl"
+          className="w-24 h-24 mb-6 rounded-3xl bg-linear-to-br from-blue-500/20 via-indigo-500/15 to-purple-500/20 border border-border flex items-center justify-center shadow-xl"
           initial={{ scale: 0.8, rotate: -10 }}
           animate={{ scale: 1, rotate: 0 }}
           transition={{ delay: 0.1, type: 'spring', damping: 15 }}

@@ -25,7 +25,7 @@ export function Desktop() {
           className={`absolute inset-0 ${
             isDark
               ? 'bg-[#050508]'
-              : 'bg-gradient-to-br from-slate-100 via-blue-50/50 to-slate-50'
+              : 'bg-linear-to-br from-slate-100 via-blue-50/50 to-slate-50'
           }`}
         />
 

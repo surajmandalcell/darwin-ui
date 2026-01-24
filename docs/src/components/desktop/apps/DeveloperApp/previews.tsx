@@ -1694,7 +1694,7 @@ function HoverEffectsPreview() {
           whileHover="hover"
         >
           <motion.div
-            className="absolute inset-0 bg-gradient-to-br from-violet-500/20 to-indigo-500/5 rounded-xl"
+            className="absolute inset-0 bg-linear-to-br from-violet-500/20 to-indigo-500/5 rounded-xl"
             initial={{ opacity: 0 }}
             variants={{ hover: { opacity: 1 } }}
             transition={{ duration: 0.3 }}
@@ -1724,7 +1724,7 @@ function HoverEffectsPreview() {
 
         {/* Glow */}
         <div className="relative group cursor-pointer">
-          <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl blur opacity-0 group-hover:opacity-30 transition duration-300" />
+          <div className="absolute -inset-0.5 bg-linear-to-r from-blue-500 to-purple-500 rounded-xl blur opacity-0 group-hover:opacity-30 transition duration-300" />
           <div className="relative p-4 bg-muted/20 border border-border/60 rounded-xl text-center">
             <span className="text-xs font-medium text-muted-foreground">Glow</span>
           </div>
@@ -1749,7 +1749,7 @@ function HoverEffectsPreview() {
               backgroundPosition: { duration: 3, repeat: Infinity, ease: "linear" }
             }}
           />
-          <div className="absolute inset-[1px] rounded-[11px] bg-muted/90" />
+          <div className="absolute inset-px rounded-[11px] bg-muted/90" />
           <span className="relative z-10 text-xs font-medium text-muted-foreground">Border Glow</span>
         </motion.div>
 

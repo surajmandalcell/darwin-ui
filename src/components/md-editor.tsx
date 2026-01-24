@@ -18,7 +18,7 @@ import "@uiw/react-markdown-preview/markdown.css";
 
 function EditorSkeleton() {
 	return (
-		<div className="rounded-[6px] overflow-hidden border border-black/10 dark:border-white/10 bg-zinc-900 h-[420px] flex flex-col">
+		<div className="rounded-[6px] overflow-hidden border border-black/10 dark:border-white/10 bg-zinc-900 h-105 flex flex-col">
 			<div className="border-b border-black/10 dark:border-white/10 p-2 h-10">
 				<div className="flex gap-2">
 					<Skeleton className="h-6 w-16" />

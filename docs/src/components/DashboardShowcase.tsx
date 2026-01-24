@@ -156,9 +156,9 @@ export default function DashboardShowcase({ showTitleBar = true, interactive = t
                 </div>
             )}
 
-            <div className={`flex flex-col md:flex-row ${showTitleBar ? 'min-h-[650px] md:h-[800px] xl:h-[850px]' : 'h-full'}`}>
+            <div className={`flex flex-col md:flex-row ${showTitleBar ? 'min-h-162.5 md:h-200 xl:h-212.5' : 'h-full'}`}>
                 {/* Sidebar - Compact */}
-                <div className="w-[200px] flex-shrink-0 border-r border-border bg-card hidden md:flex flex-col">
+                <div className="w-50 shrink-0 border-r border-border bg-card hidden md:flex flex-col">
                     <div className="p-3">
 
                         <div className="space-y-4">
@@ -267,7 +267,7 @@ export default function DashboardShowcase({ showTitleBar = true, interactive = t
                                         </div>
                                     )}
                                 </div>
-                                <div className="h-5 w-[1px] bg-border/80 mx-1" />
+                                <div className="h-5 w-px bg-border/80 mx-1" />
                                 <Button size="icon" variant="ghost" className="relative">
                                     <Bell className="w-4 h-4" />
                                     <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-red-500 border-2 border-[#050505]" />
@@ -306,7 +306,7 @@ export default function DashboardShowcase({ showTitleBar = true, interactive = t
                                         </Button>
                                     </div>
                                 </div>
-                                <div className="flex-1 min-h-[220px] w-full min-w-0">
+                                <div className="flex-1 min-h-55 w-full min-w-0">
                                         {mounted ? (
                                             <ResponsiveContainer width="100%" height="100%">
                                                 <AreaChart data={revenueData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
@@ -383,7 +383,7 @@ export default function DashboardShowcase({ showTitleBar = true, interactive = t
                                         <MoreVertical className="w-3.5 h-3.5" />
                                     </Button>
                                 </div>
-                                <div className="flex-1 min-h-[180px] relative w-full">
+                                <div className="flex-1 min-h-45 relative w-full">
                                     {mounted ? (
                                         <ResponsiveContainer width="100%" height="100%">
                                             <PieChart>
@@ -447,7 +447,7 @@ export default function DashboardShowcase({ showTitleBar = true, interactive = t
                             <div className="flex items-center justify-between px-4 py-3 border-b border-border/60">
                                 <div className="flex items-center gap-3">
                                     <h3 className="text-sm font-semibold text-foreground">Recent Transactions</h3>
-                                    <div className="h-4 w-[1px] bg-border" />
+                                    <div className="h-4 w-px bg-border" />
                                     <div className="flex items-center gap-2">
                                         <Badge variant="secondary">All Status</Badge>
                                         <Badge variant="secondary">Revenue</Badge>
@@ -537,7 +537,7 @@ export default function DashboardShowcase({ showTitleBar = true, interactive = t
             {/* Modal Overlay */}
             {showModal && (
                 <div
-                    className="absolute inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-[4px]"
+                    className="absolute inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs"
                     onClick={() => setShowModal(false)}
                     style={{ animation: 'fadeIn 0.2s ease-out' }}
                 >
@@ -585,7 +585,7 @@ export default function DashboardShowcase({ showTitleBar = true, interactive = t
                         boxShadow: isDark ? '0 10px 30px -5px rgba(0,0,0,0.5)' : '0 10px 30px -5px rgba(0,0,0,0.15)'
                     }}
                 >
-                    <div className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center border border-emerald-500/20 shadow-[0_0_10px_rgba(16,185,129,0.2)]">
+                    <div className="shrink-0 w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center border border-emerald-500/20 shadow-[0_0_10px_rgba(16,185,129,0.2)]">
                         <Check className="w-3.5 h-3.5 text-emerald-500" strokeWidth={3} />
                     </div>
                     <div className="flex flex-col">
@@ -597,7 +597,7 @@ export default function DashboardShowcase({ showTitleBar = true, interactive = t
                     </button>
 
                     {/* Progress bar */}
-                    <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-emerald-500/20">
+                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-emerald-500/20">
                         <div
                             className="h-full bg-emerald-500 animate-progress"
                             style={{ animationDuration: '3s' }}

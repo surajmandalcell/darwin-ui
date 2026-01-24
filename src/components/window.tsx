@@ -15,13 +15,13 @@ export function Window({ children, title, glass = false }: WindowProps) {
 			initial={{ opacity: 0, scale: 0.98 }}
 			animate={{ opacity: 1, scale: 1 }}
 			transition={{ duration: 0.4, ease: "easeOut" }}
-			className={`flex h-full w-full flex-col rounded-[var(--radius-lg,0.75rem)] border shadow-lg ${
+			className={`flex h-full w-full flex-col rounded-(--radius-lg,0.75rem) border shadow-lg ${
 				glass
 					? "bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl border-white/20 dark:border-white/10"
 					: "bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border-black/10 dark:border-white/10"
 			}`}
 		>
-			<div className="relative flex items-center justify-center border-b border-black/10 dark:border-white/10 px-4 py-1.5 bg-black/5 dark:bg-white/5 rounded-t-[var(--radius-lg,0.75rem)]">
+			<div className="relative flex items-center justify-center border-b border-black/10 dark:border-white/10 px-4 py-1.5 bg-black/5 dark:bg-white/5 rounded-t-(--radius-lg,0.75rem)">
 				<CloseButton
 					href="/"
 					className="absolute left-4 top-1/2 -translate-y-1/2"

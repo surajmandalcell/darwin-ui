@@ -31,7 +31,7 @@ function FeatureCard({ icon, title, description, delay }: FeatureCardProps) {
 			viewport={{ once: true }}
 			transition={{ duration: 0.5, delay }}
 		>
-			<div className="flex-shrink-0 w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
+			<div className="shrink-0 w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
 				{icon}
 			</div>
 			<div>
@@ -112,11 +112,11 @@ export function AgenticCodingSection() {
 		>
 			{/* Emerald glow effect */}
 			<div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-				<div className="w-[800px] h-[600px] bg-emerald-500/8 blur-[120px] rounded-full" />
+				<div className="w-200 h-150 bg-emerald-500/8 blur-[120px] rounded-full" />
 			</div>
-			<div className="absolute top-1/4 right-1/4 w-[400px] h-[400px] bg-emerald-400/5 blur-[100px] rounded-full" />
+			<div className="absolute top-1/4 right-1/4 w-100 h-100 bg-emerald-400/5 blur-[100px] rounded-full" />
 
-			<div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 relative z-10">
+			<div className="max-w-350 mx-auto px-6 md:px-12 lg:px-20 relative z-10">
 				<div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
 					{/* Left side - Code editor */}
 					<motion.div
@@ -141,7 +141,7 @@ export function AgenticCodingSection() {
 							</div>
 
 							{/* Code content */}
-							<div className="p-4 font-mono text-sm min-h-[280px]">
+							<div className="p-4 font-mono text-sm min-h-70">
 								{displayedLines.map((line, index) => (
 									<div key={index} className="flex">
 										{/* Line number */}
@@ -161,7 +161,7 @@ export function AgenticCodingSection() {
 											{index === currentLineIndex &&
 												isTyping &&
 												cursorVisible && (
-													<span className="inline-block w-[2px] h-4 bg-emerald-400 ml-px align-middle" />
+													<span className="inline-block w-0.5 h-4 bg-emerald-400 ml-px align-middle" />
 												)}
 										</span>
 									</div>
@@ -174,7 +174,7 @@ export function AgenticCodingSection() {
 											<span className="w-8 text-right pr-4 text-muted-foreground/50 select-none text-xs leading-6">
 												{displayedLines.length + 1}
 											</span>
-											<span className="inline-block w-[2px] h-4 bg-emerald-400 align-middle" />
+											<span className="inline-block w-0.5 h-4 bg-emerald-400 align-middle" />
 										</div>
 									)}
 								{/* Placeholder lines for consistent height */}

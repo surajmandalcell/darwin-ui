@@ -53,7 +53,7 @@ function TopbarItemButton({ item, active, onClick }: TopbarItemButtonProps) {
 			type="button"
 			onClick={onClick || item.onClick}
 			className={cn(
-				"group flex items-center gap-2 px-3 py-2 rounded-[var(--radius-lg,0.75rem)] text-sm font-medium transition-all duration-200",
+				"group flex items-center gap-2 px-3 py-2 rounded-(--radius-lg,0.75rem) text-sm font-medium transition-all duration-200",
 				"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50",
 				active
 					? "bg-blue-500 text-white shadow-sm shadow-blue-500/25"
@@ -124,7 +124,7 @@ function MobileMenu({ items, activeItem, isOpen, onClose }: MobileMenuProps) {
 							<button
 								type="button"
 								onClick={onClose}
-								className="p-2 rounded-[var(--radius-lg,0.75rem)] text-zinc-500 hover:bg-zinc-100 dark:hover:bg-white/10 hover:text-zinc-700 dark:hover:text-zinc-200 transition-colors"
+								className="p-2 rounded-(--radius-lg,0.75rem) text-zinc-500 hover:bg-zinc-100 dark:hover:bg-white/10 hover:text-zinc-700 dark:hover:text-zinc-200 transition-colors"
 								aria-label="Close menu"
 							>
 								<X className="h-5 w-5" />
@@ -189,7 +189,7 @@ export function Topbar({
 			>
 				<div className="flex items-center justify-between h-14 px-4 md:px-6">
 					{/* Logo / Brand */}
-					{logo && <div className="flex-shrink-0">{logo}</div>}
+					{logo && <div className="shrink-0">{logo}</div>}
 
 					{/* Desktop Navigation */}
 					<nav className="hidden md:flex items-center gap-1 ml-6">
@@ -214,7 +214,7 @@ export function Topbar({
 					<button
 						type="button"
 						onClick={() => setMobileMenuOpen(true)}
-						className="md:hidden p-2 rounded-[var(--radius-lg,0.75rem)] text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-white/10 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+						className="md:hidden p-2 rounded-(--radius-lg,0.75rem) text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-white/10 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
 						aria-label="Open menu"
 					>
 						<Menu className="h-5 w-5" />

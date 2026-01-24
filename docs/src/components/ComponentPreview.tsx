@@ -260,7 +260,7 @@ export function ToastPreview() {
     };
 
     return (
-        <div className="component-preview relative min-h-[120px]">
+        <div className="component-preview relative min-h-30">
             <Button variant="primary" onClick={handleClick}>
                 Trigger Toast Notification
             </Button>

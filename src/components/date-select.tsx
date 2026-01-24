@@ -83,7 +83,7 @@ function InlineSelect({
 			</Popover.Trigger>
 			<Popover.Portal>
 				<Popover.Content
-					className="bg-[hsl(var(--popover))] border border-[hsl(var(--border))] rounded-[var(--radius-lg,0.75rem)] shadow-md p-1 z-10000 min-w-[140px]"
+					className="bg-[hsl(var(--popover))] border border-[hsl(var(--border))] rounded-[var(--radius-lg,0.75rem)] shadow-md p-1 z-10000 min-w-35"
 					sideOffset={5}
 				>
 					{options.map((option) => (
@@ -931,7 +931,7 @@ export function DateSelect({
 							</div>
 
 							{/* Questionnaire sentence */}
-							<div className="p-4 bg-[hsl(var(--muted))] rounded border border-[hsl(var(--border))] min-h-[60px]">
+							<div className="p-4 bg-[hsl(var(--muted))] rounded border border-[hsl(var(--border))] min-h-15">
 								{renderQuestionnaire()}
 							</div>
 

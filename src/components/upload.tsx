@@ -125,7 +125,7 @@ export function Upload({
 		return (
 			<div className="flex flex-col gap-1">
 				{fileInput}
-				<div className="flex items-center gap-2 h-10 px-3 rounded-[var(--radius-lg,0.75rem)] border border-[hsl(var(--border))] bg-[hsl(var(--muted))] overflow-hidden">
+				<div className="flex items-center gap-2 h-10 px-3 rounded-[var(--radius-lg,0.75rem)] border border-border bg-muted overflow-hidden">
 					{/* Thumbnails */}
 					{hasImages && (
 						<div className="flex items-center gap-1.5 overflow-x-auto py-1 flex-1">
@@ -174,7 +174,7 @@ export function Upload({
 
 					{/* Empty state / Add button */}
 					{!hasImages && (
-						<span className="text-sm text-[hsl(var(--muted-foreground))] flex-1">
+						<span className="text-sm text-muted-foreground flex-1">
 							{label || "No images"}
 						</span>
 					)}
@@ -182,7 +182,7 @@ export function Upload({
 					{/* Add button */}
 					<button
 						onClick={() => fileInputRef.current?.click()}
-						className="shrink-0 h-6 w-6 rounded bg-[hsl(var(--background))] border border-[hsl(var(--border))] flex items-center justify-center text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--foreground))] hover:border-[hsl(var(--foreground))]/20 transition-colors"
+						className="shrink-0 h-6 w-6 rounded bg-background border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-[hsl(var(--foreground))]/20 transition-colors"
 						aria-label="Add image"
 					>
 						<UploadIcon className="size-3.5" />
@@ -213,17 +213,17 @@ export function Upload({
 		return (
 			<div className="flex flex-col gap-2">
 				{fileInput}
-				<div className="relative flex flex-col overflow-hidden rounded-[var(--radius-lg,0.75rem)] border border-dashed border-[hsl(var(--border))] p-3">
+				<div className="relative flex flex-col overflow-hidden rounded-[var(--radius-lg,0.75rem)] border border-dashed border-border p-3">
 					{(value?.length || 0) + (pending.length || 0) > 0 ? (
 						<div className="flex w-full flex-col gap-2">
 							<div className="flex items-center justify-between gap-2">
-								<span className="text-xs font-medium text-[hsl(var(--muted-foreground))]">
+								<span className="text-xs font-medium text-muted-foreground">
 									{value.length + pending.length} image{value.length + pending.length !== 1 ? "s" : ""}
 								</span>
 								<div className="flex gap-1.5">
 									<button
 										onClick={() => fileInputRef.current?.click()}
-										className="inline-flex items-center gap-1 px-2 py-1 rounded text-xs bg-[hsl(var(--muted))] text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--foreground))] transition-colors"
+										className="inline-flex items-center gap-1 px-2 py-1 rounded text-xs bg-muted text-muted-foreground hover:text-foreground transition-colors"
 									>
 										<UploadIcon className="size-3" />
 										Add
@@ -292,14 +292,14 @@ export function Upload({
 							className="flex items-center justify-center gap-3 py-4 cursor-pointer"
 							onClick={() => fileInputRef.current?.click()}
 						>
-							<div className="flex size-8 items-center justify-center rounded-full border border-[hsl(var(--border))] bg-[hsl(var(--muted))]">
-								<ImageIcon className="size-3.5 text-[hsl(var(--muted-foreground))]" />
+							<div className="flex size-8 items-center justify-center rounded-full border border-border bg-muted">
+								<ImageIcon className="size-3.5 text-muted-foreground" />
 							</div>
 							<div className="text-left">
-								<p className="text-sm font-medium text-[hsl(var(--foreground))]">
+								<p className="text-sm font-medium text-foreground">
 									Upload images
 								</p>
-								<p className="text-xs text-[hsl(var(--muted-foreground))]">
+								<p className="text-xs text-muted-foreground">
 									{label || `Max ${maxFiles} files`}
 								</p>
 							</div>
@@ -330,7 +330,7 @@ export function Upload({
 							<div className="flex gap-2">
 								<button
 									onClick={() => fileInputRef.current?.click()}
-									className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 border border-black/10 dark:border-white/10 hover:border-black/20 dark:border-white/20 rounded-md text-xs text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:text-zinc-100 transition-all duration-200"
+									className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 border border-black/10 dark:border-white/20 rounded-md text-xs text-zinc-500 hover:text-zinc-900 dark:text-zinc-100 transition-all duration-200"
 								>
 									<UploadIcon className="size-3.5" />
 									Add
@@ -440,7 +440,7 @@ export function Upload({
 				)}
 				<div className="py-3 px-0">
 					<div
-						className="border border-dashed border-black/20 dark:border-white/20 rounded-[var(--radius-lg,0.75rem)] min-h-[50px] flex items-center justify-center text-zinc-500 dark:text-zinc-400 text-sm cursor-pointer hover:bg-black/5 dark:bg-white/5"
+						className="border border-dashed border-black/20 dark:border-white/20 rounded-[var(--radius-lg,0.75rem)] min-h-12.5 flex items-center justify-center text-zinc-500 dark:text-zinc-400 text-sm cursor-pointer hover:bg-black/5 dark:bg-white/5"
 						onClick={() => fileInputRef.current?.click()}
 					>
 						Click to select images

@@ -66,7 +66,7 @@ export function Checkbox({
 						<motion.svg
 							viewBox="0 0 16 16"
 							aria-hidden="true"
-							className="h-[11px] w-[11px]"
+							className="h-2.75 w-2.75"
 							initial={false}
 							animate={{
 								opacity: checked ? 1 : 0,

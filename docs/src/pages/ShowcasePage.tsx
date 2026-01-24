@@ -32,7 +32,7 @@ export default function ShowcasePage() {
         {/* Animated gradient orbs */}
         <div className="absolute inset-0 overflow-hidden">
           <motion.div
-            className="absolute w-[800px] h-[800px] rounded-full"
+            className="absolute w-200 h-200 rounded-full"
             style={{
               background: 'radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%)',
               top: '-20%',
@@ -46,7 +46,7 @@ export default function ShowcasePage() {
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
           />
           <motion.div
-            className="absolute w-[600px] h-[600px] rounded-full"
+            className="absolute w-150 h-150 rounded-full"
             style={{
               background: 'radial-gradient(circle, rgba(236, 72, 153, 0.12) 0%, transparent 70%)',
               bottom: '-10%',
@@ -60,7 +60,7 @@ export default function ShowcasePage() {
             transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
           />
           <motion.div
-            className="absolute w-[400px] h-[400px] rounded-full"
+            className="absolute w-100 h-100 rounded-full"
             style={{
               background: 'radial-gradient(circle, rgba(34, 211, 238, 0.08) 0%, transparent 70%)',
               top: '40%',
@@ -90,7 +90,7 @@ export default function ShowcasePage() {
         </div>
 
         <motion.div
-          className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20"
+          className="relative z-10 w-full max-w-350 mx-auto px-6 md:px-12 lg:px-20"
           style={{ opacity: heroOpacity, scale: heroScale, y: heroY }}
         >
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center min-h-screen py-32">
@@ -116,7 +116,7 @@ export default function ShowcasePage() {
               >
                 <h1 className="text-[clamp(3rem,8vw,6rem)] font-bold leading-[0.95] tracking-[-0.03em] font-heading">
                   <span className="block text-foreground">Build</span>
-                  <span className="block bg-gradient-to-r from-foreground via-foreground/90 to-foreground/40 bg-clip-text text-transparent">
+                  <span className="block bg-linear-to-r from-foreground via-foreground/90 to-foreground/40 bg-clip-text text-transparent">
                     beautiful
                   </span>
                   <span className="block text-muted-foreground/50">interfaces.</span>
@@ -199,14 +199,14 @@ export default function ShowcasePage() {
             transition={{ duration: 2, repeat: Infinity }}
           >
             <span className="text-[10px] uppercase tracking-[0.2em]">Scroll</span>
-            <div className="w-px h-8 bg-gradient-to-b from-muted-foreground/50 to-transparent" />
+            <div className="w-px h-8 bg-linear-to-b from-muted-foreground/50 to-transparent" />
           </motion.div>
         </motion.div>
       </section>
 
       {/* Feature highlights */}
       <section className="py-16 md:py-20 lg:py-24 xl:py-28 px-6 md:px-12 lg:px-20 relative">
-        <div className="max-w-[1400px] mx-auto">
+        <div className="max-w-350 mx-auto">
           <motion.div
             className="grid md:grid-cols-3 gap-6"
             initial={{ opacity: 0, y: 40 }}
@@ -239,7 +239,7 @@ export default function ShowcasePage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
               >
-                <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+                <div className={`absolute inset-0 bg-linear-to-br ${feature.gradient} rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
                 <div className="relative">
                   <h3 className="text-lg font-semibold text-foreground mb-3 font-heading">{feature.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{feature.desc}</p>
@@ -264,7 +264,7 @@ export default function ShowcasePage() {
       <footer>
         {/* Top CTA Section */}
         <div className="pt-0 pb-48 px-6 md:px-12 lg:px-20">
-          <div className="max-w-[1400px] mx-auto text-center">
+          <div className="max-w-350 mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -296,7 +296,7 @@ export default function ShowcasePage() {
 
         {/* Bottom Bar */}
         <div className="border-t border-border/40 py-8 px-6 md:px-12 lg:px-20">
-          <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="max-w-350 mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-3">
               <DarwinLogo className="w-6 h-6" />
               <span className="text-muted-foreground text-sm">Darwin UI</span>

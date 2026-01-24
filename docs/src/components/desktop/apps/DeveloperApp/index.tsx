@@ -116,7 +116,7 @@ export function DeveloperApp({ windowState: _windowState, initialSection, initia
   return (
     <div className="flex flex-col md:flex-row h-full bg-card relative">
       {/* Mobile Header */}
-      <div className="md:hidden flex items-center justify-between p-4 border-b border-border bg-card flex-shrink-0">
+      <div className="md:hidden flex items-center justify-between p-4 border-b border-border bg-card shrink-0">
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 rounded bg-muted border border-border/50 flex items-center justify-center">
             <BookOpen className="w-4 h-4 text-blue-400" />
@@ -200,7 +200,7 @@ export function DeveloperApp({ windowState: _windowState, initialSection, initia
 
       {/* Desktop Sidebar */}
       <motion.div
-        className="hidden md:flex w-56 bg-card border-r border-border flex-col overflow-hidden flex-shrink-0"
+        className="hidden md:flex w-56 bg-card border-r border-border flex-col overflow-hidden shrink-0"
         initial={{ x: -56, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}

@@ -178,7 +178,7 @@ function SingleSelectInternal({
 									minWidth: `${position.width}px`,
 								}}
 								className={cn(
-									"z-50 min-w-[8rem] overflow-hidden rounded-[var(--radius-md,0.5rem)] border shadow-md",
+									"z-50 min-w-32 overflow-hidden rounded-[var(--radius-md,0.5rem)] border shadow-md",
 									glass
 										? "bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl border-white/20 dark:border-white/10"
 										: "bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border-black/10 dark:border-white/10"
@@ -315,7 +315,7 @@ function MultiSelectInternal({
 									minWidth: `${position.width}px`,
 								}}
 								className={cn(
-									"z-50 min-w-[8rem] overflow-hidden rounded-[var(--radius-md,0.5rem)] border shadow-md",
+									"z-50 min-w-32 overflow-hidden rounded-[var(--radius-md,0.5rem)] border shadow-md",
 									glass
 										? "bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl border-white/20 dark:border-white/10"
 										: "bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border-black/10 dark:border-white/10"

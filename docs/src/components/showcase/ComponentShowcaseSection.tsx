@@ -357,10 +357,10 @@ const COMPONENTS: ComponentDef[] = [
     size: 'sm',
     preview: (
       <AvatarGroup max={3} className="[&>*]:border-0 [&>*]:ring-0">
-        <Avatar fallback="JD" size="sm" className="border-0 ring-0 bg-gradient-to-br from-indigo-500 to-purple-600" />
-        <Avatar fallback="SM" size="sm" className="border-0 ring-0 bg-gradient-to-br from-emerald-500 to-teal-600" />
-        <Avatar fallback="AK" size="sm" className="border-0 ring-0 bg-gradient-to-br from-amber-500 to-orange-600" />
-        <Avatar fallback="+5" size="sm" className="border-0 ring-0 bg-gradient-to-br from-pink-500 to-rose-600" />
+        <Avatar fallback="JD" size="sm" className="border-0 ring-0 bg-linear-to-br from-indigo-500 to-purple-600" />
+        <Avatar fallback="SM" size="sm" className="border-0 ring-0 bg-linear-to-br from-emerald-500 to-teal-600" />
+        <Avatar fallback="AK" size="sm" className="border-0 ring-0 bg-linear-to-br from-amber-500 to-orange-600" />
+        <Avatar fallback="+5" size="sm" className="border-0 ring-0 bg-linear-to-br from-pink-500 to-rose-600" />
       </AvatarGroup>
     ),
   },

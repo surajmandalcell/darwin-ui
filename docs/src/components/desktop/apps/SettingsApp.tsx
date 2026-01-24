@@ -489,7 +489,7 @@ export function SettingsApp({ windowState: _windowState }: SettingsAppProps) {
           >
             <motion.div
               variants={staggerItemVariants}
-              className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-blue-500/20 to-indigo-500/20 border border-border flex items-center justify-center backdrop-blur-sm"
+              className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-linear-to-br from-blue-500/20 to-indigo-500/20 border border-border flex items-center justify-center backdrop-blur-sm"
               whileHover={{ scale: 1.1, rotate: 5 }}
               transition={{ type: 'spring', stiffness: 400, damping: 25 }}
             >

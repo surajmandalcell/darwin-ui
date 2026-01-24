@@ -96,7 +96,7 @@ export function HeroComponentPreview() {
       >
         <div className="bg-muted/30 backdrop-blur border border-border/80 rounded-xl p-4">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center text-xs font-medium text-white">
+            <div className="w-8 h-8 rounded-full bg-linear-to-br from-violet-500 to-purple-600 flex items-center justify-center text-xs font-medium text-white">
               JD
             </div>
             <div className="text-xs">
