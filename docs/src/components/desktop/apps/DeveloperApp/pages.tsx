@@ -495,6 +495,261 @@ function MyComponent() {
   );
 }
 
+// CSS Setup page - explains how to set up Darwin UI styles
+export function CssSetupPage() {
+  const quickSetupCode = `/* In your app's CSS entry point (e.g., globals.css, index.css) */
+@import '@pikoloo/darwin-ui/styles.css';
+
+/* Tell Tailwind v4 to scan darwin-ui for classes */
+@source "../node_modules/@pikoloo/darwin-ui/dist";`;
+
+  const minimalSetupCode = `/* Minimal setup - just import the styles */
+@import '@pikoloo/darwin-ui/styles.css';`;
+
+  const themeProviderCode = `// Example ThemeProvider implementation
+import { createContext, useContext, useEffect, useState } from 'react';
+
+type Theme = 'light' | 'dark' | 'system';
+
+const ThemeContext = createContext<{
+  theme: Theme;
+  setTheme: (theme: Theme) => void;
+}>({ theme: 'dark', setTheme: () => {} });
+
+export function ThemeProvider({
+  children,
+  defaultTheme = 'dark',
+  storageKey = 'darwin-ui-theme',
+}: {
+  children: React.ReactNode;
+  defaultTheme?: Theme;
+  storageKey?: string;
+}) {
+  const [theme, setTheme] = useState<Theme>(() => {
+    if (typeof window !== 'undefined') {
+      return (localStorage.getItem(storageKey) as Theme) || defaultTheme;
+    }
+    return defaultTheme;
+  });
+
+  useEffect(() => {
+    const root = document.documentElement;
+    const effectiveTheme = theme === 'system'
+      ? window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light'
+      : theme;
+
+    // Set BOTH for full compatibility
+    root.setAttribute('data-theme', effectiveTheme);
+    root.classList.toggle('dark', effectiveTheme === 'dark');
+
+    localStorage.setItem(storageKey, theme);
+  }, [theme, storageKey]);
+
+  return (
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+}
+
+export const useTheme = () => useContext(ThemeContext);`;
+
+  const whyBothCode = `// Why both data-theme AND .dark class?
+
+// 1. CSS variables switch via data-attribute
+[data-theme='light'] { --background: 0 0% 100%; }
+[data-theme='dark']  { --background: 240 10% 3.9%; }
+
+// 2. Tailwind's dark: prefix requires .dark class
+// darwin-ui.css configures this with:
+@variant dark (&:where(.dark, .dark *));
+
+// So your JS must set BOTH:
+document.documentElement.setAttribute('data-theme', theme);
+document.documentElement.classList.toggle('dark', theme === 'dark');`;
+
+  const whatsIncludedItems = [
+    { title: 'Tailwind v4 Import', desc: '@import "tailwindcss" with dark mode configured' },
+    { title: 'Complete Theme Variables', desc: 'All CSS variables for dark and light themes' },
+    { title: 'Color Utilities', desc: '@theme inline block for Tailwind v4 color classes' },
+    { title: 'Core Animations', desc: 'Modal, toast, progress, and fade animations' },
+    { title: 'Border Color Fix', desc: 'Fixes Tailwind v4 defaulting to currentColor' },
+  ];
+
+  return (
+    <motion.div
+      variants={pageTransitionVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      className="space-y-8"
+    >
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="show"
+      >
+        <motion.div className="flex items-center gap-2 mb-4" variants={itemVariants}>
+          <Badge variant="info">Required</Badge>
+        </motion.div>
+        <motion.h1
+          className="text-4xl font-bold text-foreground mb-4"
+          variants={itemVariants}
+        >
+          CSS Setup
+        </motion.h1>
+        <motion.p
+          className="text-lg text-muted-foreground"
+          variants={itemVariants}
+        >
+          Configure Darwin UI styles in your project for proper theming and component rendering.
+        </motion.p>
+      </motion.div>
+
+      {/* Quick Setup */}
+      <motion.div
+        variants={itemVariants}
+        initial="hidden"
+        animate="show"
+        transition={{ delay: 0.1 }}
+        className="space-y-4"
+      >
+        <h2 className="text-2xl font-semibold text-foreground">Quick Setup</h2>
+        <p className="text-muted-foreground">
+          Add these lines to your CSS entry point (e.g., <code className="text-blue-400 bg-muted/50 px-1.5 py-0.5 rounded">globals.css</code> or <code className="text-blue-400 bg-muted/50 px-1.5 py-0.5 rounded">index.css</code>):
+        </p>
+        <CodeBlock code={quickSetupCode} language="css" />
+        <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/20">
+          <p className="text-sm text-amber-400">
+            <strong>Note:</strong> The <code className="bg-muted/50 px-1 rounded">@source</code> directive tells Tailwind v4 to scan Darwin UI components for class names. Without it, some utility classes may not be included in your CSS build.
+          </p>
+        </div>
+      </motion.div>
+
+      {/* What's Included */}
+      <motion.div
+        variants={itemVariants}
+        initial="hidden"
+        animate="show"
+        transition={{ delay: 0.2 }}
+        className="space-y-4"
+      >
+        <h2 className="text-2xl font-semibold text-foreground">What&apos;s Included</h2>
+        <p className="text-muted-foreground">
+          Darwin UI&apos;s stylesheet provides everything needed for components to render correctly:
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          {whatsIncludedItems.map((item) => (
+            <div key={item.title} className="flex gap-3 p-3 rounded-lg bg-muted/50">
+              <div className="w-2 h-2 rounded-full bg-blue-400 mt-2 shrink-0" />
+              <div>
+                <p className="font-medium text-foreground">{item.title}</p>
+                <p className="text-sm text-muted-foreground">{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* Dark Mode Setup */}
+      <motion.div
+        variants={itemVariants}
+        initial="hidden"
+        animate="show"
+        transition={{ delay: 0.3 }}
+        className="space-y-4"
+      >
+        <h2 className="text-2xl font-semibold text-foreground">Dark Mode Setup</h2>
+        <p className="text-muted-foreground">
+          Darwin UI uses a hybrid approach for dark mode that requires setting <strong>both</strong> a data attribute and a class:
+        </p>
+        <CodeBlock code={whyBothCode} language="css" />
+      </motion.div>
+
+      {/* Theme Provider Example */}
+      <motion.div
+        variants={itemVariants}
+        initial="hidden"
+        animate="show"
+        transition={{ delay: 0.4 }}
+        className="space-y-4"
+      >
+        <h2 className="text-2xl font-semibold text-foreground">Theme Provider Example</h2>
+        <p className="text-muted-foreground">
+          Here&apos;s a complete ThemeProvider you can copy into your project:
+        </p>
+        <CodeBlock code={themeProviderCode} language="typescript" />
+        <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
+          <p className="text-sm text-emerald-400">
+            <strong>Tip:</strong> For Next.js projects, you can also use <code className="bg-muted/50 px-1 rounded">next-themes</code> which handles SSR and system preference detection automatically.
+          </p>
+        </div>
+      </motion.div>
+
+      {/* Minimal Setup */}
+      <motion.div
+        variants={itemVariants}
+        initial="hidden"
+        animate="show"
+        transition={{ delay: 0.5 }}
+        className="space-y-4"
+      >
+        <h2 className="text-2xl font-semibold text-foreground">Minimal Setup (Dark Only)</h2>
+        <p className="text-muted-foreground">
+          If your app is dark-mode only and doesn&apos;t need theme switching, you can use this minimal setup:
+        </p>
+        <CodeBlock code={minimalSetupCode} language="css" />
+        <p className="text-sm text-muted-foreground">
+          Dark mode is the default, so no additional JS configuration is needed.
+        </p>
+      </motion.div>
+
+      {/* Common Issues */}
+      <motion.div
+        variants={itemVariants}
+        initial="hidden"
+        animate="show"
+        transition={{ delay: 0.6 }}
+        className="space-y-4"
+      >
+        <h2 className="text-2xl font-semibold text-foreground">Common Issues</h2>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableHeaderCell>Issue</TableHeaderCell>
+              <TableHeaderCell>Solution</TableHeaderCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <TableRow>
+              <TableCell>Components have no styles</TableCell>
+              <TableCell>Import <code className="bg-muted/50 px-1 rounded">@pikoloo/darwin-ui/styles.css</code></TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Tailwind classes missing</TableCell>
+              <TableCell>Add <code className="bg-muted/50 px-1 rounded">@source</code> directive</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>dark: classes not working</TableCell>
+              <TableCell>Add <code className="bg-muted/50 px-1 rounded">.dark</code> class to html element</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Theme switch not working</TableCell>
+              <TableCell>Set both <code className="bg-muted/50 px-1 rounded">data-theme</code> and <code className="bg-muted/50 px-1 rounded">.dark</code> class</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>CSS conflicts with other libraries</TableCell>
+              <TableCell>See CSS Isolation guide</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </motion.div>
+    </motion.div>
+  );
+}
+
 // ShadCN CLI documentation page
 export function ShadcnCliPage() {
   const shadcnInstallCode = `# Add individual components via ShadCN CLI
@@ -1776,6 +2031,8 @@ export function PageContent({ section, page, onNavigate }: { section: string; pa
         return <IntroductionPage />;
       case 'installation':
         return <InstallationPage />;
+      case 'css-setup':
+        return <CssSetupPage />;
       case 'shadcn-cli':
         return <ShadcnCliPage />;
       case 'quick-start':

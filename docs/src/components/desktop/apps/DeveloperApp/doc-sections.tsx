@@ -10,6 +10,7 @@ export const docSections: Record<string, DocSection> = {
       { id: 'agentic-coding', title: 'Agentic Coding' },
       { id: 'introduction', title: 'Introduction' },
       { id: 'installation', title: 'Installation' },
+      { id: 'css-setup', title: 'CSS Setup' },
       { id: 'shadcn-cli', title: 'ShadCN CLI' },
       { id: 'quick-start', title: 'Quick Start' },
       { id: 'css-isolation', title: 'CSS Isolation' },

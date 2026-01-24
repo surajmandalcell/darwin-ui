@@ -33,7 +33,7 @@
     "*.css"
   ],
   "scripts": {
-    "build": "tsup && cp src/styles/darwin-ui.css dist/",
+    "build": "tsup && cp -v src/styles/darwin-ui.css dist/",
     "build:registry": "tsx scripts/build-registry.ts",
     "dev": "tsup --watch",
     "clean": "rimraf dist",

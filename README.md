@@ -143,37 +143,40 @@ const isDesktop = useMediaQuery("(min-width: 1024px)");
 useEscapeKey(() => closeModal());
 ```
 
-## Theming
+## CSS Setup
 
-Darwin UI supports both light and dark modes with CSS variables. The theme automatically adapts to user preference, or you can toggle manually.
+Darwin UI requires importing its stylesheet for components to render correctly.
 
-```css
-/* Dark mode (default) */
-:root {
-  --background: 0 0% 4%;
-  --foreground: 0 0% 95%;
-  --card: 0 0% 6%;
-  --border: 0 0% 15%;
-}
-
-/* Light mode */
-.light {
-  --background: 0 0% 98%;
-  --foreground: 0 0% 10%;
-  --card: 0 0% 100%;
-  --border: 0 0% 85%;
-}
-```
-
-## Tailwind Setup
-
-Add Darwin UI's CSS to your Tailwind config:
+### Quick Setup
 
 ```css
-/* In your global CSS */
-@import "tailwindcss";
-@import "@pikoloo/darwin-ui/styles";
+/* In your globals.css or index.css */
+@import '@pikoloo/darwin-ui/styles.css';
+
+/* Tell Tailwind v4 to scan darwin-ui for class names */
+@source "../node_modules/@pikoloo/darwin-ui/dist";
 ```
+
+### Dark Mode
+
+Darwin UI defaults to dark mode. For theme switching, set both a data attribute and class:
+
+```js
+// Set both for full compatibility
+document.documentElement.setAttribute('data-theme', theme); // 'light' or 'dark'
+document.documentElement.classList.toggle('dark', theme === 'dark');
+```
+
+See the [CSS Setup documentation](https://darwin-ui.mandalsuraj.com) for a complete ThemeProvider example.
+
+### What's Included
+
+The stylesheet provides:
+- Tailwind v4 import with class-based dark mode
+- Complete CSS variables for light and dark themes
+- `@theme inline` block for Tailwind v4 color utilities
+- Core animations (modal, toast, progress)
+- Border color fix for Tailwind v4
 
 ## Browser Support
 
