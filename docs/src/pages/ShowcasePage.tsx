@@ -147,7 +147,7 @@ export default function ShowcasePage() {
                   </Button>
                 </Link>
                 <a href="https://github.com/surajmandalcell/darwin-ui" target="_blank" rel="noopener noreferrer">
-                  <button className="h-12 px-6 text-sm font-medium text-muted-foreground hover:text-foreground border border-border hover:border-border/80 rounded-lg transition-all flex items-center gap-2 hover:bg-muted/20">
+                  <button type="button" className="h-12 px-6 text-sm font-medium text-muted-foreground hover:text-foreground border border-border hover:border-border/80 rounded-lg transition-all flex items-center gap-2 hover:bg-muted/20">
                     <Github className="w-4 h-4" />
                     View on GitHub
                   </button>
@@ -165,8 +165,8 @@ export default function ShowcasePage() {
                   { value: '36+', label: 'Components' },
                   { value: '100%', label: 'TypeScript' },
                   { value: '<5kb', label: 'Per component' },
-                ].map((stat, i) => (
-                  <div key={i} className="space-y-1">
+                ].map((stat) => (
+                  <div key={stat.label} className="space-y-1">
                     <div className="text-2xl font-semibold text-foreground">{stat.value}</div>
                     <div className="text-xs text-muted-foreground/70 uppercase tracking-wider">{stat.label}</div>
                   </div>
@@ -284,7 +284,7 @@ export default function ShowcasePage() {
                   </Button>
                 </Link>
                 <a href="https://github.com/surajmandalcell/darwin-ui" target="_blank" rel="noopener noreferrer">
-                  <button className="h-12 px-8 text-sm font-medium text-muted-foreground hover:text-foreground border border-border hover:border-border/80 rounded-lg transition-all flex items-center gap-2 hover:bg-muted/20">
+                  <button type="button" className="h-12 px-8 text-sm font-medium text-muted-foreground hover:text-foreground border border-border hover:border-border/80 rounded-lg transition-all flex items-center gap-2 hover:bg-muted/20">
                     <Github className="w-4 h-4" />
                     Star on GitHub
                   </button>

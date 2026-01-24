@@ -79,6 +79,7 @@ export function DeveloperApp({ windowState: _windowState, initialSection, initia
         setExpandedSections(prev => [...prev, initialSection]);
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- Only sync on URL param changes, not internal state changes
   }, [initialSection, initialPage]);
 
   const copyForAI = async () => {

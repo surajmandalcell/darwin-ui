@@ -55,9 +55,9 @@ const inputSizeClasses: Record<InputSize, string> = {
 };
 
 const textareaSizeClasses: Record<InputSize, string> = {
-	sm: "text-xs px-2.5 py-1.5 min-h-[60px]",
-	md: "text-sm px-3 py-2 min-h-[80px]",
-	lg: "text-base px-4 py-2.5 min-h-[100px]",
+	sm: "text-xs px-2.5 py-1.5 min-h-15",
+	md: "text-sm px-3 py-2 min-h-20",
+	lg: "text-base px-4 py-2.5 min-h-25",
 };
 
 const iconSizeClasses: Record<InputSize, string> = {
@@ -71,7 +71,7 @@ const iconSizeClasses: Record<InputSize, string> = {
 // ============================================================================
 
 const baseInputClasses =
-	"flex w-full rounded-[var(--radius-md,0.5rem)] bg-black/5 dark:bg-white/5 text-zinc-900 dark:text-zinc-100 shadow-sm transition-all duration-200 placeholder:text-zinc-500 dark:placeholder:text-zinc-400 outline-none disabled:cursor-not-allowed disabled:opacity-50 backdrop-blur-sm hover:bg-black/10 dark:hover:bg-white/10 focus:bg-white/90 dark:focus:bg-zinc-900/90 focus:backdrop-blur-md";
+	"flex w-full rounded-lg bg-black/5 dark:bg-white/5 text-zinc-900 dark:text-zinc-100 shadow-sm transition-all duration-200 placeholder:text-zinc-500 dark:placeholder:text-zinc-400 outline-none disabled:cursor-not-allowed disabled:opacity-50 backdrop-blur-sm hover:bg-black/10 dark:hover:bg-white/10 focus:bg-white/90 dark:focus:bg-zinc-900/90 focus:backdrop-blur-md";
 
 const getStateClasses = (error?: boolean, success?: boolean) => {
 	if (error) {

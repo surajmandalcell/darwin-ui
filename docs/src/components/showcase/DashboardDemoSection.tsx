@@ -12,7 +12,7 @@ export function DashboardDemoSection() {
     <section ref={ref} className="min-h-screen py-16 md:py-20 lg:py-24 xl:py-28 px-4 relative">
       {/* Ambient glow effect */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="w-[600px] h-[400px] bg-indigo-500/10 blur-[100px] rounded-full" />
+        <div className="w-150 h-100 bg-indigo-500/10 blur-[100px] rounded-full" />
       </div>
 
       <motion.div
@@ -29,7 +29,7 @@ export function DashboardDemoSection() {
       </motion.div>
 
       <motion.div
-        className="max-w-[1600px] mx-auto relative z-10"
+        className="max-w-400 mx-auto relative z-10"
         initial={{ opacity: 0, y: 60, scale: 0.95 }}
         animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
         transition={{ delay: 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}

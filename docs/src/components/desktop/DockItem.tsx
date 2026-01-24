@@ -75,7 +75,7 @@ export function DockItem({
 
       {/* Tooltip */}
       <motion.div
-        className="absolute -top-9 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-popover/95 backdrop-blur-md rounded-lg text-xs font-medium text-popover-foreground whitespace-nowrap pointer-events-none border border-border shadow-sm z-[9999]"
+        className="absolute -top-9 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-popover/95 backdrop-blur-md rounded-lg text-xs font-medium text-popover-foreground whitespace-nowrap pointer-events-none border border-border shadow-sm z-9999"
         initial={{ opacity: 0, y: 8, scale: 0.9 }}
         animate={{
           opacity: isHovered ? 1 : 0,

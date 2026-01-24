@@ -82,7 +82,7 @@ export function Modal({
 									duration: getDuration("slow"),
 									ease: [0.16, 1, 0.3, 1],
 								}}
-								className={`${glass ? "bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl border-white/20 dark:border-white/10" : "bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border-black/10 dark:border-white/10"} shadow-md border rounded-[var(--radius-lg,0.75rem)] w-full ${sizeClasses[size]} flex flex-col max-h-[calc(100vh-2rem)] ${className} pointer-events-auto`}
+								className={`${glass ? "bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl border-white/20 dark:border-white/10" : "bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border-black/10 dark:border-white/10"} shadow-md border rounded-xl w-full ${sizeClasses[size]} flex flex-col max-h-[calc(100vh-2rem)] ${className} pointer-events-auto`}
 								role="dialog"
 								aria-modal="true"
 								aria-labelledby="modal-title"

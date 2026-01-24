@@ -97,8 +97,8 @@ export function Upload({
 			);
 			if (urls?.length)
 				onChange([...(value || []), ...urls].slice(0, maxFiles));
-		} catch (e: any) {
-			setErrors([e?.message || "Upload failed"]);
+		} catch (e: unknown) {
+			setErrors([(e instanceof Error ? e.message : null) || "Upload failed"]);
 		} finally {
 			input.value = "";
 		}
@@ -125,13 +125,13 @@ export function Upload({
 		return (
 			<div className="flex flex-col gap-1">
 				{fileInput}
-				<div className="flex items-center gap-2 h-10 px-3 rounded-[var(--radius-lg,0.75rem)] border border-border bg-muted overflow-hidden">
+				<div className="flex items-center gap-2 h-10 px-3 rounded-xl border border-border bg-muted overflow-hidden">
 					{/* Thumbnails */}
 					{hasImages && (
 						<div className="flex items-center gap-1.5 overflow-x-auto py-1 flex-1">
 							{value.map((url, index) => (
 								<div
-									key={url + index}
+									key={`inline-${url}`}
 									className="relative shrink-0 h-7 w-7 rounded overflow-hidden group"
 								>
 									<Image
@@ -142,6 +142,7 @@ export function Upload({
 										height={28}
 									/>
 									<button
+										type="button"
 										onClick={() => removeAt(index)}
 										className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity"
 										aria-label="Remove"
@@ -152,7 +153,7 @@ export function Upload({
 							))}
 							{pending.map((p) => (
 								<div
-									key={"pending-" + p.id}
+									key={`inline-pending-${p.id}`}
 									className="relative shrink-0 h-7 w-7 rounded overflow-hidden"
 								>
 									{/* eslint-disable-next-line @next/next/no-img-element */}
@@ -181,6 +182,7 @@ export function Upload({
 
 					{/* Add button */}
 					<button
+						type="button"
 						onClick={() => fileInputRef.current?.click()}
 						className="shrink-0 h-6 w-6 rounded bg-background border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-[hsl(var(--foreground))]/20 transition-colors"
 						aria-label="Add image"
@@ -191,6 +193,7 @@ export function Upload({
 					{/* Clear all button */}
 					{hasImages && (
 						<button
+							type="button"
 							onClick={() => onChange([])}
 							className="shrink-0 h-6 w-6 rounded bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-500 hover:bg-red-500/20 transition-colors"
 							aria-label="Remove all"
@@ -213,7 +216,7 @@ export function Upload({
 		return (
 			<div className="flex flex-col gap-2">
 				{fileInput}
-				<div className="relative flex flex-col overflow-hidden rounded-[var(--radius-lg,0.75rem)] border border-dashed border-border p-3">
+				<div className="relative flex flex-col overflow-hidden rounded-xl border border-dashed border-border p-3">
 					{(value?.length || 0) + (pending.length || 0) > 0 ? (
 						<div className="flex w-full flex-col gap-2">
 							<div className="flex items-center justify-between gap-2">
@@ -222,6 +225,7 @@ export function Upload({
 								</span>
 								<div className="flex gap-1.5">
 									<button
+										type="button"
 										onClick={() => fileInputRef.current?.click()}
 										className="inline-flex items-center gap-1 px-2 py-1 rounded text-xs bg-muted text-muted-foreground hover:text-foreground transition-colors"
 									>
@@ -229,6 +233,7 @@ export function Upload({
 										Add
 									</button>
 									<button
+										type="button"
 										onClick={() => onChange([])}
 										className="inline-flex items-center gap-1 px-2 py-1 rounded text-xs bg-red-500/10 text-red-500 hover:bg-red-500/20 transition-colors"
 									>
@@ -240,7 +245,7 @@ export function Upload({
 							<div className="grid grid-cols-2 gap-2">
 								{value.map((url, index) => (
 									<div
-										key={url + index}
+										key={`compact-${url}`}
 										className="relative rounded overflow-hidden group"
 									>
 										<Image
@@ -251,6 +256,7 @@ export function Upload({
 											height={64}
 										/>
 										<button
+											type="button"
 											onClick={() => removeAt(index)}
 											className="absolute top-1 right-1 size-5 rounded-full bg-red-500 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
 											aria-label="Remove"
@@ -266,7 +272,7 @@ export function Upload({
 								))}
 								{pending.map((p) => (
 									<div
-										key={"pending-" + p.id}
+										key={`compact-pending-${p.id}`}
 										className="relative rounded overflow-hidden"
 									>
 										{/* eslint-disable-next-line @next/next/no-img-element */}
@@ -288,8 +294,9 @@ export function Upload({
 							</div>
 						</div>
 					) : (
-						<div
-							className="flex items-center justify-center gap-3 py-4 cursor-pointer"
+						<button
+							type="button"
+							className="flex items-center justify-center gap-3 py-4 cursor-pointer w-full"
 							onClick={() => fileInputRef.current?.click()}
 						>
 							<div className="flex size-8 items-center justify-center rounded-full border border-border bg-muted">
@@ -303,7 +310,7 @@ export function Upload({
 									{label || `Max ${maxFiles} files`}
 								</p>
 							</div>
-						</div>
+						</button>
 					)}
 				</div>
 				{errors.length > 0 && (
@@ -329,6 +336,7 @@ export function Upload({
 							</h3>
 							<div className="flex gap-2">
 								<button
+									type="button"
 									onClick={() => fileInputRef.current?.click()}
 									className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 border border-black/10 dark:border-white/20 rounded-md text-xs text-zinc-500 hover:text-zinc-900 dark:text-zinc-100 transition-all duration-200"
 								>
@@ -336,6 +344,7 @@ export function Upload({
 									Add
 								</button>
 								<button
+									type="button"
 									onClick={() => onChange([])}
 									className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-red-500/15 hover:bg-red-500/20 border border-red-500/20 hover:border-red-500/30 rounded-md text-xs text-red-500 hover:text-red-500 transition-all duration-200"
 								>
@@ -348,7 +357,7 @@ export function Upload({
 						<div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
 							{value.map((url, index) => (
 								<div
-									key={url + index}
+									key={`default-${url}`}
 									className="relative flex flex-col rounded-md border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 overflow-hidden group"
 								>
 									<Image
@@ -371,6 +380,7 @@ export function Upload({
 										</span>
 										<div className="flex gap-1">
 											<button
+												type="button"
 												title={index === 0 ? "Already cover" : "Make cover"}
 												onClick={() => setCover(index)}
 												className="p-1 rounded bg-black/10 dark:bg-white/10 hover:bg-black/15 dark:hover:bg-white/15 text-zinc-900 dark:text-zinc-100"
@@ -382,6 +392,7 @@ export function Upload({
 												)}
 											</button>
 											<button
+												type="button"
 												title="Swap with next"
 												onClick={() =>
 													swap(index, Math.min(index + 1, value.length - 1))
@@ -394,16 +405,16 @@ export function Upload({
 									</div>
 								</div>
 							))}
-							{pending.map((p, i) => (
+							{pending.map((p) => (
 								<div
-									key={"pending-" + p.id}
+									key={`default-pending-${p.id}`}
 									className="relative flex flex-col rounded-md border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 overflow-hidden"
 								>
 									<div className="aspect-square w-full bg-zinc-800">
 										{/* eslint-disable-next-line @next/next/no-img-element */}
 										<img
 											src={p.preview}
-											alt={`Pending ${i + 1}`}
+											alt="Uploading"
 											className="h-full w-full object-cover opacity-80"
 										/>
 									</div>
@@ -439,12 +450,13 @@ export function Upload({
 					</div>
 				)}
 				<div className="py-3 px-0">
-					<div
-						className="border border-dashed border-black/20 dark:border-white/20 rounded-[var(--radius-lg,0.75rem)] min-h-12.5 flex items-center justify-center text-zinc-500 dark:text-zinc-400 text-sm cursor-pointer hover:bg-black/5 dark:bg-white/5"
+					<button
+						type="button"
+						className="w-full border border-dashed border-black/20 dark:border-white/20 rounded-xl min-h-12.5 flex items-center justify-center text-zinc-500 dark:text-zinc-400 text-sm cursor-pointer hover:bg-black/5 dark:hover:bg-white/5"
 						onClick={() => fileInputRef.current?.click()}
 					>
 						Click to select images
-					</div>
+					</button>
 				</div>
 			</div>
 

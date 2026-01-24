@@ -174,6 +174,7 @@ export default function DashboardShowcase({ showTitleBar = true, interactive = t
                                         { id: "activity", icon: Activity, label: "Realtime" },
                                     ].map((item) => (
                                         <button
+                                            type="button"
                                             key={item.id}
                                             onClick={() => setActiveNav(item.id)}
                                             className={cn(
@@ -204,6 +205,7 @@ export default function DashboardShowcase({ showTitleBar = true, interactive = t
                                         { id: "notifications", icon: Bell, label: "Updates", badge: 3 },
                                     ].map((item) => (
                                         <button
+                                            type="button"
                                             key={item.id}
                                             onClick={() => setActiveNav(item.id)}
                                             className={cn(
@@ -228,14 +230,14 @@ export default function DashboardShowcase({ showTitleBar = true, interactive = t
                     </div>
 
                     <div className="mt-auto p-4 border-t border-border/60">
-                        <div className="flex items-center gap-3 px-2 py-2 rounded-lg hover:bg-muted/40 transition-colors cursor-pointer">
+                        <button type="button" className="w-full flex items-center gap-3 px-2 py-2 rounded-lg hover:bg-muted/40 transition-colors cursor-pointer">
                             <div className="w-8 h-8 rounded-full bg-purple-500 border border-border" />
-                            <div className="flex-1 min-w-0">
+                            <div className="flex-1 min-w-0 text-left">
                                 <p className="text-sm font-medium text-foreground truncate">Olivia Martin</p>
                                 <p className="text-xs text-muted-foreground truncate">olivia@untitledui.com</p>
                             </div>
                             <ChevronDown className="w-4 h-4 text-muted-foreground" />
-                        </div>
+                        </button>
                     </div>
                 </div>
 
@@ -398,8 +400,8 @@ export default function DashboardShowcase({ showTitleBar = true, interactive = t
                                                     stroke="none"
                                                     cornerRadius={4}
                                                 >
-                                                    {pieData.map((entry, index) => (
-                                                        <Cell key={`cell-${index}`} fill={entry.color} />
+                                                    {pieData.map((entry) => (
+                                                        <Cell key={`cell-${entry.name}`} fill={entry.color} />
                                                     ))}
                                                 </Pie>
                                                 <Tooltip
@@ -430,13 +432,13 @@ export default function DashboardShowcase({ showTitleBar = true, interactive = t
 
                                 <div className="space-y-3 mt-2">
                                     {pieData.map((item) => (
-                                        <div key={item.name} className="flex items-center justify-between text-sm group cursor-pointer hover:bg-muted/20 p-2 rounded-lg transition-colors">
+                                        <button type="button" key={item.name} className="w-full flex items-center justify-between text-sm group cursor-pointer hover:bg-muted/20 p-2 rounded-lg transition-colors">
                                             <div className="flex items-center gap-2.5">
                                                 <div className="w-2.5 h-2.5 rounded-full" style={{ background: item.color }} />
                                                 <span className="text-foreground/70 group-hover:text-foreground transition-colors">{item.name}</span>
                                             </div>
                                             <span className="font-semibold text-foreground tabular-nums">{item.value}%</span>
-                                        </div>
+                                        </button>
                                     ))}
                                 </div>
                             </Card>
@@ -539,11 +541,17 @@ export default function DashboardShowcase({ showTitleBar = true, interactive = t
                 <div
                     className="absolute inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs"
                     onClick={() => setShowModal(false)}
+                    onKeyDown={(e) => e.key === 'Escape' && setShowModal(false)}
+                    role="button"
+                    tabIndex={0}
                     style={{ animation: 'fadeIn 0.2s ease-out' }}
                 >
                     <div
                         className="w-full max-w-sm bg-card border border-border rounded-2xl shadow-md p-6 relative overflow-hidden animate-modal-enter"
                         onClick={(e) => e.stopPropagation()}
+                        onKeyDown={(e) => e.stopPropagation()}
+                        role="dialog"
+                        aria-modal="true"
                         style={{
                             boxShadow: isDark
                                 ? '0 0 0 1px rgba(255,255,255,0.05), 0 20px 50px -10px rgba(0,0,0,0.8)'
@@ -558,7 +566,7 @@ export default function DashboardShowcase({ showTitleBar = true, interactive = t
                                 <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center border border-blue-500/20 text-blue-500 mb-2 shadow-[0_0_15px_rgba(59,130,246,0.3)]">
                                     <LayoutDashboard className="w-6 h-6" />
                                 </div>
-                                <button onClick={() => setShowModal(false)} className="text-muted-foreground hover:text-foreground transition-colors p-1 hover:bg-muted/60 rounded-lg">
+                                <button type="button" onClick={() => setShowModal(false)} className="text-muted-foreground hover:text-foreground transition-colors p-1 hover:bg-muted/60 rounded-lg">
                                     <X className="w-5 h-5" />
                                 </button>
                             </div>
@@ -592,7 +600,7 @@ export default function DashboardShowcase({ showTitleBar = true, interactive = t
                         <span className="text-sm font-semibold text-foreground">Export Success</span>
                         <span className="text-xs text-muted-foreground">Your report is ready to download.</span>
                     </div>
-                    <button onClick={() => setShowToast(false)} className="text-muted-foreground hover:text-foreground ml-2 transition-colors">
+                    <button type="button" onClick={() => setShowToast(false)} className="text-muted-foreground hover:text-foreground ml-2 transition-colors">
                         <X className="w-4 h-4" />
                     </button>
 

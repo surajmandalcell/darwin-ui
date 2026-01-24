@@ -12,7 +12,7 @@ export const Skeleton = React.forwardRef<HTMLDivElement, SkeletonProps>(
       <div
         ref={ref}
         className={cn(
-          'animate-pulse rounded-[var(--radius-md,0.5rem)]',
+          'animate-pulse rounded-lg',
           glass
             ? 'bg-white/40 dark:bg-zinc-900/40 backdrop-blur-sm'
             : 'bg-black/10 dark:bg-white/10',

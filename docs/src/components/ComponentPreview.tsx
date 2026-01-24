@@ -191,7 +191,7 @@ export function SkeletonPreview() {
     return (
         <div className="component-preview">
             <div className="flex items-center gap-5 w-full max-w-xs p-4 border border-border rounded-xl bg-muted/30">
-                <Skeleton className="w-12 h-12 rounded-full flex-shrink-0" />
+                <Skeleton className="w-12 h-12 rounded-full shrink-0" />
                 <div className="flex-1 space-y-2.5">
                     <Skeleton className="h-4 w-3/4 bg-muted" />
                     <Skeleton className="h-3 w-1/2 bg-muted" />
@@ -212,8 +212,9 @@ export function ModalPreview() {
 
             {isOpen && (
                 <div
-                    className="fixed inset-0 bg-black/60 backdrop-blur-[6px] flex items-center justify-center z-[100]"
+                    className="fixed inset-0 bg-black/60 backdrop-blur-[6px] flex items-center justify-center z-100"
                     onClick={() => setIsOpen(false)}
+                    role="presentation"
                 >
                     <Card
                         className="w-[90%] max-w-md bg-card border-border p-6 shadow-md relative overflow-hidden"
@@ -227,8 +228,9 @@ export function ModalPreview() {
                                     <Info className="w-5 h-5 text-foreground/80" />
                                 </div>
                                 <button
+                                    type="button"
                                     onClick={() => setIsOpen(false)}
-                                    className="p-1.5 rounded-lg text-foreground/40 hover:text-foreground hover:bg-foreground/[0.06] transition-colors"
+                                    className="p-1.5 rounded-lg text-foreground/40 hover:text-foreground hover:bg-foreground/6 transition-colors"
                                 >
                                     <X className="w-5 h-5" />
                                 </button>
@@ -269,7 +271,7 @@ export function ToastPreview() {
                 <div
                     className="absolute bottom-4 z-20 flex items-center gap-3 px-4 py-3 bg-card border border-emerald-500/20 rounded-xl shadow-md animate-in slide-in-from-bottom-5 fade-in duration-300"
                 >
-                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-500/10 flex items-center justify-center">
+                    <div className="shrink-0 w-8 h-8 rounded-full bg-emerald-500/10 flex items-center justify-center">
                         <Check className="w-4 h-4 text-emerald-500" />
                     </div>
                     <div>
@@ -288,17 +290,18 @@ export function SelectPreview() {
     const options = ["Engineering Team", "Marketing Team", "Design Team", "Sales Team"];
 
     return (
-        <div className="component-preview min-h-[200px] items-start pt-10">
+        <div className="component-preview min-h-50 items-start pt-10">
             <div className="relative w-64">
-                <label className="text-xs font-medium text-foreground/60 mb-1.5 block ml-1">Assign To</label>
+                <span className="text-xs font-medium text-foreground/60 mb-1.5 block ml-1">Assign To</span>
                 <button
+                    type="button"
                     onClick={() => setIsOpen(!isOpen)}
                     className={cn(
                         "w-full h-10 px-4 rounded-lg text-sm text-left flex items-center justify-between transition-all duration-200",
-                        "bg-foreground/[0.04] border",
+                        "bg-foreground/4 border",
                         isOpen
-                            ? "border-blue-500/50 bg-foreground/[0.06] ring-2 ring-blue-500/20"
-                            : "border-foreground/[0.08] hover:border-foreground/[0.12] text-foreground"
+                            ? "border-blue-500/50 bg-foreground/6 ring-2 ring-blue-500/20"
+                            : "border-foreground/8 hover:border-foreground/12 text-foreground"
                     )}
                 >
                     <div className="flex items-center gap-2">
@@ -314,13 +317,14 @@ export function SelectPreview() {
                     >
                         {options.map((option) => (
                             <button
+                                type="button"
                                 key={option}
                                 onClick={() => { setSelected(option); setIsOpen(false); }}
                                 className={cn(
                                     "w-full px-4 py-2.5 text-sm text-left flex items-center justify-between transition-colors",
                                     option === selected
                                         ? "bg-blue-600/10 text-blue-400 font-medium"
-                                        : "text-foreground/70 hover:text-foreground hover:bg-foreground/[0.04]"
+                                        : "text-foreground/70 hover:text-foreground hover:bg-foreground/4"
                                 )}
                             >
                                 {option}
@@ -354,8 +358,8 @@ export function TablePreview() {
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-border">
-                        {data.map((row, i) => (
-                            <tr key={i} className="group hover:bg-muted/30 transition-colors">
+                        {data.map((row) => (
+                            <tr key={row.email} className="group hover:bg-muted/30 transition-colors">
                                 <td className="px-6 py-3.5">
                                     <div className="flex flex-col">
                                         <span className="text-sm font-medium text-foreground">{row.name}</span>

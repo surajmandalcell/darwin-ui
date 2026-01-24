@@ -82,8 +82,8 @@ const variantClasses: Record<ButtonVariant, string> = {
 
 const sizeClasses: Record<ButtonSize, string> = {
 	default: "h-9 px-4 py-2",
-	sm: "h-8 rounded-[var(--radius-md,0.5rem)] px-3 text-xs",
-	lg: "h-10 rounded-[var(--radius-md,0.5rem)] px-8",
+	sm: "h-8 rounded-lg px-3 text-xs",
+	lg: "h-10 rounded-lg px-8",
 	icon: "h-9 w-9",
 };
 
@@ -145,7 +145,7 @@ const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonProps>(
 				whileTap={!isDisabled ? { scale: 0.98 } : {}}
 				transition={{ duration: getDuration("fast") }}
 				className={cn(
-					"inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-[var(--radius-lg,0.75rem)] text-sm font-medium transition-all duration-150 outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50 focus-visible:ring-inset disabled:pointer-events-none disabled:opacity-50",
+					"inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl text-sm font-medium transition-all duration-150 outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50 focus-visible:ring-inset disabled:pointer-events-none disabled:opacity-50",
 					variantClasses[variant],
 					sizeClasses[effectiveSize],
 					fullWidth && "w-full",

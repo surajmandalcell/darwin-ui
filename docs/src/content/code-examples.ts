@@ -68,7 +68,7 @@ export const COMPONENT_OVERRIDE = `import { Button } from '@pikoloo/darwin-ui';
 function MyButton() {
   return (
     <Button
-      className="bg-gradient-to-r from-pink-500 to-violet-500 hover:from-pink-600 hover:to-violet-600"
+      className="bg-linear-to-r from-pink-500 to-violet-500 hover:from-pink-600 hover:to-violet-600"
     >
       Custom styled button
     </Button>

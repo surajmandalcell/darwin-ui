@@ -859,7 +859,7 @@ const handleUpload = async (files: File[]) => {
 <div className="relative overflow-hidden">
   {/* Indigo orb - top right */}
   <motion.div
-    className="absolute w-[800px] h-[800px] rounded-full"
+    className="absolute w-200 h-200 rounded-full"
     style={{
       background: 'radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%)',
       top: '-20%',
@@ -875,7 +875,7 @@ const handleUpload = async (files: File[]) => {
 
   {/* Pink orb - bottom left */}
   <motion.div
-    className="absolute w-[600px] h-[600px] rounded-full"
+    className="absolute w-150 h-150 rounded-full"
     style={{
       background: 'radial-gradient(circle, rgba(236, 72, 153, 0.12) 0%, transparent 70%)',
       bottom: '-10%',
@@ -891,7 +891,7 @@ const handleUpload = async (files: File[]) => {
 
   {/* Cyan orb - center */}
   <motion.div
-    className="absolute w-[400px] h-[400px] rounded-full"
+    className="absolute w-100 h-100 rounded-full"
     style={{
       background: 'radial-gradient(circle, rgba(34, 211, 238, 0.08) 0%, transparent 70%)',
       top: '40%',
@@ -931,7 +931,7 @@ const handleUpload = async (files: File[]) => {
   whileHover="hover"
 >
   <motion.div
-    className="absolute inset-0 bg-gradient-to-br from-violet-500/20 to-indigo-500/5 rounded-2xl"
+    className="absolute inset-0 bg-linear-to-br from-violet-500/20 to-indigo-500/5 rounded-2xl"
     initial={{ opacity: 0 }}
     variants={{ hover: { opacity: 1 } }}
     transition={{ duration: 0.3 }}
@@ -959,7 +959,7 @@ const handleUpload = async (files: File[]) => {
 
 // Glow Effect
 <div className="relative group">
-  <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg blur opacity-0 group-hover:opacity-25 transition duration-300" />
+  <div className="absolute -inset-1 bg-linear-to-r from-blue-500 to-purple-500 rounded-lg blur opacity-0 group-hover:opacity-25 transition duration-300" />
   <div className="relative bg-card border border-border rounded-lg p-4">
     Card content
   </div>

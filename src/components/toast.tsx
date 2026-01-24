@@ -102,7 +102,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
 				{toasts.map((toast) => (
 					<div
 						key={toast.id}
-						className={`${toast.glass ? "bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl border-white/20 dark:border-white/10" : "bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border-black/10 dark:border-white/10"} shadow-md border rounded-[var(--radius-lg,0.75rem)] min-w-80 max-w-md pointer-events-auto animate-in slide-in-from-right duration-300`}
+						className={`${toast.glass ? "bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl border-white/20 dark:border-white/10" : "bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border-black/10 dark:border-white/10"} shadow-md border rounded-xl min-w-80 max-w-md pointer-events-auto animate-in slide-in-from-right duration-300`}
 					>
 						<div className="p-4 flex items-start gap-3">
 							{getIcon(toast.type)}

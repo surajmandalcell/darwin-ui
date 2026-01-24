@@ -76,7 +76,8 @@ interface ComponentDef {
 // Small chart SVG representations
 function MiniAreaChart() {
   return (
-    <svg viewBox="0 0 80 40" className="w-full h-full">
+    <svg viewBox="0 0 80 40" className="w-full h-full" role="img" aria-label="Area chart">
+      <title>Area Chart</title>
       <defs>
         <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="rgba(99, 102, 241, 0.4)" />
@@ -99,7 +100,8 @@ function MiniAreaChart() {
 
 function MiniBarChart() {
   return (
-    <svg viewBox="0 0 80 40" className="w-full h-full">
+    <svg viewBox="0 0 80 40" className="w-full h-full" role="img" aria-label="Bar chart">
+      <title>Bar Chart</title>
       <rect x="5" y="20" width="10" height="18" rx="2" fill="rgba(34, 197, 94, 0.6)" />
       <rect x="20" y="10" width="10" height="28" rx="2" fill="rgba(34, 197, 94, 0.8)" />
       <rect x="35" y="15" width="10" height="23" rx="2" fill="rgba(34, 197, 94, 0.6)" />
@@ -111,7 +113,8 @@ function MiniBarChart() {
 
 function MiniLineChart() {
   return (
-    <svg viewBox="0 0 80 40" className="w-full h-full">
+    <svg viewBox="0 0 80 40" className="w-full h-full" role="img" aria-label="Line chart">
+      <title>Line Chart</title>
       <path
         d="M5,30 L20,22 L35,28 L50,15 L65,20 L75,10"
         fill="none"
@@ -129,7 +132,8 @@ function MiniLineChart() {
 
 function MiniPieChart() {
   return (
-    <svg viewBox="0 0 40 40" className="w-full h-full">
+    <svg viewBox="0 0 40 40" className="w-full h-full" role="img" aria-label="Pie chart">
+      <title>Pie Chart</title>
       <circle cx="20" cy="20" r="16" fill="rgba(99, 102, 241, 0.3)" />
       <path
         d="M20,20 L20,4 A16,16 0 0,1 34,14 Z"
@@ -149,7 +153,8 @@ function MiniPieChart() {
 
 function MiniDonutChart() {
   return (
-    <svg viewBox="0 0 40 40" className="w-full h-full">
+    <svg viewBox="0 0 40 40" className="w-full h-full" role="img" aria-label="Donut chart">
+      <title>Donut Chart</title>
       <circle cx="20" cy="20" r="14" fill="none" stroke="rgba(99, 102, 241, 0.3)" strokeWidth="5" />
       <circle
         cx="20"
@@ -187,7 +192,8 @@ function MiniDonutChart() {
 
 function MiniStackedBarChart() {
   return (
-    <svg viewBox="0 0 80 40" className="w-full h-full">
+    <svg viewBox="0 0 80 40" className="w-full h-full" role="img" aria-label="Stacked bar chart">
+      <title>Stacked Bar Chart</title>
       <rect x="5" y="25" width="12" height="13" rx="1" fill="rgba(99, 102, 241, 0.8)" />
       <rect x="5" y="15" width="12" height="10" rx="1" fill="rgba(34, 197, 94, 0.8)" />
       <rect x="22" y="18" width="12" height="20" rx="1" fill="rgba(99, 102, 241, 0.8)" />
@@ -356,7 +362,7 @@ const COMPONENTS: ComponentDef[] = [
     category: 'data-display',
     size: 'sm',
     preview: (
-      <AvatarGroup max={3} className="[&>*]:border-0 [&>*]:ring-0">
+      <AvatarGroup max={3} className="*:border-0 *:ring-0">
         <Avatar fallback="JD" size="sm" className="border-0 ring-0 bg-linear-to-br from-indigo-500 to-purple-600" />
         <Avatar fallback="SM" size="sm" className="border-0 ring-0 bg-linear-to-br from-emerald-500 to-teal-600" />
         <Avatar fallback="AK" size="sm" className="border-0 ring-0 bg-linear-to-br from-amber-500 to-orange-600" />
@@ -498,7 +504,7 @@ const COMPONENTS: ComponentDef[] = [
     size: 'wide',
     preview: (
       <div className="relative p-3 rounded-lg bg-card/90 border border-border shadow-2xl w-full">
-        <button className="absolute top-2 right-2 text-muted-foreground/60 hover:text-muted-foreground">
+        <button type="button" className="absolute top-2 right-2 text-muted-foreground/60 hover:text-muted-foreground">
           <X className="w-3.5 h-3.5" />
         </button>
         <div className="text-sm font-medium text-foreground mb-1">Modal Window</div>
@@ -672,7 +678,7 @@ const COMPONENTS: ComponentDef[] = [
           <span className="text-[10px] text-muted-foreground">Revenue Over Time</span>
           <Badge variant="success" className="text-[8px]">+12.5%</Badge>
         </div>
-        <div className="flex-1 min-h-[100px]">
+        <div className="flex-1 min-h-25">
           <MiniAreaChart />
         </div>
         <div className="flex justify-between text-[9px] text-muted-foreground/60 mt-1">
@@ -692,7 +698,7 @@ const COMPONENTS: ComponentDef[] = [
           <span className="text-[10px] text-muted-foreground">Monthly Sales</span>
           <Badge variant="info" className="text-[8px]">Q1 2026</Badge>
         </div>
-        <div className="flex-1 min-h-[100px]">
+        <div className="flex-1 min-h-25">
           <MiniBarChart />
         </div>
         <div className="flex justify-between text-[9px] text-muted-foreground/60 mt-1">
@@ -712,7 +718,7 @@ const COMPONENTS: ComponentDef[] = [
           <span className="text-[10px] text-muted-foreground">User Growth</span>
           <Badge variant="warning" className="text-[8px]">Live</Badge>
         </div>
-        <div className="flex-1 min-h-[100px]">
+        <div className="flex-1 min-h-25">
           <MiniLineChart />
         </div>
         <div className="flex justify-between text-[9px] text-muted-foreground/60 mt-1">
@@ -728,7 +734,7 @@ const COMPONENTS: ComponentDef[] = [
     size: 'wide',
     preview: (
       <div className="h-full w-full flex items-center gap-3">
-        <div className="h-16 w-16 flex-shrink-0">
+        <div className="h-16 w-16 shrink-0">
           <MiniPieChart />
         </div>
         <div className="flex-1 space-y-1">
@@ -758,7 +764,7 @@ const COMPONENTS: ComponentDef[] = [
     size: 'wide',
     preview: (
       <div className="h-full w-full flex items-center gap-3">
-        <div className="h-16 w-16 flex-shrink-0 relative">
+        <div className="h-16 w-16 shrink-0 relative">
           <MiniDonutChart />
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center">
@@ -806,7 +812,7 @@ const COMPONENTS: ComponentDef[] = [
             </div>
           </div>
         </div>
-        <div className="flex-1 min-h-[100px]">
+        <div className="flex-1 min-h-25">
           <MiniStackedBarChart />
         </div>
         <div className="flex justify-between text-[9px] text-muted-foreground/60 mt-1">
@@ -947,10 +953,10 @@ function ComponentCard({ component, delay = 0 }: ComponentCardProps) {
 
       {/* Preview - adjust height based on size */}
       <div className={`relative z-10 flex items-center justify-center ${
-        isLarge ? 'min-h-[200px] h-[calc(100%-2rem)]' :
-        isTall ? 'min-h-[200px] h-[calc(100%-2rem)]' :
-        isWide ? 'min-h-[80px]' :
-        'min-h-[80px]'
+        isLarge ? 'min-h-50 h-[calc(100%-2rem)]' :
+        isTall ? 'min-h-50 h-[calc(100%-2rem)]' :
+        isWide ? 'min-h-20' :
+        'min-h-20'
       }`}>
         {component.preview}
       </div>
@@ -982,7 +988,7 @@ export function ComponentShowcaseSection() {
 
       {/* Category Filter Tabs */}
       <motion.div
-        className="max-w-[1400px] mx-auto px-2 md:px-8 lg:px-16 mb-10"
+        className="max-w-350 mx-auto px-2 md:px-8 lg:px-16 mb-10"
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6, delay: 0.1 }}
@@ -990,6 +996,7 @@ export function ComponentShowcaseSection() {
         <div className="flex flex-wrap justify-center gap-2">
           {CATEGORIES.map((category) => (
             <button
+              type="button"
               key={category.id}
               onClick={() => setActiveCategory(category.id)}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
@@ -1010,9 +1017,9 @@ export function ComponentShowcaseSection() {
       </motion.div>
 
       {/* Component Grid */}
-      <div className="max-w-[1600px] mx-auto px-4 md:px-8 lg:px-12">
+      <div className="max-w-400 mx-auto px-4 md:px-8 lg:px-12">
         <motion.div
-          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 auto-rows-[160px] [grid-auto-flow:dense]"
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 auto-rows-[160px] grid-flow-dense"
           layout
         >
           <AnimatePresence mode="popLayout">

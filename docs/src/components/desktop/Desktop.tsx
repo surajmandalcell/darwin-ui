@@ -49,7 +49,7 @@ export function Desktop() {
 
         {/* Primary aurora blob - slow drift */}
         <motion.div
-          className="absolute w-[800px] h-[600px] rounded-full"
+          className="absolute w-200 h-150 rounded-full"
           style={{
             background: isDark
               ? 'radial-gradient(ellipse at center, rgba(139, 92, 246, 0.15) 0%, rgba(139, 92, 246, 0.05) 40%, transparent 70%)'
@@ -68,7 +68,7 @@ export function Desktop() {
 
         {/* Secondary glow - blue accent */}
         <motion.div
-          className="absolute w-[600px] h-[500px] rounded-full"
+          className="absolute w-150 h-125 rounded-full"
           style={{
             background: isDark
               ? 'radial-gradient(ellipse at center, rgba(59, 130, 246, 0.12) 0%, rgba(59, 130, 246, 0.04) 50%, transparent 70%)'
@@ -87,7 +87,7 @@ export function Desktop() {
 
         {/* Tertiary warm accent - subtle pink */}
         <motion.div
-          className="absolute w-[500px] h-[400px] rounded-full"
+          className="absolute w-125 h-100 rounded-full"
           style={{
             background: isDark
               ? 'radial-gradient(ellipse at center, rgba(236, 72, 153, 0.08) 0%, transparent 60%)'
@@ -106,7 +106,7 @@ export function Desktop() {
 
         {/* Subtle cyan accent - bottom right */}
         <motion.div
-          className="absolute w-[400px] h-[300px] rounded-full"
+          className="absolute w-100 h-75 rounded-full"
           style={{
             background: isDark
               ? 'radial-gradient(ellipse at center, rgba(34, 211, 238, 0.06) 0%, transparent 60%)'
@@ -175,7 +175,7 @@ export function Desktop() {
 
       {/* Dock */}
       <motion.div
-        className="absolute bottom-2 left-1/2 -translate-x-1/2 z-[9990]"
+        className="absolute bottom-2 left-1/2 -translate-x-1/2 z-9990"
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{
@@ -191,7 +191,7 @@ export function Desktop() {
       <AnimatePresence>
         {state.isBooting && (
           <motion.div
-            className={`absolute inset-0 flex items-center justify-center z-[9999] ${
+            className={`absolute inset-0 flex items-center justify-center z-9999 ${
               isDark ? 'bg-black' : 'bg-white'
             }`}
             initial={{ opacity: 1 }}

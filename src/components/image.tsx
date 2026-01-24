@@ -27,10 +27,10 @@ export function Image({
 
 	const roundedClass = {
 		none: "",
-		sm: "rounded-[var(--radius-sm,0.375rem)]",
-		md: "rounded-[var(--radius-md,0.5rem)]",
-		lg: "rounded-[var(--radius-lg,0.75rem)]",
-		xl: "rounded-[var(--radius-xl,1rem)]",
+		sm: "rounded-md",
+		md: "rounded-lg",
+		lg: "rounded-xl",
+		xl: "rounded-2xl",
 		full: "rounded-full",
 	}[rounded];
 
@@ -115,7 +115,7 @@ export function Image({
 						<img
 							src={getImageSrc()}
 							alt={getImageAlt()}
-							className="object-contain rounded-[var(--radius-lg,0.75rem)] max-w-full max-h-[90vh] w-auto h-auto"
+							className="object-contain rounded-xl max-w-full max-h-[90vh] w-auto h-auto"
 						/>
 					</div>
 				</div>
@@ -141,7 +141,7 @@ export function Image({
 					className="cursor-pointer group relative inline-block"
 				>
 					{element}
-					<div className="absolute inset-0 bg-transparent group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center pointer-events-none rounded-[var(--radius-lg,0.75rem)]">
+					<div className="absolute inset-0 bg-transparent group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center pointer-events-none rounded-xl">
 						<Expand className="text-transparent group-hover:text-zinc-100 text-sm transition-all duration-300" />
 					</div>
 				</div>

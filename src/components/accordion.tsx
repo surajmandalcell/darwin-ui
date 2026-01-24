@@ -83,7 +83,7 @@ function AccordionItem({ value, children, className }: AccordionItemProps) {
 		<div
 			className={cn(
 				"py-0",
-				glass && "bg-white/60 dark:bg-zinc-900/60 backdrop-blur-sm border border-white/20 dark:border-white/10 rounded-[var(--radius-lg,0.75rem)] px-4",
+				glass && "bg-white/60 dark:bg-zinc-900/60 backdrop-blur-sm border border-white/20 dark:border-white/10 rounded-xl px-4",
 				className
 			)}
 			data-value={value}
@@ -114,7 +114,7 @@ function AccordionTrigger({ children, className, itemValue }: AccordionTriggerPr
 			onClick={() => itemValue && toggleItem(itemValue)}
 			aria-expanded={isExpanded}
 			className={cn(
-				"flex w-full items-center justify-between py-4 text-sm font-medium text-zinc-900 dark:text-zinc-100 transition-all hover:text-zinc-600 dark:hover:text-zinc-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-500/50 rounded-[var(--radius-md,0.5rem)]",
+				"flex w-full items-center justify-between py-4 text-sm font-medium text-zinc-900 dark:text-zinc-100 transition-all hover:text-zinc-600 dark:hover:text-zinc-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-500/50 rounded-lg",
 				className
 			)}
 		>

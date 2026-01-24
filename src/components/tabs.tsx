@@ -48,7 +48,7 @@ function TabsList({ children, className }: TabsListProps) {
 		<div
 			role="tablist"
 			className={cn(
-				"inline-flex h-10 items-center justify-center rounded-[var(--radius-lg,0.75rem)] p-1 text-zinc-800 dark:text-zinc-200 border",
+				"inline-flex h-10 items-center justify-center rounded-xl p-1 text-zinc-800 dark:text-zinc-200 border",
 				glass
 					? "bg-white/60 dark:bg-zinc-900/60 backdrop-blur-xl border-white/20 dark:border-white/10"
 					: "bg-black/5 dark:bg-white/5 backdrop-blur-sm border-black/10 dark:border-white/10",
@@ -80,14 +80,14 @@ function TabsTrigger({ value, children, className, disabled }: TabsTriggerProps)
 			disabled={disabled}
 			onClick={() => onValueChange(value)}
 			className={cn(
-				"relative inline-flex items-center justify-center whitespace-nowrap rounded-[var(--radius-md,0.5rem)] px-3 py-1.5 text-sm font-medium transition-all outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50 focus-visible:ring-inset disabled:pointer-events-none disabled:opacity-50",
+				"relative inline-flex items-center justify-center whitespace-nowrap rounded-lg px-3 py-1.5 text-sm font-medium transition-all outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50 focus-visible:ring-inset disabled:pointer-events-none disabled:opacity-50",
 				className
 			)}
 		>
 			{isSelected && (
 				<motion.span
 					layoutId="active-tab"
-					className="absolute inset-0 bg-black/10 dark:bg-white/10 rounded-[var(--radius-md,0.5rem)]"
+					className="absolute inset-0 bg-black/10 dark:bg-white/10 rounded-lg"
 					transition={{
 						type: "spring",
 						bounce: 0.15,

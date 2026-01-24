@@ -140,7 +140,7 @@ export function UnifiedNavbar() {
   const { speed, setSpeed } = useAnimationSpeed();
 
   return (
-    <nav className="flex-shrink-0 h-10 bg-card border-b border-border flex items-center px-4 gap-6">
+    <nav className="shrink-0 h-10 bg-card border-b border-border flex items-center px-4 gap-6">
       <Link
         to="/"
         className="flex items-center justify-center text-foreground/70 hover:text-foreground transition-colors"

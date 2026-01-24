@@ -14,7 +14,7 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
 			ref={ref}
 			{...(props as any)}
 			className={cn(
-				"rounded-[var(--radius-xl,1rem)] border text-card-foreground transition-colors duration-150",
+				"rounded-2xl border text-card-foreground transition-colors duration-150",
 				glass
 					? "bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border-white/20 dark:border-white/10"
 					: "bg-card border-border hover:border-border/80",

@@ -38,7 +38,7 @@ function Progress({
 		success: "bg-emerald-500",
 		warning: "bg-amber-500",
 		danger: "bg-red-500",
-		gradient: "bg-gradient-to-r from-blue-500 via-violet-500 to-red-500",
+		gradient: "bg-linear-to-r from-blue-500 via-violet-500 to-red-500",
 	};
 
 	return (
@@ -128,7 +128,8 @@ function CircularProgress({
 			className={cn("relative inline-flex items-center justify-center", className)}
 			style={{ width: size, height: size }}
 		>
-			<svg width={size} height={size} className="-rotate-90">
+			<svg width={size} height={size} className="-rotate-90" role="img" aria-label="Circular progress indicator">
+				<title>Circular Progress</title>
 				<circle
 					cx={size / 2}
 					cy={size / 2}

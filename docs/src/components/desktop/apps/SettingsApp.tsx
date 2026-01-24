@@ -132,7 +132,7 @@ function AnimatedSlider({ value, onChange, min = 0, max = 100, label }: Animated
         <div className="absolute inset-0 bg-foreground/10 rounded-full overflow-hidden">
           {/* Filled track with smooth animation */}
           <motion.div
-            className="h-full bg-gradient-to-r from-blue-500 to-blue-400 rounded-full"
+            className="h-full bg-linear-to-r from-blue-500 to-blue-400 rounded-full"
             initial={false}
             animate={{ width: `${percentage}%` }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}

@@ -143,7 +143,7 @@ export function AgenticCodingSection() {
 							{/* Code content */}
 							<div className="p-4 font-mono text-sm min-h-70">
 								{displayedLines.map((line, index) => (
-									<div key={index} className="flex">
+									<div key={`code-line-${index}-${line.slice(0, 20)}`} className="flex">
 										{/* Line number */}
 										<span className="w-8 text-right pr-4 text-muted-foreground/50 select-none text-xs leading-6">
 											{index + 1}
@@ -179,8 +179,8 @@ export function AgenticCodingSection() {
 									)}
 								{/* Placeholder lines for consistent height */}
 								{displayedLines.length < 8 &&
-									[...Array(8 - displayedLines.length)].map((_, i) => (
-										<div key={`placeholder-${i}`} className="flex">
+									Array.from({ length: 8 - displayedLines.length }, (_, i) => (
+										<div key={`placeholder-line-${displayedLines.length + i + 1}`} className="flex">
 											<span className="w-8 text-right pr-4 text-muted-foreground/30 select-none text-xs leading-6">
 												{displayedLines.length + i + 1}
 											</span>

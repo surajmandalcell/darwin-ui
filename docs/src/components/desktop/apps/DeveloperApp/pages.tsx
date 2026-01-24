@@ -1256,7 +1256,7 @@ function ExampleCard({ example, index }: { example: { name: string; description?
             {ExamplePreview ? (
               <ExamplePreview />
             ) : (
-              <div className="flex items-center justify-center min-h-[80px] text-muted-foreground text-sm">
+              <div className="flex items-center justify-center min-h-20 text-muted-foreground text-sm">
                 Preview available in live docs
               </div>
             )}
@@ -1605,7 +1605,7 @@ export function CustomizationPage() {
 
 // All components accept className for custom styling
 <Button
-  className="bg-gradient-to-r from-pink-500 to-violet-500
+  className="bg-linear-to-r from-pink-500 to-violet-500
              hover:from-pink-600 hover:to-violet-600"
 >
   Gradient Button

@@ -189,7 +189,7 @@ function ContextMenuContent({ children, className, glass = false }: ContextMenuC
 					role="menu"
 					aria-orientation="vertical"
 					className={cn(
-						"fixed min-w-45 overflow-hidden rounded-[var(--radius-lg,0.75rem)] border p-1 shadow-xl",
+						"fixed min-w-45 overflow-hidden rounded-xl border p-1 shadow-xl",
 						glass
 							? "bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl border-white/20 dark:border-white/10"
 							: "bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border-black/10 dark:border-white/10",
@@ -254,7 +254,7 @@ function ContextMenuItem({
 			onClick={handleClick}
 			onKeyDown={handleKeyDown}
 			className={cn(
-				"flex w-full items-center rounded-[var(--radius-md,0.5rem)] px-2 py-1.5 text-sm text-zinc-700 dark:text-zinc-300 outline-none transition-colors hover:bg-black/10 dark:hover:bg-white/10 hover:text-zinc-900 dark:hover:text-zinc-100 focus:bg-black/5 dark:focus:bg-white/10",
+				"flex w-full items-center rounded-lg px-2 py-1.5 text-sm text-zinc-700 dark:text-zinc-300 outline-none transition-colors hover:bg-black/10 dark:hover:bg-white/10 hover:text-zinc-900 dark:hover:text-zinc-100 focus:bg-black/5 dark:focus:bg-white/10",
 				disabled && "pointer-events-none opacity-50",
 				destructive &&
 					"text-red-500 hover:text-red-500 hover:bg-red-500/10 focus:bg-red-500/10",
@@ -301,7 +301,7 @@ function ContextMenuCheckboxItem({
 			onClick={() => onCheckedChange?.(!checked)}
 			onKeyDown={handleKeyDown}
 			className={cn(
-				"flex w-full items-center rounded-[var(--radius-md,0.5rem)] px-2 py-1.5 text-sm text-zinc-700 dark:text-zinc-300 outline-none transition-colors hover:bg-black/10 dark:hover:bg-white/10 hover:text-zinc-900 dark:hover:text-zinc-100 focus:bg-black/5 dark:focus:bg-white/10",
+				"flex w-full items-center rounded-lg px-2 py-1.5 text-sm text-zinc-700 dark:text-zinc-300 outline-none transition-colors hover:bg-black/10 dark:hover:bg-white/10 hover:text-zinc-900 dark:hover:text-zinc-100 focus:bg-black/5 dark:focus:bg-white/10",
 				disabled && "pointer-events-none opacity-50",
 				className,
 			)}
@@ -399,8 +399,8 @@ function LegacyContextMenu({
 		<ContextMenuRoot>
 			<ContextMenuTrigger className={className}>{children}</ContextMenuTrigger>
 			<ContextMenuContent glass={glass}>
-				{items.map((item, index) => (
-					<React.Fragment key={index}>
+				{items.map((item) => (
+					<React.Fragment key={item.label || item.shortcut || 'separator'}>
 						{item.separator && <ContextMenuSeparator />}
 						{item.label && (
 							<ContextMenuItem

@@ -108,7 +108,7 @@ export function Alert({
 						mass: 0.8
 					}}
 					className={cn(
-						"relative flex items-start gap-3 rounded-[var(--radius-xl,1rem)] border p-4",
+						"relative flex items-start gap-3 rounded-2xl border p-4",
 						glass
 							? "bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl border-white/20 dark:border-white/10"
 							: cn("backdrop-blur-sm", styles.bg, styles.border),
@@ -146,7 +146,7 @@ export function Alert({
 							type="button"
 							onClick={handleDismiss}
 							className={cn(
-								"shrink-0 p-1 rounded-[var(--radius-lg,0.75rem)] transition-colors",
+								"shrink-0 p-1 rounded-xl transition-colors",
 								"hover:bg-black/10 dark:hover:bg-white/10 active:bg-white/15 dark:active:bg-black/15",
 								styles.icon,
 								"opacity-60 hover:opacity-100"
@@ -266,7 +266,7 @@ export function AlertProvider({ children }: { children: React.ReactNode }) {
 							onClick={() => handleClose(alert.onCancel)}
 						/>
 						<div
-							className={`relative bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md shadow-md border border-black/10 dark:border-white/10 rounded-[var(--radius-lg,0.75rem)] w-full max-w-md ${
+							className={`relative bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md shadow-md border border-black/10 dark:border-white/10 rounded-xl w-full max-w-md ${
 								isClosing
 									? "animate-out zoom-out-95 duration-200"
 									: "animate-in zoom-in-95 duration-200"

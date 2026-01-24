@@ -83,7 +83,7 @@ function InlineSelect({
 			</Popover.Trigger>
 			<Popover.Portal>
 				<Popover.Content
-					className="bg-[hsl(var(--popover))] border border-[hsl(var(--border))] rounded-[var(--radius-lg,0.75rem)] shadow-md p-1 z-10000 min-w-35"
+					className="bg-popover border border-border rounded-xl shadow-md p-1 z-10000 min-w-35"
 					sideOffset={5}
 				>
 					{options.map((option) => (
@@ -97,7 +97,7 @@ function InlineSelect({
 							className={`w-full px-3 py-2 text-left text-sm rounded transition ${
 								value === option.value
 									? "bg-blue-500/15 text-blue-400"
-									: "text-[hsl(var(--muted-foreground))] hover:bg-[hsl(var(--muted))] hover:text-[hsl(var(--foreground))]"
+									: "text-muted-foreground hover:bg-muted hover:text-foreground"
 							}`}
 						>
 							{option.label}
@@ -151,7 +151,7 @@ function DatePickerButton({
 			</Popover.Trigger>
 			<Popover.Portal>
 				<Popover.Content
-					className="bg-[hsl(var(--popover))] border border-[hsl(var(--border))] rounded-[var(--radius-lg,0.75rem)] shadow-md p-4 z-10000"
+					className="bg-popover border border-border rounded-xl shadow-md p-4 z-10000"
 					sideOffset={5}
 				>
 					<div className="rdp-custom">
@@ -240,7 +240,7 @@ function TimePickerButton({
 			</Popover.Trigger>
 			<Popover.Portal>
 				<Popover.Content
-					className="bg-[hsl(var(--popover))] border border-[hsl(var(--border))] rounded-[var(--radius-lg,0.75rem)] shadow-md p-3 z-10000"
+					className="bg-popover border border-border rounded-xl shadow-md p-3 z-10000"
 					sideOffset={5}
 				>
 					<input
@@ -250,7 +250,7 @@ function TimePickerButton({
 							onChange(e.target.value);
 							setOpenPopover(null);
 						}}
-						className="px-3 py-2 bg-[hsl(var(--muted))] ring-1 ring-inset ring-[hsl(var(--border))] rounded text-[hsl(var(--foreground))] outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-150"
+						className="px-3 py-2 bg-muted ring-1 ring-inset ring-border rounded text-foreground outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-150"
 					/>
 				</Popover.Content>
 			</Popover.Portal>
@@ -259,23 +259,28 @@ function TimePickerButton({
 }
 
 // Helper to safely parse dates from various formats
-function parseDate(dateValue: any): Date | undefined {
+function parseDate(dateValue: unknown): Date | undefined {
 	if (!dateValue) return undefined;
 
 	// If it's already a Date object
 	if (dateValue instanceof Date) {
 		// Check if it's a valid date
-		return isNaN(dateValue.getTime()) ? undefined : dateValue;
+		return Number.isNaN(dateValue.getTime()) ? undefined : dateValue;
 	}
 
 	// If it's a Firestore Timestamp
-	if (dateValue?.toDate && typeof dateValue.toDate === "function") {
-		return dateValue.toDate();
+	if (
+		dateValue !== null &&
+		typeof dateValue === "object" &&
+		"toDate" in dateValue &&
+		typeof (dateValue as { toDate: () => Date }).toDate === "function"
+	) {
+		return (dateValue as { toDate: () => Date }).toDate();
 	}
 
 	// If it's a string or number, try to parse it
-	const parsed = new Date(dateValue);
-	return isNaN(parsed.getTime()) ? undefined : parsed;
+	const parsed = new Date(dateValue as string | number);
+	return Number.isNaN(parsed.getTime()) ? undefined : parsed;
 }
 
 export function DateSelect({
@@ -580,7 +585,7 @@ export function DateSelect({
 		if (eventType === "single") {
 			if (dateMode === "datetime") {
 				return (
-					<div className="text-[hsl(var(--muted-foreground))] text-base leading-relaxed flex flex-wrap items-center gap-x-2 gap-y-2">
+					<div className="text-muted-foreground text-base leading-relaxed flex flex-wrap items-center gap-x-2 gap-y-2">
 						<InlineSelect
 							value={dateMode}
 							options={modeOptions}
@@ -628,7 +633,7 @@ export function DateSelect({
 			}
 			if (dateMode === "date-only") {
 				return (
-					<div className="text-[hsl(var(--muted-foreground))] text-base leading-relaxed flex flex-wrap items-center gap-x-2 gap-y-2">
+					<div className="text-muted-foreground text-base leading-relaxed flex flex-wrap items-center gap-x-2 gap-y-2">
 						<InlineSelect
 							value={dateMode}
 							options={modeOptions}
@@ -652,7 +657,7 @@ export function DateSelect({
 			}
 			if (dateMode === "month-only") {
 				return (
-					<div className="text-[hsl(var(--muted-foreground))] text-base leading-relaxed flex flex-wrap items-center gap-x-2 gap-y-2">
+					<div className="text-muted-foreground text-base leading-relaxed flex flex-wrap items-center gap-x-2 gap-y-2">
 						<InlineSelect
 							value={dateMode}
 							options={modeOptions}
@@ -676,7 +681,7 @@ export function DateSelect({
 			}
 			if (dateMode === "year-only") {
 				return (
-					<div className="text-[hsl(var(--muted-foreground))] text-base leading-relaxed flex flex-wrap items-center gap-x-2 gap-y-2">
+					<div className="text-muted-foreground text-base leading-relaxed flex flex-wrap items-center gap-x-2 gap-y-2">
 						<InlineSelect
 							value={dateMode}
 							options={modeOptions}
@@ -721,7 +726,7 @@ export function DateSelect({
 
 			if (frequency === "specific-day") {
 				return (
-					<div className="text-[hsl(var(--muted-foreground))] text-base leading-relaxed flex flex-wrap items-center gap-x-2 gap-y-2">
+					<div className="text-muted-foreground text-base leading-relaxed flex flex-wrap items-center gap-x-2 gap-y-2">
 						<span>Every</span>
 						<InlineSelect
 							value={dayOfWeek}
@@ -802,7 +807,7 @@ export function DateSelect({
 			}
 
 			return (
-				<div className="text-[hsl(var(--muted-foreground))] text-base leading-relaxed flex flex-wrap items-center gap-x-2 gap-y-2">
+				<div className="text-muted-foreground text-base leading-relaxed flex flex-wrap items-center gap-x-2 gap-y-2">
 					<span>Every</span>
 					<InlineSelect
 						value={frequency}
@@ -892,31 +897,31 @@ export function DateSelect({
 	return (
 		<div className="w-full">
 			{label && (
-				<label className="block text-sm text-[hsl(var(--muted-foreground))] mb-2">{label}</label>
+				<span className="block text-sm text-muted-foreground mb-2">{label}</span>
 			)}
 
 			<Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
 				<Dialog.Trigger asChild>
 					<button
 						type="button"
-						className="w-full px-3 py-2 bg-[hsl(var(--muted))] border border-[hsl(var(--border))] rounded-[var(--radius-sm,0.375rem)] text-[hsl(var(--foreground))] text-left hover:border-[hsl(var(--border))]/80 transition-all flex items-center gap-2"
+						className="w-full px-3 py-2 bg-muted border border-border rounded-md text-foreground text-left hover:border-border/80 transition-all flex items-center gap-2"
 					>
-						<Calendar className="w-4 h-4 text-[hsl(var(--muted-foreground))]" />
+						<Calendar className="w-4 h-4 text-muted-foreground" />
 						<span className="flex-1">{formatDisplayValue()}</span>
 					</button>
 				</Dialog.Trigger>
 
 				<Dialog.Portal>
 					<Dialog.Overlay className="fixed inset-0 bg-black/50 backdrop-blur-[6px] z-9998" />
-					<Dialog.Content className="fixed w-fit max-w-2xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[hsl(var(--card))] border border-[hsl(var(--border))] rounded-[var(--radius-lg,0.75rem)] shadow-md p-6 z-9999">
-						<Dialog.Title className="text-lg font-semibold text-[hsl(var(--foreground))] mb-4">
+					<Dialog.Content className="fixed w-fit max-w-2xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-card border border-border rounded-xl shadow-md p-6 z-9999">
+						<Dialog.Title className="text-lg font-semibold text-foreground mb-4">
 							Select Date & Time
 						</Dialog.Title>
 
 						<div className="space-y-4">
 							{/* Event type selector */}
 							<div className="flex items-center gap-2">
-								<span className="text-[hsl(var(--muted-foreground))] text-sm">Event type:</span>
+								<span className="text-muted-foreground text-sm">Event type:</span>
 								<InlineSelect
 									value={eventType}
 									options={[
@@ -931,13 +936,13 @@ export function DateSelect({
 							</div>
 
 							{/* Questionnaire sentence */}
-							<div className="p-4 bg-[hsl(var(--muted))] rounded border border-[hsl(var(--border))] min-h-15">
+							<div className="p-4 bg-muted rounded border border-border min-h-15">
 								{renderQuestionnaire()}
 							</div>
 
 							{/* Summary */}
 							{startDate && (
-								<div className="text-xs text-[hsl(var(--muted-foreground))] text-center pt-2 border-t border-[hsl(var(--border))]">
+								<div className="text-xs text-muted-foreground text-center pt-2 border-t border-border">
 									{eventType === "single" ? (
 										<>
 											{dateMode === "datetime" && (
@@ -1047,7 +1052,7 @@ export function DateSelect({
 							<Dialog.Close asChild>
 								<button
 									type="button"
-									className="px-4 py-2 bg-[hsl(var(--muted))] border border-[hsl(var(--border))] rounded text-[hsl(var(--muted-foreground))] hover:bg-[hsl(var(--muted))]/80 transition"
+									className="px-4 py-2 bg-muted border border-border rounded text-muted-foreground hover:bg-muted/80 transition"
 								>
 									Cancel
 								</button>

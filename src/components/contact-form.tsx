@@ -30,7 +30,7 @@ export function CompactContactForm({
 	return (
 		<section className={`relative py-14 sm:py-16 ${className}`}>
 			<div className="relative z-10 mx-auto max-w-6xl px-4">
-				<div className="relative overflow-hidden bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border border-black/10 dark:border-white/10 rounded-[var(--radius-xl,1rem)]">
+				<div className="relative overflow-hidden bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border border-black/10 dark:border-white/10 rounded-2xl">
 					<div className="absolute inset-0 bg-black/5 dark:bg-white/5" />
 					<div className="relative z-10 p-5 sm:p-6">
 						{/* Row 1: Heading */}
@@ -59,7 +59,7 @@ export function CompactContactForm({
 									value={formData.name}
 									onChange={handleInputChange}
 									required
-									className="flex-1 py-3 px-4 bg-black/5 dark:bg-white/5 ring-1 ring-inset ring-black/10 dark:ring-white/10 rounded-[var(--radius-md,0.5rem)] text-zinc-900 dark:text-zinc-100 text-sm transition-all duration-200 placeholder:text-zinc-600 dark:placeholder:text-zinc-400 outline-none focus:ring-2 focus:ring-blue-500 hover:ring-black/20 dark:hover:ring-white/20"
+									className="flex-1 py-3 px-4 bg-black/5 dark:bg-white/5 ring-1 ring-inset ring-black/10 dark:ring-white/10 rounded-lg text-zinc-900 dark:text-zinc-100 text-sm transition-all duration-200 placeholder:text-zinc-600 dark:placeholder:text-zinc-400 outline-none focus:ring-2 focus:ring-blue-500 hover:ring-black/20 dark:hover:ring-white/20"
 									placeholder="Your Name"
 								/>
 								<input
@@ -68,13 +68,13 @@ export function CompactContactForm({
 									value={formData.email}
 									onChange={handleInputChange}
 									required
-									className="flex-1 py-3 px-4 bg-black/5 dark:bg-white/5 ring-1 ring-inset ring-black/10 dark:ring-white/10 rounded-[var(--radius-md,0.5rem)] text-zinc-900 dark:text-zinc-100 text-sm transition-all duration-200 placeholder:text-zinc-600 dark:placeholder:text-zinc-400 outline-none focus:ring-2 focus:ring-blue-500 hover:ring-black/20 dark:hover:ring-white/20"
+									className="flex-1 py-3 px-4 bg-black/5 dark:bg-white/5 ring-1 ring-inset ring-black/10 dark:ring-white/10 rounded-lg text-zinc-900 dark:text-zinc-100 text-sm transition-all duration-200 placeholder:text-zinc-600 dark:placeholder:text-zinc-400 outline-none focus:ring-2 focus:ring-blue-500 hover:ring-black/20 dark:hover:ring-white/20"
 									placeholder="your@email.com"
 								/>
 								<button
 									type="submit"
 									disabled={isSubmitting}
-									className={`${manrope.className} w-full sm:w-auto px-6 py-3 min-h-11 ${isSubmitting ? "bg-black/5 dark:bg-white/5 text-zinc-500 dark:text-zinc-400 cursor-not-allowed" : "bg-black/10 dark:bg-white/10 hover:bg-black/15 dark:hover:bg-white/15 text-zinc-900 dark:text-zinc-100"} border border-black/20 dark:border-white/20 rounded-[var(--radius-md,0.5rem)] transition-colors font-medium text-sm`}
+									className={`${manrope.className} w-full sm:w-auto px-6 py-3 min-h-11 ${isSubmitting ? "bg-black/5 dark:bg-white/5 text-zinc-500 dark:text-zinc-400 cursor-not-allowed" : "bg-black/10 dark:bg-white/10 hover:bg-black/15 dark:hover:bg-white/15 text-zinc-900 dark:text-zinc-100"} border border-black/20 dark:border-white/20 rounded-lg transition-colors font-medium text-sm`}
 								>
 									{isSubmitting ? "Submitting..." : "Submit"}
 								</button>

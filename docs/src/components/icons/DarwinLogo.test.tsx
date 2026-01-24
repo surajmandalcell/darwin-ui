@@ -18,7 +18,7 @@ describe('DarwinLogo', () => {
   it('renders without background by default', () => {
     const { container } = render(<DarwinLogo />);
     // Should not have wrapper div with gradient
-    const gradientDiv = container.querySelector('.bg-gradient-to-br');
+    const gradientDiv = container.querySelector('.bg-linear-to-br');
     expect(gradientDiv).not.toBeInTheDocument();
   });
 

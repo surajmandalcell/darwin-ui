@@ -48,7 +48,7 @@ export function Dock() {
 
   return (
     <motion.div
-      className="relative flex items-end gap-1 px-[10px] py-1.5 md:px-4 md:gap-2 rounded-2xl max-w-[calc(100vw-20px)] overflow-visible z-[9990]"
+      className="relative flex items-end gap-1 px-[10px] py-1.5 md:px-4 md:gap-2 rounded-2xl max-w-[calc(100vw-20px)] overflow-visible z-9990"
       style={{
         backgroundColor: isDark ? 'rgba(30, 30, 30, 0.4)' : 'rgba(255, 255, 255, 0.6)',
         backdropFilter: 'blur(30px)',
@@ -103,7 +103,7 @@ export function Dock() {
         </motion.div>
         {/* Tooltip */}
         <motion.div
-          className="absolute -top-9 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-popover/95 backdrop-blur-md rounded-lg text-xs font-medium text-popover-foreground whitespace-nowrap pointer-events-none border border-border shadow-sm z-[9999]"
+          className="absolute -top-9 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-popover/95 backdrop-blur-md rounded-lg text-xs font-medium text-popover-foreground whitespace-nowrap pointer-events-none border border-border shadow-sm z-9999"
           initial={{ opacity: 0, y: 8, scale: 0.9 }}
           animate={{
             opacity: githubHovered ? 1 : 0,
@@ -136,7 +136,7 @@ export function Dock() {
         </motion.div>
         {/* Tooltip */}
         <motion.div
-          className="absolute -top-9 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-popover/95 backdrop-blur-md rounded-lg text-xs font-medium text-popover-foreground whitespace-nowrap pointer-events-none border border-border shadow-sm z-[9999]"
+          className="absolute -top-9 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-popover/95 backdrop-blur-md rounded-lg text-xs font-medium text-popover-foreground whitespace-nowrap pointer-events-none border border-border shadow-sm z-9999"
           initial={{ opacity: 0, y: 8, scale: 0.9 }}
           animate={{
             opacity: aboutHovered ? 1 : 0,
