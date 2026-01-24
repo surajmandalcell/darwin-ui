@@ -1,0 +1,962 @@
+# Darwin UI - Complete Documentation
+
+> Darwin UI is a macOS-inspired React component library featuring glass-morphism aesthetics, dark theme (with light mode support), and Tailwind CSS integration. It provides 36+ production-ready components with Framer Motion animations and full accessibility support.
+
+## Quick Reference
+
+| Resource | URL |
+|----------|-----|
+| Documentation | https://darwin-ui.mandalsuraj.com |
+| GitHub | https://github.com/surajmandalcell/darwin-ui |
+| NPM | https://www.npmjs.com/package/@pikoloo/darwin-ui |
+| Context7 (AI) | https://context7.com/surajmandalcell/darwin-ui |
+
+## Installation
+
+```bash
+npm install @pikoloo/darwin-ui
+# or
+pnpm add @pikoloo/darwin-ui
+# or
+yarn add @pikoloo/darwin-ui
+```
+
+### Setup
+
+Import the CSS in your app entry point:
+
+```tsx
+// app.tsx or main.tsx
+import '@pikoloo/darwin-ui/styles.css';
+import { Button, Card, Window } from '@pikoloo/darwin-ui';
+```
+
+---
+
+## Layout & Navigation Components
+
+### Accordion
+
+Collapsible content sections with smooth Framer Motion animations
+
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#accordion](https://darwin-ui.mandalsuraj.com/docs#accordion)
+
+**Props**:
+- `items: { title, content }[]`
+- `defaultOpen?: number`
+- `allowMultiple?: boolean`
+
+**Example**:
+```tsx
+<Accordion items={[
+  { title: 'Section 1', content: 'Content here' },
+  { title: 'Section 2', content: 'More content' }
+]} />
+```
+
+### Card
+
+Glass-morphism container with header, content, and footer sections
+
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#card](https://darwin-ui.mandalsuraj.com/docs#card)
+
+**Props**:
+- `children`
+- `className?: string`
+- `variant?: "default" | "glass"`
+
+**Example**:
+```tsx
+<Card>
+  <Card.Header>Title</Card.Header>
+  <Card.Content>Body content</Card.Content>
+  <Card.Footer>Footer actions</Card.Footer>
+</Card>
+```
+
+### Sidebar
+
+Navigation sidebar with collapsible mode, tooltips, and active state indicators
+
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#sidebar](https://darwin-ui.mandalsuraj.com/docs#sidebar)
+
+**Props**:
+- `items: SidebarItem[]`
+- `collapsed?: boolean`
+- `onCollapse?: () => void`
+
+**Example**:
+```tsx
+<Sidebar
+  items={[
+    { icon: HomeIcon, label: 'Home', href: '/' },
+    { icon: SettingsIcon, label: 'Settings', href: '/settings' }
+  ]}
+/>
+```
+
+### Tabs
+
+Tabbed navigation with animated indicator and keyboard support
+
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#tabs](https://darwin-ui.mandalsuraj.com/docs#tabs)
+
+**Props**:
+- `tabs: { label, content }[]`
+- `defaultIndex?: number`
+- `onChange?: (index) => void`
+
+**Example**:
+```tsx
+<Tabs tabs={[
+  { label: 'Tab 1', content: <div>Content 1</div> },
+  { label: 'Tab 2', content: <div>Content 2</div> }
+]} />
+```
+
+### Window
+
+macOS-style window chrome with traffic light buttons (close, minimize, maximize)
+
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#window](https://darwin-ui.mandalsuraj.com/docs#window)
+
+**Props**:
+- `title?: string`
+- `children`
+- `onClose?: () => void`
+- `onMinimize?: () => void`
+
+**Example**:
+```tsx
+<Window title="My Application">
+  <p>Window content goes here</p>
+</Window>
+```
+
+---
+
+## Form & Input Components
+
+### Button
+
+Versatile button with 10 variants (primary, secondary, ghost, etc.) and 3 sizes
+
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#button](https://darwin-ui.mandalsuraj.com/docs#button)
+
+**Props**:
+- `variant?: ButtonVariant`
+- `size?: "sm" | "md" | "lg"`
+- `disabled?: boolean`
+- `loading?: boolean`
+
+**Example**:
+```tsx
+<Button variant="primary" size="md" onClick={handleClick}>
+  Click Me
+</Button>
+```
+
+### Checkbox
+
+Checkbox with indeterminate state support and spring animations
+
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#checkbox](https://darwin-ui.mandalsuraj.com/docs#checkbox)
+
+**Props**:
+- `checked?: boolean`
+- `indeterminate?: boolean`
+- `onChange?: (checked) => void`
+- `label?: string`
+
+**Example**:
+```tsx
+<Checkbox
+  checked={isChecked}
+  onChange={setIsChecked}
+  label="Accept terms"
+/>
+```
+
+### Input
+
+Text input with validation states (error, success), icons, and clear button
+
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#input](https://darwin-ui.mandalsuraj.com/docs#input)
+
+**Props**:
+- `value?: string`
+- `onChange?: (e) => void`
+- `error?: string`
+- `success?: boolean`
+- `icon?: ReactNode`
+
+**Example**:
+```tsx
+<Input
+  placeholder="Enter email"
+  value={email}
+  onChange={(e) => setEmail(e.target.value)}
+  error={errors.email}
+/>
+```
+
+### SearchInput
+
+Search input with magnifying glass icon and clear functionality
+
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#search-input](https://darwin-ui.mandalsuraj.com/docs#search-input)
+
+**Props**:
+- `value?: string`
+- `onChange?: (value) => void`
+- `onSearch?: (value) => void`
+- `placeholder?: string`
+
+**Example**:
+```tsx
+<SearchInput
+  placeholder="Search..."
+  onSearch={(query) => console.log(query)}
+/>
+```
+
+### Select
+
+Dropdown select with custom styling and keyboard navigation
+
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#select](https://darwin-ui.mandalsuraj.com/docs#select)
+
+**Props**:
+- `options: { value, label }[]`
+- `value?: string`
+- `onChange?: (value) => void`
+- `placeholder?: string`
+
+**Example**:
+```tsx
+<Select
+  options={[
+    { value: 'opt1', label: 'Option 1' },
+    { value: 'opt2', label: 'Option 2' }
+  ]}
+  value={selected}
+  onChange={setSelected}
+/>
+```
+
+### MultiSelect
+
+Multi-selection dropdown with tag display and search filtering
+
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#multi-select](https://darwin-ui.mandalsuraj.com/docs#multi-select)
+
+**Props**:
+- `options: Option[]`
+- `value?: string[]`
+- `onChange?: (values) => void`
+- `searchable?: boolean`
+
+**Example**:
+```tsx
+<MultiSelect
+  options={options}
+  value={selectedItems}
+  onChange={setSelectedItems}
+  placeholder="Select items..."
+/>
+```
+
+### Slider
+
+Range slider with customizable track, thumb, and step values
+
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#slider](https://darwin-ui.mandalsuraj.com/docs#slider)
+
+**Props**:
+- `value?: number`
+- `onChange?: (value) => void`
+- `min?: number`
+- `max?: number`
+- `step?: number`
+
+**Example**:
+```tsx
+<Slider
+  value={volume}
+  onChange={setVolume}
+  min={0}
+  max={100}
+/>
+```
+
+### Switch
+
+Toggle switch with spring physics animation
+
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#switch](https://darwin-ui.mandalsuraj.com/docs#switch)
+
+**Props**:
+- `checked?: boolean`
+- `onChange?: (checked) => void`
+- `disabled?: boolean`
+- `label?: string`
+
+**Example**:
+```tsx
+<Switch
+  checked={isDarkMode}
+  onChange={setIsDarkMode}
+  label="Dark Mode"
+/>
+```
+
+### Textarea
+
+Multi-line text input with auto-resize and character count
+
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#textarea](https://darwin-ui.mandalsuraj.com/docs#textarea)
+
+**Props**:
+- `value?: string`
+- `onChange?: (e) => void`
+- `autoResize?: boolean`
+- `maxLength?: number`
+
+**Example**:
+```tsx
+<Textarea
+  value={description}
+  onChange={(e) => setDescription(e.target.value)}
+  autoResize
+  placeholder="Enter description..."
+/>
+```
+
+### DateSelect
+
+Date picker with calendar interface and range selection support
+
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#date-select](https://darwin-ui.mandalsuraj.com/docs#date-select)
+
+**Props**:
+- `value?: Date`
+- `onChange?: (date) => void`
+- `minDate?: Date`
+- `maxDate?: Date`
+
+**Example**:
+```tsx
+<DateSelect
+  value={selectedDate}
+  onChange={setSelectedDate}
+/>
+```
+
+### Upload
+
+File upload with drag-and-drop support and file type validation
+
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#upload](https://darwin-ui.mandalsuraj.com/docs#upload)
+
+**Props**:
+- `accept?: string`
+- `multiple?: boolean`
+- `onUpload?: (files) => void`
+- `maxSize?: number`
+
+**Example**:
+```tsx
+<Upload
+  accept="image/*"
+  onUpload={(files) => handleUpload(files)}
+  multiple
+/>
+```
+
+### ContactForm
+
+Pre-built contact form with name, email, message fields and validation
+
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#contact-form](https://darwin-ui.mandalsuraj.com/docs#contact-form)
+
+**Props**:
+- `onSubmit?: (data) => void`
+- `loading?: boolean`
+
+**Example**:
+```tsx
+<ContactForm onSubmit={async (data) => {
+  await sendMessage(data);
+}} />
+```
+
+---
+
+## Feedback & Overlay Components
+
+### Alert
+
+Inline alerts and modal-style alert dialogs with semantic variants
+
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#alert](https://darwin-ui.mandalsuraj.com/docs#alert)
+
+**Props**:
+- `variant?: "info" | "success" | "warning" | "error"`
+- `title?: string`
+- `children`
+
+**Example**:
+```tsx
+<Alert variant="success" title="Success!">
+  Your changes have been saved.
+</Alert>
+```
+
+### Badge
+
+Status badges with semantic colors and optional dot indicator
+
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#badge](https://darwin-ui.mandalsuraj.com/docs#badge)
+
+**Props**:
+- `variant?: BadgeVariant`
+- `size?: "sm" | "md"`
+- `dot?: boolean`
+
+**Example**:
+```tsx
+<Badge variant="success">Active</Badge>
+<Badge variant="warning" dot>Pending</Badge>
+```
+
+### Dialog
+
+Modal dialog with focus trap, portal rendering, and backdrop click dismiss
+
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#dialog](https://darwin-ui.mandalsuraj.com/docs#dialog)
+
+**Props**:
+- `open?: boolean`
+- `onClose?: () => void`
+- `title?: string`
+- `children`
+
+**Example**:
+```tsx
+<Dialog open={isOpen} onClose={() => setIsOpen(false)} title="Confirm">
+  <p>Are you sure?</p>
+  <Button onClick={handleConfirm}>Yes</Button>
+</Dialog>
+```
+
+### DropdownMenu
+
+Full-featured dropdown menu with keyboard navigation, submenus, and separators
+
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#dropdown-menu](https://darwin-ui.mandalsuraj.com/docs#dropdown-menu)
+
+**Props**:
+- `trigger: ReactNode`
+- `items: MenuItem[]`
+- `align?: "start" | "end"`
+
+**Example**:
+```tsx
+<DropdownMenu
+  trigger={<Button>Actions</Button>}
+  items={[
+    { label: 'Edit', onClick: handleEdit },
+    { label: 'Delete', onClick: handleDelete, variant: 'danger' }
+  ]}
+/>
+```
+
+### Modal
+
+Modal dialog with glass-morphism backdrop and smooth animations
+
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#modal](https://darwin-ui.mandalsuraj.com/docs#modal)
+
+**Props**:
+- `isOpen?: boolean`
+- `onClose?: () => void`
+- `size?: "sm" | "md" | "lg"`
+
+**Example**:
+```tsx
+<Modal isOpen={showModal} onClose={() => setShowModal(false)}>
+  <Modal.Header>Modal Title</Modal.Header>
+  <Modal.Body>Content here</Modal.Body>
+</Modal>
+```
+
+### Popover
+
+Flexible popover with portal support and multiple placement options
+
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#popover](https://darwin-ui.mandalsuraj.com/docs#popover)
+
+**Props**:
+- `content: ReactNode`
+- `trigger: ReactNode`
+- `placement?: Placement`
+
+**Example**:
+```tsx
+<Popover
+  trigger={<Button>Show Info</Button>}
+  content={<div>Popover content</div>}
+  placement="bottom"
+/>
+```
+
+### Toast
+
+Toast notification system with auto-dismiss and action buttons
+
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#toast](https://darwin-ui.mandalsuraj.com/docs#toast)
+
+**Props**:
+- `message: string`
+- `variant?: ToastVariant`
+- `duration?: number`
+- `action?: { label, onClick }`
+
+**Example**:
+```tsx
+// Using the toast function
+toast.success('File uploaded successfully');
+toast.error('Failed to save changes');
+toast.info('Processing...', { duration: 5000 });
+```
+
+### Tooltip
+
+Accessible tooltip with multiple positions and delay options
+
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#tooltip](https://darwin-ui.mandalsuraj.com/docs#tooltip)
+
+**Props**:
+- `content: string | ReactNode`
+- `children`
+- `side?: "top" | "bottom" | "left" | "right"`
+
+**Example**:
+```tsx
+<Tooltip content="Delete this item" side="top">
+  <Button variant="ghost" icon={<TrashIcon />} />
+</Tooltip>
+```
+
+### ContextMenu
+
+Right-click context menu with keyboard support
+
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#context-menu](https://darwin-ui.mandalsuraj.com/docs#context-menu)
+
+**Props**:
+- `items: MenuItem[]`
+- `children`
+
+**Example**:
+```tsx
+<ContextMenu items={[
+  { label: 'Copy', shortcut: '⌘C', onClick: handleCopy },
+  { label: 'Paste', shortcut: '⌘V', onClick: handlePaste }
+]}>
+  <div>Right-click me</div>
+</ContextMenu>
+```
+
+---
+
+## Data Display Components
+
+### Avatar
+
+User avatar with image fallback to initials and group stacking
+
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#avatar](https://darwin-ui.mandalsuraj.com/docs#avatar)
+
+**Props**:
+- `src?: string`
+- `alt?: string`
+- `fallback?: string`
+- `size?: "sm" | "md" | "lg"`
+
+**Example**:
+```tsx
+<Avatar src="/user.jpg" fallback="JD" size="md" />
+<Avatar.Group>
+  <Avatar src="/user1.jpg" />
+  <Avatar src="/user2.jpg" />
+</Avatar.Group>
+```
+
+### Charts
+
+SVG-based charts: Line, Bar, Area, Pie, Donut, and Stacked Bar with animations
+
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#charts](https://darwin-ui.mandalsuraj.com/docs#charts)
+
+**Props**:
+- `data: ChartData[]`
+- `width?: number`
+- `height?: number`
+- `colors?: string[]`
+
+**Example**:
+```tsx
+<LineChart
+  data={[
+    { label: 'Jan', value: 100 },
+    { label: 'Feb', value: 150 },
+    { label: 'Mar', value: 120 }
+  ]}
+/>
+<PieChart data={pieData} donut />
+```
+
+### Image
+
+Image component with lazy loading and click-to-enlarge lightbox
+
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#image](https://darwin-ui.mandalsuraj.com/docs#image)
+
+**Props**:
+- `src: string`
+- `alt: string`
+- `enlargeable?: boolean`
+- `aspectRatio?: string`
+
+**Example**:
+```tsx
+<Image
+  src="/photo.jpg"
+  alt="Description"
+  enlargeable
+  aspectRatio="16/9"
+/>
+```
+
+### Progress
+
+Linear and circular progress indicators with animated fill
+
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#progress](https://darwin-ui.mandalsuraj.com/docs#progress)
+
+**Props**:
+- `value: number`
+- `max?: number`
+- `variant?: "linear" | "circular"`
+- `showLabel?: boolean`
+
+**Example**:
+```tsx
+<Progress value={75} max={100} showLabel />
+<Progress value={50} variant="circular" />
+```
+
+### Skeleton
+
+Loading placeholder with shimmer animation effect
+
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#skeleton](https://darwin-ui.mandalsuraj.com/docs#skeleton)
+
+**Props**:
+- `width?: string | number`
+- `height?: string | number`
+- `variant?: "text" | "circular" | "rectangular"`
+
+**Example**:
+```tsx
+<Skeleton width={200} height={20} />
+<Skeleton variant="circular" width={40} height={40} />
+<Skeleton variant="rectangular" height={100} />
+```
+
+### Table
+
+Data table with sorting, selection, and loading states
+
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#table](https://darwin-ui.mandalsuraj.com/docs#table)
+
+**Props**:
+- `columns: Column[]`
+- `data: T[]`
+- `sortable?: boolean`
+- `selectable?: boolean`
+- `loading?: boolean`
+
+**Example**:
+```tsx
+<Table
+  columns={[
+    { key: 'name', header: 'Name', sortable: true },
+    { key: 'email', header: 'Email' }
+  ]}
+  data={users}
+  sortable
+/>
+```
+
+---
+
+## Utility Components
+
+### CloseButton
+
+Red close button matching macOS traffic light style
+
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#close-button](https://darwin-ui.mandalsuraj.com/docs#close-button)
+
+**Props**:
+- `onClick?: () => void`
+- `size?: "sm" | "md"`
+
+**Example**:
+```tsx
+<CloseButton onClick={() => handleClose()} />
+```
+
+### MdEditor
+
+Markdown editor with live preview and toolbar
+
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#md-editor](https://darwin-ui.mandalsuraj.com/docs#md-editor)
+
+**Props**:
+- `value?: string`
+- `onChange?: (value) => void`
+- `preview?: boolean`
+
+**Example**:
+```tsx
+<MdEditor
+  value={markdown}
+  onChange={setMarkdown}
+  preview
+/>
+```
+
+### Reveal
+
+Scroll-triggered reveal animations with multiple effects
+
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#reveal](https://darwin-ui.mandalsuraj.com/docs#reveal)
+
+**Props**:
+- `children`
+- `animation?: "fade" | "slide" | "scale"`
+- `delay?: number`
+- `once?: boolean`
+
+**Example**:
+```tsx
+<Reveal animation="slide" delay={0.2}>
+  <Card>Content that animates in on scroll</Card>
+</Reveal>
+```
+
+---
+
+## Animation System
+
+Darwin UI uses Framer Motion with a configurable animation system.
+
+### Duration Presets
+
+| Key | Duration | Use Case |
+|-----|----------|----------|
+| instant | 0s | No animation |
+| fast | 0.1s | Quick interactions |
+| normal | 0.15s | Standard transitions |
+| slow | 0.2s | Deliberate animations |
+| reveal | 0.4s | Page reveals |
+
+### Spring Presets
+
+| Preset | Description |
+|--------|-------------|
+| snappy | Quick, responsive feel |
+| smooth | Natural, fluid motion |
+| gentle | Soft, subtle movement |
+
+### Configuration
+
+```tsx
+import { configureAnimations } from '@pikoloo/darwin-ui';
+
+// Disable all animations (e.g., for testing)
+configureAnimations({ enabled: false });
+
+// Customize durations
+configureAnimations({
+  durations: { fast: 0.05, normal: 0.1, slow: 0.15 }
+});
+
+// Disable specific animation types
+configureAnimations({
+  disable: { hover: true, scale: true }
+});
+```
+
+The library automatically respects the `prefers-reduced-motion` system preference.
+
+---
+
+## Theming
+
+Darwin UI uses CSS custom properties (HSL format) for theming.
+
+### Color Variables
+
+```css
+:root {
+  --background: 0 0% 100%;
+  --foreground: 0 0% 3.9%;
+  --card: 0 0% 100%;
+  --primary: 0 0% 9%;
+  --secondary: 0 0% 96.1%;
+  --muted: 0 0% 96.1%;
+  --accent: 0 0% 96.1%;
+  --border: 0 0% 89.8%;
+}
+
+.dark {
+  --background: 0 0% 3.9%;
+  --foreground: 0 0% 98%;
+  /* ... dark theme values */
+}
+```
+
+### Usage in Components
+
+```tsx
+<div className="bg-[hsl(var(--background))] text-[hsl(var(--foreground))]">
+  Themed content
+</div>
+```
+
+---
+
+## Hooks
+
+### useMediaQuery
+
+`useMediaQuery(query: string): boolean`
+
+Responsive design hook that returns true when media query matches
+
+### useIsMobile
+
+`useIsMobile(): boolean`
+
+Returns true when viewport is below 768px (mobile breakpoint)
+
+### useEscapeKey
+
+`useEscapeKey(callback: () => void): void`
+
+Calls callback when Escape key is pressed, useful for modal dismissal
+
+### useContactForm
+
+`useContactForm(config): FormState`
+
+Form handling hook with built-in validation for contact forms
+
+---
+
+## Utility Functions
+
+### cn
+
+`cn(...classes): string`
+
+Tailwind class merging utility using clsx and tailwind-merge
+
+### prefersReducedMotion
+
+`prefersReducedMotion(): boolean`
+
+Check if user prefers reduced motion
+
+### getDuration
+
+`getDuration(key): number`
+
+Get animation duration respecting reduced motion preference
+
+### getSpring
+
+`getSpring(preset): SpringConfig`
+
+Get spring animation config (snappy, smooth, gentle)
+
+### configureAnimations
+
+`configureAnimations(config): void`
+
+Configure global animation settings (disable, customize durations)
+
+---
+
+## Common Patterns
+
+### Form with Validation
+
+```tsx
+import { Input, Button, Alert } from '@pikoloo/darwin-ui';
+
+function LoginForm() {
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    if (!email.includes("@")) {
+      setError("Invalid email address");
+      return;
+    }
+    // Submit logic
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <Input
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        error={error}
+        placeholder="Email"
+      />
+      <Button type="submit">Sign In</Button>
+    </form>
+  );
+}
+```
+
+### Modal with Confirmation
+
+```tsx
+import { Modal, Button } from '@pikoloo/darwin-ui';
+
+function ConfirmDialog({ isOpen, onClose, onConfirm }) {
+  return (
+    <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal.Header>Confirm Action</Modal.Header>
+      <Modal.Body>
+        <p>Are you sure you want to proceed?</p>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="ghost" onClick={onClose}>Cancel</Button>
+        <Button variant="danger" onClick={onConfirm}>Delete</Button>
+      </Modal.Footer>
+    </Modal>
+  );
+}
+```
+
+---
+
+*Generated automatically. For the most up-to-date documentation, visit the links above.*

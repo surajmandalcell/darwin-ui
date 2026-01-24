@@ -45,49 +45,49 @@ When working with Darwin UI in AI assistants (Claude, Cursor, etc.), reference C
 ## Components
 
 ### Layout & Navigation
-- [Accordion](https://darwin-ui.mandalsuraj.com/docs#accordion): Collapsible content sections with smooth animations
-- [Card](https://darwin-ui.mandalsuraj.com/docs#card): Container component with header, content, and footer sections
-- [Sidebar](https://darwin-ui.mandalsuraj.com/docs#sidebar): Navigation sidebar with collapsible mode and tooltip support
-- [Tabs](https://darwin-ui.mandalsuraj.com/docs#tabs): Tabbed navigation component
-- [Window](https://darwin-ui.mandalsuraj.com/docs#window): macOS-style window chrome with traffic lights
+- [Accordion](https://darwin-ui.mandalsuraj.com/docs#accordion): Collapsible content sections with smooth Framer Motion animations
+- [Card](https://darwin-ui.mandalsuraj.com/docs#card): Glass-morphism container with header, content, and footer sections
+- [Sidebar](https://darwin-ui.mandalsuraj.com/docs#sidebar): Navigation sidebar with collapsible mode, tooltips, and active state indicators
+- [Tabs](https://darwin-ui.mandalsuraj.com/docs#tabs): Tabbed navigation with animated indicator and keyboard support
+- [Window](https://darwin-ui.mandalsuraj.com/docs#window): macOS-style window chrome with traffic light buttons (close, minimize, maximize)
 
 ### Forms & Inputs
-- [Button](https://darwin-ui.mandalsuraj.com/docs#button): Versatile button with 10 variants and 3 sizes
-- [Checkbox](https://darwin-ui.mandalsuraj.com/docs#checkbox): Checkbox with indeterminate state and smooth animations
-- [Input](https://darwin-ui.mandalsuraj.com/docs#input): Text input with validation states
-- [SearchInput](https://darwin-ui.mandalsuraj.com/docs#search-input): Search input with icon
-- [Select](https://darwin-ui.mandalsuraj.com/docs#select): Dropdown select with custom styling
-- [MultiSelect](https://darwin-ui.mandalsuraj.com/docs#multi-select): Multi-selection dropdown with tags
-- [Slider](https://darwin-ui.mandalsuraj.com/docs#slider): Range slider with customizable track and thumb
-- [Switch](https://darwin-ui.mandalsuraj.com/docs#switch): Toggle switch component with spring physics
-- [Textarea](https://darwin-ui.mandalsuraj.com/docs#textarea): Multi-line text input with auto-resize
-- [DateSelect](https://darwin-ui.mandalsuraj.com/docs#date-select): Date picker with calendar interface
-- [Upload](https://darwin-ui.mandalsuraj.com/docs#upload): File upload with drag-and-drop support
-- [ContactForm](https://darwin-ui.mandalsuraj.com/docs#contact-form): Pre-built contact form component
+- [Button](https://darwin-ui.mandalsuraj.com/docs#button): Versatile button with 10 variants (primary, secondary, ghost, etc.) and 3 sizes
+- [Checkbox](https://darwin-ui.mandalsuraj.com/docs#checkbox): Checkbox with indeterminate state support and spring animations
+- [Input](https://darwin-ui.mandalsuraj.com/docs#input): Text input with validation states (error, success), icons, and clear button
+- [SearchInput](https://darwin-ui.mandalsuraj.com/docs#search-input): Search input with magnifying glass icon and clear functionality
+- [Select](https://darwin-ui.mandalsuraj.com/docs#select): Dropdown select with custom styling and keyboard navigation
+- [MultiSelect](https://darwin-ui.mandalsuraj.com/docs#multi-select): Multi-selection dropdown with tag display and search filtering
+- [Slider](https://darwin-ui.mandalsuraj.com/docs#slider): Range slider with customizable track, thumb, and step values
+- [Switch](https://darwin-ui.mandalsuraj.com/docs#switch): Toggle switch with spring physics animation
+- [Textarea](https://darwin-ui.mandalsuraj.com/docs#textarea): Multi-line text input with auto-resize and character count
+- [DateSelect](https://darwin-ui.mandalsuraj.com/docs#date-select): Date picker with calendar interface and range selection support
+- [Upload](https://darwin-ui.mandalsuraj.com/docs#upload): File upload with drag-and-drop support and file type validation
+- [ContactForm](https://darwin-ui.mandalsuraj.com/docs#contact-form): Pre-built contact form with name, email, message fields and validation
 
 ### Feedback & Overlays
-- [Alert](https://darwin-ui.mandalsuraj.com/docs#alert): Inline alerts and modal-style alert dialogs
-- [Badge](https://darwin-ui.mandalsuraj.com/docs#badge): Status badges with semantic colors
-- [Dialog](https://darwin-ui.mandalsuraj.com/docs#dialog): Modal dialog with focus trap and portal rendering
-- [DropdownMenu](https://darwin-ui.mandalsuraj.com/docs#dropdown-menu): Full-featured dropdown menu with keyboard navigation
-- [Modal](https://darwin-ui.mandalsuraj.com/docs#modal): Modal dialog with backdrop
-- [Popover](https://darwin-ui.mandalsuraj.com/docs#popover): Flexible popover component with portal support
-- [Toast](https://darwin-ui.mandalsuraj.com/docs#toast): Toast notification system
-- [Tooltip](https://darwin-ui.mandalsuraj.com/docs#tooltip): Accessible tooltip with multiple positions
-- [ContextMenu](https://darwin-ui.mandalsuraj.com/docs#context-menu): Right-click context menu
+- [Alert](https://darwin-ui.mandalsuraj.com/docs#alert): Inline alerts and modal-style alert dialogs with semantic variants
+- [Badge](https://darwin-ui.mandalsuraj.com/docs#badge): Status badges with semantic colors and optional dot indicator
+- [Dialog](https://darwin-ui.mandalsuraj.com/docs#dialog): Modal dialog with focus trap, portal rendering, and backdrop click dismiss
+- [DropdownMenu](https://darwin-ui.mandalsuraj.com/docs#dropdown-menu): Full-featured dropdown menu with keyboard navigation, submenus, and separators
+- [Modal](https://darwin-ui.mandalsuraj.com/docs#modal): Modal dialog with glass-morphism backdrop and smooth animations
+- [Popover](https://darwin-ui.mandalsuraj.com/docs#popover): Flexible popover with portal support and multiple placement options
+- [Toast](https://darwin-ui.mandalsuraj.com/docs#toast): Toast notification system with auto-dismiss and action buttons
+- [Tooltip](https://darwin-ui.mandalsuraj.com/docs#tooltip): Accessible tooltip with multiple positions and delay options
+- [ContextMenu](https://darwin-ui.mandalsuraj.com/docs#context-menu): Right-click context menu with keyboard support
 
 ### Data Display
-- [Avatar](https://darwin-ui.mandalsuraj.com/docs#avatar): User avatar with fallback and group support
-- [Charts](https://darwin-ui.mandalsuraj.com/docs#charts): Line, Bar, Area, Pie, Donut, and Stacked Bar charts
-- [Image](https://darwin-ui.mandalsuraj.com/docs#image): Image component with click-to-enlarge
-- [Progress](https://darwin-ui.mandalsuraj.com/docs#progress): Linear and circular progress indicators
-- [Skeleton](https://darwin-ui.mandalsuraj.com/docs#skeleton): Loading placeholder with shimmer effect
-- [Table](https://darwin-ui.mandalsuraj.com/docs#table): Data table with sorting and loading states
+- [Avatar](https://darwin-ui.mandalsuraj.com/docs#avatar): User avatar with image fallback to initials and group stacking
+- [Charts](https://darwin-ui.mandalsuraj.com/docs#charts): SVG-based charts: Line, Bar, Area, Pie, Donut, and Stacked Bar with animations
+- [Image](https://darwin-ui.mandalsuraj.com/docs#image): Image component with lazy loading and click-to-enlarge lightbox
+- [Progress](https://darwin-ui.mandalsuraj.com/docs#progress): Linear and circular progress indicators with animated fill
+- [Skeleton](https://darwin-ui.mandalsuraj.com/docs#skeleton): Loading placeholder with shimmer animation effect
+- [Table](https://darwin-ui.mandalsuraj.com/docs#table): Data table with sorting, selection, and loading states
 
 ### Utilities
-- [CloseButton](https://darwin-ui.mandalsuraj.com/docs#close-button): Red close button matching macOS style
-- [MdEditor](https://darwin-ui.mandalsuraj.com/docs#md-editor): Markdown editor with preview
-- [Reveal](https://darwin-ui.mandalsuraj.com/docs#reveal): Scroll-triggered reveal animations
+- [CloseButton](https://darwin-ui.mandalsuraj.com/docs#close-button): Red close button matching macOS traffic light style
+- [MdEditor](https://darwin-ui.mandalsuraj.com/docs#md-editor): Markdown editor with live preview and toolbar
+- [Reveal](https://darwin-ui.mandalsuraj.com/docs#reveal): Scroll-triggered reveal animations with multiple effects
 
 ## Animation Configuration
 
@@ -114,24 +114,24 @@ The library automatically respects `prefers-reduced-motion` system preference.
 
 ## Theming
 
-- [Colors](https://darwin-ui.mandalsuraj.com/docs#colors): Color system and CSS variables
-- [Dark Mode](https://darwin-ui.mandalsuraj.com/docs#dark-mode): Dark theme configuration and customization
-- [Customization](https://darwin-ui.mandalsuraj.com/docs#customization): How to customize components with CSS variables and Tailwind
+- [Colors](https://darwin-ui.mandalsuraj.com/docs#colors): HSL-based color system with CSS custom properties for easy theming
+- [Dark Mode](https://darwin-ui.mandalsuraj.com/docs#dark-mode): Dark theme optimized by default with light mode support via class toggle
+- [Customization](https://darwin-ui.mandalsuraj.com/docs#customization): Customize via CSS variables or Tailwind config extension
 
 ## Hooks
 
-- **useMediaQuery**: Responsive design hook for media queries
-- **useIsMobile**: Hook to detect mobile viewport (< 768px)
-- **useEscapeKey**: Hook for modal dismissal on Escape key
-- **useContactForm**: Form handling hook with validation
+- **useMediaQuery**: Responsive design hook that returns true when media query matches
+- **useIsMobile**: Returns true when viewport is below 768px (mobile breakpoint)
+- **useEscapeKey**: Calls callback when Escape key is pressed, useful for modal dismissal
+- **useContactForm**: Form handling hook with built-in validation for contact forms
 
 ## Utilities
 
-- **cn**: Class name utility for merging Tailwind classes
+- **cn**: Tailwind class merging utility using clsx and tailwind-merge
 - **prefersReducedMotion**: Check if user prefers reduced motion
-- **getDuration**: Get animation duration respecting reduced motion
-- **getSpring**: Get spring animation config respecting reduced motion
-- **configureAnimations**: Configure global animation settings
+- **getDuration**: Get animation duration respecting reduced motion preference
+- **getSpring**: Get spring animation config (snappy, smooth, gentle)
+- **configureAnimations**: Configure global animation settings (disable, customize durations)
 
 ## Resources
 
