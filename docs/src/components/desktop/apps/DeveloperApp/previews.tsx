@@ -2037,9 +2037,9 @@ function BadgeGlassExample() {
 function ButtonGlassExample() {
   return (
     <div className="flex flex-wrap gap-3">
-      <Button type="button" variant="primary" className="backdrop-blur-sm">Glass Button</Button>
-      <Button type="button" variant="secondary" className="backdrop-blur-sm">Secondary Glass</Button>
-      <Button type="button" variant="outline" className={glassStyles}>Outline Glass</Button>
+      <Button type="button" variant="primary" glass>Glass Button</Button>
+      <Button type="button" variant="secondary" glass>Secondary Glass</Button>
+      <Button type="button" variant="outline" glass>Outline Glass</Button>
     </div>
   );
 }
