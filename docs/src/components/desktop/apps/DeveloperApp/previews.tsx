@@ -2009,7 +2009,7 @@ function ImageClickToEnlargeExample() {
 }
 
 // Glass Example Components - These show glassmorphism styling concepts
-// Note: Glass styling is achieved via className, not a glass prop
+// Note: Buttons use the glass prop; other previews reuse shared glass utility classes.
 const glassStyles = "bg-white/10 dark:bg-white/5 backdrop-blur-xl border border-white/20 dark:border-white/10";
 
 function CardGlassExample() {
