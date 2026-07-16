@@ -13,6 +13,12 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, './src'),
       '@pikoloo/darwin-ui': path.resolve(__dirname, './src/__mocks__/@pikoloo/darwin-ui.tsx'),
+      'react': path.resolve(__dirname, './node_modules/react'),
+      'react-dom': path.resolve(__dirname, './node_modules/react-dom'),
+      'framer-motion': path.resolve(__dirname, './node_modules/framer-motion'),
+      'react/jsx-runtime': path.resolve(__dirname, './node_modules/react/jsx-runtime'),
+      'react/jsx-dev-runtime': path.resolve(__dirname, './node_modules/react/jsx-dev-runtime'),
     },
+    dedupe: ['react', 'react-dom', 'framer-motion'],
   },
 });

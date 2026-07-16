@@ -4,6 +4,16 @@
 
 ---
 
+## [2.0.1] - 2026-07-16
+
+### Added
+
+- **Select**: Optional `searchable` prop for filtering single-select options by label or value with keyboard selection.
+
+### Fixed
+
+- **Select**: Dropdown lists now scroll at 320px and flip or clamp to stay within the viewport.
+
 ## [Unreleased] - Post v1.5.0
 
 ### BREAKING CHANGES

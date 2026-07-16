@@ -7,7 +7,7 @@
 		"enabled": true,
 		"rules": {
 			"recommended": true,
-			"correctness": {
+			"complexity": {
 				"noUselessFragments": "off"
 			}
 		}
