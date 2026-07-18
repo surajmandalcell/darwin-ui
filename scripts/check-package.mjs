@@ -53,6 +53,14 @@ try {
   assert.ok(progress.registryDependencies.includes('utils'));
   assert.ok(progress.files[0].content.includes('function Progress'));
   assert.ok(registry.items.some(({ name }) => name === 'progress'));
+  for (const [name, path, exported] of [
+    ['multi-select', 'components/select.tsx', 'MultiSelectComponent as MultiSelect'],
+    ['search-input', 'components/input.tsx', 'export { SearchInput }'],
+  ]) {
+    const item = JSON.parse(readFileSync(join(root, `docs/public/registry/${name}.json`), 'utf8'));
+    assert.equal(item.files[0].path, path);
+    assert.ok(item.files[0].content.includes(exported));
+  }
 
   symlinkSync(join(root, 'node_modules'), join(temporaryDirectory, 'node_modules'), 'dir');
   const require = createRequire(pathToFileURL(join(packageRoot, 'package.json')));

@@ -105,7 +105,7 @@ const components: Record<string, ComponentDef> = {
   'multi-select': {
     title: 'MultiSelect',
     description: 'Multi-selection dropdown component for selecting multiple options.',
-    files: ['src/components/multi-select.tsx'],
+    files: ['src/components/select.tsx'],
     dependencies: ['@radix-ui/react-popover', 'lucide-react'],
     registryDependencies: ['utils'],
     type: 'registry:ui',
@@ -185,7 +185,7 @@ const components: Record<string, ComponentDef> = {
   'search-input': {
     title: 'SearchInput',
     description: 'Search input field component with search icon styling.',
-    files: ['src/components/search-input.tsx'],
+    files: ['src/components/input.tsx'],
     dependencies: [],
     registryDependencies: ['input'],
     type: 'registry:ui',
