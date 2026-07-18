@@ -31,6 +31,8 @@ import '@pikoloo/darwin-ui/styles.css';
 import { Button, Card, Window } from '@pikoloo/darwin-ui';
 ```
 
+The stylesheet is precompiled in v2.1 and later; no Tailwind `@source` directive is required.
+
 ---
 
 ## Layout & Navigation Components
@@ -39,7 +41,7 @@ import { Button, Card, Window } from '@pikoloo/darwin-ui';
 
 Collapsible content sections with smooth Framer Motion animations
 
-**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#accordion](https://darwin-ui.mandalsuraj.com/docs#accordion)
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs/components/accordion](https://darwin-ui.mandalsuraj.com/docs/components/accordion)
 
 **Props**:
 - `items: { title, content }[]`
@@ -58,7 +60,7 @@ Collapsible content sections with smooth Framer Motion animations
 
 Glass-morphism container with header, content, and footer sections
 
-**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#card](https://darwin-ui.mandalsuraj.com/docs#card)
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs/components/card](https://darwin-ui.mandalsuraj.com/docs/components/card)
 
 **Props**:
 - `children`
@@ -78,7 +80,7 @@ Glass-morphism container with header, content, and footer sections
 
 Navigation sidebar with collapsible mode, tooltips, and active state indicators
 
-**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#sidebar](https://darwin-ui.mandalsuraj.com/docs#sidebar)
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs/components/sidebar](https://darwin-ui.mandalsuraj.com/docs/components/sidebar)
 
 **Props**:
 - `items: SidebarItem[]`
@@ -99,7 +101,7 @@ Navigation sidebar with collapsible mode, tooltips, and active state indicators
 
 Tabbed navigation with animated indicator and keyboard support
 
-**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#tabs](https://darwin-ui.mandalsuraj.com/docs#tabs)
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs/components/tabs](https://darwin-ui.mandalsuraj.com/docs/components/tabs)
 
 **Props**:
 - `tabs: { label, content }[]`
@@ -118,7 +120,7 @@ Tabbed navigation with animated indicator and keyboard support
 
 macOS-style window chrome with traffic light buttons (close, minimize, maximize)
 
-**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#window](https://darwin-ui.mandalsuraj.com/docs#window)
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs/components/window](https://darwin-ui.mandalsuraj.com/docs/components/window)
 
 **Props**:
 - `title?: string`
@@ -141,7 +143,7 @@ macOS-style window chrome with traffic light buttons (close, minimize, maximize)
 
 Versatile button with 10 variants (primary, secondary, ghost, etc.) and 3 sizes
 
-**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#button](https://darwin-ui.mandalsuraj.com/docs#button)
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs/components/button](https://darwin-ui.mandalsuraj.com/docs/components/button)
 
 **Props**:
 - `variant?: ButtonVariant`
@@ -160,7 +162,7 @@ Versatile button with 10 variants (primary, secondary, ghost, etc.) and 3 sizes
 
 Checkbox with indeterminate state support and spring animations
 
-**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#checkbox](https://darwin-ui.mandalsuraj.com/docs#checkbox)
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs/components/checkbox](https://darwin-ui.mandalsuraj.com/docs/components/checkbox)
 
 **Props**:
 - `checked?: boolean`
@@ -181,7 +183,7 @@ Checkbox with indeterminate state support and spring animations
 
 Text input with validation states (error, success), icons, and clear button
 
-**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#input](https://darwin-ui.mandalsuraj.com/docs#input)
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs/components/input](https://darwin-ui.mandalsuraj.com/docs/components/input)
 
 **Props**:
 - `value?: string`
@@ -204,7 +206,7 @@ Text input with validation states (error, success), icons, and clear button
 
 Search input with magnifying glass icon and clear functionality
 
-**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#search-input](https://darwin-ui.mandalsuraj.com/docs#search-input)
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs/components/search-input](https://darwin-ui.mandalsuraj.com/docs/components/search-input)
 
 **Props**:
 - `value?: string`
@@ -224,7 +226,7 @@ Search input with magnifying glass icon and clear functionality
 
 Dropdown select with custom styling and keyboard navigation
 
-**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#select](https://darwin-ui.mandalsuraj.com/docs#select)
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs/components/select](https://darwin-ui.mandalsuraj.com/docs/components/select)
 
 **Props**:
 - `options: { value, label }[]`
@@ -248,7 +250,7 @@ Dropdown select with custom styling and keyboard navigation
 
 Multi-selection dropdown with tag display and search filtering
 
-**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#multi-select](https://darwin-ui.mandalsuraj.com/docs#multi-select)
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs/components/multi-select](https://darwin-ui.mandalsuraj.com/docs/components/multi-select)
 
 **Props**:
 - `options: Option[]`
@@ -270,7 +272,7 @@ Multi-selection dropdown with tag display and search filtering
 
 Range slider with customizable track, thumb, and step values
 
-**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#slider](https://darwin-ui.mandalsuraj.com/docs#slider)
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs/components/slider](https://darwin-ui.mandalsuraj.com/docs/components/slider)
 
 **Props**:
 - `value?: number`
@@ -293,7 +295,7 @@ Range slider with customizable track, thumb, and step values
 
 Toggle switch with spring physics animation
 
-**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#switch](https://darwin-ui.mandalsuraj.com/docs#switch)
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs/components/switch](https://darwin-ui.mandalsuraj.com/docs/components/switch)
 
 **Props**:
 - `checked?: boolean`
@@ -314,7 +316,7 @@ Toggle switch with spring physics animation
 
 Multi-line text input with auto-resize and character count
 
-**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#textarea](https://darwin-ui.mandalsuraj.com/docs#textarea)
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs/components/textarea](https://darwin-ui.mandalsuraj.com/docs/components/textarea)
 
 **Props**:
 - `value?: string`
@@ -336,7 +338,7 @@ Multi-line text input with auto-resize and character count
 
 Date picker with calendar interface and range selection support
 
-**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#date-select](https://darwin-ui.mandalsuraj.com/docs#date-select)
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs/components/date-select](https://darwin-ui.mandalsuraj.com/docs/components/date-select)
 
 **Props**:
 - `value?: Date`
@@ -356,7 +358,7 @@ Date picker with calendar interface and range selection support
 
 File upload with drag-and-drop support and file type validation
 
-**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#upload](https://darwin-ui.mandalsuraj.com/docs#upload)
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs/components/upload](https://darwin-ui.mandalsuraj.com/docs/components/upload)
 
 **Props**:
 - `accept?: string`
@@ -377,7 +379,7 @@ File upload with drag-and-drop support and file type validation
 
 Pre-built contact form with name, email, message fields and validation
 
-**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#contact-form](https://darwin-ui.mandalsuraj.com/docs#contact-form)
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs/components/contact-form](https://darwin-ui.mandalsuraj.com/docs/components/contact-form)
 
 **Props**:
 - `onSubmit?: (data) => void`
@@ -416,7 +418,7 @@ Inline alerts and modal-style alert dialogs with semantic variants
 
 Status badges with semantic colors and optional dot indicator
 
-**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#badge](https://darwin-ui.mandalsuraj.com/docs#badge)
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs/components/badge](https://darwin-ui.mandalsuraj.com/docs/components/badge)
 
 **Props**:
 - `variant?: BadgeVariant`
@@ -433,7 +435,7 @@ Status badges with semantic colors and optional dot indicator
 
 Modal dialog with focus trap, portal rendering, and backdrop click dismiss
 
-**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#dialog](https://darwin-ui.mandalsuraj.com/docs#dialog)
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs/components/dialog](https://darwin-ui.mandalsuraj.com/docs/components/dialog)
 
 **Props**:
 - `open?: boolean`
@@ -453,7 +455,7 @@ Modal dialog with focus trap, portal rendering, and backdrop click dismiss
 
 Full-featured dropdown menu with keyboard navigation, submenus, and separators
 
-**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#dropdown-menu](https://darwin-ui.mandalsuraj.com/docs#dropdown-menu)
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs/components/dropdown-menu](https://darwin-ui.mandalsuraj.com/docs/components/dropdown-menu)
 
 **Props**:
 - `trigger: ReactNode`
@@ -475,7 +477,7 @@ Full-featured dropdown menu with keyboard navigation, submenus, and separators
 
 Modal dialog with glass-morphism backdrop and smooth animations
 
-**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#modal](https://darwin-ui.mandalsuraj.com/docs#modal)
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs/components/modal](https://darwin-ui.mandalsuraj.com/docs/components/modal)
 
 **Props**:
 - `isOpen?: boolean`
@@ -494,7 +496,7 @@ Modal dialog with glass-morphism backdrop and smooth animations
 
 Flexible popover with portal support and multiple placement options
 
-**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#popover](https://darwin-ui.mandalsuraj.com/docs#popover)
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs/components/popover](https://darwin-ui.mandalsuraj.com/docs/components/popover)
 
 **Props**:
 - `content: ReactNode`
@@ -534,7 +536,7 @@ toast.info('Processing...', { duration: 5000 });
 
 Accessible tooltip with multiple positions and delay options
 
-**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#tooltip](https://darwin-ui.mandalsuraj.com/docs#tooltip)
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs/components/tooltip](https://darwin-ui.mandalsuraj.com/docs/components/tooltip)
 
 **Props**:
 - `content: string | ReactNode`
@@ -552,7 +554,7 @@ Accessible tooltip with multiple positions and delay options
 
 Right-click context menu with keyboard support
 
-**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#context-menu](https://darwin-ui.mandalsuraj.com/docs#context-menu)
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs/components/context-menu](https://darwin-ui.mandalsuraj.com/docs/components/context-menu)
 
 **Props**:
 - `items: MenuItem[]`
@@ -576,7 +578,7 @@ Right-click context menu with keyboard support
 
 User avatar with image fallback to initials and group stacking
 
-**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#avatar](https://darwin-ui.mandalsuraj.com/docs#avatar)
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs/components/avatar](https://darwin-ui.mandalsuraj.com/docs/components/avatar)
 
 **Props**:
 - `src?: string`
@@ -597,7 +599,7 @@ User avatar with image fallback to initials and group stacking
 
 SVG-based charts: Line, Bar, Area, Pie, Donut, and Stacked Bar with animations
 
-**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#charts](https://darwin-ui.mandalsuraj.com/docs#charts)
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs/components/charts](https://darwin-ui.mandalsuraj.com/docs/components/charts)
 
 **Props**:
 - `data: ChartData[]`
@@ -621,7 +623,7 @@ SVG-based charts: Line, Bar, Area, Pie, Donut, and Stacked Bar with animations
 
 Image component with lazy loading and click-to-enlarge lightbox
 
-**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#image](https://darwin-ui.mandalsuraj.com/docs#image)
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs/components/image](https://darwin-ui.mandalsuraj.com/docs/components/image)
 
 **Props**:
 - `src: string`
@@ -643,7 +645,7 @@ Image component with lazy loading and click-to-enlarge lightbox
 
 Linear and circular progress indicators with animated fill
 
-**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#progress](https://darwin-ui.mandalsuraj.com/docs#progress)
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs/components/progress](https://darwin-ui.mandalsuraj.com/docs/components/progress)
 
 **Props**:
 - `value: number`
@@ -661,7 +663,7 @@ Linear and circular progress indicators with animated fill
 
 Loading placeholder with shimmer animation effect
 
-**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#skeleton](https://darwin-ui.mandalsuraj.com/docs#skeleton)
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs/components/skeleton](https://darwin-ui.mandalsuraj.com/docs/components/skeleton)
 
 **Props**:
 - `width?: string | number`
@@ -679,7 +681,7 @@ Loading placeholder with shimmer animation effect
 
 Data table with sorting, selection, and loading states
 
-**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#table](https://darwin-ui.mandalsuraj.com/docs#table)
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs/components/table](https://darwin-ui.mandalsuraj.com/docs/components/table)
 
 **Props**:
 - `columns: Column[]`
@@ -708,7 +710,7 @@ Data table with sorting, selection, and loading states
 
 Red close button matching macOS traffic light style
 
-**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#close-button](https://darwin-ui.mandalsuraj.com/docs#close-button)
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs/components/close-button](https://darwin-ui.mandalsuraj.com/docs/components/close-button)
 
 **Props**:
 - `onClick?: () => void`
@@ -723,7 +725,7 @@ Red close button matching macOS traffic light style
 
 Markdown editor with live preview and toolbar
 
-**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#md-editor](https://darwin-ui.mandalsuraj.com/docs#md-editor)
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs/components/md-editor](https://darwin-ui.mandalsuraj.com/docs/components/md-editor)
 
 **Props**:
 - `value?: string`
@@ -743,7 +745,7 @@ Markdown editor with live preview and toolbar
 
 Scroll-triggered reveal animations with multiple effects
 
-**Documentation**: [https://darwin-ui.mandalsuraj.com/docs#reveal](https://darwin-ui.mandalsuraj.com/docs#reveal)
+**Documentation**: [https://darwin-ui.mandalsuraj.com/docs/components/reveal](https://darwin-ui.mandalsuraj.com/docs/components/reveal)
 
 **Props**:
 - `children`

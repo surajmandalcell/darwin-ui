@@ -11,6 +11,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { docRoutes } from '../doc-routes';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, '..');
@@ -20,6 +21,13 @@ const BASE_URL = 'https://darwin-ui.mandalsuraj.com';
 const REPO_URL = 'https://github.com/surajmandalcell/darwin-ui';
 const NPM_URL = 'https://www.npmjs.com/package/@pikoloo/darwin-ui';
 const CONTEXT7_URL = 'https://context7.com/surajmandalcell/darwin-ui';
+const componentRouteIds = new Set(docRoutes.components.map(({ id }) => id));
+
+function componentDocsUrl(id: string): string {
+  return componentRouteIds.has(id)
+    ? `${BASE_URL}/docs/components/${id}`
+    : `${BASE_URL}/docs#${id}`;
+}
 
 // Component categories with detailed information
 interface Component {
@@ -472,6 +480,8 @@ function generateLlmsTxt(): string {
   lines.push("import '@pikoloo/darwin-ui/styles.css';");
   lines.push('```');
   lines.push('');
+  lines.push('The stylesheet is precompiled in v2.1 and later; no Tailwind `@source` directive is required.');
+  lines.push('');
 
   lines.push('## Agentic Coding');
   lines.push('');
@@ -485,41 +495,41 @@ function generateLlmsTxt(): string {
 
   lines.push('## Getting Started');
   lines.push('');
-  lines.push(`- [Introduction](${BASE_URL}/docs#introduction): Overview of Darwin UI and its macOS-inspired design philosophy`);
-  lines.push(`- [Agentic Coding](${BASE_URL}/docs#agentic-coding): How to use Darwin UI with AI coding assistants`);
-  lines.push(`- [Installation](${BASE_URL}/docs#installation): How to install and set up Darwin UI in your project`);
-  lines.push(`- [Quick Start](${BASE_URL}/docs#quick-start): Get up and running with your first Darwin UI components`);
+  lines.push(`- [Introduction](${BASE_URL}/docs/getting-started/introduction): Overview of Darwin UI and its macOS-inspired design philosophy`);
+  lines.push(`- [Agentic Coding](${BASE_URL}/docs/getting-started/agentic-coding): How to use Darwin UI with AI coding assistants`);
+  lines.push(`- [Installation](${BASE_URL}/docs/getting-started/installation): How to install and set up Darwin UI in your project`);
+  lines.push(`- [Quick Start](${BASE_URL}/docs/getting-started/quick-start): Get up and running with your first Darwin UI components`);
   lines.push('');
 
   lines.push('## Components');
   lines.push('');
   lines.push('### Layout & Navigation');
   for (const c of LAYOUT_COMPONENTS) {
-    lines.push(`- [${c.title}](${BASE_URL}/docs#${c.id}): ${c.description}`);
+    lines.push(`- [${c.title}](${componentDocsUrl(c.id)}): ${c.description}`);
   }
   lines.push('');
 
   lines.push('### Forms & Inputs');
   for (const c of FORM_COMPONENTS) {
-    lines.push(`- [${c.title}](${BASE_URL}/docs#${c.id}): ${c.description}`);
+    lines.push(`- [${c.title}](${componentDocsUrl(c.id)}): ${c.description}`);
   }
   lines.push('');
 
   lines.push('### Feedback & Overlays');
   for (const c of FEEDBACK_COMPONENTS) {
-    lines.push(`- [${c.title}](${BASE_URL}/docs#${c.id}): ${c.description}`);
+    lines.push(`- [${c.title}](${componentDocsUrl(c.id)}): ${c.description}`);
   }
   lines.push('');
 
   lines.push('### Data Display');
   for (const c of DATA_DISPLAY_COMPONENTS) {
-    lines.push(`- [${c.title}](${BASE_URL}/docs#${c.id}): ${c.description}`);
+    lines.push(`- [${c.title}](${componentDocsUrl(c.id)}): ${c.description}`);
   }
   lines.push('');
 
   lines.push('### Utilities');
   for (const c of UTILITY_COMPONENTS) {
-    lines.push(`- [${c.title}](${BASE_URL}/docs#${c.id}): ${c.description}`);
+    lines.push(`- [${c.title}](${componentDocsUrl(c.id)}): ${c.description}`);
   }
   lines.push('');
 
@@ -550,7 +560,7 @@ function generateLlmsTxt(): string {
   lines.push('## Theming');
   lines.push('');
   for (const item of THEMING) {
-    lines.push(`- [${item.title}](${BASE_URL}/docs#${item.id}): ${item.description}`);
+    lines.push(`- [${item.title}](${BASE_URL}/docs/theming/${item.id}): ${item.description}`);
   }
   lines.push('');
 
@@ -618,6 +628,8 @@ function generateLlmsFullTxt(): string {
   lines.push("import { Button, Card, Window } from '@pikoloo/darwin-ui';");
   lines.push('```');
   lines.push('');
+  lines.push('The stylesheet is precompiled in v2.1 and later; no Tailwind `@source` directive is required.');
+  lines.push('');
 
   // Layout Components
   lines.push('---');
@@ -629,7 +641,7 @@ function generateLlmsFullTxt(): string {
     lines.push('');
     lines.push(c.description);
     lines.push('');
-    lines.push(`**Documentation**: [${BASE_URL}/docs#${c.id}](${BASE_URL}/docs#${c.id})`);
+    lines.push(`**Documentation**: [${componentDocsUrl(c.id)}](${componentDocsUrl(c.id)})`);
     lines.push('');
     if (c.props) {
       lines.push('**Props**:');
@@ -657,7 +669,7 @@ function generateLlmsFullTxt(): string {
     lines.push('');
     lines.push(c.description);
     lines.push('');
-    lines.push(`**Documentation**: [${BASE_URL}/docs#${c.id}](${BASE_URL}/docs#${c.id})`);
+    lines.push(`**Documentation**: [${componentDocsUrl(c.id)}](${componentDocsUrl(c.id)})`);
     lines.push('');
     if (c.props) {
       lines.push('**Props**:');
@@ -685,7 +697,7 @@ function generateLlmsFullTxt(): string {
     lines.push('');
     lines.push(c.description);
     lines.push('');
-    lines.push(`**Documentation**: [${BASE_URL}/docs#${c.id}](${BASE_URL}/docs#${c.id})`);
+    lines.push(`**Documentation**: [${componentDocsUrl(c.id)}](${componentDocsUrl(c.id)})`);
     lines.push('');
     if (c.props) {
       lines.push('**Props**:');
@@ -713,7 +725,7 @@ function generateLlmsFullTxt(): string {
     lines.push('');
     lines.push(c.description);
     lines.push('');
-    lines.push(`**Documentation**: [${BASE_URL}/docs#${c.id}](${BASE_URL}/docs#${c.id})`);
+    lines.push(`**Documentation**: [${componentDocsUrl(c.id)}](${componentDocsUrl(c.id)})`);
     lines.push('');
     if (c.props) {
       lines.push('**Props**:');
@@ -741,7 +753,7 @@ function generateLlmsFullTxt(): string {
     lines.push('');
     lines.push(c.description);
     lines.push('');
-    lines.push(`**Documentation**: [${BASE_URL}/docs#${c.id}](${BASE_URL}/docs#${c.id})`);
+    lines.push(`**Documentation**: [${componentDocsUrl(c.id)}](${componentDocsUrl(c.id)})`);
     lines.push('');
     if (c.props) {
       lines.push('**Props**:');

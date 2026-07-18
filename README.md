@@ -31,6 +31,14 @@ yarn add @pikoloo/darwin-ui
 pnpm add @pikoloo/darwin-ui
 ```
 
+Import the precompiled component styles once in your app entry point:
+
+```tsx
+import "@pikoloo/darwin-ui/styles.css";
+```
+
+No Tailwind `@source` directive is required in v2.1 or later.
+
 ### Using shadcn CLI
 
 ```bash
@@ -152,9 +160,6 @@ Darwin UI requires importing its stylesheet for components to render correctly.
 ```css
 /* In your globals.css or index.css */
 @import '@pikoloo/darwin-ui/styles.css';
-
-/* Tell Tailwind v4 to scan darwin-ui for class names */
-@source "../node_modules/@pikoloo/darwin-ui/dist";
 ```
 
 ### Dark Mode
@@ -172,11 +177,10 @@ See the [CSS Setup documentation](https://darwin-ui.mandalsuraj.com) for a compl
 ### What's Included
 
 The stylesheet provides:
-- Tailwind v4 import with class-based dark mode
+- Precompiled component utilities with class-based dark mode
 - Complete CSS variables for light and dark themes
-- `@theme inline` block for Tailwind v4 color utilities
 - Core animations (modal, toast, progress)
-- Border color fix for Tailwind v4
+- Compatibility with consumer Tailwind and PostCSS builds
 
 ## Browser Support
 

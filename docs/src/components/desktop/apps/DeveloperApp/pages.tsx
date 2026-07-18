@@ -437,6 +437,9 @@ function MyComponent() {
           Add the Darwin UI stylesheet to your application entry point (e.g., <code className="text-blue-400 bg-muted/50 px-1.5 py-0.5 rounded">_app.tsx</code>, <code className="text-blue-400 bg-muted/50 px-1.5 py-0.5 rounded">main.tsx</code>, or <code className="text-blue-400 bg-muted/50 px-1.5 py-0.5 rounded">layout.tsx</code>):
         </p>
         <CodeBlock code={stylesImportCode} language="typescript" />
+        <p className="mt-3 text-sm text-muted-foreground">
+          The stylesheet is precompiled in v2.1 and later, so no Tailwind <code className="text-blue-400 bg-muted/50 px-1.5 py-0.5 rounded">@source</code> directive is required.
+        </p>
       </motion.div>
 
       {/* Step 3: Setup Providers */}
@@ -498,10 +501,7 @@ function MyComponent() {
 // CSS Setup page - explains how to set up Darwin UI styles
 export function CssSetupPage() {
   const quickSetupCode = `/* In your app's CSS entry point (e.g., globals.css, index.css) */
-@import '@pikoloo/darwin-ui/styles.css';
-
-/* Tell Tailwind v4 to scan darwin-ui for classes */
-@source "../node_modules/@pikoloo/darwin-ui/dist";`;
+@import '@pikoloo/darwin-ui/styles.css';`;
 
   const minimalSetupCode = `/* Minimal setup - just import the styles */
 @import '@pikoloo/darwin-ui/styles.css';`;
@@ -562,20 +562,18 @@ export const useTheme = () => useContext(ThemeContext);`;
 [data-theme='light'] { --background: 0 0% 100%; }
 [data-theme='dark']  { --background: 240 10% 3.9%; }
 
-// 2. Tailwind's dark: prefix requires .dark class
-// darwin-ui.css configures this with:
-@variant dark (&:where(.dark, .dark *));
+// 2. Darwin UI's compiled dark variants use the .dark class
 
 // So your JS must set BOTH:
 document.documentElement.setAttribute('data-theme', theme);
 document.documentElement.classList.toggle('dark', theme === 'dark');`;
 
   const whatsIncludedItems = [
-    { title: 'Tailwind v4 Import', desc: '@import "tailwindcss" with dark mode configured' },
+    { title: 'Compiled Component Styles', desc: 'Utilities are ready to use without source scanning' },
     { title: 'Complete Theme Variables', desc: 'All CSS variables for dark and light themes' },
-    { title: 'Color Utilities', desc: '@theme inline block for Tailwind v4 color classes' },
+    { title: 'Build Compatibility', desc: 'Works without importing Tailwind into consumer CSS' },
     { title: 'Core Animations', desc: 'Modal, toast, progress, and fade animations' },
-    { title: 'Border Color Fix', desc: 'Fixes Tailwind v4 defaulting to currentColor' },
+    { title: 'Theme-Aware Defaults', desc: 'Foreground, background, border, and radius tokens included' },
   ];
 
   return (
@@ -618,12 +616,12 @@ document.documentElement.classList.toggle('dark', theme === 'dark');`;
       >
         <h2 className="text-2xl font-semibold text-foreground">Quick Setup</h2>
         <p className="text-muted-foreground">
-          Add these lines to your CSS entry point (e.g., <code className="text-blue-400 bg-muted/50 px-1.5 py-0.5 rounded">globals.css</code> or <code className="text-blue-400 bg-muted/50 px-1.5 py-0.5 rounded">index.css</code>):
+          Add this line to your CSS entry point (e.g., <code className="text-blue-400 bg-muted/50 px-1.5 py-0.5 rounded">globals.css</code> or <code className="text-blue-400 bg-muted/50 px-1.5 py-0.5 rounded">index.css</code>):
         </p>
         <CodeBlock code={quickSetupCode} language="css" />
-        <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/20">
-          <p className="text-sm text-amber-400">
-            <strong>Note:</strong> The <code className="bg-muted/50 px-1 rounded">@source</code> directive tells Tailwind v4 to scan Darwin UI components for class names. Without it, some utility classes may not be included in your CSS build.
+        <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
+          <p className="text-sm text-emerald-400">
+            <strong>Note:</strong> Darwin UI v2.1 and later ships precompiled CSS. Tailwind source scanning is not required.
           </p>
         </div>
       </motion.div>
@@ -729,7 +727,7 @@ document.documentElement.classList.toggle('dark', theme === 'dark');`;
             </TableRow>
             <TableRow>
               <TableCell>Tailwind classes missing</TableCell>
-              <TableCell>Add <code className="bg-muted/50 px-1 rounded">@source</code> directive</TableCell>
+              <TableCell>Upgrade to v2.1+ and import the compiled stylesheet</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>dark: classes not working</TableCell>

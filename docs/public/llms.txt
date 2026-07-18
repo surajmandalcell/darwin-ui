@@ -26,6 +26,8 @@ Import the styles in your app entry point:
 import '@pikoloo/darwin-ui/styles.css';
 ```
 
+The stylesheet is precompiled in v2.1 and later; no Tailwind `@source` directive is required.
+
 ## Agentic Coding
 
 Darwin UI is indexed on Context7 for AI assistant integration. AI agents can fetch up-to-date documentation:
@@ -37,57 +39,57 @@ When working with Darwin UI in AI assistants (Claude, Cursor, etc.), reference C
 
 ## Getting Started
 
-- [Introduction](https://darwin-ui.mandalsuraj.com/docs#introduction): Overview of Darwin UI and its macOS-inspired design philosophy
-- [Agentic Coding](https://darwin-ui.mandalsuraj.com/docs#agentic-coding): How to use Darwin UI with AI coding assistants
-- [Installation](https://darwin-ui.mandalsuraj.com/docs#installation): How to install and set up Darwin UI in your project
-- [Quick Start](https://darwin-ui.mandalsuraj.com/docs#quick-start): Get up and running with your first Darwin UI components
+- [Introduction](https://darwin-ui.mandalsuraj.com/docs/getting-started/introduction): Overview of Darwin UI and its macOS-inspired design philosophy
+- [Agentic Coding](https://darwin-ui.mandalsuraj.com/docs/getting-started/agentic-coding): How to use Darwin UI with AI coding assistants
+- [Installation](https://darwin-ui.mandalsuraj.com/docs/getting-started/installation): How to install and set up Darwin UI in your project
+- [Quick Start](https://darwin-ui.mandalsuraj.com/docs/getting-started/quick-start): Get up and running with your first Darwin UI components
 
 ## Components
 
 ### Layout & Navigation
-- [Accordion](https://darwin-ui.mandalsuraj.com/docs#accordion): Collapsible content sections with smooth Framer Motion animations
-- [Card](https://darwin-ui.mandalsuraj.com/docs#card): Glass-morphism container with header, content, and footer sections
-- [Sidebar](https://darwin-ui.mandalsuraj.com/docs#sidebar): Navigation sidebar with collapsible mode, tooltips, and active state indicators
-- [Tabs](https://darwin-ui.mandalsuraj.com/docs#tabs): Tabbed navigation with animated indicator and keyboard support
-- [Window](https://darwin-ui.mandalsuraj.com/docs#window): macOS-style window chrome with traffic light buttons (close, minimize, maximize)
+- [Accordion](https://darwin-ui.mandalsuraj.com/docs/components/accordion): Collapsible content sections with smooth Framer Motion animations
+- [Card](https://darwin-ui.mandalsuraj.com/docs/components/card): Glass-morphism container with header, content, and footer sections
+- [Sidebar](https://darwin-ui.mandalsuraj.com/docs/components/sidebar): Navigation sidebar with collapsible mode, tooltips, and active state indicators
+- [Tabs](https://darwin-ui.mandalsuraj.com/docs/components/tabs): Tabbed navigation with animated indicator and keyboard support
+- [Window](https://darwin-ui.mandalsuraj.com/docs/components/window): macOS-style window chrome with traffic light buttons (close, minimize, maximize)
 
 ### Forms & Inputs
-- [Button](https://darwin-ui.mandalsuraj.com/docs#button): Versatile button with 10 variants (primary, secondary, ghost, etc.) and 3 sizes
-- [Checkbox](https://darwin-ui.mandalsuraj.com/docs#checkbox): Checkbox with indeterminate state support and spring animations
-- [Input](https://darwin-ui.mandalsuraj.com/docs#input): Text input with validation states (error, success), icons, and clear button
-- [SearchInput](https://darwin-ui.mandalsuraj.com/docs#search-input): Search input with magnifying glass icon and clear functionality
-- [Select](https://darwin-ui.mandalsuraj.com/docs#select): Dropdown select with custom styling and keyboard navigation
-- [MultiSelect](https://darwin-ui.mandalsuraj.com/docs#multi-select): Multi-selection dropdown with tag display and search filtering
-- [Slider](https://darwin-ui.mandalsuraj.com/docs#slider): Range slider with customizable track, thumb, and step values
-- [Switch](https://darwin-ui.mandalsuraj.com/docs#switch): Toggle switch with spring physics animation
-- [Textarea](https://darwin-ui.mandalsuraj.com/docs#textarea): Multi-line text input with auto-resize and character count
-- [DateSelect](https://darwin-ui.mandalsuraj.com/docs#date-select): Date picker with calendar interface and range selection support
-- [Upload](https://darwin-ui.mandalsuraj.com/docs#upload): File upload with drag-and-drop support and file type validation
-- [ContactForm](https://darwin-ui.mandalsuraj.com/docs#contact-form): Pre-built contact form with name, email, message fields and validation
+- [Button](https://darwin-ui.mandalsuraj.com/docs/components/button): Versatile button with 10 variants (primary, secondary, ghost, etc.) and 3 sizes
+- [Checkbox](https://darwin-ui.mandalsuraj.com/docs/components/checkbox): Checkbox with indeterminate state support and spring animations
+- [Input](https://darwin-ui.mandalsuraj.com/docs/components/input): Text input with validation states (error, success), icons, and clear button
+- [SearchInput](https://darwin-ui.mandalsuraj.com/docs/components/search-input): Search input with magnifying glass icon and clear functionality
+- [Select](https://darwin-ui.mandalsuraj.com/docs/components/select): Dropdown select with custom styling and keyboard navigation
+- [MultiSelect](https://darwin-ui.mandalsuraj.com/docs/components/multi-select): Multi-selection dropdown with tag display and search filtering
+- [Slider](https://darwin-ui.mandalsuraj.com/docs/components/slider): Range slider with customizable track, thumb, and step values
+- [Switch](https://darwin-ui.mandalsuraj.com/docs/components/switch): Toggle switch with spring physics animation
+- [Textarea](https://darwin-ui.mandalsuraj.com/docs/components/textarea): Multi-line text input with auto-resize and character count
+- [DateSelect](https://darwin-ui.mandalsuraj.com/docs/components/date-select): Date picker with calendar interface and range selection support
+- [Upload](https://darwin-ui.mandalsuraj.com/docs/components/upload): File upload with drag-and-drop support and file type validation
+- [ContactForm](https://darwin-ui.mandalsuraj.com/docs/components/contact-form): Pre-built contact form with name, email, message fields and validation
 
 ### Feedback & Overlays
 - [Alert](https://darwin-ui.mandalsuraj.com/docs#alert): Inline alerts and modal-style alert dialogs with semantic variants
-- [Badge](https://darwin-ui.mandalsuraj.com/docs#badge): Status badges with semantic colors and optional dot indicator
-- [Dialog](https://darwin-ui.mandalsuraj.com/docs#dialog): Modal dialog with focus trap, portal rendering, and backdrop click dismiss
-- [DropdownMenu](https://darwin-ui.mandalsuraj.com/docs#dropdown-menu): Full-featured dropdown menu with keyboard navigation, submenus, and separators
-- [Modal](https://darwin-ui.mandalsuraj.com/docs#modal): Modal dialog with glass-morphism backdrop and smooth animations
-- [Popover](https://darwin-ui.mandalsuraj.com/docs#popover): Flexible popover with portal support and multiple placement options
+- [Badge](https://darwin-ui.mandalsuraj.com/docs/components/badge): Status badges with semantic colors and optional dot indicator
+- [Dialog](https://darwin-ui.mandalsuraj.com/docs/components/dialog): Modal dialog with focus trap, portal rendering, and backdrop click dismiss
+- [DropdownMenu](https://darwin-ui.mandalsuraj.com/docs/components/dropdown-menu): Full-featured dropdown menu with keyboard navigation, submenus, and separators
+- [Modal](https://darwin-ui.mandalsuraj.com/docs/components/modal): Modal dialog with glass-morphism backdrop and smooth animations
+- [Popover](https://darwin-ui.mandalsuraj.com/docs/components/popover): Flexible popover with portal support and multiple placement options
 - [Toast](https://darwin-ui.mandalsuraj.com/docs#toast): Toast notification system with auto-dismiss and action buttons
-- [Tooltip](https://darwin-ui.mandalsuraj.com/docs#tooltip): Accessible tooltip with multiple positions and delay options
-- [ContextMenu](https://darwin-ui.mandalsuraj.com/docs#context-menu): Right-click context menu with keyboard support
+- [Tooltip](https://darwin-ui.mandalsuraj.com/docs/components/tooltip): Accessible tooltip with multiple positions and delay options
+- [ContextMenu](https://darwin-ui.mandalsuraj.com/docs/components/context-menu): Right-click context menu with keyboard support
 
 ### Data Display
-- [Avatar](https://darwin-ui.mandalsuraj.com/docs#avatar): User avatar with image fallback to initials and group stacking
-- [Charts](https://darwin-ui.mandalsuraj.com/docs#charts): SVG-based charts: Line, Bar, Area, Pie, Donut, and Stacked Bar with animations
-- [Image](https://darwin-ui.mandalsuraj.com/docs#image): Image component with lazy loading and click-to-enlarge lightbox
-- [Progress](https://darwin-ui.mandalsuraj.com/docs#progress): Linear and circular progress indicators with animated fill
-- [Skeleton](https://darwin-ui.mandalsuraj.com/docs#skeleton): Loading placeholder with shimmer animation effect
-- [Table](https://darwin-ui.mandalsuraj.com/docs#table): Data table with sorting, selection, and loading states
+- [Avatar](https://darwin-ui.mandalsuraj.com/docs/components/avatar): User avatar with image fallback to initials and group stacking
+- [Charts](https://darwin-ui.mandalsuraj.com/docs/components/charts): SVG-based charts: Line, Bar, Area, Pie, Donut, and Stacked Bar with animations
+- [Image](https://darwin-ui.mandalsuraj.com/docs/components/image): Image component with lazy loading and click-to-enlarge lightbox
+- [Progress](https://darwin-ui.mandalsuraj.com/docs/components/progress): Linear and circular progress indicators with animated fill
+- [Skeleton](https://darwin-ui.mandalsuraj.com/docs/components/skeleton): Loading placeholder with shimmer animation effect
+- [Table](https://darwin-ui.mandalsuraj.com/docs/components/table): Data table with sorting, selection, and loading states
 
 ### Utilities
-- [CloseButton](https://darwin-ui.mandalsuraj.com/docs#close-button): Red close button matching macOS traffic light style
-- [MdEditor](https://darwin-ui.mandalsuraj.com/docs#md-editor): Markdown editor with live preview and toolbar
-- [Reveal](https://darwin-ui.mandalsuraj.com/docs#reveal): Scroll-triggered reveal animations with multiple effects
+- [CloseButton](https://darwin-ui.mandalsuraj.com/docs/components/close-button): Red close button matching macOS traffic light style
+- [MdEditor](https://darwin-ui.mandalsuraj.com/docs/components/md-editor): Markdown editor with live preview and toolbar
+- [Reveal](https://darwin-ui.mandalsuraj.com/docs/components/reveal): Scroll-triggered reveal animations with multiple effects
 
 ## Animation Configuration
 
@@ -114,9 +116,9 @@ The library automatically respects `prefers-reduced-motion` system preference.
 
 ## Theming
 
-- [Colors](https://darwin-ui.mandalsuraj.com/docs#colors): HSL-based color system with CSS custom properties for easy theming
-- [Dark Mode](https://darwin-ui.mandalsuraj.com/docs#dark-mode): Dark theme optimized by default with light mode support via class toggle
-- [Customization](https://darwin-ui.mandalsuraj.com/docs#customization): Customize via CSS variables or Tailwind config extension
+- [Colors](https://darwin-ui.mandalsuraj.com/docs/theming/colors): HSL-based color system with CSS custom properties for easy theming
+- [Dark Mode](https://darwin-ui.mandalsuraj.com/docs/theming/dark-mode): Dark theme optimized by default with light mode support via class toggle
+- [Customization](https://darwin-ui.mandalsuraj.com/docs/theming/customization): Customize via CSS variables or Tailwind config extension
 
 ## Hooks
 
