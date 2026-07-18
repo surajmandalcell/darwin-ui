@@ -4,15 +4,21 @@
 
 ---
 
-## [2.0.1] - 2026-07-16
+## [2.1.0] - 2026-07-18
 
 ### Added
 
-- **Select**: Optional `searchable` prop for filtering single-select options by label or value with keyboard selection.
+- **Package**: Direct component imports such as `@pikoloo/darwin-ui/button` and `@pikoloo/darwin-ui/progress`.
+- **Registry**: Progress now has a shadcn-compatible registry entry.
+- **Select**: `searchable` accepts `true` or an option-count threshold and supports keyboard filtering without stealing focus.
 
 ### Fixed
 
-- **Select**: Dropdown lists now scroll at 320px and flip or clamp to stay within the viewport.
+- **Package**: The styles export is now precompiled, includes complete light and dark tokens, and works without consumer Tailwind source scanning.
+- **Package**: `date-fns` now aligns with Base UI and React Day Picker on version 4.
+- **Select**: Dropdowns use the trigger width, truncate long labels, scroll, and flip or clamp within the viewport while preserving search queries.
+- **Floating**: Tooltips and popovers now size intrinsically and shift away from viewport edges.
+- **Documentation**: Installation instructions match the compiled stylesheet, and direct documentation routes load on refresh.
 
 ## [Unreleased] - Post v1.5.0
 
