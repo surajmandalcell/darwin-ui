@@ -45,14 +45,27 @@ function useFloatingContext() {
 function useFloatingPosition(
 	open: boolean,
 	triggerRef: React.RefObject<HTMLElement | null>,
+	contentRef: React.RefObject<HTMLDivElement | null>,
+	contentReady: boolean,
 	side: FloatingSide,
 	align: FloatingAlign,
 	sideOffset: number,
 ) {
-	const [position, setPosition] = React.useState({ top: 0, left: 0 });
+	const [position, setPosition] = React.useState({
+		top: 0,
+		left: 0,
+		translateX: 0,
+		translateY: 0,
+		revision: 0,
+	});
 
-	React.useEffect(() => {
-		if (open && triggerRef.current) {
+	React.useLayoutEffect(() => {
+		if (!open) return;
+
+		let animationFrame: number | undefined;
+		const updatePosition = () => {
+			if (!triggerRef.current) return;
+
 			const rect = triggerRef.current.getBoundingClientRect();
 			let top = 0;
 			let left = 0;
@@ -86,9 +99,65 @@ function useFloatingPosition(
 					break;
 			}
 
-			setPosition({ top, left });
-		}
+			setPosition((current) => ({
+				top,
+				left,
+				translateX: 0,
+				translateY: 0,
+				revision: current.revision + 1,
+			}));
+		};
+		const scheduleUpdate = () => {
+			if (animationFrame !== undefined) cancelAnimationFrame(animationFrame);
+			animationFrame = requestAnimationFrame(updatePosition);
+		};
+
+		updatePosition();
+		window.addEventListener("resize", scheduleUpdate);
+		window.addEventListener("scroll", scheduleUpdate, true);
+
+		return () => {
+			if (animationFrame !== undefined) cancelAnimationFrame(animationFrame);
+			window.removeEventListener("resize", scheduleUpdate);
+			window.removeEventListener("scroll", scheduleUpdate, true);
+		};
 	}, [open, side, align, sideOffset, triggerRef]);
+
+	React.useLayoutEffect(() => {
+		if (!open || !contentReady || !contentRef.current) return;
+
+		const rect = contentRef.current.getBoundingClientRect();
+		const viewportPadding = 8;
+		const left = rect.left - position.translateX;
+		const right = rect.right - position.translateX;
+		const top = rect.top - position.translateY;
+		const bottom = rect.bottom - position.translateY;
+		const translateX =
+			left < viewportPadding
+				? viewportPadding - left
+				: right > window.innerWidth - viewportPadding
+					? window.innerWidth - viewportPadding - right
+					: 0;
+		const translateY =
+			top < viewportPadding
+				? viewportPadding - top
+				: bottom > window.innerHeight - viewportPadding
+					? window.innerHeight - viewportPadding - bottom
+					: 0;
+
+		setPosition((current) =>
+			current.translateX === translateX && current.translateY === translateY
+				? current
+				: { ...current, translateX, translateY },
+		);
+	}, [
+		open,
+		contentReady,
+		contentRef,
+		position.top,
+		position.left,
+		position.revision,
+	]);
 
 	return position;
 }
@@ -189,7 +258,7 @@ function getAnimationProps(
 // ============================================================================
 
 const sizeClasses: Record<FloatingSize, string> = {
-	sm: "px-3 py-1.5 text-xs", // Tooltip
+	sm: "w-max px-3 py-1.5 text-xs", // Tooltip
 	md: "p-4 w-72", // Popover
 	lg: "p-6 w-96", // Large popover
 };
@@ -395,9 +464,12 @@ function FloatingContent({
 }: FloatingContentProps) {
 	const { open, triggerRef, trigger, size } = useFloatingContext();
 	const [mounted, setMounted] = React.useState(false);
+	const contentRef = React.useRef<HTMLDivElement>(null);
 	const position = useFloatingPosition(
 		open,
 		triggerRef,
+		contentRef,
+		mounted,
 		side,
 		align,
 		sideOffset,
@@ -413,12 +485,13 @@ function FloatingContent({
 		<AnimatePresence>
 			{open && (
 				<motion.div
+					ref={contentRef}
 					data-floating-content
 					role={trigger === "hover" ? "tooltip" : undefined}
 					{...animationProps}
 					transition={{ duration: getDuration("normal"), ease: "easeOut" }}
 					className={cn(
-						"fixed overflow-hidden rounded-xl border text-zinc-900 dark:text-zinc-100 shadow-xl",
+						"fixed max-w-[calc(100vw-1rem)] overflow-hidden rounded-xl border text-zinc-900 dark:text-zinc-100 shadow-xl",
 						glass
 							? "bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl border-white/20 dark:border-white/10"
 							: "bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border-black/10 dark:border-white/10",
@@ -429,6 +502,7 @@ function FloatingContent({
 						zIndex: 9999,
 						top: position.top,
 						left: position.left,
+						translate: `${position.translateX}px ${position.translateY}px`,
 						transform: getTransform(side, align),
 						transformOrigin: getTransformOrigin(side, align),
 					}}
