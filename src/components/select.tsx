@@ -35,8 +35,8 @@ interface SingleSelectProps extends BaseSelectProps {
 	value?: string;
 	defaultValue?: string;
 	onChange?: (e: { target: { value: string } }) => void;
-	/** Show a search input that filters options by label or value */
-	searchable?: boolean;
+	/** Show a search input, optionally once the option count reaches a threshold */
+	searchable?: boolean | number;
 	/** Options as array (alternative to children) */
 	options?: SelectOption[];
 	/** Children (SelectOption elements) */
@@ -177,25 +177,13 @@ function SingleSelectInternal({
 	const containerRef = React.useRef<HTMLDivElement>(null);
 	const dropdownRef = React.useRef<HTMLDivElement>(null);
 	const buttonRef = React.useRef<HTMLButtonElement>(null);
-	const searchInputRef = React.useRef<HTMLInputElement>(null);
 	const listboxId = React.useId();
-	const position = useDropdownPosition(
-		open,
-		buttonRef,
-		searchable
-			? DROPDOWN_MAX_HEIGHT + SEARCH_INPUT_HEIGHT
-			: DROPDOWN_MAX_HEIGHT,
-	);
 	const closeDropdown = React.useCallback(() => {
-		setSearch("");
 		setActiveValue(undefined);
 		setOpen(false);
 	}, []);
 
 	useClickOutside(containerRef, dropdownRef, open, closeDropdown);
-	React.useEffect(() => {
-		if (open && searchable) searchInputRef.current?.focus();
-	}, [open, searchable]);
 
 	// Parse options from children or props
 	const options = React.useMemo<SelectOption[]>(() => {
@@ -217,6 +205,16 @@ function SingleSelectInternal({
 			];
 		});
 	}, [children, optionsProp]);
+	const showSearch =
+		searchable === true ||
+		(typeof searchable === "number" && options.length >= searchable);
+	const position = useDropdownPosition(
+		open,
+		buttonRef,
+		showSearch
+			? DROPDOWN_MAX_HEIGHT + SEARCH_INPUT_HEIGHT
+			: DROPDOWN_MAX_HEIGHT,
+	);
 
 	// Determine selected value
 	const selected = React.useMemo(() => {
@@ -227,13 +225,13 @@ function SingleSelectInternal({
 
 	const filteredOptions = React.useMemo(() => {
 		const query = search.trim().toLocaleLowerCase();
-		if (!searchable || !query) return options;
+		if (!showSearch || !query) return options;
 		return options.filter(
 			(option) =>
 				getTextContent(option.label).toLocaleLowerCase().includes(query) ||
 				option.value.toLocaleLowerCase().includes(query),
 		);
-	}, [options, search, searchable]);
+	}, [options, search, showSearch]);
 
 	const activeIndex = React.useMemo(() => {
 		const highlightedIndex = filteredOptions.findIndex(
@@ -269,14 +267,22 @@ function SingleSelectInternal({
 	function handleSearchKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
 		if (e.key === "Escape") {
 			e.preventDefault();
-			closeDropdown();
-			buttonRef.current?.focus();
+			if (search) {
+				setSearch("");
+				setActiveValue(undefined);
+			} else {
+				closeDropdown();
+				buttonRef.current?.focus();
+			}
 		} else if (e.key === "ArrowDown" || e.key === "ArrowUp") {
 			e.preventDefault();
 			moveActive(e.key === "ArrowDown" ? 1 : -1);
 		} else if (e.key === "Enter") {
 			e.preventDefault();
-			const option = filteredOptions[activeIndex];
+			const option =
+				filteredOptions.length === 1
+					? filteredOptions[0]
+					: filteredOptions.find((item) => item.value === activeValue);
 			if (option && !option.disabled) handleSelect(option.value);
 		}
 	}
@@ -300,20 +306,19 @@ function SingleSelectInternal({
 									top: position.top,
 									bottom: position.bottom,
 									left: position.left,
-									minWidth: position.width,
+									width: position.width,
 									maxHeight: position.maxHeight,
 								}}
 								className={cn(
-									"z-50 min-w-32 overflow-hidden rounded-lg border shadow-md flex flex-col",
+									"z-50 overflow-hidden rounded-lg border shadow-md flex flex-col",
 									glass
 										? "bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl border-white/20 dark:border-white/10"
 										: "bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border-black/10 dark:border-white/10",
 								)}
 							>
-								{searchable && (
+								{showSearch && (
 									<div className="shrink-0 border-b border-black/10 dark:border-white/10 p-1">
 										<input
-											ref={searchInputRef}
 											type="search"
 											value={search}
 											onChange={(e) => {
@@ -359,7 +364,7 @@ function SingleSelectInternal({
 												}
 											}}
 											onMouseEnter={() =>
-												searchable && setActiveValue(opt.value)
+												showSearch && setActiveValue(opt.value)
 											}
 											tabIndex={opt.disabled ? -1 : 0}
 											className={cn(
@@ -367,12 +372,14 @@ function SingleSelectInternal({
 												opt.disabled &&
 													"pointer-events-none opacity-50 cursor-not-allowed",
 												opt.value === selected.value ||
-													(searchable && index === activeIndex)
+													(showSearch && index === activeIndex)
 													? "bg-black/10 dark:bg-white/10 text-zinc-900 dark:text-zinc-100"
 													: "text-zinc-700 dark:text-zinc-300 hover:bg-black/5 dark:hover:bg-white/5",
 											)}
 										>
-											{opt.label}
+											<span className="min-w-0 flex-1 truncate">
+												{opt.label}
+											</span>
 										</div>
 									))}
 									{filteredOptions.length === 0 && (
