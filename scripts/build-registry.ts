@@ -118,6 +118,14 @@ const components: Record<string, ComponentDef> = {
     registryDependencies: ['utils'],
     type: 'registry:ui',
   },
+  progress: {
+    title: 'Progress',
+    description: 'Linear and circular progress indicators with determinate and indeterminate states.',
+    files: ['src/components/progress.tsx'],
+    dependencies: ['framer-motion'],
+    registryDependencies: ['utils'],
+    type: 'registry:ui',
+  },
   table: {
     title: 'Table',
     description: 'Comprehensive table system with TableHead, TableBody, TableCell, TableHeaderCell, TableRow, TableEmptyRow, and TableLoadingRows components.',

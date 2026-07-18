@@ -6,10 +6,7 @@
 /* ============================================
    Darwin UI - Complete Theme Stylesheet
    ============================================
-   Import this file in your app's CSS entry point.
-
-   For Tailwind v4 to scan darwin-ui components, add:
-   @source "../node_modules/@pikoloo/darwin-ui/dist";
+   Build input for the compiled, consumer-ready package stylesheet.
    ============================================ */
 
 :root {
