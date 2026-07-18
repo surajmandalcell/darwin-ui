@@ -156,6 +156,8 @@ function useFloatingPosition(
 		contentRef,
 		position.top,
 		position.left,
+		position.translateX,
+		position.translateY,
 		position.revision,
 	]);
 
