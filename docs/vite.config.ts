@@ -1,13 +1,42 @@
-import { defineConfig } from 'vite'
+import { defineConfig, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import path from 'path'
+import { docRoutes } from './doc-routes'
+
+function staticSpaRoutes(): Plugin {
+  const routes = [
+    'docs',
+    'changelog',
+    'desktop',
+    ...Object.entries(docRoutes).flatMap(([section, pages]) =>
+      pages.map(({ id }) => `docs/${section}/${id}`),
+    ),
+  ]
+
+  return {
+    name: 'static-spa-routes',
+    generateBundle(_, bundle) {
+      const index = bundle['index.html']
+      if (index?.type !== 'asset') return
+
+      for (const route of routes) {
+        this.emitFile({
+          type: 'asset',
+          fileName: `${route}/index.html`,
+          source: index.source,
+        })
+      }
+    },
+  }
+}
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
+    staticSpaRoutes(),
   ],
   resolve: {
     alias: {
