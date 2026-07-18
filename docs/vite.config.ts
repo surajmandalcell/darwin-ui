@@ -1,6 +1,7 @@
 import { defineConfig, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
+import { mkdirSync, writeFileSync } from 'node:fs'
 import path from 'path'
 import { docRoutes } from './doc-routes'
 
@@ -16,16 +17,14 @@ function staticSpaRoutes(): Plugin {
 
   return {
     name: 'static-spa-routes',
-    generateBundle(_, bundle) {
+    writeBundle({ dir }, bundle) {
       const index = bundle['index.html']
-      if (index?.type !== 'asset') return
+      if (!dir || index?.type !== 'asset') return
 
       for (const route of routes) {
-        this.emitFile({
-          type: 'asset',
-          fileName: `${route}/index.html`,
-          source: index.source,
-        })
+        const output = path.resolve(dir, route, 'index.html')
+        mkdirSync(path.dirname(output), { recursive: true })
+        writeFileSync(output, index.source)
       }
     },
   }
