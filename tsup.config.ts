@@ -43,7 +43,7 @@ async function buildStyles() {
 export default defineConfig({
   entry: { index: 'src/index.ts', ...componentEntries },
   format: ['cjs', 'esm'],
-  dts: true,
+  dts: { compilerOptions: { ignoreDeprecations: '6.0' } },
   clean: true,
   external: [
     'react',
