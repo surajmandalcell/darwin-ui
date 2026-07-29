@@ -80,6 +80,20 @@ const variantClasses: Record<ButtonVariant, string> = {
 	accent: "bg-violet-500 text-white hover:bg-violet-600",
 };
 
+const glassHoverClasses: Record<ButtonVariant, string> = {
+	default: "hover:bg-white/80 dark:hover:bg-zinc-900/80 hover:backdrop-blur-md",
+	primary: "hover:bg-blue-600/90 hover:backdrop-blur-md",
+	secondary: "hover:bg-white/80 dark:hover:bg-zinc-900/80 hover:backdrop-blur-md",
+	success: "hover:bg-emerald-600/90 hover:backdrop-blur-md",
+	warning: "hover:bg-amber-600/90 hover:backdrop-blur-md",
+	info: "hover:bg-sky-600/90 hover:backdrop-blur-md",
+	destructive: "hover:bg-red-600/90 hover:backdrop-blur-md",
+	outline: "hover:bg-white/80 dark:hover:bg-zinc-900/80 hover:backdrop-blur-md",
+	ghost: "hover:bg-white/80 dark:hover:bg-zinc-900/80 hover:backdrop-blur-md",
+	link: "hover:backdrop-blur-md",
+	accent: "hover:bg-violet-600/90 hover:backdrop-blur-md",
+};
+
 const sizeClasses: Record<ButtonSize, string> = {
 	default: "h-9 px-4 py-2",
 	sm: "h-8 rounded-lg px-3 text-xs",
@@ -149,7 +163,7 @@ const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonProps>(
 					variantClasses[variant],
 					sizeClasses[effectiveSize],
 					fullWidth && "w-full",
-					glass && "hover:bg-white/80 dark:hover:bg-zinc-900/80 hover:backdrop-blur-md",
+					glass && glassHoverClasses[variant],
 					className,
 				)}
 				// biome-ignore lint/suspicious/noExplicitAny: Framer Motion onDrag conflicts with HTML onDrag
