@@ -2009,7 +2009,7 @@ function ImageClickToEnlargeExample() {
 }
 
 // Glass Example Components - These show glassmorphism styling concepts
-// Note: Glass styling is achieved via className, not a glass prop
+// Note: Buttons use the glass prop; other previews reuse shared glass utility classes.
 const glassStyles = "bg-white/10 dark:bg-white/5 backdrop-blur-xl border border-white/20 dark:border-white/10";
 
 function CardGlassExample() {
@@ -2037,9 +2037,9 @@ function BadgeGlassExample() {
 function ButtonGlassExample() {
   return (
     <div className="flex flex-wrap gap-3">
-      <Button type="button" variant="primary" className="backdrop-blur-sm">Glass Button</Button>
-      <Button type="button" variant="secondary" className="backdrop-blur-sm">Secondary Glass</Button>
-      <Button type="button" variant="outline" className={glassStyles}>Outline Glass</Button>
+      <Button type="button" variant="primary" glass>Glass Button</Button>
+      <Button type="button" variant="secondary" glass>Secondary Glass</Button>
+      <Button type="button" variant="outline" glass>Outline Glass</Button>
     </div>
   );
 }
